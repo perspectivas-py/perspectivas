@@ -2,12 +2,15 @@ backend:
   name: github
   repo: perspectivas-py/perspectivas-vercel
   branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: oauth
+  client_id: TU_CLIENT_ID_DE_GITHUB
 
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
-site_url: "/"
-display_url: "/"
+site_url: "https://perspectivaspy.vercel.app"
+display_url: "https://perspectivaspy.vercel.app"
 
 collections:
   - name: "noticias"
