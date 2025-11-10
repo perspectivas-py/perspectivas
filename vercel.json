@@ -1,6 +1,7 @@
 {
   "version": 2,
   "builds": [
+    { "src": "editor/admin.html", "use": "@vercel/static" }
     { "src": "index.html", "use": "@vercel/static" },
     { "src": "editor/index.html", "use": "@vercel/static" },
     { "src": "editor/decap-cms.js", "use": "@vercel/static" },
