@@ -1,23 +1,16 @@
 {
   "version": 2,
+  "public": true,
   "builds": [
-    { "src": "editor/admin.html", "use": "@vercel/static" }
     { "src": "index.html", "use": "@vercel/static" },
     { "src": "editor/index.html", "use": "@vercel/static" },
-    { "src": "editor/decap-cms.js", "use": "@vercel/static" },
-    { "src": "editor/config.yml", "use": "@vercel/static" }
+    { "src": "editor/admin.html", "use": "@vercel/static" },
+    { "src": "editor/config.yml", "use": "@vercel/static" },
+    { "src": "editor/decap-cms.js", "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/editor/(.*)", "dest": "/editor/$1" },
-    { "src": "/editor", "dest": "/editor/index.html" },
+    { "src": "/editor/?", "dest": "/editor/index.html" },
+    { "src": "/editor/(.*)", "dest": "/editor/index.html" },
     { "src": "/(.*)", "dest": "/index.html" }
-  ],
-  "headers": [
-    {
-      "source": "/editor/config.yml",
-      "headers": [
-        { "key": "Content-Type", "value": "text/plain; charset=utf-8" }
-      ]
-    }
   ]
 }
