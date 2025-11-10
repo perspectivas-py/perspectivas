@@ -3,11 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <title>Editor Perspectivas</title>
-    <script src="./decap-cms.js"></script>
+    <!-- Importar el archivo local -->
+    <script src="/editor/decap-cms.js"></script>
   </head>
   <body>
     <script>
-      CMS.init();
+      if (typeof CMS !== "undefined") {
+        CMS.init();
+      } else {
+        document.body.innerHTML =
+          "<h2 style='color:red; font-family:sans-serif; text-align:center; margin-top:20%'>⚠️ Error: CMS local no se cargó correctamente.</h2>";
+      }
     </script>
   </body>
 </html>
