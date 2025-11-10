@@ -3,17 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <title>Editor Perspectivas</title>
-    <!-- Usar la versión local del CMS -->
-    <script src="/editor/decap-cms.js"></script>
+    <script type="module" src="./decap-cms.js"></script>
   </head>
   <body>
-    <script>
-      if (typeof CMS !== "undefined") {
-        CMS.init();
-      } else {
-        document.body.innerHTML =
-          "<h2 style='color:red; text-align:center; margin-top:20%'>⚠️ Error: CMS local no se cargó correctamente.</h2>";
-      }
-    </script>
+    <h2 style="font-family:sans-serif;text-align:center;margin-top:40px;">Cargando CMS...</h2>
   </body>
 </html>
