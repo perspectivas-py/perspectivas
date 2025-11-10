@@ -9,19 +9,6 @@
     { "src": "/editor/(.*)", "dest": "/editor/index.html" },
     { "src": "/editor", "dest": "/editor/index.html" },
     { "src": "/(.*)", "dest": "/index.html" }
-  ]
-}
-{
-  "version": 2,
-  "public": true,
-  "builds": [
-    { "src": "index.html", "use": "@vercel/static" },
-    { "src": "editor/index.html", "use": "@vercel/static" }
-  ],
-  "routes": [
-    { "src": "/editor/(.*)", "dest": "/editor/index.html" },
-    { "src": "/editor", "dest": "/editor/index.html" },
-    { "src": "/(.*)", "dest": "/index.html" }
   ],
   "headers": [
     {
