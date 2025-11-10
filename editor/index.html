@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Editor Perspectivas</title>
-    <!-- Importar el archivo local -->
+    <!-- Usar el CMS local, no el CDN -->
     <script src="/editor/decap-cms.js"></script>
   </head>
   <body>
@@ -12,7 +12,7 @@
         CMS.init();
       } else {
         document.body.innerHTML =
-          "<h2 style='color:red; font-family:sans-serif; text-align:center; margin-top:20%'>⚠️ Error: CMS local no se cargó correctamente.</h2>";
+          "<h2 style='color:red; text-align:center; margin-top:20%'>⚠️ Error: CMS local no se cargó correctamente.</h2>";
       }
     </script>
   </body>
