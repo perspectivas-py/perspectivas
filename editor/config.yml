@@ -6,9 +6,12 @@ backend:
 media_folder: "assets/uploads"
 public_folder: "/assets/uploads"
 
+site_url: "https://perspectivaspy.vercel.app"
+display_url: "https://perspectivaspy.vercel.app"
+
 collections:
   - name: "noticias"
-    label: "Noticias"
+    label: "Noticias Locales"
     folder: "content/noticias"
     create: true
     slug: "{{slug}}"
@@ -17,3 +20,24 @@ collections:
       - { label: "Fecha", name: "date", widget: "datetime" }
       - { label: "Autor", name: "author", widget: "string", default: "Redacción Perspectivas" }
       - { label: "Contenido", name: "body", widget: "markdown" }
+
+  - name: "analisis"
+    label: "Análisis y Opinión"
+    folder: "content/analisis"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Autor", name: "author", widget: "string" }
+      - { label: "Contenido", name: "body", widget: "markdown" }
+
+  - name: "programa"
+    label: "Programa Perspectivas"
+    folder: "content/programa"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Episodio", name: "title", widget: "string" }
+      - { label: "Fecha", name: "date", widget: "datetime" }
+      - { label: "Resumen", name: "summary", widget: "text" }
+      - { label: "Media (URL)", name: "media", widget: "string" }
