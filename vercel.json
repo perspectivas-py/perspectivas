@@ -2,10 +2,12 @@
   "version": 2,
   "builds": [
     { "src": "index.html", "use": "@vercel/static" },
-    { "src": "editor/index.html", "use": "@vercel/static" }
+    { "src": "editor/index.html", "use": "@vercel/static" },
+    { "src": "editor/decap-cms.js", "use": "@vercel/static" },
+    { "src": "editor/config.yml", "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/editor/(.*)", "dest": "/editor/index.html" },
+    { "src": "/editor/(.*)", "dest": "/editor/$1" },
     { "src": "/editor", "dest": "/editor/index.html" },
     { "src": "/(.*)", "dest": "/index.html" }
   ],
