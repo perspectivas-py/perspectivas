@@ -73,12 +73,3 @@ function parseFrontmatter(markdownContent) {
   }
   return { frontmatter, content };
 }```
-
-### **Siguientes Pasos**
-
-1.  **Guarda** los tres archivos.
-2.  Sube los cambios a GitHub:
-    *   `git add script.js noticia.html noticia-script.js`
-    *   `git commit -m "Implementa página de detalle para noticias"`
-    *   `git push`
-3.  Vercel detectará los cambios y desplegará la nueva versión automáticamente. Una vez que termine, todo debería funcionar.
