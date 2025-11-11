@@ -1,30 +1,80 @@
-const FINNHUB_API_KEY="d47vpo1r01qk80bip1s0d47vpo1r01qk80bip1sg";
-const MARKET_ITEMS=[
-  {label:"USD/GS",symbol:"OANDA:USD_PYG"},
-  {label:"EUR/GS",symbol:"OANDA:EUR_PYG"},
-  {label:"EUR/USD",symbol:"OANDA:EUR_USD"},
-  {label:"Petróleo",symbol:"OANDA:BCO_USD"},
-  {label:"Soja",symbol:"CBOT:ZS1"},
-  {label:"Bitcoin",symbol:"BINANCE:BTCUSDT"}
-];
-const REFRESH_MS=5*60*1000;
-document.addEventListener("DOMContentLoaded",()=>{
-  const btn=document.getElementById("themeToggle");
-  const saved=localStorage.getItem("theme");
-  if(saved==="dark") document.body.classList.add("dark");
-  btn.addEventListener("click",()=>{
-    document.body.classList.toggle("dark");
-    localStorage.setItem("theme",document.body.classList.contains("dark")?"dark":"light");
-    updateThemeIcon();
-  });
-  function updateThemeIcon(){
-    const icon=document.querySelector("#themeToggle .icon");
-    if(icon) icon.textContent=document.body.classList.contains("dark")?"☀️":"🌙";
+document.addEventListener('DOMContentLoaded', () => {
+  const repo = 'perspectivas-py/perspectivas';
+  const branch = 'main'; // O 'master' si usas esa rama
+  // IMPORTANTE: Esta ruta debe coincidir con la de tu config.yml
+  const postsPath = 'content/noticias'; 
+
+  const noticiasContainer = document.getElementById('lista-noticias');
+
+  if (!noticiasContainer) {
+    console.error('Error: No se encontró el contenedor con id "lista-noticias".');
+    return;
   }
-  updateThemeIcon();
-  loadTicker();
-  setInterval(loadTicker,REFRESH_MS);
+
+  fetch(`https://api.github.com/repos/${repo}/contents/${postsPath}?ref=${branch}`)
+    .then(response => {
+      if (!response.ok) throw new Error('Respuesta de red no fue exitosa.');
+      return response.json();
+    })
+    .then(files => {
+      if (!Array.isArray(files) || files.length === 0) {
+        noticiasContainer.innerHTML = '<p>No hay noticias para mostrar todavía.</p>';
+        return;
+      }
+
+      noticiasContainer.innerHTML = ''; // Limpiar antes de añadir contenido
+      
+      files.forEach(file => {
+        if (file.type !== 'file' || !file.download_url) return;
+
+        fetch(file.download_url)
+          .then(response => response.text())
+          .then(markdown => {
+            const postHTML = crearTarjetaNoticia(markdown);
+            noticiasContainer.innerHTML += postHTML;
+          });
+      });
+    })
+    .catch(error => {
+      console.error('Error al cargar las noticias:', error);
+      noticiasContainer.innerHTML = '<p>Ocurrió un error al cargar las noticias.</p>';
+    });
+
+  function parseFrontmatter(markdownContent) {
+    const frontmatterRegex = /^---\s*([\s\S]*?)\s*---/;
+    const match = frontmatterRegex.exec(markdownContent);
+    const frontmatter = {};
+    let content = markdownContent;
+
+    if (match) {
+      content = markdownContent.replace(match[0], '').trim();
+      match[1].split('\n').forEach(line => {
+        const [key, ...valueParts] = line.split(':');
+        if (key && valueParts.length > 0) {
+          frontmatter[key.trim()] = valueParts.join(':').trim().replace(/"/g, '');
+        }
+      });
+    }
+    return { frontmatter, content };
+  }
+
+  function crearTarjetaNoticia(markdown) {
+    const { frontmatter, content } = parseFrontmatter(markdown);
+    const bodyHtml = marked.parse(content || '');
+    const fecha = new Date(frontmatter.date);
+    const fechaFormateada = !isNaN(fecha) 
+      ? fecha.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })
+      : 'Fecha no disponible';
+
+    return `
+      <article class="noticia-card">
+        <h3>${frontmatter.title || 'Sin título'}</h3>
+        <p class="fecha">${fechaFormateada}</p>
+        <div class="contenido-resumen">
+          ${bodyHtml.substring(0, 250)}...
+        </div>
+        <a href="#" class="leer-mas">Leer más</a>
+      </article>
+    `;
+  }
 });
-async function fetchQuote(s){const u=`https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(s)}&token=${FINNHUB_API_KEY}`;const r=await fetch(u,{cache:"no-store"});if(!r.ok)throw new Error("HTTP "+r.status);const d=await r.json();return{price:d.c??null,change:d.d??null,changePct:d.dp??null};}
-function fmt(n){if(n===null||n===undefined)return"—";const v=Number(n);if(!isFinite(v))return"—";return(Math.abs(v)>=1000)?v.toLocaleString(undefined,{maximumFractionDigits:2}):v.toFixed(2);}
-async function loadTicker(){const wrap=document.querySelector(".ticker");const meta=document.querySelector(".ticker-meta");if(!wrap)return;wrap.textContent="Cargando cotizaciones…";try{const rows=await Promise.all(MARKET_ITEMS.map(async item=>{try{const q=await fetchQuote(item.symbol);const dir=(q.change??0)>=0?"up":"down";const arrow=(q.change??0)>=0?"▲":"▼";return `<span class="item"><strong>${item.label}:</strong> ${fmt(q.price)} <span class="${dir}">${arrow} ${fmt(q.changePct)}%</span></span>`}catch(e){console.warn("Error item",item,e);return `<span class="item"><strong>${item.label}:</strong> —</span>`}}));wrap.innerHTML=rows.join('<span class="sep">•</span>');meta.textContent="Actualizado "+(new Date()).toLocaleTimeString();}catch(err){console.error(err);wrap.textContent="No se pudieron cargar cotizaciones.";}}
