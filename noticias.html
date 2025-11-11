@@ -1,74 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Noticias | Perspectivas</title>
-  <link rel="stylesheet" href="/style.css">
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <style>
-    body { max-width: 800px; margin: auto; padding: 2rem; font-family: Arial, sans-serif; }
-    h1 { margin-bottom: 1rem; }
-    article { margin-bottom: 3rem; border-bottom: 1px solid #ddd; padding-bottom: 1rem; }
-    .meta { color: #666; font-size: 0.9rem; margin-bottom: 0.5rem; }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Noticia | Perspectivas</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>📰 Noticias Locales</h1>
-  <div id="noticias">Cargando noticias...</div>
 
-  <script>
-    const owner = "perspectivas-py";
-    const repo = "perspectivas";
-    const folder = "content/noticias";
+  <header class="site-header">
+    <!-- Puedes copiar y pegar el mismo header de tu index.html aquí -->
+    <div class="container header-inner">
+      <div class="brand">
+        <a href="/" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px;">
+          <img class="logo" src="assets/img/logo.jpeg" alt="Perspectivas">
+          <div>
+            <h1 class="site-title">Perspectivas</h1>
+          </div>
+        </a>
+      </div>
+    </div>
+  </header>
 
-    async function cargarNoticias() {
-      const contenedor = document.getElementById("noticias");
+  <main class="container">
+    <!-- Aquí se inyectará el contenido completo de la noticia -->
+    <article id="contenido-noticia" class="full-article">
+      <!-- El script buscará este ID y lo rellenará -->
+    </article>
+  </main>
 
-      try {
-        // Obtener lista de archivos desde GitHub
-        const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folder}`);
-        const files = await res.json();
+  <footer class="site-footer">
+    <!-- Puedes copiar y pegar el mismo footer de tu index.html aquí -->
+    <div class="container">
+      <div class="footer-row">
+        <span>© 2025 Perspectivas</span>
+      </div>
+    </div>
+  </footer>
 
-        const markdownFiles = files
-          .filter(f => f.name.endsWith(".md"))
-          .sort((a, b) => b.name.localeCompare(a.name));
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="noticia-script.js"></script>
 
-        contenedor.innerHTML = "";
-
-        for (const file of markdownFiles) {
-          const url = `/content/noticias/${file.name}`;
-          const r = await fetch(url);
-          if (!r.ok) continue;
-          const text = await r.text();
-
-          // Extraer front matter YAML
-          const match = /^---([\s\S]*?)---/.exec(text);
-          let metadata = {};
-          if (match) {
-            match[1].split('\n').forEach(line => {
-              const [key, ...rest] = line.split(':');
-              if (key && rest.length) metadata[key.trim()] = rest.join(':').trim();
-            });
-          }
-          const body = text.replace(/---[\s\S]*?---/, '').trim();
-          const html = marked.parse(body);
-
-          const article = document.createElement("article");
-          article.innerHTML = `
-            <h2>${metadata.title || file.name.replace('.md', '')}</h2>
-            <p class="meta">${metadata.date ? new Date(metadata.date).toLocaleDateString('es-ES', {year: 'numeric', month: 'long', day: 'numeric'}) : ''}</p>
-            ${html}
-          `;
-          contenedor.appendChild(article);
-        }
-      } catch (err) {
-        contenedor.innerHTML = `<p>Error cargando noticias: ${err.message}</p>`;
-        console.error(err);
-      }
-    }
-
-    cargarNoticias();
-  </script>
 </body>
 </html>
