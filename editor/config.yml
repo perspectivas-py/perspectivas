@@ -1,43 +1,40 @@
 backend:
-  name: test-repo
-  repo: perspectivas-py/perspectivas-vercel
+  name: github
+  repo: perspectivas-py/perspectivas   # tu repositorio
   branch: main
+  # base_url: ""  # si más adelante agregas autenticación OAuth, aquí va la URL
 
-media_folder: "assets/uploads"
-public_folder: "/assets/uploads"
-
-site_url: "https://perspectivaspy.vercel.app"
-display_url: "https://perspectivaspy.vercel.app"
+media_folder: "assets/img/uploads"     # dentro del repo
+public_folder: "/assets/img/uploads"   # URL pública
+local_backend: false
 
 collections:
   - name: "noticias"
     label: "Noticias Locales"
     folder: "content/noticias"
     create: true
-    slug: "{{slug}}"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Título", name: "title", widget: "string" }
       - { label: "Fecha", name: "date", widget: "datetime" }
-      - { label: "Autor", name: "author", widget: "string", default: "Redacción Perspectivas" }
-      - { label: "Contenido", name: "body", widget: "markdown" }
+      - { label: "Cuerpo", name: "body", widget: "markdown" }
 
   - name: "analisis"
     label: "Análisis y Opinión"
     folder: "content/analisis"
     create: true
-    slug: "{{slug}}"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Título", name: "title", widget: "string" }
       - { label: "Autor", name: "author", widget: "string" }
-      - { label: "Contenido", name: "body", widget: "markdown" }
+      - { label: "Cuerpo", name: "body", widget: "markdown" }
 
-  - name: "programa"
+  - name: "programas"
     label: "Programa Perspectivas"
-    folder: "content/programa"
+    folder: "content/programas"
     create: true
-    slug: "{{slug}}"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "Episodio", name: "title", widget: "string" }
-      - { label: "Fecha", name: "date", widget: "datetime" }
-      - { label: "Resumen", name: "summary", widget: "text" }
-      - { label: "Media (URL)", name: "media", widget: "string" }
+      - { label: "Título del episodio", name: "title", widget: "string" }
+      - { label: "Video (YouTube embed)", name: "video", widget: "string" }
+      - { label: "Descripción", name: "body", widget: "markdown" }
