@@ -5,50 +5,66 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Noticias | Perspectivas</title>
   <link rel="stylesheet" href="/style.css">
-  <!-- Librería para leer Markdown -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    body { max-width: 800px; margin: auto; padding: 2rem; font-family: Arial; }
+    article { margin-bottom: 3rem; border-bottom: 1px solid #ddd; padding-bottom: 1.5rem; }
+    article h2 { margin-bottom: 0.5rem; }
+    .meta { color: #666; font-size: 0.9rem; margin-bottom: 1rem; }
+  </style>
 </head>
-<body style="max-width:800px; margin:auto; padding:2rem; font-family:Arial;">
+<body>
   <h1>📰 Noticias Locales</h1>
-  <div id="noticias"></div>
+  <div id="noticias">Cargando noticias...</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script>
-async function cargarNoticias() {
-  const contenedor = document.getElementById('noticias');
-  contenedor.innerHTML = '';
+  <script>
+    const owner = "perspectivas-py";
+    const repo = "perspectivas";
+    const folder = "content/noticias";
 
-  const archivos = [
-    '/content/noticias/2025-11-10-actividad-economica-sigue-en-expansion.md',
-    '/content/noticias/2025-11-11-primera-noticia-de-ejemplo.md'
-  ];
+    async function cargarNoticias() {
+      const contenedor = document.getElementById("noticias");
+      contenedor.innerHTML = "Cargando noticias...";
 
-  for (const archivo of archivos) {
-    try {
-      const res = await fetch(archivo);
-      if (!res.ok) {
-        console.warn('No se pudo cargar:', archivo);
-        continue;
+      try {
+        // 1️⃣ Buscar la lista de archivos en GitHub (carpeta content/noticias)
+        const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folder}`);
+        if (!res.ok) throw new Error("No se pudo listar noticias");
+        const files = await res.json();
+
+        // 2️⃣ Filtrar solo archivos Markdown y ordenarlos por nombre (más recientes primero)
+        const markdownFiles = files
+          .filter(f => f.name.endsWith(".md"))
+          .sort((a, b) => b.name.localeCompare(a.name));
+
+        if (markdownFiles.length === 0) {
+          contenedor.innerHTML = "<p>No hay noticias aún.</p>";
+          return;
+        }
+
+        contenedor.innerHTML = "";
+
+        // 3️⃣ Descargar y renderizar cada noticia
+        for (const file of markdownFiles) {
+          const urlPublica = `/content/noticias/${file.name}`;
+          const respuesta = await fetch(urlPublica);
+          if (!respuesta.ok) continue;
+
+          const texto = await respuesta.text();
+          const body = texto.replace(/---[\s\S]*?---/, "").trim();
+          const html = marked.parse(body);
+
+          const article = document.createElement("article");
+          article.innerHTML = html;
+          contenedor.appendChild(article);
+        }
+      } catch (err) {
+        contenedor.innerHTML = `<p>Error cargando noticias: ${err.message}</p>`;
+        console.error(err);
       }
-
-      const texto = await res.text();
-
-      // Quitar cabecera YAML (--- ... ---)
-      const body = texto.replace(/---[\s\S]*?---/, '').trim();
-      const html = marked.parse(body);
-
-      const div = document.createElement('article');
-      div.classList.add('noticia');
-      div.innerHTML = html;
-      contenedor.appendChild(div);
-    } catch (err) {
-      console.error('Error cargando noticia', archivo, err);
     }
-  }
-}
 
-cargarNoticias();
-</script>
-
+    cargarNoticias();
+  </script>
 </body>
 </html>
