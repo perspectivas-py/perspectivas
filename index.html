@@ -2,11 +2,12 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Perspectivas | Análisis económico y opinión</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <header class="site-header">
     <div class="container header-inner">
       <div class="brand">
@@ -29,11 +30,14 @@
     </div>
   </div>
 
+  <!-- INICIO DEL CONTENEDOR PRINCIPAL ÚNICO -->
   <main class="container main-grid">
+
+    <!-- Sección de artículos destacados -->
     <section class="lead">
       <div class="featured">
         <article class="card">
-          <img src="/assets/img/portada.jpg" alt="Portada 1">
+          <img src="assets/img/portada.jpg" alt="Portada 1">
           <div class="p">
             <h2>Titular principal de ejemplo</h2>
             <p class="meta">Redacción — 8 de noviembre de 2025</p>
@@ -42,7 +46,7 @@
           </div>
         </article>
         <article class="card">
-          <img src="/assets/img/portada.jpg" alt="Portada 2">
+          <img src="assets/img/portada.jpg" alt="Portada 2">
           <div class="p">
             <h2>Inflación: claves del mes y tendencias</h2>
             <p class="meta">Economía — 8 de noviembre de 2025</p>
@@ -51,7 +55,7 @@
           </div>
         </article>
         <article class="card">
-          <img src="/assets/img/portada.jpg" alt="Portada 3">
+          <img src="assets/img/portada.jpg" alt="Portada 3">
           <div class="p">
             <h2>Entrevista: mirada al presupuesto 2026</h2>
             <p class="meta">Política económica — 8 de noviembre de 2025</p>
@@ -62,6 +66,7 @@
       </div>
     </section>
 
+    <!-- Barra lateral -->
     <aside class="sidebar">
       <div class="block">
         <h3>Análisis Destacado</h3>
@@ -72,7 +77,17 @@
         <p>Episodio 1: Resumen y enlace.</p>
       </div>
     </aside>
+
+    <!-- Sección de Últimas Noticias (cargadas dinámicamente) -->
+    <section class="latest-news" style="grid-column: 1 / -1; margin-top: 40px;">
+      <h2>Últimas Noticias</h2>
+      <div id="lista-noticias" class="grid-noticias">
+        <!-- El contenido se inyectará aquí desde script.js -->
+      </div>
+    </section>
+
   </main>
+  <!-- FIN DEL CONTENEDOR PRINCIPAL ÚNICO -->
 
   <footer class="site-footer">
     <div class="container">
@@ -86,14 +101,9 @@
     </div>
   </footer>
 
- <main class="container">
-    <h2>Últimas Noticias</h2>
-    <div id="lista-noticias" class="grid-noticias">
-      <!-- El contenido se inyectará aquí desde script.js -->
-    </div>
-  </main>
-  
- <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
- <script src="script.js"></script>
+  <!-- Scripts al final del body para un mejor rendimiento -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="script.js"></script>
+
 </body>
 </html>
