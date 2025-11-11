@@ -12,37 +12,43 @@
   <h1>📰 Noticias Locales</h1>
   <div id="noticias"></div>
 
-  <script>
-    // Lista manual inicial: podés agregar más rutas según tus archivos
-    const archivos = [
-      '/content/noticias/2025-11-10-actividad-economica-sigue-en-expansion.md',
-      '/content/noticias/2025-11-11-primera-noticia-de-ejemplo.md'
-    ];
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+async function cargarNoticias() {
+  const contenedor = document.getElementById('noticias');
+  contenedor.innerHTML = '';
 
-    async function cargarNoticias() {
-      const contenedor = document.getElementById('noticias');
-      contenedor.innerHTML = '';
+  const archivos = [
+    '/content/noticias/2025-11-10-actividad-economica-sigue-en-expansion.md',
+    '/content/noticias/2025-11-11-primera-noticia-de-ejemplo.md'
+  ];
 
-      for (const archivo of archivos) {
-        try {
-          const res = await fetch(archivo);
-          if (!res.ok) continue;
-
-          const texto = await res.text();
-          const html = marked.parse(texto);
-
-          const div = document.createElement('article');
-          div.classList.add('noticia');
-          div.style.marginBottom = '3rem';
-          div.innerHTML = html;
-          contenedor.appendChild(div);
-        } catch (err) {
-          console.error('Error cargando noticia:', archivo, err);
-        }
+  for (const archivo of archivos) {
+    try {
+      const res = await fetch(archivo);
+      if (!res.ok) {
+        console.warn('No se pudo cargar:', archivo);
+        continue;
       }
-    }
 
-    cargarNoticias();
-  </script>
+      const texto = await res.text();
+
+      // Quitar cabecera YAML (--- ... ---)
+      const body = texto.replace(/---[\s\S]*?---/, '').trim();
+      const html = marked.parse(body);
+
+      const div = document.createElement('article');
+      div.classList.add('noticia');
+      div.innerHTML = html;
+      contenedor.appendChild(div);
+    } catch (err) {
+      console.error('Error cargando noticia', archivo, err);
+    }
+  }
+}
+
+cargarNoticias();
+</script>
+
 </body>
 </html>
