@@ -7,10 +7,10 @@
   <link rel="stylesheet" href="/style.css">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
-    body { max-width: 800px; margin: auto; padding: 2rem; font-family: Arial; }
-    article { margin-bottom: 3rem; border-bottom: 1px solid #ddd; padding-bottom: 1.5rem; }
-    article h2 { margin-bottom: 0.5rem; }
-    .meta { color: #666; font-size: 0.9rem; margin-bottom: 1rem; }
+    body { max-width: 800px; margin: auto; padding: 2rem; font-family: Arial, sans-serif; }
+    h1 { margin-bottom: 1rem; }
+    article { margin-bottom: 3rem; border-bottom: 1px solid #ddd; padding-bottom: 1rem; }
+    .meta { color: #666; font-size: 0.9rem; margin-bottom: 0.5rem; }
   </style>
 </head>
 <body>
@@ -24,38 +24,42 @@
 
     async function cargarNoticias() {
       const contenedor = document.getElementById("noticias");
-      contenedor.innerHTML = "Cargando noticias...";
 
       try {
-        // 1️⃣ Buscar la lista de archivos en GitHub (carpeta content/noticias)
+        // Obtener lista de archivos desde GitHub
         const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folder}`);
-        if (!res.ok) throw new Error("No se pudo listar noticias");
         const files = await res.json();
 
-        // 2️⃣ Filtrar solo archivos Markdown y ordenarlos por nombre (más recientes primero)
         const markdownFiles = files
           .filter(f => f.name.endsWith(".md"))
           .sort((a, b) => b.name.localeCompare(a.name));
 
-        if (markdownFiles.length === 0) {
-          contenedor.innerHTML = "<p>No hay noticias aún.</p>";
-          return;
-        }
-
         contenedor.innerHTML = "";
 
-        // 3️⃣ Descargar y renderizar cada noticia
         for (const file of markdownFiles) {
-          const urlPublica = `/content/noticias/${file.name}`;
-          const respuesta = await fetch(urlPublica);
-          if (!respuesta.ok) continue;
+          const url = `/content/noticias/${file.name}`;
+          const r = await fetch(url);
+          if (!r.ok) continue;
+          const text = await r.text();
 
-          const texto = await respuesta.text();
-          const body = texto.replace(/---[\s\S]*?---/, "").trim();
+          // Extraer front matter YAML
+          const match = /^---([\s\S]*?)---/.exec(text);
+          let metadata = {};
+          if (match) {
+            match[1].split('\n').forEach(line => {
+              const [key, ...rest] = line.split(':');
+              if (key && rest.length) metadata[key.trim()] = rest.join(':').trim();
+            });
+          }
+          const body = text.replace(/---[\s\S]*?---/, '').trim();
           const html = marked.parse(body);
 
           const article = document.createElement("article");
-          article.innerHTML = html;
+          article.innerHTML = `
+            <h2>${metadata.title || file.name.replace('.md', '')}</h2>
+            <p class="meta">${metadata.date ? new Date(metadata.date).toLocaleDateString('es-ES', {year: 'numeric', month: 'long', day: 'numeric'}) : ''}</p>
+            ${html}
+          `;
           contenedor.appendChild(article);
         }
       } catch (err) {
