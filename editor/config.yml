@@ -1,8 +1,9 @@
 backend:
   name: github
-  repo: perspectivas-py/perspectivas   # tu repositorio
+  repo: perspectivas-py/perspectivas
   branch: main
-  # base_url: ""  # si más adelante agregas autenticación OAuth, aquí va la URL
+  base_url: https://decap-oauth.vercel.app
+  auth_endpoint: /auth
 
 media_folder: "assets/img/uploads"     # dentro del repo
 public_folder: "/assets/img/uploads"   # URL pública
