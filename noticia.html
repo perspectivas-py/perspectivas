@@ -9,9 +9,9 @@
 <body>
 
   <header class="site-header">
-    <!-- Puedes copiar y pegar el mismo header de tu index.html aquí -->
     <div class="container header-inner">
       <div class="brand">
+        <!-- Enlace para volver a la página de inicio -->
         <a href="/" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px;">
           <img class="logo" src="assets/img/logo.jpeg" alt="Perspectivas">
           <div>
@@ -23,21 +23,21 @@
   </header>
 
   <main class="container">
-    <!-- Aquí se inyectará el contenido completo de la noticia -->
+    <!-- El contenido completo del artículo se cargará aquí dinámicamente -->
     <article id="contenido-noticia" class="full-article">
-      <!-- El script buscará este ID y lo rellenará -->
+      <p style="text-align: center; padding: 40px;">Cargando noticia...</p>
     </article>
   </main>
 
   <footer class="site-footer">
-    <!-- Puedes copiar y pegar el mismo footer de tu index.html aquí -->
     <div class="container">
       <div class="footer-row">
-        <span>© 2025 Perspectivas</span>
+        <span>© 2025 Perspectivas · Análisis, datos y contexto económico del Paraguay · <a href="/">Volver al inicio</a></span>
       </div>
     </div>
   </footer>
 
+  <!-- Scripts necesarios para esta página -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="noticia-script.js"></script>
 
