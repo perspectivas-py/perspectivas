@@ -1,9 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const repo = 'perspectivas-py/perspectivas';
-  const branch = 'main'; // O 'master' si usas esa rama
-  // IMPORTANTE: Esta ruta debe coincidir con la de tu config.yml
-  const postsPath = 'content/noticias'; 
-
+  const branch = 'main';
+  const postsPath = 'content/noticias';
   const noticiasContainer = document.getElementById('lista-noticias');
 
   if (!noticiasContainer) {
@@ -22,19 +20,22 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
+      // Ordenar archivos por nombre (fecha) de más reciente a más antiguo
+      files.sort((a, b) => b.name.localeCompare(a.name));
+
       noticiasContainer.innerHTML = ''; // Limpiar antes de añadir contenido
       
-     files.forEach(file => {
-  if (file.type !== 'file' || !file.download_url) return;
+      files.forEach(file => {
+        if (file.type !== 'file' || !file.download_url) return;
 
-  fetch(file.download_url)
-    .then(response => response.text())
-    .then(markdown => {
-      // Pasamos tanto el contenido como el nombre del archivo
-      const postHTML = crearTarjetaNoticia(markdown, file.name); 
-      noticiasContainer.innerHTML += postHTML;
-    });
-});
+        fetch(file.download_url)
+          .then(response => response.text())
+          .then(markdown => {
+            // Pasamos el contenido del markdown y el nombre del archivo
+            const postHTML = crearTarjetaNoticia(markdown, file.name);
+            noticiasContainer.innerHTML += postHTML;
+          });
+      });
     })
     .catch(error => {
       console.error('Error al cargar las noticias:', error);
@@ -59,24 +60,23 @@ document.addEventListener('DOMContentLoaded', () => {
     return { frontmatter, content };
   }
 
-  function crearTarjetaNoticia(markdown, filename) { // Añadimos 'filename' como parámetro
-  const { frontmatter, content } = parseFrontmatter(markdown);
-  const bodyHtml = marked.parse(content || '');
-  const fecha = new Date(frontmatter.date);
-  const fechaFormateada = !isNaN(fecha) 
-    ? fecha.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })
-    : 'Fecha no disponible';
+  function crearTarjetaNoticia(markdown, filename) {
+    const { frontmatter, content } = parseFrontmatter(markdown);
+    const bodyHtml = marked.parse(content || '');
+    const fecha = new Date(frontmatter.date);
+    const fechaFormateada = !isNaN(fecha) 
+      ? fecha.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })
+      : 'Fecha no disponible';
 
-  return `
-    <article class="noticia-card">
-      <h3>${frontmatter.title || 'Sin título'}</h3>
-      <p class="fecha">${fechaFormateada}</p>
-      <div class="contenido-resumen">
-        ${bodyHtml.substring(0, 250)}...
-      </div>
-      <!-- LÍNEA MODIFICADA -->
-      <a href="noticia.html?id=${filename}" class="leer-mas">Leer más</a>
-    </article>
-  `;
-}
+    return `
+      <article class="noticia-card">
+        <h3>${frontmatter.title || 'Sin título'}</h3>
+        <p class="fecha">${fechaFormateada}</p>
+        <div class="contenido-resumen">
+          ${bodyHtml.substring(0, 250)}...
+        </div>
+        <a href="noticia.html?id=${filename}" class="leer-mas">Leer más</a>
+      </article>
+    `;
+  }
 });
