@@ -2,10 +2,11 @@
 title: Actividad económica sigue en expansión a setiembre del 2025
 date: 2025-11-10T23:56:00.000-03:00
 ---
-
 En septiembre, la actividad económica continuó
 registrando un buen dinamismo interanual , reflejando un
 crecimiento en los principales sectores productivos.
+
+![](/assets/img/uploads/en-mexico-actividad-economica.jpg)
 
 En base a informaciones preliminares, el IMAEP registró
 un incremento de 6,7% con respecto al mismo mes del año
@@ -14,10 +15,6 @@ anterior. Con este resultado, acumuló un crecimiento de
 En el crecimiento interanual incidieron favorablemente
 los servicios, el sector secundario (las manufacturas) y el
 sector primario.
-
-
-
-
 
 Sector Primario
 
@@ -51,9 +48,3 @@ siguieron contribuyendo positivamente.
 Por su parte, el sector de la construcción verificó una caída
 interanual en el mes de septiembre debido al menor ritmo
 de ejecución de las obras tanto públicas como privadas.
-
-
-
-![](/assets/img/uploads/en-mexico-actividad-economica.jpg)
-
-![]()
