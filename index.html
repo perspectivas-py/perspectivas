@@ -86,6 +86,39 @@
     </div>
   </footer>
 
-  <script src="/script.js"></script>
+  <script src="/script.js"></script><section id="ultimas-noticias" style="padding:2rem;">
+  <h2>Últimas Noticias</h2>
+  <div id="lista-noticias"></div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+async function mostrarUltimasNoticias() {
+  const lista = document.getElementById('lista-noticias');
+  const archivos = [
+    '/content/noticias/2025-11-10-actividad-economica-sigue-en-expansion.md',
+    '/content/noticias/2025-11-11-primera-noticia-de-ejemplo.md'
+  ];
+
+  for (const archivo of archivos) {
+    const res = await fetch(archivo);
+    if (!res.ok) continue;
+    const texto = await res.text();
+    const lineas = texto.split('\n').slice(0, 5).join('\n'); // primeras líneas
+    const html = marked.parse(lineas);
+
+    const div = document.createElement('div');
+    div.innerHTML = `
+      <article style="margin-bottom:1.5rem;">
+        ${html}
+        <a href="/noticias.html" style="color:blue;">Leer más →</a>
+      </article>
+    `;
+    lista.appendChild(div);
+  }
+}
+mostrarUltimasNoticias();
+</script>
+
 </body>
 </html>
