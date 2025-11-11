@@ -1,8 +1,10 @@
 {
-  "rewrites": [
-    {
-      "source": "/editor/:path*",
-      "destination": "/editor/index.html"
-    }
+  "version": 2,
+  "public": true,
+  "routes": [
+    { "src": "/editor/(.*\\.(js|css|yml|yaml|json|png|jpg|jpeg|svg|gif|map))$", "dest": "/editor/$1" },
+    { "src": "^/editor/?$", "dest": "/editor/index.html" },
+    { "src": "/content/(.*)", "dest": "/content/$1" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
