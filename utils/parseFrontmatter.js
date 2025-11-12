@@ -2,6 +2,7 @@ export function parseFrontmatter(markdownContent) {
   const frontmatterRegex = /^---\s*([\s\S]*?)\s*---/;
   const match = frontmatterRegex.exec(markdownContent);
   const data = { frontmatter: {}, content: markdownContent };
+  
   if (match) {
     data.content = markdownContent.replace(match[0], '').trim();
     match[1].split('\n').forEach(line => {
@@ -12,4 +13,18 @@ export function parseFrontmatter(markdownContent) {
     });
   }
   return data;
+}
+
+export function findFirstImage(content) {
+  const imageMatch = content.match(/!\[.*\]\((.*)\)/);
+  // Si encontramos una imagen, nos aseguramos de que la URL sea absoluta
+  if (imageMatch && imageMatch[1]) {
+    // Si la URL ya es http, la dejamos. Si es relativa (ej: /assets/img/...), la completamos.
+    if (imageMatch[1].startsWith('http')) {
+      return imageMatch[1];
+    } else {
+      return `https://perspectivaspy.vercel.app${imageMatch[1].startsWith('/') ? '' : '/'}${imageMatch[1]}`;
+    }
+  }
+  return null;
 }
