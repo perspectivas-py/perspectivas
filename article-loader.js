@@ -39,7 +39,3 @@ document.addEventListener('DOMContentLoaded', () => {
       generarBotonesSociales(document.getElementById('share-buttons'), frontmatter.title);
     });
 });
-
-// ... las funciones auxiliares generarBotonesSociales y parseFrontmatter se mantienen igual ...
-function generarBotonesSociales(container, title) { /* ... */ }
-function parseFrontmatter(markdownContent) { /* ... */ }
