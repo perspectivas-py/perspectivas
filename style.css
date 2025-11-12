@@ -309,3 +309,13 @@ Hemos completado una gran transformación. ¡Felicidades por llegar hasta aquí!
 .main-nav a:hover {
   color: var(--color-link);
 }
+/* --- Estilos para los Iconos de Redes Sociales --- */
+#share-buttons a {
+  font-size: 1.5em; /* Iconos más grandes */
+  color: var(--color-text-secondary); /* Un color más sutil */
+  transition: color 0.2s ease-in-out;
+}
+
+#share-buttons a:hover {
+  color: var(--color-link); /* Cambia de color al pasar el ratón */
+}
