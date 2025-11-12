@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   const repo = 'perspectivas-py/perspectivas';
   const branch = 'main';
-  const postsPath = 'content/noticias'; // Asegúrate que esta es la carpeta de tus noticias
+  // RUTA CORREGIDA BASADA EN TU CAPTURA
+  const postsPath = 'noticias/_posts'; 
   const articleContainer = document.getElementById('contenido-noticia');
 
-  // Leer el parámetro 'id' de la URL (ej: noticia.html?id=mi-noticia.md)
   const urlParams = new URLSearchParams(window.location.search);
   const noticiaId = urlParams.get('id');
 
@@ -13,32 +13,24 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  // Usamos la URL de 'raw' de GitHub para obtener el archivo de texto plano
   const fileUrl = `https://raw.githubusercontent.com/${repo}/${branch}/${postsPath}/${noticiaId}`;
 
   fetch(fileUrl)
     .then(response => {
       if (!response.ok) {
-        throw new Error('No se pudo cargar el archivo de la noticia.');
+        throw new Error('No se pudo cargar el archivo de la noticia. Verifica la ruta en noticia-script.js');
       }
       return response.text();
     })
     .then(markdown => {
       const { frontmatter, content } = parseFrontmatter(markdown);
-      
-      // Convertir el cuerpo del artículo de Markdown a HTML
       const bodyHtml = marked.parse(content || '');
-
-      // Actualizar el título de la pestaña del navegador
       document.title = `${frontmatter.title || 'Noticia'} | Perspectivas`;
-
-      // Formatear la fecha
       const fecha = new Date(frontmatter.date);
       const fechaFormateada = !isNaN(fecha) 
         ? `Publicado el ${fecha.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}`
         : '';
       
-      // Inyectar el HTML final en el contenedor
       articleContainer.innerHTML = `
         <h1>${frontmatter.title || 'Sin título'}</h1>
         <p class="meta">${fechaFormateada}</p>
@@ -54,8 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Esta función es una copia de la que usamos en script.js
-// Sirve para separar los metadatos (título, fecha) del contenido principal
 function parseFrontmatter(markdownContent) {
   const frontmatterRegex = /^---\s*([\s\S]*?)\s*---/;
   const match = frontmatterRegex.exec(markdownContent);
@@ -72,4 +62,4 @@ function parseFrontmatter(markdownContent) {
     });
   }
   return { frontmatter, content };
-}```
+}
