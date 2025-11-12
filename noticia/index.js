@@ -41,7 +41,7 @@ export default async function handler(request) {
 async function getArticleData(type, id) {
   const repo = 'perspectivas-py/perspectivas';
   const branch = 'main';
-  const path = `${type}/_posts/${id}`;
+   const path = `content/${type}/_posts/${id}`;
   const url = `https://raw.githubusercontent.com/${repo}/${branch}/${path}`;
   
   const response = await fetch(url);
