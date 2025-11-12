@@ -33,7 +33,7 @@ collections:
 
   - name: "programas"
     label: "Programa Perspectivas"
-    folder: "content/programas"
+    folder: "programas/-posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
