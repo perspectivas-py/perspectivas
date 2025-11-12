@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   const repo = 'perspectivas-py/perspectivas';
   const branch = 'main';
-  const postsPath = 'content/noticias';
+  // RUTA CORREGIDA BASADA EN TU CAPTURA
+  const postsPath = 'noticias/_posts'; 
   const noticiasContainer = document.getElementById('lista-noticias');
 
   if (!noticiasContainer) {
@@ -11,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   fetch(`https://api.github.com/repos/${repo}/contents/${postsPath}?ref=${branch}`)
     .then(response => {
-      if (!response.ok) throw new Error('Respuesta de red no fue exitosa.');
+      if (!response.ok) throw new Error('Respuesta de red no fue exitosa. Verifica la ruta en script.js');
       return response.json();
     })
     .then(files => {
@@ -20,10 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Ordenar archivos por nombre (fecha) de más reciente a más antiguo
       files.sort((a, b) => b.name.localeCompare(a.name));
-
-      noticiasContainer.innerHTML = ''; // Limpiar antes de añadir contenido
+      noticiasContainer.innerHTML = ''; 
       
       files.forEach(file => {
         if (file.type !== 'file' || !file.download_url) return;
@@ -31,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch(file.download_url)
           .then(response => response.text())
           .then(markdown => {
-            // Pasamos el contenido del markdown y el nombre del archivo
             const postHTML = crearTarjetaNoticia(markdown, file.name);
             noticiasContainer.innerHTML += postHTML;
           });
@@ -39,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(error => {
       console.error('Error al cargar las noticias:', error);
-      noticiasContainer.innerHTML = '<p>Ocurrió un error al cargar las noticias.</p>';
+      noticiasContainer.innerHTML = '<p>Ocurrió un error al cargar las noticias. Revisa la consola para más detalles.</p>';
     });
 
   function parseFrontmatter(markdownContent) {
