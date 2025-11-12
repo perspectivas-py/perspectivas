@@ -17,9 +17,7 @@ export function parseFrontmatter(markdownContent) {
 
 export function findFirstImage(content) {
   const imageMatch = content.match(/!\[.*\]\((.*)\)/);
-  // Si encontramos una imagen, nos aseguramos de que la URL sea absoluta
   if (imageMatch && imageMatch[1]) {
-    // Si la URL ya es http, la dejamos. Si es relativa (ej: /assets/img/...), la completamos.
     if (imageMatch[1].startsWith('http')) {
       return imageMatch[1];
     } else {
