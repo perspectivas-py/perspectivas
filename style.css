@@ -1,3 +1,67 @@
+:root {
+  /* TEMA CLARO (Por defecto) */
+  --color-background: #f9f9f9;
+  --color-surface: #ffffff; /* Color para tarjetas y cabeceras */
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #555;
+  --color-border: #e0e0e0;
+  --color-link: #0056b3;
+  --color-link-hover: #003d82;
+}
+
+body.dark-mode {
+  /* TEMA OSCURO (Cuando el body tiene la clase .dark-mode) */
+  --color-background: #121212;
+  --color-surface: #1e1e1e;
+  --color-text-primary: #e0e0e0;
+  --color-text-secondary: #aaa;
+  --color-border: #333333;
+  --color-link: #64b5f6;
+  --color-link-hover: #90caf9;
+}
+
+/* --- Transición Suave --- */
+body, .card, .site-header, .site-footer {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --- Aplicación de Variables a Elementos Base --- */
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+}
+
+.site-header, .site-footer, .card {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+a {
+  color: var(--color-link);
+}
+a:hover {
+  color: var(--color-link-hover);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text-primary);
+}
+
+.card h2 a, .card h3 a {
+  color: var(--color-text-primary);
+}
+
+.card h2 a:hover, .card h3 a:hover {
+  color: var(--color-link);
+}
+
+hr {
+  border-color: var(--color-border);
+}
+
+.full-article .meta, #reading-time, #share-buttons {
+  color: var(--color-text-secondary);
+}
 body {
   font-family: 'Lato', sans-serif; /* Fuente base para todo el texto */
 }:root{--accent:#103a6a;--accent-2:#0aa0c2;--bg:#f4f6f8;--fg:#101418;--muted:#646e78;--card:#ffffff;--border:#e5e9ef;--ticker-bg:#0f3360}
