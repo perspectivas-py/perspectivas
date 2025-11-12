@@ -12,7 +12,7 @@ local_backend: false
 collections:
   - name: "noticias"
     label: "Noticias Locales"
-    folder: "content/noticias"
+    folder: "noticias/_posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
