@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const repo = 'perspectivas-py/perspectivas';
   const branch = 'main';
-  // <-- ¡Asegúrate de que esta ruta coincida con tu GitHub! -->
+  // <-- ¡ESTA ES LA RUTA CORRECTA Y DEFINITIVA! -->
   const postsPath = 'analisis/_posts'; 
   const gridContainer = document.getElementById('analisis-grid');
 
@@ -15,8 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   fetch(`https://api.github.com/repos/${repo}/contents/${postsPath}?ref=${branch}`)
     .then(response => {
         if (!response.ok) {
-            // Si la carpeta no existe, GitHub devuelve 404
-            throw new Error('No se pudo encontrar la carpeta de análisis. ¿Has publicado algún artículo en esa sección?');
+            throw new Error('No se pudo encontrar la carpeta de análisis. Verifica la ruta en el script y en GitHub.');
         }
         return response.json();
     })
@@ -55,7 +54,7 @@ function crearTarjetaAnalisis(markdown, filename) {
 }
 
 function parseFrontmatter(markdownContent) {
-    const frontmatterRegex = /^---\s*([\s\S]*?)\s*---/;
+    const frontmatterRegex = /^---\s*([\s*[\s\S]*?)\s*---/;
     const match = frontmatterRegex.exec(markdownContent);
     const data = { frontmatter: {}, content: markdownContent };
     if (match) {
@@ -72,4 +71,4 @@ function parseFrontmatter(markdownContent) {
       data.frontmatter.image = imageMatch[1];
     }
     return data;
-}```
+}
