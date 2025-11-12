@@ -297,3 +297,15 @@ main.container {
 ¡Y listo! Una vez que se despliegue, tu página de inicio recibirá a los visitantes con un dinámico ticker de noticias, dándole ese toque final de profesionalismo y actualidad.
 
 Hemos completado una gran transformación. ¡Felicidades por llegar hasta aquí! Ahora el sitio tiene una base increíblemente sólida y profesional.
+.main-nav {
+  display: flex;
+  gap: 20px;
+}
+.main-nav a {
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--color-text-secondary);
+}
+.main-nav a:hover {
+  color: var(--color-link);
+}
