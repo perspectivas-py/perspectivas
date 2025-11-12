@@ -1,6 +1,6 @@
-/* AGREGA ESTO AL PRINCIPIO DE TU style.css */
-
-/* --- Definición de la Paleta de Colores (Variables CSS) --- */
+/* ==========================================================================
+   1. VARIABLES Y TEMA OSCURO (DEBE ESTAR AL PRINCIPIO)
+   ========================================================================== */
 :root {
   /* TEMA CLARO (Por defecto) */
   --color-background: #f9f9f9;
@@ -23,80 +23,104 @@ body.dark-mode {
   --color-link-hover: #90caf9;
 }
 
-/* --- Transición Suave --- */
-body, .card, .site-header, .site-footer {
+/* ==========================================================================
+   2. ESTILOS BASE Y TIPOGRAFÍA
+   ========================================================================== */
+body {
+  font-family: 'Lato', sans-serif;
+  margin: 0;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* --- Aplicación de Variables a Elementos Base --- */
-body {
-  background-color: var(--color-background);
-  color: var(--color-text-primary);
-}
-
-.site-header, .site-footer, .card {
-  background-color: var(--color-surface);
-  border-color: var(--color-border);
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 a {
   color: var(--color-link);
+  text-decoration: none;
 }
 a:hover {
   color: var(--color-link-hover);
 }
 
 h1, h2, h3, h4, h5, h6 {
+  font-family: 'Merriweather', serif;
   color: var(--color-text-primary);
-}
-
-.card h2 a, .card h3 a {
-  color: var(--color-text-primary);
-}
-
-.card h2 a:hover, .card h3 a:hover {
-  color: var(--color-link);
 }
 
 hr {
-  border-color: var(--color-border);
+  border: 0;
+  border-top: 1px solid var(--color-border);
 }
 
-.full-article .meta, #reading-time, #share-buttons {
+/* ==========================================================================
+   3. CABECERA Y PIE DE PÁGINA
+   ========================================================================== */
+.site-header, .site-footer {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: 15px 0;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  border-bottom: none;
+  text-align: center;
+  font-size: 0.9em;
   color: var(--color-text-secondary);
 }
-body {
-  font-family: 'Lato', sans-serif; /* Fuente base para todo el texto */
-}:root{--accent:#103a6a;--accent-2:#0aa0c2;--bg:#f4f6f8;--fg:#101418;--muted:#646e78;--card:#ffffff;--border:#e5e9ef;--ticker-bg:#0f3360}
-body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--fg)}
-.container{max-width:1100px;margin:0 auto;padding:18px}
-.site-header{background:var(--card);border-bottom:1px solid var(--border)}
-.header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
-.brand{display:flex;align-items:center;gap:14px}
-.logo{height:56px;transition:filter .3s ease}
-.site-title{margin:0;font-size:24px;color:var(--accent);font-weight:800;letter-spacing:.2px}
-.tagline{margin:0;color:var(--muted);font-size:13px}
-.theme-toggle{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:var(--card);padding:6px 10px;border-radius:999px;cursor:pointer;font-size:13px}
-.theme-toggle .icon{font-size:16px;line-height:1}
-.ticker-wrap{background:var(--ticker-bg);color:#fff;overflow:hidden;border-bottom:1px solid #0d2a4a}
-.ticker{display:inline-block;white-space:nowrap;padding:8px 0;animation:scroll 45s linear infinite}
-.ticker .item{display:inline-flex;gap:6px;align-items:center;margin:0 18px;font-size:14px}
-.ticker .up{color:#74d18c;font-weight:700}.ticker .down{color:#ff7a7a;font-weight:700}.ticker .sep{opacity:.5;margin:0 8px}
-.ticker-meta{font-size:12px;opacity:.8;margin-left:18px}
-@keyframes scroll{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
-.main-grid{display:grid;grid-template-columns:2fr 1fr;gap:20px;padding:24px 0}
-.featured{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.03)}
-.card img{width:100%;height:140px;object-fit:cover}
-.card .p{padding:12px}.card h2{font-size:18px;margin:6px 0 6px}.meta{font-size:12px;color:var(--muted);margin-bottom:8px}
-.read-more{color:var(--accent-2);text-decoration:none;font-weight:700}
-.sidebar .block{background:var(--card);border:1px solid var(--border);padding:12px;border-radius:10px;margin-bottom:12px}
-.site-footer{border-top:1px solid var(--border);background:var(--card);padding:18px 0;margin-top:24px;color:var(--muted);font-size:14px;text-align:center}
-.footer-row{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
-.footer-row a{color:var(--accent);text-decoration:none}
-body.dark{--bg:#0c1116;--fg:#e6edf3;--muted:#9aa3ab;--card:#0f1520;--border:#202b37;--ticker-bg:#0a274b}
-body.dark .logo{filter:brightness(0) invert(1)}body.dark .site-title{color:#6ea8ff}body.dark .read-more{color:#79c0ff}body.dark .theme-toggle{background:#141a23;border-color:#243142}
-@media(max-width:900px){.main-grid{grid-template-columns:1fr}.featured{grid-template-columns:1fr}}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.brand .logo {
+  height: 50px;
+  width: auto;
+}
+
+.site-title {
+  margin: 0;
+  font-size: 1.8em;
+}
+
+.tagline {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+/* ==========================================================================
+   4. ESTRUCTURA Y TARJETAS DE LA PORTADA
+   ========================================================================== */
+main.container {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
 .main-story {
   margin-bottom: 40px;
 }
@@ -107,20 +131,14 @@ body.dark .logo{filter:brightness(0) invert(1)}body.dark .site-title{color:#6ea8
   gap: 25px;
 }
 
-h2 {
-  font-family: 'Merriweather', serif; /* Fuente con más carácter para títulos */
-  border-bottom: 1px solid #e0e0e0;
-  padding-bottom: 10px;
-  margin-bottom: 25px;
-}
-
-/* --- Estilo de las Tarjetas de Noticia --- */
 .card {
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
-  transition: box-shadow 0.2s ease-in-out;
+  transition: box-shadow 0.2s ease-in-out, background-color 0.3s ease;
+  overflow: hidden; /* Para que las imágenes no se salgan */
+  border-radius: 4px;
 }
 
 .card:hover {
@@ -137,35 +155,27 @@ h2 {
   padding: 15px;
 }
 
-.card h2, .card h3 {
-  margin-top: 0;
-  font-family: 'Merriweather', serif;
-}
-
 .card h2 a, .card h3 a {
-  text-decoration: none;
-  color: #1a1a1a;
+  color: var(--color-text-primary);
   transition: color 0.2s;
 }
 
 .card h2 a:hover, .card h3 a:hover {
-  color: #0056b3;
+  color: var(--color-link);
 }
 
-/* Estilo específico para la Tarjeta DESTACADA */
 .featured-card {
-  /* En pantallas grandes, imagen a la izquierda y texto a la derecha */
   @media (min-width: 768px) {
     display: flex;
     flex-direction: row;
-    height: 350px;
+    min-height: 350px;
   }
 }
 
 .featured-card img {
   @media (min-width: 768px) {
     width: 60%;
-    height: 100%;
+    height: auto;
   }
 }
 
@@ -180,23 +190,25 @@ h2 {
 }
 
 .featured-card h2 {
-  font-size: 2em; /* Título mucho más grande */
+  font-size: 2em;
 }
-/* --- Estilos para la Página del Artículo --- */
+
+/* ==========================================================================
+   5. PÁGINA DEL ARTÍCULO
+   ========================================================================== */
 .full-article {
-  max-width: 720px; /* Ancho de lectura ideal, como en Medium o Substack */
-  margin: 40px auto; /* Centra el contenedor del artículo */
+  max-width: 720px;
+  margin: 40px auto;
   padding: 0 20px;
 }
 
 .full-article h1 {
   font-size: 2.5em;
-  font-family: 'Merriweather', serif;
   line-height: 1.2;
 }
 
 .full-article .meta {
-  color: #666;
+  color: var(--color-text-secondary);
   font-size: 0.9em;
   margin-bottom: 20px;
 }
@@ -204,7 +216,7 @@ h2 {
 .full-article .article-content {
   font-size: 1.1em;
   line-height: 1.7;
-  color: #333;
+  color: var(--color-text-primary);
 }
 
 .full-article .article-content img {
@@ -212,26 +224,23 @@ h2 {
   height: auto;
   margin: 30px 0;
 }
-/* --- Estilos para Metadatos y Botones de Compartir --- */
+
 .article-meta-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap; /* Para que se vea bien en móviles */
+  gap: 15px;
   margin: 20px 0;
   padding: 10px 0;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
   font-size: 0.9em;
-  color: #555;
+  color: var(--color-text-secondary);
 }
 
 #share-buttons a {
   margin-left: 10px;
-  text-decoration: none;
-  color: #0056b3;
+  color: var(--color-link);
   font-weight: bold;
-}
-
-#share-buttons a:hover {
-  text-decoration: underline;
 }
