@@ -1,9 +1,4 @@
 {
-  "functions": {
-    "noticia/index.js": {
-      "runtime": "edge"
-    }
-  },
   "rewrites": [
     { "source": "/noticia", "destination": "/noticia/index.js" },
     { "source": "/editor/(.*)", "destination": "/editor/index.html" }
