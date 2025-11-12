@@ -1,7 +1,9 @@
+// Contenido completo para noticia/index.js
 import { parse } from 'node-html-parser';
 import { parseFrontmatter, findFirstImage } from '../utils/parseFrontmatter.js';
 
-export const config = {
+// ... (config de runtime no cambia) ...
+export default async function handler(request) {
   runtime: 'edge',
 };
 
@@ -41,7 +43,7 @@ export default async function handler(request) {
 async function getArticleData(type, id) {
   const repo = 'perspectivas-py/perspectivas';
   const branch = 'main';
-   const path = `content/${type}/_posts/${id}`;
+  const path = `content/${type}/_posts/${id}`; // <-- RUTA UNIFICADA
   const url = `https://raw.githubusercontent.com/${repo}/${branch}/${path}`;
   
   const response = await fetch(url);
