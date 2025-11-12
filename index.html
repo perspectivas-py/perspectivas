@@ -31,62 +31,20 @@
   </div>
 
   <!-- INICIO DEL CONTENEDOR PRINCIPAL ÚNICO -->
-  <main class="container main-grid">
+  <main class="container">
 
-    <!-- Sección de artículos destacados -->
-    <section class="lead">
-      <div class="featured">
-        <article class="card">
-          <img src="assets/img/portada.jpg" alt="Portada 1">
-          <div class="p">
-            <h2>Titular principal de ejemplo</h2>
-            <p class="meta">Redacción — 8 de noviembre de 2025</p>
-            <p>Resumen corto para mostrar el estilo general de la portada con bloques tipo Expansión.</p>
-            <a href="#" class="read-more">Leer más</a>
-          </div>
-        </article>
-        <article class="card">
-          <img src="assets/img/portada.jpg" alt="Portada 2">
-          <div class="p">
-            <h2>Inflación: claves del mes y tendencias</h2>
-            <p class="meta">Economía — 8 de noviembre de 2025</p>
-            <p>Precios por rubros, expectativas y referencias internacionales para Paraguay.</p>
-            <a href="#" class="read-more">Leer más</a>
-          </div>
-        </article>
-        <article class="card">
-          <img src="assets/img/portada.jpg" alt="Portada 3">
-          <div class="p">
-            <h2>Entrevista: mirada al presupuesto 2026</h2>
-            <p class="meta">Política económica — 8 de noviembre de 2025</p>
-            <p>Inversión pública, prioridades y oportunidades de crecimiento.</p>
-            <a href="#" class="read-more">Leer más</a>
-          </div>
-        </article>
-      </div>
-    </section>
+  <!-- 1. ZONA PARA EL ARTÍCULO DESTACADO PRINCIPAL -->
+  <section id="main-story-container" class="main-story">
+    <!-- El artículo más reciente se cargará aquí con JavaScript -->
+  </section>
 
-    <!-- Barra lateral -->
-    <aside class="sidebar">
-      <div class="block">
-        <h3>Análisis Destacado</h3>
-        <p>Columna de ejemplo: Perspectivas sobre el mercado local.</p>
-      </div>
-      <div class="block">
-        <h3>Programa Perspectivas</h3>
-        <p>Episodio 1: Resumen y enlace.</p>
-      </div>
-    </aside>
+  <!-- 2. CUADRÍCULA PARA LAS NOTICIAS SECUNDARIAS -->
+  <h2>Más Noticias</h2>
+  <section id="secondary-grid-container" class="secondary-grid">
+    <!-- El resto de los artículos se cargarán aquí -->
+  </section>
 
-    <!-- Sección de Últimas Noticias (cargadas dinámicamente) -->
-    <section class="latest-news" style="grid-column: 1 / -1; margin-top: 40px;">
-      <h2>Últimas Noticias</h2>
-      <div id="lista-noticias" class="grid-noticias">
-        <!-- El contenido se inyectará aquí desde script.js -->
-      </div>
-    </section>
-
-  </main>
+</main>
   <!-- FIN DEL CONTENEDOR PRINCIPAL ÚNICO -->
 
   <footer class="site-footer">
