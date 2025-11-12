@@ -22,13 +22,14 @@ collections:
 
   - name: "analisis"
     label: "Análisis y Opinión"
-    folder: "content/analisis"
+    folder: "analisis/_posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Título", name: "title", widget: "string" }
-      - { label: "Autor", name: "author", widget: "string" }
-      - { label: "Cuerpo", name: "body", widget: "markdown" }
+      - { label: "Autor", name: "author", widget: "string", default: "El Equipo de Perspectivas" }
+      - { label: "Fecha de Publicación", name: "date", widget: "datetime" }
+      - { label: "Cuerpo del Análisis", name: "body", widget: "markdown" }
 
   - name: "programas"
     label: "Programa Perspectivas"
