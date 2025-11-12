@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (mainStoryContainer && secondaryGridContainer) {
     const repo = 'perspectivas-py/perspectivas';
     const branch = 'main';
-    const postsPath = 'noticias/_posts';
+    const postsPath = 'content/noticias/_posts';
 
     fetch(`https://api.github.com/repos/${repo}/contents/${postsPath}?ref=${branch}`)
       .then(response => response.json())
