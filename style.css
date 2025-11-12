@@ -115,3 +115,33 @@ h2 {
 .featured-card h2 {
   font-size: 2em; /* Título mucho más grande */
 }
+/* --- Estilos para la Página del Artículo --- */
+.full-article {
+  max-width: 720px; /* Ancho de lectura ideal, como en Medium o Substack */
+  margin: 40px auto; /* Centra el contenedor del artículo */
+  padding: 0 20px;
+}
+
+.full-article h1 {
+  font-size: 2.5em;
+  font-family: 'Merriweather', serif;
+  line-height: 1.2;
+}
+
+.full-article .meta {
+  color: #666;
+  font-size: 0.9em;
+  margin-bottom: 20px;
+}
+
+.full-article .article-content {
+  font-size: 1.1em;
+  line-height: 1.7;
+  color: #333;
+}
+
+.full-article .article-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 30px 0;
+}
