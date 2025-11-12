@@ -1,3 +1,6 @@
+/* AGREGA ESTO AL PRINCIPIO DE TU style.css */
+
+/* --- Definición de la Paleta de Colores (Variables CSS) --- */
 :root {
   /* TEMA CLARO (Por defecto) */
   --color-background: #f9f9f9;
