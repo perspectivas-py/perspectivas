@@ -1,7 +1,9 @@
 ---
 title: "Resiliencia, productividad y avances económicos: desafíos clave para Latan"
-date: 2025-11-11T23:44:00.000-03:00
+date: 2025-11-11T23:50:00.000-03:00
 ---
+![El Fondo Monetario Internacional (FMI) presentó este viernes 7 de noviembre, en el Instituto del BCP, la edición 2025 del Informe de Perspectivas Económicas (REO)](/assets/img/uploads/fmi.jpg "BCP/FMI")
+
 El Fondo Monetario Internacional (FMI) presentó este viernes 7 de noviembre, en el Instituto del BCP, la edición 2025 del Informe de Perspectivas Económicas (REO) para las Américas.
 
 **El Fondo Monetario Internacional (FMI) presentó este viernes 7 de noviembre, en el Instituto del BCP, la edición 2025 del Informe de Perspectivas Económicas (REO) para las Américas. Durante la jornada se analizaron los principales desafíos que enfrentan las economías de América Latina y el Caribe en un contexto global caracterizado por elevados niveles de incertidumbre, cambios en las políticas económicas y choques persistentes.**
