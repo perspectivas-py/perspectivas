@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Noticia | Perspectivas</title>
+  <!-- Enlaces a las fuentes de Google -->
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+                <a href="/" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px;">
+          <img class="logo" src="assets/img/logo.jpeg" alt="Perspectivas">
+          <div>
+            <h1 class="site-title">Perspectivas</h1>
+          </div>
+        </a>
+      </div>
+    </div>
+    <nav class="main-nav">
+      <a href="index.html">Inicio</a>
+      <a href="analisis.html">Análisis</a>
+      <!-- <a href="#">Programa</a> (Lo añadiremos en el futuro) -->
+    </nav>
+    
+    <button id="themeToggle" ...> ... </button>
+     </div>
+  </header>
+
+  <main class="container">
+    <!-- Este es el contenedor que el script va a rellenar. No necesita nada más. -->
+    <article id="contenido-noticia" class="full-article">
+      <p style="text-align: center; padding: 40px;">Cargando noticia...</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-row">
+        <span>© 2025 Perspectivas · <a href="/">Volver al inicio</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="noticia-script.js"></script>
+
+</body>
+</html>
