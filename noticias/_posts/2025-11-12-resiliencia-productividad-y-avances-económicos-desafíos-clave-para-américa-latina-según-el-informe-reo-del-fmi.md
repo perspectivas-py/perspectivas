@@ -1,14 +1,10 @@
 ---
-title: "Resiliencia, productividad y avances económicos: desafíos clave para
-  América Latina, según el informe REO del FMI"
+title: "Resiliencia, productividad y avances económicos: desafíos clave para Latan"
 date: 2025-11-11T23:06:00.000-03:00
 ---
-![El Fondo Monetario Internacional (FMI) presentó este viernes 7 de noviembre, en el Instituto del BCP, la edición 2025 del Informe de Perspectivas Económicas (REO) para las Américas.](/assets/img/uploads/fmi.jpg)
+El Fondo Monetario Internacional (FMI) presentó este viernes 7 de noviembre, en el Instituto del BCP, la edición 2025 del Informe de Perspectivas Económicas (REO) para las Américas.
 
 **El Fondo Monetario Internacional (FMI) presentó este viernes 7 de noviembre, en el Instituto del BCP, la edición 2025 del Informe de Perspectivas Económicas (REO) para las Américas. Durante la jornada se analizaron los principales desafíos que enfrentan las economías de América Latina y el Caribe en un contexto global caracterizado por elevados niveles de incertidumbre, cambios en las políticas económicas y choques persistentes.**
-
-
-
 
 El presidente del Banco Central del Paraguay (BCP), Carlos Carvallo Spalding, abrió la jornada destacando que Paraguay, al igual que otros países de la región, atraviesa un momento especialmente significativo en materia económica. En ese sentido, señaló que el país avanza de manera continua y progresiva en materia de disciplina macroeconómica, ofreciendo credibilidad y certezas en un contexto internacional marcado por la incertidumbre.
 
