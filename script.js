@@ -1,5 +1,3 @@
-// Reemplaza TODO el contenido de script.js con esto
-
 document.addEventListener('DOMContentLoaded', () => {
   
   // --- FUNCIONALIDAD DEL MODO OSCURO ---
@@ -27,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     themeToggle.addEventListener('click', toggleTheme);
   }
 
-  // --- FUNCIONALIDAD PARA CARGAR NOTICIAS Y TICKER ---
+  // --- LÓGICA DE CARGA DE NOTICIAS ---
   const mainStoryContainer = document.getElementById('main-story-container');
   const secondaryGridContainer = document.getElementById('secondary-grid-container');
   const tickerContainer = document.querySelector('.ticker');
@@ -35,10 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {
   if (mainStoryContainer && secondaryGridContainer) {
     const repo = 'perspectivas-py/perspectivas';
     const branch = 'main';
-    const postsPath = 'content/noticias/_posts';
+    const postsPath = 'content/noticias/_posts'; // <-- RUTA UNIFICADA
 
     fetch(`https://api.github.com/repos/${repo}/contents/${postsPath}?ref=${branch}`)
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) throw new Error('Carpeta de noticias no encontrada.');
+        return response.json();
+      })
       .then(files => {
         if (!Array.isArray(files) || files.length === 0) {
           mainStoryContainer.innerHTML = '<p>No hay noticias para mostrar.</p>';
