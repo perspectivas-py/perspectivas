@@ -2,28 +2,27 @@ backend:
   name: github
   repo: perspectivas-py/perspectivas
   branch: main
-  base_url: https://decap-oauth.vercel.app
-  auth_endpoint: /auth
 
-media_folder: "assets/img/uploads"     # dentro del repo
-public_folder: "/assets/img/uploads"   # URL pública
-local_backend: false
+media_folder: "assets/img"
+public_folder: "/assets/img"
 
 collections:
   - name: "noticias"
-    label: "Noticias Locales"
-    folder: "noticias/_posts"
+    label: "Noticias"
+    # ¡Ruta actualizada!
+    folder: "content/noticias/_posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Título", name: "title", widget: "string" }
-      - { label: "Fecha", name: "date", widget: "datetime" }
+      - { label: "Fecha de Publicación", name: "date", widget: "datetime" }
       - { label: "Resumen (para SEO y Redes Sociales)", name: "summary", widget: "text" }
       - { label: "Cuerpo", name: "body", widget: "markdown" }
 
   - name: "analisis"
     label: "Análisis y Opinión"
-    folder: "analisis/_posts"
+    # ¡Ruta actualizada!
+    folder: "content/analisis/_posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
@@ -32,13 +31,3 @@ collections:
       - { label: "Fecha de Publicación", name: "date", widget: "datetime" }
       - { label: "Resumen (para SEO y Redes Sociales)", name: "summary", widget: "text" }
       - { label: "Cuerpo del Análisis", name: "body", widget: "markdown" }
-
-  - name: "programas"
-    label: "Programa Perspectivas"
-    folder: "programas/-posts"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - { label: "Título del episodio", name: "title", widget: "string" }
-      - { label: "Video (YouTube embed)", name: "video", widget: "string" }
-      - { label: "Descripción", name: "body", widget: "markdown" }
