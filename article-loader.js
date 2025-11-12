@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const repo = 'perspectivas-py/perspectivas';
   const branch = 'main';
-  const path = `${type}/_posts/${id}`;
+  const path = `content/${type}/_posts/${id}`; // <-- ¡RUTA CORREGIDA!
   const url = `https://raw.githubusercontent.com/${repo}/${branch}/${path}`;
 
   fetch(url)
