@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const body = document.body;
   const themeIcon = themeToggle ? themeToggle.querySelector('.icon') : null;
 
-  // Función para cambiar el tema
   const toggleTheme = () => {
     body.classList.toggle('dark-mode');
     if (body.classList.contains('dark-mode')) {
@@ -19,22 +18,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // Aplicar el tema guardado al cargar la página
   if (localStorage.getItem('theme') === 'dark') {
     body.classList.add('dark-mode');
     if(themeIcon) themeIcon.textContent = '☀️';
   }
 
-  // Añadir el evento al botón
   if(themeToggle) {
     themeToggle.addEventListener('click', toggleTheme);
   }
 
-  // --- FUNCIONALIDAD PARA CARGAR NOTICIAS (Solo en la página principal) ---
+  // --- FUNCIONALIDAD PARA CARGAR NOTICIAS Y TICKER ---
   const mainStoryContainer = document.getElementById('main-story-container');
   const secondaryGridContainer = document.getElementById('secondary-grid-container');
+  const tickerContainer = document.querySelector('.ticker');
 
-  // Si los contenedores de noticias existen, ejecutamos la lógica para cargar noticias
   if (mainStoryContainer && secondaryGridContainer) {
     const repo = 'perspectivas-py/perspectivas';
     const branch = 'main';
@@ -48,6 +45,12 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
         files.sort((a, b) => b.name.localeCompare(a.name));
+        
+        // **NUEVO: Llenar el Ticker con los titulares**
+        if (tickerContainer) {
+          populateTicker(files.slice(0, 7)); // Tomamos las 7 noticias más recientes para el ticker
+        }
+
         files.forEach((file, index) => {
           if (file.type !== 'file' || !file.download_url) return;
           fetch(file.download_url)
@@ -66,7 +69,31 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// --- FUNCIONES AUXILIARES (no necesitan estar dentro del DOMContentLoaded) ---
+// --- FUNCIONES AUXILIARES ---
+
+// **NUEVA FUNCIÓN: Poblar el Ticker**
+function populateTicker(files) {
+  const ticker = document.querySelector('.ticker');
+  if (!ticker) return;
+  ticker.innerHTML = ''; // Limpiamos por si acaso
+  files.forEach(file => {
+    const title = formatTitleFromFilename(file.name);
+    const link = document.createElement('a');
+    link.href = `noticia.html?id=${file.name}`;
+    link.textContent = title;
+    link.classList.add('ticker-item');
+    ticker.appendChild(link);
+  });
+}
+
+// **NUEVA FUNCIÓN: Formatear título desde el nombre del archivo**
+function formatTitleFromFilename(filename) {
+  return filename
+    .replace(/\.md$/, '') // Quitar la extensión .md
+    .replace(/^\d{4}-\d{2}-\d{2}-/, '') // Quitar la fecha del inicio
+    .replace(/-/g, ' ') // Reemplazar guiones por espacios
+    .replace(/\b\w/g, l => l.toUpperCase()); // Poner en mayúscula la primera letra de cada palabra
+}
 
 function parseFrontmatter(markdownContent) {
   const frontmatterRegex = /^---\s*([\s\S]*?)\s*---/;
