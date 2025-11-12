@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function crearTarjetaAnalisis(markdown, filename) {
   const { frontmatter } = parseFrontmatter(markdown);
-  const url = `noticia.html?type=analisis&id=${filename}`;
+  const url = `/noticia?type=noticias&id=${filename}`;
   return `
     <article class="card">
       ${frontmatter.image ? `<img src="${frontmatter.image}" alt="">` : ''}
