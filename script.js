@@ -121,7 +121,7 @@ function crearTarjetaPrincipal(markdown, filename) {
     <article class="card featured-card">
       ${frontmatter.image ? `<img src="${frontmatter.image}" alt="Imagen destacada">` : ''}
       <div class="card-content">
-        <h2><a href="noticia.html?id=${filename}">${frontmatter.title || 'Sin título'}</a></h2>
+        <h2><a href="/noticia?type=noticias&id=${filename}">${frontmatter.title || 'Sin título'}</a></h2>
         <p>${content.substring(0, 150)}...</p>
       </div>
     </article>
@@ -134,7 +134,7 @@ function crearTarjetaSecundaria(markdown, filename) {
     <article class="card">
       ${frontmatter.image ? `<img src="${frontmatter.image}" alt="Imagen de noticia">` : ''}
       <div class="card-content">
-        <h3><a href="noticia.html?id=${filename}">${frontmatter.title || 'Sin título'}</a></h3>
+        <h3><a href="/noticia?type=noticias&id=${filename}">${frontmatter.title || 'Sin título'}</a></h3>
       </div>
     </article>
   `;
