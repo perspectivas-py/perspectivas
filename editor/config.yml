@@ -18,6 +18,7 @@ collections:
     fields:
       - { label: "Título", name: "title", widget: "string" }
       - { label: "Fecha", name: "date", widget: "datetime" }
+      - { label: "Resumen (para SEO y Redes Sociales)", name: "summary", widget: "text" }
       - { label: "Cuerpo", name: "body", widget: "markdown" }
 
   - name: "analisis"
@@ -29,6 +30,7 @@ collections:
       - { label: "Título", name: "title", widget: "string" }
       - { label: "Autor", name: "author", widget: "string", default: "El Equipo de Perspectivas" }
       - { label: "Fecha de Publicación", name: "date", widget: "datetime" }
+      - { label: "Resumen (para SEO y Redes Sociales)", name: "summary", widget: "text" }
       - { label: "Cuerpo del Análisis", name: "body", widget: "markdown" }
 
   - name: "programas"
