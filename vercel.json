@@ -1,4 +1,9 @@
 {
+  "functions": {
+    "noticia/index.js": {
+      "runtime": "edge"
+    }
+  },
   "rewrites": [
     {
       "source": "/editor/:path*",
