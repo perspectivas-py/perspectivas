@@ -1,4 +1,6 @@
-:root{--accent:#103a6a;--accent-2:#0aa0c2;--bg:#f4f6f8;--fg:#101418;--muted:#646e78;--card:#ffffff;--border:#e5e9ef;--ticker-bg:#0f3360}
+body {
+  font-family: 'Lato', sans-serif; /* Fuente base para todo el texto */
+}:root{--accent:#103a6a;--accent-2:#0aa0c2;--bg:#f4f6f8;--fg:#101418;--muted:#646e78;--card:#ffffff;--border:#e5e9ef;--ticker-bg:#0f3360}
 body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--fg)}
 .container{max-width:1100px;margin:0 auto;padding:18px}
 .site-header{background:var(--card);border-bottom:1px solid var(--border)}
