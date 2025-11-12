@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const repo = 'perspectivas-py/perspectivas';
   const branch = 'main';
   // <-- ¡ESTA ES LA RUTA CORRECTA Y DEFINITIVA! -->
-  const postsPath = 'analisis/_posts'; 
+  const postsPath = 'content/analisis/_posts'; 
   const gridContainer = document.getElementById('analisis-grid');
 
   if (!gridContainer) {
