@@ -1,5 +1,4 @@
 import { parse } from 'node-html-parser';
-// La ruta es crucial. Debe ser exactamente así.
 import { parseFrontmatter, findFirstImage } from '../utils/parseFrontmatter.js';
 
 export const config = {
@@ -12,16 +11,13 @@ export default async function handler(request) {
     const type = searchParams.get('type') || 'noticias';
     const id = searchParams.get('id');
 
-    if (!id) {
-      return new Response('Artículo no encontrado: ID no especificado', { status: 404 });
-    }
+    if (!id) throw new Error('ID de artículo no especificado');
 
     const { frontmatter, content } = await getArticleData(type, id);
     const imageUrl = findFirstImage(content) || 'https://perspectivaspy.vercel.app/assets/img/portada.jpg';
     
     const root = parse(htmlBase);
 
-    // Inyectamos las metaetiquetas
     root.querySelector('title').set_content(`${frontmatter.title || 'Artículo'} | Perspectivas`);
     root.querySelector('meta[name="description"]').setAttribute('content', frontmatter.summary || '');
     root.querySelector('meta[property="og:title"]').setAttribute('content', frontmatter.title);
@@ -54,7 +50,72 @@ async function getArticleData(type, id) {
   return parseFrontmatter(markdown);
 }
 
-// El HTML base se mantiene igual
+// --- PLANTILLA HTML BASE CON LAS RUTAS ABSOLUTAS CORREGIDAS ---
 const htmlBase = `
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Perspectivas</title><meta name="description" content=""><meta property="og:type" content="article"><meta property="og:title" content=""><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:url" content=""><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content=""><meta name="twitter:description" content=""><meta name="twitter:image" content=""><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"><link rel="stylesheet" href="/style.css"></head><body><header class="site-header"><div class="container header-inner"><div class="brand"><a href="/" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px;"><img class="logo" src="/assets/img/logo.jpeg" alt="Perspectivas"><div><h1 class="site-title">Perspectivas</h1></div></a></div><nav class="main-nav"><a href="/">Inicio</a><a href="/analisis.html">Análisis</a></nav><button id="themeToggle" class="theme-toggle" aria-label="Alternar modo oscuro"><span class="icon">🌙</span></button></div></header><main class="container"><article id="contenido-noticia" class="full-article"><p style="text-align: center; padding: 40px;">Cargando contenido...</p></article></main><footer class="site-footer"><div class="container"><div class="footer-row"><span>© 2025 Perspectivas · <a href="/">Volver al inicio</a></span></div></div></footer><script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script><script src="/article-loader.js"></script><script src="/script.js"></script></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Perspectivas</title>
+  
+  <meta name="description" content="">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="">
+  <meta property="og:description" content="">
+  <meta property="og:image" content="">
+  <meta property="og:url" content="">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:image" content="">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- ¡RUTAS CORREGIDAS! Ahora empiezan con '/' -->
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a href="/" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px;">
+          <!-- Ruta del logo también corregida -->
+          <img class="logo" src="/assets/img/logo.jpeg" alt="Perspectivas">
+          <div><h1 class="site-title">Perspectivas</h1></div>
+        </a>
+      </div>
+      <nav class="main-nav">
+        <a href="/">Inicio</a>
+        <a href="/analisis.html">Análisis</a>
+      </nav>
+      <button id="themeToggle" class="theme-toggle" aria-label="Alternar modo oscuro">
+        <span class="icon">🌙</span>
+      </button>
+    </div>
+  </header>
+  
+  <main class="container">
+    <article id="contenido-noticia" class="full-article">
+      <p style="text-align: center; padding: 40px;">Cargando contenido del artículo...</p>
+    </article>
+  </main>
+  
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-row">
+        <span>© 2025 Perspectivas · <a href="/">Volver al inicio</a></span>
+      </div>
+    </div>
+  </footer>
+  
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <!-- Rutas de scripts también corregidas -->
+  <script src="/article-loader.js"></script>
+  <script src="/script.js"></script>
+</body>
+</html>
 `;
