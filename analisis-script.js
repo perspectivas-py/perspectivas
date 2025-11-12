@@ -46,7 +46,7 @@ function crearTarjetaAnalisis(markdown, filename) {
     <article class="card">
       ${frontmatter.image ? `<img src="${frontmatter.image}" alt="">` : ''}
       <div class="card-content">
-        <h3><a href="${url}">${frontmatter.title || 'Sin título'}</a></h3>
+        <h3><a href="/noticia?type=analisis&id=${filename}">${frontmatter.title || 'Sin título'}</a></h3>
         <p class="meta" style="color: var(--color-text-secondary); font-size: 0.9em;">Por: ${frontmatter.author || 'Anónimo'}</p>
       </div>
     </article>
