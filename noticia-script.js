@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ? `Publicado el ${fecha.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}`
         : '';
       
+      // ESTE BLOQUE CREA TODA LA ESTRUCTURA FINAL DENTRO DEL CONTENEDOR
       articleContainer.innerHTML = `
         <h1>${frontmatter.title || 'Sin título'}</h1>
         <p class="meta">${fechaFormateada}</p>
@@ -38,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="article-content">${bodyHtml}</div>
       `;
       
-      // *** NUEVAS FUNCIONES PREMIUM ***
+      // *** FUNCIONES PREMIUM ***
       // 1. Calcular y mostrar tiempo de lectura
       const readingTimeContainer = document.getElementById('reading-time');
       const tiempoDeLectura = calcularTiempoLectura(content);
@@ -56,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function parseFrontmatter(markdownContent) {
-  // (Esta función no cambia, la dejamos como está)
   const frontmatterRegex = /^---\s*([\s\S]*?)\s*---/;
   const match = frontmatterRegex.exec(markdownContent);
   const frontmatter = {};
@@ -73,14 +73,12 @@ function parseFrontmatter(markdownContent) {
   return { frontmatter, content };
 }
 
-// *** NUEVA FUNCIÓN: Calcular tiempo de lectura ***
 function calcularTiempoLectura(texto) {
   const palabrasPorMinuto = 200;
   const numeroDePalabras = texto.trim().split(/\s+/).length;
   return Math.ceil(numeroDePalabras / palabrasPorMinuto);
 }
 
-// *** NUEVA FUNCIÓN: Generar botones de redes sociales ***
 function generarBotonesSociales(container, title) {
   const url = encodeURIComponent(window.location.href);
   const text = encodeURIComponent(`Leé esta nota de Perspectivas: "${title}"`);
