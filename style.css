@@ -1,0 +1,321 @@
+/* ==========================================================================
+   1. VARIABLES Y TEMA OSCURO (DEBE ESTAR AL PRINCIPIO)
+   ========================================================================== */
+:root {
+  /* TEMA CLARO (Por defecto) */
+  --color-background: #f9f9f9;
+  --color-surface: #ffffff; /* Color para tarjetas y cabeceras */
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #555;
+  --color-border: #e0e0e0;
+  --color-link: #0056b3;
+  --color-link-hover: #003d82;
+}
+
+body.dark-mode {
+  /* TEMA OSCURO (Cuando el body tiene la clase .dark-mode) */
+  --color-background: #121212;
+  --color-surface: #1e1e1e;
+  --color-text-primary: #e0e0e0;
+  --color-text-secondary: #aaa;
+  --color-border: #333333;
+  --color-link: #64b5f6;
+  --color-link-hover: #90caf9;
+}
+
+/* ==========================================================================
+   2. ESTILOS BASE Y TIPOGRAFÍA
+   ========================================================================== */
+body {
+  font-family: 'Lato', sans-serif;
+  margin: 0;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--color-link-hover);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Merriweather', serif;
+  color: var(--color-text-primary);
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+}
+
+/* ==========================================================================
+   3. CABECERA Y PIE DE PÁGINA
+   ========================================================================== */
+.site-header, .site-footer {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: 15px 0;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  border-bottom: none;
+  text-align: center;
+  font-size: 0.9em;
+  color: var(--color-text-secondary);
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.brand .logo {
+  height: 50px;
+  width: auto;
+}
+
+.site-title {
+  margin: 0;
+  font-size: 1.8em;
+}
+
+.tagline {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+/* ==========================================================================
+   4. ESTRUCTURA Y TARJETAS DE LA PORTADA
+   ========================================================================== */
+main.container {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.main-story {
+  margin-bottom: 40px;
+}
+
+.secondary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease-in-out, background-color 0.3s ease;
+  overflow: hidden; /* Para que las imágenes no se salgan */
+  border-radius: 4px;
+}
+
+.card:hover {
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.card .card-content {
+  padding: 15px;
+}
+
+.card h2 a, .card h3 a {
+  color: var(--color-text-primary);
+  transition: color 0.2s;
+}
+
+.card h2 a:hover, .card h3 a:hover {
+  color: var(--color-link);
+}
+
+.featured-card {
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    min-height: 350px;
+  }
+}
+
+.featured-card img {
+  @media (min-width: 768px) {
+    width: 60%;
+    height: auto;
+  }
+}
+
+.featured-card .card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  @media (min-width: 768px) {
+    width: 40%;
+    padding: 30px;
+  }
+}
+
+.featured-card h2 {
+  font-size: 2em;
+}
+
+/* ==========================================================================
+   5. PÁGINA DEL ARTÍCULO
+   ========================================================================== */
+.full-article {
+  max-width: 720px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.full-article h1 {
+  font-size: 2.5em;
+  line-height: 1.2;
+}
+
+.full-article .meta {
+  color: var(--color-text-secondary);
+  font-size: 0.9em;
+  margin-bottom: 20px;
+}
+
+.full-article .article-content {
+  font-size: 1.1em;
+  line-height: 1.7;
+  color: var(--color-text-primary);
+}
+
+.full-article .article-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 30px 0;
+}
+
+.article-meta-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* Para que se vea bien en móviles */
+  gap: 15px;
+  margin: 20px 0;
+  padding: 10px 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.9em;
+  color: var(--color-text-secondary);
+}
+
+#share-buttons a {
+  margin-left: 10px;
+  color: var(--color-link);
+  font-weight: bold;
+}
+/* AGREGA ESTO AL FINAL DE TU style.css */
+
+/* --- Estilos del Ticker de Noticias --- */
+.ticker-wrap {
+  background-color: var(--color-link);
+  color: #fff;
+  padding: 10px 0;
+  overflow: hidden; /* Oculta el contenido que se sale del contenedor */
+  white-space: nowrap; /* Evita que el texto salte a la siguiente línea */
+}
+
+.ticker-label {
+  font-weight: bold;
+  font-size: 0.8em;
+  padding: 4px 8px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--color-link);
+  border-radius: 3px;
+}
+
+.ticker {
+  display: inline-block; /* Permite que la animación funcione correctamente */
+  animation: ticker-scroll 35s linear infinite; /* Aplica la animación */
+}
+
+.ticker-item {
+  color: #fff;
+  margin: 0 25px;
+  font-size: 0.9em;
+  text-decoration: none;
+}
+
+.ticker-item:hover {
+  text-decoration: underline;
+}
+
+.ticker-wrap:hover .ticker {
+  animation-play-state: paused; /* Pausa la animación al pasar el ratón por encima */
+}
+
+/* Definición de la Animación */
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}```
+
+¡Y listo! Una vez que se despliegue, tu página de inicio recibirá a los visitantes con un dinámico ticker de noticias, dándole ese toque final de profesionalismo y actualidad.
+
+Hemos completado una gran transformación. ¡Felicidades por llegar hasta aquí! Ahora el sitio tiene una base increíblemente sólida y profesional.
+.main-nav {
+  display: flex;
+  gap: 20px;
+}
+.main-nav a {
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--color-text-secondary);
+}
+.main-nav a:hover {
+  color: var(--color-link);
+}
+/* --- Estilos para los Iconos de Redes Sociales --- */
+#share-buttons a {
+  font-size: 1.5em; /* Iconos más grandes */
+  color: var(--color-text-secondary); /* Un color más sutil */
+  transition: color 0.2s ease-in-out;
+}
+
+#share-buttons a:hover {
+  color: var(--color-link); /* Cambia de color al pasar el ratón */
+}
