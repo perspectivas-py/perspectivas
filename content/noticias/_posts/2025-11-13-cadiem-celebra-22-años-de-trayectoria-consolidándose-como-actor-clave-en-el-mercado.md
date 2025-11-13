@@ -1,6 +1,6 @@
 ---
 title: CADIEM celebra 22 años de trayectoria, consolidándose como actor clave
-date: 2025-11-13T20:50:00.000-03:00
+date: 2025-11-13T20:54:00.000-03:00
 summary: >-
   Con la obtención de la primera nota en grado de inversión para el Paraguay, y
   a la
