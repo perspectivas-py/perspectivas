@@ -1,7 +1,7 @@
 ---
 title: CADIEM celebra 22 años de trayectoria, consolidándose como actor clave en
   el mercado
-date: 2025-11-13T20:20:00.000-03:00
+date: 2025-11-13T20:50:00.000-03:00
 summary: >-
   Con la obtención de la primera nota en grado de inversión para el Paraguay, y
   a la
@@ -12,8 +12,7 @@ summary: >-
 
   internacional
 ---
-![](/assets/img/dsc_7982.jpg)
-
+![Cadien 123](/assets/img/dsc_7982.jpg "Cadien")
 
 CADIEM Casa de Bolsa celebra 22 años de trayectoria institucional, en un contexto de sostenido crecimiento del mercado de valores, tanto en el segmento bursátil como en el de fondos mutuos y de inversión. En este contexto, Gloria Ayala Person, socia fundadora y directora de la compañía, recordó los inicios del emprendimiento que ya tiene más de dos décadas operando.
 
