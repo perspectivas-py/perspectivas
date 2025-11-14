@@ -1,6 +1,6 @@
 ---
 title: MEF y BID presentaron la plataforma ImplementaPy
-date: 2025-11-13T21:17:00.000-03:00
+date: 2025-11-13T22:35:00.000-03:00
 summary: MEF y BID presentaron la plataforma ImplementaPy para fortalecer la
   formación de servidores públicos y brindar mejores servicios a la ciudadanía.
 ---
