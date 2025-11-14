@@ -36,4 +36,46 @@
 
   <div class="ticker-wrap">
     <div class="container" style="display:flex; align-items:center; gap:15px;">
-      <span class="ticker-la
+      <span class="ticker-label">ÚLTIMO</span>
+      <div class="ticker"></div>
+    </div>
+  </div>
+
+  <!-- INICIO DE LA SECCIÓN PRINCIPAL DINÁMICA -->
+  <main class="container main-grid">
+
+    <!-- 1. CONTENEDOR PARA EL ARTÍCULO DESTACADO (se llenará con JavaScript) -->
+    <section id="main-story-container" class="lead main-story">
+      <!-- El artículo más reciente se cargará aquí -->
+      <p>Cargando noticia principal...</p>
+    </section>
+  
+    <!-- 2. CONTENEDOR PARA LA CUADRÍCULA DE NOTICIAS (se llenará con JavaScript) -->
+    <aside class="sidebar">
+      <h2>Más Noticias</h2>
+      <div id="secondary-grid-container" class="secondary-grid">
+        <!-- El resto de los artículos se cargarán aquí -->
+      </div>
+    </aside>
+
+  </main>
+  <!-- FIN DE LA SECCIÓN PRINCIPAL DINÁMICA -->
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-row">
+        <span>© 2025 Perspectivas · Análisis, datos y contexto económico del Paraguay</span>
+        <span>·</span>
+        <a href="mailto:prensa.perspectivas@gmail.com">prensa.perspectivas@gmail.com</a>
+        <span>·</span>
+        <span>Redes: @perspectivaspy</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts al final del body para un mejor rendimiento -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
