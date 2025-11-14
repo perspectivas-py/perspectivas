@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Análisis y Opinión | Perspectivas</title>
   
-  <!-- Estilos y Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
@@ -14,16 +13,14 @@
 <body>
 
   <header class="site-header">
-    <div class="container header-inner">
-      <div class="brand">
-        <a href="/" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px;">
-          <img class="logo" src="assets/img/logo.jpeg" alt="Perspectivas">
-          <div><h1 class="site-title">Perspectivas</h1></div>
-        </a>
-      </div>
-      <nav class="main-nav">
-        <a href="/">Inicio</a>
-        <a href="analisis.html">Análisis</a>
+    <div class="wrap">
+      <a class="brand" href="/">Perspectivas</a>
+      <nav class="main-nav" aria-label="Menú principal">
+        <ul id="nav-list" class="nav-list">
+          <li><a href="/">Inicio</a></li>
+          <li><a href="analisis.html">Análisis</a></li>
+          <li><a href="programa.html">Programa</a></li>
+        </ul>
       </nav>
       <button id="themeToggle" class="theme-toggle" aria-label="Alternar modo oscuro">
         <span class="icon">🌙</span>
@@ -31,28 +28,29 @@
     </div>
   </header>
 
-  <main class="container">
-    <h1 class="section-title" style="font-size: 2.5em; margin-bottom: 30px;">Análisis y Opinión</h1>
-    
-    <!-- El ID 'analisis-grid' es crucial para que el script sepa dónde poner el contenido -->
-    <section id="analisis-grid" class="secondary-grid">
-      <!-- Si ves este mensaje en la web, significa que el script no se ha ejecutado -->
-      <p>Cargando análisis...</p>
-    </section>
+  <main class="container wrap section">
+    <div class="section-header">
+      <h2>Análisis y Opinión</h2>
+    </div>
+    <section id="analisis-grid" class="cards-grid"></section>
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <div class="footer-row">
-        <span>© 2025 Perspectivas · <a href="/">Volver al inicio</a></span>
+    <div class="wrap">
+      <div class="footer-left">
+        <strong>Perspectivas</strong>
+        <p class="muted small">Periodismo económico local — © 2025</p>
+      </div>
+      <div class="footer-right">
+        <nav aria-label="Enlaces de pie de página">
+          <a href="#">Contacto</a>
+        </nav>
       </div>
     </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="analisis-script.js"></script>
-  <!-- Importante: El script del tema oscuro debe estar en todas las páginas -->
-  <script src="script.js"></script> 
-
+  <script src="script.js"></script> <!-- Para el modo oscuro -->
 </body>
 </html>
