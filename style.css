@@ -232,7 +232,10 @@ a:hover {
   font-size: 1.2em;
   color: var(--color-text-secondary);
 }
-/* Estilos para el video responsive */
+
+/* ==========================================================================
+   7. Estilos para el video responsive 
+   ========================================================================== */
 .video-container {
   position: relative;
   padding-bottom: 56.25%; /* Proporción 16:9 (YouTube estándar) */
