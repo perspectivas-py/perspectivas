@@ -34,3 +34,21 @@ collections:
       - { label: "Fecha de Publicación", name: "date", widget: "datetime" }
       - { label: "Resumen (para SEO y Redes Sociales)", name: "summary", widget: "text" }
       - { label: "Cuerpo del Análisis", name: "body", widget: "markdown" }
+      # En editor/config.yml
+
+collections:
+  # ... (tu colección de "noticias" aquí) ...
+
+  # ... (tu colección de "analisis" aquí) ...
+
+  # ▼▼▼ AÑADE ESTA NUEVA COLECCIÓN AL FINAL ▼▼▼
+  - name: "programa"
+    label: "Programa Perspectivas"
+    folder: "content/programa/_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Título del Episodio", name: "title", widget: "string" }
+      - { label: "Fecha de Emisión", name: "date", widget: "datetime" }
+      - { label: "Enlace de Inserción (Embed)", name: "embed_url", widget: "text", hint: "Pega aquí el enlace 'src' del iframe de YouTube, Spotify, etc." }
+      - { label: "Resumen y Notas del Episodio", name: "body", widget: "markdown" }
