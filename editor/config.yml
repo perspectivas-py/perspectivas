@@ -8,9 +8,9 @@ backend:
 media_folder: "assets/img"
 public_folder: "/assets/img"
 
-# La palabra 'collections' empieza sin espacios.
+# Una sola clave 'collections' al principio del bloque.
 collections:
-  # El primer guion empieza con dos espacios.
+  # Colección 1: Noticias
   - name: "noticias"
     label: "Noticias"
     folder: "content/noticias/_posts"
@@ -22,7 +22,7 @@ collections:
       - { label: "Resumen (para SEO y Redes Sociales)", name: "summary", widget: "text" }
       - { label: "Cuerpo", name: "body", widget: "markdown" }
 
-  # El segundo guion empieza EXACTAMENTE con los mismos dos espacios.
+  # Colección 2: Análisis
   - name: "analisis"
     label: "Análisis y Opinión"
     folder: "content/analisis/_posts"
@@ -34,13 +34,8 @@ collections:
       - { label: "Fecha de Publicación", name: "date", widget: "datetime" }
       - { label: "Resumen (para SEO y Redes Sociales)", name: "summary", widget: "text" }
       - { label: "Cuerpo del Análisis", name: "body", widget: "markdown" }
-      # En editor/config.yml
 
-collections:
-  # ... (tu colección de "noticias" aquí) ...
-
-  # ... (tu colección de "analisis" aquí) ...
-
+  # Colección 3: Programa
   - name: "programa"
     label: "Programa Perspectivas"
     folder: "content/programa/_posts"
@@ -49,5 +44,5 @@ collections:
     fields:
       - { label: "Título del Episodio", name: "title", widget: "string" }
       - { label: "Fecha de Emisión", name: "date", widget: "datetime" }
-      - { label: "Enlace de Inserción (Embed)", name: "embed_url", widget: "text", hint: "Pega aquí el enlace 'src' del iframe de YouTube, Spotify, etc." }
+      - { label: "Enlace de Inserción (Embed)", name: "embed_url", widget: "text", hint: "Pega aquí SOLAMENTE la URL que va dentro del 'src' del iframe de YouTube, Spotify, etc." }
       - { label: "Resumen y Notas del Episodio", name: "body", widget: "markdown" }
