@@ -41,7 +41,6 @@ collections:
 
   # ... (tu colección de "analisis" aquí) ...
 
-  # ▼▼▼ AÑADE ESTA NUEVA COLECCIÓN AL FINAL ▼▼▼
   - name: "programa"
     label: "Programa Perspectivas"
     folder: "content/programa/_posts"
