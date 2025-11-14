@@ -69,6 +69,11 @@ a:hover {
   background-color: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
   padding: 15px 0;
+   /* ▼▼▼ AÑADE ESTAS LÍNEAS DE CÓDIGO ▼▼▼ */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
 }
 .site-header .wrap {
   display: flex;
