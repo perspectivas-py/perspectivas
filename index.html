@@ -6,11 +6,9 @@
   <meta name="description" content="Perspectivas — periodismo económico local con análisis profesional y modelos de monetización.">
   <title>Perspectivas — Análisis Económico</title>
 
-  <!-- Tipografías: Merriweather + Lato (Estilo BBC que aplicaremos) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -19,14 +17,10 @@
     <div class="wrap">
       <a class="brand" href="/">Perspectivas</a>
       <nav class="main-nav" aria-label="Menú principal">
-        <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="nav-list">☰</button>
         <ul id="nav-list" class="nav-list">
           <li><a href="/">Inicio</a></li>
           <li><a href="analisis.html">Análisis</a></li>
-          <!-- Los enlaces de abajo son marcadores de posición por ahora -->
-          <li><a href="#programa">Programa</a></li>
-          <li><a href="#newsletter">Newsletter</a></li>
-          <li><a href="#podcast">Podcast</a></li>
+          <li><a href="programa.html">Programa</a></li>
         </ul>
       </nav>
       <button id="themeToggle" class="theme-toggle" aria-label="Alternar modo oscuro">
@@ -35,10 +29,8 @@
     </div>
   </header>
 
-  <!-- HERO / Portada Principal -->
   <main>
     <section id="home" class="hero wrap">
-      <!-- El artículo destacado se cargará aquí -->
       <div class="hero-left">
         <article class="featured-card">
           <img src="https://via.placeholder.com/1000x560?text=Cargando..." alt="Noticia destacada">
@@ -50,7 +42,6 @@
         </article>
       </div>
 
-      <!-- La lista de noticias secundarias se cargará aquí -->
       <aside class="hero-right">
         <div class="side-list">
           <h3>Destacados</h3>
@@ -61,18 +52,13 @@
       </aside>
     </section>
 
-    <!-- Grilla de Noticias Locales -->
     <section id="noticias" class="wrap section">
       <div class="section-header">
         <h2>Más Noticias</h2>
       </div>
       <div id="news-grid" class="cards-grid" aria-live="polite">
-        <!-- Las tarjetas de noticias se generarán aquí por JS -->
       </div>
     </section>
-
-    <!-- Aquí irán las otras secciones en el futuro -->
-
   </main>
 
   <footer class="site-footer">
