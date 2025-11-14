@@ -1,10 +1,10 @@
 ---
 title: MEF y BID presentaron la plataforma ImplementaPy
-date: 2025-11-13T22:35:00.000-03:00
+date: 2025-11-14T00:12:00.000-03:00
 summary: MEF y BID presentaron la plataforma ImplementaPy para fortalecer la
   formación de servidores públicos y brindar mejores servicios a la ciudadanía.
 ---
-![BID](/assets/img/py.-imagen-de-pru-no-usar.jpg "BID")
+![BID](/assets/img/lucas-van-oort-fbzovyf-96w-unsplash.jpg "BID")
 
 El Ministerio de Economía y Finanzas (MEF), con el apoyo del Banco Interamericano de Desarrollo (BID), presentó la plataforma ImplementaPy para servidores públicos de Paraguay con el fin de fortalecer su formación para brindar mejores servicios a la ciudadanía. Fue durante el XXX Congreso Internacional del Centro Latinoamericano de Administración para el Desarrollo (CLAD) desarrollado en nuestro país, con la participación de representantes de organismos internacionales, expertos y autoridades nacionales para reflexionar sobre los desafíos y las oportunidades para mejorar la Administración Pública.
 
