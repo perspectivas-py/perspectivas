@@ -1,114 +1,229 @@
-:root{
-  /* Paleta: Estilo "Expansión" -> blanco / azul / gris profesional */
-  --bg: #ffffff;
-  --muted: #6b7280;          /* gris apagado */
-  --text: #0f172a;           /* texto oscuro */
-  --accent: #0b5ed7;         /* azul principal */
-  --accent-2: #0a66c2;       /* azul secundario */
-  --card-bg: #f8fafc;        /* tarjeta muy clara */
-  --border: #e6eefc;
-  --maxw: 1200px;
-  --radius: 8px;
-  --shadow: 0 6px 20px rgba(11,94,215,0.06);
-  font-family: 'Merriweather', Georgia, serif;
+/* ==========================================================================
+   1. VARIABLES, TEMA OSCURO Y TIPOGRAFÍA (LA BASE PREMIUM)
+   ========================================================================== */
+:root {
+  --font-headline: 'Merriweather', serif;
+  --font-body: 'Lato', sans-serif;
+  
+  /* TEMA CLARO */
+  --color-background: #f4f4f4;
+  --color-surface: #ffffff;
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #555;
+  --color-border: #e0e0e0;
+  --color-accent: #004D99;
+  --color-accent-hover: #003366;
+  --color-muted-bg: #f9f9f9;
 }
 
-/* Reset simple */
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  line-height:1.5;
+body.dark-mode {
+  /* TEMA OSCURO */
+  --color-background: #121212;
+  --color-surface: #1e1e1e;
+  --color-text-primary: #e0e0e0;
+  --color-text-secondary: #aaa;
+  --color-border: #3a3a3a;
+  --color-accent: #64b5f6;
+  --color-accent-hover: #90caf9;
+  --color-muted-bg: #2a2a2a;
 }
 
-/* Utility */
-.wrap{max-width:var(--maxw);margin:0 auto;padding:24px}
-.sr-only{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px}
-
-/* Header */
-.site-header{
-  border-bottom:1px solid var(--border);
-  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9));
-  position:sticky;top:0;z-index:99;
+/* ==========================================================================
+   2. ESTILOS GLOBALES Y LAYOUT
+   ========================================================================== */
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
-.site-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px}
-.brand{font-weight:700;color:var(--accent);font-size:1.5rem;text-decoration:none}
-.main-nav{display:flex;align-items:center;gap:16px}
-.menu-toggle{display:none;background:none;border:0;font-size:1.2rem;padding:8px}
-.nav-list{list-style:none;display:flex;gap:14px;margin:0;padding:0}
-.nav-list a{text-decoration:none;color:var(--muted);font-weight:600;font-size:.95rem}
-.nav-list a:hover{color:var(--text)}
 
-/* HERO */
-.hero{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start;padding-top:28px;padding-bottom:28px}
-.featured-card{background:var(--card-bg);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
-.featured-card img{width:100%;height:auto;display:block}
-.featured-body{padding:18px}
-.featured-body time{display:block;color:var(--muted);font-size:.9rem;margin-bottom:8px}
-.featured-body h1{font-size:1.6rem;margin:0 0 8px;font-family: 'Merriweather', Georgia, serif}
-.featured-body .dek{color:var(--muted);margin-bottom:12px}
-.cta{display:inline-block;padding:10px 14px;background:var(--accent);color:#fff;border-radius:6px;text-decoration:none;font-weight:700}
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
 
-/* Right column */
-.hero-right{display:flex;flex-direction:column;gap:18px}
-.side-list{background:#fff;padding:12px;border-radius:8px;border:1px solid var(--border)}
-.side-list h3{margin:0 0 8px;font-size:1rem}
-.side-list ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
-.side-list li a{color:var(--text);text-decoration:none;font-weight:600}
-.sponsor-small{background:linear-gradient(180deg,#fff,#fbfdff);padding:12px;border-radius:8px;border:1px solid var(--border);text-align:center}
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
 
-/* Sections */
-.section{padding-top:28px;padding-bottom:28px}
-.section-header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
-.section-header h2{font-family:'Merriweather', Georgia, serif;margin:0;font-size:1.25rem}
-.section-header .sub{color:var(--muted);margin:6px 0 0;font-size:.95rem}
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
+}
 
-/* Cards grid */
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
-.card{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:0 6px 18px rgba(16,24,40,0.03)}
-.card img{width:100%;height:150px;object-fit:cover;display:block}
-.card-body{padding:14px}
-.card-body time{display:block;color:var(--muted);font-size:.85rem;margin-bottom:8px}
-.card-body h3{margin:0 0 8px;font-size:1.05rem}
-.card-body p{color:var(--muted);margin:0 0 12px}
-.card-body a.read{color:var(--accent);font-weight:700;text-decoration:none}
+/* ==========================================================================
+   3. CABECERA Y NAVEGACIÓN
+   ========================================================================== */
+.site-header {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: 15px 0;
+}
+.site-header .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.brand {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 1.8em;
+  color: var(--color-text-primary);
+}
+.main-nav .nav-list {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.main-nav a {
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+}
+.menu-toggle { display: none; } /* Oculto en escritorio */
 
-/* Analysis grid (taller text blocks) */
-.analysis-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.analysis-card{background:var(--card-bg);padding:18px;border-radius:10px;border:1px solid var(--border)}
-.analysis-card h3{margin:0 0 8px}
-.analysis-card .author{color:var(--muted);font-size:.9rem;margin-bottom:8px}
+/* ==========================================================================
+   4. PORTADA (HERO SECTION)
+   ========================================================================== */
+.hero {
+  padding-top: 40px;
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* 2/3 para el principal, 1/3 para la barra lateral */
+  gap: 30px;
+}
 
-/* Newsletter */
-.callout{background:linear-gradient(90deg,#f7fbff,#ffffff);border-radius:12px;border:1px solid var(--border)}
-.newsletter-inner{display:flex;flex-direction:column;gap:12px;padding:18px;align-items:flex-start}
-.newsletter-form{display:flex;gap:10px;width:100%;flex-wrap:wrap}
-.newsletter-form input[type="email"]{padding:10px;border:1px solid var(--border);border-radius:8px;flex:1}
-.newsletter-form select{padding:10px;border:1px solid var(--border);border-radius:8px}
-.newsletter-form button{background:var(--accent);color:#fff;padding:10px 14px;border-radius:8px;border:0;font-weight:700;cursor:pointer}
+.featured-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+.featured-card img {
+  width: 100%;
+}
+.featured-body {
+  padding: 30px;
+}
+.featured-body time {
+  font-size: 0.9em;
+  color: var(--color-text-secondary);
+}
+.featured-body h1 {
+  font-size: 2.5em;
+  margin: 10px 0;
+  line-height: 1.2;
+}
+.featured-body h1 a {
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+.featured-body h1 a:hover {
+  color: var(--color-accent);
+}
+.featured-body .dek { /* 'dek' es jerga periodística para el resumen */
+  font-size: 1.1em;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
 
-/* Sponsors */
-.sponsors-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;align-items:center}
-.sponsor-card{background:#fff;border-radius:8px;padding:12px;border:1px solid var(--border);text-align:center}
-.sponsor-card img{max-width:100%;height:auto;display:inline-block}
+.side-list h3 {
+  font-family: var(--font-headline);
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 10px;
+}
+.side-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.side-list li {
+  padding: 15px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.side-list a {
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--color-text-primary);
+}
 
-/* Footer */
-.site-footer{border-top:1px solid var(--border);padding:18px 0;margin-top:20px}
-.site-footer .wrap{display:flex;justify-content:space-between;gap:12px;align-items:center}
-.site-footer a{color:var(--muted);text-decoration:none;margin-left:12px}
+/* ==========================================================================
+   5. SECCIONES Y CUADRÍCULA DE NOTICIAS
+   ========================================================================== */
+.section {
+  padding: 40px 0;
+}
+.section-header h2 {
+  font-size: 1.8em;
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+}
 
-/* Small text helpers */
-.muted{color:var(--muted)}
-.small{font-size:.9rem}
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
 
-/* Responsive */
-@media (max-width: 980px){
-  .hero{grid-template-columns:1fr;gap:12px}
-  .analysis-grid{grid-template-columns:1fr}
-  .nav-list{display:none}
-  .menu-toggle{display:block}
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.card:hover {
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+.card-body {
+  padding: 20px;
+}
+.card-body time {
+  font-size: 0.8em;
+  color: var(--color-text-secondary);
+}
+.card-body h3 {
+  margin: 5px 0 0;
+}
+.card-body h3 a {
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   6. FOOTER Y MODO OSCURO
+   ========================================================================== */
+.site-footer {
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding: 30px 0;
+  margin-top: 40px;
+}
+.site-footer .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-text-secondary);
+}
+
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 1.2em;
+  color: var(--color-text-secondary);
 }
