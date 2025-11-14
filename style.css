@@ -202,3 +202,17 @@ main.container { padding-top: 40px; padding-bottom: 40px; }
   border-bottom: 2px solid var(--color-accent);
   padding-bottom: 10px;
 }
+/* --- Estilo para Imagen Destacada del Artículo --- */
+
+.featured-image {
+  margin: 30px 0;
+  width: 100%;
+}
+
+.featured-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
