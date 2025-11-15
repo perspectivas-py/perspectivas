@@ -28,7 +28,7 @@ async function loadNews() {
       files.map(async file => {
         const markdown = await fetchFileContent(file.download_url);
         const { frontmatter, content } = parseFrontmatter(markdown);
-        return { ...file, frontmatter, content }; // Devolvemos todo
+        return { ...file, frontmatter, content };
       })
     );
 
@@ -46,7 +46,7 @@ async function loadNews() {
 
   } catch (error) {
     console.error("Error al cargar las noticias:", error);
-    newsGrid.innerHTML = '<p style="color: red;">Ocurrió un error al cargar las noticias.</p>';
+    newsGrid.innerHTML = `<p style="color: red;">${error.message}</p>`;
   }
 }
 
@@ -55,16 +55,18 @@ async function loadNews() {
 function renderFeaturedArticle(container, filename, frontmatter, content) {
   const imageUrl = findFirstImage(content) || 'https://via.placeholder.com/1000x560?text=Perspectivas';
   
-  container.querySelector('img').src = imageUrl;
-  container.querySelector('img').alt = `Imagen para: ${frontmatter.title || 'Noticia destacada'}`;
+  const imgTag = container.querySelector('img');
+  if(imgTag) {
+    imgTag.src = imageUrl;
+    imgTag.alt = `Imagen para: ${frontmatter.title || 'Noticia destacada'}`;
+    if (imgTag.parentElement.tagName === 'A') {
+        imgTag.parentElement.href = `noticia.html?type=noticias&id=${filename}`;
+    }
+  }
+
   container.querySelector('time').textContent = formatDate(frontmatter.date);
-  container.querySelector('h1').textContent = frontmatter.title || 'Sin Título';
-  // LÍNEA CORREGIDA: Usamos 'content' que sí existe aquí
+  container.querySelector('h1').innerHTML = `<a href="noticia.html?type=noticias&id=${filename}">${frontmatter.title || 'Sin Título'}</a>`;
   container.querySelector('.dek').textContent = frontmatter.summary || content.substring(0, 120) + '...';
-  
-  const link = `noticia.html?type=noticias&id=${filename}`;
-  container.querySelector('h1').innerHTML = `<a href="${link}">${frontmatter.title || 'Sin Título'}</a>`;
-  container.querySelector('img').parentElement.href = link;
 }
 
 async function renderTopList(container, files) {
@@ -99,5 +101,23 @@ function createNewsCard(filename, frontmatter, content) {
   `;
 }
 
-// ... (El resto de las funciones auxiliares y del menú móvil se mantienen igual) ...
-// (Incluyendo fetchFiles, fetchFileContent, parseFrontmatter, findFirstImage, formatDate, activateDarkMode, activateMobileMenu)
+// --- FUNCIONES DE UTILIDAD ---
+async function fetchFiles(path) {
+  const response = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}`);
+  if (!response.ok) throw new Error(`No se pudo acceder a la carpeta: ${path}`);
+  const files = await response.json();
+  return files.sort((a, b) => b.name.localeCompare(a.name));
+}
+async function fetchFileContent(url) {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`No se pudo cargar el contenido del archivo: ${url}`);
+  return await response.text();
+}
+function parseFrontmatter(markdownContent){const match=/^---\s*([\s\S]*?)\s*---/.exec(markdownContent),data={frontmatter:{},content:markdownContent};if(match){data.content=markdownContent.replace(match[0],"").trim(),match[1].split("\n").forEach(line=>{const[key,...valueParts]=line.split(":");key&&valueParts.length>0&&(data.frontmatter[key.trim()]=valueParts.join(":").trim().replace(/"/g,""))});}return data}
+function findFirstImage(content){const match=content.match(/!\[.*\]\((.*)\)/);if(match&&match[1])return match[1].startsWith("http")?match[1]:match[1].startsWith("/")?match[1]:`/${match[1]}`;return null}
+function formatTitleFromFilename(filename){return filename.replace(/\.md$/,"").replace(/^\d{4}-\d{2}-\d{2}-/,"").replace(/-/g," ").replace(/\b\w/g,l=>l.toUpperCase())}
+function formatDate(dateString){if(!dateString)return"";const date=new Date(dateString),options={day:"numeric",month:"short",year:"numeric"};return date.toLocaleDateString("es-ES",options)}
+
+// --- LÓGICA DE MENÚ MÓVIL Y MODO OSCURO ---
+function activateDarkMode(){const t=document.getElementById("themeToggle"),e=document.body,o=t?t.querySelector(".icon"):null;if(t){const n=()=>{e.classList.toggle("dark-mode");const t=e.classList.contains("dark-mode")?"dark":"light";localStorage.setItem("theme",t),o&&(o.textContent="dark"===t?"☀️":"🌙")};"dark"===localStorage.getItem("theme")&&(e.classList.add("dark-mode"),o&&(o.textContent="☀️")),t.addEventListener("click",n)}}
+function activateMobileMenu(){const t=document.getElementById("menu-toggle"),e=document.getElementById("nav-list");t&&e&&t.addEventListener("click",()=>{e.classList.toggle("is-open");const o=e.classList.contains("is-open");t.setAttribute("aria-expanded",o),t.innerHTML=o?"&times;":"☰"})}
