@@ -52,16 +52,25 @@ async function loadNews() {
 
 // --- FUNCIONES DE RENDERIZADO (VERSIÓN CORREGIDA) ---
 
-function renderFeaturedArticle(container, filename, frontmatter, content) {
-  const imageUrl = findFirstImage(content) || 'https://via.placeholder.com/1000x560?text=Perspectivas';
-  
-  const imgTag = container.querySelector('img');
-  if(imgTag) {
-    imgTag.src = imageUrl;
-    imgTag.alt = `Imagen para: ${frontmatter.title || 'Noticia destacada'}`;
-    if (imgTag.parentElement.tagName === 'A') {
-        imgTag.parentElement.href = `noticia.html?type=noticias&id=${filename}`;
+function findFirstImage(content) {
+  const imageMatch = content.match(/!\[.*\]\((.*?)\)/); // Captura lo que está dentro de los paréntesis
+  if (imageMatch && imageMatch[1]) {
+    let imageUrl = imageMatch[1];
+    // Si la URL ya es una URL completa (empieza con http), la dejamos como está.
+    if (imageUrl.startsWith('http')) {
+      return imageUrl;
     }
+    // Si la URL es relativa (empieza con /assets/...), la dejamos así.
+    // El navegador la convertirá a una ruta absoluta correctamente.
+    // Nos aseguramos de que siempre empiece con una sola barra '/'.
+    if (imageUrl.startsWith('/')) {
+        return imageUrl;
+    } else {
+        return '/' + imageUrl;
+    }
+  }
+  return null; // Si no hay imagen, devolvemos null
+}
   }
 
   container.querySelector('time').textContent = formatDate(frontmatter.date);
