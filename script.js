@@ -51,24 +51,31 @@ async function loadNews() {
 }
 
 // --- FUNCIONES DE RENDERIZADO ---
+// En tu script.js, reemplaza la función renderFeaturedArticle existente por esta:
 
 function renderFeaturedArticle(container, filename, frontmatter, content) {
+  // 1. Buscamos la imagen del artículo. Si no hay, usamos un placeholder.
   const imageUrl = findFirstImage(content) || 'https://via.placeholder.com/1000x560?text=Perspectivas';
   
-  const imgTag = container.querySelector('img');
-  if(imgTag) {
-    imgTag.src = imageUrl;
-    imgTag.alt = `Imagen para: ${frontmatter.title || 'Noticia destacada'}`;
-    const parentLink = imgTag.closest('a');
-    if (parentLink) {
-        parentLink.href = `noticia.html?type=noticias&id=${filename}`;
-    }
-  }
+  // 2. Creamos el enlace al artículo.
+  const link = `noticia.html?type=noticias&id=${filename}`;
 
-  container.querySelector('time').textContent = formatDate(frontmatter.date);
-  container.querySelector('h1').innerHTML = `<a href="noticia.html?type=noticias&id=${filename}">${frontmatter.title || 'Sin Título'}</a>`;
-  container.querySelector('.dek').textContent = frontmatter.summary || content.substring(0, 120) + '...';
+  // 3. Construimos el HTML completo de la tarjeta desde cero.
+  const cardHtml = `
+    <a href="${link}">
+      <img src="${imageUrl}" alt="Imagen para: ${frontmatter.title || 'Noticia destacada'}">
+    </a>
+    <div class="featured-body">
+      <time datetime="${frontmatter.date}">${formatDate(frontmatter.date)}</time>
+      <h1><a href="${link}">${frontmatter.title || 'Sin Título'}</a></h1>
+      <p class="dek">${frontmatter.summary || content.substring(0, 120) + '...'}</p>
+    </div>
+  `;
+
+  // 4. Reemplazamos todo el contenido del contenedor de la tarjeta con nuestro nuevo HTML.
+  container.innerHTML = cardHtml;
 }
+
 
 async function renderTopList(container, files) {
   container.innerHTML = '';
