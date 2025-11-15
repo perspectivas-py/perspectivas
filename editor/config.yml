@@ -8,9 +8,7 @@ backend:
 media_folder: "assets/img"
 public_folder: "/assets/img"
 
-# Una sola clave 'collections' al principio del bloque.
 collections:
-  # Colección 1: Noticias
   - name: "noticias"
     label: "Noticias"
     folder: "content/noticias/_posts"
@@ -19,12 +17,10 @@ collections:
     fields:
       - { label: "Destacar en Portada", name: "featured", widget: "boolean", default: false, required: false }
       - { label: "Título", name: "title", widget: "string" }
-      - { label: "Título", name: "title", widget: "string" }
       - { label: "Fecha de Publicación", name: "date", widget: "datetime" }
       - { label: "Resumen (para SEO y Redes Sociales)", name: "summary", widget: "text" }
       - { label: "Cuerpo", name: "body", widget: "markdown" }
 
-  # Colección 2: Análisis
   - name: "analisis"
     label: "Análisis y Opinión"
     folder: "content/analisis/_posts"
@@ -36,8 +32,7 @@ collections:
       - { label: "Fecha de Publicación", name: "date", widget: "datetime" }
       - { label: "Resumen (para SEO y Redes Sociales)", name: "summary", widget: "text" }
       - { label: "Cuerpo del Análisis", name: "body", widget: "markdown" }
-
-  # Colección 3: Programa
+      
   - name: "programa"
     label: "Programa Perspectivas"
     folder: "content/programa/_posts"
