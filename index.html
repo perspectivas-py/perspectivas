@@ -13,21 +13,27 @@
 </head>
 
 <body>
-  <header class="site-header">
-    <div class="wrap">
-      <a class="brand" href="/">Perspectivas</a>
-      <nav class="main-nav" aria-label="Menú principal">
-        <ul id="nav-list" class="nav-list">
-          <li><a href="/">Inicio</a></li>
-          <li><a href="analisis.html">Análisis</a></li>
-          <li><a href="programa.html">Programa</a></li>
-        </ul>
-      </nav>
-      <button id="themeToggle" class="theme-toggle" aria-label="Alternar modo oscuro">
-        <span class="icon">🌙</span>
-      </button>
-    </div>
-  </header>
+ <header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">Perspectivas</a>
+    
+    <nav class="main-nav" aria-label="Menú principal">
+      <!-- El botón que controlará todo en móvil -->
+      <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="nav-list">☰</button>
+      
+      <!-- La lista de enlaces -->
+      <ul id="nav-list" class="nav-list">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/analisis.html">Análisis</a></li>
+        <li><a href="/programa.html">Programa</a></li>
+      </ul>
+    </nav>
+    
+    <button id="themeToggle" class="theme-toggle" aria-label="Alternar modo oscuro">
+      <span class="icon">🌙</span>
+    </button>
+  </div>
+</header>
 
   <main>
     <section id="home" class="hero wrap">
