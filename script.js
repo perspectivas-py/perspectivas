@@ -42,15 +42,48 @@ async function loadNews() {
   const featuredCard = document.querySelector('.featured-card');
   const topList = document.getElementById('top-list');
   const newsGrid = document.getElementById('news-grid');
-
-  if (!featuredCard || !topList || !newsGrid) return; // Si no están los contenedores, no hacemos nada.
+  if (!featuredCard || !topList || !newsGrid) return;
 
   try {
+    // 1. Obtenemos todos los archivos como antes
     const files = await fetchFiles(NEWS_PATH);
     if (!files || files.length === 0) {
       featuredCard.innerHTML = '<p>No hay noticias para mostrar.</p>';
       return;
     }
+
+    // 2. Procesamos el contenido de TODOS los archivos para leer sus metadatos
+    const allPosts = await Promise.all(
+      files.map(async file => {
+        const markdown = await fetchFileContent(file.download_url);
+        const { frontmatter } = parseFrontmatter(markdown);
+        return { ...file, frontmatter }; // Devolvemos el archivo con sus metadatos
+      })
+    );
+
+    // 3. ¡LA NUEVA LÓGICA! Buscamos el artículo destacado
+    let featuredPost = allPosts.find(post => post.frontmatter.featured === 'true');
+    
+    // Si no hay ninguno destacado manualmente, usamos el más reciente como antes
+    if (!featuredPost) {
+      featuredPost = allPosts[0];
+    }
+
+    // 4. Filtramos el resto de los posts para que el destacado no se repita
+    const otherPosts = allPosts.filter(post => post.name !== featuredPost.name);
+
+    // 5. Renderizamos todo
+    const featuredContent = await fetchFileContent(featuredPost.download_url);
+    renderFeaturedArticle(featuredCard, featuredPost.name, featuredContent);
+
+    renderTopList(topList, otherPosts.slice(0, 4));
+    renderNewsGrid(newsGrid, otherPosts);
+
+  } catch (error) {
+    console.error("Error al cargar las noticias:", error);
+    newsGrid.innerHTML = '<p style="color: red;">Ocurrió un error al cargar las noticias.</p>';
+  }
+}
 
     // 1. El primer artículo (el más reciente) es el destacado.
     const featuredFile = files[0];
