@@ -51,25 +51,21 @@ async function loadNews() {
 }
 
 // --- FUNCIONES DE RENDERIZADO (VERSIÓN CORREGIDA) ---
+// En script.js, reemplaza la función findFirstImage por esta versión
 
 function findFirstImage(content) {
-  const imageMatch = content.match(/!\[.*\]\((.*?)\)/); // Captura lo que está dentro de los paréntesis
+  const imageMatch = content.match(/!\[.*\]\((.*)\)/);
   if (imageMatch && imageMatch[1]) {
     let imageUrl = imageMatch[1];
-    // Si la URL ya es una URL completa (empieza con http), la dejamos como está.
+    // Si la URL ya es una URL completa (empieza con http), la devolvemos.
     if (imageUrl.startsWith('http')) {
       return imageUrl;
     }
-    // Si la URL es relativa (empieza con /assets/...), la dejamos así.
-    // El navegador la convertirá a una ruta absoluta correctamente.
-    // Nos aseguramos de que siempre empiece con una sola barra '/'.
-    if (imageUrl.startsWith('/')) {
-        return imageUrl;
-    } else {
-        return '/' + imageUrl;
-    }
+    // Para cualquier otra cosa, nos aseguramos de que empiece con una barra '/'.
+    // Esto crea una ruta absoluta desde la raíz del sitio, que es lo más seguro.
+    return imageUrl.startsWith('/') ? imageUrl : '/' + imageUrl;
   }
-  return null; // Si no hay imagen, devolvemos null
+  return null;
 }
   }
 
