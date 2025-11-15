@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   activateMobileMenu();
 });
 
-// --- LÓGICA DE CARGA DE NOTICIAS (VERSIÓN CORREGIDA) ---
+// --- LÓGICA DE CARGA DE NOTICIAS ---
 async function loadNews() {
   const featuredCard = document.querySelector('.featured-card');
   const topList = document.getElementById('top-list');
@@ -50,23 +50,19 @@ async function loadNews() {
   }
 }
 
-// --- FUNCIONES DE RENDERIZADO (VERSIÓN CORREGIDA) ---
-// En script.js, reemplaza la función findFirstImage por esta versión
+// --- FUNCIONES DE RENDERIZADO ---
 
-function findFirstImage(content) {
-  const imageMatch = content.match(/!\[.*\]\((.*)\)/);
-  if (imageMatch && imageMatch[1]) {
-    let imageUrl = imageMatch[1];
-    // Si la URL ya es una URL completa (empieza con http), la devolvemos.
-    if (imageUrl.startsWith('http')) {
-      return imageUrl;
+function renderFeaturedArticle(container, filename, frontmatter, content) {
+  const imageUrl = findFirstImage(content) || 'https://via.placeholder.com/1000x560?text=Perspectivas';
+  
+  const imgTag = container.querySelector('img');
+  if(imgTag) {
+    imgTag.src = imageUrl;
+    imgTag.alt = `Imagen para: ${frontmatter.title || 'Noticia destacada'}`;
+    const parentLink = imgTag.closest('a');
+    if (parentLink) {
+        parentLink.href = `noticia.html?type=noticias&id=${filename}`;
     }
-    // Para cualquier otra cosa, nos aseguramos de que empiece con una barra '/'.
-    // Esto crea una ruta absoluta desde la raíz del sitio, que es lo más seguro.
-    return imageUrl.startsWith('/') ? imageUrl : '/' + imageUrl;
-  }
-  return null;
-}
   }
 
   container.querySelector('time').textContent = formatDate(frontmatter.date);
@@ -107,22 +103,89 @@ function createNewsCard(filename, frontmatter, content) {
 }
 
 // --- FUNCIONES DE UTILIDAD ---
+
 async function fetchFiles(path) {
   const response = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}`);
   if (!response.ok) throw new Error(`No se pudo acceder a la carpeta: ${path}`);
   const files = await response.json();
   return files.sort((a, b) => b.name.localeCompare(a.name));
 }
+
 async function fetchFileContent(url) {
   const response = await fetch(url);
   if (!response.ok) throw new Error(`No se pudo cargar el contenido del archivo: ${url}`);
   return await response.text();
 }
-function parseFrontmatter(markdownContent){const match=/^---\s*([\s\S]*?)\s*---/.exec(markdownContent),data={frontmatter:{},content:markdownContent};if(match){data.content=markdownContent.replace(match[0],"").trim(),match[1].split("\n").forEach(line=>{const[key,...valueParts]=line.split(":");key&&valueParts.length>0&&(data.frontmatter[key.trim()]=valueParts.join(":").trim().replace(/"/g,""))});}return data}
-function findFirstImage(content){const match=content.match(/!\[.*\]\((.*)\)/);if(match&&match[1])return match[1].startsWith("http")?match[1]:match[1].startsWith("/")?match[1]:`/${match[1]}`;return null}
-function formatTitleFromFilename(filename){return filename.replace(/\.md$/,"").replace(/^\d{4}-\d{2}-\d{2}-/,"").replace(/-/g," ").replace(/\b\w/g,l=>l.toUpperCase())}
-function formatDate(dateString){if(!dateString)return"";const date=new Date(dateString),options={day:"numeric",month:"short",year:"numeric"};return date.toLocaleDateString("es-ES",options)}
+
+function parseFrontmatter(markdownContent) {
+  const frontmatterRegex = /^---\s*([\s\S]*?)\s*---/;
+  const match = frontmatterRegex.exec(markdownContent);
+  const data = { frontmatter: {}, content: markdownContent };
+  if (match) {
+    data.content = markdownContent.replace(match[0], '').trim();
+    match[1].split('\n').forEach(line => {
+      const [key, ...valueParts] = line.split(':');
+      if (key && valueParts.length > 0) { data.frontmatter[key.trim()] = valueParts.join(':').trim().replace(/"/g, ''); }
+    });
+  }
+  return data;
+}
+
+function findFirstImage(content) {
+  const imageMatch = content.match(/!\[.*\]\((.*)\)/);
+  if (imageMatch && imageMatch[1]) {
+    let imageUrl = imageMatch[1];
+    if (imageUrl.startsWith('http')) {
+      return imageUrl;
+    }
+    return imageUrl.startsWith('/') ? imageUrl : '/' + imageUrl;
+  }
+  return null;
+}
+
+function formatTitleFromFilename(filename) {
+  return filename.replace(/\.md$/, '').replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+}
+
+function formatDate(dateString) {
+  if (!dateString) return '';
+  const date = new Date(dateString);
+  const options = { day: 'numeric', month: 'short', year: 'numeric' };
+  return date.toLocaleDateString('es-ES', options);
+}
 
 // --- LÓGICA DE MENÚ MÓVIL Y MODO OSCURO ---
-function activateDarkMode(){const t=document.getElementById("themeToggle"),e=document.body,o=t?t.querySelector(".icon"):null;if(t){const n=()=>{e.classList.toggle("dark-mode");const t=e.classList.contains("dark-mode")?"dark":"light";localStorage.setItem("theme",t),o&&(o.textContent="dark"===t?"☀️":"🌙")};"dark"===localStorage.getItem("theme")&&(e.classList.add("dark-mode"),o&&(o.textContent="☀️")),t.addEventListener("click",n)}}
-function activateMobileMenu(){const t=document.getElementById("menu-toggle"),e=document.getElementById("nav-list");t&&e&&t.addEventListener("click",()=>{e.classList.toggle("is-open");const o=e.classList.contains("is-open");t.setAttribute("aria-expanded",o),t.innerHTML=o?"&times;":"☰"})}
+
+function activateDarkMode() {
+  const themeToggle = document.getElementById('themeToggle');
+  const body = document.body;
+  const themeIcon = themeToggle ? themeToggle.querySelector('.icon') : null;
+  if (!themeToggle) return;
+
+  const toggleTheme = () => {
+    body.classList.toggle('dark-mode');
+    const theme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+    localStorage.setItem('theme', theme);
+    if(themeIcon) themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+  };
+
+  if (localStorage.getItem('theme') === 'dark') {
+    body.classList.add('dark-mode');
+    if(themeIcon) themeIcon.textContent = '☀️';
+  }
+
+  themeToggle.addEventListener('click', toggleTheme);
+}
+
+function activateMobileMenu() {
+  const menuToggle = document.getElementById('menu-toggle');
+  const navList = document.getElementById('nav-list');
+  if (!menuToggle || !navList) return;
+
+  menuToggle.addEventListener('click', () => {
+    navList.classList.toggle('is-open');
+    const isExpanded = navList.classList.contains('is-open');
+    menuToggle.setAttribute('aria-expanded', isExpanded);
+    menuToggle.innerHTML = isExpanded ? '&times;' : '☰';
+  });
+}
