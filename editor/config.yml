@@ -17,6 +17,8 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
+      - { label: "Destacar en Portada", name: "featured", widget: "boolean", default: false, required: false }
+      - { label: "Título", name: "title", widget: "string" }
       - { label: "Título", name: "title", widget: "string" }
       - { label: "Fecha de Publicación", name: "date", widget: "datetime" }
       - { label: "Resumen (para SEO y Redes Sociales)", name: "summary", widget: "text" }
