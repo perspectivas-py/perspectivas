@@ -110,9 +110,10 @@ a:hover {
   gap: 30px;
 }
 
+/* ESTA ES LA NUEVA VERSIÓN CORRECTA */
 .featured-card {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
 }
 .featured-card img {
   width: 100%;
@@ -317,69 +318,101 @@ a:hover {
   height: 100%;
 }
 /* ==========================================================================
-   7. DISEÑO RESPONSIVE Y MENÚ MÓVIL
+   7. DISEÑO RESPONSIVE Y MENÚ MÓVIL (Mobile-First)
    ========================================================================== */
 
-/* --- Estilos base para el menú móvil (oculto por defecto) --- */
+/* --- Estilos por defecto para MÓVIL --- */
+
+/* Ocultamos la navegación de escritorio y mostramos el botón hamburguesa */
+.main-nav .nav-list {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--color-surface);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+.main-nav .nav-list.is-open {
+  display: flex; /* Mostramos el menú al hacer clic */
+}
+.main-nav .nav-list li {
+  margin: 20px 0;
+}
+.main-nav .nav-list a {
+  font-size: 2em;
+}
+
 .menu-toggle {
-  display: none; /* Oculto en pantallas grandes */
+  display: block; /* Visible en móvil */
   background: none;
   border: none;
   font-size: 2em;
   cursor: pointer;
   color: var(--color-text-primary);
+  z-index: 101;
 }
 
-/* --- Media Query: Estilos para pantallas pequeñas (ej: 768px o menos) --- */
-@media (max-width: 768px) {
-  /* Hacemos visible el botón de la hamburguesa */
-  .menu-toggle {
-    display: block;
-    position: relative;
-    z-index: 101; /* Para que esté por encima de todo */
-  }
+/* Adaptamos la portada a una sola columna en móvil */
+.hero {
+  grid-template-columns: 1fr;
+}
+.full-article h1 {
+  font-size: 2em;
+}
 
-  /* Posicionamos la navegación principal */
-  .main-nav {
-    position: static;
+
+/* --- Media Query: Estilos para ESCRITORIO (769px o más) --- */
+@media (min-width: 769px) {
+  /* Ocultamos el botón hamburguesa y mostramos el menú normal */
+  .menu-toggle {
+    display: none;
   }
   
-  /* Ocultamos la lista de enlaces y la preparamos para la animación */
-  .nav-list {
-    display: none; /* Oculta por defecto */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+  .main-nav .nav-list {
+    display: flex;
+    position: static;
+    height: auto;
+    width: auto;
+    background-color: transparent;
+    flex-direction: row;
+    gap: 25px;
+  }
+  .main-nav .nav-list li {
+    margin: 0;
+  }
+  .main-nav .nav-list a {
+    font-size: 1em; /* Tamaño normal en escritorio */
+  }
+
+  /* Restauramos el layout de dos columnas para la portada */
+  .hero {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  /* Damos el estilo especial a la tarjeta destacada en escritorio */
+  .featured-card {
+    display: flex;
+    flex-direction: row;
+    min-height: 350px;
+  }
+  .featured-card img {
+    width: 60%;
     height: 100%;
-    background-color: var(--color-surface);
+    object-fit: cover;
+  }
+  .featured-card .card-content {
+    width: 40%;
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    text-align: center;
-    z-index: 100;
+    padding: 30px;
   }
-  
-  /* Cuando el menú está abierto (añadimos la clase .is-open con JS) */
-  .nav-list.is-open {
-    display: flex; /* La hacemos visible */
-  }
-
-  .nav-list li {
-    margin: 20px 0;
-  }
-
-  .nav-list a {
-    font-size: 1.8em;
-  }
-
-  /* Ajustamos el layout de la portada para móviles */
-  .hero {
-    grid-template-columns: 1fr; /* Una sola columna */
-  }
-
-  /* Ajustamos el título del artículo en móvil */
   .full-article h1 {
-    font-size: 2em;
+    font-size: 2.8em;
   }
 }
