@@ -5,10 +5,37 @@ const NEWS_PATH = 'content/noticias/_posts';
 
 // --- FUNCIÓN PRINCIPAL ---
 document.addEventListener('DOMContentLoaded', () => {
-  // Cuando el DOM esté listo, cargamos las noticias y activamos el modo oscuro.
+   // ... (tu código para cargar noticias y modo oscuro va aquí) ...
   loadNews();
   activateDarkMode();
+
+  // ▼▼▼ AÑADE ESTA NUEVA FUNCIÓN AL FINAL ▼▼▼
+  activateMobileMenu();
 });
+
+// ... (el resto de tus funciones como loadNews, etc., van después) ...
+
+// ▼▼▼ AÑADE ESTA NUEVA FUNCIÓN COMPLETA AL FINAL DEL ARCHIVO ▼▼▼
+function activateMobileMenu() {
+  const menuToggle = document.getElementById('menu-toggle');
+  const navList = document.getElementById('nav-list');
+
+  if (!menuToggle || !navList) return;
+
+  menuToggle.addEventListener('click', () => {
+    // Alternamos la clase .is-open en la lista del menú
+    navList.classList.toggle('is-open');
+    
+    // Cambiamos el icono de ☰ a X y viceversa
+    const isExpanded = navList.classList.contains('is-open');
+    menuToggle.setAttribute('aria-expanded', isExpanded);
+    if (isExpanded) {
+      menuToggle.innerHTML = '&times;'; // Icono de 'X'
+    } else {
+      menuToggle.innerHTML = '☰'; // Icono de hamburguesa
+    }
+  });
+}
 
 // --- LÓGICA DE CARGA DE NOTICIAS ---
 async function loadNews() {
