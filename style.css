@@ -276,7 +276,19 @@ a:hover {
   font-size: 0.9em;
   margin-bottom: 20px;
 }
-
+.article-meta-info {
+  display: flex; /* Activa Flexbox */
+  justify-content: space-between; /* ¡La magia! Empuja los hijos a los extremos opuestos */
+  align-items: center; /* Los alinea verticalmente */
+  flex-wrap: wrap; /* Permite que se apilen en pantallas muy pequeñas */
+  gap: 15px;
+  margin: 20px 0;
+  padding: 10px 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.9em;
+  color: var(--color-text-secondary);
+}
 /* Contenido principal del artículo (párrafos, etc.) */
 .full-article .article-content {
   font-size: 1.15em; /* Tamaño de fuente cómodo para leer */
