@@ -80,7 +80,7 @@ function renderFeaturedArticle(container, filename, markdown) {
   container.querySelector('img').src = imageUrl;
   container.querySelector('time').textContent = formatDate(frontmatter.date);
   container.querySelector('h1').textContent = frontmatter.title || 'Sin Título';
-  container.querySelector('.dek').textContent = frontmatter.summary || content.substring(0, 120) + '...';
+  container.querySelector('.dek').textContent = frontmatter.summary || frontmatter.content.substring(0, 120) + '...';
   
   // Hacemos que toda la tarjeta sea un enlace
   const link = `noticia.html?type=noticias&id=${filename}`;
