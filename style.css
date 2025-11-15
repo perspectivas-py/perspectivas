@@ -316,3 +316,70 @@ a:hover {
   width: 100%;
   height: 100%;
 }
+/* ==========================================================================
+   7. DISEÑO RESPONSIVE Y MENÚ MÓVIL
+   ========================================================================== */
+
+/* --- Estilos base para el menú móvil (oculto por defecto) --- */
+.menu-toggle {
+  display: none; /* Oculto en pantallas grandes */
+  background: none;
+  border: none;
+  font-size: 2em;
+  cursor: pointer;
+  color: var(--color-text-primary);
+}
+
+/* --- Media Query: Estilos para pantallas pequeñas (ej: 768px o menos) --- */
+@media (max-width: 768px) {
+  /* Hacemos visible el botón de la hamburguesa */
+  .menu-toggle {
+    display: block;
+    position: relative;
+    z-index: 101; /* Para que esté por encima de todo */
+  }
+
+  /* Posicionamos la navegación principal */
+  .main-nav {
+    position: static;
+  }
+  
+  /* Ocultamos la lista de enlaces y la preparamos para la animación */
+  .nav-list {
+    display: none; /* Oculta por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-surface);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 100;
+  }
+  
+  /* Cuando el menú está abierto (añadimos la clase .is-open con JS) */
+  .nav-list.is-open {
+    display: flex; /* La hacemos visible */
+  }
+
+  .nav-list li {
+    margin: 20px 0;
+  }
+
+  .nav-list a {
+    font-size: 1.8em;
+  }
+
+  /* Ajustamos el layout de la portada para móviles */
+  .hero {
+    grid-template-columns: 1fr; /* Una sola columna */
+  }
+
+  /* Ajustamos el título del artículo en móvil */
+  .full-article h1 {
+    font-size: 2em;
+  }
+}
