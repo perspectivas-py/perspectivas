@@ -88,9 +88,9 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-headline); }
   color: var(--color-text-secondary);
 }
 .featured-card .featured-body h1 {
-  font-size: 2.5em;
-  margin: 15px 0 05px 0; /* Margen superior de 15px, inferior de 10px */
-  line-height: 1.2;
+ font-size: 2.2em; /* Título grande y con impacto */
+  margin: 10px 0;
+  line-height: 1.1;
 }
 .featured-card .featured-body h1 a {
   color: var(--color-text-primary);
