@@ -2,10 +2,9 @@
 featured: true
 title: Paraguay destacó su política fiscal responsable en seminario internacional
 date: 2025-11-15T21:23:00.000-03:00
-summary: El encuentro reunió a autoridades fiscales y especialistas de la región
-  para debatir sobre los desafíos y tendencias de la gestión presupuestaria, así
-  como para promover el intercambio técnico y político orientado a fortalecer la
-  sostenibilidad fiscal.
+summary: Se debatió sobre los desafíos y tendencias de la gestión
+  presupuestaria, así como para promover el intercambio técnico y político
+  orientado a fortalecer la sostenibilidad fiscal.
 ---
 ![Del evento, en representación del MEF participaron la gerente de Gestión Financiera del Estado, Teodora Recalde de Spinzi, y el director general de Presupuesto, Jorge Paredes.](/assets/img/exportación.jpg)
 
