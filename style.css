@@ -407,21 +407,53 @@ a:hover {
   }
 
   /* Damos el estilo especial a la tarjeta destacada en escritorio */
+  /* --- ESTILO MEJORADO PARA LA TARJETA DESTACADA EN PORTADA --- */
+
+/* Por defecto (móvil), la tarjeta es vertical */
+.featured-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column; /* Apilado verticalmente en móvil */
+}
+
+.featured-card a:first-child { /* El enlace que contiene la imagen */
+  order: 1; /* La imagen va primero */
+}
+
+.featured-card .featured-body {
+  order: 2; /* El texto va después */
+  padding: 20px;
+}
+
+.featured-card img {
+  width: 100%;
+  height: auto;
+}
+
+/* --- Media Query: Estilos para ESCRITORIO (a partir de 769px) --- */
+@media (min-width: 769px) {
   .featured-card {
-    display: flex;
-    flex-direction: row;
-    min-height: 350px;
+    flex-direction: row; /* ¡La magia! Ponemos los elementos en fila */
+    align-items: stretch; /* Hacemos que ambos hijos ocupen toda la altura */
   }
+
+  .featured-card a:first-child { /* El enlace de la imagen */
+    width: 60%; /* La imagen ocupa el 60% del ancho */
+    flex-shrink: 0; /* Evita que la imagen se encoja */
+  }
+
   .featured-card img {
-    width: 60%;
-    height: 100%;
-    object-fit: cover;
+    width: 100%;
+    height: 100%; /* La imagen rellena toda la altura de su contenedor */
+    object-fit: cover; /* Recorta la imagen para que encaje sin deformarse */
   }
-  .featured-card .card-content {
-    width: 40%;
+
+  .featured-card .featured-body {
+    width: 40%; /* El texto ocupa el 40% restante */
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 30px;
+    justify-content: center; /* Centra el contenido verticalmente */
+    padding: 40px;
   }
 }
