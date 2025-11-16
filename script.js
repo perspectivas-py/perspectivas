@@ -1,182 +1,276 @@
-// --- CONFIGURACIÓN GLOBAL ---
-const REPO = 'perspectivas-py/perspectivas';
-const BRANCH = 'main';
-const NEWS_PATH = 'content/noticias/posts';
+// =============================
+// CONFIG
+// =============================
+const REPO = "perspectivas-py/perspectivas";
+const BRANCH = "main";
+const NEWS_PATH = "content/noticias/posts";
 
-// --- FUNCIÓN PRINCIPAL ---
-document.addEventListener('DOMContentLoaded', () => {
-  try {
-    loadNews();
-    activateDarkMode();
-    activateMobileMenu();
-  } catch (error) {
-    console.error("Error Crítico al iniciar la aplicación:", error);
-    document.body.innerHTML = `<div style="text-align:center;padding:50px;"><h1>Error Crítico</h1><p>Revisa consola F12.</p></div>`;
-  }
+// Colores por categoría
+const CATEGORY_COLORS = {
+  "Macro": "#004b8d",
+  "Política económica": "#8d0000",
+  "Inmobiliario": "#1a7f1a",
+  "Empresas": "#7a008d",
+  "Opinión": "#8a5500",
+  "Educación financiera": "#006c6c",
+  "Agroindustria": "#3f6600",
+  "Comercio exterior": "#5e008d"
+};
+
+
+// =============================
+// START
+// =============================
+document.addEventListener("DOMContentLoaded", () => {
+  loadNews();
+  activateDarkMode();
+  activateMobileMenu();
 });
 
-// --- CARGA DE NOTICIAS ---
+
+// =============================
+// MAIN LOAD FUNCTION
+// =============================
 async function loadNews() {
-  const featuredCard = document.querySelector('.featured-card-bbc');
-  const topList = document.getElementById('top-list-bbc');
-  const newsGrid = document.getElementById('news-grid');
+  const featuredCard = document.querySelector(".featured-card-bbc");
+  const topList = document.getElementById("top-list-bbc");
+  const newsGrid = document.getElementById("news-grid");
   if (!featuredCard || !topList || !newsGrid) return;
 
   try {
     const files = await fetchFiles(NEWS_PATH);
-    if (!files || files.length === 0) {
-      featuredCard.innerHTML = '<p>No hay noticias para mostrar.</p>';
-      return;
-    }
+    const posts = await loadPosts(files);
 
-    const allPosts = await Promise.all(
-      files.map(async file => {
-        const markdown = await fetchFileContent(file.download_url);
-        const { frontmatter, content } = parseFrontmatter(markdown);
-        return { ...file, frontmatter, content };
-      })
-    );
+    // Ordenar por fecha DESC
+    posts.sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date));
 
-    // ORDENAR POR FECHA DESCENDENTE
-    allPosts.sort((a, b) => {
-      const da = new Date(a.frontmatter.date || a.frontmatter.fecha || 0);
-      const db = new Date(b.frontmatter.date || b.frontmatter.fecha || 0);
-      return db - da;
-    });
+    const featured = posts.find(p => p.frontmatter.featured === "true" || p.frontmatter.featured === true);
+    const firstFeatured = featured || posts[0];
+    const others = posts.filter(p => p !== firstFeatured);
 
-    // DESTACADA Y RESTO
-    let featuredPost = allPosts.find(p => String(p.frontmatter.featured) === 'true') || allPosts[0];
-    const otherPosts = allPosts.filter(p => p.name !== featuredPost.name);
+    renderFeaturedArticleBBC(featuredCard, firstFeatured);
+    renderTopListBBC(topList, others.slice(0, 4));
 
-    // RENDERIZADO
-    renderFeaturedArticleBBC(featuredCard, featuredPost.name, featuredPost.frontmatter, featuredPost.content);
-    renderTopListBBC(topList, otherPosts.slice(0, 4));
-    renderNewsGrid(newsGrid, otherPosts);
+    setupCategoryFilters(posts, others, newsGrid, topList);
+    renderWithUrlFilter(posts, others, newsGrid, topList);
 
-    // ACTIVAR FILTROS
-    setupCategoryFilters(allPosts, otherPosts, newsGrid, topList);
-
-  } catch (error) {
-    console.error("Error al cargar noticias:", error);
-    featuredCard.innerHTML = `<p style="color:red;font-weight:bold;">Error: ${error.message}</p>`;
+  } catch (err) {
+    console.error("Error al cargar noticias:", err);
+    featuredCard.innerHTML = "<p>Error cargando contenido.</p>";
   }
 }
 
-// --- RENDER BBC ---
-function renderFeaturedArticleBBC(container, filename, frontmatter, content) {
-  let imageUrl = findFirstImage(content) || 'https://placehold.co/800x450/EFEFEF/AAAAAA?text=Perspectivas';
-  const link = `noticia.html?type=noticias&id=${filename}`;
-  container.innerHTML = `
-    <div class="featured-image-container">
-      <a href="${link}"><img src="${imageUrl}" alt="Imagen"></a>
-    </div>
-    <div class="featured-body">
-      <time datetime="${frontmatter.date}">${formatDate(frontmatter.date)}</time>
-      <h1><a href="${link}">${frontmatter.title || 'Sin Título'}</a></h1>
-      <p class="dek">${frontmatter.summary || content.substring(0,150)+'...'}</p>
-    </div>`;
+
+// =============================
+// LOAD HELPERS
+// =============================
+async function fetchFiles(path) {
+  const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}`);
+  if (!r.ok) throw new Error("No se pudo acceder al repositorio.");
+  return await r.json();
 }
 
-function renderTopListBBC(container, files) {
-  container.innerHTML = '';
-  files.forEach(post => {
-    const link = `noticia.html?type=noticias&id=${post.name}`;
-    const li = document.createElement('li');
+async function loadPosts(files) {
+  return Promise.all(
+    files.map(async file => {
+      const markdown = await fetchFileContent(file.download_url);
+      const { frontmatter, content } = parseFrontmatter(markdown);
+
+      // Si falta summary, autogenerarlo
+      if (!frontmatter.summary) {
+        frontmatter.summary = content.slice(0, 180) + "...";
+      }
+
+      // Tiempo estimado de lectura
+      frontmatter.readtime = estimateReading(content);
+
+      return { ...file, frontmatter, content };
+    })
+  );
+}
+
+async function fetchFileContent(url) {
+  const r = await fetch(url);
+  if (!r.ok) throw new Error("No se pudo cargar el archivo: " + url);
+  return await r.text();
+}
+
+
+// =============================
+// FRONTMATTER PARSE
+// =============================
+function parseFrontmatter(md) {
+  const m = /^---\s*([\s\S]*?)\s*---/.exec(md);
+  const data = { frontmatter: {}, content: md };
+
+  if (m) {
+    data.content = md.replace(m[0], "").trim();
+    m[1].split("\n").forEach(line => {
+      const [key, ...v] = line.split(":");
+      if (key && v.length > 0) {
+        data.frontmatter[key.trim()] = v.join(":").trim().replace(/"/g, "");
+      }
+    });
+  }
+  return data;
+}
+
+
+// =============================
+// RENDER BBC LAYOUT
+// =============================
+function renderFeaturedArticleBBC(container, post) {
+  const fm = post.frontmatter;
+  const content = post.content;
+  const img = findFirstImage(content) || fm.image || "https://placehold.co/800x450/EEE/333?text=Perspectivas";
+  const url = `noticia.html?type=noticias&id=${post.name}`;
+
+  // Validación featured requiere imagen
+  if ((fm.featured === "true" || fm.featured === true) && !fm.image) {
+    console.warn("⚠ Noticia destacada sin imagen:", fm.title);
+  }
+
+  container.innerHTML = `
+    <div class="featured-image-container">
+      <a href="${url}">
+        <img src="${img}" alt="Imagen principal" />
+      </a>
+    </div>
+    <div class="featured-body">
+      <time>${formatDate(fm.date)}</time>
+      <h1><a href="${url}">${fm.title}</a></h1>
+      <p class="dek">${fm.summary}</p>
+      <p class="meta-read">${fm.readtime} min de lectura</p>
+    </div>
+  `;
+}
+
+function renderTopListBBC(container, posts) {
+  container.innerHTML = "";
+  posts.forEach(post => {
+    const fm = post.frontmatter;
+    const url = `noticia.html?type=noticias&id=${post.name}`;
+    const li = document.createElement("li");
     li.innerHTML = `
-      <a href="${link}">
-        <h4>${post.frontmatter.title || formatTitleFromFilename(post.name)}</h4>
-        <p>${post.frontmatter.summary || post.content.substring(0,80)+'...'}</p>
+      <a href="${url}">
+        <h4>${fm.title}</h4>
+        <p>${fm.summary}</p>
       </a>`;
     container.appendChild(li);
   });
 }
 
-async function renderNewsGrid(container, files) {
-  container.innerHTML = '';
-  for (const post of files) {
-    container.innerHTML += createNewsCard(post.name, post.frontmatter, post.content);
-  }
+
+// =============================
+// NEWS GRID
+// =============================
+function renderNewsGrid(container, posts) {
+  container.innerHTML = posts.map(createNewsCard).join("");
 }
 
-function createNewsCard(filename, frontmatter, content) {
-  const imageUrl = findFirstImage(content) || 'https://placehold.co/400x225/EFEFEF/AAAAAA?text=Perspectivas';
-  const link = `noticia.html?type=noticias&id=${filename}`;
-  const category = frontmatter.category || frontmatter.categoria || null;
-  const categoryLabel = category ? `<span class="badge-cat">${category}</span>` : '';
+function createNewsCard(post) {
+  const fm = post.frontmatter;
+  const url = `noticia.html?type=noticias&id=${post.name}`;
+  const img = findFirstImage(post.content) || fm.image || "https://placehold.co/600x350/EEE/333?text=Perspectivas";
+  const badge = fm.category ? `<span class="badge" style="background:${CATEGORY_COLORS[fm.category] || "#444"}">${fm.category}</span>` : "";
+
   return `
-  <article class="card">
-    <a href="${link}"><img src="${imageUrl}" alt=""></a>
-    <div class="card-body">
-      ${categoryLabel}
-      <time datetime="${frontmatter.date}">${formatDate(frontmatter.date)}</time>
-      <h3><a href="${link}">${frontmatter.title || 'Sin Título'}</a></h3>
-    </div>
-  </article>`;
+    <article class="card">
+      <a href="${url}">
+        <img src="${img}" alt="">
+      </a>
+      <div class="card-body">
+        ${badge}
+        <time>${formatDate(fm.date)}</time>
+        <h3><a href="${url}">${fm.title}</a></h3>
+        <small>${fm.readtime} min de lectura</small>
+      </div>
+    </article>`;
 }
 
-// --- CATEGORÍAS Y FILTROS ---
-function setupCategoryFilters(allPosts, otherPosts, newsGrid, topList) {
-  const filtersContainer = document.getElementById('category-filters');
-  if (!filtersContainer) return;
 
-  const categories = [...new Set(allPosts.map(p => (p.frontmatter.category || p.frontmatter.categoria || '').trim()).filter(Boolean))];
+// =============================
+// CATEGORY FILTER + URL FILTER
+// =============================
+function setupCategoryFilters(allPosts, others, newsGrid, topList) {
+  const filterBox = document.getElementById("category-filters");
+  if (!filterBox) return;
 
-  if (!categories.length) {
-    filtersContainer.style.display = 'none';
-    return;
+  const categories = [...new Set(allPosts.map(p => p.frontmatter.category).filter(Boolean))];
+
+  let activeCat = null;
+
+  function applyFilter(category) {
+    activeCat = category;
+    setUrlFilters(category);
+    applyUrlFilters(allPosts, others, newsGrid, topList);
   }
 
-  let active = 'Todos';
+  filterBox.innerHTML = `
+    <button class="filter-pill" data-cat="">Todos</button>
+    ${categories.map(cat => `<button class="filter-pill" data-cat="${cat}">${cat}</button>`).join("")}
+  `;
 
-  const renderFilters = () => {
-    filtersContainer.innerHTML = '';
-    const allBtn = createFilterButton('Todos', active === 'Todos', () => {
-      active = 'Todos';
-      updateUI();
+  filterBox.querySelectorAll("button").forEach(btn => {
+    btn.addEventListener("click", e => {
+      applyFilter(e.target.dataset.cat || null);
     });
-    filtersContainer.appendChild(allBtn);
-
-    categories.forEach(cat => {
-      const btn = createFilterButton(cat, active === cat, () => {
-        active = cat;
-        updateUI();
-      });
-      filtersContainer.appendChild(btn);
-    });
-  };
-
-  const updateUI = () => {
-    const filtered =
-      active === 'Todos'
-        ? otherPosts
-        : otherPosts.filter(p => (p.frontmatter.category || p.frontmatter.categoria) === active);
-
-    renderNewsGrid(newsGrid, filtered);
-    renderTopListBBC(topList, filtered.slice(0, 4));
-    renderFilters();
-  };
-
-  const createFilterButton = (text, active, handler) => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.textContent = text;
-    btn.className = 'filter-pill' + (active ? ' is-active' : '');
-    btn.onclick = handler;
-    return btn;
-  };
-
-  renderFilters();
-  updateUI();
+  });
 }
 
-// --- UTILIDADES ---
-async function fetchFiles(path){const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}`);if(!r.ok)throw new Error("No se pudo acceder a GitHub.");return await r.json();}
-async function fetchFileContent(url){const r=await fetch(url);if(!r.ok)throw new Error("No se pudo cargar archivo Markdown.");return await r.text();}
-function parseFrontmatter(md){const m=/^---\s*([\s\S]*?)\s*---/.exec(md);const d={frontmatter:{},content:md};if(m){d.content=md.replace(m[0],"").trim();m[1].split("\n").forEach(l=>{const[k,...v]=l.split(":");if(k&&v.length>0)d.frontmatter[k.trim()]=v.join(":").trim().replace(/"/g,"");});}return d;}
-function findFirstImage(c){const m=c.match(/!\[.*\]\((.*)\)/);if(m&&m[1])return m[1].startsWith('http')?m[1]:'/'+m[1];return null;}
-function formatDate(d){if(!d)return'';return new Date(d).toLocaleDateString('es-ES',{day:'numeric',month:'short',year:'numeric'});}
-function formatTitleFromFilename(f){return f.replace(/\.md$/,'').replace(/^\d{4}-\d{2}-\d{2}-/,'').replace(/-/g,' ').replace(/\b\w/g,l=>l.toUpperCase());}
 
-// --- UI ---
+// =============================
+// URL FILTER LOGIC
+// =============================
+function renderWithUrlFilter(allPosts, others, newsGrid, topList) {
+  applyUrlFilters(allPosts, others, newsGrid, topList);
+}
+
+function applyUrlFilters(allPosts, others, newsGrid, topList) {
+  const params = new URLSearchParams(location.search);
+  const cat = params.get("cat");
+
+  let filtered = others;
+
+  if (cat) {
+    filtered = filtered.filter(p => p.frontmatter.category === cat);
+  }
+
+  renderNewsGrid(newsGrid, filtered);
+  renderTopListBBC(topList, filtered.slice(0, 4));
+}
+
+function setUrlFilters(cat) {
+  const url = new URL(location);
+  if (!cat) {
+    url.searchParams.delete("cat");
+  } else {
+    url.searchParams.set("cat", cat);
+  }
+  history.replaceState(null, "", url);
+}
+
+
+// =============================
+// UTILITIES
+// =============================
+function findFirstImage(content) {
+  const m = content.match(/!\[.*?\]\((.*?)\)/);
+  return m ? m[1] : null;
+}
+
+function estimateReading(text) {
+  const words = text.split(/\s+/).length;
+  return Math.max(1, Math.round(words / 220)); // 220 wpm
+}
+
+function formatDate(dateStr) {
+  return new Date(dateStr).toLocaleDateString("es-PY", { day: "numeric", month: "short", year: "numeric" });
+}
+
+
+// =============================
+// UI
+// =============================
 function activateDarkMode(){const t=document.getElementById("themeToggle"),e=document.body,o=t?t.querySelector(".icon"):null;if(!t)return;const n=()=>{e.classList.toggle("dark-mode");const t=e.classList.contains("dark-mode")?"dark":"light";localStorage.setItem("theme",t),o&&(o.textContent="dark"===t?"☀️":"🌙")};"dark"===localStorage.getItem("theme")&&(e.classList.add("dark-mode"),o&&(o.textContent="☀️")),t.addEventListener("click",n)}
 function activateMobileMenu(){const t=document.getElementById("menu-toggle"),e=document.getElementById("nav-list");if(!t||!e)return;t.addEventListener("click",()=>{e.classList.toggle("is-open");const o=e.classList.contains("is-open");t.setAttribute("aria-expanded",o),t.innerHTML=o?"&times;":"☰"})}
