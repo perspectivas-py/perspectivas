@@ -50,7 +50,8 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-headline); }
   position: sticky; top: 0; z-index: 100; width: 100%;
 }
 .site-header .wrap { display: flex; justify-content: space-between; align-items: center; }
-.brand { font-family: var(--font-headline); font-weight: 700; font-size: 1.8em; color: var(--color-text-primary); }
+.brand { font-family: var(--font-headline); font-weight: 700; font-size: 1.8em; color: var(--color-text-primary); text-decoration: none; }
+.brand:hover { text-decoration: none; }
 
 /* ==========================================================================
    4. PORTADA (HERO SECTION) - ESTILO BBC
@@ -58,88 +59,31 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-headline); }
 .hero {
   padding-top: 24px;
   display: grid;
-  grid-template-columns: 66% 1fr; /* 2/3 para la columna principal */
+  grid-template-columns: 66% 1fr;
   grid-template-rows: auto;
   gap: 24px;
   border-bottom: 1px solid var(--color-border);
   padding-bottom: 24px;
 }
-
-.hero-main {
-  grid-column: 1;
-}
-
+.hero-main { grid-column: 1; }
 .hero-secondary {
   grid-column: 2;
   border-left: 1px solid var(--color-border);
   padding-left: 24px;
 }
+.featured-card-bbc h1 { font-size: 2.2em; margin: 10px 0; line-height: 1.1; }
+.featured-card-bbc h1 a { color: var(--color-text-primary); text-decoration: none; }
+.featured-card-bbc h1 a:hover { color: var(--color-accent); text-decoration: none; }
+.featured-card-bbc .dek { font-size: 1.1em; color: var(--color-text-secondary); line-height: 1.6; }
+.featured-card-bbc time { font-size: 0.9em; color: var(--color-text-secondary); }
 
-.featured-card-bbc h1 {
-  font-size: 2.2em; /* Título grande y con impacto */
-  margin: 10px 0;
-  line-height: 1.1;
-}
-.featured-card-bbc h1 a {
-  color: var(--color-text-primary);
-  text-decoration: none;
-}
-.featured-card-bbc h1 a:hover {
-  color: var(--color-accent);
-}
-.featured-card-bbc .dek {
-  font-size: 1.1em;
-  color: var(--color-text-secondary);
-  line-height: 1.6;
-}
-
-.headline-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.headline-list li {
-  padding-bottom: 16px;
-  margin-bottom: 16px;
-  border-bottom: 1px solid var(--color-border);
-}
-.headline-list li:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
-}
-.headline-list a {
-  text-decoration: none;
-  color: var(--color-text-primary);
-}
-.headline-list h4 {
-  font-size: 1.2em;
-  margin: 0 0 8px 0;
-  line-height: 1.2;
-}
-.headline-list p {
-  font-family: var(--font-body);
-  font-size: 0.9em;
-  color: var(--color-text-secondary);
-  margin: 0;
-}
-
-/* En móvil, todo se apila en una sola columna */
-@media (max-width: 768px) {
-  .hero {
-    grid-template-columns: 1fr;
-  }
-  .hero-secondary {
-    border-left: none;
-    padding-left: 0;
-    margin-top: 24px;
-    border-top: 1px solid var(--color-border);
-    padding-top: 24px;
-  }
-}
+.headline-list { list-style: none; margin: 0; padding: 0; height: 100%; display: flex; flex-direction: column; }
+.headline-list li { padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--color-border); }
+.headline-list li:last-child { border-bottom: none; margin-bottom: 0; }
+.headline-list a { text-decoration: none; color: var(--color-text-primary); }
+.headline-list a:hover h4 { color: var(--color-accent); text-decoration: none; }
+.headline-list h4 { font-size: 1.2em; margin: 0 0 8px 0; line-height: 1.2; font-weight: 700; }
+.headline-list p { font-family: var(--font-body); font-size: 0.9em; color: var(--color-text-secondary); margin: 0; }
 
 /* ==========================================================================
    5. SECCIONES Y CUADRÍCULA DE NOTICIAS
@@ -168,6 +112,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-headline); }
 .card-body time { font-size: 0.8em; color: var(--color-text-secondary); }
 .card-body h3 { margin: 5px 0 0; }
 .card-body h3 a { color: var(--color-text-primary); text-decoration: none; }
+.card-body h3 a:hover { color: var(--color-accent); }
 
 /* ==========================================================================
    6. PÁGINA DE ARTÍCULO
@@ -181,11 +126,11 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-headline); }
 .featured-image img { width: 100%; height: auto; display: block; border-radius: 4px; }
 .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 30px 0; background-color: #000; border-radius: 4px; }
 .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-#share-buttons a { font-size: 1.5em; color: var(--color-text-secondary); transition: color 0.2s ease-in-out; margin-left: 12px; }
+#share-buttons a { font-size: 1.5em; color: var(--color-text-secondary); transition: color 0.2s ease-in-out; margin-left: 12px; text-decoration: none; }
 #share-buttons a:hover { color: var(--color-accent); }
 
 /* ==========================================================================
-   7. FOOTER
+   7. FOOTER Y MODO OSCURO
    ========================================================================== */
 .site-footer {
   background-color: var(--color-surface);
@@ -201,29 +146,26 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-headline); }
    ========================================================================== */
 .main-nav .nav-list { display: flex; gap: 25px; list-style: none; margin: 0; padding: 0; }
 .main-nav a { font-weight: 700; color: var(--color-text-secondary); text-decoration: none; }
-.menu-toggle { display: none; } /* Oculto por defecto en escritorio */
+.menu-toggle { display: none; }
 
 @media (max-width: 768px) {
-  /* Hacemos visible el botón hamburguesa */
   .menu-toggle {
     display: block; background: none; border: none; font-size: 2em;
     cursor: pointer; color: var(--color-text-primary); z-index: 101;
   }
-  
-  /* Ocultamos el menú de escritorio y lo preparamos para ser un overlay */
   .main-nav .nav-list {
     display: none; position: fixed; top: 0; left: 0;
     width: 100vw; height: 100vh; background-color: var(--color-surface);
     flex-direction: column; justify-content: center; align-items: center; z-index: 100;
   }
-  .main-nav .nav-list.is-open { display: flex; } /* Lo mostramos al hacer clic */
+  .main-nav .nav-list.is-open { display: flex; }
   .main-nav .nav-list li { margin: 20px 0; }
   .main-nav .nav-list a { font-size: 2em; }
-  
-  /* Adaptamos la portada a una sola columna */
   .hero { grid-template-columns: 1fr; }
-  
-  /* Ajustamos fuentes para móvil */
-  .featured-card .featured-body h1 { font-size: 2em; }
+  .hero-secondary {
+    border-left: none; padding-left: 0; margin-top: 24px;
+    border-top: 1px solid var(--color-border); padding-top: 24px;
+  }
+  .featured-card-bbc h1 { font-size: 1.8em; }
   .full-article h1 { font-size: 2em; }
 }
