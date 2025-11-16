@@ -53,67 +53,93 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-headline); }
 .brand { font-family: var(--font-headline); font-weight: 700; font-size: 1.8em; color: var(--color-text-primary); }
 
 /* ==========================================================================
-   4. PORTADA (HERO SECTION) - ¡SECCIÓN CORREGIDA Y UNIFICADA!
+   4. PORTADA (HERO SECTION) - ESTILO BBC
    ========================================================================== */
 .hero {
-  padding-top: 40px;
+  padding-top: 24px;
   display: grid;
-  grid-template-columns: 2fr 1fr; /* 2/3 para principal, 1/3 para barra lateral en escritorio */
-  gap: 30px;
+  grid-template-columns: 66% 1fr; /* 2/3 para la columna principal */
+  grid-template-rows: auto;
+  gap: 24px;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 24px;
 }
 
-.featured-card {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  display: flex;
-  flex-direction: column; /* Siempre vertical */
-  border-radius: 4px;
-  overflow: hidden;
+.hero-main {
+  grid-column: 1;
 }
-.featured-card a:first-child { /* Contenedor del enlace de la imagen */
-  width: 100%;
-  height: 400px;
-  display: block;
+
+.hero-secondary {
+  grid-column: 2;
+  border-left: 1px solid var(--color-border);
+  padding-left: 24px;
 }
-.featured-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Recorta la imagen para que llene el espacio sin deformarse */
-}
-.featured-card .featured-body {
-  padding: 30px;
-}
-.featured-card .featured-body time {
-  font-size: 0.9em;
-  color: var(--color-text-secondary);
-}
-.featured-card .featured-body h1 {
- font-size: 2.2em; /* Título grande y con impacto */
+
+.featured-card-bbc h1 {
+  font-size: 2.2em; /* Título grande y con impacto */
   margin: 10px 0;
   line-height: 1.1;
 }
-.featured-card .featured-body h1 a {
+.featured-card-bbc h1 a {
   color: var(--color-text-primary);
   text-decoration: none;
 }
-.featured-card .featured-body h1 a:hover {
+.featured-card-bbc h1 a:hover {
   color: var(--color-accent);
 }
-.featured-card .featured-body .dek {
+.featured-card-bbc .dek {
   font-size: 1.1em;
   color: var(--color-text-secondary);
   line-height: 1.6;
-  margin-top: 0; /* Elimina el margen superior por defecto del párrafo */
 }
 
-.side-list h3 {
-  font-family: var(--font-headline);
-  border-bottom: 2px solid var(--color-accent);
-  padding-bottom: 10px;
+.headline-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-.side-list ul { list-style: none; padding: 0; margin: 0; }
-.side-list li { padding: 15px 0; border-bottom: 1px solid var(--color-border); }
-.side-list a { font-weight: 700; text-decoration: none; color: var(--color-text-primary); }
+.headline-list li {
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+.headline-list li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+.headline-list a {
+  text-decoration: none;
+  color: var(--color-text-primary);
+}
+.headline-list h4 {
+  font-size: 1.2em;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+.headline-list p {
+  font-family: var(--font-body);
+  font-size: 0.9em;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* En móvil, todo se apila en una sola columna */
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+  .hero-secondary {
+    border-left: none;
+    padding-left: 0;
+    margin-top: 24px;
+    border-top: 1px solid var(--color-border);
+    padding-top: 24px;
+  }
+}
 
 /* ==========================================================================
    5. SECCIONES Y CUADRÍCULA DE NOTICIAS
