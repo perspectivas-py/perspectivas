@@ -103,7 +103,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-headline); }
   font-size: 1.1em;
   color: var(--color-text-secondary);
   line-height: 1.6;
-  margin-top: 0; /* <-- ¡LA SOLUCIÓN MÁGICA! */
+  margin-top: 0; /* Elimina el margen superior por defecto del párrafo */
 }
 
 .side-list h3 {
