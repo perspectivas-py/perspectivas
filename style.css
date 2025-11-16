@@ -200,3 +200,37 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-headline); }
   .featured-card .featured-body h1 { font-size: 2em; }
   .full-article h1 { font-size: 2em; }
 }
+/* --- Filtros por categoría en portada --- */
+.filters-bar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
+}
+
+.filter-pill{
+  border:1px solid var(--color-border);
+  border-radius:999px;
+  padding:6px 12px;
+  font-size:.85em;
+  cursor:pointer;
+  background-color:var(--color-surface);
+  color:var(--color-text-secondary);
+  transition:background-color .15s ease,border-color .15s ease,color .15s ease;
+}
+
+.filter-pill:hover{
+  border-color:var(--color-accent);
+}
+
+.filter-pill.is-active{
+  background-color:var(--color-accent);
+  border-color:var(--color-accent);
+  color:#fff;
+}
+
+@media (max-width:768px){
+  .filters-bar{
+    overflow-x:auto;
+  }
+}
