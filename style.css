@@ -407,53 +407,82 @@ a:hover {
   }
 
   /* Damos el estilo especial a la tarjeta destacada en escritorio */
-  /* --- ESTILO MEJORADO PARA LA TARJETA DESTACADA EN PORTADA --- */
+ /* ==========================================================================
+   4. PORTADA (HERO SECTION) - ESTILO VERTICAL
+   ========================================================================== */
+.hero {
+  padding-top: 40px;
+  display: grid;
+  /* En pantallas grandes, mantenemos las dos columnas para el layout general */
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+}
 
-/* Por defecto (móvil), la tarjeta es vertical */
+/* Estilo para la tarjeta destacada principal */
 .featured-card {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   display: flex;
-  flex-direction: column; /* Apilado verticalmente en móvil */
+  flex-direction: column; /* Siempre vertical */
+  overflow: hidden; /* Asegura que la imagen no se desborde */
+  border-radius: 4px;
 }
 
 .featured-card a:first-child { /* El enlace que contiene la imagen */
-  order: 1; /* La imagen va primero */
-}
-
-.featured-card .featured-body {
-  order: 2; /* El texto va después */
-  padding: 20px;
+  width: 100%;
+  height: 400px; /* Le damos una altura fija para un look más impactante */
+  display: block;
 }
 
 .featured-card img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover; /* Recorta la imagen para que llene el espacio sin deformarse */
 }
 
-/* --- Media Query: Estilos para ESCRITORIO (a partir de 769px) --- */
-@media (min-width: 769px) {
-  .featured-card {
-    flex-direction: row; /* ¡La magia! Ponemos los elementos en fila */
-    align-items: stretch; /* Hacemos que ambos hijos ocupen toda la altura */
-  }
+.featured-card .featured-body {
+  padding: 30px;
+}
 
-  .featured-card a:first-child { /* El enlace de la imagen */
-    width: 60%; /* La imagen ocupa el 60% del ancho */
-    flex-shrink: 0; /* Evita que la imagen se encoja */
-  }
+.featured-card .featured-body time {
+  font-size: 0.9em;
+  color: var(--color-text-secondary);
+}
 
-  .featured-card img {
-    width: 100%;
-    height: 100%; /* La imagen rellena toda la altura de su contenedor */
-    object-fit: cover; /* Recorta la imagen para que encaje sin deformarse */
-  }
+.featured-card .featured-body h1 {
+  font-size: 2.5em;
+  margin: 10px 0;
+  line-height: 1.2;
+}
 
-  .featured-card .featured-body {
-    width: 40%; /* El texto ocupa el 40% restante */
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Centra el contenido verticalmente */
-    padding: 40px;
+.featured-card .featured-body h1 a {
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+.featured-card .featured-body h1 a:hover {
+  color: var(--color-accent);
+}
+
+.featured-card .featured-body .dek {
+  font-size: 1.1em;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.side-list h3 { /* Estilos de la barra lateral (sin cambios) */
+  font-family: var(--font-headline);
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 10px;
+}
+
+.side-list ul { list-style: none; padding: 0; margin: 0; }
+.side-list li { padding: 15px 0; border-bottom: 1px solid var(--color-border); }
+.side-list a { font-weight: 700; text-decoration: none; color: var(--color-text-primary); }
+
+/* En pantallas pequeñas, hacemos que todo sea una sola columna */
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
   }
 }
