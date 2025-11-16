@@ -10,10 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
   activateMobileMenu();
 });
 
-// --- LÓGICA DE CARGA DE NOTICIAS ---
+// --- LÓGICA DE CARGA DE NOTICIAS (NUEVA VERSIÓN BBC) ---
 async function loadNews() {
-  const featuredCard = document.querySelector('.featured-card');
-  const topList = document.getElementById('top-list');
+  const featuredCard = document.querySelector('.featured-card-bbc');
+  const topList = document.getElementById('top-list-bbc');
   const newsGrid = document.getElementById('news-grid');
   if (!featuredCard || !topList || !newsGrid) return;
 
@@ -32,16 +32,11 @@ async function loadNews() {
       })
     );
 
-    let featuredPost = allPosts.find(post => String(post.frontmatter.featured) === 'true');
-    
-    if (!featuredPost) {
-      featuredPost = allPosts[0];
-    }
-
+    let featuredPost = allPosts.find(post => String(post.frontmatter.featured) === 'true') || allPosts[0];
     const otherPosts = allPosts.filter(post => post.name !== featuredPost.name);
 
-    renderFeaturedArticle(featuredCard, featuredPost.name, featuredPost.frontmatter, featuredPost.content);
-    renderTopList(topList, otherPosts.slice(0, 4));
+    renderFeaturedArticleBBC(featuredCard, featuredPost.name, featuredPost.frontmatter, featuredPost.content);
+    renderTopListBBC(topList, otherPosts.slice(0, 4));
     renderNewsGrid(newsGrid, otherPosts);
 
   } catch (error) {
@@ -50,42 +45,34 @@ async function loadNews() {
   }
 }
 
-// --- FUNCIONES DE RENDERIZADO ---
-// En tu script.js, reemplaza la función renderFeaturedArticle existente por esta:
+// --- FUNCIONES DE RENDERIZADO (NUEVA VERSIÓN BBC) ---
 
-function renderFeaturedArticle(container, filename, frontmatter, content) {
-  // 1. Buscamos la imagen del artículo. Si no hay, usamos un placeholder.
-  const imageUrl = findFirstImage(content) || 'https://via.placeholder.com/1000x560?text=Perspectivas';
-  
-  // 2. Creamos el enlace al artículo.
+function renderFeaturedArticleBBC(container, filename, frontmatter, content) {
+  const imageUrl = findFirstImage(content) || 'https://via.placeholder.com/800x450?text=Perspectivas';
   const link = `noticia.html?type=noticias&id=${filename}`;
 
-  // 3. Construimos el HTML completo de la tarjeta desde cero.
-  const cardHtml = `
-    <a href="${link}">
-      <img src="${imageUrl}" alt="Imagen para: ${frontmatter.title || 'Noticia destacada'}">
-    </a>
-    <div class="featured-body">
-      <time datetime="${frontmatter.date}">${formatDate(frontmatter.date)}</time>
-      <h1><a href="${link}">${frontmatter.title || 'Sin Título'}</a></h1>
-      <p class="dek">${frontmatter.summary || content.substring(0, 120) + '...'}</p>
-    </div>
-  `;
-
-  // 4. Reemplazamos todo el contenido del contenedor de la tarjeta con nuestro nuevo HTML.
-  container.innerHTML = cardHtml;
+  container.querySelector('.featured-image-container a').href = link;
+  container.querySelector('img').src = imageUrl;
+  container.querySelector('img').alt = `Imagen para: ${frontmatter.title}`;
+  container.querySelector('time').textContent = formatDate(frontmatter.date);
+  container.querySelector('h1 a').href = link;
+  container.querySelector('h1 a').textContent = frontmatter.title || 'Sin Título';
+  container.querySelector('.dek').textContent = frontmatter.summary || content.substring(0, 150) + '...';
 }
 
-
-async function renderTopList(container, files) {
+function renderTopListBBC(container, files) {
   container.innerHTML = '';
-  for (const file of files) {
-    const title = formatTitleFromFilename(file.name);
+  files.forEach(post => {
     const listItem = document.createElement('li');
-    const link = `noticia.html?type=noticias&id=${file.name}`;
-    listItem.innerHTML = `<a href="${link}">${title}</a>`;
+    const link = `noticia.html?type=noticias&id=${post.name}`;
+    listItem.innerHTML = `
+      <a href="${link}">
+        <h4>${post.frontmatter.title || formatTitleFromFilename(post.name)}</h4>
+        <p>${post.frontmatter.summary || post.content.substring(0, 80) + '...'}</p>
+      </a>
+    `;
     container.appendChild(listItem);
-  }
+  });
 }
 
 async function renderNewsGrid(container, files) {
@@ -109,7 +96,7 @@ function createNewsCard(filename, frontmatter, content) {
   `;
 }
 
-// --- FUNCIONES DE UTILIDAD ---
+// --- FUNCIONES DE UTILIDAD (SIN CAMBIOS) ---
 
 async function fetchFiles(path) {
   const response = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}`);
@@ -142,9 +129,7 @@ function findFirstImage(content) {
   const imageMatch = content.match(/!\[.*\]\((.*)\)/);
   if (imageMatch && imageMatch[1]) {
     let imageUrl = imageMatch[1];
-    if (imageUrl.startsWith('http')) {
-      return imageUrl;
-    }
+    if (imageUrl.startsWith('http')) return imageUrl;
     return imageUrl.startsWith('/') ? imageUrl : '/' + imageUrl;
   }
   return null;
@@ -161,7 +146,7 @@ function formatDate(dateString) {
   return date.toLocaleDateString('es-ES', options);
 }
 
-// --- LÓGICA DE MENÚ MÓVIL Y MODO OSCURO ---
+// --- LÓGICA DE MENÚ MÓVIL Y MODO OSCURO (SIN CAMBIOS) ---
 
 function activateDarkMode() {
   const themeToggle = document.getElementById('themeToggle');
