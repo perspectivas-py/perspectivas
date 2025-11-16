@@ -89,7 +89,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-headline); }
 }
 .featured-card .featured-body h1 {
   font-size: 2.5em;
-  margin: 15px 0; /* Espacio vertical consistente */
+  margin: 15px 0 10px 0; /* Margen superior de 15px, inferior de 10px */
   line-height: 1.2;
 }
 .featured-card .featured-body h1 a {
@@ -103,6 +103,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-headline); }
   font-size: 1.1em;
   color: var(--color-text-secondary);
   line-height: 1.6;
+  margin-top: 0; /* <-- ¡LA SOLUCIÓN MÁGICA! */
 }
 
 .side-list h3 {
