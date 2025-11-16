@@ -1,28 +1,80 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="description" content="Perspectivas — periodismo económico local con análisis profesional y modelos de monetización.">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Perspectivas — periodismo económico local con análisis profesional y modelos de monetización.">
   <title>Perspectivas — Análisis Económico</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <header class="site-header"><div class="wrap"><a class="brand" href="/">Perspectivas</a><nav class="main-nav" aria-label="Menú principal"><button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="nav-list">☰</button><ul id="nav-list" class="nav-list"><li><a href="/">Inicio</a></li><li><a href="/analisis.html">Análisis</a></li><li><a href="/programa.html">Programa</a></li></ul></nav><button id="themeToggle" class="theme-toggle" aria-label="Alternar modo oscuro"><span class="icon">🌙</span></button></div></header>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/">Perspectivas</a>
+      <nav class="main-nav" aria-label="Menú principal">
+        <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="nav-list">☰</button>
+        <ul id="nav-list" class="nav-list">
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/analisis.html">Análisis</a></li>
+          <li><a href="/programa.html">Programa</a></li>
+        </ul>
+      </nav>
+      <button id="themeToggle" class="theme-toggle" aria-label="Alternar modo oscuro">
+        <span class="icon">🌙</span>
+      </button>
+    </div>
+  </header>
+
   <main>
     <section id="home" class="hero wrap">
       <div class="hero-main">
         <article class="featured-card-bbc">
-          <div class="featured-image-container"><a href="#"><img src="https://via.placeholder.com/800x450?text=Cargando..." alt="Noticia destacada"></a></div>
-          <div class="featured-body"><time datetime=""></time><h1><a href="#"></a></h1><p class="dek"></p></div>
+          <div class="featured-image-container">
+            <a href="#"><img src="https://via.placeholder.com/800x450?text=Cargando..." alt="Noticia destacada"></a>
+          </div>
+          <div class="featured-body">
+            <time datetime=""></time>
+            <h1><a href="#"></a></h1>
+            <p class="dek"></p>
+          </div>
         </article>
       </div>
       <aside class="hero-secondary">
-        <ul id="top-list-bbc" class="headline-list"><li>Cargando noticias...</li></ul>
+        <ul id="top-list-bbc" class="headline-list">
+          <li>Cargando noticias...</li>
+        </ul>
       </aside>
     </section>
-    <section id="noticias" class="wrap section"><div class="section-header"><h2>Más Noticias</h2></div><div id="news-grid" class="cards-grid" aria-live="polite"></div></section>
+
+    <section id="noticias" class="wrap section">
+      <div class="section-header">
+        <h2>Más Noticias</h2>
+      </div>
+      <div id="news-grid" class="cards-grid" aria-live="polite"></div>
+    </section>
   </main>
-  <footer class="site-footer"><div class="wrap"><div class="footer-left"><strong>Perspectivas</strong><p class="muted small">Periodismo económico local — © 2025</p></div><div class="footer-right"><nav aria-label="Enlaces de pie de página"><a href="#">Contacto</a></nav></div></div></footer>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script><script src="script.js"></script>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-left">
+        <strong>Perspectivas</strong>
+        <p class="muted small">Periodismo económico local — © 2025</p>
+      </div>
+      <div class="footer-right">
+        <nav aria-label="Enlaces de pie de página">
+          <a href="#">Contacto</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="script.js"></script>
 </body>
-</html>```
+</html>
