@@ -1,11 +1,9 @@
 /* ==========================================================================
-   1. VARIABLES, TEMA OSCURO Y TIPOGRAFÍA (LA BASE PREMIUM )
+   1. VARIABLES, TEMA OSCURO Y TIPOGRAFÍA
    ========================================================================== */
 :root {
   --font-headline: 'Merriweather', serif;
   --font-body: 'Lato', sans-serif;
-  
-  /* TEMA CLARO */
   --color-background: #f4f4f4;
   --color-surface: #ffffff;
   --color-text-primary: #1a1a1a;
@@ -13,11 +11,8 @@
   --color-border: #e0e0e0;
   --color-accent: #004D99;
   --color-accent-hover: #003366;
-  --color-muted-bg: #f9f9f9;
 }
-
 body.dark-mode {
-  /* TEMA OSCURO */
   --color-background: #121212;
   --color-surface: #1e1e1e;
   --color-text-primary: #e0e0e0;
@@ -25,7 +20,6 @@ body.dark-mode {
   --color-border: #3a3a3a;
   --color-accent: #64b5f6;
   --color-accent-hover: #90caf9;
-  --color-muted-bg: #2a2a2a;
 }
 
 /* ==========================================================================
@@ -40,27 +34,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
-
-.wrap {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-a {
-  color: var(--color-accent);
-  text-decoration: none;
-}
-a:hover {
-  color: var(--color-accent-hover);
-  text-decoration: underline;
-}
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--color-accent); text-decoration: none; }
+a:hover { color: var(--color-accent-hover); text-decoration: underline; }
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-headline); }
 
 /* ==========================================================================
    3. CABECERA Y NAVEGACIÓN
@@ -69,59 +47,30 @@ a:hover {
   background-color: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
   padding: 15px 0;
-   /* ▼▼▼ AÑADE ESTAS LÍNEAS DE CÓDIGO ▼▼▼ */
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  width: 100%;
+  position: sticky; top: 0; z-index: 100; width: 100%;
 }
-.site-header .wrap {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.brand {
-  font-family: var(--font-headline);
-  font-weight: 700;
-  font-size: 1.8em;
-  color: var(--color-text-primary);
-}
-.main-nav .nav-list {
-  display: flex;
-  gap: 25px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.main-nav a {
-  font-weight: 700;
-  color: var(--color-text-secondary);
-  text-decoration: none;
-}
-.menu-toggle { display: none; } /* Oculto en escritorio */
+.site-header .wrap { display: flex; justify-content: space-between; align-items: center; }
+.brand { font-family: var(--font-headline); font-weight: 700; font-size: 1.8em; color: var(--color-text-primary); }
 
 /* ==========================================================================
-   4. PORTADA (HERO SECTION)
+   4. PORTADA (HERO SECTION) - ¡SECCIÓN CORREGIDA Y UNIFICADA!
    ========================================================================== */
 .hero {
   padding-top: 40px;
   display: grid;
-  grid-template-columns: 2fr 1fr; /* 2/3 para el principal, 1/3 para la barra lateral */
+  grid-template-columns: 2fr 1fr; /* 2/3 para principal, 1/3 para barra lateral en escritorio */
   gap: 30px;
 }
-
-/* ESTA ES LA NUEVA VERSIÓN CORRECTA */
-/* Puedes buscar y reemplazar todo este bloque en tu style.css */
 
 .featured-card {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   display: flex;
   flex-direction: column; /* Siempre vertical */
-  overflow: hidden;
   border-radius: 4px;
+  overflow: hidden;
 }
-.featured-card a:first-child {
+.featured-card a:first-child { /* Contenedor del enlace de la imagen */
   width: 100%;
   height: 400px;
   display: block;
@@ -129,7 +78,7 @@ a:hover {
 .featured-card img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Recorta la imagen para que llene el espacio sin deformarse */
 }
 .featured-card .featured-body {
   padding: 30px;
@@ -140,7 +89,7 @@ a:hover {
 }
 .featured-card .featured-body h1 {
   font-size: 2.5em;
-  margin: 10px 0 20px 0; /* <-- CAMBIO APLICADO AQUÍ */
+  margin: 15px 0; /* Espacio vertical consistente */
   line-height: 1.2;
 }
 .featured-card .featured-body h1 a {
@@ -155,25 +104,31 @@ a:hover {
   color: var(--color-text-secondary);
   line-height: 1.6;
 }
+
+.side-list h3 {
+  font-family: var(--font-headline);
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 10px;
+}
+.side-list ul { list-style: none; padding: 0; margin: 0; }
+.side-list li { padding: 15px 0; border-bottom: 1px solid var(--color-border); }
+.side-list a { font-weight: 700; text-decoration: none; color: var(--color-text-primary); }
+
 /* ==========================================================================
    5. SECCIONES Y CUADRÍCULA DE NOTICIAS
    ========================================================================== */
-.section {
-  padding: 40px 0;
-}
+.section { padding: 40px 0; }
 .section-header h2 {
   font-size: 1.8em;
   border-bottom: 2px solid var(--color-accent);
   padding-bottom: 10px;
   margin-bottom: 30px;
 }
-
 .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 30px;
 }
-
 .card {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -181,26 +136,29 @@ a:hover {
   overflow: hidden;
   transition: box-shadow 0.2s;
 }
-.card:hover {
-  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-}
-.card-body {
-  padding: 20px;
-}
-.card-body time {
-  font-size: 0.8em;
-  color: var(--color-text-secondary);
-}
-.card-body h3 {
-  margin: 5px 0 0;
-}
-.card-body h3 a {
-  color: var(--color-text-primary);
-  text-decoration: none;
-}
+.card:hover { box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+.card-body { padding: 20px; }
+.card-body time { font-size: 0.8em; color: var(--color-text-secondary); }
+.card-body h3 { margin: 5px 0 0; }
+.card-body h3 a { color: var(--color-text-primary); text-decoration: none; }
 
 /* ==========================================================================
-   6. FOOTER Y MODO OSCURO
+   6. PÁGINA DE ARTÍCULO
+   ========================================================================== */
+.full-article { max-width: 740px; margin: 40px auto; padding: 0 20px; }
+.full-article h1 { font-size: 2.8em; line-height: 1.1; margin-bottom: 15px; }
+.full-article .meta { color: var(--color-text-secondary); font-size: 0.9em; margin-bottom: 20px; }
+.article-meta-info { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin: 20px 0; padding: 10px 0; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); font-size: 0.9em; color: var(--color-text-secondary); }
+.full-article .article-content { font-size: 1.15em; line-height: 1.8; color: var(--color-text-primary); }
+.featured-image { margin: 30px 0; width: 100%; }
+.featured-image img { width: 100%; height: auto; display: block; border-radius: 4px; }
+.video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 30px 0; background-color: #000; border-radius: 4px; }
+.video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+#share-buttons a { font-size: 1.5em; color: var(--color-text-secondary); transition: color 0.2s ease-in-out; margin-left: 12px; }
+#share-buttons a:hover { color: var(--color-accent); }
+
+/* ==========================================================================
+   7. FOOTER
    ========================================================================== */
 .site-footer {
   background-color: var(--color-surface);
@@ -208,273 +166,37 @@ a:hover {
   padding: 30px 0;
   margin-top: 40px;
 }
-.site-footer .wrap {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--color-text-secondary);
-}
-
-.theme-toggle {
-  background: none;
-  border: 1px solid var(--color-border);
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  font-size: 1.2em;
-  color: var(--color-text-secondary);
-}
+.site-footer .wrap { display: flex; justify-content: space-between; align-items: center; color: var(--color-text-secondary); }
+.theme-toggle { background: none; border: 1px solid var(--color-border); border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 1.2em; color: var(--color-text-secondary); }
 
 /* ==========================================================================
-   7. Estilos para el video responsive 
+   8. DISEÑO RESPONSIVE Y MENÚ MÓVIL
    ========================================================================== */
-.video-container {
-  position: relative;
-  padding-bottom: 56.25%; /* Proporción 16:9 (YouTube estándar) */
-  height: 0;
-  overflow: hidden;
-  max-width: 100%;
-  margin: 30px 0;
-  background: #000;
-}
+.main-nav .nav-list { display: flex; gap: 25px; list-style: none; margin: 0; padding: 0; }
+.main-nav a { font-weight: 700; color: var(--color-text-secondary); text-decoration: none; }
+.menu-toggle { display: none; } /* Oculto por defecto en escritorio */
 
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-/* --- ESTILOS PARA LA PÁGINA DE ARTÍCULO DETALLADO --- */
-
-/* Contenedor principal del artículo */
-.full-article {
-  max-width: 740px; /* Ancho de lectura óptimo, similar a Medium/NYT */
-  margin: 40px auto; /* Centra el contenedor en la página */
-  padding: 0 20px;
-}
-
-/* Título del artículo */
-.full-article h1 {
-  font-size: 2.8em;
-  line-height: 1.1;
-  margin-bottom: 15px;
-}
-
-/* Metadatos (Fecha, Autor) */
-.full-article .meta {
-  color: var(--color-text-secondary);
-  font-size: 0.9em;
-  margin-bottom: 20px;
-}
-.article-meta-info {
-  display: flex; /* Activa Flexbox */
-  justify-content: space-between; /* ¡La magia! Empuja los hijos a los extremos opuestos */
-  align-items: center; /* Los alinea verticalmente */
-  flex-wrap: wrap; /* Permite que se apilen en pantallas muy pequeñas */
-  gap: 15px;
-  margin: 20px 0;
-  padding: 10px 0;
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-  font-size: 0.9em;
-  color: var(--color-text-secondary);
-}
-/* Contenido principal del artículo (párrafos, etc.) */
-.full-article .article-content {
-  font-size: 1.15em; /* Tamaño de fuente cómodo para leer */
-  line-height: 1.8;  /* Espacio generoso entre líneas */
-  color: var(--color-text-primary);
-}
-/* --- ESTILO PARA LA IMAGEN DESTACADA Y MULTIMEDIA --- */
-
-/* Contenedor de la imagen destacada */
-.featured-image {
-  margin: 30px 0; /* Espacio vertical para que la imagen 'respire' */
-  width: 100%;
-}
-
-.featured-image img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 4px; /* Bordes sutilmente redondeados */
-}
-
-/* Contenedor para videos (de la sección Programa) */
-.video-container {
-  position: relative;
-  padding-bottom: 56.25%; /* Proporción 16:9 */
-  height: 0;
-  overflow: hidden;
-  max-width: 100%;
-  margin: 30px 0;
-  background-color: #000;
-  border-radius: 4px;
-}
-
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-/* ==========================================================================
-   7. DISEÑO RESPONSIVE Y MENÚ MÓVIL (Mobile-First)
-   ========================================================================== */
-
-/* --- Estilos por defecto para MÓVIL --- */
-
-/* Ocultamos la navegación de escritorio y mostramos el botón hamburguesa */
-.main-nav .nav-list {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: var(--color-surface);
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 100;
-}
-.main-nav .nav-list.is-open {
-  display: flex; /* Mostramos el menú al hacer clic */
-}
-.main-nav .nav-list li {
-  margin: 20px 0;
-}
-.main-nav .nav-list a {
-  font-size: 2em;
-}
-
-.menu-toggle {
-  display: block; /* Visible en móvil */
-  background: none;
-  border: none;
-  font-size: 2em;
-  cursor: pointer;
-  color: var(--color-text-primary);
-  z-index: 101;
-}
-
-/* Adaptamos la portada a una sola columna en móvil */
-.hero {
-  grid-template-columns: 1fr;
-}
-.full-article h1 {
-  font-size: 2em;
-}
-
-
-/* --- Media Query: Estilos para ESCRITORIO (769px o más) --- */
-@media (min-width: 769px) {
-  /* Ocultamos el botón hamburguesa y mostramos el menú normal */
+@media (max-width: 768px) {
+  /* Hacemos visible el botón hamburguesa */
   .menu-toggle {
-    display: none;
+    display: block; background: none; border: none; font-size: 2em;
+    cursor: pointer; color: var(--color-text-primary); z-index: 101;
   }
   
+  /* Ocultamos el menú de escritorio y lo preparamos para ser un overlay */
   .main-nav .nav-list {
-    display: flex;
-    position: static;
-    height: auto;
-    width: auto;
-    background-color: transparent;
-    flex-direction: row;
-    gap: 25px;
+    display: none; position: fixed; top: 0; left: 0;
+    width: 100vw; height: 100vh; background-color: var(--color-surface);
+    flex-direction: column; justify-content: center; align-items: center; z-index: 100;
   }
-  .main-nav .nav-list li {
-    margin: 0;
-  }
-  .main-nav .nav-list a {
-    font-size: 1em; /* Tamaño normal en escritorio */
-  }
-
-  /* Restauramos el layout de dos columnas para la portada */
-  .hero {
-    grid-template-columns: 2fr 1fr;
-  }
-
-  /* Damos el estilo especial a la tarjeta destacada en escritorio */
- /* ==========================================================================
-   4. PORTADA (HERO SECTION) - ESTILO VERTICAL
-   ========================================================================== */
-.hero {
-  padding-top: 40px;
-  display: grid;
-  /* En pantallas grandes, mantenemos las dos columnas para el layout general */
-  grid-template-columns: 2fr 1fr;
-  gap: 30px;
-}
-
-/* Estilo para la tarjeta destacada principal */
-.featured-card {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  display: flex;
-  flex-direction: column; /* Siempre vertical */
-  overflow: hidden; /* Asegura que la imagen no se desborde */
-  border-radius: 4px;
-}
-
-.featured-card a:first-child { /* El enlace que contiene la imagen */
-  width: 100%;
-  height: 400px; /* Le damos una altura fija para un look más impactante */
-  display: block;
-}
-
-.featured-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Recorta la imagen para que llene el espacio sin deformarse */
-}
-
-.featured-card .featured-body {
-  padding: 30px;
-}
-
-.featured-card .featured-body time {
-  font-size: 0.9em;
-  color: var(--color-text-secondary);
-}
-
-.featured-card .featured-body h1 {
-  font-size: 2.5em;
-  margin: 10px 0;
-  line-height: 1.2;
-}
-
-.featured-card .featured-body h1 a {
-  color: var(--color-text-primary);
-  text-decoration: none;
-}
-
-.featured-card .featured-body h1 a:hover {
-  color: var(--color-accent);
-}
-
-.featured-card .featured-body .dek {
-  font-size: 1.1em;
-  color: var(--color-text-secondary);
-  line-height: 1.6;
-}
-
-.side-list h3 { /* Estilos de la barra lateral (sin cambios) */
-  font-family: var(--font-headline);
-  border-bottom: 2px solid var(--color-accent);
-  padding-bottom: 10px;
-}
-
-.side-list ul { list-style: none; padding: 0; margin: 0; }
-.side-list li { padding: 15px 0; border-bottom: 1px solid var(--color-border); }
-.side-list a { font-weight: 700; text-decoration: none; color: var(--color-text-primary); }
-
-/* En pantallas pequeñas, hacemos que todo sea una sola columna */
-@media (max-width: 768px) {
-  .hero {
-    grid-template-columns: 1fr;
-  }
+  .main-nav .nav-list.is-open { display: flex; } /* Lo mostramos al hacer clic */
+  .main-nav .nav-list li { margin: 20px 0; }
+  .main-nav .nav-list a { font-size: 2em; }
+  
+  /* Adaptamos la portada a una sola columna */
+  .hero { grid-template-columns: 1fr; }
+  
+  /* Ajustamos fuentes para móvil */
+  .featured-card .featured-body h1 { font-size: 2em; }
+  .full-article h1 { font-size: 2em; }
 }
