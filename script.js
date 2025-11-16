@@ -15,17 +15,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// --- LÓGICA DE CARGA DE NOTICIAS CON AUTODIAGNÓSTICO ---
+// --- LÓGICA DE CARGA DE NOTICIAS CON AUTODIAGNÓSTICO (VERSIÓN CORREGIDA) ---
 async function loadNews() {
   const featuredCard = document.querySelector('.featured-card-bbc');
   const topList = document.getElementById('top-list-bbc');
   const newsGrid = document.getElementById('news-grid');
-  if (!featuredCard || !topList || !newsGrid) return;
+
+  // Si los elementos no existen en la página, no continuamos.
+  if (!featuredCard || !topList || !newsGrid) {
+    console.warn("No se encontraron los contenedores de noticias. Saliendo de loadNews.");
+    return;
+  }
 
   try {
     const files = await fetchFiles(NEWS_PATH);
     if (!files || files.length === 0) {
       featuredCard.innerHTML = '<p>No hay noticias para mostrar.</p>';
+      topList.innerHTML = ''; // Limpiamos también la lista de titulares
       return;
     }
 
@@ -37,19 +43,35 @@ async function loadNews() {
       })
     );
 
+    // --- **CORRECCIÓN 1: ORDENAR NOTICIAS POR FECHA** ---
+    // Ordenamos todas las noticias de la más reciente a la más antigua.
+    // Esto asegura que el contenido siempre se muestre de forma predecible.
+    allPosts.sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date));
+
+    // El artículo destacado es el que tiene 'featured: true' o, en su defecto, el más reciente.
     let featuredPost = allPosts.find(post => String(post.frontmatter.featured) === 'true') || allPosts[0];
+    
+    // El resto de noticias son todas las que NO son el artículo destacado.
     const otherPosts = allPosts.filter(post => post.name !== featuredPost.name);
 
+    // Renderizamos el artículo principal.
     renderFeaturedArticleBBC(featuredCard, featuredPost.name, featuredPost.frontmatter, featuredPost.content);
-    renderTopListBBC(topList, otherPosts.slice(0, 4));
-    renderNewsGrid(newsGrid, otherPosts);
+
+    // --- **CORRECCIÓN 2: LÓGICA DE RENDERIZADO SIN DUPLICADOS** ---
+    // Tomamos los primeros 4 artículos de 'otherPosts' para la columna de titulares.
+    const topListPosts = otherPosts.slice(0, 4);
+    renderTopListBBC(topList, topListPosts);
+
+    // Tomamos el resto de artículos (a partir del 5to) para la grilla de "Más Noticias".
+    const gridPosts = otherPosts.slice(4);
+    renderNewsGrid(newsGrid, gridPosts);
 
   } catch (error) {
     console.error("Error al cargar las noticias:", error);
-    featuredCard.innerHTML = `<p style="color: red; font-weight: bold;">Error: ${error.message}</p>`;
+    featuredCard.innerHTML = `<p style="color: red; font-weight: bold;">Error al cargar el contenido. Por favor, revisa la consola para más detalles.</p>`;
+    topList.innerHTML = `<li>Error de carga.</li>`;
   }
 }
-
 // --- FUNCIONES DE RENDERIZADO (VERSIÓN BBC) ---
 function renderFeaturedArticleBBC(container, filename, frontmatter, content) {
   let imageUrl = findFirstImage(content);
