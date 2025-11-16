@@ -1,6 +1,6 @@
 ---
 featured: false
-title: 3 Paraguay destacó su política fiscal responsable en seminario internacional
+title: Paraguay destacó su política fiscal responsable en seminario internacional
 date: 2025-11-15T18:24:00.000-03:00
 summary: El encuentro reunió a autoridades fiscales y especialistas de la región
   para debatir sobre los desafíos y tendencias de la gestión presupuestaria, así
