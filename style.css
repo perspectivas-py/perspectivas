@@ -128,7 +128,7 @@ a:hover {
 .featured-body h1 {
   font-size: 2.5em;
   /* Margen superior de 10px, horizontal de 0, inferior de 20px */
-  margin: 10px 0 20px 0; 
+  margin: 10px 0 15px 0; 
   line-height: 1.2;
 }
 .featured-body h1 a {
