@@ -1,6 +1,5 @@
 // --------------------------------------
 // Configuración local para página de noticia
-// (NOMBRES DIFERENTES para no chocar con script.js)
 // --------------------------------------
 const ARTICLE_REPO = 'perspectivas-py/perspectivas';
 const ARTICLE_BRANCH = 'main';
@@ -27,18 +26,17 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     await loadArticle(type, id);
   } catch (error) {
-    console.error("Error al cargar la noticia:", error);
+    console.error("❌ Error al cargar la noticia:", error);
     safeSetInnerHTML("<h1>Error</h1><p>No se pudo cargar el artículo solicitado.</p>");
   }
 });
 
 // --------------------------------------
-// Función principal
+// Cargar artículo
 // --------------------------------------
 async function loadArticle(type, id) {
   const path = ARTICLE_CONTENT_PATHS[type] || ARTICLE_CONTENT_PATHS.noticias;
 
-  // Codificar bien el nombre del archivo (tildes, ñ, etc.)
   const encodedId = encodeURIComponent(id).replace(/%2F/g, "/");
   const fileUrl = `https://raw.githubusercontent.com/${ARTICLE_REPO}/${ARTICLE_BRANCH}/${path}/${encodedId}`;
 
@@ -49,16 +47,16 @@ async function loadArticle(type, id) {
 }
 
 // --------------------------------------
-// Fetch Markdown
+// Fetch
 // --------------------------------------
 async function fetchMarkdown(url) {
   const res = await fetch(url);
-  if (!res.ok) throw new Error(`No se pudo cargar el archivo: ${url}`);
+  if (!res.ok) throw new Error(`No se pudo cargar el archivo Markdown: ${url}`);
   return await res.text();
 }
 
 // --------------------------------------
-// Parse Frontmatter (versión local, nombre distinto)
+// Parse frontmatter
 // --------------------------------------
 function parseFrontmatterArticle(md) {
   const match = /^---\s*([\s\S]+?)\s*---/.exec(md);
@@ -76,7 +74,7 @@ function parseFrontmatterArticle(md) {
 }
 
 // --------------------------------------
-// Render de la noticia
+// Render
 // --------------------------------------
 function renderArticle(fm, content, type, id) {
   const container = getArticleContainer();
@@ -85,8 +83,14 @@ function renderArticle(fm, content, type, id) {
   const title = fm.title || "Sin título";
   const date = formatDateArticle(fm.date);
   const readTime = estimateReadingTime(content);
-  const image = findFirstImageArticle(content);
-  const htmlContent = window.marked ? window.marked.parse(content) : content;
+
+  // buscar primera imagen
+  const firstImage = findFirstImageFromAny(content);
+
+  // eliminar primera imagen (markdown, img, figure)
+  let cleanedContent = removeFirstImage(content);
+
+  const htmlContent = window.marked ? window.marked.parse(cleanedContent.trim()) : cleanedContent.trim();
 
   container.innerHTML = `
     <h1>${title}</h1>
@@ -96,7 +100,7 @@ function renderArticle(fm, content, type, id) {
       <span>⏱ ${readTime} min de lectura</span>
     </div>
 
-    ${image ? `<div class="featured-image"><img src="${image}" alt=""></div>` : ""}
+    ${firstImage ? `<div class="featured-image"><img src="${firstImage}" alt=""></div>` : ""}
 
     <article class="article-content">
       ${htmlContent}
@@ -109,18 +113,11 @@ function renderArticle(fm, content, type, id) {
 }
 
 // --------------------------------------
-// Utilidades de render
+// Utilidades DOM
 // --------------------------------------
 function getArticleContainer() {
-  // Usa el <section> o <article> con clase .full-article (tu plantilla actual)
   let el = document.querySelector(".full-article");
-
-  // Si algún día agregas un id="article-container", también lo soporta
   if (!el) el = document.getElementById("article-container");
-
-  if (!el) {
-    console.error("No se encontró contenedor para el artículo (.full-article ni #article-container)");
-  }
   return el;
 }
 
@@ -129,6 +126,9 @@ function safeSetInnerHTML(html) {
   if (el) el.innerHTML = html;
 }
 
+// --------------------------------------
+// Utilidades de contenido
+// --------------------------------------
 function formatDateArticle(dateStr) {
   if (!dateStr) return "";
   const d = new Date(dateStr);
@@ -144,19 +144,41 @@ function estimateReadingTime(text) {
   return Math.max(1, Math.round(words / 200));
 }
 
-function findFirstImageArticle(content) {
-  const match = content.match(/!\[[^\]]*]\((.*?)\)/);
-  return match ? match[1] : null;
+// Encuentra la primera imagen válida
+function findFirstImageFromAny(content) {
+  // Markdown ![]()
+  const md = content.match(/!\[[^\]]*]\((.*?)\)/);
+  if (md) return md[1];
+
+  // <img src="">
+  const htmlImg = content.match(/<img[^>]+src=["']([^"']+)["']/i);
+  if (htmlImg) return htmlImg[1];
+
+  // <figure><img src=""></figure>
+  const fig = content.match(/<figure([\s\S]*?)<img[^>]+src=["']([^"']+)["']/i);
+  if (fig) return fig[2];
+
+  return null;
 }
 
+// Elimina la primera imagen markdown, img o figure del contenido
+function removeFirstImage(content) {
+  return content
+    .replace(/!\[[^\]]*]\((.*?)\)/, "")                         // markdown
+    .replace(/<figure[\s\S]*?<\/figure>/i, "")                 // figure
+    .replace(/<img[^>]+src=["']([^"']+)["'][^>]*>/i, "");      // html <img>
+}
+
+// --------------------------------------
+// Redes sociales
+// --------------------------------------
 function renderShareButtons(title) {
   const url = encodeURIComponent(window.location.href);
   const text = encodeURIComponent(title);
-
   return `
-    <a href="https://twitter.com/intent/tweet?url=${url}&text=${text}" target="_blank" rel="noopener">🐦</a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank" rel="noopener">📘</a>
-    <a href="https://api.whatsapp.com/send?text=${text}%20${url}" target="_blank" rel="noopener">💬</a>
-    <a href="https://www.linkedin.com/sharing/share-offsite/?url=${url}" target="_blank" rel="noopener">💼</a>
+    <a href="https://twitter.com/intent/tweet?url=${url}&text=${text}" target="_blank">🐦</a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank">📘</a>
+    <a href="https://api.whatsapp.com/send?text=${text}%20${url}" target="_blank">💬</a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=${url}" target="_blank">💼</a>
   `;
 }
