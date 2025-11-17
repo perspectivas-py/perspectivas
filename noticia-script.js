@@ -1,112 +1,147 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const repo = 'perspectivas-py/perspectivas';
-  const branch = 'main';
-  const articleContainer = document.getElementById('contenido-noticia');
-  
-  // Leemos los parámetros de la URL
-  const urlParams = new URLSearchParams(window.location.search);
-  const type = urlParams.get('type') || 'noticias'; // 'noticias', 'analisis', o 'programa'
-  const id = urlParams.get('id');
+// --------------------------------------
+// Configuración Global
+// --------------------------------------
+const REPO = 'perspectivas-py/perspectivas';
+const BRANCH = 'main';
 
-  if (!id) return;
-  
-  const path = `content/${type}/_posts/${id}`;
-  const encodedId = encodeURIComponent(id).replace(/%2F/g, '/');
-const fileUrl = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/${CONTENT_PATH}/${encodedId}`;
+const CONTENT_PATHS = {
+  noticias: "content/noticias/posts",
+  analisis: "content/analisis/posts",
+  programa: "content/programa/posts",
+};
 
-  fetch(url)
-    .then(response => response.text())
-    .then(markdown => {
-      const { frontmatter, content } = parseFrontmatter(markdown);
-      
-      // Preparamos la fecha y el autor
-      const fecha = new Date(frontmatter.date);
-      const fechaFormateada = !isNaN(fecha) ? `Publicado el ${fecha.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}` : '';
-      const autorMeta = (type === 'analisis' && frontmatter.author) ? `<span class="author-meta">Por: ${frontmatter.author}</span>` : '';
-      
-      let mediaHtml = '';
-      let bodyHtml = '';
+// --------------------------------------
+// Inicio
+// --------------------------------------
+document.addEventListener("DOMContentLoaded", async () => {
+  const params = new URLSearchParams(window.location.search);
+  const type = params.get("type") || "noticias";
+  const id = params.get("id");
 
-      // --- LÓGICA INTELIGENTE SEGÚN EL TIPO ---
-      
-      if (type === 'programa' && frontmatter.embed_url) {
-        // CASO 1: Es un PROGRAMA con video
-        mediaHtml = `
-          <div class="video-container">
-            <iframe src="${frontmatter.embed_url}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-        `;
-        // Renderizamos todo el contenido markdown debajo
-        bodyHtml = marked.parse(content || '');
+  if (!id) {
+    document.getElementById("article-container").innerHTML = `
+      <h1>Error</h1><p>No se encontró el identificador del artículo.</p>
+    `;
+    return;
+  }
 
-      } else {
-        // CASO 2: Es NOTICIA o ANÁLISIS (Texto + Imagen)
-        // Extraemos la imagen destacada para que no se repita
-        const { featuredImageUrl, remainingContent } = extractFeaturedImage(content);
-        
-        if (featuredImageUrl) {
-          mediaHtml = `
-            <figure class="featured-image">
-              <img src="${featuredImageUrl}" alt="Imagen principal: ${frontmatter.title || ''}">
-            </figure>
-          `;
-        }
-        // Renderizamos el resto del contenido sin la imagen
-        bodyHtml = marked.parse(remainingContent || '');
-      }
-      
-      // Inyectamos el HTML final
-      articleContainer.innerHTML = `
-        <h1>${frontmatter.title || 'Sin título'}</h1>
-        <p class="meta">${fechaFormateada}${autorMeta ? ` • ${autorMeta}` : ''}</p>
-        
-        ${mediaHtml}
-
-        <hr>
-        <div class="article-meta-info">
-          <div id="reading-time"></div>
-          <div id="share-buttons"></div>
-        </div>
-        <div class="article-content">${bodyHtml}</div>
-      `;
-      
-      // Funciones extra (tiempo lectura, compartir)
-      const textForTime = type === 'programa' ? (content || '') : (content || ''); // Calculamos sobre el texto disponible
-      const readingTime = Math.ceil(textForTime.trim().split(/\s+/).length / 200);
-      document.getElementById('reading-time').innerHTML = `<span>🕒 ${readingTime} min de lectura</span>`;
-      generarBotonesSociales(document.getElementById('share-buttons'), frontmatter.title);
-    });
+  try {
+    await loadArticle(type, id);
+  } catch (error) {
+    console.error(error);
+    document.getElementById("article-container").innerHTML = `
+      <h1>Error</h1><p>No se pudo cargar el artículo solicitado.</p>
+    `;
+  }
 });
 
-// --- FUNCIONES AUXILIARES ---
+// --------------------------------------
+// Función principal
+// --------------------------------------
+async function loadArticle(type, id) {
+  const path = CONTENT_PATHS[type] || CONTENT_PATHS.noticias;
 
-function extractFeaturedImage(content) {
-  const imageRegex = /!\[(.*?)\]\((.*?)\)/;
-  const match = content.match(imageRegex);
-  if (match) {
-    return { featuredImageUrl: match[2], remainingContent: content.replace(imageRegex, '').trim() };
-  }
-  return { featuredImageUrl: null, remainingContent: content };
+  // --- FIX CRÍTICO PARA ARCHIVOS CON TILDES Y Ñ ---
+  const encodedId = encodeURIComponent(id).replace(/%2F/g, "/");
+  const fileUrl = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/${path}/${encodedId}`;
+
+  const markdown = await fetchMarkdown(fileUrl);
+  const { frontmatter, content } = parseFrontmatter(markdown);
+
+  renderArticle(frontmatter, content, type, id);
 }
 
-function generarBotonesSociales(container, title) {
+// --------------------------------------
+// Fetch Markdown
+// --------------------------------------
+async function fetchMarkdown(url) {
+  const res = await fetch(url);
+
+  if (!res.ok) throw new Error(`No se pudo cargar el archivo: ${url}`);
+
+  return await res.text();
+}
+
+// --------------------------------------
+// Parse Frontmatter
+// --------------------------------------
+function parseFrontmatter(md) {
+  const match = /^---\s*([\s\S]+?)\s*---/.exec(md);
+  if (!match) return { frontmatter: {}, content: md };
+
+  const frontmatter = {};
+  const fmLines = match[1].split("\n");
+
+  fmLines.forEach(line => {
+    const [key, ...rest] = line.split(":");
+    if (!key || rest.length === 0) return;
+    frontmatter[key.trim()] = rest.join(":").trim().replace(/"/g, "");
+  });
+
+  const content = md.replace(match[0], "").trim();
+  return { frontmatter, content };
+}
+
+// --------------------------------------
+// Render Article
+// --------------------------------------
+function renderArticle(fm, content, type, id) {
+  const container = document.getElementById("article-container");
+  const title = fm.title || "Sin título";
+  const date = formatDate(fm.date);
+  const readTime = estimateReadingTime(content);
+  const image = findFirstImage(content);
+  const htmlContent = marked.parse(content);
+
+  container.innerHTML = `
+    <h1>${title}</h1>
+
+    <div class="article-meta-info">
+      <span>${date}</span>
+      <span>⏱ ${readTime} min de lectura</span>
+    </div>
+
+    ${image ? `<div class="featured-image"><img src="${image}" alt="" /></div>` : ""}
+
+    <article class="article-content">${htmlContent}</article>
+
+    <div id="share-buttons">
+      ${renderShareButtons(title, type, id)}
+    </div>
+  `;
+}
+
+// --------------------------------------
+// Utilidades
+// --------------------------------------
+function formatDate(dateStr) {
+  if (!dateStr) return "";
+  const d = new Date(dateStr);
+  return d.toLocaleDateString("es-ES", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
+}
+
+function estimateReadingTime(text) {
+  const words = text.split(/\s+/).length;
+  return Math.max(1, Math.round(words / 200)); // 200 palabras por minuto
+}
+
+function findFirstImage(content) {
+  const match = content.match(/!\[[^\]]*\]\((.*?)\)/);
+  return match ? match[1] : null;
+}
+
+function renderShareButtons(title, type, id) {
   const url = encodeURIComponent(window.location.href);
-  const text = encodeURIComponent(`Leé este contenido de Perspectivas: "${title}"`);
-  container.innerHTML = `<span>Compartir:</span><a href="https://twitter.com/intent/tweet?url=${url}&text=${text}&via=perspectivaspy" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a><a href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a><a href="https://api.whatsapp.com/send?text=${text}%20${url}" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a><a href="https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${text}" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>`;
-}
+  const text = encodeURIComponent(title);
 
-function parseFrontmatter(markdownContent) {
-  const frontmatterRegex = /^---\s*([\s\S]*?)\s*---/;
-  const match = frontmatterRegex.exec(markdownContent);
-  const data = { frontmatter: {}, content: markdownContent };
-  if (match) {
-    data.content = markdownContent.replace(match[0], '').trim();
-    match[1].split('\n').forEach(line => {
-      const [key, ...valueParts] = line.split(':');
-      if (key && valueParts.length > 0) {
-        data.frontmatter[key.trim()] = valueParts.join(':').trim().replace(/"/g, '');
-      }
-    });
-  }
-  return data;
+  return `
+    <a href="https://twitter.com/intent/tweet?url=${url}&text=${text}" target="_blank">🐦</a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank">📘</a>
+    <a href="https://api.whatsapp.com/send?text=${text}%20${url}" target="_blank">💬</a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=${url}" target="_blank">💼</a>
+  `;
 }
