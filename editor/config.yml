@@ -10,85 +10,31 @@ collections:
   # ==========================================================
   # NOTICIAS
   # ==========================================================
-  - name: "noticias"
-    label: "📰 Noticias"
+    - name: "noticias"
+    label: "Noticias"
     folder: "content/noticias/posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    format: "frontmatter"
     fields:
-      - label: "Destacar en Portada"
-        name: "featured"
-        widget: "boolean"
-        default: false
-        required: false
-
+      - { label: "Destacar en Portada", name: "featured", widget: "boolean", default: false, required: false }
       - { label: "Título", name: "title", widget: "string" }
-
-      - label: "Fecha de Publicación"
-        name: "date"
-        widget: "datetime"
-        time_format: false
-        format: "YYYY-MM-DD"
-
+      - { label: "Fecha de Publicación", name: "date", widget: "datetime" }
       - label: "Categoría"
         name: "category"
-        widget: "string"
-        hint: "Ej: Macro, Inmobiliario, Empresas, etc."
-
-      - label: "Subcategoría"
-        name: "subcategory"
         widget: "select"
-        required: false
+        default: "sin-categoria"
         options:
-          - { label: "Inflación", value: "Inflación" }
-          - { label: "Política monetaria", value: "Política monetaria" }
-          - { label: "PIB", value: "PIB" }
-          - { label: "Empleo", value: "Empleo" }
-          - { label: "Deuda", value: "Deuda" }
-          - { label: "Gobierno", value: "Gobierno" }
-          - { label: "Regulación", value: "Regulación" }
-          - { label: "Impuestos", value: "Impuestos" }
-          - { label: "Presupuesto", value: "Presupuesto" }
-          - { label: "Construcción", value: "Construcción" }
-          - { label: "Frontera", value: "Frontera" }
-          - { label: "Alquileres", value: "Alquileres" }
-          - { label: "Vivienda", value: "Vivienda" }
-          - { label: "Negocios", value: "Negocios" }
-          - { label: "Startups", value: "Startups" }
-          - { label: "Banca", value: "Banca" }
-          - { label: "Retail", value: "Retail" }
-          - { label: "Editorial", value: "Editorial" }
-          - { label: "Entrevistas", value: "Entrevistas" }
-          - { label: "Ahorro", value: "Ahorro" }
-          - { label: "Crédito", value: "Crédito" }
-          - { label: "Inversiones", value: "Inversiones" }
-          - { label: "Bancarización", value: "Bancarización" }
-          - { label: "Commodities", value: "Commodities" }
-          - { label: "Exportaciones", value: "Exportaciones" }
-          - { label: "Ganadería", value: "Ganadería" }
-          - { label: "Agricultura", value: "Agricultura" }
-          - { label: "Brasil", value: "Brasil" }
-          - { label: "Argentina", value: "Argentina" }
-          - { label: "Mercosur", value: "Mercosur" }
-          - { label: "Aduanas", value: "Aduanas" }
-
-      - label: "Resumen (para portada y SEO)"
-        name: "summary"
-        widget: "text"
-        required: true
-        pattern:
-          - "^.{20,250}$"
-          - "El resumen debe tener entre 20 y 250 caracteres."
-
-      - label: "Imagen principal"
-        name: "image"
-        widget: "image"
-        required: false
-        hint: "Obligatoria solo si la noticia está marcada como destacada."
-
-      - { label: "Contenido", name: "body", widget: "markdown" }
-
+          - { label: "Macro", value: "macro" }
+          - { label: "Política Económica", value: "politica-economica" }
+          - { label: "Comercio Exterior", value: "comercio-exterior" }
+          - { label: "Inmobiliario", value: "inmobiliario" }
+          - { label: "Agroindustria", value: "agroindustria" }
+          - { label: "Empresas", value: "empresas" }
+          - { label: "Opinión", value: "opinion" }
+          - { label: "Educación Financiera", value: "educacion-financiera" }
+          - { label: "Sin Categoría", value: "sin-categoria" }
+      - { label: "Resumen (para SEO y Redes Sociales)", name: "summary", widget: "text" }
+      - { label: "Cuerpo", name: "body", widget: "markdown" }
 
   # ==========================================================
   # ANÁLISIS / OPINIÓN
