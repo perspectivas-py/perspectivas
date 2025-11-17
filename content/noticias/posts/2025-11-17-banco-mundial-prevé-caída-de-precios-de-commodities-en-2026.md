@@ -5,7 +5,7 @@ date: 2025-11-17
 category: Macro
 subcategory: Commodities
 summary: Enfrentarían en el 2026 su cuarto año consecutivo de descenso de precios
-image: ""
+image: /assets/img/precios-de-commodities-en-baja-bm.jpg
 ---
 ![](/assets/img/precios-de-commodities-en-baja-bm.jpg)
 
