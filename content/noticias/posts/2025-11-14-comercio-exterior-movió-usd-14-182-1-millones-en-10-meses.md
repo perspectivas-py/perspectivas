@@ -1,5 +1,6 @@
 ---
-title: Comercio exterior movió USD 14.182,1 millones en 10 meses
+title: "Comercio exterior movió US$ 14.182,1 millones en 10 meses"
+
 date: 2025-11-13T21:12:00.000-03:00
 summary: "Las exportaciones totales, al mes de octubre de 2025, alcanzaron un
   valor de USD 14.182,1 millones, 3,3% por encima de los USD 13.273,9 millones
