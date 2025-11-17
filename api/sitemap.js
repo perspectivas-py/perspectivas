@@ -24,12 +24,12 @@ export default async function handler(req, res) {
             const text = await fetch(f.download_url).then(r => r.text());
             const fm = parseFrontmatter(text);
 
-            // Si no hay fecha, evitar romper el sitemap
             if (!fm.frontmatter.date) return null;
 
             return {
               slug: f.name.replace(".md", ""),
-              date: fm.frontmatter.date
+              date: fm.frontmatter.date,
+              title: fm.frontmatter.title || f.name.replace(".md", "")
             };
           } catch {
             return null;
@@ -39,15 +39,21 @@ export default async function handler(req, res) {
 
     const validPosts = posts.filter(Boolean);
 
+    const escapeXml = (str) =>
+      str.replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&apos;");
+
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
-
 ${validPosts
   .map(
     p => `
   <url>
-    <loc>${baseUrl}/noticia.html?type=noticias&id=${p.slug}.md</loc>
+    <loc>${baseUrl}/noticia.html?type=noticias&id=${encodeURIComponent(p.slug)}.md</loc>
     <lastmod>${p.date}</lastmod>
     <news:news>
       <news:publication>
@@ -55,7 +61,7 @@ ${validPosts
         <news:language>es</news:language>
       </news:publication>
       <news:publication_date>${p.date}</news:publication_date>
-      <news:title>${p.slug}</news:title>
+      <news:title>${escapeXml(p.title)}</news:title>
     </news:news>
   </url>`
   )
