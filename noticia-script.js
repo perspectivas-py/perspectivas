@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!id) return;
   
   const path = `content/${type}/_posts/${id}`;
-  const url = `https://raw.githubusercontent.com/${repo}/${branch}/${path}`;
+  const encodedId = encodeURIComponent(id).replace(/%2F/g, '/');
+const fileUrl = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/${CONTENT_PATH}/${encodedId}`;
 
   fetch(url)
     .then(response => response.text())
