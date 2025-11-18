@@ -142,11 +142,12 @@ function initCategoryFilter() {
 
       applyCategoryFilter(category, cards);
 
-      window.history.pushState(
-        {},
-        "",
-        category === "all" ? "/" : `/categoria/${category}`
-      );
+      if (category === "all") {
+  window.history.pushState({}, "", "/");
+} else {
+  window.location.href = `/categoria.html?cat=${category}`;
+}
+
     });
   });
 }
