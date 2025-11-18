@@ -255,3 +255,19 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-headline); }
   background:var(--color-accent);
   color:white;
 }
+/* ---- Buscador de noticias ---- */
+.search-bar {
+  padding: 10px 0 5px;
+}
+.search-bar input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  font-size: 1em;
+}
+.search-bar input:focus {
+  outline: 2px solid var(--color-accent);
+}
