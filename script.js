@@ -1,33 +1,28 @@
 // --- CONFIGURACIÓN GLOBAL ---
-const REPO = 'perspectivas-py/perspectivas';
-const BRANCH = 'main';
-const NEWS_PATH = 'content/noticias/posts';
+const REPO = "perspectivas-py/perspectivas";
+const BRANCH = "main";
+const NEWS_PATH = "content/noticias/posts";
 
-// --- FUNCIÓN PRINCIPAL DE ARRANQUE ---
-document.addEventListener('DOMContentLoaded', () => {
+// --- FUNCIÓN PRINCIPAL ---
+document.addEventListener("DOMContentLoaded", () => {
   try {
     loadNews();
     activateDarkMode();
     activateMobileMenu();
   } catch (error) {
-    console.error("Error Crítico al iniciar la aplicación:", error);
-    document.body.innerHTML = `<div style="text-align:center; padding: 50px;"><h1>Error Crítico</h1><p>El sitio no pudo cargarse. Revisa la consola (F12) para más detalles.</p></div>`;
+    console.error("Error al iniciar:", error);
   }
 });
 
-// --- LÓGICA DE CARGA DE NOTICIAS ---
+// --- CARGA PRINCIPAL DE NOTICIAS ---
 async function loadNews() {
-  const featuredCard = document.querySelector('.featured-card-bbc');
-  const topList = document.getElementById('top-list-bbc');
-  const newsGrid = document.getElementById('news-grid');
+  const featuredCard = document.querySelector(".featured-card-bbc");
+  const topList = document.getElementById("top-list-bbc");
+  const newsGrid = document.getElementById("news-grid");
   if (!featuredCard || !topList || !newsGrid) return;
 
   try {
     const files = await fetchFiles(NEWS_PATH);
-    if (!files || files.length === 0) {
-      featuredCard.innerHTML = '<p>No hay noticias para mostrar.</p>';
-      return;
-    }
 
     const allPosts = await Promise.all(
       files.map(async file => {
@@ -37,158 +32,224 @@ async function loadNews() {
           ...file,
           frontmatter,
           content,
-          category: frontmatter.category || "sin-categoria"
+          category: frontmatter.category || "sin-categoria",
+          tags: frontmatter.tags || []
         };
       })
     );
 
-    let featuredPost = allPosts.find(post => String(post.frontmatter.featured) === 'true') || allPosts[0];
-    const otherPosts = allPosts.filter(post => post.name !== featuredPost.name);
+    // Destacado
+    let featuredPost =
+      allPosts.find(post => String(post.frontmatter.featured) === "true") ||
+      allPosts[0];
 
-    renderFeaturedArticleBBC(featuredCard, featuredPost.name, featuredPost.frontmatter, featuredPost.content);
+    const otherPosts = allPosts.filter(p => p.name !== featuredPost.name);
+
+    renderFeaturedArticleBBC(featuredCard, featuredPost);
     renderTopListBBC(topList, otherPosts.slice(0, 4));
     renderNewsGrid(newsGrid, otherPosts);
 
-    initCategoryFilter(); // ← Activar filtros
-    initSearchFilter(); // ← activar buscador
-
+    initCategoryFilter();
+    initSearchFilter();
 
   } catch (error) {
-    console.error("Error al cargar las noticias:", error);
-    featuredCard.innerHTML = `<p style="color: red; font-weight: bold;">Error: ${error.message}</p>`;
+    console.error("Error al cargar noticias:", error);
+    featuredCard.innerHTML = `<p style="color:red;font-weight:bold">Error: ${error.message}</p>`;
   }
 }
 
-// --- FUNCIONES DE RENDERIZADO (VERSIÓN BBC) ---
-function renderFeaturedArticleBBC(container, filename, frontmatter, content) {
-  let imageUrl = findFirstImage(content);
-  if (!imageUrl) {
-    imageUrl = 'https://placehold.co/800x450/EFEFEF/AAAAAA?text=Perspectivas';
-  }
-  const link = `noticia.html?type=noticias&id=${filename}`;
+// --- RENDER DESTACADA ---
+function renderFeaturedArticleBBC(container, post) {
+  const { name, frontmatter, content } = post;
+  let imageUrl = findFirstImage(content) || 
+    "https://placehold.co/800x450/EFEFEF/AAAAAA?text=Perspectivas";
+
+  const link = `noticia.html?type=noticias&id=${name}`;
+
   container.innerHTML = `
     <div class="featured-image-container">
-      <a href="${link}"><img src="${imageUrl}" alt="Imagen para: ${frontmatter.title || 'Noticia destacada'}"></a>
+      <a href="${link}"><img src="${imageUrl}" alt=""></a>
     </div>
     <div class="featured-body">
       <time datetime="${frontmatter.date}">${formatDate(frontmatter.date)}</time>
-      <h1><a href="${link}">${frontmatter.title || 'Sin Título'}</a></h1>
-      <p class="dek">${frontmatter.summary || content.substring(0, 150) + '...'}</p>
+      <h1><a href="${link}">${frontmatter.title || "Sin título"}</a></h1>
+      <p class="dek">${frontmatter.summary || content.substring(0, 150)}...</p>
     </div>
   `;
 }
 
+// --- LISTA LATERAL ---
 function renderTopListBBC(container, files) {
-  container.innerHTML = '';
+  container.innerHTML = "";
   files.forEach(post => {
-    const listItem = document.createElement('li');
     const link = `noticia.html?type=noticias&id=${post.name}`;
-    listItem.innerHTML = `
+    const li = document.createElement("li");
+    li.innerHTML = `
       <a href="${link}">
         <h4>${post.frontmatter.title || formatTitleFromFilename(post.name)}</h4>
-        <p>${post.frontmatter.summary || post.content.substring(0, 80) + '...'}</p>
-      </a>`;
-    container.appendChild(listItem);
+        <p>${post.frontmatter.summary || post.content.substring(0, 80)}...</p>
+      </a>
+    `;
+    container.appendChild(li);
   });
 }
 
-async function renderNewsGrid(container, files) {
-  container.innerHTML = '';
-  for (const post of files) {
-    container.innerHTML += createNewsCard(
-      post.name,
-      post.frontmatter,
-      post.content,
-      post.category
-    );
-  }
+// --- GRID PRINCIPAL ---
+function renderNewsGrid(container, files) {
+  container.innerHTML = "";
+  files.forEach(post => {
+    container.innerHTML += createNewsCard(post);
+  });
 }
 
-// --- TARJETA DE NOTICIA CON CATEGORÍA ---
-function createNewsCard(filename, frontmatter, content, category) {
-  const imageUrl = findFirstImage(content) || 'https://placehold.co/400x225/EFEFEF/AAAAAA?text=Perspectivas';
-  const link = `noticia.html?type=noticias&id=${filename}`;
+function createNewsCard(post) {
+  const { name, frontmatter, content, category } = post;
+  const link = `noticia.html?type=noticias&id=${name}`;
+  const img = findFirstImage(content) ||
+    "https://placehold.co/400x225/EFEFEF/AAAAAA?text=Perspectivas";
 
   return `
-  <article class="card" data-category="${category}">
-    <a href="${link}"><img src="${imageUrl}" alt=""></a>
-    <div class="card-body">
-      <time datetime="${frontmatter.date}">${formatDate(frontmatter.date)}</time>
-      <h3><a href="${link}">${frontmatter.title || 'Sin Título'}</a></h3>
-    </div>
-  </article>`;
+    <article class="card" data-category="${category}">
+      <a href="${link}">
+        <img src="${img}" alt="">
+      </a>
+      <div class="card-body">
+        <time datetime="${frontmatter.date}">${formatDate(frontmatter.date)}</time>
+        <h3><a href="${link}">${frontmatter.title}</a></h3>
+      </div>
+    </article>
+  `;
 }
 
-// --- FILTROS DE CATEGORÍAS EN PORTADA ---
-function applyCategoryFilter(category, cards) {
-  cards.forEach(card => {
-    const cat = card.dataset.category;
-    card.style.display = (category === "all" || cat === category) ? "" : "none";
-  });
-}
-
+// --- FILTRO DE CATEGORÍAS ---
 function initCategoryFilter() {
   const btns = document.querySelectorAll("#category-filters button");
   const cards = document.querySelectorAll("#news-grid .card");
-
   if (!btns.length || !cards.length) return;
 
   btns.forEach(btn => {
     btn.addEventListener("click", () => {
       btns.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
+      const cat = btn.dataset.cat;
 
-      const category = btn.dataset.cat;
+      cards.forEach(card => {
+        card.style.display = (cat === "all" || card.dataset.category === cat) ? "" : "none";
+      });
 
-      applyCategoryFilter(category, cards);
-
-      if (category === "all") {
-  window.history.pushState({}, "", "/");
-} else {
-  window.location.href = `/categoria.html?cat=${category}`;
-}
-
+      window.history.pushState({}, "", cat === "all" ? "/" : `/categoria/${cat}`);
     });
   });
 }
-// --- BUSCADOR DE NOTICIAS ---
-// Normaliza texto para comparar sin tildes, mayúsculas, ni caracteres raros
-function normalizeText(str) {
-  return str
-    .toLowerCase()
-    .normalize("NFD") // separa letras y tildes
-    .replace(/[\u0300-\u036f]/g, ""); // elimina tildes
-}
 
-// Aplica búsqueda dentro del contenido visible en tarjetas
-function applySearchFilter(keyword, cards) {
-  const text = normalizeText(keyword);
-  cards.forEach(card => {
-    const haystack = normalizeText(card.innerText);
-    card.style.display = haystack.includes(text) ? "" : "none";
-  });
-}
-
-// Inicializa el buscador en portada
+// --- BUSCADOR ---
 function initSearchFilter() {
-  const searchInput = document.getElementById("news-search");
+  const input = document.getElementById("search-input");
   const cards = document.querySelectorAll("#news-grid .card");
-  if (!searchInput || !cards.length) return;
 
-  searchInput.addEventListener("input", () => {
-    const keyword = searchInput.value.trim();
-    applySearchFilter(keyword, cards);
+  if (!input) return;
+
+  input.addEventListener("input", () => {
+    const q = normalizeText(input.value);
+
+    cards.forEach(card => {
+      const title = normalizeText(card.querySelector("h3").innerText);
+      card.style.display = title.includes(q) ? "" : "none";
+    });
   });
 }
 
-// --- UTILIDADES ---
-async function fetchFiles(path) { const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}`); if (!r.ok) throw new Error(`No se pudo acceder a la carpeta de GitHub: ${path}`); return await r.json(); }
-async function fetchFileContent(url) { const r = await fetch(url); if (!r.ok) throw new Error(`No se pudo cargar el contenido del archivo: ${url}`); return await r.text(); }
-function parseFrontmatter(markdownContent) { const match = /^---\s*([\s\S]*?)\s*---/.exec(markdownContent); const data = { frontmatter: {}, content: markdownContent }; if (match) { data.content = markdownContent.replace(match[0], "").trim(); match[1].split("\n").forEach(line => { const [key, ...valueParts] = line.split(":"); if (key && valueParts.length > 0) { data.frontmatter[key.trim()] = valueParts.join(":").trim().replace(/"/g, ""); } }); } return data; }
-function findFirstImage(content) { const imageMatch = content.match(/!\[.*\]\((.*)\)/); if (imageMatch && imageMatch[1]) return imageMatch[1]; const htmlImg = content.match(/<img[^>]+src=["']([^"']+)["']/i); return htmlImg ? htmlImg[1] : null; }
-function formatTitleFromFilename(filename) { return filename.replace(/\.md$/, '').replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()); }
-function formatDate(dateString) { if (!dateString) return ''; const date = new Date(dateString); const options = { day: 'numeric', month: 'short', year: 'numeric' }; return date.toLocaleDateString('es-ES', options); }
+function normalizeText(str) {
+  return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
 
-// --- LÓGICA DARK MODE Y MENÚ MÓVIL ---
-function activateDarkMode(){const t=document.getElementById("themeToggle"),e=document.body,o=t?t.querySelector(".icon"):null;if(!t)return;const n=()=>{e.classList.toggle("dark-mode");const t=e.classList.contains("dark-mode")?"dark":"light";localStorage.setItem("theme",t),o&&(o.textContent="dark"===t?"☀️":"🌙")};"dark"===localStorage.getItem("theme")&&(e.classList.add("dark-mode"),o&&(o.textContent="☀️")),t.addEventListener("click",n)}
-function activateMobileMenu(){const t=document.getElementById("menu-toggle"),e=document.getElementById("nav-list");if(!t||!e)return;t.addEventListener("click",()=>{e.classList.toggle("is-open");const o=e.classList.contains("is-open");t.setAttribute("aria-expanded",o),t.innerHTML=o?"&times;":"☰"})}
+// --- UTILS ---
+async function fetchFiles(path) {
+  const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}`);
+  if (!r.ok) throw new Error(`No se pudo acceder al contenido: ${path}`);
+  return await r.json();
+}
+
+async function fetchFileContent(url) {
+  const r = await fetch(url);
+  if (!r.ok) throw new Error("No se pudo cargar archivo");
+  return await r.text();
+}
+
+function parseFrontmatter(md) {
+  const match = /^---\s*([\s\S]*?)\s*---/.exec(md);
+  const data = { frontmatter: {}, content: md };
+
+  if (match) {
+    const lines = match[1].split("\n");
+    lines.forEach(line => {
+      const [key, ...rest] = line.split(":");
+      if (key && rest.length) {
+        data.frontmatter[key.trim()] = rest.join(":").trim();
+      }
+    });
+    data.content = md.replace(match[0], "").trim();
+  }
+  return data;
+}
+
+function findFirstImage(content) {
+  const mdImg = content.match(/!\[.*\]\((.*?)\)/);
+  if (mdImg) return mdImg[1];
+
+  const htmlImg = content.match(/<img[^>]+src=["']([^"']+)["']/i);
+  return htmlImg ? htmlImg[1] : null;
+}
+
+function formatTitleFromFilename(fn) {
+  return fn.replace(/\.md$/, "")
+    .replace(/^\d{4}-\d{2}-\d{2}-/, "")
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, l => l.toUpperCase());
+}
+
+function formatDate(dateString) {
+  if (!dateString) return "";
+  return new Date(dateString).toLocaleDateString("es-ES", {
+    day: "numeric",
+    month: "short",
+    year: "numeric"
+  });
+}
+
+// --- DARK MODE ---
+function activateDarkMode() {
+  const btn = document.getElementById("themeToggle");
+  const body = document.body;
+  const icon = btn?.querySelector(".icon");
+
+  if (!btn) return;
+
+  const toggle = () => {
+    body.classList.toggle("dark-mode");
+    const mode = body.classList.contains("dark-mode") ? "dark" : "light";
+    localStorage.setItem("theme", mode);
+    if (icon) icon.textContent = mode === "dark" ? "☀️" : "🌙";
+  };
+
+  if (localStorage.getItem("theme") === "dark") {
+    body.classList.add("dark-mode");
+    if (icon) icon.textContent = "☀️";
+  }
+
+  btn.addEventListener("click", toggle);
+}
+
+// --- MENÚ MÓVIL ---
+function activateMobileMenu() {
+  const toggle = document.getElementById("menu-toggle");
+  const nav = document.getElementById("nav-list");
+  if (!toggle || !nav) return;
+
+  toggle.addEventListener("click", () => {
+    nav.classList.toggle("is-open");
+    const isOpen = nav.classList.contains("is-open");
+    toggle.innerHTML = isOpen ? "&times;" : "☰";
+    toggle.setAttribute("aria-expanded", isOpen);
+  });
+}
