@@ -150,6 +150,35 @@ function initCategoryFilter() {
     });
   });
 }
+// --- BUSCADOR DE NOTICIAS ---
+// Normaliza texto para comparar sin tildes, mayúsculas, ni caracteres raros
+function normalizeText(str) {
+  return str
+    .toLowerCase()
+    .normalize("NFD") // separa letras y tildes
+    .replace(/[\u0300-\u036f]/g, ""); // elimina tildes
+}
+
+// Aplica búsqueda dentro del contenido visible en tarjetas
+function applySearchFilter(keyword, cards) {
+  const text = normalizeText(keyword);
+  cards.forEach(card => {
+    const haystack = normalizeText(card.innerText);
+    card.style.display = haystack.includes(text) ? "" : "none";
+  });
+}
+
+// Inicializa el buscador en portada
+function initSearchFilter() {
+  const searchInput = document.getElementById("news-search");
+  const cards = document.querySelectorAll("#news-grid .card");
+  if (!searchInput || !cards.length) return;
+
+  searchInput.addEventListener("input", () => {
+    const keyword = searchInput.value.trim();
+    applySearchFilter(keyword, cards);
+  });
+}
 
 // --- UTILIDADES ---
 async function fetchFiles(path) { const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}`); if (!r.ok) throw new Error(`No se pudo acceder a la carpeta de GitHub: ${path}`); return await r.json(); }
