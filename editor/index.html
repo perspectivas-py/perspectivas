@@ -3,24 +3,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Decap CMS | Perspectivas</title>
-
-  <!-- Estilos básicos del login -->
-  <style>
-    body { 
-      margin: 0; 
-      font-family: system-ui, sans-serif; 
-      background: #f7f7f7; 
-    }
-  </style>
+  <title>Gestor de Contenidos | Perspectivas</title>
 </head>
 
 <body>
-  <!-- Contenedor del CMS -->
-  <script src="https://unpkg.com/decap-cms@3.0.11/dist/decap-cms.js"></script>
+  <!-- Cargar Decap CMS desde CDN seguro -->
+  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.7/dist/decap-cms.js"></script>
+
+  <!-- Inicializar CMS -->
   <script>
-    window.CMS.init({
-      configPath: "config.yml"
+    document.addEventListener("DOMContentLoaded", function () {
+      if (window.CMS) {
+        window.CMS.init({ configPath: "config.yml" });
+      } else {
+        document.body.innerHTML = "<h1>Error cargando Decap CMS</h1><p>Revisa la consola (F12).</p>";
+      }
     });
   </script>
 </body>
