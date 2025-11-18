@@ -2,6 +2,9 @@ backend:
   name: github
   repo: perspectivas-py/perspectivas
   branch: main
+  base_url: https://decap-oauth.vercel.app
+  auth_endpoint: auth
+
 
 media_folder: "assets/img"
 public_folder: "/assets/img"
