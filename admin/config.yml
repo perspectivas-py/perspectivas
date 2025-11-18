@@ -13,10 +13,16 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "Destacar en Portada", name: "featured", widget: "boolean", default: false, required: false }
+      - label: "Destacar en Portada"
+        name: "featured"
+        widget: "boolean"
+        default: false
+        required: false
+
       - label: "Categoría"
         name: "category"
         widget: "select"
+        required: false
         options:
           - { label: "Macro", value: "macro" }
           - { label: "Política Económica", value: "politica-economica" }
@@ -26,15 +32,30 @@ collections:
           - { label: "Educación Financiera", value: "educacion-financiera" }
           - { label: "Agroindustria", value: "agroindustria" }
           - { label: "Comercio Exterior", value: "comercio-exterior" }
+
       - label: "Temas / Tags"
         name: "tags"
         widget: "list"
         required: false
-        hint: "Ejemplo: inflacion, empleo, crecimiento"
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "Fecha de Publicación", name: "date", widget: "datetime" }
-      - { label: "Resumen", name: "summary", widget: "text" }
-      - { label: "Cuerpo", name: "body", widget: "markdown" }
+        hint: "Ejemplo: inflación, empleo, crecimiento"
+
+      - label: "Título"
+        name: "title"
+        widget: "string"
+
+      - label: "Fecha de Publicación"
+        name: "date"
+        widget: "datetime"
+
+      - label: "Resumen"
+        name: "summary"
+        widget: "text"
+        required: false
+
+      - label: "Cuerpo"
+        name: "body"
+        widget: "markdown"
+
 
   - name: "analisis"
     label: "Análisis y Opinión"
@@ -42,11 +63,24 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "Autor", name: "author", widget: "string", default: "Perspectivas" }
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "Fecha", name: "date", widget: "datetime" }
-      - { label: "Resumen", name: "summary", widget: "text" }
-      - { label: "Cuerpo", name: "body", widget: "markdown" }
+      - label: "Autor"
+        name: "author"
+        widget: "string"
+        default: "Perspectivas"
+      - label: "Título"
+        name: "title"
+        widget: "string"
+      - label: "Fecha"
+        name: "date"
+        widget: "datetime"
+      - label: "Resumen"
+        name: "summary"
+        widget: "text"
+        required: false
+      - label: "Cuerpo"
+        name: "body"
+        widget: "markdown"
+
 
   - name: "programa"
     label: "Programa Perspectivas"
@@ -54,7 +88,15 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "Título del Episodio", name: "title", widget: "string" }
-      - { label: "Fecha", name: "date", widget: "datetime" }
-      - { label: "Enlace Embed", name: "embed_url", widget: "text" }
-      - { label: "Resumen y Notas", name: "body", widget: "markdown" }
+      - label: "Título del Episodio"
+        name: "title"
+        widget: "string"
+      - label: "Fecha"
+        name: "date"
+        widget: "datetime"
+      - label: "Enlace Embed"
+        name: "embed_url"
+        widget: "text"
+      - label: "Resumen y Notas"
+        name: "body"
+        widget: "markdown"
