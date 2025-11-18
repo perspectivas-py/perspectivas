@@ -10,31 +10,20 @@ collections:
   # ==========================================================
   # NOTICIAS
   # ==========================================================
-    - name: "noticias"
+      - name: "noticias"
     label: "Noticias"
     folder: "content/noticias/posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Destacar en Portada", name: "featured", widget: "boolean", default: false, required: false }
+      - { label: "Categoría", name: "category", widget: "select", options: ["macro","politica-economica","inmobiliario","empresas","opinion","educacion-financiera","agroindustria","comercio-exterior"] }
+      - { label: "Temas / Tags (separados por coma)", name: "tags", widget: "list", default: [] }
       - { label: "Título", name: "title", widget: "string" }
       - { label: "Fecha de Publicación", name: "date", widget: "datetime" }
-      - label: "Categoría"
-        name: "category"
-        widget: "select"
-        default: "sin-categoria"
-        options:
-          - { label: "Macro", value: "macro" }
-          - { label: "Política Económica", value: "politica-economica" }
-          - { label: "Comercio Exterior", value: "comercio-exterior" }
-          - { label: "Inmobiliario", value: "inmobiliario" }
-          - { label: "Agroindustria", value: "agroindustria" }
-          - { label: "Empresas", value: "empresas" }
-          - { label: "Opinión", value: "opinion" }
-          - { label: "Educación Financiera", value: "educacion-financiera" }
-          - { label: "Sin Categoría", value: "sin-categoria" }
-      - { label: "Resumen (para SEO y Redes Sociales)", name: "summary", widget: "text" }
+      - { label: "Resumen", name: "summary", widget: "text" }
       - { label: "Cuerpo", name: "body", widget: "markdown" }
+
 
   # ==========================================================
   # ANÁLISIS / OPINIÓN
