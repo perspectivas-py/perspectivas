@@ -7,52 +7,54 @@ media_folder: "assets/img"
 public_folder: "/assets/img"
 
 collections:
-  # ==========================================================
-  # NOTICIAS
-  # ==========================================================
-      - name: "noticias"
+  - name: "noticias"
     label: "Noticias"
     folder: "content/noticias/posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Destacar en Portada", name: "featured", widget: "boolean", default: false, required: false }
-      - { label: "Categoría", name: "category", widget: "select", options: ["macro","politica-economica","inmobiliario","empresas","opinion","educacion-financiera","agroindustria","comercio-exterior"] }
-      - { label: "Temas / Tags (separados por coma)", name: "tags", widget: "list", default: [] }
+      - label: "Categoría"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "Macro", value: "macro" }
+          - { label: "Política Económica", value: "politica-economica" }
+          - { label: "Inmobiliario", value: "inmobiliario" }
+          - { label: "Empresas", value: "empresas" }
+          - { label: "Opinión", value: "opinion" }
+          - { label: "Educación Financiera", value: "educacion-financiera" }
+          - { label: "Agroindustria", value: "agroindustria" }
+          - { label: "Comercio Exterior", value: "comercio-exterior" }
+      - label: "Temas / Tags"
+        name: "tags"
+        widget: "list"
+        required: false
+        hint: "Ejemplo: inflacion, empleo, crecimiento"
       - { label: "Título", name: "title", widget: "string" }
       - { label: "Fecha de Publicación", name: "date", widget: "datetime" }
       - { label: "Resumen", name: "summary", widget: "text" }
       - { label: "Cuerpo", name: "body", widget: "markdown" }
 
-
-  # ==========================================================
-  # ANÁLISIS / OPINIÓN
-  # ==========================================================
   - name: "analisis"
-    label: "📊 Análisis y Opinión"
+    label: "Análisis y Opinión"
     folder: "content/analisis/posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    format: "frontmatter"
     fields:
+      - { label: "Autor", name: "author", widget: "string", default: "Perspectivas" }
       - { label: "Título", name: "title", widget: "string" }
-      - { label: "Autor", name: "author", widget: "string", default: "Equipo de Perspectivas" }
-      - { label: "Fecha de Publicación", name: "date", widget: "datetime", time_format: false, format: "YYYY-MM-DD" }
+      - { label: "Fecha", name: "date", widget: "datetime" }
       - { label: "Resumen", name: "summary", widget: "text" }
-      - { label: "Contenido del Análisis", name: "body", widget: "markdown" }
+      - { label: "Cuerpo", name: "body", widget: "markdown" }
 
-
-  # ==========================================================
-  # PROGRAMA
-  # ==========================================================
   - name: "programa"
-    label: "🎙 Programa Perspectivas"
+    label: "Programa Perspectivas"
     folder: "content/programa/posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    format: "frontmatter"
     fields:
       - { label: "Título del Episodio", name: "title", widget: "string" }
-      - { label: "Fecha de Emisión", name: "date", widget: "datetime", time_format: false, format: "YYYY-MM-DD" }
-      - { label: "Enlace de Inserción (iframe YouTube/Spotify)", name: "embed_url", widget: "text" }
-      - { label: "Descripción y Notas", name: "body", widget: "markdown" }
+      - { label: "Fecha", name: "date", widget: "datetime" }
+      - { label: "Enlace Embed", name: "embed_url", widget: "text" }
+      - { label: "Resumen y Notas", name: "body", widget: "markdown" }
