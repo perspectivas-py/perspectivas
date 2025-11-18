@@ -50,6 +50,8 @@ async function loadNews() {
     renderNewsGrid(newsGrid, otherPosts);
 
     initCategoryFilter(); // ← Activar filtros
+    initSearchFilter(); // ← activar buscador
+
 
   } catch (error) {
     console.error("Error al cargar las noticias:", error);
