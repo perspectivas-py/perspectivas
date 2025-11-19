@@ -32,14 +32,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 // --------------------------------------
-// Cargar artículo (VERSIÓN ACTUALIZADA)
+// Cargar artículo (VERSIÓN FINAL Y ROBUSTA)
 // --------------------------------------
 async function loadArticle(type, id) {
   const path = ARTICLE_CONTENT_PATHS[type] || ARTICLE_CONTENT_PATHS.noticias;
 
-  // --- CORRECCIÓN 3: Añadimos la extensión .md al final del ID para construir la URL correcta ---
-  // Ahora el script puede manejar IDs limpios (sin extensión) para todos los tipos de contenido.
-  const filename = `${id}.md`;
+  // --- CORRECCIÓN FINAL: El script ahora maneja ambos tipos de ID ---
+  // Si el ID ya termina en .md, lo usa tal cual.
+  // Si no, le añade .md.
+  // Esto hace que sea compatible con todas las páginas del sitio.
+  const filename = id.endsWith('.md') ? id : `${id}.md`;
   
   const encodedFilename = encodeURIComponent(filename).replace(/%2F/g, "/");
   const fileUrl = `https://raw.githubusercontent.com/${ARTICLE_REPO}/${ARTICLE_BRANCH}/${path}/${encodedFilename}`;
