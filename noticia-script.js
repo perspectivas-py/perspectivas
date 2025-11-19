@@ -73,6 +73,42 @@ function parseFrontmatterArticle(md) {
   return { frontmatter, content };
 }
 
+// --- CORRECCIÓN 1: SE RESTAURA LA FUNCIÓN RENDERARTICLE ---
+// Esta función había sido eliminada y es esencial para mostrar el contenido.
+// --------------------------------------
+function renderArticle(fm, content, type, id) {
+  const container = getArticleContainer();
+  if (!container) return;
+
+  const title = fm.title || "Sin título";
+  const date = formatDateArticle(fm.date);
+  const readTime = estimateReadingTime(content);
+  const firstImage = findFirstImageFromAny(content);
+  let cleanedContent = removeFirstImage(content);
+  const htmlContent = window.marked ? window.marked.parse(cleanedContent.trim()) : cleanedContent.trim();
+
+  container.innerHTML = `
+    <h1>${title}</h1>
+
+    <div class="article-meta-info">
+      <span>${date}</span>
+      <span>⏱ ${readTime} min de lectura</span>
+    </div>
+
+    ${firstImage ? `<div class="featured-image"><img src="${firstImage}" alt=""></div>` : ""}
+
+    <div id="share-buttons">
+      ${renderShareButtons(title)}
+    </div>
+
+    <article class="article-content">
+      ${htmlContent}
+    </article>
+  `;
+}
+
+// --- CORRECCIÓN 2: SE ELIMINA LA FUNCIÓN DUPLICADA ---
+// Ahora solo hay una versión de renderShareButtons, la correcta.
 // --------------------------------------
 // Redes sociales (VERSIÓN CON ICONOS AGRUPADOS)
 // --------------------------------------
@@ -80,7 +116,6 @@ function renderShareButtons(title) {
   const url = encodeURIComponent(window.location.href);
   const text = encodeURIComponent(title);
   
-  // Añadimos un <div> para agrupar los iconos y poder alinearlos a la derecha.
   return `
     <span>Compartir:</span>
     <div class="share-icons">
@@ -99,6 +134,7 @@ function renderShareButtons(title) {
     </div>
   `;
 }
+
 // --------------------------------------
 // Utilidades DOM
 // --------------------------------------
@@ -131,52 +167,19 @@ function estimateReadingTime(text) {
   return Math.max(1, Math.round(words / 200));
 }
 
-// Encuentra la primera imagen válida
 function findFirstImageFromAny(content) {
-  // Markdown ![]()
   const md = content.match(/!\[[^\]]*]\((.*?)\)/);
   if (md) return md[1];
-
-  // <img src="">
   const htmlImg = content.match(/<img[^>]+src=["']([^"']+)["']/i);
   if (htmlImg) return htmlImg[1];
-
-  // <figure><img src=""></figure>
   const fig = content.match(/<figure([\s\S]*?)<img[^>]+src=["']([^"']+)["']/i);
   if (fig) return fig[2];
-
   return null;
 }
 
-// Elimina la primera imagen markdown, img o figure del contenido
 function removeFirstImage(content) {
   return content
-    .replace(/!\[[^\]]*]\((.*?)\)/, "")                         // markdown
-    .replace(/<figure[\s\S]*?<\/figure>/i, "")                 // figure
-    .replace(/<img[^>]+src=["']([^"']+)["'][^>]*>/i, "");      // html <img>
-}
-
-// --------------------------------------
-// Redes sociales (VERSIÓN MEJORADA CON ICONOS)
-// --------------------------------------
-function renderShareButtons(title) {
-  const url = encodeURIComponent(window.location.href);
-  const text = encodeURIComponent(title);
-  
-  // Usamos los iconos de Font Awesome (etiquetas <i>) en lugar de emojis.
-  return `
-    <span>Compartir:</span>
-    <a href="https://twitter.com/intent/tweet?url=${url}&text=${text}" target="_blank" aria-label="Compartir en Twitter">
-      <i class="fab fa-twitter"></i>
-    </a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank" aria-label="Compartir en Facebook">
-      <i class="fab fa-facebook-f"></i>
-    </a>
-    <a href="https://api.whatsapp.com/send?text=${text}%20${url}" target="_blank" aria-label="Compartir en WhatsApp">
-      <i class="fab fa-whatsapp"></i>
-    </a>
-    <a href="https://www.linkedin.com/sharing/share-offsite/?url=${url}" target="_blank" aria-label="Compartir en LinkedIn">
-      <i class="fab fa-linkedin"></i>
-    </a>
-  `;
+    .replace(/!\[[^\]]*]\((.*?)\)/, "")
+    .replace(/<figure[\s\S]*?<\/figure>/i, "")
+    .replace(/<img[^>]+src=["']([^"']+)["'][^>]*>/i, "");
 }
