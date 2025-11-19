@@ -33,14 +33,11 @@
 
   <main>
     <section id="home" class="hero wrap">
-      <!-- Contenedor para el artículo estilo BBC -->
       <div class="hero-main">
         <article class="featured-card-bbc">
-          <!-- El script rellenará esto. El contenido inicial se borrará. -->
           <p style="padding: 20px;">Cargando artículo principal...</p>
         </article>
       </div>
-      <!-- Contenedor para la lista de titulares estilo BBC -->
       <aside class="hero-secondary">
         <ul id="top-list-bbc" class="headline-list">
           <li>Cargando titulares...</li>
@@ -48,34 +45,32 @@
       </aside>
     </section>
 
-    <!-- Contenedor para la grilla de "Más Noticias" -->
     <section id="noticias" class="wrap section">
-  <div class="section-header">
-    <h2>Más Noticias</h2>
-    <div class="search-bar">
-  <input type="text" id="news-search" placeholder="Buscar noticias..." aria-label="Buscar noticias">
-</div>
+      <div class="section-header">
+        <h2>Más Noticias</h2>
+        <div class="search-bar">
+          <!-- --- CORRECCIÓN 1: ID ajustado para que coincida con el script --- -->
+          <input type="text" id="search-input" placeholder="Buscar noticias..." aria-label="Buscar noticias">
+        </div>
 
-    <div id="category-filters" class="category-filters">
-  <button data-cat="all" class="active">Todas</button>
-  <button data-cat="macro">Macro</button>
-  <button data-cat="politica-economica">Política Económica</button>
-  <button data-cat="comercio-exterior">Comercio Exterior</button>
-  <button data-cat="inmobiliario">Inmobiliario</button>
-  <button data-cat="agroindustria">Agroindustria</button>
-  <button data-cat="empresas">Empresas</button>
-  <button data-cat="opinion">Opinión</button>
-  <button data-cat="educacion-financiera">Educación Financiera</button>
-  <button data-cat="sin-categoria">Sin Categoría</button>
-</div>
+        <div id="category-filters" class="category-filters">
+          <button data-cat="all" class="active">Todas</button>
+          <button data-cat="macro">Macro</button>
+          <button data-cat="politica-economica">Política Económica</button>
+          <button data-cat="comercio-exterior">Comercio Exterior</button>
+          <button data-cat="inmobiliario">Inmobiliario</button>
+          <button data-cat="agroindustria">Agroindustria</button>
+          <button data-cat="empresas">Empresas</button>
+          <button data-cat="opinion">Opinión</button>
+          <button data-cat="educacion-financiera">Educación Financiera</button>
+          <button data-cat="sin-categoria">Sin Categoría</button>
+        </div>
+        
+        <!-- --- CORRECCIÓN 2: Eliminado el div duplicado con id="category-filters" --- -->
+      </div>
 
-    <!-- Barra de filtros por categoría -->
-    <div id="category-filters" class="filters-bar" aria-label="Filtrar por categoría"></div>
-  </div>
-
-  <div id="news-grid" class="cards-grid" aria-live="polite"></div>
-</section>
-
+      <div id="news-grid" class="cards-grid" aria-live="polite"></div>
+    </section>
   </main>
 
   <footer class="site-footer">
