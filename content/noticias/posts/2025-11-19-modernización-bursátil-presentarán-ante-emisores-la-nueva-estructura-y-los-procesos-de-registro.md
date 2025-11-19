@@ -3,11 +3,10 @@ featured: true
 category: macro
 tags:
   - bursátil
-title: "Modernización bursátil: Presentarán ante emisores la nueva estructura y los procesos de registro"
-date: 2025-11-19T14:58:25.495Z
-summary: |-
-  El encuentro se llevará a cabo este jueves 20 de noviembre, desde las
-  08:00.
+title: "Modernización bursátil: Presentarán ante emisores la nueva estructura y
+  los procesos de registro"
+date: 2025-11-19T15:55:52.535Z
+summary: '"El encuentro se llevará a cabo este jueves 20 de noviembre"'
 ---
 ![Objetivo es presentar a las empresas emisoras las novedades](/assets/img/nasdaq.avif "Nasdaq")
 
