@@ -4,10 +4,11 @@
 const ARTICLE_REPO = 'perspectivas-py/perspectivas';
 const ARTICLE_BRANCH = 'main';
 
+// --- MAPA DE RUTAS CORRECTO ---
 const ARTICLE_CONTENT_PATHS = {
   noticias: "content/noticias/posts",
   analisis: "content/analisis/_posts",
-  programa: "content/programa/posts",
+  programa: "content/programa/posts", 
 };
 
 // --------------------------------------
@@ -32,18 +33,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 // --------------------------------------
-// Cargar artículo (VERSIÓN FINAL Y ROBUSTA)
+// Cargar artículo (ANTI-CACHÉ Y ROBUSTO)
 // --------------------------------------
 async function loadArticle(type, id) {
   const path = ARTICLE_CONTENT_PATHS[type] || ARTICLE_CONTENT_PATHS.noticias;
-
-  // --- CORRECCIÓN FINAL: El script ahora maneja ambos tipos de ID ---
-  // Si el ID ya termina en .md, lo usa tal cual.
-  // Si no, le añade .md.
-  // Esto hace que sea compatible con todas las páginas del sitio.
-  const filename = id.endsWith('.md') ? id : `${id}.md`;
   
+  // Manejo de IDs con o sin extensión .md
+  const filename = id.endsWith('.md') ? id : `${id}.md`;
   const encodedFilename = encodeURIComponent(filename).replace(/%2F/g, "/");
+  
   const fileUrl = `https://raw.githubusercontent.com/${ARTICLE_REPO}/${ARTICLE_BRANCH}/${path}/${encodedFilename}`;
 
   const markdown = await fetchMarkdown(fileUrl);
@@ -53,13 +51,10 @@ async function loadArticle(type, id) {
 }
 
 // --------------------------------------
-// Fetch (VERSIÓN ANTI-CACHÉ)
+// Fetch (ANTI-CACHÉ)
 // --------------------------------------
 async function fetchMarkdown(url) {
-  // Se añade un parámetro único a la URL para forzar una carga nueva del archivo
-  // y evitar que se muestre una versión antigua guardada en caché.
   const cacheBustingUrl = `${url}?t=${new Date().getTime()}`;
-  
   const res = await fetch(cacheBustingUrl);
   if (!res.ok) throw new Error(`No se pudo cargar el archivo Markdown: ${url}`);
   return await res.text();
@@ -76,15 +71,15 @@ function parseFrontmatterArticle(md) {
   match[1].split("\n").forEach(line => {
     const [key, ...rest] = line.split(":");
     if (!key || rest.length === 0) return;
-    frontmatter[key.trim()] = rest.join(":").trim().replace(/"/g, "");
+    frontmatter[key.trim()] = rest.join(":").trim().replace(/^['"]|['"]$/g, '');
   });
 
   const content = md.replace(match[0], "").trim();
   return { frontmatter, content };
 }
 
-// --- CORRECCIÓN 1: SE RESTAURA LA FUNCIÓN RENDERARTICLE ---
-// Esta función había sido eliminada y es esencial para mostrar el contenido.
+// --------------------------------------
+// Render (CON SOPORTE INTELIGENTE PARA VIDEO)
 // --------------------------------------
 function renderArticle(fm, content, type, id) {
   const container = getArticleContainer();
@@ -93,9 +88,32 @@ function renderArticle(fm, content, type, id) {
   const title = fm.title || "Sin título";
   const date = formatDateArticle(fm.date);
   const readTime = estimateReadingTime(content);
+  
   const firstImage = findFirstImageFromAny(content);
   let cleanedContent = removeFirstImage(content);
+
+  // Buscamos VIDEO (Ahora soporta el código iframe completo)
+  const videoId = fm.embed_url ? extractYoutubeId(fm.embed_url) : null;
+
   const htmlContent = window.marked ? window.marked.parse(cleanedContent.trim()) : cleanedContent.trim();
+
+  // Lógica: Video mata Imagen. Si hay video, se muestra el video.
+  let featuredMedia = '';
+  
+  if (videoId) {
+    featuredMedia = `
+      <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; margin-bottom: 25px; border-radius: 4px;">
+        <iframe 
+          src="https://www.youtube.com/embed/${videoId}" 
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      </div>`;
+  } else if (firstImage) {
+    featuredMedia = `<div class="featured-image"><img src="${firstImage}" alt="${title}"></div>`;
+  }
 
   container.innerHTML = `
     <h1>${title}</h1>
@@ -105,7 +123,7 @@ function renderArticle(fm, content, type, id) {
       <span>⏱ ${readTime} min de lectura</span>
     </div>
 
-    ${firstImage ? `<div class="featured-image"><img src="${firstImage}" alt=""></div>` : ""}
+    ${featuredMedia}
 
     <div id="share-buttons">
       ${renderShareButtons(title)}
@@ -117,10 +135,34 @@ function renderArticle(fm, content, type, id) {
   `;
 }
 
-// --- CORRECCIÓN 2: SE ELIMINA LA FUNCIÓN DUPLICADA ---
-// Ahora solo hay una versión de renderShareButtons, la correcta.
 // --------------------------------------
-// Redes sociales (VERSIÓN CON ICONOS AGRUPADOS)
+// EXTRACTOR DE ID YOUTUBE (MEJORADO)
+// --------------------------------------
+function extractYoutubeId(urlOrCode) {
+  if (!urlOrCode) return null;
+
+  // 1. Si el usuario pegó todo el código <iframe>, extraemos solo la URL del 'src'
+  if (urlOrCode.includes('<iframe')) {
+    const srcMatch = urlOrCode.match(/src=["']([^"']+)["']/);
+    if (srcMatch && srcMatch[1]) {
+      urlOrCode = srcMatch[1]; // Ahora trabajamos solo con la URL limpia
+    }
+  }
+
+  // 2. Extraemos el ID del video de la URL
+  let videoId = null;
+  if (urlOrCode.includes('youtu.be/')) {
+    videoId = urlOrCode.split('youtu.be/')[1].split('?')[0];
+  } else if (urlOrCode.includes('v=')) {
+    videoId = urlOrCode.split('v=')[1].split('&')[0];
+  } else if (urlOrCode.includes('/embed/')) {
+    videoId = urlOrCode.split('/embed/')[1].split('?')[0];
+  }
+  return videoId;
+}
+
+// --------------------------------------
+// Redes sociales
 // --------------------------------------
 function renderShareButtons(title) {
   const url = encodeURIComponent(window.location.href);
@@ -129,54 +171,35 @@ function renderShareButtons(title) {
   return `
     <span>Compartir:</span>
     <div class="share-icons">
-      <a href="https://twitter.com/intent/tweet?url=${url}&text=${text}" target="_blank" aria-label="Compartir en Twitter">
-        <i class="fab fa-twitter"></i>
-      </a>
-      <a href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank" aria-label="Compartir en Facebook">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-      <a href="https://api.whatsapp.com/send?text=${text}%20${url}" target="_blank" aria-label="Compartir en WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-      </a>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url=${url}" target="_blank" aria-label="Compartir en LinkedIn">
-        <i class="fab fa-linkedin"></i>
-      </a>
+      <a href="https://twitter.com/intent/tweet?url=${url}&text=${text}" target="_blank" aria-label="Compartir en Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank" aria-label="Compartir en Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://api.whatsapp.com/send?text=${text}%20${url}" target="_blank" aria-label="Compartir en WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=${url}" target="_blank" aria-label="Compartir en LinkedIn"><i class="fab fa-linkedin"></i></a>
     </div>
   `;
 }
 
 // --------------------------------------
-// Utilidades DOM
+// Utilidades DOM y Contenido
 // --------------------------------------
 function getArticleContainer() {
   let el = document.querySelector(".full-article");
   if (!el) el = document.getElementById("article-container");
   return el;
 }
-
 function safeSetInnerHTML(html) {
   const el = getArticleContainer();
   if (el) el.innerHTML = html;
 }
-
-// --------------------------------------
-// Utilidades de contenido
-// --------------------------------------
 function formatDateArticle(dateStr) {
   if (!dateStr) return "";
   const d = new Date(dateStr);
-  return d.toLocaleDateString("es-ES", {
-    year: "numeric",
-    month: "short",
-    day: "numeric"
-  });
+  return d.toLocaleDateString("es-ES", { year: "numeric", month: "short", day: "numeric" });
 }
-
 function estimateReadingTime(text) {
   const words = text.split(/\s+/).length;
   return Math.max(1, Math.round(words / 200));
 }
-
 function findFirstImageFromAny(content) {
   const md = content.match(/!\[[^\]]*]\((.*?)\)/);
   if (md) return md[1];
@@ -186,7 +209,6 @@ function findFirstImageFromAny(content) {
   if (fig) return fig[2];
   return null;
 }
-
 function removeFirstImage(content) {
   return content
     .replace(/!\[[^\]]*]\((.*?)\)/, "")
