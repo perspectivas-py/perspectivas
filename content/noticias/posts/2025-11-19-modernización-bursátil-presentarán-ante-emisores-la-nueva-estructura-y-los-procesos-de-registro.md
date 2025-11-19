@@ -8,9 +8,9 @@ title: "Modernización bursátil: Presentarán ante emisores la nueva estructura
 date: 2025-11-19T14:58:25.495Z
 summary: |-
   El encuentro se llevará a cabo este jueves 20 de noviembre, desde las
-  08:00, en el Hotel Dazzler (Av. Aviadores del Chaco y Vasconcellos).
+  08:00.
 ---
-![El objetivo es presentar a las empresas emisoras las novedades que se están implementando en el mercado de valores, en el marco de la transformación tecnológica, regulatoria y de infraestructura por la que atraviesa el sector.](/assets/img/nasdaq_market_site_201506.jpg "Nasdaq")
+![El objetivo es presentar a las empresas emisoras las novedades.](/assets/img/nasdaq.avif "Nasdaq")
 
 “Modernización bursátil: Nueva estructura y procesos para emisores” se denomina la charla que se encuentran organizando la Bolsa de Valores de Asunción (BVA), la Caja de Valores del Paraguay (CAVAPY) y la Asociación de Casas de Bolsa del Paraguay (Asobolsa), para este jueves 20 de noviembre.
 
