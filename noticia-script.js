@@ -6,8 +6,8 @@ const ARTICLE_BRANCH = 'main';
 
 const ARTICLE_CONTENT_PATHS = {
   noticias: "content/noticias/posts",
-  analisis: "content/analisis/posts",
-  programa: "content/programa/posts",
+  analisis: "content/analisis/_posts",
+  programa: "content/programa/_posts",
 };
 
 // --------------------------------------
