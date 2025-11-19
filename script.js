@@ -1,22 +1,33 @@
 /* script.js - Perspectivas Engine v2.2 (Router & Detail View) */
 
-// 1. CONFIGURACIÓN
+// 1. CONFIGURACIÓN/* script.js - Perspectivas Engine v2.3 (Fix Rutas) */
+
+// 1. CONFIGURACIÓN Y RUTAS
 const CONFIG = {
-  username: 'perspectivas-py',
+  username: 'perspectivas-py', 
   repo: 'perspectivas',
   limitNews: 10,
 };
 
-const BASE_API = `https://api.github.com/repos/${CONFIG.username}/${CONFIG.repo}/contents/content`;
+// DEFINICIÓN EXACTA DE TUS CARPETAS EN GITHUB
+const PATHS = {
+  noticias: 'content/noticias/posts',
+  programa: 'content/programa/posts', 
+  analisis: 'content/analisis/posts'  
+};
+
+const BASE_API = `https://api.github.com/repos/${CONFIG.username}/${CONFIG.repo}/contents`;
 
 // 2. UTILIDADES
 const getCacheBust = () => `?t=${Date.now()}`;
 
 const formatDate = (dateString) => {
   if (!dateString) return "";
-  return new Date(dateString).toLocaleDateString("es-ES", {
-    day: "numeric", month: "long", year: "numeric"
-  });
+  try {
+    return new Date(dateString).toLocaleDateString("es-ES", {
+      day: "numeric", month: "short", year: "numeric"
+    });
+  } catch (e) { return dateString; }
 };
 
 const getYoutubeId = (url) => {
@@ -26,7 +37,7 @@ const getYoutubeId = (url) => {
   return (match && match[2].length === 11) ? match[2] : null;
 };
 
-// Parsear Markdown y Frontmatter
+// Parsear Frontmatter
 const parseMarkdown = (text) => {
   const frontmatterRegex = /^---([\s\S]*?)---/;
   const match = text.match(frontmatterRegex);
@@ -47,12 +58,21 @@ const parseMarkdown = (text) => {
   return { attributes, body };
 };
 
-// 3. API FETCHING
-async function fetchCollection(folder) {
+// 3. FETCHING
+async function fetchCollection(folderPath, sectionName) {
   try {
-    const response = await fetch(`${BASE_API}/${folder}${getCacheBust()}`);
-    if (!response.ok) throw new Error(`Error folder ${folder}`);
+    // Llamada a la API para listar archivos
+    const apiUrl = `${BASE_API}/${folderPath}${getCacheBust()}`;
+    const response = await fetch(apiUrl);
+    
+    if (!response.ok) {
+      console.error(`Error HTTP: ${response.status} buscando en: ${folderPath}`);
+      throw new Error(`No encontrada: ${folderPath}`);
+    }
+    
     const files = await response.json();
+    
+    // Filtrar solo MD y evitar subcarpetas extrañas
     const mdFiles = files.filter(f => f.name.endsWith('.md'));
 
     const items = await Promise.all(mdFiles.map(async (file) => {
@@ -63,52 +83,48 @@ async function fetchCollection(folder) {
         ...attributes,
         body,
         slug: file.name.replace('.md', ''),
-        folder: folder,
+        folder: folderPath, // Guardamos la ruta completa para saber dónde buscar luego
         category: attributes.category || 'General',
-        date: attributes.date || new Date().toISOString()
+        date: attributes.date || new Date().toISOString(),
+        section: sectionName
       };
     }));
 
     return items.sort((a, b) => new Date(b.date) - new Date(a.date));
   } catch (error) {
-    console.error(error);
+    console.error(`Fallo crítico cargando ${sectionName}:`, error);
     return [];
   }
 }
 
-// Función específica para cargar UN solo post (Detalle)
-async function fetchSinglePost(folder, slug) {
+// Fetch Individual (Router)
+async function fetchSinglePost(folderPath, slug) {
   try {
-    // Construimos la URL directa al archivo "raw" de GitHub user content o vía API
-    // Usaremos la API para asegurar consistencia con la caché
-    const apiUrl = `${BASE_API}/${folder}/${slug}.md${getCacheBust()}`;
-    
-    // Fetch metadata del archivo para obtener el download_url
+    const apiUrl = `${BASE_API}/${folderPath}/${slug}.md${getCacheBust()}`;
     const fileRes = await fetch(apiUrl);
     if (!fileRes.ok) throw new Error("Post no encontrado");
     const fileData = await fileRes.json();
-
-    // Fetch contenido raw
     const contentRes = await fetch(fileData.download_url);
-    const text = await contentRes.text();
-    return parseMarkdown(text);
+    return parseMarkdown(await contentRes.text());
   } catch (error) {
-    console.error("Error loading post:", error);
+    console.error(error);
     return null;
   }
 }
 
-// 4. RENDERIZADO HOME (UI)
+// 4. RENDER UI (HOME)
 const createCardHTML = (item, showVideo) => {
+  const link = `post.html?id=${item.slug}&folder=${item.folder}`; // Pasamos la carpeta correcta en la URL
   let mediaHTML = '';
-  const link = `post.html?id=${item.slug}&folder=${item.folder}`;
-  
+
   if (showVideo && item.embed_url && getYoutubeId(item.embed_url)) {
     mediaHTML = `<div class="video-wrapper"><iframe src="https://www.youtube.com/embed/${getYoutubeId(item.embed_url)}" frameborder="0" allowfullscreen></iframe></div>`;
   } else {
     const img = item.thumbnail || "https://placehold.co/600x400?text=Perspectivas";
     mediaHTML = `<div class="card-img-container"><a href="${link}"><img src="${img}" loading="lazy"></a></div>`;
   }
+
+  const excerpt = item.description || (item.body ? item.body.substring(0, 100) + '...' : '');
 
   return `
     <article class="card">
@@ -121,53 +137,81 @@ const createCardHTML = (item, showVideo) => {
   `;
 };
 
-async function initHome() {
-  console.log("Iniciando HOME...");
-  const allNews = await fetchCollection('noticias');
-  const allProgram = await fetchCollection('programa');
-  const allAnalysis = await fetchCollection('analisis');
+const setupFilters = (items, gridId) => {
+  const container = document.getElementById('category-filters');
+  if (!container) return;
+  const categories = ['Todas', ...new Set(items.map(i => i.category))];
+  
+  container.innerHTML = categories.map(cat => 
+    `<button class="filter-btn ${cat === 'Todas' ? 'active' : ''}" data-cat="${cat}">${cat}</button>`
+  ).join('');
 
-  // Hero
+  container.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filtered = btn.dataset.cat === 'Todas' 
+        ? items.slice(0, CONFIG.limitNews) 
+        : items.filter(i => i.category === btn.dataset.cat);
+      const grid = document.getElementById(gridId);
+      if(grid) grid.innerHTML = filtered.map(i => createCardHTML(i)).join('');
+    });
+  });
+};
+
+async function initHome() {
+  // Usamos las rutas corregidas del objeto PATHS
+  const allNews = await fetchCollection(PATHS.noticias, 'noticias');
+  const allProgram = await fetchCollection(PATHS.programa, 'programa');
+  const allAnalysis = await fetchCollection(PATHS.analisis, 'analisis');
+
+  // Render Hero
   if (allNews.length > 0) {
     const hero = allNews[0];
     const heroContainer = document.querySelector('.featured-card-bbc');
     if (heroContainer) {
       heroContainer.innerHTML = `
-        <a href="post.html?id=${hero.slug}&folder=noticias">
+        <a href="post.html?id=${hero.slug}&folder=${hero.folder}">
           <img src="${hero.thumbnail || ''}" alt="${hero.title}">
           <h2>${hero.title}</h2>
           <p class="featured-excerpt">${hero.description || ''}</p>
         </a>`;
     }
     
-    // Sidebar
     const sidebar = document.getElementById('top-list-bbc');
     if (sidebar) {
       sidebar.innerHTML = allNews.slice(1, 4).map(item => `
-        <li><a href="post.html?id=${item.slug}&folder=noticias">
+        <li><a href="post.html?id=${item.slug}&folder=${item.folder}">
           <h4>${item.title}</h4><small>${formatDate(item.date)}</small>
         </a></li>`).join('');
     }
 
-    // Grid Noticias
     const grid = document.getElementById('news-grid');
-    if (grid) grid.innerHTML = allNews.slice(4, 4 + CONFIG.limitNews).map(i => createCardHTML(i)).join('');
+    if (grid) {
+        // Render inicial
+        grid.innerHTML = allNews.slice(4, 4 + CONFIG.limitNews).map(i => createCardHTML(i)).join('');
+        // Configurar filtros sobre las noticias RESTANTES (excluyendo hero y sidebar)
+        setupFilters(allNews.slice(4), 'news-grid');
+    }
+  } else {
+    // Manejo de error visual si no carga nada
+    const heroContainer = document.querySelector('.featured-card-bbc');
+    if(heroContainer) heroContainer.innerHTML = "<p>No se encontraron noticias. Verifica la conexión o la configuración.</p>";
   }
 
-  // Grids Programa y Análisis
   const progGrid = document.getElementById('program-grid');
-  if (progGrid) progGrid.innerHTML = allProgram.slice(0, 6).map(i => createCardHTML(i, true)).join('');
+  if (progGrid) progGrid.innerHTML = allProgram.slice(0, 6).map(i => createCardHTML(i, true)).join(''); // True para video
   
   const anaGrid = document.getElementById('analisis-grid');
   if (anaGrid) anaGrid.innerHTML = allAnalysis.slice(0, 4).map(i => createCardHTML(i)).join('');
 }
 
-// 5. RENDERIZADO POST (DETALLE)
+// 5. RENDER POST (DETALLE)
 async function initPost() {
-  console.log("Iniciando DETALLE...");
   const params = new URLSearchParams(window.location.search);
   const slug = params.get('id');
-  const folder = params.get('folder') || 'noticias'; // Default a noticias
+  // Recuperamos la carpeta desde la URL, si no existe, intentamos adivinar con la ruta de noticias
+  const folder = params.get('folder') || PATHS.noticias; 
   const container = document.getElementById('article-detail');
 
   if (!slug || !container) return;
@@ -175,58 +219,47 @@ async function initPost() {
   const data = await fetchSinglePost(folder, slug);
   
   if (!data) {
-    container.innerHTML = "<p>Lo sentimos, no pudimos cargar la noticia. Verifica tu conexión.</p>";
+    container.innerHTML = `
+      <div style="text-align:center; padding:4rem 0;">
+        <h3>Error al cargar noticia</h3>
+        <p>Es posible que la ruta del archivo haya cambiado.</p>
+        <a href="index.html" style="color:red;">Volver al inicio</a>
+      </div>`;
     return;
   }
 
   const { attributes, body } = data;
   document.title = `${attributes.title} | Perspectivas`;
-
-  // Parsear Markdown a HTML usando la librería 'marked'
+  
+  // Cargar librería Marked dinámicamente si no está
+  if(typeof marked === 'undefined') {
+     await import('https://cdn.jsdelivr.net/npm/marked/marked.min.js');
+  }
   const htmlContent = marked.parse(body);
   
-  // Verificar si hay video principal
   let videoHTML = '';
-  if (attributes.embed_url) {
-    const vId = getYoutubeId(attributes.embed_url);
-    if (vId) {
-      videoHTML = `
-        <div class="article-video video-wrapper">
-          <iframe src="https://www.youtube.com/embed/${vId}" frameborder="0" allowfullscreen></iframe>
-        </div>`;
-    }
+  if (attributes.embed_url && getYoutubeId(attributes.embed_url)) {
+      videoHTML = `<div class="article-video video-wrapper"><iframe src="https://www.youtube.com/embed/${getYoutubeId(attributes.embed_url)}" frameborder="0" allowfullscreen></iframe></div>`;
   }
 
-  // Render final
   container.innerHTML = `
     <header class="article-header">
       <span class="article-category">${attributes.category || 'Noticia'}</span>
       <h1 class="article-title">${attributes.title}</h1>
-      <time class="article-meta">${formatDate(attributes.date)} | Por ${attributes.author || 'Redacción'}</time>
+      <time class="article-meta">${formatDate(attributes.date)} | ${attributes.author || 'Redacción'}</time>
     </header>
-    
     ${videoHTML}
-    
     ${!videoHTML && attributes.thumbnail ? `<img src="${attributes.thumbnail}" alt="${attributes.title}">` : ''}
-    
-    <div class="article-content">
-      ${htmlContent}
-    </div>
+    <div class="article-content">${htmlContent}</div>
   `;
 }
 
-// 6. ROUTER PRINCIPAL
+// 6. INICIO
 document.addEventListener('DOMContentLoaded', () => {
-  const path = window.location.pathname;
-
-  // Detectar si estamos en Home (index.html o raíz /)
-  if (path.includes('post.html')) {
+  if (window.location.pathname.includes('post.html')) {
     initPost();
   } else {
-    // Asumimos Home para index.html o raíz
     initHome();
-    
-    // Menú móvil solo necesario en Home o Header general
     const menuToggle = document.getElementById('menu-toggle');
     if(menuToggle) {
       menuToggle.addEventListener('click', () => {
