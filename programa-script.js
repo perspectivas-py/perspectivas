@@ -3,7 +3,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const repo = 'perspectivas-py/perspectivas';
   const branch = 'main';
-  const postsPath = 'content/programa/_posts';
+  const postsPath = 'content/programa/posts';
   const gridContainer = document.getElementById('program-grid');
 
   if (!gridContainer) {
