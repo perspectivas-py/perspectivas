@@ -177,7 +177,9 @@ async function fetchFiles(path) {
 }
 
 async function fetchFileContent(url) {
-  const r = await fetch(url);
+  // Se añade el mismo truco anti-caché aquí para la portada.
+  const cacheBustingUrl = `${url}?t=${new Date().getTime()}`;
+  const r = await fetch(cacheBustingUrl);
   if (!r.ok) throw new Error("No se pudo cargar archivo");
   return await r.text();
 }
