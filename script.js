@@ -262,3 +262,228 @@ function activateMobileMenu() {
     toggle.setAttribute("aria-expanded", isOpen);
   });
 }
+/* script.js - Perspectivas Engine v2.0 */
+
+// 1. CONFIGURACIÓN
+const CONFIG = {
+  username: 'TU_USUARIO_GITHUB', // <--- ¡CAMBIA ESTO!
+  repo: 'Perspectivas',          // <--- ¡CAMBIA ESTO!
+  branch: 'main',
+  limitNews: 10, // Límite solicitado para performance
+};
+
+const BASE_API = `https://api.github.com/repos/${CONFIG.username}/${CONFIG.repo}/contents/content`;
+
+// 2. UTILIDADES
+const getCacheBust = () => `?t=${Date.now()}`;
+
+// Detectar ID de YouTube
+const getYoutubeId = (url) => {
+  if (!url) return null;
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  const match = url.match(regExp);
+  return (match && match[2].length === 11) ? match[2] : null;
+};
+
+// Parsear Frontmatter (Metadata entre ---)
+const parseMarkdown = (text) => {
+  const frontmatterRegex = /^---([\s\S]*?)---/;
+  const match = text.match(frontmatterRegex);
+  
+  if (!match) return { attributes: {}, body: text };
+
+  const frontmatterBlock = match[1];
+  const body = text.replace(frontmatterRegex, '').trim();
+  const attributes = {};
+
+  frontmatterBlock.split('\n').forEach(line => {
+    const [key, ...value] = line.split(':');
+    if (key && value) {
+      let val = value.join(':').trim();
+      // Limpiar comillas si existen
+      val = val.replace(/^['"](.*)['"]$/, '$1');
+      attributes[key.trim()] = val;
+    }
+  });
+
+  return { attributes, body };
+};
+
+// 3. FETCHING DE DATOS
+async function fetchCollection(folder) {
+  try {
+    const response = await fetch(`${BASE_API}/${folder}${getCacheBust()}`);
+    if (!response.ok) throw new Error(`Error cargando ${folder}`);
+    const files = await response.json();
+
+    // Filtrar solo archivos .md
+    const mdFiles = files.filter(f => f.name.endsWith('.md'));
+
+    // Obtener contenido de cada archivo
+    const contentPromises = mdFiles.map(async (file) => {
+      const res = await fetch(file.download_url);
+      const text = await res.text();
+      const { attributes, body } = parseMarkdown(text);
+      return {
+        ...attributes,
+        body, // Opcional: convertir a HTML con marked() si se va a mostrar entero
+        slug: file.name.replace('.md', ''),
+        folder: folder
+      };
+    });
+
+    const items = await Promise.all(contentPromises);
+    
+    // Ordenar por fecha (más reciente primero)
+    return items.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
+
+// 4. RENDERIZADO DE UI
+
+// Renderizado genérico de tarjeta
+const createCardHTML = (item, showVideo = false) => {
+  let mediaHTML = '';
+  
+  // Prioridad Video si showVideo es true y existe embed_url
+  if (showVideo && item.embed_url) {
+    const videoId = getYoutubeId(item.embed_url);
+    if (videoId) {
+      mediaHTML = `
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
+        </div>`;
+    }
+  } 
+  
+  // Si no hay video o no corresponde, mostrar imagen
+  if (!mediaHTML && item.thumbnail) {
+    mediaHTML = `
+      <div class="card-img-container">
+        <img src="${item.thumbnail}" alt="${item.title}" loading="lazy">
+      </div>`;
+  }
+
+  // Snippet del texto
+  const excerpt = item.description || item.body.substring(0, 100) + '...';
+
+  return `
+    <article class="card">
+      ${mediaHTML}
+      <div class="card-content">
+        <small class="card-meta">${item.date || ''} | ${item.author || 'Redacción'}</small>
+        <h3><a href="post.html?id=${item.slug}&folder=${item.folder}">${item.title}</a></h3>
+        <p>${excerpt}</p>
+      </div>
+    </article>
+  `;
+};
+
+// Renderizar Hero (Portada Principal)
+const renderHero = (item) => {
+  const container = document.querySelector('.featured-card-bbc');
+  if (!item || !container) return;
+
+  container.innerHTML = `
+    <a href="post.html?id=${item.slug}&folder=${item.folder}">
+      <img src="${item.thumbnail}" alt="${item.title}">
+      <h2>${item.title}</h2>
+      <p class="featured-excerpt">${item.description || ''}</p>
+    </a>
+  `;
+};
+
+// Renderizar Lista Lateral (Destacados)
+const renderTopList = (items) => {
+  const container = document.getElementById('top-list-bbc');
+  if (!container) return;
+  
+  container.innerHTML = items.map(item => `
+    <li>
+      <a href="post.html?id=${item.slug}&folder=${item.folder}">
+        <h4>${item.title}</h4>
+        <small>${item.date}</small>
+      </a>
+    </li>
+  `).join('');
+};
+
+// Renderizar Grillas Generales
+const renderGrid = (items, elementId, isVideoSection = false) => {
+  const container = document.getElementById(elementId);
+  if (!container) return;
+  container.innerHTML = items.map(item => createCardHTML(item, isVideoSection)).join('');
+};
+
+
+// 5. INICIALIZACIÓN (MAIN)
+async function initApp() {
+  // A. Cargar Noticias
+  const allNews = await fetchCollection('noticias'); // Asume carpeta content/noticias
+  const allProgram = await fetchCollection('programa'); // Asume carpeta content/programa
+  const allAnalysis = await fetchCollection('analisis'); // Asume carpeta content/analisis
+
+  // B. Lógica de Distribución de Noticias (Hero vs Grid)
+  if (allNews.length > 0) {
+    // 1. La más reciente va al Hero
+    renderHero(allNews[0]);
+
+    // 2. Las siguientes 3 van al Sidebar
+    const sidebarItems = allNews.slice(1, 4);
+    renderTopList(sidebarItems);
+
+    // 3. Las siguientes X (según límite) van al Grid de Noticias Locales
+    // Empezamos en 4 porque 0 es hero y 1,2,3 son sidebar
+    const gridItems = allNews.slice(4, 4 + CONFIG.limitNews); 
+    renderGrid(gridItems, 'news-grid');
+  }
+
+  // C. Sección Programa (Videos)
+  // Renderiza todo o con límite, activando modo video
+  renderGrid(allProgram.slice(0, 6), 'program-grid', true);
+
+  // D. Sección Análisis
+  renderGrid(allAnalysis.slice(0, 4), 'analisis-grid');
+
+  // E. Buscador Simple (Cliente)
+  setupSearch([ ...allNews, ...allProgram, ...allAnalysis ]);
+}
+
+// 6. BUSCADOR EN CLIENTE (Básico)
+function setupSearch(allItems) {
+  const input = document.getElementById('search-input');
+  if (!input) return;
+
+  input.addEventListener('input', (e) => {
+    const term = e.target.value.toLowerCase();
+    const newsGrid = document.getElementById('news-grid');
+    
+    if (term.length < 2) {
+        // Restaurar estado original (requiere guardar estado, 
+        // simplificado aquí recargando lo inicial o filtrando sobre el subset)
+        // Para este ejemplo, filtraremos sobre todo lo que tengamos cargado en memoria
+        return; 
+    }
+
+    // Filtrar
+    const filtered = allItems.filter(item => 
+      item.title.toLowerCase().includes(term) || 
+      (item.description && item.description.toLowerCase().includes(term))
+    );
+
+    // Re-renderizar solo el grid de noticias con resultados
+    newsGrid.innerHTML = filtered.map(item => createCardHTML(item)).join('');
+  });
+}
+
+// Menú Móvil
+document.getElementById('menu-toggle').addEventListener('click', () => {
+  document.getElementById('nav-list').classList.toggle('active');
+});
+
+// Arrancar
+document.addEventListener('DOMContentLoaded', initApp);
