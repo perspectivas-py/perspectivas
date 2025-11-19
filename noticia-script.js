@@ -170,15 +170,26 @@ function removeFirstImage(content) {
 }
 
 // --------------------------------------
-// Redes sociales
+// Redes sociales (VERSIÓN MEJORADA CON ICONOS)
 // --------------------------------------
 function renderShareButtons(title) {
   const url = encodeURIComponent(window.location.href);
   const text = encodeURIComponent(title);
+  
+  // Usamos los iconos de Font Awesome (etiquetas <i>) en lugar de emojis.
   return `
-    <a href="https://twitter.com/intent/tweet?url=${url}&text=${text}" target="_blank">🐦</a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank">📘</a>
-    <a href="https://api.whatsapp.com/send?text=${text}%20${url}" target="_blank">💬</a>
-    <a href="https://www.linkedin.com/sharing/share-offsite/?url=${url}" target="_blank">💼</a>
+    <span>Compartir:</span>
+    <a href="https://twitter.com/intent/tweet?url=${url}&text=${text}" target="_blank" aria-label="Compartir en Twitter">
+      <i class="fab fa-twitter"></i>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank" aria-label="Compartir en Facebook">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+    <a href="https://api.whatsapp.com/send?text=${text}%20${url}" target="_blank" aria-label="Compartir en WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=${url}" target="_blank" aria-label="Compartir en LinkedIn">
+      <i class="fab fa-linkedin"></i>
+    </a>
   `;
 }
