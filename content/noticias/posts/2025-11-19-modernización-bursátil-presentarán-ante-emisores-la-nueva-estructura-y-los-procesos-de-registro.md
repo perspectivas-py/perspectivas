@@ -3,14 +3,13 @@ featured: true
 category: macro
 tags:
   - bursátil
-title: "Modernización bursátil: Presentarán ante emisores la nueva estructura y
-  los procesos de registro"
+title: "Modernización bursátil: Presentarán ante emisores la nueva estructura y los procesos de registro"
 date: 2025-11-19T14:58:25.495Z
 summary: |-
   El encuentro se llevará a cabo este jueves 20 de noviembre, desde las
   08:00.
 ---
-![El objetivo es presentar a las empresas emisoras las novedades.](/assets/img/nasdaq.avif "Nasdaq")
+![Objetivo es presentar a las empresas emisoras las novedades](/assets/img/nasdaq.avif "Nasdaq")
 
 “Modernización bursátil: Nueva estructura y procesos para emisores” se denomina la charla que se encuentran organizando la Bolsa de Valores de Asunción (BVA), la Caja de Valores del Paraguay (CAVAPY) y la Asociación de Casas de Bolsa del Paraguay (Asobolsa), para este jueves 20 de noviembre.
 
