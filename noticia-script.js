@@ -74,38 +74,29 @@ function parseFrontmatterArticle(md) {
 }
 
 // --------------------------------------
-// Render (VERSIÓN CON BOTONES DEBAJO DE LA IMAGEN)
+// Redes sociales (VERSIÓN CON ICONOS AGRUPADOS)
 // --------------------------------------
-function renderArticle(fm, content, type, id) {
-  const container = getArticleContainer();
-  if (!container) return;
-
-  const title = fm.title || "Sin título";
-  const date = formatDateArticle(fm.date);
-  const readTime = estimateReadingTime(content);
-  const firstImage = findFirstImageFromAny(content);
-  let cleanedContent = removeFirstImage(content);
-  const htmlContent = window.marked ? window.marked.parse(cleanedContent.trim()) : cleanedContent.trim();
-
-  // El bloque de "share-buttons" se ha movido aquí, justo después de la imagen.
-  container.innerHTML = `
-    <h1>${title}</h1>
-
-    <div class="article-meta-info">
-      <span>${date}</span>
-      <span>⏱ ${readTime} min de lectura</span>
+function renderShareButtons(title) {
+  const url = encodeURIComponent(window.location.href);
+  const text = encodeURIComponent(title);
+  
+  // Añadimos un <div> para agrupar los iconos y poder alinearlos a la derecha.
+  return `
+    <span>Compartir:</span>
+    <div class="share-icons">
+      <a href="https://twitter.com/intent/tweet?url=${url}&text=${text}" target="_blank" aria-label="Compartir en Twitter">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank" aria-label="Compartir en Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://api.whatsapp.com/send?text=${text}%20${url}" target="_blank" aria-label="Compartir en WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=${url}" target="_blank" aria-label="Compartir en LinkedIn">
+        <i class="fab fa-linkedin"></i>
+      </a>
     </div>
-
-    ${firstImage ? `<div class="featured-image"><img src="${firstImage}" alt=""></div>` : ""}
-
-    <!-- **** BOTONES MOVIDOS AQUÍ **** -->
-    <div id="share-buttons">
-      ${renderShareButtons(title)}
-    </div>
-
-    <article class="article-content">
-      ${htmlContent}
-    </article>
   `;
 }
 // --------------------------------------
