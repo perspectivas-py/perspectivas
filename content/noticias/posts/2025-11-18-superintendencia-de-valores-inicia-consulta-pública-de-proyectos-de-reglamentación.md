@@ -6,8 +6,8 @@ tags:
 title: Superintendencia de Valores inicia consulta pública de proyectos de
   reglamentación
 date: 2025-11-18T16:51:08.840Z
-summary: Superintendencia de Valores inicia consulta pública de proyectos de
-  reglamentación
+summary: '"Superintendencia de Valores inicia consulta pública de proyectos de
+  reglamentación"'
 ---
 ![](/assets/img/knmg6a6szzcshjyavygmnkhpbi.jpg)
 
