@@ -271,3 +271,29 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-headline); }
 .search-bar input:focus {
   outline: 2px solid var(--color-accent);
 }
+/* --- Estilos para los botones de compartir --- */
+#share-buttons {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Espacio entre el texto y los iconos */
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+#share-buttons span {
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: var(--color-text-secondary);
+}
+
+#share-buttons a {
+  font-size: 1.5em; /* Tamaño de los iconos */
+  color: var(--color-text-secondary); /* Color por defecto */
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+#share-buttons a:hover {
+  color: var(--color-accent); /* Color al pasar el mouse */
+}
