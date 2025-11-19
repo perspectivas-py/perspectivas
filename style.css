@@ -271,12 +271,12 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-headline); }
 .search-bar input:focus {
   outline: 2px solid var(--color-accent);
 }
-/* --- Estilos para los botones de compartir (NUEVA POSICIÓN) --- */
+/* --- Estilos para los botones de compartir (Alineados a los costados) --- */
 #share-buttons {
   display: flex;
   align-items: center;
-  gap: 15px;
-  /* Ajustamos el margen para dar espacio arriba y abajo */
+  /* La magia está aquí: empuja los elementos hijos a los extremos opuestos. */
+  justify-content: space-between; 
   margin: 25px 0; 
 }
 
@@ -286,6 +286,14 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-headline); }
   color: var(--color-text-secondary);
 }
 
+/* Nuevo estilo para el contenedor de los iconos */
+.share-icons {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Mantenemos el espacio entre los iconos */
+}
+
+/* El estilo de los enlaces 'a' se mantiene igual y no necesita cambios */
 #share-buttons a {
   font-size: 1.5em;
   color: var(--color-text-secondary);
