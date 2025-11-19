@@ -74,7 +74,7 @@ function parseFrontmatterArticle(md) {
 }
 
 // --------------------------------------
-// Render
+// Render (VERSIÓN CON BOTONES DEBAJO DE LA IMAGEN)
 // --------------------------------------
 function renderArticle(fm, content, type, id) {
   const container = getArticleContainer();
@@ -83,15 +83,11 @@ function renderArticle(fm, content, type, id) {
   const title = fm.title || "Sin título";
   const date = formatDateArticle(fm.date);
   const readTime = estimateReadingTime(content);
-
-  // buscar primera imagen
   const firstImage = findFirstImageFromAny(content);
-
-  // eliminar primera imagen (markdown, img, figure)
   let cleanedContent = removeFirstImage(content);
-
   const htmlContent = window.marked ? window.marked.parse(cleanedContent.trim()) : cleanedContent.trim();
 
+  // El bloque de "share-buttons" se ha movido aquí, justo después de la imagen.
   container.innerHTML = `
     <h1>${title}</h1>
 
@@ -102,16 +98,16 @@ function renderArticle(fm, content, type, id) {
 
     ${firstImage ? `<div class="featured-image"><img src="${firstImage}" alt=""></div>` : ""}
 
-    <article class="article-content">
-      ${htmlContent}
-    </article>
-
+    <!-- **** BOTONES MOVIDOS AQUÍ **** -->
     <div id="share-buttons">
       ${renderShareButtons(title)}
     </div>
+
+    <article class="article-content">
+      ${htmlContent}
+    </article>
   `;
 }
-
 // --------------------------------------
 // Utilidades DOM
 // --------------------------------------
