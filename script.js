@@ -63,13 +63,13 @@ async function loadNews() {
   }
 }
 
-// --- RENDER DESTACADA ---
+// --- RENDER DESTACADA (LÍMITE DE TEXTO AUMENTADO) ---
 function renderFeaturedArticleBBC(container, post) {
   const { name, frontmatter, content } = post;
   let imageUrl = findFirstImage(content) || 
     "https://placehold.co/800x450/EFEFEF/AAAAAA?text=Perspectivas";
 
-  const link = `noticia.html?type=noticias&id=${name}`;
+  const link = `noticia.html?type=noticias&id=${name.replace(/\.md$/, '')}`;
 
   container.innerHTML = `
     <div class="featured-image-container">
@@ -78,21 +78,21 @@ function renderFeaturedArticleBBC(container, post) {
     <div class="featured-body">
       <time datetime="${frontmatter.date}">${formatDate(frontmatter.date)}</time>
       <h1><a href="${link}">${frontmatter.title || "Sin título"}</a></h1>
-      <p class="dek">${frontmatter.summary || content.substring(0, 150)}...</p>
+      <p class="dek">${frontmatter.summary || content.substring(0, 220) + '...'}</p>
     </div>
   `;
 }
 
-// --- LISTA LATERAL ---
+// --- LISTA LATERAL (LÍMITE DE TEXTO AUMENTADO) ---
 function renderTopListBBC(container, files) {
   container.innerHTML = "";
   files.forEach(post => {
-    const link = `noticia.html?type=noticias&id=${post.name}`;
+    const link = `noticia.html?type=noticias&id=${post.name.replace(/\.md$/, '')}`;
     const li = document.createElement("li");
     li.innerHTML = `
       <a href="${link}">
         <h4>${post.frontmatter.title || formatTitleFromFilename(post.name)}</h4>
-        <p>${post.frontmatter.summary || post.content.substring(0, 80)}...</p>
+        <p>${post.frontmatter.summary || post.content.substring(0, 120) + '...'}</p>
       </a>
     `;
     container.appendChild(li);
