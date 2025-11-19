@@ -38,7 +38,11 @@ async function loadNews() {
       })
     );
 
-    // Destacado
+    // --- CORRECCIÓN 3: ORDENAR TODAS LAS NOTICIAS POR FECHA (MÁS RECIENTE PRIMERO) ---
+    // Esto garantiza que el contenido nuevo siempre esté al principio.
+    allPosts.sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date));
+
+    // El destacado es el marcado como 'featured' o, en su defecto, el más reciente.
     let featuredPost =
       allPosts.find(post => String(post.frontmatter.featured) === "true") ||
       allPosts[0];
@@ -47,8 +51,9 @@ async function loadNews() {
 
     renderFeaturedArticleBBC(featuredCard, featuredPost);
     renderTopListBBC(topList, otherPosts.slice(0, 4));
-    renderNewsGrid(newsGrid, otherPosts);
+    renderNewsGrid(newsGrid, otherPosts); // Renderiza todas las demás noticias
 
+    // Inicializamos los filtros DESPUÉS de renderizar todo el contenido.
     initCategoryFilter();
     initSearchFilter();
 
@@ -109,7 +114,7 @@ function createNewsCard(post) {
     "https://placehold.co/400x225/EFEFEF/AAAAAA?text=Perspectivas";
 
   return `
-    <article class="card" data-category="${category}">
+    <article class="card" data-category="${category.toLowerCase()}">
       <a href="${link}">
         <img src="${img}" alt="">
       </a>
@@ -136,8 +141,6 @@ function initCategoryFilter() {
       cards.forEach(card => {
         card.style.display = (cat === "all" || card.dataset.category === cat) ? "" : "none";
       });
-
-      window.history.pushState({}, "", cat === "all" ? "/" : `/categoria/${cat}`);
     });
   });
 }
@@ -165,7 +168,10 @@ function normalizeText(str) {
 
 // --- UTILS ---
 async function fetchFiles(path) {
-  const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}`);
+  // --- CORRECCIÓN 4: ANTI-CACHÉ ---
+  // Se añade un parámetro único a la URL para forzar la obtención de datos frescos.
+  const timestamp = `&_=${new Date().getTime()}`;
+  const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}${timestamp}`);
   if (!r.ok) throw new Error(`No se pudo acceder al contenido: ${path}`);
   return await r.json();
 }
@@ -185,7 +191,8 @@ function parseFrontmatter(md) {
     lines.forEach(line => {
       const [key, ...rest] = line.split(":");
       if (key && rest.length) {
-        data.frontmatter[key.trim()] = rest.join(":").trim();
+        // Aseguramos que el valor se limpie de comillas y espacios extra
+        data.frontmatter[key.trim()] = rest.join(":").trim().replace(/^['"]|['"]$/g, '');
       }
     });
     data.content = md.replace(match[0], "").trim();
