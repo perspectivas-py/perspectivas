@@ -53,10 +53,14 @@ async function loadArticle(type, id) {
 }
 
 // --------------------------------------
-// Fetch
+// Fetch (VERSIÓN ANTI-CACHÉ)
 // --------------------------------------
 async function fetchMarkdown(url) {
-  const res = await fetch(url);
+  // Se añade un parámetro único a la URL para forzar una carga nueva del archivo
+  // y evitar que se muestre una versión antigua guardada en caché.
+  const cacheBustingUrl = `${url}?t=${new Date().getTime()}`;
+  
+  const res = await fetch(cacheBustingUrl);
   if (!res.ok) throw new Error(`No se pudo cargar el archivo Markdown: ${url}`);
   return await res.text();
 }
