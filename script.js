@@ -11,7 +11,9 @@ const PATHS = {
   noticias: 'content/noticias/posts',
   programa: 'content/programa/posts', 
   analisis: 'content/analisis/posts',
-  podcast: 'content/podcast/posts'
+  podcast: 'content/podcast/posts',
+  sponsors: 'content/sponsors'
+
 };
 
 const BASE_API = `https://api.github.com/repos/${CONFIG.username}/${CONFIG.repo}/contents`;
@@ -63,6 +65,19 @@ const parseMarkdown = (text) => {
   });
   return { attributes, body: text.replace(match[0], '').trim() };
 };
+
+// --- Helpers Sponsors ---
+function shuffleArray(arr) {
+  return arr
+    .map(item => ({ item, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ item }) => item);
+}
+
+function resolveMediaUrl(path) {
+  if (!path) return '';
+  return path.startsWith('http') ? path : path; 
+}
 
 // --- Fetching ---
 async function fetchCollection(path, type) {
@@ -161,6 +176,99 @@ const createPodcastHTML = (item) => {
     </article>
   `;
 };
+function renderSponsorsGrid(entries) {
+  const container = document.getElementById('sponsorsGrid');
+  if (!container) return;
+
+  container.innerHTML = '';
+
+  if (!entries.length) {
+    container.innerHTML = '<p>No hay patrocinadores activos por el momento.</p>';
+    return;
+  }
+
+  const randomized = shuffleArray(entries);
+
+  randomized.forEach(item => {
+    const d = item;
+    if (String(d.active) === 'false') return;
+
+    const tierClass = d.tier ? `tier-${d.tier}` : '';
+    const logoUrl = resolveMediaUrl(d.logo);
+
+    const wrapper = document.createElement(d.url ? 'a' : 'div');
+    wrapper.className = `sponsor-item ${tierClass}`;
+    if (d.url) {
+      wrapper.href = d.url;
+      wrapper.target = '_blank';
+      wrapper.rel = 'noopener noreferrer sponsored';
+      wrapper.title = d.title || '';
+    }
+
+    const img = document.createElement('img');
+    img.src = logoUrl || 'https://placehold.co/200x60?text=Logo';
+    img.alt = d.title || 'Patrocinador';
+    wrapper.appendChild(img);
+
+    container.appendChild(wrapper);
+  });
+}
+function renderSponsoredSite(entries) {
+  const cardEl = document.getElementById('sponsoredSiteCard');
+  if (!cardEl) return;
+
+  const featured = entries.find(e => String(e.featured) === 'true') || entries[0];
+
+  if (!featured) {
+    cardEl.innerHTML = '<p>No hay sitio patrocinado disponible.</p>';
+    cardEl.classList.remove('skeleton-card');
+    return;
+  }
+
+  const d = featured;
+  const logoUrl = resolveMediaUrl(d.logo);
+
+  cardEl.classList.remove('skeleton-card');
+  cardEl.innerHTML = `
+    <div>
+      <div class="sponsored-meta">Contenido patrocinado</div>
+      <h3>${d.headline || d.title || 'Sitio patrocinado'}</h3>
+      ${d.excerpt ? `<p>${d.excerpt}</p>` : ''}
+      ${d.sector ? `<div class="sponsored-sector">Sector: ${d.sector}</div>` : ''}
+      ${d.url ? `
+        <div class="sponsored-actions">
+          <a class="sponsored-cta" href="${d.url}" target="_blank" rel="noopener noreferrer sponsored">
+            Visitar sitio patrocinado
+          </a>
+        </div>` : ''}
+    </div>
+    <div>
+      <img src="${logoUrl || 'https://placehold.co/400x250?text=Patrocinador'}" 
+           alt="${d.title || 'Patrocinador'}">
+    </div>
+  `;
+}
+async function loadSponsorsHome() {
+  try {
+    const sponsors = await fetchCollection(PATHS.sponsors, 'sponsors');
+
+    if (sponsors.length) {
+      renderSponsorsGrid(sponsors);
+      renderSponsoredSite(sponsors);
+    }
+  } catch (err) {
+    console.error("Error cargando sponsors:", err);
+
+    const grid = document.getElementById('sponsorsGrid');
+    const block = document.getElementById('sponsoredSiteCard');
+
+    if (grid) grid.innerHTML = '<p>Error cargando patrocinadores.</p>';
+    if (block) {
+      block.innerHTML = '<p>Error cargando sitio patrocinado.</p>';
+      block.classList.remove('skeleton-card');
+    }
+  }
+}
 
 const setupFilters = (items, gridId) => {
   const container = document.getElementById('category-filters');
@@ -272,6 +380,7 @@ async function initHome() {
        grid.innerHTML = news.slice(4, 4 + CONFIG.limitNews).map(n => createCardHTML(n)).join('');
     } else {
        grid.innerHTML = news.filter(n => n.title.toLowerCase().includes(term)).map(n => createCardHTML(n)).join('');
+       loadSponsorsHome();
     }
   });
 }
