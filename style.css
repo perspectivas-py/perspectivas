@@ -79,3 +79,102 @@ ul { list-style: none; }
   .nav-list.active { display: flex; }
   .menu-toggle { display: block; }
 }
+/* =========================================
+   SECCIÓN NEWSLETTER (Callout)
+   ========================================= */
+.callout {
+  background-color: #f8f9fa; /* Fondo gris muy suave */
+  border-top: 4px solid var(--color-accent); /* Borde rojo arriba */
+  border-bottom: 1px solid #e0e0e0;
+  padding: 4rem 2rem;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.newsletter-inner {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.newsletter-inner h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-dark);
+}
+
+.newsletter-inner p {
+  color: #555;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+/* Formulario en una línea (Desktop) */
+.newsletter-form .input-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.newsletter-form input,
+.newsletter-form select {
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: var(--font-ui);
+  font-size: 1rem;
+}
+
+.newsletter-form input {
+  flex: 2; /* Ocupa más espacio */
+}
+
+.newsletter-form select {
+  flex: 1;
+  background-color: white;
+  cursor: pointer;
+}
+
+.newsletter-form button {
+  background-color: var(--color-dark);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 4px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-family: var(--font-ui);
+}
+
+.newsletter-form button:hover {
+  background-color: var(--color-accent);
+}
+
+/* Mensajes de Feedback */
+.msg-feedback {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  min-height: 1.5em; /* Evita saltos de layout */
+}
+.msg-success { color: #16a34a; } /* Verde */
+.msg-error { color: #dc2626; }   /* Rojo */
+
+.disclaimer {
+  font-size: 0.8rem !important;
+  color: #888 !important;
+  margin-top: 1.5rem;
+  margin-bottom: 0 !important;
+}
+
+/* Responsive: Apilar en móviles */
+@media (max-width: 600px) {
+  .newsletter-form .input-group {
+    flex-direction: column;
+  }
+  .newsletter-form input, 
+  .newsletter-form select, 
+  .newsletter-form button {
+    width: 100%;
+  }
+}
