@@ -5,7 +5,6 @@ backend:
   base_url: https://decap-oauth.vercel.app
   auth_endpoint: auth
 
-
 media_folder: "assets/img"
 public_folder: "/assets/img"
 
@@ -49,6 +48,11 @@ collections:
       - label: "Fecha de Publicación"
         name: "date"
         widget: "datetime"
+      
+      - label: "Imagen Destacada"
+        name: "thumbnail"
+        widget: "image"
+        required: false
 
       - label: "Resumen"
         name: "summary"
@@ -62,7 +66,7 @@ collections:
 
   - name: "analisis"
     label: "Análisis y Opinión"
-    folder: "content/analisis/_posts"
+    folder: "content/analisis/posts" # CORREGIDO: Coincide con tu script.js
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
@@ -76,6 +80,10 @@ collections:
       - label: "Fecha"
         name: "date"
         widget: "datetime"
+      - label: "Imagen"
+        name: "thumbnail"
+        widget: "image"
+        required: false
       - label: "Resumen"
         name: "summary"
         widget: "text"
@@ -97,22 +105,35 @@ collections:
       - label: "Fecha"
         name: "date"
         widget: "datetime"
-      - label: "Enlace Embed"
+      - label: "Enlace Embed (Youtube)"
         name: "embed_url"
-        widget: "text"
+        widget: "string"
       - label: "Resumen y Notas"
         name: "body"
         widget: "markdown"
-        
- - name: "podcast"
+
+  - name: "podcast"
     label: "Podcast"
     folder: "content/podcast/posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - {label: "Título", name: "title", widget: "string"}
-      - {label: "Fecha", name: "date", widget: "datetime"}
-      - {label: "Imagen de Portada", name: "thumbnail", widget: "image"}
-      - {label: "Descripción Corta", name: "description", widget: "text"}
-      - {label: "Embed de Spotify/YouTube", name: "embed_url", widget: "string", required: false}
-      - {label: "Cuerpo", name: "body", widget: "markdown"}
+      - label: "Título"
+        name: "title"
+        widget: "string"
+      - label: "Fecha"
+        name: "date"
+        widget: "datetime"
+      - label: "Imagen de Portada"
+        name: "thumbnail"
+        widget: "image"
+      - label: "Descripción Corta"
+        name: "description"
+        widget: "text"
+      - label: "Embed de Spotify/YouTube"
+        name: "embed_url"
+        widget: "string"
+        required: false
+      - label: "Cuerpo"
+        name: "body"
+        widget: "markdown"
