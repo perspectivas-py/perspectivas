@@ -11,7 +11,7 @@ const CONFIG = {
 const PATHS = {
   noticias: 'content/noticias/posts',
   programa: 'content/programa/posts', 
-  analisis: 'content/analisis/posts'  
+  analisis: 'content/analisis/_posts'  
 };
 
 const BASE_API = `https://api.github.com/repos/${CONFIG.username}/${CONFIG.repo}/contents`;
