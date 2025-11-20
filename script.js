@@ -1,268 +1,201 @@
-/* script.js - Perspectivas Engine v2.3 (Fix Rutas) */
+/* script.js - Final para HTML actual */
 
-// 1. CONFIGURACIÓN Y RUTAS
 const CONFIG = {
-  username: 'perspectivas-py', 
+  username: 'perspectivas-py',
   repo: 'perspectivas',
   limitNews: 10,
 };
 
-// DEFINICIÓN EXACTA DE TUS CARPETAS EN GITHUB
+// TUS RUTAS REALES
 const PATHS = {
   noticias: 'content/noticias/posts',
   programa: 'content/programa/posts', 
-  analisis: 'content/analisis/_posts'  
+  analisis: 'content/analisis/posts'  
 };
 
 const BASE_API = `https://api.github.com/repos/${CONFIG.username}/${CONFIG.repo}/contents`;
-
-// 2. UTILIDADES
 const getCacheBust = () => `?t=${Date.now()}`;
 
-const formatDate = (dateString) => {
-  if (!dateString) return "";
-  try {
-    return new Date(dateString).toLocaleDateString("es-ES", {
-      day: "numeric", month: "short", year: "numeric"
-    });
-  } catch (e) { return dateString; }
+// --- Helpers ---
+const formatDate = (str) => {
+  if(!str) return "";
+  try { return new Date(str).toLocaleDateString("es-ES", {day:"numeric", month:"short", year:"numeric"}); } 
+  catch(e){ return str; }
 };
 
 const getYoutubeId = (url) => {
   if (!url) return null;
-  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-  const match = url.match(regExp);
+  const match = url.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/);
   return (match && match[2].length === 11) ? match[2] : null;
 };
 
-// Parsear Frontmatter
 const parseMarkdown = (text) => {
-  const frontmatterRegex = /^---([\s\S]*?)---/;
-  const match = text.match(frontmatterRegex);
+  const match = text.match(/^---([\s\S]*?)---/);
   if (!match) return { attributes: {}, body: text };
-
-  const frontmatterBlock = match[1];
-  const body = text.replace(frontmatterRegex, '').trim();
   const attributes = {};
-
-  frontmatterBlock.split('\n').forEach(line => {
-    const [key, ...value] = line.split(':');
-    if (key && value) {
-      let val = value.join(':').trim();
-      val = val.replace(/^['"](.*)['"]$/, '$1');
-      attributes[key.trim()] = val;
-    }
+  match[1].split('\n').forEach(line => {
+    const [key, ...val] = line.split(':');
+    if (key && val) attributes[key.trim()] = val.join(':').trim().replace(/^['"]|['"]$/g, '');
   });
-  return { attributes, body };
+  return { attributes, body: text.replace(match[0], '').trim() };
 };
 
-// 3. FETCHING
-async function fetchCollection(folderPath, sectionName) {
+// --- Fetching ---
+async function fetchCollection(path, type) {
   try {
-    // Llamada a la API para listar archivos
-    const apiUrl = `${BASE_API}/${folderPath}${getCacheBust()}`;
-    const response = await fetch(apiUrl);
-    
-    if (!response.ok) {
-      console.error(`Error HTTP: ${response.status} buscando en: ${folderPath}`);
-      throw new Error(`No encontrada: ${folderPath}`);
-    }
-    
-    const files = await response.json();
-    
-    // Filtrar solo MD y evitar subcarpetas extrañas
+    const res = await fetch(`${BASE_API}/${path}${getCacheBust()}`);
+    if(!res.ok) return [];
+    const files = await res.json();
     const mdFiles = files.filter(f => f.name.endsWith('.md'));
-
-    const items = await Promise.all(mdFiles.map(async (file) => {
-      const res = await fetch(file.download_url);
-      const text = await res.text();
-      const { attributes, body } = parseMarkdown(text);
-      return {
-        ...attributes,
-        body,
-        slug: file.name.replace('.md', ''),
-        folder: folderPath, // Guardamos la ruta completa para saber dónde buscar luego
-        category: attributes.category || 'General',
-        date: attributes.date || new Date().toISOString(),
-        section: sectionName
-      };
+    
+    const items = await Promise.all(mdFiles.map(async f => {
+      const r = await fetch(f.download_url);
+      const t = await r.text();
+      const { attributes, body } = parseMarkdown(t);
+      return { ...attributes, body, slug: f.name.replace('.md',''), folder: path, category: attributes.category || 'General' };
     }));
-
-    return items.sort((a, b) => new Date(b.date) - new Date(a.date));
-  } catch (error) {
-    console.error(`Fallo crítico cargando ${sectionName}:`, error);
-    return [];
-  }
+    return items.sort((a,b) => new Date(b.date) - new Date(a.date));
+  } catch(e) { console.error(e); return []; }
 }
 
-// Fetch Individual (Router)
-async function fetchSinglePost(folderPath, slug) {
+async function fetchSinglePost(folder, slug) {
   try {
-    const apiUrl = `${BASE_API}/${folderPath}/${slug}.md${getCacheBust()}`;
-    const fileRes = await fetch(apiUrl);
-    if (!fileRes.ok) throw new Error("Post no encontrado");
-    const fileData = await fileRes.json();
-    const contentRes = await fetch(fileData.download_url);
+    const res = await fetch(`${BASE_API}/${folder}/${slug}.md${getCacheBust()}`);
+    if(!res.ok) throw new Error("Not found");
+    const meta = await res.json();
+    const contentRes = await fetch(meta.download_url);
     return parseMarkdown(await contentRes.text());
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
+  } catch(e) { return null; }
 }
 
-// 4. RENDER UI (HOME)
+// --- Rendering ---
 const createCardHTML = (item, showVideo) => {
-  const link = `post.html?id=${item.slug}&folder=${item.folder}`; // Pasamos la carpeta correcta en la URL
-  let mediaHTML = '';
-
+  const link = `post.html?id=${item.slug}&folder=${item.folder}`;
+  let media = '';
+  
   if (showVideo && item.embed_url && getYoutubeId(item.embed_url)) {
-    mediaHTML = `<div class="video-wrapper"><iframe src="https://www.youtube.com/embed/${getYoutubeId(item.embed_url)}" frameborder="0" allowfullscreen></iframe></div>`;
+    media = `<div class="video-wrapper"><iframe src="https://www.youtube.com/embed/${getYoutubeId(item.embed_url)}" frameborder="0" allowfullscreen></iframe></div>`;
   } else {
-    const img = item.thumbnail || "https://placehold.co/600x400?text=Perspectivas";
-    mediaHTML = `<div class="card-img-container"><a href="${link}"><img src="${img}" loading="lazy"></a></div>`;
+    media = `<div class="card-img-container"><a href="${link}"><img src="${item.thumbnail || 'https://via.placeholder.com/600x400'}" loading="lazy"></a></div>`;
   }
-
-  const excerpt = item.description || (item.body ? item.body.substring(0, 100) + '...' : '');
-
+  
   return `
     <article class="card">
-      ${mediaHTML}
+      ${media}
       <div class="card-content">
         <small class="card-meta">${formatDate(item.date)} | ${item.category}</small>
         <h3><a href="${link}">${item.title}</a></h3>
       </div>
-    </article>
-  `;
+    </article>`;
 };
 
 const setupFilters = (items, gridId) => {
   const container = document.getElementById('category-filters');
   if (!container) return;
-  const categories = ['Todas', ...new Set(items.map(i => i.category))];
+  const cats = ['Todas', ...new Set(items.map(i => i.category))];
+  container.innerHTML = cats.map(c => `<button class="filter-btn ${c==='Todas'?'active':''}" data-cat="${c}">${c}</button>`).join('');
   
-  container.innerHTML = categories.map(cat => 
-    `<button class="filter-btn ${cat === 'Todas' ? 'active' : ''}" data-cat="${cat}">${cat}</button>`
-  ).join('');
-
   container.querySelectorAll('button').forEach(btn => {
     btn.addEventListener('click', () => {
-      container.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      container.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const filtered = btn.dataset.cat === 'Todas' 
-        ? items.slice(0, CONFIG.limitNews) 
-        : items.filter(i => i.category === btn.dataset.cat);
-      const grid = document.getElementById(gridId);
-      if(grid) grid.innerHTML = filtered.map(i => createCardHTML(i)).join('');
+      const cat = btn.dataset.cat;
+      const filtered = cat === 'Todas' ? items.slice(0, CONFIG.limitNews) : items.filter(i => i.category === cat);
+      document.getElementById(gridId).innerHTML = filtered.map(i => createCardHTML(i)).join('');
     });
   });
 };
 
+// --- Main Init ---
 async function initHome() {
-  // Usamos las rutas corregidas del objeto PATHS
-  const allNews = await fetchCollection(PATHS.noticias, 'noticias');
-  const allProgram = await fetchCollection(PATHS.programa, 'programa');
-  const allAnalysis = await fetchCollection(PATHS.analisis, 'analisis');
+  const news = await fetchCollection(PATHS.noticias, 'noticias');
+  const prog = await fetchCollection(PATHS.programa, 'programa');
+  const analysis = await fetchCollection(PATHS.analisis, 'analisis');
 
-  // Render Hero
-  if (allNews.length > 0) {
-    const hero = allNews[0];
-    const heroContainer = document.querySelector('.featured-card-bbc');
-    if (heroContainer) {
-      heroContainer.innerHTML = `
+  // 1. Hero (BBC)
+  if(news.length > 0) {
+    const hero = news[0];
+    const heroEl = document.querySelector('.featured-card-bbc');
+    if(heroEl) {
+      heroEl.innerHTML = `
         <a href="post.html?id=${hero.slug}&folder=${hero.folder}">
-          <img src="${hero.thumbnail || ''}" alt="${hero.title}">
+          <img src="${hero.thumbnail || ''}">
           <h2>${hero.title}</h2>
-          <p class="featured-excerpt">${hero.description || ''}</p>
+          <p>${hero.description || ''}</p>
         </a>`;
     }
-    
-    const sidebar = document.getElementById('top-list-bbc');
-    if (sidebar) {
-      sidebar.innerHTML = allNews.slice(1, 4).map(item => `
-        <li><a href="post.html?id=${item.slug}&folder=${item.folder}">
-          <h4>${item.title}</h4><small>${formatDate(item.date)}</small>
+    // Sidebar
+    const sideEl = document.getElementById('top-list-bbc');
+    if(sideEl) {
+      sideEl.innerHTML = news.slice(1,4).map(n => `
+        <li><a href="post.html?id=${n.slug}&folder=${n.folder}">
+          <h4>${n.title}</h4><small>${formatDate(n.date)}</small>
         </a></li>`).join('');
     }
-
-    const grid = document.getElementById('news-grid');
-    if (grid) {
-        // Render inicial
-        grid.innerHTML = allNews.slice(4, 4 + CONFIG.limitNews).map(i => createCardHTML(i)).join('');
-        // Configurar filtros sobre las noticias RESTANTES (excluyendo hero y sidebar)
-        setupFilters(allNews.slice(4), 'news-grid');
+    // Grid Noticias
+    const newsGrid = document.getElementById('news-grid');
+    if(newsGrid) {
+      newsGrid.innerHTML = news.slice(4, 4 + CONFIG.limitNews).map(n => createCardHTML(n)).join('');
+      setupFilters(news.slice(4), 'news-grid');
     }
-  } else {
-    // Manejo de error visual si no carga nada
-    const heroContainer = document.querySelector('.featured-card-bbc');
-    if(heroContainer) heroContainer.innerHTML = "<p>No se encontraron noticias. Verifica la conexión o la configuración.</p>";
   }
 
+  // 2. Programa (Video)
   const progGrid = document.getElementById('program-grid');
-  if (progGrid) progGrid.innerHTML = allProgram.slice(0, 6).map(i => createCardHTML(i, true)).join(''); // True para video
-  
+  if(progGrid) progGrid.innerHTML = prog.slice(0,6).map(p => createCardHTML(p, true)).join('');
+
+  // 3. Analisis
   const anaGrid = document.getElementById('analisis-grid');
-  if (anaGrid) anaGrid.innerHTML = allAnalysis.slice(0, 4).map(i => createCardHTML(i)).join('');
+  if(anaGrid) anaGrid.innerHTML = analysis.slice(0,4).map(a => createCardHTML(a)).join('');
+
+  // Buscador
+  document.getElementById('search-input')?.addEventListener('input', e => {
+    const term = e.target.value.toLowerCase();
+    const grid = document.getElementById('news-grid');
+    if(term.length < 2) {
+       grid.innerHTML = news.slice(4, 4 + CONFIG.limitNews).map(n => createCardHTML(n)).join('');
+    } else {
+       grid.innerHTML = news.filter(n => n.title.toLowerCase().includes(term)).map(n => createCardHTML(n)).join('');
+    }
+  });
 }
 
-// 5. RENDER POST (DETALLE)
 async function initPost() {
-  const params = new URLSearchParams(window.location.search);
-  const slug = params.get('id');
-  // Recuperamos la carpeta desde la URL, si no existe, intentamos adivinar con la ruta de noticias
-  const folder = params.get('folder') || PATHS.noticias; 
-  const container = document.getElementById('article-detail');
-
-  if (!slug || !container) return;
+  const p = new URLSearchParams(window.location.search);
+  const slug = p.get('id');
+  const folder = p.get('folder') || PATHS.noticias;
+  const el = document.getElementById('article-detail');
+  if(!slug || !el) return;
 
   const data = await fetchSinglePost(folder, slug);
+  if(!data) { el.innerHTML = "<p>Error cargando noticia</p>"; return; }
   
-  if (!data) {
-    container.innerHTML = `
-      <div style="text-align:center; padding:4rem 0;">
-        <h3>Error al cargar noticia</h3>
-        <p>Es posible que la ruta del archivo haya cambiado.</p>
-        <a href="index.html" style="color:red;">Volver al inicio</a>
-      </div>`;
-    return;
+  document.title = data.attributes.title;
+  if(typeof marked === 'undefined') await import('https://cdn.jsdelivr.net/npm/marked/marked.min.js');
+  
+  let video = '';
+  if(data.attributes.embed_url) {
+    const vid = getYoutubeId(data.attributes.embed_url);
+    if(vid) video = `<div class="video-wrapper" style="margin:2rem 0"><iframe src="https://www.youtube.com/embed/${vid}" frameborder="0" allowfullscreen></iframe></div>`;
   }
 
-  const { attributes, body } = data;
-  document.title = `${attributes.title} | Perspectivas`;
-  
-  // Cargar librería Marked dinámicamente si no está
-  if(typeof marked === 'undefined') {
-     await import('https://cdn.jsdelivr.net/npm/marked/marked.min.js');
-  }
-  const htmlContent = marked.parse(body);
-  
-  let videoHTML = '';
-  if (attributes.embed_url && getYoutubeId(attributes.embed_url)) {
-      videoHTML = `<div class="article-video video-wrapper"><iframe src="https://www.youtube.com/embed/${getYoutubeId(attributes.embed_url)}" frameborder="0" allowfullscreen></iframe></div>`;
-  }
-
-  container.innerHTML = `
+  el.innerHTML = `
     <header class="article-header">
-      <span class="article-category">${attributes.category || 'Noticia'}</span>
-      <h1 class="article-title">${attributes.title}</h1>
-      <time class="article-meta">${formatDate(attributes.date)} | ${attributes.author || 'Redacción'}</time>
+       <span class="article-category">${data.attributes.category || 'Noticia'}</span>
+       <h1 class="article-title">${data.attributes.title}</h1>
+       <time class="article-meta">${formatDate(data.attributes.date)}</time>
     </header>
-    ${videoHTML}
-    ${!videoHTML && attributes.thumbnail ? `<img src="${attributes.thumbnail}" alt="${attributes.title}">` : ''}
-    <div class="article-content">${htmlContent}</div>
+    ${video}
+    ${!video && data.attributes.thumbnail ? `<img src="${data.attributes.thumbnail}">` : ''}
+    <div class="article-content">${marked.parse(data.body)}</div>
   `;
 }
 
-// 6. INICIO
 document.addEventListener('DOMContentLoaded', () => {
-  if (window.location.pathname.includes('post.html')) {
-    initPost();
-  } else {
-    initHome();
-    const menuToggle = document.getElementById('menu-toggle');
-    if(menuToggle) {
-      menuToggle.addEventListener('click', () => {
-        document.getElementById('nav-list').classList.toggle('active');
-      });
-    }
-  }
+  if(window.location.pathname.includes('post.html')) initPost();
+  else initHome();
+  
+  document.getElementById('menu-toggle')?.addEventListener('click', () => {
+    document.getElementById('nav-list').classList.toggle('active');
+  });
 });
