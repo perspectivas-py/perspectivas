@@ -335,3 +335,78 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('nav-list').classList.toggle('active');
   });
 });
+
+// --------------------------------------
+// Redes sociales (VERSIÓN CON ICONOS AGRUPADOS)
+// --------------------------------------
+function renderShareButtons(title) {
+  const url = encodeURIComponent(window.location.href);
+  const text = encodeURIComponent(title);
+  
+  return `
+    <span>Compartir:</span>
+    <div class="share-icons">
+      <a href="https://twitter.com/intent/tweet?url=${url}&text=${text}" target="_blank" aria-label="Compartir en Twitter">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank" aria-label="Compartir en Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://api.whatsapp.com/send?text=${text}%20${url}" target="_blank" aria-label="Compartir en WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=${url}" target="_blank" aria-label="Compartir en LinkedIn">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </div>
+  `;
+}
+
+// --------------------------------------
+// Utilidades DOM
+// --------------------------------------
+function getArticleContainer() {
+  let el = document.querySelector(".full-article");
+  if (!el) el = document.getElementById("article-container");
+  return el;
+}
+
+function safeSetInnerHTML(html) {
+  const el = getArticleContainer();
+  if (el) el.innerHTML = html;
+}
+
+// --------------------------------------
+// Utilidades de contenido
+// --------------------------------------
+function formatDateArticle(dateStr) {
+  if (!dateStr) return "";
+  const d = new Date(dateStr);
+  return d.toLocaleDateString("es-ES", {
+    year: "numeric",
+    month: "short",
+    day: "numeric"
+  });
+}
+
+function estimateReadingTime(text) {
+  const words = text.split(/\s+/).length;
+  return Math.max(1, Math.round(words / 200));
+}
+
+function findFirstImageFromAny(content) {
+  const md = content.match(/!\[[^\]]*]\((.*?)\)/);
+  if (md) return md[1];
+  const htmlImg = content.match(/<img[^>]+src=["']([^"']+)["']/i);
+  if (htmlImg) return htmlImg[1];
+  const fig = content.match(/<figure([\s\S]*?)<img[^>]+src=["']([^"']+)["']/i);
+  if (fig) return fig[2];
+  return null;
+}
+
+function removeFirstImage(content) {
+  return content
+    .replace(/!\[[^\]]*]\((.*?)\)/, "")
+    .replace(/<figure[\s\S]*?<\/figure>/i, "")
+    .replace(/<img[^>]+src=["']([^"']+)["'][^>]*>/i, "");
+}
