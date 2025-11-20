@@ -1,20 +1,37 @@
-/* script.js - Final para HTML actual */
+/* script.js - Perspectivas Engine v2.5 (Smart Caching) */
 
 const CONFIG = {
   username: 'perspectivas-py',
   repo: 'perspectivas',
   limitNews: 10,
+  cacheTime: 15 * 60 * 1000, // 15 minutos de memoria (en milisegundos)
 };
 
-// TUS RUTAS REALES
 const PATHS = {
   noticias: 'content/noticias/posts',
   programa: 'content/programa/posts', 
-  analisis: 'content/analisis/_posts'  
+  analisis: 'content/analisis/posts'  
 };
 
 const BASE_API = `https://api.github.com/repos/${CONFIG.username}/${CONFIG.repo}/contents`;
-const getCacheBust = () => `?t=${Date.now()}`;
+
+// --- SISTEMA DE CACHÉ (LocalStorage) ---
+const db = {
+  save: (key, data) => {
+    localStorage.setItem(key, JSON.stringify({
+      timestamp: Date.now(),
+      payload: data
+    }));
+  },
+  get: (key) => {
+    const record = localStorage.getItem(key);
+    if (!record) return null;
+    const { timestamp, payload } = JSON.parse(record);
+    // Si el dato es más viejo que el tiempo configurado, lo descartamos
+    if (Date.now() - timestamp > CONFIG.cacheTime) return null;
+    return payload;
+  }
+};
 
 // --- Helpers ---
 const formatDate = (str) => {
@@ -40,11 +57,25 @@ const parseMarkdown = (text) => {
   return { attributes, body: text.replace(match[0], '').trim() };
 };
 
-// --- Fetching ---
+// --- Fetching con Lógica de Caché ---
 async function fetchCollection(path, type) {
+  const cacheKey = `perspectivas_v1_${type}`;
+  
+  // 1. Intentar leer de memoria primero
+  const cachedData = db.get(cacheKey);
+  if (cachedData) {
+    console.log(`⚡ Cargando ${type} desde caché local`);
+    return cachedData;
+  }
+
+  // 2. Si no hay caché, llamar a GitHub
   try {
-    const res = await fetch(`${BASE_API}/${path}${getCacheBust()}`);
-    if(!res.ok) return [];
+    console.log(`🌐 Descargando ${type} desde GitHub API...`);
+    const res = await fetch(`${BASE_API}/${path}`); // Quitamos el cache-bust de la URL API para no forzar siempre
+    
+    if (res.status === 403) throw new Error("Límite de API excedido (403)");
+    if (!res.ok) return [];
+    
     const files = await res.json();
     const mdFiles = files.filter(f => f.name.endsWith('.md'));
     
@@ -54,13 +85,26 @@ async function fetchCollection(path, type) {
       const { attributes, body } = parseMarkdown(t);
       return { ...attributes, body, slug: f.name.replace('.md',''), folder: path, category: attributes.category || 'General' };
     }));
-    return items.sort((a,b) => new Date(b.date) - new Date(a.date));
-  } catch(e) { console.error(e); return []; }
+    
+    const sortedItems = items.sort((a,b) => new Date(b.date) - new Date(a.date));
+    
+    // 3. Guardar en memoria para la próxima
+    db.save(cacheKey, sortedItems);
+    return sortedItems;
+
+  } catch(e) { 
+    console.error(e);
+    // Si falla la API (403), intentamos recuperar el caché viejo aunque esté vencido
+    const staleData = localStorage.getItem(cacheKey);
+    if (staleData) return JSON.parse(staleData).payload;
+    return []; 
+  }
 }
 
 async function fetchSinglePost(folder, slug) {
   try {
-    const res = await fetch(`${BASE_API}/${folder}/${slug}.md${getCacheBust()}`);
+    // Los posts individuales no los cacheamos para asegurar que siempre se puedan leer
+    const res = await fetch(`${BASE_API}/${folder}/${slug}.md`);
     if(!res.ok) throw new Error("Not found");
     const meta = await res.json();
     const contentRes = await fetch(meta.download_url);
@@ -111,6 +155,17 @@ async function initHome() {
   const news = await fetchCollection(PATHS.noticias, 'noticias');
   const prog = await fetchCollection(PATHS.programa, 'programa');
   const analysis = await fetchCollection(PATHS.analisis, 'analisis');
+
+  // Si recibimos arrays vacíos por el error 403 y no hay caché, mostrar aviso
+  if (news.length === 0 && prog.length === 0) {
+    document.querySelector('.featured-card-bbc').innerHTML = 
+      `<div style="padding:2rem; text-align:center; color:#b91c1c;">
+         <h3>⚠️ Tráfico alto detectado</h3>
+         <p>GitHub ha limitado temporalmente las conexiones desde tu red.</p>
+         <p>Por favor, espera unos minutos antes de recargar.</p>
+       </div>`;
+    return;
+  }
 
   // 1. Hero (BBC)
   if(news.length > 0) {
