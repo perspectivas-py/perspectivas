@@ -1,10 +1,10 @@
-/* script.js - Perspectivas Engine v3.1 (Sponsors + Fixes + Stability) */
+/* script.js - Perspectivas Engine v3.0 (Patrocinadores Integrado) */
 
 const CONFIG = {
   username: 'perspectivas-py',
   repo: 'perspectivas',
   limitNews: 10,
-  cacheTime: 15 * 60 * 1000 // 15 min
+  cacheTime: 15 * 60 * 1000, // 15 min caché
 };
 
 const PATHS = {
@@ -17,35 +17,27 @@ const PATHS = {
 
 const BASE_API = `https://api.github.com/repos/${CONFIG.username}/${CONFIG.repo}/contents`;
 
-/* =========================================
-   SISTEMA DE CACHÉ LOCAL
-   ========================================= */
+// ---------------------------------------------------------
+// SISTEMA DE CACHÉ
+// ---------------------------------------------------------
 const db = {
   save: (key, data) => {
     try {
-      localStorage.setItem(key, JSON.stringify({
-        timestamp: Date.now(),
-        payload: data
-      }));
-    } catch (e) {
-      console.warn("Cache full", e);
-    }
+      localStorage.setItem(key, JSON.stringify({ timestamp: Date.now(), payload: data }));
+    } catch (e) { console.warn("Cache full", e); }
   },
   get: (key) => {
     const record = localStorage.getItem(key);
     if (!record) return null;
-
     const { timestamp, payload } = JSON.parse(record);
     if (Date.now() - timestamp > CONFIG.cacheTime) return null;
-
     return payload;
   }
 };
 
-/* =========================================
-   Helpers Generales
-   ========================================= */
-
+// ---------------------------------------------------------
+// Helpers generales
+// ---------------------------------------------------------
 const formatDate = (str) => {
   if (!str) return "";
   try {
@@ -54,41 +46,31 @@ const formatDate = (str) => {
       month: "short",
       year: "numeric"
     });
-  } catch (e) {
-    return str;
-  }
+  } catch (e) { return str; }
 };
 
 const getYoutubeId = (url) => {
   if (!url) return null;
   const match = url.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/);
-  return match && match[2].length === 11 ? match[2] : null;
+  return (match && match[2].length === 11) ? match[2] : null;
 };
 
 const extractFirstImage = (markdown) => {
   const mdMatch = markdown.match(/!\[.*?\]\((.*?)\)/);
   if (mdMatch) return mdMatch[1];
-
   const htmlMatch = markdown.match(/<img[^>]+src=["']([^"']+)["']/i);
   if (htmlMatch) return htmlMatch[1];
-
   return null;
 };
 
-/* 🔥 Parser front-matter YAML */
 const parseMarkdown = (text) => {
   const match = text.match(/^---([\s\S]*?)---/);
-  if (!match) return {
-    attributes: {},
-    body: text
-  };
+  if (!match) return { attributes: {}, body: text };
 
   const attributes = {};
   match[1].split("\n").forEach(line => {
     const [key, ...val] = line.split(":");
-    if (key && val) {
-      attributes[key.trim()] = val.join(":").trim().replace(/^['"]|['"]$/g, "");
-    }
+    if (key && val) attributes[key.trim()] = val.join(":").trim().replace(/^['"]|['"]$/g, "");
   });
 
   return {
@@ -97,10 +79,9 @@ const parseMarkdown = (text) => {
   };
 };
 
-/* =========================================
-   Helpers Sponsors
-   ========================================= */
-
+// ---------------------------------------------------------
+// Helpers para Patrocinadores
+// ---------------------------------------------------------
 function shuffleArray(arr) {
   return arr
     .map(item => ({ item, sort: Math.random() }))
@@ -113,14 +94,13 @@ function resolveMediaUrl(path) {
   return path.startsWith("http") ? path : path;
 }
 
-/* =========================================
-   FETCHING CONTENT
-   ========================================= */
-
+// ---------------------------------------------------------
+// Fetch de colecciones
+// ---------------------------------------------------------
 async function fetchCollection(path, type) {
   const cacheKey = `perspectivas_v3_${type}`;
-  const cached = db.get(cacheKey);
-  if (cached) return cached;
+  const cachedData = db.get(cacheKey);
+  if (cachedData) return cachedData;
 
   try {
     const res = await fetch(`${BASE_API}/${path}`);
@@ -130,30 +110,28 @@ async function fetchCollection(path, type) {
     const files = await res.json();
     const mdFiles = files.filter(f => f.name.endsWith(".md"));
 
-    const items = await Promise.all(mdFiles.map(async f => {
-      const r = await fetch(f.download_url);
-      const raw = await r.text();
-      const { attributes, body } = parseMarkdown(raw);
+    const items = await Promise.all(
+      mdFiles.map(async (f) => {
+        const r = await fetch(f.download_url);
+        const t = await r.text();
+        const { attributes, body } = parseMarkdown(t);
+        const finalImage =
+          attributes.thumbnail || attributes.image || extractFirstImage(body) || null;
 
-      const finalImage =
-        attributes.thumbnail ||
-        attributes.image ||
-        extractFirstImage(body) ||
-        null;
+        return {
+          ...attributes,
+          body,
+          slug: f.name.replace(".md", ""),
+          folder: path,
+          category: attributes.category || "General",
+          thumbnail: finalImage
+        };
+      })
+    );
 
-      return {
-        ...attributes,
-        body,
-        slug: f.name.replace(".md", ""),
-        folder: path,
-        category: attributes.category || "General",
-        thumbnail: finalImage
-      };
-    }));
-
-    const sorted = items.sort((a, b) => new Date(b.date) - new Date(a.date));
-    db.save(cacheKey, sorted);
-    return sorted;
+    const sortedItems = items.sort((a, b) => new Date(b.date) - new Date(a.date));
+    db.save(cacheKey, sortedItems);
+    return sortedItems;
 
   } catch (e) {
     const stale = localStorage.getItem(cacheKey);
@@ -165,7 +143,6 @@ async function fetchSinglePost(folder, slug) {
   try {
     const res = await fetch(`${BASE_API}/${folder}/${slug}.md`);
     if (!res.ok) throw new Error("Not found");
-
     const meta = await res.json();
     const contentRes = await fetch(meta.download_url);
     const { attributes, body } = parseMarkdown(await contentRes.text());
@@ -175,15 +152,13 @@ async function fetchSinglePost(folder, slug) {
     }
 
     return { attributes, body };
-  } catch {
-    return null;
-  }
+
+  } catch (e) { return null; }
 }
 
-/* =========================================
-   RENDER NEWS / PODCAST
-   ========================================= */
-
+// ---------------------------------------------------------
+// Rendering Cards
+// ---------------------------------------------------------
 const createCardHTML = (item, showVideo) => {
   const link = `post.html?id=${item.slug}&folder=${item.folder}`;
   let media = "";
@@ -191,15 +166,14 @@ const createCardHTML = (item, showVideo) => {
   if (showVideo && item.embed_url && getYoutubeId(item.embed_url)) {
     media = `
       <div class="video-wrapper">
-        <iframe src="https://www.youtube.com/embed/${getYoutubeId(item.embed_url)}" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/${getYoutubeId(item.embed_url)}"
+                frameborder="0" allowfullscreen></iframe>
       </div>`;
   } else {
     const imgUrl = item.thumbnail || "https://placehold.co/600x400/eee/999?text=Perspectivas";
     media = `
       <div class="card-img-container">
-        <a href="${link}">
-          <img src="${imgUrl}" loading="lazy" alt="${item.title}">
-        </a>
+         <a href="${link}"><img src="${imgUrl}" loading="lazy" alt="${item.title}"></a>
       </div>`;
   }
 
@@ -230,10 +204,9 @@ const createPodcastHTML = (item) => {
     </article>`;
 };
 
-/* =========================================
-   SPONSORS GRID
-   ========================================= */
-
+// ---------------------------------------------------------
+// RENDER: Patrocinadores (grilla)
+// ---------------------------------------------------------
 function renderSponsorsGrid(entries) {
   const container = document.getElementById("sponsorsGrid");
   if (!container) return;
@@ -241,18 +214,20 @@ function renderSponsorsGrid(entries) {
   container.innerHTML = "";
 
   if (!entries.length) {
-    container.innerHTML = "<p>No hay patrocinadores activos por el momento.</p>";
+    container.innerHTML = "<p>No hay patrocinadores activos.</p>";
     return;
   }
 
   const randomized = shuffleArray(entries);
 
-  randomized.forEach(item => {
-    const d = item;
+  randomized.forEach(d => {
     if (String(d.active) === "false") return;
 
+    const tierClass = d.tier ? `tier-${d.tier}` : "";
+    const logoUrl = resolveMediaUrl(d.logo);
+
     const wrapper = document.createElement(d.url ? "a" : "div");
-    wrapper.className = `sponsor-item tier-${d.tier || "Silver"}`;
+    wrapper.className = `sponsor-item ${tierClass}`;
 
     if (d.url) {
       wrapper.href = d.url;
@@ -261,7 +236,7 @@ function renderSponsorsGrid(entries) {
     }
 
     const img = document.createElement("img");
-    img.src = resolveMediaUrl(d.logo) || "https://placehold.co/200x60?text=Logo";
+    img.src = logoUrl || "https://placehold.co/200x60?text=Logo";
     img.alt = d.title || "Patrocinador";
 
     wrapper.appendChild(img);
@@ -269,99 +244,82 @@ function renderSponsorsGrid(entries) {
   });
 }
 
-/* =========================================
-   SPONSORED SITE BLOCK
-   ========================================= */
-
+// ---------------------------------------------------------
+// RENDER: Sitio Patrocinado (bloque destacado)
+// ---------------------------------------------------------
 function renderSponsoredSite(entries) {
   const cardEl = document.getElementById("sponsoredSiteCard");
   if (!cardEl) return;
 
   const featured = entries.find(e => String(e.featured) === "true") || entries[0];
+
   if (!featured) {
     cardEl.innerHTML = "<p>No hay sitio patrocinado disponible.</p>";
+    cardEl.classList.remove("skeleton-card");
     return;
   }
 
   const d = featured;
+  const logoUrl = resolveMediaUrl(d.logo);
 
   cardEl.classList.remove("skeleton-card");
   cardEl.innerHTML = `
     <div>
       <div class="sponsored-meta">Contenido patrocinado</div>
-      <h3>${d.headline || d.title}</h3>
+      <h3>${d.headline || d.title || "Sitio patrocinado"}</h3>
       ${d.excerpt ? `<p>${d.excerpt}</p>` : ""}
       ${d.sector ? `<div class="sponsored-sector">Sector: ${d.sector}</div>` : ""}
-      ${
-        d.url
-          ? `<div class="sponsored-actions">
-               <a class="sponsored-cta" href="${d.url}" target="_blank" rel="noopener noreferrer sponsored">
-                 Visitar sitio patrocinado
-               </a>
-             </div>`
-          : ""
-      }
+      ${d.url ? `
+        <div class="sponsored-actions">
+          <a class="sponsored-cta" href="${d.url}" target="_blank"
+             rel="noopener noreferrer sponsored">
+             Visitar sitio patrocinado
+          </a>
+        </div>` : ""}
     </div>
+
     <div>
-      <img src="${resolveMediaUrl(d.logo)}" alt="${d.title}">
+      <img src="${logoUrl || "https://placehold.co/400x250?text=Patrocinador"}"
+           alt="${d.title || "Patrocinador"}">
     </div>`;
 }
 
-/* =========================================
-   LOAD SPONSORS
-   ========================================= */
-
+// ---------------------------------------------------------
+// CARGA DE PATROCINADORES (Home)
+// ---------------------------------------------------------
 async function loadSponsorsHome() {
   try {
     const sponsors = await fetchCollection(PATHS.sponsors, "sponsors");
+
     if (sponsors.length) {
       renderSponsorsGrid(sponsors);
       renderSponsoredSite(sponsors);
     }
+
   } catch (err) {
     console.error("Error cargando sponsors:", err);
+
+    const grid = document.getElementById("sponsorsGrid");
+    const block = document.getElementById("sponsoredSiteCard");
+
+    if (grid) grid.innerHTML = "<p>Error al cargar los patrocinadores.</p>";
+    if (block) {
+      block.innerHTML = "<p>Error cargando sitio patrocinado.</p>";
+      block.classList.remove("skeleton-card");
+    }
   }
 }
 
-/* =========================================
-   FILTROS Y NEWSLETTER
-   ========================================= */
-
-const setupFilters = (items, gridId) => {
-  const container = document.getElementById("category-filters");
-  if (!container) return;
-
-  const cats = ["Todas", ...new Set(items.map(i => i.category))];
-
-  container.innerHTML = cats
-    .map(
-      c =>
-        `<button class="filter-btn ${c === "Todas" ? "active" : ""}" data-cat="${c}">${c}</button>`
-    )
-    .join("");
-
-  container.querySelectorAll("button").forEach(btn => {
-    btn.addEventListener("click", () => {
-      container.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-
-      const cat = btn.dataset.cat;
-      const filtered =
-        cat === "Todas"
-          ? items.slice(0, CONFIG.limitNews)
-          : items.filter(i => i.category === cat);
-
-      document.getElementById(gridId).innerHTML = filtered.map(i => createCardHTML(i)).join("");
-    });
-  });
-};
-
+// ---------------------------------------------------------
+// Newsletter
+// ---------------------------------------------------------
 function setupNewsletter() {
   const form = document.getElementById("newsletter-form");
   const msg = document.getElementById("newsletter-msg");
+
   if (!form || !msg) return;
 
-  form.addEventListener("submit", async e => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const emailInput = document.getElementById("email");
@@ -383,7 +341,7 @@ function setupNewsletter() {
       msg.textContent = `¡Suscrito al plan ${plan}!`;
       msg.className = "msg-feedback msg-success";
       form.reset();
-    } catch {
+    } catch (e) {
       msg.textContent = "Error al enviar.";
     } finally {
       btn.textContent = originalText;
@@ -392,10 +350,9 @@ function setupNewsletter() {
   });
 }
 
-/* =========================================
-   INIT HOME (Página principal)
-   ========================================= */
-
+// ---------------------------------------------------------
+// HOME INIT
+// ---------------------------------------------------------
 async function initHome() {
   const news = await fetchCollection(PATHS.noticias, "noticias");
   const prog = await fetchCollection(PATHS.programa, "programa");
@@ -404,15 +361,13 @@ async function initHome() {
 
   if (news.length === 0 && prog.length === 0) return;
 
-  /* Hero */
+  // ---------------- Hero & Noticias ----------------
   if (news.length > 0) {
     const hero = news[0];
     const heroEl = document.querySelector(".featured-card-bbc");
 
     if (heroEl) {
-      const heroImg =
-        hero.thumbnail || "https://placehold.co/800x400/eee/999?text=Perspectivas";
-
+      const heroImg = hero.thumbnail || "https://placehold.co/800x400/eee/999?text=Perspectivas";
       heroEl.innerHTML = `
         <a href="post.html?id=${hero.slug}&folder=${hero.folder}">
           <img src="${heroImg}" alt="${hero.title}">
@@ -423,30 +378,22 @@ async function initHome() {
 
     const sideEl = document.getElementById("top-list-bbc");
     if (sideEl) {
-      sideEl.innerHTML = news
-        .slice(1, 4)
-        .map(
-          n => `
-        <li><a href="post.html?id=${n.slug}&folder=${n.folder}">
-          <h4>${n.title}</h4>
-          <small>${formatDate(n.date)}</small>
-        </a></li>`
-        )
-        .join("");
+      sideEl.innerHTML = news.slice(1, 4).map(n => `
+        <li>
+          <a href="post.html?id=${n.slug}&folder=${n.folder}">
+            <h4>${n.title}</h4>
+            <small>${formatDate(n.date)}</small>
+          </a>
+        </li>`).join("");
     }
 
     const newsGrid = document.getElementById("news-grid");
     if (newsGrid) {
-      newsGrid.innerHTML = news
-        .slice(4, 4 + CONFIG.limitNews)
-        .map(n => createCardHTML(n))
-        .join("");
-
-      setupFilters(news.slice(4), "news-grid");
+      newsGrid.innerHTML = news.slice(4, 4 + CONFIG.limitNews).map(n => createCardHTML(n)).join("");
     }
   }
 
-  /* Secciones secundarias */
+  // ---------------- Otros Grids ----------------
   const progGrid = document.getElementById("program-grid");
   if (progGrid) progGrid.innerHTML = prog.slice(0, 6).map(p => createCardHTML(p, true)).join("");
 
@@ -456,19 +403,17 @@ async function initHome() {
   const podGrid = document.getElementById("podcast-grid");
   if (podGrid) podGrid.innerHTML = podcasts.slice(0, 4).map(p => createPodcastHTML(p)).join("");
 
+  // ---------------- Newsletter ----------------
   setupNewsletter();
 
-  /* Buscador */
+  // ---------------- Buscador ----------------
   document.getElementById("search-input")?.addEventListener("input", e => {
     const term = e.target.value.toLowerCase();
     const grid = document.getElementById("news-grid");
     if (!grid) return;
 
     if (term.length < 2) {
-      grid.innerHTML = news
-        .slice(4, 4 + CONFIG.limitNews)
-        .map(n => createCardHTML(n))
-        .join("");
+      grid.innerHTML = news.slice(4, 4 + CONFIG.limitNews).map(n => createCardHTML(n)).join("");
     } else {
       grid.innerHTML = news
         .filter(n => n.title.toLowerCase().includes(term))
@@ -477,31 +422,27 @@ async function initHome() {
     }
   });
 
-  /* Cargar sponsors */
+  // ---------------- Patrocinadores (Nuevo) ----------------
   loadSponsorsHome();
 }
 
-/* =========================================
-   INIT POST (detalle)
-   ========================================= */
-
+// ---------------------------------------------------------
+// POST PAGE
+// ---------------------------------------------------------
 async function initPost() {
   const p = new URLSearchParams(window.location.search);
   const slug = p.get("id");
   const folder = p.get("folder") || PATHS.noticias;
-
   const el = document.getElementById("article-detail");
   if (!slug || !el) return;
 
   const data = await fetchSinglePost(folder, slug);
-
   if (!data) {
     el.innerHTML = "<p>Error cargando noticia</p>";
     return;
   }
 
   document.title = data.attributes.title;
-
   if (typeof marked === "undefined") {
     await import("https://cdn.jsdelivr.net/npm/marked/marked.min.js");
   }
@@ -512,7 +453,8 @@ async function initPost() {
     if (vid) {
       video = `
         <div class="video-wrapper" style="margin:2rem 0">
-          <iframe src="https://www.youtube.com/embed/${vid}" frameborder="0" allowfullscreen></iframe>
+          <iframe src="https://www.youtube.com/embed/${vid}"
+                  frameborder="0" allowfullscreen></iframe>
         </div>`;
     }
   }
@@ -528,7 +470,7 @@ async function initPost() {
     tempDiv.innerHTML = htmlContent;
     const firstImg = tempDiv.querySelector("img");
 
-    if (firstImg && (firstImg.src === thumbnail || firstImg.getAttribute("src") === thumbnail)) {
+    if (firstImg && (firstImg.getAttribute("src") === thumbnail || firstImg.src === thumbnail)) {
       firstImg.remove();
       htmlContent = tempDiv.innerHTML;
     }
@@ -536,9 +478,9 @@ async function initPost() {
 
   el.innerHTML = `
     <header class="article-header">
-      <span class="article-category">${data.attributes.category || "Noticia"}</span>
-      <h1 class="article-title">${data.attributes.title}</h1>
-      <time class="article-meta">${formatDate(data.attributes.date)}</time>
+       <span class="article-category">${data.attributes.category || "Noticia"}</span>
+       <h1 class="article-title">${data.attributes.title}</h1>
+       <time class="article-meta">${formatDate(data.attributes.date)}</time>
     </header>
 
     ${video}
@@ -548,16 +490,12 @@ async function initPost() {
   `;
 }
 
-/* =========================================
-   LOAD PAGE
-   ========================================= */
-
+// ---------------------------------------------------------
+// DOM Ready
+// ---------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
-  if (window.location.pathname.includes("post.html")) {
-    initPost();
-  } else {
-    initHome();
-  }
+  if (window.location.pathname.includes("post.html")) initPost();
+  else initHome();
 
   document.getElementById("menu-toggle")?.addEventListener("click", () => {
     document.getElementById("nav-list").classList.toggle("active");
