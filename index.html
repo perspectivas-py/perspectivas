@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Perspectivas — periodismo económico local con análisis profesional y modelos de monetización.">
+  <meta name="description" content="Perspectivas — periodismo económico local con análisis profesional.">
   <title>Perspectivas — Análisis Económico</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,67 +16,75 @@
 <body>
   <header class="site-header">
     <div class="wrap">
-      <a class="brand" href="/">Perspectivas</a>
-      <nav class="main-nav" aria-label="Menú principal">
-        <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="nav-list">☰</button>
+      <a class="brand" href="index.html">Perspectivas</a>
+      <nav class="main-nav">
+        <button id="menu-toggle" class="menu-toggle">☰</button>
         <ul id="nav-list" class="nav-list">
-          <li><a href="/">Inicio</a></li>
-          <li><a href="/analisis.html">Análisis</a></li>
-          <li><a href="/programa.html">Programa</a></li>
+          <li><a href="#home">Inicio</a></li>
+          <li><a href="#noticias">Noticias</a></li>
+          <li><a href="#programa">Programa</a></li>
+          <li><a href="#analisis">Análisis</a></li>
         </ul>
       </nav>
-      <button id="themeToggle" class="theme-toggle" aria-label="Alternar modo oscuro">
-        <span class="icon">🌙</span>
-      </button>
     </div>
   </header>
 
   <main>
+    <!-- HERO (Estilo BBC) -->
     <section id="home" class="hero wrap">
       <div class="hero-main">
         <article class="featured-card-bbc">
-          <p style="padding: 20px;">Cargando artículo principal...</p>
+          <!-- JS inyectará aquí -->
+          <p style="padding: 20px;">Cargando portada...</p>
         </article>
       </div>
       <aside class="hero-secondary">
+        <h3>Destacados</h3>
         <ul id="top-list-bbc" class="headline-list">
-          <li>Cargando titulares...</li>
+          <!-- JS inyectará aquí -->
         </ul>
       </aside>
     </section>
 
+    <!-- Noticias Locales -->
     <section id="noticias" class="wrap section">
       <div class="section-header">
-        <h2>Más Noticias</h2>
+        <h2>Noticias Locales</h2>
         <div class="search-bar">
-          <!-- --- CORRECCIÓN 1: ID ajustado para que coincida con el script --- -->
-          <input type="text" id="search-input" placeholder="Buscar noticias..." aria-label="Buscar noticias">
+          <input type="text" id="search-input" placeholder="Buscar noticias...">
         </div>
-
-        <div id="category-filters" class="category-filters">
-          <button data-cat="all" class="active">Todas</button>
-          <button data-cat="macro">Macro</button>
-          <button data-cat="politica-economica">Política Económica</button>
-          <button data-cat="comercio-exterior">Comercio Exterior</button>
-          <button data-cat="inmobiliario">Inmobiliario</button>
-          <button data-cat="agroindustria">Agroindustria</button>
-          <button data-cat="empresas">Empresas</button>
-          <button data-cat="opinion">Opinión</button>
-          <button data-cat="educacion-financiera">Educación Financiera</button>
-          <button data-cat="sin-categoria">Sin Categoría</button>
-        </div>
-        
-        <!-- --- CORRECCIÓN 2: Eliminado el div duplicado con id="category-filters" --- -->
       </div>
+      <!-- Filtros generados por JS o estáticos -->
+      <div id="category-filters" class="category-filters"></div>
+      
+      <div id="news-grid" class="cards-grid"></div>
+    </section>
 
-      <div id="news-grid" class="cards-grid" aria-live="polite"></div>
+    <!-- SECCIÓN NUEVA: Programa (Fondo Oscuro) -->
+    <section id="programa" class="wrap section muted-bg">
+      <div class="section-header">
+        <h2>Programa Perspectivas</h2>
+        <p style="color: #ccc; margin-top: 5px;">Archivo Multimedia y Entrevistas</p>
+      </div>
+      <div id="program-grid" class="cards-grid">
+        <!-- JS inyectará videos aquí -->
+      </div>
+    </section>
+
+    <!-- SECCIÓN NUEVA: Análisis -->
+    <section id="analisis" class="wrap section">
+      <div class="section-header">
+        <h2>Análisis & Opinión</h2>
+      </div>
+      <div id="analisis-grid" class="cards-grid">
+        <!-- JS inyectará análisis aquí -->
+      </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">
-      <div class="footer-left"><strong>Perspectivas</strong><p class="muted small">© 2025</p></div>
-      <div class="footer-right"><nav><a href="#">Contacto</a></nav></div>
+      <p>© 2025 Perspectivas - Periodismo Económico</p>
     </div>
   </footer>
 
