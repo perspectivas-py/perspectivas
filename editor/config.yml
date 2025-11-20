@@ -62,7 +62,7 @@ collections:
 
   - name: "analisis"
     label: "Análisis y Opinión"
-    folder: "content/analisis/posts"
+    folder: "content/analisis/_posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
@@ -103,3 +103,16 @@ collections:
       - label: "Resumen y Notas"
         name: "body"
         widget: "markdown"
+        
+ - name: "podcast"
+    label: "Podcast"
+    folder: "content/podcast/posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Fecha", name: "date", widget: "datetime"}
+      - {label: "Imagen de Portada", name: "thumbnail", widget: "image"}
+      - {label: "Descripción Corta", name: "description", widget: "text"}
+      - {label: "Embed de Spotify/YouTube", name: "embed_url", widget: "string", required: false}
+      - {label: "Cuerpo", name: "body", widget: "markdown"}
