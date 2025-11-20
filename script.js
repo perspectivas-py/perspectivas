@@ -266,3 +266,56 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('nav-list').classList.toggle('active');
   });
 });
+// --- Lógica Newsletter ---
+function setupNewsletter() {
+  const form = document.getElementById('newsletter-form');
+  const msg = document.getElementById('newsletter-msg');
+  
+  if (!form || !msg) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const emailInput = document.getElementById('email');
+    const email = emailInput.value;
+    const plan = document.getElementById('plan').value;
+    const btn = form.querySelector('button');
+
+    // 1. Validación simple
+    if (!email || !email.includes('@')) {
+      msg.textContent = "Por favor, ingresa un email válido.";
+      msg.className = "msg-feedback msg-error";
+      return;
+    }
+
+    // 2. Estado de "Cargando"
+    const originalText = btn.textContent;
+    btn.textContent = "Enviando...";
+    btn.disabled = true;
+    msg.textContent = "";
+
+    // 3. Simulación de envío a API (Aquí conectaríamos Formspree/Mailchimp)
+    try {
+      // Simulamos espera de 1.5 segundos
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Éxito Visual
+      msg.textContent = `¡Gracias! Te has suscrito al plan ${plan}. Revisa tu bandeja de entrada.`;
+      msg.className = "msg-feedback msg-success";
+      form.reset();
+
+    } catch (error) {
+      msg.textContent = "Hubo un error. Inténtalo de nuevo.";
+      msg.className = "msg-feedback msg-error";
+    } finally {
+      // Restaurar botón
+      btn.textContent = originalText;
+      btn.disabled = false;
+      
+      // Borrar mensaje de éxito a los 5 segundos
+      setTimeout(() => {
+        if(msg.classList.contains('msg-success')) msg.textContent = "";
+      }, 5000);
+    }
+  });
+}
