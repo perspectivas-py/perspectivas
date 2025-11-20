@@ -1,6 +1,4 @@
-/* script.js - Perspectivas Engine v2.2 (Router & Detail View) */
-
-// 1. CONFIGURACIÓN/* script.js - Perspectivas Engine v2.3 (Fix Rutas) */
+/* script.js - Perspectivas Engine v2.3 (Fix Rutas) */
 
 // 1. CONFIGURACIÓN Y RUTAS
 const CONFIG = {
