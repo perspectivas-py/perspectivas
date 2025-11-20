@@ -276,3 +276,200 @@ ul { list-style: none; }
   .podcast-img-link { width: 90px; height: 90px; } /* Un poco más chico */
   .podcast-title { font-size: 1rem; }
 }
+/* =========================================
+   PATROCINADORES (Logos)
+   ========================================= */
+
+.sponsors-strip {
+  padding: 40px 0;
+  border-top: 1px solid var(--border-subtle, #e5e5e5);
+  border-bottom: 1px solid var(--border-subtle, #e5e5e5);
+  background: var(--bg-elevated, #fafafa);
+}
+
+.sponsors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 20px;
+  align-items: center;
+  justify-items: center;
+}
+
+.sponsor-item {
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  opacity: 0.8;
+}
+
+.sponsor-item:hover {
+  opacity: 1;
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.sponsor-item img {
+  max-height: 60px;     /* Altura uniforme */
+  width: auto;
+  max-width: 180px;
+  object-fit: contain;
+  filter: grayscale(100%);  /* Efecto elegante: blanco y negro */
+  transition: filter 0.3s;
+}
+
+.sponsor-item:hover img {
+  filter: grayscale(0%); /* Color al pasar el mouse */
+}
+
+/* Diferenciación por Nivel */
+.tier-Gold img {
+  max-height: 90px;
+  max-width: 220px;
+}
+
+.tier-Silver img {
+  max-height: 70px;
+  max-width: 200px;
+}
+
+.tier-Bronze img {
+  max-height: 60px;
+  max-width: 160px;
+}
+
+/* =========================================
+   SKELETON LOADING (Animación de Carga)
+   ========================================= */
+
+.skeleton {
+  background: #eee;
+  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+  border-radius: 4px;
+  background-size: 200% 100%;
+  animation: 1.5s shine linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position-x: -200%;
+  }
+}
+
+/* Estructura del Skeleton Card */
+.skeleton-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skeleton-img {
+  height: 200px;
+  width: 100%;
+}
+
+.skeleton-text {
+  height: 20px;
+  width: 100%;
+}
+
+/* Skeleton chiquito para logos */
+.skeleton-sponsor {
+  height: 60px;
+  width: 160px;
+}
+
+/* =========================================
+   SITIO PATROCINADO
+   ========================================= */
+
+.sponsored-site-section {
+  padding: 40px 0 50px;
+  background: var(--bg-default, #ffffff);
+}
+
+.sponsored-site-card {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: 24px;
+  padding: 20px;
+  border-radius: 14px;
+  background: var(--bg-elevated, #fafafa);
+  border: 1px solid var(--border-subtle, #e5e5e5);
+}
+
+.sponsored-site-card img {
+  width: 100%;
+  height: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.sponsored-meta {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #888;
+  margin-bottom: 6px;
+}
+
+.sponsored-site-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.3rem;
+}
+
+.sponsored-site-card p {
+  margin: 0 0 14px;
+  line-height: 1.5;
+}
+
+.sponsored-tagline {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.sponsored-sector {
+  font-size: 0.85rem;
+  color: #999;
+  margin-bottom: 12px;
+}
+
+.sponsored-actions {
+  margin-top: auto;
+}
+
+.sponsored-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid #005bbc;
+  background: #005bbc;
+  color: #fff;
+  font-size: 0.9rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.sponsored-cta:hover {
+  background: #004399;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sponsored-site-card {
+    grid-template-columns: 1fr;
+  }
+}
