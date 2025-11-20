@@ -1,10 +1,10 @@
-/* script.js - Perspectivas Engine v2.5 (Smart Caching) */
+/* script.js - Perspectivas Engine v2.6 (Image Hunter Fix) */
 
 const CONFIG = {
   username: 'perspectivas-py',
   repo: 'perspectivas',
   limitNews: 10,
-  cacheTime: 15 * 60 * 1000, // 15 minutos de memoria (en milisegundos)
+  cacheTime: 15 * 60 * 1000, // 15 min caché
 };
 
 const PATHS = {
@@ -15,19 +15,15 @@ const PATHS = {
 
 const BASE_API = `https://api.github.com/repos/${CONFIG.username}/${CONFIG.repo}/contents`;
 
-// --- SISTEMA DE CACHÉ (LocalStorage) ---
+// --- SISTEMA DE CACHÉ ---
 const db = {
   save: (key, data) => {
-    localStorage.setItem(key, JSON.stringify({
-      timestamp: Date.now(),
-      payload: data
-    }));
+    localStorage.setItem(key, JSON.stringify({ timestamp: Date.now(), payload: data }));
   },
   get: (key) => {
     const record = localStorage.getItem(key);
     if (!record) return null;
     const { timestamp, payload } = JSON.parse(record);
-    // Si el dato es más viejo que el tiempo configurado, lo descartamos
     if (Date.now() - timestamp > CONFIG.cacheTime) return null;
     return payload;
   }
@@ -46,6 +42,19 @@ const getYoutubeId = (url) => {
   return (match && match[2].length === 11) ? match[2] : null;
 };
 
+// NUEVO: Busca la primera imagen dentro del texto Markdown
+const extractFirstImage = (markdown) => {
+  // Busca formato markdown ![alt](url)
+  const mdMatch = markdown.match(/!\[.*?\]\((.*?)\)/);
+  if (mdMatch) return mdMatch[1];
+  
+  // Busca formato HTML <img src="url">
+  const htmlMatch = markdown.match(/<img[^>]+src=["']([^"']+)["']/i);
+  if (htmlMatch) return htmlMatch[1];
+
+  return null;
+};
+
 const parseMarkdown = (text) => {
   const match = text.match(/^---([\s\S]*?)---/);
   if (!match) return { attributes: {}, body: text };
@@ -57,23 +66,18 @@ const parseMarkdown = (text) => {
   return { attributes, body: text.replace(match[0], '').trim() };
 };
 
-// --- Fetching con Lógica de Caché ---
+// --- Fetching ---
 async function fetchCollection(path, type) {
-  const cacheKey = `perspectivas_v1_${type}`;
-  
-  // 1. Intentar leer de memoria primero
+  const cacheKey = `perspectivas_v2_${type}`;
   const cachedData = db.get(cacheKey);
   if (cachedData) {
-    console.log(`⚡ Cargando ${type} desde caché local`);
+    console.log(`⚡ ${type} desde caché`);
     return cachedData;
   }
 
-  // 2. Si no hay caché, llamar a GitHub
   try {
-    console.log(`🌐 Descargando ${type} desde GitHub API...`);
-    const res = await fetch(`${BASE_API}/${path}`); // Quitamos el cache-bust de la URL API para no forzar siempre
-    
-    if (res.status === 403) throw new Error("Límite de API excedido (403)");
+    const res = await fetch(`${BASE_API}/${path}`);
+    if (res.status === 403) throw new Error("403 API Limit");
     if (!res.ok) return [];
     
     const files = await res.json();
@@ -83,32 +87,45 @@ async function fetchCollection(path, type) {
       const r = await fetch(f.download_url);
       const t = await r.text();
       const { attributes, body } = parseMarkdown(t);
-      return { ...attributes, body, slug: f.name.replace('.md',''), folder: path, category: attributes.category || 'General' };
+      
+      // Lógica de imagen prioritaria: thumbnail > image > primera imagen del texto
+      const finalImage = attributes.thumbnail || attributes.image || extractFirstImage(body) || null;
+
+      return { 
+        ...attributes, 
+        body, 
+        slug: f.name.replace('.md',''), 
+        folder: path, 
+        category: attributes.category || 'General',
+        thumbnail: finalImage // Guardamos la imagen encontrada
+      };
     }));
     
     const sortedItems = items.sort((a,b) => new Date(b.date) - new Date(a.date));
-    
-    // 3. Guardar en memoria para la próxima
     db.save(cacheKey, sortedItems);
     return sortedItems;
 
   } catch(e) { 
-    console.error(e);
-    // Si falla la API (403), intentamos recuperar el caché viejo aunque esté vencido
-    const staleData = localStorage.getItem(cacheKey);
-    if (staleData) return JSON.parse(staleData).payload;
-    return []; 
+    console.warn(e);
+    const stale = localStorage.getItem(cacheKey);
+    return stale ? JSON.parse(stale).payload : []; 
   }
 }
 
 async function fetchSinglePost(folder, slug) {
   try {
-    // Los posts individuales no los cacheamos para asegurar que siempre se puedan leer
     const res = await fetch(`${BASE_API}/${folder}/${slug}.md`);
     if(!res.ok) throw new Error("Not found");
     const meta = await res.json();
     const contentRes = await fetch(meta.download_url);
-    return parseMarkdown(await contentRes.text());
+    const { attributes, body } = parseMarkdown(await contentRes.text());
+    
+    // Misma lógica para post individual por si acaso
+    if (!attributes.thumbnail && !attributes.image) {
+        attributes.thumbnail = extractFirstImage(body);
+    }
+    
+    return { attributes, body };
   } catch(e) { return null; }
 }
 
@@ -120,7 +137,9 @@ const createCardHTML = (item, showVideo) => {
   if (showVideo && item.embed_url && getYoutubeId(item.embed_url)) {
     media = `<div class="video-wrapper"><iframe src="https://www.youtube.com/embed/${getYoutubeId(item.embed_url)}" frameborder="0" allowfullscreen></iframe></div>`;
   } else {
-    media = `<div class="card-img-container"><a href="${link}"><img src="${item.thumbnail || 'https://via.placeholder.com/600x400'}" loading="lazy"></a></div>`;
+    // Si después de todo no hay imagen, usamos placeholder gris
+    const imgUrl = item.thumbnail || 'https://placehold.co/600x400/eee/999?text=Perspectivas';
+    media = `<div class="card-img-container"><a href="${link}"><img src="${imgUrl}" loading="lazy" alt="${item.title}"></a></div>`;
   }
   
   return `
@@ -156,30 +175,26 @@ async function initHome() {
   const prog = await fetchCollection(PATHS.programa, 'programa');
   const analysis = await fetchCollection(PATHS.analisis, 'analisis');
 
-  // Si recibimos arrays vacíos por el error 403 y no hay caché, mostrar aviso
-  if (news.length === 0 && prog.length === 0) {
-    document.querySelector('.featured-card-bbc').innerHTML = 
-      `<div style="padding:2rem; text-align:center; color:#b91c1c;">
-         <h3>⚠️ Tráfico alto detectado</h3>
-         <p>GitHub ha limitado temporalmente las conexiones desde tu red.</p>
-         <p>Por favor, espera unos minutos antes de recargar.</p>
-       </div>`;
-    return;
+  if(news.length === 0 && prog.length === 0) {
+    // Si falla todo y no hay caché
+    return; 
   }
 
-  // 1. Hero (BBC)
+  // 1. Hero
   if(news.length > 0) {
     const hero = news[0];
     const heroEl = document.querySelector('.featured-card-bbc');
     if(heroEl) {
+      // Usamos hero.thumbnail que ahora ya viene relleno gracias al "Cazador de Imágenes"
+      const heroImg = hero.thumbnail || 'https://placehold.co/800x400/eee/999?text=Perspectivas';
       heroEl.innerHTML = `
         <a href="post.html?id=${hero.slug}&folder=${hero.folder}">
-          <img src="${hero.thumbnail || ''}">
+          <img src="${heroImg}" alt="${hero.title}">
           <h2>${hero.title}</h2>
           <p>${hero.description || ''}</p>
         </a>`;
     }
-    // Sidebar
+    
     const sideEl = document.getElementById('top-list-bbc');
     if(sideEl) {
       sideEl.innerHTML = news.slice(1,4).map(n => `
@@ -187,7 +202,7 @@ async function initHome() {
           <h4>${n.title}</h4><small>${formatDate(n.date)}</small>
         </a></li>`).join('');
     }
-    // Grid Noticias
+
     const newsGrid = document.getElementById('news-grid');
     if(newsGrid) {
       newsGrid.innerHTML = news.slice(4, 4 + CONFIG.limitNews).map(n => createCardHTML(n)).join('');
@@ -195,7 +210,7 @@ async function initHome() {
     }
   }
 
-  // 2. Programa (Video)
+  // 2. Programa
   const progGrid = document.getElementById('program-grid');
   if(progGrid) progGrid.innerHTML = prog.slice(0,6).map(p => createCardHTML(p, true)).join('');
 
@@ -241,7 +256,7 @@ async function initPost() {
        <time class="article-meta">${formatDate(data.attributes.date)}</time>
     </header>
     ${video}
-    ${!video && data.attributes.thumbnail ? `<img src="${data.attributes.thumbnail}">` : ''}
+    ${!video && data.attributes.thumbnail ? `<img src="${data.attributes.thumbnail}" class="featured-image">` : ''}
     <div class="article-content">${marked.parse(data.body)}</div>
   `;
 }
