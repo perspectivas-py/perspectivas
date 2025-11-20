@@ -1,4 +1,4 @@
-/* script.js - Perspectivas Engine v2.6 (Image Hunter Fix) */
+/* script.js - Perspectivas Engine v2.7 (No Duplicates) */
 
 const CONFIG = {
   username: 'perspectivas-py',
@@ -42,16 +42,11 @@ const getYoutubeId = (url) => {
   return (match && match[2].length === 11) ? match[2] : null;
 };
 
-// NUEVO: Busca la primera imagen dentro del texto Markdown
 const extractFirstImage = (markdown) => {
-  // Busca formato markdown ![alt](url)
   const mdMatch = markdown.match(/!\[.*?\]\((.*?)\)/);
   if (mdMatch) return mdMatch[1];
-  
-  // Busca formato HTML <img src="url">
   const htmlMatch = markdown.match(/<img[^>]+src=["']([^"']+)["']/i);
   if (htmlMatch) return htmlMatch[1];
-
   return null;
 };
 
@@ -70,10 +65,7 @@ const parseMarkdown = (text) => {
 async function fetchCollection(path, type) {
   const cacheKey = `perspectivas_v2_${type}`;
   const cachedData = db.get(cacheKey);
-  if (cachedData) {
-    console.log(`⚡ ${type} desde caché`);
-    return cachedData;
-  }
+  if (cachedData) return cachedData;
 
   try {
     const res = await fetch(`${BASE_API}/${path}`);
@@ -87,8 +79,6 @@ async function fetchCollection(path, type) {
       const r = await fetch(f.download_url);
       const t = await r.text();
       const { attributes, body } = parseMarkdown(t);
-      
-      // Lógica de imagen prioritaria: thumbnail > image > primera imagen del texto
       const finalImage = attributes.thumbnail || attributes.image || extractFirstImage(body) || null;
 
       return { 
@@ -97,7 +87,7 @@ async function fetchCollection(path, type) {
         slug: f.name.replace('.md',''), 
         folder: path, 
         category: attributes.category || 'General',
-        thumbnail: finalImage // Guardamos la imagen encontrada
+        thumbnail: finalImage
       };
     }));
     
@@ -106,7 +96,6 @@ async function fetchCollection(path, type) {
     return sortedItems;
 
   } catch(e) { 
-    console.warn(e);
     const stale = localStorage.getItem(cacheKey);
     return stale ? JSON.parse(stale).payload : []; 
   }
@@ -120,7 +109,6 @@ async function fetchSinglePost(folder, slug) {
     const contentRes = await fetch(meta.download_url);
     const { attributes, body } = parseMarkdown(await contentRes.text());
     
-    // Misma lógica para post individual por si acaso
     if (!attributes.thumbnail && !attributes.image) {
         attributes.thumbnail = extractFirstImage(body);
     }
@@ -137,7 +125,6 @@ const createCardHTML = (item, showVideo) => {
   if (showVideo && item.embed_url && getYoutubeId(item.embed_url)) {
     media = `<div class="video-wrapper"><iframe src="https://www.youtube.com/embed/${getYoutubeId(item.embed_url)}" frameborder="0" allowfullscreen></iframe></div>`;
   } else {
-    // Si después de todo no hay imagen, usamos placeholder gris
     const imgUrl = item.thumbnail || 'https://placehold.co/600x400/eee/999?text=Perspectivas';
     media = `<div class="card-img-container"><a href="${link}"><img src="${imgUrl}" loading="lazy" alt="${item.title}"></a></div>`;
   }
@@ -175,17 +162,12 @@ async function initHome() {
   const prog = await fetchCollection(PATHS.programa, 'programa');
   const analysis = await fetchCollection(PATHS.analisis, 'analisis');
 
-  if(news.length === 0 && prog.length === 0) {
-    // Si falla todo y no hay caché
-    return; 
-  }
+  if(news.length === 0 && prog.length === 0) return;
 
-  // 1. Hero
   if(news.length > 0) {
     const hero = news[0];
     const heroEl = document.querySelector('.featured-card-bbc');
     if(heroEl) {
-      // Usamos hero.thumbnail que ahora ya viene relleno gracias al "Cazador de Imágenes"
       const heroImg = hero.thumbnail || 'https://placehold.co/800x400/eee/999?text=Perspectivas';
       heroEl.innerHTML = `
         <a href="post.html?id=${hero.slug}&folder=${hero.folder}">
@@ -194,7 +176,6 @@ async function initHome() {
           <p>${hero.description || ''}</p>
         </a>`;
     }
-    
     const sideEl = document.getElementById('top-list-bbc');
     if(sideEl) {
       sideEl.innerHTML = news.slice(1,4).map(n => `
@@ -202,7 +183,6 @@ async function initHome() {
           <h4>${n.title}</h4><small>${formatDate(n.date)}</small>
         </a></li>`).join('');
     }
-
     const newsGrid = document.getElementById('news-grid');
     if(newsGrid) {
       newsGrid.innerHTML = news.slice(4, 4 + CONFIG.limitNews).map(n => createCardHTML(n)).join('');
@@ -210,15 +190,12 @@ async function initHome() {
     }
   }
 
-  // 2. Programa
   const progGrid = document.getElementById('program-grid');
   if(progGrid) progGrid.innerHTML = prog.slice(0,6).map(p => createCardHTML(p, true)).join('');
 
-  // 3. Analisis
   const anaGrid = document.getElementById('analisis-grid');
   if(anaGrid) anaGrid.innerHTML = analysis.slice(0,4).map(a => createCardHTML(a)).join('');
 
-  // Buscador
   document.getElementById('search-input')?.addEventListener('input', e => {
     const term = e.target.value.toLowerCase();
     const grid = document.getElementById('news-grid');
@@ -249,6 +226,26 @@ async function initPost() {
     if(vid) video = `<div class="video-wrapper" style="margin:2rem 0"><iframe src="https://www.youtube.com/embed/${vid}" frameborder="0" allowfullscreen></iframe></div>`;
   }
 
+  // --- LÓGICA DE DES-DUPLICACIÓN ---
+  let htmlContent = marked.parse(data.body);
+  const thumbnail = data.attributes.thumbnail;
+  
+  // Si tenemos una foto destacada y NO es un video
+  if (!video && thumbnail) {
+    // Creamos un elemento virtual para inspeccionar el HTML generado
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = htmlContent;
+    const firstImg = tempDiv.querySelector('img');
+
+    // Si la primera imagen del texto es la misma que la destacada, la borramos
+    // Usamos getAttribute('src') para comparar exactamente lo que está escrito en el markdown
+    if (firstImg && (firstImg.getAttribute('src') === thumbnail || firstImg.src === thumbnail)) {
+      firstImg.remove(); // Adiós duplicado
+      htmlContent = tempDiv.innerHTML; // Guardamos el HTML limpio
+    }
+  }
+  // ----------------------------------
+
   el.innerHTML = `
     <header class="article-header">
        <span class="article-category">${data.attributes.category || 'Noticia'}</span>
@@ -256,8 +253,8 @@ async function initPost() {
        <time class="article-meta">${formatDate(data.attributes.date)}</time>
     </header>
     ${video}
-    ${!video && data.attributes.thumbnail ? `<img src="${data.attributes.thumbnail}" class="featured-image">` : ''}
-    <div class="article-content">${marked.parse(data.body)}</div>
+    ${!video && thumbnail ? `<img src="${thumbnail}" class="featured-image">` : ''}
+    <div class="article-content">${htmlContent}</div>
   `;
 }
 
