@@ -1,4 +1,4 @@
-/* script.js - Perspectivas Engine v2.8 (Podcast Integration) */
+/* script.js - Perspectivas Engine v2.9 (Syntax Fix) */
 
 const CONFIG = {
   username: 'perspectivas-py',
@@ -11,7 +11,7 @@ const PATHS = {
   noticias: 'content/noticias/posts',
   programa: 'content/programa/posts', 
   analisis: 'content/analisis/posts',
-  podcast: 'content/podcast/posts' // <--- NUEVA RUTA
+  podcast: 'content/podcast/posts'
 };
 
 const BASE_API = `https://api.github.com/repos/${CONFIG.username}/${CONFIG.repo}/contents`;
@@ -19,7 +19,9 @@ const BASE_API = `https://api.github.com/repos/${CONFIG.username}/${CONFIG.repo}
 // --- SISTEMA DE CACHÉ ---
 const db = {
   save: (key, data) => {
-    localStorage.setItem(key, JSON.stringify({ timestamp: Date.now(), payload: data }));
+    try {
+      localStorage.setItem(key, JSON.stringify({ timestamp: Date.now(), payload: data }));
+    } catch (e) { console.warn("Cache full", e); }
   },
   get: (key) => {
     const record = localStorage.getItem(key);
@@ -64,7 +66,7 @@ const parseMarkdown = (text) => {
 
 // --- Fetching ---
 async function fetchCollection(path, type) {
-  const cacheKey = `perspectivas_v2_${type}`;
+  const cacheKey = `perspectivas_v3_${type}`;
   const cachedData = db.get(cacheKey);
   if (cachedData) return cachedData;
 
@@ -92,11 +94,13 @@ async function fetchCollection(path, type) {
       };
     }));
     
+    // Ordenar por fecha descendente
     const sortedItems = items.sort((a,b) => new Date(b.date) - new Date(a.date));
     db.save(cacheKey, sortedItems);
     return sortedItems;
 
   } catch(e) { 
+    // Si falla, intentar recuperar caché viejo
     const stale = localStorage.getItem(cacheKey);
     return stale ? JSON.parse(stale).payload : []; 
   }
@@ -118,7 +122,7 @@ async function fetchSinglePost(folder, slug) {
   } catch(e) { return null; }
 }
 
-// --- Rendering (Tarjetas Verticales Estándar) ---
+// --- Rendering ---
 const createCardHTML = (item, showVideo) => {
   const link = `post.html?id=${item.slug}&folder=${item.folder}`;
   let media = '';
@@ -140,7 +144,6 @@ const createCardHTML = (item, showVideo) => {
     </article>`;
 };
 
-// --- Rendering (Tarjetas Horizontales Podcast) ---
 const createPodcastHTML = (item) => {
   const link = `post.html?id=${item.slug}&folder=${item.folder}`;
   const imgUrl = item.thumbnail || 'https://placehold.co/150x150/333/fff?text=Audio';
@@ -159,7 +162,6 @@ const createPodcastHTML = (item) => {
   `;
 };
 
-// --- Filtros ---
 const setupFilters = (items, gridId) => {
   const container = document.getElementById('category-filters');
   if (!container) return;
@@ -177,7 +179,6 @@ const setupFilters = (items, gridId) => {
   });
 };
 
-// --- Lógica Newsletter ---
 function setupNewsletter() {
   const form = document.getElementById('newsletter-form');
   const msg = document.getElementById('newsletter-msg');
@@ -186,57 +187,44 @@ function setupNewsletter() {
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
     const emailInput = document.getElementById('email');
-    const email = emailInput.value;
     const plan = document.getElementById('plan').value;
     const btn = form.querySelector('button');
 
-    // Validación simple
-    if (!email || !email.includes('@')) {
-      msg.textContent = "Por favor, ingresa un email válido.";
+    if (!emailInput.value.includes('@')) {
+      msg.textContent = "Email inválido";
       msg.className = "msg-feedback msg-error";
       return;
     }
 
-    // Estado "Cargando"
     const originalText = btn.textContent;
     btn.textContent = "Enviando...";
     btn.disabled = true;
-    msg.textContent = "";
 
     try {
-      // Simulación de envío (Aquí conectaríamos Formspree/Mailchimp)
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Éxito Visual
-      msg.textContent = `¡Gracias! Te has suscrito al plan ${plan}. Revisa tu bandeja de entrada.`;
+      await new Promise(r => setTimeout(r, 1000));
+      msg.textContent = `¡Suscrito al plan ${plan}!`;
       msg.className = "msg-feedback msg-success";
       form.reset();
-
-    } catch (error) {
-      msg.textContent = "Hubo un error. Inténtalo de nuevo.";
-      msg.className = "msg-feedback msg-error";
+    } catch (e) {
+      msg.textContent = "Error al enviar.";
     } finally {
       btn.textContent = originalText;
       btn.disabled = false;
-      setTimeout(() => {
-        if(msg.classList.contains('msg-success')) msg.textContent = "";
-      }, 5000);
     }
   });
 }
 
-// --- Main Init (HOME) ---
+// --- Init Functions ---
 async function initHome() {
   const news = await fetchCollection(PATHS.noticias, 'noticias');
   const prog = await fetchCollection(PATHS.programa, 'programa');
   const analysis = await fetchCollection(PATHS.analisis, 'analisis');
-  const podcasts = await fetchCollection(PATHS.podcast, 'podcast'); // Carga podcast
+  const podcasts = await fetchCollection(PATHS.podcast, 'podcast');
 
   if(news.length === 0 && prog.length === 0) return;
 
-  // 1. Hero & Noticias
+  // Hero & News
   if(news.length > 0) {
     const hero = news[0];
     const heroEl = document.querySelector('.featured-card-bbc');
@@ -263,27 +251,23 @@ async function initHome() {
     }
   }
 
-  // 2. Programa
+  // Otros Grids
   const progGrid = document.getElementById('program-grid');
   if(progGrid) progGrid.innerHTML = prog.slice(0,6).map(p => createCardHTML(p, true)).join('');
 
-  // 3. Análisis
   const anaGrid = document.getElementById('analisis-grid');
   if(anaGrid) anaGrid.innerHTML = analysis.slice(0,4).map(a => createCardHTML(a)).join('');
 
-  // 4. Podcast
   const podGrid = document.getElementById('podcast-grid');
-  if(podGrid) {
-      // Usamos el nuevo renderizador horizontal
-      podGrid.innerHTML = podcasts.slice(0, 4).map(p => createPodcastHTML(p)).join('');
-  }
+  if(podGrid) podGrid.innerHTML = podcasts.slice(0, 4).map(p => createPodcastHTML(p)).join('');
 
-  // 5. Newsletter & Search
   setupNewsletter();
 
   document.getElementById('search-input')?.addEventListener('input', e => {
     const term = e.target.value.toLowerCase();
     const grid = document.getElementById('news-grid');
+    if(!grid) return;
+    
     if(term.length < 2) {
        grid.innerHTML = news.slice(4, 4 + CONFIG.limitNews).map(n => createCardHTML(n)).join('');
     } else {
@@ -292,7 +276,6 @@ async function initHome() {
   });
 }
 
-// --- Main Init (POST) ---
 async function initPost() {
   const p = new URLSearchParams(window.location.search);
   const slug = p.get('id');
@@ -312,11 +295,16 @@ async function initPost() {
     if(vid) video = `<div class="video-wrapper" style="margin:2rem 0"><iframe src="https://www.youtube.com/embed/${vid}" frameborder="0" allowfullscreen></iframe></div>`;
   }
 
-  // Des-duplicación de imagen
+  // --- Corrección de sintaxis y des-duplicación ---
   let htmlContent = marked.parse(data.body);
   const thumbnail = data.attributes.thumbnail;
-  
+  let featuredImgHTML = '';
+
   if (!video && thumbnail) {
+    // 1. Generamos el HTML de la imagen destacada por separado
+    featuredImgHTML = `<img src="${thumbnail}" class="featured-image">`;
+    
+    // 2. Lógica para borrar duplicados
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = htmlContent;
     const firstImg = tempDiv.querySelector('img');
@@ -326,8 +314,24 @@ async function initPost() {
     }
   }
 
+  // Renderizado final con variables simples (Esto evita el error de sintaxis)
   el.innerHTML = `
     <header class="article-header">
        <span class="article-category">${data.attributes.category || 'Noticia'}</span>
        <h1 class="article-title">${data.attributes.title}</h1>
-       <time class="article-meta">${formatDate(data.attributes.date)
+       <time class="article-meta">${formatDate(data.attributes.date)}</time>
+    </header>
+    ${video}
+    ${featuredImgHTML}
+    <div class="article-content">${htmlContent}</div>
+  `;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  if(window.location.pathname.includes('post.html')) initPost();
+  else initHome();
+  
+  document.getElementById('menu-toggle')?.addEventListener('click', () => {
+    document.getElementById('nav-list').classList.toggle('active');
+  });
+});
