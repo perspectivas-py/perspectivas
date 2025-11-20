@@ -128,3 +128,22 @@ collections:
       - label: "Cuerpo"
         name: "body"
         widget: "markdown"
+        collections:
+
+  - name: "sponsors"
+    label: "Patrocinadores"
+    label_singular: "Patrocinador"
+    folder: "content/sponsors"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}} ({{tier}})"
+    fields:
+      - { name: "title", label: "Nombre comercial", widget: "string" }
+      - { name: "tier", label: "Nivel", widget: "select", options: ["Gold", "Silver", "Bronze"], default: "Silver" }
+      - { name: "url", label: "URL del sitio", widget: "string", required: false }
+      - { name: "logo", label: "Logo", widget: "image", choose_url: true }
+      - { name: "sector", label: "Sector (Banco, Agro, Retail…)", widget: "string", required: false }
+      - { name: "active", label: "Activo", widget: "boolean", default: true }
+      - { name: "featured", label: "Destacar como 'Sitio patrocinado' en el Home", widget: "boolean", default: false }
+      - { name: "headline", label: "Titular para el bloque patrocinado", widget: "string", required: false, hint: "Ej: La plataforma que digitaliza el agro en Paraguay" }
+      - { name: "excerpt", label: "Descripción corta", widget: "text", required: false, hint: "2–3 líneas explicando qué hace el patrocinador" }
