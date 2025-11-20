@@ -178,3 +178,101 @@ ul { list-style: none; }
     width: 100%;
   }
 }
+/* =========================================
+   SECCIÓN PODCAST (Estilo Horizontal)
+   ========================================= */
+.podcast-grid {
+  /* Forzamos una columna en móviles, 2 en desktop */
+  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); 
+  gap: 1.5rem;
+}
+
+.podcast-card {
+  display: flex; /* Lado a lado */
+  flex-direction: row;
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  align-items: center; /* Centrado vertical */
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.podcast-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border-color: var(--color-accent);
+}
+
+/* Imagen cuadrada pequeña a la izquierda */
+.podcast-img-link {
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  position: relative;
+}
+
+.podcast-img-link img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Icono de Play superpuesto */
+.play-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.podcast-card:hover .play-overlay { opacity: 1; }
+
+.play-icon {
+  color: white;
+  font-size: 2rem;
+  background: var(--color-accent);
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  padding-left: 4px; /* Ajuste visual óptico */
+}
+
+/* Contenido a la derecha */
+.podcast-content {
+  padding: 1rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.podcast-meta {
+  font-size: 0.75rem;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+  font-family: var(--font-ui);
+}
+
+.podcast-title {
+  font-size: 1.1rem;
+  line-height: 1.3;
+  margin: 0;
+  font-weight: 700;
+}
+.podcast-title a:hover { color: var(--color-accent); }
+
+/* Responsive */
+@media (max-width: 600px) {
+  .podcast-grid { grid-template-columns: 1fr; } /* 1 columna en móvil */
+  .podcast-card {
+    flex-direction: row; /* Mantenemos horizontal incluso en móvil */
+  }
+  .podcast-img-link { width: 90px; height: 90px; } /* Un poco más chico */
+  .podcast-title { font-size: 1rem; }
+}
