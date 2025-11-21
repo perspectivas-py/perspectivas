@@ -4,7 +4,7 @@ tier: Gold
 logo: /assets/img/perspectivas-logo.jpeg
 sector: Media
 active: true
-featured: false
+featured: true
 headline: La plataforma que digitaliza la Educación Financiera
 excerpt: "Prueba "
 ---
