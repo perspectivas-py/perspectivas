@@ -248,40 +248,70 @@ function renderSponsorsGrid(entries) {
 // RENDER: Sitio Patrocinado (bloque destacado)
 // ---------------------------------------------------------
 function renderSponsoredSite(entries) {
-  const cardEl = document.getElementById("sponsoredSiteCard");
+  const cardEl = document.getElementById('sponsoredSiteCard');
   if (!cardEl) return;
 
-  const featured = entries.find(e => String(e.featured) === "true") || entries[0];
+  const featured = entries.find(e => String(e.featured) === 'true') || entries[0];
 
   if (!featured) {
-    cardEl.innerHTML = "<p>No hay sitio patrocinado disponible.</p>";
-    cardEl.classList.remove("skeleton-card");
+    cardEl.innerHTML = `
+      <div>
+        <div class="sponsored-meta">Contenido patrocinado</div>
+        <p>No hay un sitio patrocinado activo en este momento.</p>
+      </div>
+    `;
+    cardEl.classList.remove('skeleton-card');
     return;
   }
 
   const d = featured;
   const logoUrl = resolveMediaUrl(d.logo);
 
-  cardEl.classList.remove("skeleton-card");
+  cardEl.classList.remove('skeleton-card');
   cardEl.innerHTML = `
     <div>
-      <div class="sponsored-meta">Contenido patrocinado</div>
-      <h3>${d.headline || d.title || "Sitio patrocinado"}</h3>
-      ${d.excerpt ? `<p>${d.excerpt}</p>` : ""}
-      ${d.sector ? `<div class="sponsored-sector">Sector: ${d.sector}</div>` : ""}
-      ${d.url ? `
-        <div class="sponsored-actions">
-          <a class="sponsored-cta" href="${d.url}" target="_blank"
-             rel="noopener noreferrer sponsored">
-             Visitar sitio patrocinado
-          </a>
-        </div>` : ""}
+      <div class="sponsored-meta">
+        Contenido patrocinado · Perspectivas
+      </div>
+
+      <h3>${d.headline || d.title || 'Sitio patrocinado'}</h3>
+
+      ${
+        d.excerpt
+          ? `<p>${d.excerpt}</p>`
+          : d.title
+            ? `<p class="sponsored-tagline">
+                 Conocé a <strong>${d.title}</strong>, aliado de Perspectivas en el desarrollo económico del Paraguay.
+               </p>`
+            : ''
+      }
+
+      ${
+        d.sector
+          ? `<div class="sponsored-sector">Sector: ${d.sector}</div>`
+          : ''
+      }
+
+      ${
+        d.url
+          ? `<div class="sponsored-actions">
+               <a class="sponsored-cta"
+                  href="${d.url}"
+                  target="_blank"
+                  rel="noopener noreferrer sponsored">
+                 Visitar sitio patrocinado
+               </a>
+             </div>`
+          : ''
+      }
     </div>
 
     <div>
-      <img src="${logoUrl || "https://placehold.co/400x250?text=Patrocinador"}"
-           alt="${d.title || "Patrocinador"}">
-    </div>`;
+      <img
+        src="${logoUrl || 'https://placehold.co/400x250?text=Patrocinador'}"
+        alt="${d.title || 'Patrocinador'}">
+    </div>
+  `;
 }
 
 // ---------------------------------------------------------
