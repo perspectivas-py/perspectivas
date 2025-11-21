@@ -147,3 +147,6 @@ collections:
       - { name: "featured", label: "Destacar como 'Sitio patrocinado' en el Home", widget: "boolean", default: false }
       - { name: "headline", label: "Titular para el bloque patrocinado", widget: "string", required: false, hint: "Ej: La plataforma que digitaliza el agro en Paraguay" }
       - { name: "excerpt", label: "Descripción corta", widget: "text", required: false, hint: "2–3 líneas explicando qué hace el patrocinador" }
+      - { name: "priority", label: "Prioridad (1 es el más alto)", widget: "number", default: 10 }
+      - { name: "campaign_start", label: "Inicio de campaña", widget: "datetime", required: false }
+      - { name: "campaign_end", label: "Fin de campaña", widget: "datetime", required: false }
