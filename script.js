@@ -253,6 +253,59 @@ function renderSponsoredSite(entries) {
     </div>
   `;
 }
+// ---------------------------------------------------------
+// RENDER: Sitio Patrocinado (bloque destacado)
+// ---------------------------------------------------------
+function renderSponsoredSite(entries) {
+  const cardEl = document.getElementById("sponsoredSiteCard");
+  if (!cardEl) return;
+
+  // Selección inteligente
+  const featured = pickSponsoredSmart(entries);
+  if (!featured) {
+    cardEl.innerHTML = "<p>No hay patrocinadores activos.</p>";
+    return;
+  }
+
+  const logoUrl = resolveMediaUrl(featured.logo);
+
+  cardEl.classList.remove("skeleton-card");
+  cardEl.innerHTML = `
+    <div>
+      <div class="sponsored-meta">Contenido patrocinado · Perspectivas</div>
+
+      <h3>${featured.headline || featured.title || 'Sitio patrocinado'}</h3>
+
+      ${
+        featured.excerpt
+          ? `<p>${featured.excerpt}</p>`
+          : featured.title
+            ? `<p class="sponsored-tagline">
+                 Conocé a <strong>${featured.title}</strong>, aliado de Perspectivas en el desarrollo económico del Paraguay.
+               </p>`
+            : ''
+      }
+
+      ${featured.sector ? `<div class="sponsored-sector">Sector: ${featured.sector}</div>` : ''}
+
+      ${
+        featured.url
+          ? `<div class="sponsored-actions">
+               <a class="sponsored-cta" href="${featured.url}" target="_blank" rel="noopener noreferrer sponsored">
+                 Visitar sitio patrocinado
+               </a>
+             </div>`
+          : ''
+      }
+    </div>
+
+    <div>
+      <img
+        src="${logoUrl || 'https://placehold.co/400x250?text=Patrocinador'}"
+        alt="${featured.title || 'Patrocinador'}">
+    </div>
+  `;
+}
 
 /* ---------------------------------------------------------
    ROTACIÓN PRO v3 (animación + scheduler)
