@@ -245,7 +245,7 @@ function renderSponsorsGrid(entries) {
 }
 
 // ---------------------------------------------------------
-// RENDER: Sitio Patrocinado — versión PRO con rotación automática
+// RENDER: Sitio Patrocinado — PRO con Fade-out + Fade-in
 // ---------------------------------------------------------
 function renderSponsoredSite(entries) {
   const cardEl = document.getElementById("sponsoredSiteCard");
@@ -261,9 +261,11 @@ function renderSponsoredSite(entries) {
 
   const logoUrl = resolveMediaUrl(d.logo);
 
-  // Animación fade
+  // FADE-OUT (suave)
+  cardEl.style.transition = "opacity 0.6s ease";
   cardEl.style.opacity = 0;
 
+  // Esperamos que termine el fade-out antes de reemplazar el contenido
   setTimeout(() => {
     cardEl.classList.remove("skeleton-card");
 
@@ -308,12 +310,15 @@ function renderSponsoredSite(entries) {
       </div>
     `;
 
-    // Fade-in suave luego del reemplazo
-    cardEl.style.opacity = 1;
-  }, 250);
+    // FADE-IN (suave)
+    requestAnimationFrame(() => {
+      cardEl.style.opacity = 1;
+    });
+
+  }, 600);  // Combina perfectamente con transition: 0.6s
 }
 // ---------------------------------------------------------
-// Scheduler PRO: revisa campañas y cambia automáticamente
+// Scheduler PRO v3 — rotación automática + campañas
 // ---------------------------------------------------------
 function startSponsoredScheduler(entries) {
   // Primera carga
@@ -322,7 +327,12 @@ function startSponsoredScheduler(entries) {
   // Cada 3 minutos revisa si cambió la campaña activa
   setInterval(() => {
     renderSponsoredSite(entries);
-  }, 3 * 60 * 1000); // 3 minutos
+  }, 3 * 60 * 1000);
+
+  // Rotación visual cada 20 segundos
+  setInterval(() => {
+    renderSponsoredSite(entries);
+  }, 20000); // 20s → podés cambiar a 30s o 60s si querés
 }
 
 // ---------------------------------------------------------
