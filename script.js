@@ -245,77 +245,84 @@ function renderSponsorsGrid(entries) {
 }
 
 // ---------------------------------------------------------
-// RENDER PRO v3 — con transición fade-out + fade-in + pre-render
+// ROTACIÓN DINÁMICA PRO (Paso D)
 // ---------------------------------------------------------
-function renderSponsoredSite(entries) {
+function startSponsoredScheduler(entries) {
   const cardEl = document.getElementById("sponsoredSiteCard");
   if (!cardEl) return;
 
-  // 1) Elegimos patrocinador por lógica Smart
-  const d = pickSponsoredSmart(entries);
-  if (!d) {
-    cardEl.innerHTML = "<p>No hay sitio patrocinado disponible.</p>";
-    cardEl.classList.remove("skeleton-card");
-    return;
+  // Filtramos activos desde el inicio
+  let pool = entries.filter(e => String(e.active) !== "false");
+  if (!pool.length) return;
+
+  // Índice rotativo interno
+  let index = 0;
+
+  // Función: animación + cambio de patrocinador
+  function rotateSponsor() {
+    const d = pool[index];
+
+    // Fade-out rápido
+    cardEl.style.opacity = 0;
+
+    setTimeout(() => {
+      // Render PRO usando pickSponsoredSmart
+      const picked = pickSponsoredSmart(pool);
+      const logoUrl = resolveMediaUrl(picked.logo);
+
+      cardEl.innerHTML = `
+        <div>
+          <div class="sponsored-meta">Contenido patrocinado · Perspectivas</div>
+
+          <h3>${picked.headline || picked.title || "Sitio patrocinado"}</h3>
+
+          ${
+            picked.excerpt
+              ? `<p>${picked.excerpt}</p>`
+              : picked.title
+              ? `<p class="sponsored-tagline">
+                   Conocé a <strong>${picked.title}</strong>, aliado de Perspectivas en el desarrollo económico del Paraguay.
+                 </p>`
+              : ""
+          }
+
+          ${picked.sector ? `<div class="sponsored-sector">Sector: ${picked.sector}</div>` : ""}
+
+          ${
+            picked.url
+              ? `<div class="sponsored-actions">
+                   <a class="sponsored-cta"
+                      href="${picked.url}"
+                      target="_blank"
+                      rel="noopener noreferrer sponsored">
+                     Visitar sitio patrocinado
+                   </a>
+                 </div>`
+              : ""
+          }
+        </div>
+
+        <div>
+          <img src="${logoUrl}" alt="${picked.title}">
+        </div>
+      `;
+
+      // Fade-in
+      cardEl.style.opacity = 1;
+
+      // Avanzar índice rotativo
+      index = (index + 1) % pool.length;
+
+    }, 350); // tiempo del fade-out
   }
 
-  // 2) Preparamos el HTML en memoria (pre-render)
-  const logoUrl = resolveMediaUrl(d.logo);
+  // Primera carga inmediata
+  rotateSponsor();
 
-  const nextHTML = `
-    <div>
-      <div class="sponsored-meta">Contenido patrocinado · Perspectivas</div>
-
-      <h3>${d.headline || d.title || "Sitio patrocinado"}</h3>
-
-      ${
-        d.excerpt
-          ? `<p>${d.excerpt}</p>`
-          : d.title
-          ? `<p class="sponsored-tagline">
-               Conocé a <strong>${d.title}</strong>, aliado de Perspectivas en el desarrollo económico del Paraguay.
-             </p>`
-          : ""
-      }
-
-      ${d.sector ? `<div class="sponsored-sector">Sector: ${d.sector}</div>` : ""}
-
-      ${
-        d.url
-          ? `<div class="sponsored-actions">
-               <a class="sponsored-cta"
-                  href="${d.url}"
-                  target="_blank"
-                  rel="noopener noreferrer sponsored">
-                 Visitar sitio patrocinado
-               </a>
-             </div>`
-          : ""
-      }
-    </div>
-
-    <div>
-      <img
-        src="${logoUrl || "https://placehold.co/400x250?text=Patrocinador"}"
-        alt="${d.title || "Patrocinador"}">
-    </div>
-  `;
-
-  // 3) Fase fade-out (visual)
-  cardEl.style.transition = "opacity 0.35s ease";
-  cardEl.style.opacity = 0;
-
-  // 4) Luego del fade-out, reemplazamos contenido
-  setTimeout(() => {
-    cardEl.classList.remove("skeleton-card");
-    cardEl.innerHTML = nextHTML;
-
-    // 5) Fade-in suave
-    requestAnimationFrame(() => {
-      cardEl.style.opacity = 1;
-    });
-  }, 350);
+  // Rotación cada 12 segundos (puedes ajustar a gusto)
+  setInterval(rotateSponsor, 12000);
 }
+
 // ---------------------------------------------------------
 // Scheduler PRO v3 — rotación automática + campañas
 // ---------------------------------------------------------
