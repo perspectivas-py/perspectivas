@@ -1,10 +1,10 @@
-/* script.js - Perspectivas Engine v3.0 (Patrocinadores Integrado) */
+/* script.js - Perspectivas Engine v3.0 (Patrocinadores Integrado PRO) */
 
 const CONFIG = {
   username: 'perspectivas-py',
   repo: 'perspectivas',
   limitNews: 10,
-  cacheTime: 15 * 60 * 1000, // 15 min caché
+  cacheTime: 15 * 60 * 1000, // 15 min
 };
 
 const PATHS = {
@@ -17,323 +17,272 @@ const PATHS = {
 
 const BASE_API = `https://api.github.com/repos/${CONFIG.username}/${CONFIG.repo}/contents`;
 
-// ---------------------------------------------------------
-// SISTEMA DE CACHÉ
-// ---------------------------------------------------------
+/* ---------------------------------------------------------
+   SISTEMA DE CACHÉ
+--------------------------------------------------------- */
 const db = {
   save: (key, data) => {
     try {
       localStorage.setItem(key, JSON.stringify({ timestamp: Date.now(), payload: data }));
-    } catch (e) { console.warn("Cache full", e); }
+    } catch (e) {}
   },
+
   get: (key) => {
     const record = localStorage.getItem(key);
     if (!record) return null;
+
     const { timestamp, payload } = JSON.parse(record);
     if (Date.now() - timestamp > CONFIG.cacheTime) return null;
+
     return payload;
   }
 };
 
-// ---------------------------------------------------------
-// Helpers generales
-// ---------------------------------------------------------
+/* ---------------------------------------------------------
+   HELPERS GENERALES
+--------------------------------------------------------- */
 const formatDate = (str) => {
   if (!str) return "";
-  try {
-    return new Date(str).toLocaleDateString("es-ES", {
-      day: "numeric",
-      month: "short",
-      year: "numeric"
-    });
-  } catch (e) { return str; }
+  return new Date(str).toLocaleDateString("es-ES", {
+    day: "numeric",
+    month: "short",
+    year: "numeric"
+  });
 };
 
 const getYoutubeId = (url) => {
   if (!url) return null;
-  const match = url.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/);
-  return (match && match[2].length === 11) ? match[2] : null;
+  const m = url.match(/^.*(youtu.be\/|v\/|embed\/|watch\?v=)([^#&?]{11}).*/);
+  return m ? m[2] : null;
 };
 
-const extractFirstImage = (markdown) => {
-  const mdMatch = markdown.match(/!\[.*?\]\((.*?)\)/);
-  if (mdMatch) return mdMatch[1];
-  const htmlMatch = markdown.match(/<img[^>]+src=["']([^"']+)["']/i);
-  if (htmlMatch) return htmlMatch[1];
-  return null;
+const extractFirstImage = (md) => {
+  const mdImg = md.match(/!\[.*?\]\((.*?)\)/);
+  if (mdImg) return mdImg[1];
+  const htmlImg = md.match(/<img[^>]+src=["']([^"']+)["']/i);
+  return htmlImg ? htmlImg[1] : null;
 };
 
 const parseMarkdown = (text) => {
-  const match = text.match(/^---([\s\S]*?)---/);
-  if (!match) return { attributes: {}, body: text };
+  const front = text.match(/^---([\s\S]*?)---/);
+  if (!front) return { attributes: {}, body: text };
 
-  const attributes = {};
-  match[1].split("\n").forEach(line => {
-    const [key, ...val] = line.split(":");
-    if (key && val) attributes[key.trim()] = val.join(":").trim().replace(/^['"]|['"]$/g, "");
+  const attrs = {};
+  front[1].split("\n").forEach(line => {
+    const [key, ...value] = line.split(":");
+    if (key && value) attrs[key.trim()] = value.join(":").trim().replace(/^['"]|['"]$/g, "");
   });
 
   return {
-    attributes,
-    body: text.replace(match[0], "").trim()
+    attributes: attrs,
+    body: text.replace(front[0], "").trim()
   };
 };
 
-// ---------------------------------------------------------
-// Helpers para Patrocinadores
-// ---------------------------------------------------------
-function shuffleArray(arr) {
-  return arr
-    .map(item => ({ item, sort: Math.random() }))
-    .sort((a, b) => a.sort - b.sort)
-    .map(({ item }) => item);
-}
+/* ---------------------------------------------------------
+   HELPERS SPONSORS
+--------------------------------------------------------- */
+const shuffleArray = (arr) =>
+  arr.map(a => ({ sort: Math.random(), value: a }))
+     .sort((a, b) => a.sort - b.sort)
+     .map(a => a.value);
 
-function resolveMediaUrl(path) {
-  if (!path) return "";
-  return path.startsWith("http") ? path : path;
-}
+const resolveMediaUrl = (path) => !path ? "" : path;
 
-// ---------------------------------------------------------
-// Fetch de colecciones
-// ---------------------------------------------------------
+/* ---------------------------------------------------------
+   FETCH COLLECTIONS
+--------------------------------------------------------- */
 async function fetchCollection(path, type) {
-  const cacheKey = `perspectivas_v3_${type}`;
-  const cachedData = db.get(cacheKey);
-  if (cachedData) return cachedData;
+  const cacheKey = `persp_cache_${type}`;
+  const cached = db.get(cacheKey);
+  if (cached) return cached;
 
   try {
     const res = await fetch(`${BASE_API}/${path}`);
-    if (res.status === 403) throw new Error("403 API Limit");
     if (!res.ok) return [];
 
-    const files = await res.json();
-    const mdFiles = files.filter(f => f.name.endsWith(".md"));
+    const json = await res.json();
+    const mdFiles = json.filter(f => f.name.endsWith(".md"));
 
     const items = await Promise.all(
       mdFiles.map(async (f) => {
-        const r = await fetch(f.download_url);
-        const t = await r.text();
-        const { attributes, body } = parseMarkdown(t);
-        const finalImage =
-          attributes.thumbnail || attributes.image || extractFirstImage(body) || null;
+        const raw = await fetch(f.download_url);
+        const text = await raw.text();
+        const { attributes, body } = parseMarkdown(text);
 
         return {
           ...attributes,
           body,
           slug: f.name.replace(".md", ""),
           folder: path,
-          category: attributes.category || "General",
-          thumbnail: finalImage
+          thumbnail: attributes.thumbnail || extractFirstImage(body)
         };
       })
     );
 
-    const sortedItems = items.sort((a, b) => new Date(b.date) - new Date(a.date));
-    db.save(cacheKey, sortedItems);
-    return sortedItems;
+    const sorted = items.sort((a, b) => new Date(b.date) - new Date(a.date));
+    db.save(cacheKey, sorted);
+    return sorted;
 
   } catch (e) {
-    const stale = localStorage.getItem(cacheKey);
-    return stale ? JSON.parse(stale).payload : [];
+    return [];
   }
 }
 
-async function fetchSinglePost(folder, slug) {
-  try {
-    const res = await fetch(`${BASE_API}/${folder}/${slug}.md`);
-    if (!res.ok) throw new Error("Not found");
-    const meta = await res.json();
-    const contentRes = await fetch(meta.download_url);
-    const { attributes, body } = parseMarkdown(await contentRes.text());
-
-    if (!attributes.thumbnail && !attributes.image) {
-      attributes.thumbnail = extractFirstImage(body);
-    }
-
-    return { attributes, body };
-
-  } catch (e) { return null; }
-}
-
-// ---------------------------------------------------------
-// Rendering Cards
-// ---------------------------------------------------------
-const createCardHTML = (item, showVideo) => {
+/* ---------------------------------------------------------
+   RENDER CARDS
+--------------------------------------------------------- */
+const createCardHTML = (item, showVideo = false) => {
   const link = `post.html?id=${item.slug}&folder=${item.folder}`;
-  let media = "";
-
-  if (showVideo && item.embed_url && getYoutubeId(item.embed_url)) {
-    media = `
-      <div class="video-wrapper">
-        <iframe src="https://www.youtube.com/embed/${getYoutubeId(item.embed_url)}"
-                frameborder="0" allowfullscreen></iframe>
-      </div>`;
-  } else {
-    const imgUrl = item.thumbnail || "https://placehold.co/600x400/eee/999?text=Perspectivas";
-    media = `
-      <div class="card-img-container">
-         <a href="${link}"><img src="${imgUrl}" loading="lazy" alt="${item.title}"></a>
-      </div>`;
-  }
+  const img = item.thumbnail || "https://placehold.co/600x400/eee/999?text=Perspectivas";
 
   return `
     <article class="card">
-      ${media}
+      <div class="card-img-container">
+        <a href="${link}">
+          <img src="${img}" alt="${item.title}" loading="lazy">
+        </a>
+      </div>
       <div class="card-content">
         <small class="card-meta">${formatDate(item.date)} | ${item.category}</small>
         <h3><a href="${link}">${item.title}</a></h3>
       </div>
-    </article>`;
+    </article>
+  `;
 };
 
-const createPodcastHTML = (item) => {
-  const link = `post.html?id=${item.slug}&folder=${item.folder}`;
-  const imgUrl = item.thumbnail || "https://placehold.co/150x150/333/fff?text=Audio";
-
-  return `
-    <article class="podcast-card">
-      <a href="${link}" class="podcast-img-link">
-        <img src="${imgUrl}" alt="${item.title}" loading="lazy">
-        <div class="play-overlay"><span class="play-icon">▶</span></div>
-      </a>
-      <div class="podcast-content">
-        <small class="podcast-meta">${formatDate(item.date)} | EPISODIO</small>
-        <h3 class="podcast-title"><a href="${link}">${item.title}</a></h3>
-      </div>
-    </article>`;
-};
-
-// ---------------------------------------------------------
-// RENDER: Patrocinadores (grilla)
-// ---------------------------------------------------------
+/* ---------------------------------------------------------
+   GRID DE SPONSORS
+--------------------------------------------------------- */
 function renderSponsorsGrid(entries) {
-  const container = document.getElementById("sponsorsGrid");
-  if (!container) return;
-
-  container.innerHTML = "";
+  const box = document.getElementById("sponsorsGrid");
+  if (!box) return;
 
   if (!entries.length) {
-    container.innerHTML = "<p>No hay patrocinadores activos.</p>";
+    box.innerHTML = "<p>No hay patrocinadores activos.</p>";
     return;
   }
 
   const randomized = shuffleArray(entries);
 
-  randomized.forEach(d => {
-    if (String(d.active) === "false") return;
-
-    const tierClass = d.tier ? `tier-${d.tier}` : "";
-    const logoUrl = resolveMediaUrl(d.logo);
-
-    const wrapper = document.createElement(d.url ? "a" : "div");
-    wrapper.className = `sponsor-item ${tierClass}`;
-
-    if (d.url) {
-      wrapper.href = d.url;
-      wrapper.target = "_blank";
-      wrapper.rel = "noopener noreferrer sponsored";
-    }
-
-    const img = document.createElement("img");
-    img.src = logoUrl || "https://placehold.co/200x60?text=Logo";
-    img.alt = d.title || "Patrocinador";
-
-    wrapper.appendChild(img);
-    container.appendChild(wrapper);
-  });
+  box.innerHTML = randomized
+    .filter(d => String(d.active) !== "false")
+    .map(d => `
+      <a class="sponsor-item tier-${d.tier || ''}"
+         href="${d.url || '#'}"
+         target="_blank"
+         rel="noopener noreferrer sponsored">
+        <img src="${resolveMediaUrl(d.logo)}" alt="${d.title}">
+      </a>
+    `)
+    .join("");
 }
-// ---------------------------------------------------------
-// RENDER PRO: Sitio patrocinado (pick + render)
-// ---------------------------------------------------------
-function renderSponsoredSite(entries) {
-  const cardEl = document.getElementById("sponsoredSiteCard");
-  if (!cardEl) return;
 
-  // Selección inteligente PRO
+/* ---------------------------------------------------------
+   SPONSOR SMART PICK (Campañas + Prioridades)
+--------------------------------------------------------- */
+function pickSponsoredSmart(entries) {
+  const now = new Date();
+
+  const active = entries.filter(e => String(e.active) !== "false");
+
+  // Filtrar campañas activas
+  const campaign = active.filter(e => {
+    const start = e.campaign_start ? new Date(e.campaign_start) : null;
+    const end = e.campaign_end ? new Date(e.campaign_end) : null;
+
+    if (start && end) return now >= start && now <= end;
+    if (start && !end) return now >= start;
+    if (!start && end) return now <= end;
+
+    return true;
+  });
+
+  const pool = campaign.length ? campaign : active;
+
+  // Orden por prioridad
+  pool.sort((a, b) => (Number(a.priority || 999)) - (Number(b.priority || 999)));
+
+  return pool[0];
+}
+
+/* ---------------------------------------------------------
+   RENDER SPONSORED BLOCK (Bloque destacado)
+--------------------------------------------------------- */
+function renderSponsoredSite(entries) {
+  const card = document.getElementById("sponsoredSiteCard");
+  if (!card) return;
+
   const d = pickSponsoredSmart(entries);
   if (!d) {
-    cardEl.innerHTML = "<p>No hay patrocinadores activos.</p>";
+    card.innerHTML = "<p>No hay patrocinador disponible.</p>";
     return;
   }
 
-  const logoUrl = resolveMediaUrl(d.logo);
+  const logo = resolveMediaUrl(d.logo);
 
-  cardEl.classList.remove("skeleton-card");
-  cardEl.innerHTML = `
+  card.innerHTML = `
     <div>
-      <div class="sponsored-meta">
-        Contenido patrocinado · Perspectivas
-      </div>
+      <div class="sponsored-meta">Contenido patrocinado · Perspectivas</div>
 
-      <h3>${d.headline || d.title || 'Sitio patrocinado'}</h3>
+      <h3>${d.headline || d.title}</h3>
 
       ${
         d.excerpt
           ? `<p>${d.excerpt}</p>`
-          : d.title
-            ? `<p class="sponsored-tagline">
-                 Conocé a <strong>${d.title}</strong>, aliado de Perspectivas en el desarrollo económico del Paraguay.
-               </p>`
-            : ''
+          : `<p class="sponsored-tagline">
+               Conocé a <strong>${d.title}</strong>, aliado de Perspectivas en el desarrollo económico del Paraguay.
+             </p>`
       }
 
-      ${d.sector ? `<div class="sponsored-sector">Sector: ${d.sector}</div>` : ''}
+      ${d.sector ? `<div class="sponsored-sector">Sector: ${d.sector}</div>` : ""}
 
       ${
         d.url
           ? `<div class="sponsored-actions">
-               <a class="sponsored-cta"
-                  href="${d.url}"
-                  target="_blank"
-                  rel="noopener noreferrer sponsored">
+               <a href="${d.url}" class="sponsored-cta" target="_blank" rel="noopener noreferrer sponsored">
                  Visitar sitio patrocinado
                </a>
              </div>`
-          : ''
+          : ""
       }
     </div>
 
     <div>
-      <img
-        src="${logoUrl || 'https://placehold.co/400x250?text=Patrocinador'}"
-        alt="${d.title || 'Patrocinador'}">
+      <img src="${logo}" alt="${d.title}">
     </div>
   `;
 }
 
-// ---------------------------------------------------------
-// Scheduler PRO v3 — rotación automática + campañas
-// ---------------------------------------------------------
+/* ---------------------------------------------------------
+   ROTACIÓN PRO v3 (animación + scheduler)
+--------------------------------------------------------- */
 function startSponsoredScheduler(entries) {
-  // 1. Primera carga inmediata
+  // Carga inicial inmediata
   renderSponsoredSite(entries);
 
-  // 2. Rotación automática cada 3 minutos
   setInterval(() => {
-    const cardEl = document.getElementById("sponsoredSiteCard");
-    if (!cardEl) return;
+    const card = document.getElementById("sponsoredSiteCard");
+    if (!card) return;
 
-    // Fade-out suave ANTES de cambiar contenido
-    cardEl.style.transition = "opacity 0.6s ease";
-    cardEl.style.opacity = 0;
+    // fade-out
+    card.style.opacity = 0;
 
     setTimeout(() => {
-      // Reemplazo del contenido
       renderSponsoredSite(entries);
 
-      // Fade-in suave
       setTimeout(() => {
-        cardEl.style.opacity = 1;
-      }, 50);
+        card.style.opacity = 1;
+      }, 80);
 
-    }, 600);
-  }, 3 * 60 * 1000);
+    }, 500);
+
+  }, 12000); // cada 12 segundos
 }
 
-// ---------------------------------------------------------
-// CARGA DE PATROCINADORES (Home)
-// ---------------------------------------------------------
+/* ---------------------------------------------------------
+   HOME: CARGA DE SPONSORS
+--------------------------------------------------------- */
 async function loadSponsorsHome() {
   try {
     const sponsors = await fetchCollection(PATHS.sponsors, "sponsors");
@@ -343,208 +292,47 @@ async function loadSponsorsHome() {
       startSponsoredScheduler(sponsors);
     }
 
-  } catch (err) {
-    console.error("Error cargando sponsors:", err);
-
-    const grid = document.getElementById("sponsorsGrid");
-    const block = document.getElementById("sponsoredSiteCard");
-
-    if (grid) grid.innerHTML = "<p>Error al cargar los patrocinadores.</p>";
-    if (block) {
-      block.innerHTML = "<p>Error cargando sitio patrocinado.</p>";
-      block.classList.remove("skeleton-card");
-    }
+  } catch (e) {
+    const g = document.getElementById("sponsorsGrid");
+    const s = document.getElementById("sponsoredSiteCard");
+    if (g) g.innerHTML = "<p>Error al cargar patrocinadores.</p>";
+    if (s) s.innerHTML = "<p>Error cargando sitio patrocinado.</p>";
   }
 }
 
-// ---------------------------------------------------------
-// Newsletter
-// ---------------------------------------------------------
-function setupNewsletter() {
-  const form = document.getElementById("newsletter-form");
-  const msg = document.getElementById("newsletter-msg");
-
-  if (!form || !msg) return;
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const emailInput = document.getElementById("email");
-    const plan = document.getElementById("plan").value;
-    const btn = form.querySelector("button");
-
-    if (!emailInput.value.includes("@")) {
-      msg.textContent = "Email inválido";
-      msg.className = "msg-feedback msg-error";
-      return;
-    }
-
-    const originalText = btn.textContent;
-    btn.textContent = "Enviando...";
-    btn.disabled = true;
-
-    try {
-      await new Promise(r => setTimeout(r, 1000));
-      msg.textContent = `¡Suscrito al plan ${plan}!`;
-      msg.className = "msg-feedback msg-success";
-      form.reset();
-    } catch (e) {
-      msg.textContent = "Error al enviar.";
-    } finally {
-      btn.textContent = originalText;
-      btn.disabled = false;
-    }
-  });
-}
-
-// ---------------------------------------------------------
-// HOME INIT
-// ---------------------------------------------------------
+/* ---------------------------------------------------------
+   HOME INIT
+--------------------------------------------------------- */
 async function initHome() {
   const news = await fetchCollection(PATHS.noticias, "noticias");
   const prog = await fetchCollection(PATHS.programa, "programa");
   const analysis = await fetchCollection(PATHS.analisis, "analisis");
   const podcasts = await fetchCollection(PATHS.podcast, "podcast");
 
-  if (news.length === 0 && prog.length === 0) return;
-
-  // ---------------- Hero & Noticias ----------------
-  if (news.length > 0) {
+  // Hero
+  if (news.length) {
     const hero = news[0];
-    const heroEl = document.querySelector(".featured-card-bbc");
+    const el = document.querySelector(".featured-card-bbc");
 
-    if (heroEl) {
-      const heroImg = hero.thumbnail || "https://placehold.co/800x400/eee/999?text=Perspectivas";
-      heroEl.innerHTML = `
+    if (el) {
+      el.innerHTML = `
         <a href="post.html?id=${hero.slug}&folder=${hero.folder}">
-          <img src="${heroImg}" alt="${hero.title}">
+          <img src="${hero.thumbnail}" alt="${hero.title}">
           <h2>${hero.title}</h2>
-          <p>${hero.description || ""}</p>
-        </a>`;
-    }
-
-    const sideEl = document.getElementById("top-list-bbc");
-    if (sideEl) {
-      sideEl.innerHTML = news.slice(1, 4).map(n => `
-        <li>
-          <a href="post.html?id=${n.slug}&folder=${n.folder}">
-            <h4>${n.title}</h4>
-            <small>${formatDate(n.date)}</small>
-          </a>
-        </li>`).join("");
-    }
-
-    const newsGrid = document.getElementById("news-grid");
-    if (newsGrid) {
-      newsGrid.innerHTML = news.slice(4, 4 + CONFIG.limitNews).map(n => createCardHTML(n)).join("");
+          <p>${hero.description || ''}</p>
+        </a>
+      `;
     }
   }
 
-  // ---------------- Otros Grids ----------------
-  const progGrid = document.getElementById("program-grid");
-  if (progGrid) progGrid.innerHTML = prog.slice(0, 6).map(p => createCardHTML(p, true)).join("");
-
-  const anaGrid = document.getElementById("analisis-grid");
-  if (anaGrid) anaGrid.innerHTML = analysis.slice(0, 4).map(a => createCardHTML(a)).join("");
-
-  const podGrid = document.getElementById("podcast-grid");
-  if (podGrid) podGrid.innerHTML = podcasts.slice(0, 4).map(p => createPodcastHTML(p)).join("");
-
-  // ---------------- Newsletter ----------------
-  setupNewsletter();
-
-  // ---------------- Buscador ----------------
-  document.getElementById("search-input")?.addEventListener("input", e => {
-    const term = e.target.value.toLowerCase();
-    const grid = document.getElementById("news-grid");
-    if (!grid) return;
-
-    if (term.length < 2) {
-      grid.innerHTML = news.slice(4, 4 + CONFIG.limitNews).map(n => createCardHTML(n)).join("");
-    } else {
-      grid.innerHTML = news
-        .filter(n => n.title.toLowerCase().includes(term))
-        .map(n => createCardHTML(n))
-        .join("");
-    }
-  });
-
-  // ---------------- Patrocinadores (Nuevo) ----------------
+  // Sponsors
   loadSponsorsHome();
 }
 
-// ---------------------------------------------------------
-// POST PAGE
-// ---------------------------------------------------------
-async function initPost() {
-  const p = new URLSearchParams(window.location.search);
-  const slug = p.get("id");
-  const folder = p.get("folder") || PATHS.noticias;
-  const el = document.getElementById("article-detail");
-  if (!slug || !el) return;
-
-  const data = await fetchSinglePost(folder, slug);
-  if (!data) {
-    el.innerHTML = "<p>Error cargando noticia</p>";
-    return;
-  }
-
-  document.title = data.attributes.title;
-  if (typeof marked === "undefined") {
-    await import("https://cdn.jsdelivr.net/npm/marked/marked.min.js");
-  }
-
-  let video = "";
-  if (data.attributes.embed_url) {
-    const vid = getYoutubeId(data.attributes.embed_url);
-    if (vid) {
-      video = `
-        <div class="video-wrapper" style="margin:2rem 0">
-          <iframe src="https://www.youtube.com/embed/${vid}"
-                  frameborder="0" allowfullscreen></iframe>
-        </div>`;
-    }
-  }
-
-  let htmlContent = marked.parse(data.body);
-  const thumbnail = data.attributes.thumbnail;
-  let featuredImgHTML = "";
-
-  if (!video && thumbnail) {
-    featuredImgHTML = `<img src="${thumbnail}" class="featured-image">`;
-
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = htmlContent;
-    const firstImg = tempDiv.querySelector("img");
-
-    if (firstImg && (firstImg.getAttribute("src") === thumbnail || firstImg.src === thumbnail)) {
-      firstImg.remove();
-      htmlContent = tempDiv.innerHTML;
-    }
-  }
-
-  el.innerHTML = `
-    <header class="article-header">
-       <span class="article-category">${data.attributes.category || "Noticia"}</span>
-       <h1 class="article-title">${data.attributes.title}</h1>
-       <time class="article-meta">${formatDate(data.attributes.date)}</time>
-    </header>
-
-    ${video}
-    ${featuredImgHTML}
-
-    <div class="article-content">${htmlContent}</div>
-  `;
-}
-
-// ---------------------------------------------------------
-// DOM Ready
-// ---------------------------------------------------------
+/* ---------------------------------------------------------
+   DOM READY
+--------------------------------------------------------- */
 document.addEventListener("DOMContentLoaded", () => {
-  if (window.location.pathname.includes("post.html")) initPost();
-  else initHome();
-
-  document.getElementById("menu-toggle")?.addEventListener("click", () => {
-    document.getElementById("nav-list").classList.toggle("active");
-  });
+  if (window.location.pathname.includes("post.html")) return;
+  initHome();
 });
