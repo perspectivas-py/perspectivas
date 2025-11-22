@@ -245,75 +245,49 @@ function renderSponsorsGrid(entries) {
 }
 
 // ---------------------------------------------------------
-// RENDER: Sitio Patrocinado (bloque destacado)
+// RENDER: Sitio Patrocinado (bloque destacado) — v3 PRO
 // ---------------------------------------------------------
-// Selección inteligente de patrocinador destacado (v3 PRO)
-function pickSponsoredSmart(entries) {
-  const now = new Date();
 
-  // Filtrar activos
-  let active = entries.filter(e => String(e.active) !== "false");
+function renderSponsoredSite(entries) {
+  const cardEl = document.getElementById("sponsoredSiteCard");
+  if (!cardEl) return;
 
-  // Filtrar por campaña activa
-  let campaignActive = active.filter(e => {
-    const start = e.campaign_start ? new Date(e.campaign_start) : null;
-    const end = e.campaign_end ? new Date(e.campaign_end) : null;
+  // 1) Elegimos el patrocinador inteligente (campañas + prioridad)
+  const winner = pickSponsoredSmart(entries);
+  if (!winner) {
+    cardEl.innerHTML = "<p>No hay sitio patrocinado disponible.</p>";
+    cardEl.classList.remove("skeleton-card");
+    return;
+  }
 
-    // Condiciones:
-    // - Si ambas fechas existen, debe estar dentro del rango
-    if (start && end) return now >= start && now <= end;
-
-    // - Solo fecha inicio
-    if (start && !end) return now >= start;
-
-    // - Solo fecha fin
-    if (!start && end) return now <= end;
-
-    // - Sin fechas → siempre válido
-    return true;
-  });
-
-  // Si hay campañas activas → usar solo esas
-  const pool = campaignActive.length ? campaignActive : active;
-
-  // Ordenar por prioridad (1 primero)
-  pool.sort((a, b) => {
-    const pa = a.priority ? Number(a.priority) : 999;
-    const pb = b.priority ? Number(b.priority) : 999;
-    return pa - pb;
-  });
-
-  // Tomar el primero de la lista como ganador
-  return pool[0];
-}
-
-  const d = featured;
+  const d = winner;
   const logoUrl = resolveMediaUrl(d.logo);
 
-  cardEl.classList.remove('skeleton-card');
+  // 2) Animación fade-in PRO
+  cardEl.style.opacity = "0";
+  cardEl.style.transition = "opacity 0.8s ease";
+
+  // 3) Render
+  cardEl.classList.remove("skeleton-card");
   cardEl.innerHTML = `
     <div>
       <div class="sponsored-meta">
         Contenido patrocinado · Perspectivas
       </div>
 
-      <h3>${d.headline || d.title || 'Sitio patrocinado'}</h3>
+      <h3>${d.headline || d.title || "Sitio patrocinado"}</h3>
 
       ${
         d.excerpt
           ? `<p>${d.excerpt}</p>`
           : d.title
-            ? `<p class="sponsored-tagline">
-                 Conocé a <strong>${d.title}</strong>, aliado de Perspectivas en el desarrollo económico del Paraguay.
-               </p>`
-            : ''
+          ? `<p class="sponsored-tagline">
+               Conocé a <strong>${d.title}</strong>, aliado de Perspectivas en el desarrollo económico del Paraguay.
+             </p>`
+          : ""
       }
 
-      ${
-        d.sector
-          ? `<div class="sponsored-sector">Sector: ${d.sector}</div>`
-          : ''
-      }
+      ${d.sector ? `<div class="sponsored-sector">Sector: ${d.sector}</div>` : ""}
 
       ${
         d.url
@@ -325,16 +299,21 @@ function pickSponsoredSmart(entries) {
                  Visitar sitio patrocinado
                </a>
              </div>`
-          : ''
+          : ""
       }
     </div>
 
     <div>
       <img
-        src="${logoUrl || 'https://placehold.co/400x250?text=Patrocinador'}"
-        alt="${d.title || 'Patrocinador'}">
+        src="${logoUrl || "https://placehold.co/400x250?text=Patrocinador"}"
+        alt="${d.title || "Patrocinador"}">
     </div>
   `;
+
+  // 4) Activar fade-in luego de renderizar
+  requestAnimationFrame(() => {
+    cardEl.style.opacity = "1";
+  });
 }
 
 // ---------------------------------------------------------
