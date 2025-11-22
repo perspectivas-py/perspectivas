@@ -245,13 +245,13 @@ function renderSponsorsGrid(entries) {
 }
 
 // ---------------------------------------------------------
-// RENDER: Sitio Patrocinado — PRO con Fade-out + Fade-in
+// RENDER PRO v3 — con transición fade-out + fade-in + pre-render
 // ---------------------------------------------------------
 function renderSponsoredSite(entries) {
   const cardEl = document.getElementById("sponsoredSiteCard");
   if (!cardEl) return;
 
-  // Elegimos el patrocinador ganador según reglas PRO
+  // 1) Elegimos patrocinador por lógica Smart
   const d = pickSponsoredSmart(entries);
   if (!d) {
     cardEl.innerHTML = "<p>No hay sitio patrocinado disponible.</p>";
@@ -259,63 +259,62 @@ function renderSponsoredSite(entries) {
     return;
   }
 
+  // 2) Preparamos el HTML en memoria (pre-render)
   const logoUrl = resolveMediaUrl(d.logo);
 
-  // FADE-OUT (suave)
-  cardEl.style.transition = "opacity 0.6s ease";
+  const nextHTML = `
+    <div>
+      <div class="sponsored-meta">Contenido patrocinado · Perspectivas</div>
+
+      <h3>${d.headline || d.title || "Sitio patrocinado"}</h3>
+
+      ${
+        d.excerpt
+          ? `<p>${d.excerpt}</p>`
+          : d.title
+          ? `<p class="sponsored-tagline">
+               Conocé a <strong>${d.title}</strong>, aliado de Perspectivas en el desarrollo económico del Paraguay.
+             </p>`
+          : ""
+      }
+
+      ${d.sector ? `<div class="sponsored-sector">Sector: ${d.sector}</div>` : ""}
+
+      ${
+        d.url
+          ? `<div class="sponsored-actions">
+               <a class="sponsored-cta"
+                  href="${d.url}"
+                  target="_blank"
+                  rel="noopener noreferrer sponsored">
+                 Visitar sitio patrocinado
+               </a>
+             </div>`
+          : ""
+      }
+    </div>
+
+    <div>
+      <img
+        src="${logoUrl || "https://placehold.co/400x250?text=Patrocinador"}"
+        alt="${d.title || "Patrocinador"}">
+    </div>
+  `;
+
+  // 3) Fase fade-out (visual)
+  cardEl.style.transition = "opacity 0.35s ease";
   cardEl.style.opacity = 0;
 
-  // Esperamos que termine el fade-out antes de reemplazar el contenido
+  // 4) Luego del fade-out, reemplazamos contenido
   setTimeout(() => {
     cardEl.classList.remove("skeleton-card");
+    cardEl.innerHTML = nextHTML;
 
-    cardEl.innerHTML = `
-      <div>
-        <div class="sponsored-meta">
-          Contenido patrocinado · Perspectivas
-        </div>
-
-        <h3>${d.headline || d.title || "Sitio patrocinado"}</h3>
-
-        ${
-          d.excerpt
-            ? `<p>${d.excerpt}</p>`
-            : d.title
-            ? `<p class="sponsored-tagline">
-                 Conocé a <strong>${d.title}</strong>, aliado de Perspectivas en el desarrollo económico del Paraguay.
-               </p>`
-            : ""
-        }
-
-        ${d.sector ? `<div class="sponsored-sector">Sector: ${d.sector}</div>` : ""}
-
-        ${
-          d.url
-            ? `<div class="sponsored-actions">
-                 <a class="sponsored-cta"
-                    href="${d.url}"
-                    target="_blank"
-                    rel="noopener noreferrer sponsored">
-                   Visitar sitio patrocinado
-                 </a>
-               </div>`
-            : ""
-        }
-      </div>
-
-      <div>
-        <img
-          src="${logoUrl || "https://placehold.co/400x250?text=Patrocinador"}"
-          alt="${d.title || "Patrocinador"}">
-      </div>
-    `;
-
-    // FADE-IN (suave)
+    // 5) Fade-in suave
     requestAnimationFrame(() => {
       cardEl.style.opacity = 1;
     });
-
-  }, 600);  // Combina perfectamente con transition: 0.6s
+  }, 350);
 }
 // ---------------------------------------------------------
 // Scheduler PRO v3 — rotación automática + campañas
