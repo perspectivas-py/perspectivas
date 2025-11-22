@@ -327,18 +327,29 @@ function startSponsoredScheduler(entries) {
 // Scheduler PRO v3 — rotación automática + campañas
 // ---------------------------------------------------------
 function startSponsoredScheduler(entries) {
-  // Primera carga
+  // 1. Primera carga inmediata
   renderSponsoredSite(entries);
 
-  // Cada 3 minutos revisa si cambió la campaña activa
+  // 2. Rotación automática cada 3 minutos
   setInterval(() => {
-    renderSponsoredSite(entries);
-  }, 3 * 60 * 1000);
+    const cardEl = document.getElementById("sponsoredSiteCard");
+    if (!cardEl) return;
 
-  // Rotación visual cada 20 segundos
-  setInterval(() => {
-    renderSponsoredSite(entries);
-  }, 20000); // 20s → podés cambiar a 30s o 60s si querés
+    // Fade-out suave ANTES de cambiar contenido
+    cardEl.style.transition = "opacity 0.6s ease";
+    cardEl.style.opacity = 0;
+
+    setTimeout(() => {
+      // Reemplazo del contenido
+      renderSponsoredSite(entries);
+
+      // Fade-in suave
+      setTimeout(() => {
+        cardEl.style.opacity = 1;
+      }, 50);
+
+    }, 600);
+  }, 3 * 60 * 1000);
 }
 
 // ---------------------------------------------------------
