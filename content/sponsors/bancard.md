@@ -9,4 +9,7 @@ featured: false
 headline: Tu vida más simple
 excerpt: Más de 80.000 comercios y 39 años de experiencia nos avalan como el
   socio ideal para tu negocio
+priority: 3
+campaign_start: 2025-11-22T18:35:00.021Z
+campaign_end: 2025-11-30T18:35:33.826Z
 ---
