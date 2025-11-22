@@ -245,75 +245,89 @@ function renderSponsorsGrid(entries) {
 }
 
 // ---------------------------------------------------------
-// RENDER: Sitio Patrocinado (bloque destacado) — v3 PRO
+// RENDER: Sitio Patrocinado — versión PRO con rotación automática
 // ---------------------------------------------------------
-
 function renderSponsoredSite(entries) {
   const cardEl = document.getElementById("sponsoredSiteCard");
   if (!cardEl) return;
 
-  // 1) Elegimos el patrocinador inteligente (campañas + prioridad)
-  const winner = pickSponsoredSmart(entries);
-  if (!winner) {
+  // Elegimos el patrocinador ganador según reglas PRO
+  const d = pickSponsoredSmart(entries);
+  if (!d) {
     cardEl.innerHTML = "<p>No hay sitio patrocinado disponible.</p>";
     cardEl.classList.remove("skeleton-card");
     return;
   }
 
-  const d = winner;
   const logoUrl = resolveMediaUrl(d.logo);
 
-  // 2) Animación fade-in PRO
-  cardEl.style.opacity = "0";
-  cardEl.style.transition = "opacity 0.8s ease";
+  // Animación fade
+  cardEl.style.opacity = 0;
 
-  // 3) Render
-  cardEl.classList.remove("skeleton-card");
-  cardEl.innerHTML = `
-    <div>
-      <div class="sponsored-meta">
-        Contenido patrocinado · Perspectivas
+  setTimeout(() => {
+    cardEl.classList.remove("skeleton-card");
+
+    cardEl.innerHTML = `
+      <div>
+        <div class="sponsored-meta">
+          Contenido patrocinado · Perspectivas
+        </div>
+
+        <h3>${d.headline || d.title || "Sitio patrocinado"}</h3>
+
+        ${
+          d.excerpt
+            ? `<p>${d.excerpt}</p>`
+            : d.title
+            ? `<p class="sponsored-tagline">
+                 Conocé a <strong>${d.title}</strong>, aliado de Perspectivas en el desarrollo económico del Paraguay.
+               </p>`
+            : ""
+        }
+
+        ${d.sector ? `<div class="sponsored-sector">Sector: ${d.sector}</div>` : ""}
+
+        ${
+          d.url
+            ? `<div class="sponsored-actions">
+                 <a class="sponsored-cta"
+                    href="${d.url}"
+                    target="_blank"
+                    rel="noopener noreferrer sponsored">
+                   Visitar sitio patrocinado
+                 </a>
+               </div>`
+            : ""
+        }
       </div>
 
-      <h3>${d.headline || d.title || "Sitio patrocinado"}</h3>
+      <div>
+        <img
+          src="${logoUrl || "https://placehold.co/400x250?text=Patrocinador"}"
+          alt="${d.title || "Patrocinador"}">
+      </div>
+    `;
 
-      ${
-        d.excerpt
-          ? `<p>${d.excerpt}</p>`
-          : d.title
-          ? `<p class="sponsored-tagline">
-               Conocé a <strong>${d.title}</strong>, aliado de Perspectivas en el desarrollo económico del Paraguay.
-             </p>`
-          : ""
-      }
-
-      ${d.sector ? `<div class="sponsored-sector">Sector: ${d.sector}</div>` : ""}
-
-      ${
-        d.url
-          ? `<div class="sponsored-actions">
-               <a class="sponsored-cta"
-                  href="${d.url}"
-                  target="_blank"
-                  rel="noopener noreferrer sponsored">
-                 Visitar sitio patrocinado
-               </a>
-             </div>`
-          : ""
-      }
-    </div>
-
-    <div>
-      <img
-        src="${logoUrl || "https://placehold.co/400x250?text=Patrocinador"}"
-        alt="${d.title || "Patrocinador"}">
-    </div>
-  `;
-
+    // Fade-in suave luego del reemplazo
+    cardEl.style.opacity = 1;
+  }, 250);
+}
   // 4) Activar fade-in luego de renderizar
   requestAnimationFrame(() => {
     cardEl.style.opacity = "1";
   });
+}
+// ---------------------------------------------------------
+// Scheduler PRO: revisa campañas y cambia automáticamente
+// ---------------------------------------------------------
+function startSponsoredScheduler(entries) {
+  // Primera carga
+  renderSponsoredSite(entries);
+
+  // Cada 3 minutos revisa si cambió la campaña activa
+  setInterval(() => {
+    renderSponsoredSite(entries);
+  }, 3 * 60 * 1000); // 3 minutos
 }
 
 // ---------------------------------------------------------
@@ -325,7 +339,7 @@ async function loadSponsorsHome() {
 
     if (sponsors.length) {
       renderSponsorsGrid(sponsors);
-      renderSponsoredSite(sponsors);
+      startSponsoredScheduler(sponsors);
     }
 
   } catch (err) {
