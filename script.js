@@ -312,11 +312,6 @@ function renderSponsoredSite(entries) {
     cardEl.style.opacity = 1;
   }, 250);
 }
-  // 4) Activar fade-in luego de renderizar
-  requestAnimationFrame(() => {
-    cardEl.style.opacity = "1";
-  });
-}
 // ---------------------------------------------------------
 // Scheduler PRO: revisa campañas y cambia automáticamente
 // ---------------------------------------------------------
