@@ -1,5 +1,5 @@
 ---
-title: PerspectivaCompany
+title: PerspectivasCompany
 tier: Gold
 url: perspectivaspy.vercel.app
 logo: /assets/img/perspectivas-logo.jpeg
