@@ -247,22 +247,45 @@ function renderSponsorsGrid(entries) {
 // ---------------------------------------------------------
 // RENDER: Sitio Patrocinado (bloque destacado)
 // ---------------------------------------------------------
-function renderSponsoredSite(entries) {
-  const cardEl = document.getElementById('sponsoredSiteCard');
-  if (!cardEl) return;
+// Selección inteligente de patrocinador destacado (v3 PRO)
+function pickSponsoredSmart(entries) {
+  const now = new Date();
 
-  const featured = entries.find(e => String(e.featured) === 'true') || entries[0];
+  // Filtrar activos
+  let active = entries.filter(e => String(e.active) !== "false");
 
-  if (!featured) {
-    cardEl.innerHTML = `
-      <div>
-        <div class="sponsored-meta">Contenido patrocinado</div>
-        <p>No hay un sitio patrocinado activo en este momento.</p>
-      </div>
-    `;
-    cardEl.classList.remove('skeleton-card');
-    return;
-  }
+  // Filtrar por campaña activa
+  let campaignActive = active.filter(e => {
+    const start = e.campaign_start ? new Date(e.campaign_start) : null;
+    const end = e.campaign_end ? new Date(e.campaign_end) : null;
+
+    // Condiciones:
+    // - Si ambas fechas existen, debe estar dentro del rango
+    if (start && end) return now >= start && now <= end;
+
+    // - Solo fecha inicio
+    if (start && !end) return now >= start;
+
+    // - Solo fecha fin
+    if (!start && end) return now <= end;
+
+    // - Sin fechas → siempre válido
+    return true;
+  });
+
+  // Si hay campañas activas → usar solo esas
+  const pool = campaignActive.length ? campaignActive : active;
+
+  // Ordenar por prioridad (1 primero)
+  pool.sort((a, b) => {
+    const pa = a.priority ? Number(a.priority) : 999;
+    const pb = b.priority ? Number(b.priority) : 999;
+    return pa - pb;
+  });
+
+  // Tomar el primero de la lista como ganador
+  return pool[0];
+}
 
   const d = featured;
   const logoUrl = resolveMediaUrl(d.logo);
