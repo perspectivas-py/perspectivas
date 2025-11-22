@@ -3,7 +3,7 @@ featured: true
 category: macro
 tags:
   - TPM
-title: BCP mantiene "anclada" la tasa de interes
+title: BCP mantiene "anclada" la tasa de interes con una inflación a la baja
 date: 2025-11-22T16:34:48.889Z
 thumbnail: /assets/img/knmg6a6szzcshjyavygmnkhpbi.jpg
 summary: El Comité de Política Monetaria decidió, por unanimidad, mantener la
@@ -14,6 +14,8 @@ En su reunión del viernes 21 de noviembre, el Comité de Política Monetaria (C
 El Comité destaca que los indicadores de actividad económica y de ventas continuaron mostrando un buen dinamismo en el margen. En cuanto a precios, la inflación interanual se ha desacelerado en meses recientes, reflejando, en parte, el efecto de la apreciación del tipo de cambio sobre los precios de los bienes no alimenticios —en particular, los durables— y de ciertos servicios.
 
 El fortalecimiento de la moneda local, además de la disminución de las cotizaciones internacionales del petróleo, también contribuyó a la reducción de los precios de los combustibles a nivel local. Con la economía operando en torno a su nivel potencial, expectativas de inflación alineadas con la meta y menores presiones cambiarias, se proyecta que la inflación se ubique alrededor del 4,0% al cierre de 2025, para luego converger al 3,5% durante 2026.
+
+![El Comité de Política Monetaria decidió, por unanimidad, mantener la tasa de interés de política monetaria (TPM) en 6,0% anual.](/assets/img/mercado-libre-e1584221732666.jpg "Inflación")
 
 En el ámbito externo, el mercado anticipa con menor probabilidad un nuevo recorte del rango objetivo para la tasa de interés de la Reserva Federal en su reunión de diciembre. En cuanto a los commodities, los precios del petróleo disminuyeron en el último mes.
 
