@@ -1,0 +1,19 @@
+{
+  "sponsors": [
+    {
+      "excerpt": "Banca de plaza",
+      "tier": "Gold",
+      "priority": 1,
+      "active": true,
+      "sector": "Banco",
+      "logo": "/assets/img/banco-itau.png",
+      "slug": "Esponsor",
+      "campaign_end": "2025-11-23T05:48:54.375Z",
+      "featured": true,
+      "url": "itau.com.py",
+      "campaign_start": "2025-11-23T05:48:54.336Z",
+      "headline": "Para lo importante, Itaú",
+      "title": "Itaú"
+    }
+  ]
+}
