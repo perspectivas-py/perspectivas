@@ -9,7 +9,7 @@ const CONFIG = {
 };
 
 // URL del JSON generado por Decap
-const CONTENT_JSON_URL = "/api/content.json";
+const CONTENT_URL = "https://perspectivaspy.vercel.app/api/content.json";
 
 /*-------------------------------------------------------
   CACHÉ LOCAL
