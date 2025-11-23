@@ -9,144 +9,76 @@ media_folder: "assets/img"
 public_folder: "/assets/img"
 
 collections:
-  - name: "noticias"
-    label: "Noticias"
-    folder: "content/noticias/posts"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - label: "Destacar en Portada"
-        name: "featured"
-        widget: "boolean"
-        default: false
-        required: false
-      - label: "Categoría"
-        name: "category"
-        widget: "select"
-        required: false
-        options:
-          - { label: "Macro", value: "macro" }
-          - { label: "Política Económica", value: "politica-economica" }
-          - { label: "Inmobiliario", value: "inmobiliario" }
-          - { label: "Empresas", value: "empresas" }
-          - { label: "Opinión", value: "opinion" }
-          - { label: "Educación Financiera", value: "educacion-financiera" }
-          - { label: "Agroindustria", value: "agroindustria" }
-          - { label: "Comercio Exterior", value: "comercio-exterior" }
-      - label: "Temas / Tags"
-        name: "tags"
-        widget: "list"
-        required: false
-        hint: "Ejemplo: inflación, empleo, crecimiento"
-      - label: "Título"
-        name: "title"
-        widget: "string"
-      - label: "Fecha de Publicación"
-        name: "date"
-        widget: "datetime"
-      - label: "Imagen Destacada"
-        name: "thumbnail"
-        widget: "image"
-        required: false
-      - label: "Resumen"
-        name: "summary"
-        widget: "text"
-        required: false
-      - label: "Cuerpo"
-        name: "body"
-        widget: "markdown"
+  - name: "content"
+    label: "Contenido del sitio"
+    files:
+      - file: "api/content.json"
+        label: "Content JSON"
+        name: "content_json"
+        format: "json"
+        fields:
+          - label: "Noticias"
+            name: "noticias"
+            widget: "list"
+            fields:
+              - { label: "Slug", name: "slug", widget: "string" }
+              - { label: "Título", name: "title", widget: "string" }
+              - { label: "Fecha", name: "date", widget: "datetime" }
+              - { label: "Categoría", name: "category", widget: "string", default: "Noticia", required: false }
+              - { label: "Descripción", name: "description", widget: "text", required: false }
+              - { label: "Thumbnail", name: "thumbnail", widget: "image", required: false }
+              - { label: "Body (Markdown)", name: "body", widget: "markdown" }
+              - { label: "Tipo", name: "type", widget: "hidden", default: "noticias" }
 
-  - name: "analisis"
-    label: "Análisis y Opinión"
-    folder: "content/analisis/posts"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - label: "Autor"
-        name: "author"
-        widget: "string"
-        default: "Perspectivas"
-      - label: "Título"
-        name: "title"
-        widget: "string"
-      - label: "Fecha"
-        name: "date"
-        widget: "datetime"
-      - label: "Imagen"
-        name: "thumbnail"
-        widget: "image"
-        required: false
-      - label: "Resumen"
-        name: "summary"
-        widget: "text"
-        required: false
-      - label: "Cuerpo"
-        name: "body"
-        widget: "markdown"
+          - label: "Programa"
+            name: "programa"
+            widget: "list"
+            fields:
+              - { label: "Slug", name: "slug", widget: "string" }
+              - { label: "Título", name: "title", widget: "string" }
+              - { label: "Fecha", name: "date", widget: "datetime" }
+              - { label: "Thumbnail", name: "thumbnail", widget: "image", required: false }
+              - { label: "Body (Markdown)", name: "body", widget: "markdown" }
+              - { label: "Embed YouTube", name: "embed_url", widget: "string", required: false }
+              - { label: "Tipo", name: "type", widget: "hidden", default: "programa" }
 
-  - name: "programa"
-    label: "Programa Perspectivas"
-    folder: "content/programa/posts"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - label: "Título del Episodio"
-        name: "title"
-        widget: "string"
-      - label: "Fecha"
-        name: "date"
-        widget: "datetime"
-      - label: "Enlace Embed (Youtube)"
-        name: "embed_url"
-        widget: "string"
-      - label: "Resumen y Notas"
-        name: "body"
-        widget: "markdown"
+          - label: "Análisis"
+            name: "analisis"
+            widget: "list"
+            fields:
+              - { label: "Slug", name: "slug", widget: "string" }
+              - { label: "Título", name: "title", widget: "string" }
+              - { label: "Fecha", name: "date", widget: "datetime" }
+              - { label: "Thumbnail", name: "thumbnail", widget: "image", required: false }
+              - { label: "Body (Markdown)", name: "body", widget: "markdown" }
+              - { label: "Tipo", name: "type", widget: "hidden", default: "analisis" }
 
-  - name: "podcast"
-    label: "Podcast"
-    folder: "content/podcast/posts"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - label: "Título"
-        name: "title"
-        widget: "string"
-      - label: "Fecha"
-        name: "date"
-        widget: "datetime"
-      - label: "Imagen de Portada"
-        name: "thumbnail"
-        widget: "image"
-      - label: "Descripción Corta"
-        name: "description"
-        widget: "text"
-      - label: "Embed de Spotify/YouTube"
-        name: "embed_url"
-        widget: "string"
-        required: false
-      - label: "Cuerpo"
-        name: "body"
-        widget: "markdown"
-        collections:
+          - label: "Podcast"
+            name: "podcast"
+            widget: "list"
+            fields:
+              - { label: "Slug", name: "slug", widget: "string" }
+              - { label: "Título", name: "title", widget: "string" }
+              - { label: "Fecha", name: "date", widget: "datetime" }
+              - { label: "Thumbnail", name: "thumbnail", widget: "image", required: false }
+              - { label: "Body (Markdown)", name: "body", widget: "markdown", required: false }
+              - { label: "Audio/Video URL", name: "embed_url", widget: "string", required: false }
+              - { label: "Tipo", name: "type", widget: "hidden", default: "podcast" }
 
-  - name: "sponsors"
-    label: "Patrocinadores"
-    label_singular: "Patrocinador"
-    folder: "content/sponsors"
-    create: true
-    slug: "{{slug}}"
-    summary: "{{title}} ({{tier}})"
-    fields:
-      - { name: "title", label: "Nombre comercial", widget: "string" }
-      - { name: "tier", label: "Nivel", widget: "select", options: ["Gold", "Silver", "Bronze"], default: "Silver" }
-      - { name: "url", label: "URL del sitio", widget: "string", required: false }
-      - { name: "logo", label: "Logo", widget: "image", choose_url: true }
-      - { name: "sector", label: "Sector (Banco, Agro, Retail…)", widget: "string", required: false }
-      - { name: "active", label: "Activo", widget: "boolean", default: true }
-      - { name: "featured", label: "Destacar como 'Sitio patrocinado' en el Home", widget: "boolean", default: false }
-      - { name: "headline", label: "Titular para el bloque patrocinado", widget: "string", required: false, hint: "Ej: La plataforma que digitaliza el agro en Paraguay" }
-      - { name: "excerpt", label: "Descripción corta", widget: "text", required: false, hint: "2–3 líneas explicando qué hace el patrocinador" }
-      - { name: "priority", label: "Prioridad (1 es el más alto)", widget: "number", default: 10 }
-      - { name: "campaign_start", label: "Inicio de campaña", widget: "datetime", required: false }
-      - { name: "campaign_end", label: "Fin de campaña", widget: "datetime", required: false }
+          - label: "Sponsors"
+            name: "sponsors"
+            widget: "list"
+            fields:
+              - { label: "Slug", name: "slug", widget: "string" }
+              - { label: "Nombre", name: "title", widget: "string" }
+              - { label: "Logo", name: "logo", widget: "image" }
+              - { label: "URL", name: "url", widget: "string", required: false }
+              - { label: "Sector", name: "sector", widget: "string", required: false }
+              - { label: "Nivel", name: "tier", widget: "select", options: ["Gold", "Silver", "Bronze"], required: false }
+              - { label: "Prioridad (1 = más alto)", name: "priority", widget: "number", required: false }
+              - { label: "Destacado", name: "featured", widget: "boolean", default: false, required: false }
+              - { label: "Activo", name: "active", widget: "boolean", default: true, required: false }
+              - { label: "Inicio campaña", name: "campaign_start", widget: "datetime", required: false }
+              - { label: "Fin campaña", name: "campaign_end", widget: "datetime", required: false }
+              - { label: "Titular patrocinado", name: "headline", widget: "string", required: false }
+              - { label: "Resumen", name: "excerpt", widget: "text", required: false }
