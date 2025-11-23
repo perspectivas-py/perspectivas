@@ -15,5 +15,17 @@
       "headline": "Para lo importante, Itaú",
       "title": "Itaú"
     }
+  ],
+  "noticias": [
+    {
+      "category": "Noticia",
+      "type": "noticias",
+      "date": "2025-11-23T18:48:15.661Z",
+      "slug": "Macro",
+      "title": "La inflación en noviembre fue negativa, por tercer mes consecutivo",
+      "description": "JDJAHJJFSDJSAGGL",
+      "thumbnail": "/assets/img/mercado-libre-e1584221732666.jpg",
+      "body": "CAUGFSDFJKSADKFJKSDHKLJGFDH CISHFIÑSÑDJFLADJSHLFJHSd shfñosd fsdfsdkjsfsflsdfjksdfkj  fgjksgfkjsdfkjsdhfkjk lfhfjkd fsffhhf sd fsdhfjsdfh dk fdfkjd fffk f f fsdjdf dh jdj a hdjash fsdj sf sd fdd"
+    }
   ]
 }
