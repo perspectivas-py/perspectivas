@@ -1,27 +1,31 @@
-/* script.js - Perspectivas Engine v3 PRO (JSON Local Final) */
+/* script.js - Perspectivas Engine PRO v3 (JSON Unified Loader) */
 
-/* -------------------------------
-   1) Cargar el archivo content.json
-----------------------------------*/
-async function fetchContentJSON() {
+/* ============================================================
+   CONFIG
+============================================================ */
+const CONFIG = {
+  limitNews: 10,
+  rotationTime: 12000, // patrocinador: 12 seg
+};
+
+/* ============================================================
+   LOAD JSON (content.json en la raíz)
+============================================================ */
+async function loadContentJSON() {
   try {
     const res = await fetch("/content.json", { cache: "no-store" });
-
     if (!res.ok) throw new Error("No se pudo cargar content.json");
-
-    const data = await res.json();
-    return data;
-
-  } catch (err) {
-    console.error("❌ Error cargando /content.json:", err);
+    return await res.json();
+  } catch (e) {
+    console.error("ERROR cargando content.json:", e);
     return null;
   }
 }
 
-/* -------------------------------
-   2) Formatear fechas
-----------------------------------*/
-function formatDate(str) {
+/* ============================================================
+   HELPERS
+============================================================ */
+const formatDate = (str) => {
   if (!str) return "";
   try {
     return new Date(str).toLocaleDateString("es-ES", {
@@ -29,117 +33,83 @@ function formatDate(str) {
       month: "short",
       year: "numeric"
     });
-  } catch {
+  } catch (e) {
     return str;
   }
+};
+
+const getYoutubeId = (url) => {
+  if (!url) return null;
+  const match = url.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/);
+  return match && match[2].length === 11 ? match[2] : null;
+};
+
+function resolveMediaUrl(path) {
+  if (!path) return "";
+  return path.startsWith("http") ? path : path;
 }
 
-/* -------------------------------
-   3) Crear tarjetas
-----------------------------------*/
-function createCardHTML(item) {
+/* ============================================================
+   TEMPLATES HTML
+============================================================ */
+function cardHTML(item, showVideo) {
+  const link = `post.html?id=${item.id}&type=${item.type}`;
+  const img = item.thumbnail || "https://placehold.co/600x400/eee/999?text=Perspectivas";
+
+  let media = `
+    <div class="card-img-container">
+      <a href="${link}">
+        <img src="${img}" loading="lazy" alt="${item.title}">
+      </a>
+    </div>`;
+
+  if (showVideo && item.embed_url && getYoutubeId(item.embed_url)) {
+    media = `
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/${getYoutubeId(item.embed_url)}"
+                frameborder="0" allowfullscreen></iframe>
+      </div>`;
+  }
+
   return `
     <article class="card">
-      <div class="card-img-container">
-        <img src="${item.thumbnail}" loading="lazy">
-      </div>
+      ${media}
       <div class="card-content">
-        <small class="card-meta">${formatDate(item.date)} | ${item.category}</small>
-        <h3><a href="post.html?id=${item.slug}&type=${item.type}">${item.title}</a></h3>
+        <small class="card-meta">${formatDate(item.date)} | ${item.category || "General"}</small>
+        <h3><a href="${link}">${item.title}</a></h3>
       </div>
-    </article>
-  `;
+    </article>`;
 }
 
-/* -------------------------------
-   4) Renderizar Home
-----------------------------------*/
-function renderHome(data) {
-  /* HERO */
-  const heroEl = document.querySelector(".featured-card-bbc");
-  if (data.noticias.length > 0 && heroEl) {
-    const hero = data.noticias[0];
-    heroEl.innerHTML = `
-      <a href="post.html?id=${hero.slug}&type=noticias">
-        <img src="${hero.thumbnail}">
-        <h2>${hero.title}</h2>
-        <p>${hero.description || ""}</p>
+function podcastHTML(item) {
+  const link = `post.html?id=${item.id}&type=${item.type}`;
+  const img = item.thumbnail || "https://placehold.co/150x150/333/fff?text=Audio";
+
+  return `
+    <article class="podcast-card">
+      <a href="${link}" class="podcast-img-link">
+        <img src="${img}" loading="lazy">
+        <div class="play-overlay"><span class="play-icon">▶</span></div>
       </a>
-    `;
-  }
-
-  /* Noticias */
-  const newsGrid = document.getElementById("news-grid");
-  if (newsGrid) {
-    newsGrid.innerHTML = data.noticias
-      .slice(1, 9)
-      .map(n => createCardHTML(n))
-      .join("");
-  }
-
-  /* Programa */
-  const progGrid = document.getElementById("program-grid");
-  if (progGrid) {
-    progGrid.innerHTML = data.programa
-      .slice(0, 6)
-      .map(p => createCardHTML(p))
-      .join("");
-  }
-
-  /* Análisis */
-  const anaGrid = document.getElementById("analisis-grid");
-  if (anaGrid) {
-    anaGrid.innerHTML = data.analisis
-      .slice(0, 4)
-      .map(p => createCardHTML(p))
-      .join("");
-  }
-
-  /* Podcast */
-  const podGrid = document.getElementById("podcast-grid");
-  if (podGrid) {
-    podGrid.innerHTML = data.podcast
-      .slice(0, 4)
-      .map(p => createCardHTML(p))
-      .join("");
-  }
-
-  /* Sponsors */
-  if (data.sponsors) {
-    renderSponsorsGrid(data.sponsors);
-    startSponsoredScheduler(data.sponsors);
-  }
-}
-
-/* -------------------------------
-   5) Renderizar Sponsors Grid
-----------------------------------*/
-function renderSponsorsGrid(list) {
-  const container = document.getElementById("sponsorsGrid");
-  if (!container) return;
-
-  container.innerHTML = list
-    .map(s => `
-      <div class="sponsor-item">
-        <img src="${s.logo}" alt="${s.title}">
+      <div class="podcast-content">
+        <small class="podcast-meta">${formatDate(item.date)} | EPISODIO</small>
+        <h3 class="podcast-title"><a href="${link}">${item.title}</a></h3>
       </div>
-    `)
-    .join("");
+    </article>`;
 }
 
-/* -------------------------------
-   6) Sistema PRO de Rotación
-----------------------------------*/
-function pickSponsoredSmart(entries) {
+/* ============================================================
+   SPONSORS — SELECCIÓN SMART
+============================================================ */
+function pickSponsorSmart(sponsors) {
   const now = new Date();
 
-  // 1. Filtrar activos
-  let active = entries.filter(e => e.active !== false);
+  let active = sponsors.filter(s => String(s.active) !== "false");
 
-  // 2. Campañas activas
-  let campaign = active.filter(e => {
-    const start = e.campaign_start ? new Date(e.campaign_start) : null;
-    const end = e.campaign_end ? new Date(e.campaign_end) : null;
+  // aplicar campañas
+  let campaign = active.filter(s => {
+    const start = s.campaign_start ? new Date(s.campaign_start) : null;
+    const end = s.campaign_end ? new Date(s.campaign_end) : null;
 
     if (start && end) return now >= start && now <= end;
     if (start && !end) return now >= start;
@@ -147,99 +117,239 @@ function pickSponsoredSmart(entries) {
     return true;
   });
 
-  let pool = campaign.length ? campaign : active;
+  const pool = campaign.length ? campaign : active;
 
-  // 3. Orden por prioridad
-  pool.sort((a, b) => (a.priority || 999) - (b.priority || 999));
+  pool.sort((a, b) => {
+    const pa = a.priority ? Number(a.priority) : 999;
+    const pb = b.priority ? Number(b.priority) : 999;
+    return pa - pb;
+  });
 
   return pool[0];
 }
 
-function renderSponsoredSite(entries) {
+/* Render del bloque patrocinado */
+function renderSponsoredSite(sponsors) {
   const cardEl = document.getElementById("sponsoredSiteCard");
   if (!cardEl) return;
 
-  const d = pickSponsoredSmart(entries);
+  const d = pickSponsorSmart(sponsors);
+  if (!d) return;
+
+  const logoUrl = resolveMediaUrl(d.logo);
 
   cardEl.innerHTML = `
     <div>
       <div class="sponsored-meta">Contenido patrocinado · Perspectivas</div>
       <h3>${d.headline || d.title}</h3>
-      <p>${d.excerpt || ""}</p>
+
+      ${d.excerpt
+        ? `<p>${d.excerpt}</p>`
+        : `<p class="sponsored-tagline">
+             Conocé a <strong>${d.title}</strong>, aliado de Perspectivas.
+           </p>`
+      }
+
       ${d.sector ? `<div class="sponsored-sector">Sector: ${d.sector}</div>` : ""}
-      ${
-        d.url
-          ? `<div class="sponsored-actions">
-              <a class="sponsored-cta" href="${d.url}" target="_blank">Visitar sitio patrocinado</a>
-             </div>`
-          : ""
+
+      ${d.url
+        ? `<div class="sponsored-actions">
+             <a class="sponsored-cta" href="${d.url}"
+                target="_blank" rel="noopener noreferrer sponsored">
+               Visitar sitio patrocinado
+             </a>
+           </div>`
+        : ""
       }
     </div>
+
     <div>
-      <img src="${d.logo}" alt="${d.title}">
+      <img src="${logoUrl}" alt="${d.title}">
     </div>
   `;
 }
 
-function startSponsoredScheduler(entries) {
-  renderSponsoredSite(entries);
+/* Rotación Smart */
+function startSponsorsRotation(sponsors) {
+  renderSponsoredSite(sponsors);
+
+  const cardEl = document.getElementById("sponsoredSiteCard");
+  if (!cardEl) return;
 
   setInterval(() => {
-    const el = document.getElementById("sponsoredSiteCard");
-    el.style.opacity = 0;
+    cardEl.style.opacity = 0;
 
     setTimeout(() => {
-      renderSponsoredSite(entries);
-      el.style.opacity = 1;
-    }, 600);
-  }, 20000);
+      renderSponsoredSite(sponsors);
+      cardEl.style.opacity = 1;
+    }, 500);
+
+  }, CONFIG.rotationTime);
 }
 
-/* -------------------------------
-   7) Página de Post Individual
-----------------------------------*/
-async function loadPost() {
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
-  const type = params.get("type");
+/* ============================================================
+   RENDER HOME
+============================================================ */
+function renderHome(data) {
+  const news = data.noticias || [];
+  const prog = data.programa || [];
+  const analisis = data.analisis || [];
+  const podcasts = data.podcast || [];
+  const sponsors = data.sponsors || [];
 
-  const data = await fetchContentJSON();
-  if (!data || !data[type]) {
-    document.getElementById("article-detail").innerHTML = "<p>Error cargando post</p>";
-    return;
+  /* HERO */
+  if (news.length) {
+    const hero = news[0];
+    const heroEl = document.querySelector(".featured-card-bbc");
+
+    if (heroEl) {
+      const img = hero.thumbnail || "https://placehold.co/800x400?text=Perspectivas";
+
+      heroEl.innerHTML = `
+        <a href="post.html?id=${hero.id}&type=noticias">
+          <img src="${img}">
+          <h2>${hero.title}</h2>
+          <p>${hero.description || ""}</p>
+        </a>`;
+    }
+
+    const topList = document.getElementById("top-list-bbc");
+    if (topList) {
+      topList.innerHTML = news.slice(1, 4).map(n => `
+        <li>
+          <a href="post.html?id=${n.id}&type=noticias">
+            <h4>${n.title}</h4>
+            <small>${formatDate(n.date)}</small>
+          </a>
+        </li>`).join("");
+    }
   }
 
-  const post = data[type].find(p => p.slug === id);
-  if (!post) {
-    document.getElementById("article-detail").innerHTML = "<p>No encontrado</p>";
-    return;
+  /* NEWS GRID */
+  const newsGrid = document.getElementById("news-grid");
+  if (newsGrid) {
+    newsGrid.innerHTML = news.slice(4, 4 + CONFIG.limitNews)
+      .map(n => cardHTML(n))
+      .join("");
   }
 
-  document.title = post.title;
+  /* PROGRAMA */
+  const progGrid = document.getElementById("program-grid");
+  if (progGrid) {
+    progGrid.innerHTML = prog.slice(0, 6)
+      .map(p => cardHTML(p, true))
+      .join("");
+  }
 
-  document.getElementById("article-detail").innerHTML = `
+  /* ANÁLISIS */
+  const anaGrid = document.getElementById("analisis-grid");
+  if (anaGrid) {
+    anaGrid.innerHTML = analisis.slice(0, 4)
+      .map(a => cardHTML(a))
+      .join("");
+  }
+
+  /* PODCAST */
+  const podGrid = document.getElementById("podcast-grid");
+  if (podGrid) {
+    podGrid.innerHTML = podcasts.slice(0, 4)
+      .map(podcastHTML)
+      .join("");
+  }
+
+  /* SPONSORS */
+  if (sponsors.length) startSponsorsRotation(sponsors);
+}
+
+/* ============================================================
+   INIT HOME
+============================================================ */
+async function initHome() {
+  const data = await loadContentJSON();
+  if (!data) return;
+
+  renderHome(data);
+
+  /* Buscador */
+  const search = document.getElementById("search-input");
+  if (search) {
+    search.addEventListener("input", (e) => {
+      const term = e.target.value.toLowerCase();
+      const newsGrid = document.getElementById("news-grid");
+      if (!newsGrid) return;
+
+      if (!term || term.length < 2) {
+        newsGrid.innerHTML = data.noticias.slice(4, 4 + CONFIG.limitNews)
+          .map(cardHTML)
+          .join("");
+      } else {
+        newsGrid.innerHTML = data.noticias
+          .filter(n => n.title.toLowerCase().includes(term))
+          .map(cardHTML)
+          .join("");
+      }
+    });
+  }
+}
+
+/* ============================================================
+   INIT POST
+============================================================ */
+async function initPost() {
+  const p = new URLSearchParams(window.location.search);
+  const id = p.get("id");
+  const type = p.get("type");
+
+  const data = await loadContentJSON();
+  if (!data || !id || !type) return;
+
+  const list = data[type] || [];
+  const item = list.find(x => x.id === id);
+  if (!item) return;
+
+  const el = document.getElementById("article-detail");
+  if (!el) return;
+
+  document.title = item.title;
+
+  let video = "";
+  if (item.embed_url) {
+    const vid = getYoutubeId(item.embed_url);
+    if (vid) {
+      video = `
+        <div class="video-wrapper" style="margin:2rem 0">
+          <iframe src="https://www.youtube.com/embed/${vid}"
+                  frameborder="0" allowfullscreen></iframe>
+        </div>`;
+    }
+  }
+
+  let featured = "";
+  if (!video && item.thumbnail) {
+    featured = `<img src="${item.thumbnail}" class="featured-image">`;
+  }
+
+  el.innerHTML = `
     <header class="article-header">
-      <span class="article-category">${post.category}</span>
-      <h1 class="article-title">${post.title}</h1>
-      <time class="article-meta">${formatDate(post.date)}</time>
+       <span class="article-category">${item.category}</span>
+       <h1 class="article-title">${item.title}</h1>
+       <time class="article-meta">${formatDate(item.date)}</time>
     </header>
 
-    <img src="${post.thumbnail}" class="featured-image">
+    ${video}
+    ${featured}
 
-    <div class="article-content">${post.body}</div>
+    <div class="article-content">${item.body_html}</div>
   `;
 }
 
-/* -------------------------------
-   8) INIT
-----------------------------------*/
-document.addEventListener("DOMContentLoaded", async () => {
-  const isPost = window.location.pathname.includes("post.html");
-
-  if (isPost) {
-    loadPost();
+/* ============================================================
+   DOM READY
+============================================================ */
+document.addEventListener("DOMContentLoaded", () => {
+  if (window.location.pathname.includes("post.html")) {
+    initPost();
   } else {
-    const data = await fetchContentJSON();
-    if (data) renderHome(data);
+    initHome();
   }
 });
