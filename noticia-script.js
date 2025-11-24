@@ -14,10 +14,11 @@ const ARTICLE_CONTENT_PATHS = {
 // --------------------------------------
 // Inicio
 // --------------------------------------
-document.addEventListener("DOMContentLoaded", async () => {
+  document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
   const type = params.get("type") || "noticias";
-  const id = params.get("id");
+  const rawId = params.get("id");
+  const id = safeDecodeURIComponent(rawId);
 
   if (!id) {
     safeSetInnerHTML("<h1>Error</h1><p>No se encontró el identificador del artículo.</p>");
@@ -186,6 +187,14 @@ function getArticleContainer() {
   let el = document.querySelector(".full-article");
   if (!el) el = document.getElementById("article-container");
   return el;
+}
+function safeDecodeURIComponent(value) {
+  if (value === null || value === undefined) return null;
+  try {
+    return decodeURIComponent(value);
+  } catch (err) {
+    return value;
+  }
 }
 function safeSetInnerHTML(html) {
   const el = getArticleContainer();
