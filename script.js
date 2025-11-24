@@ -50,6 +50,93 @@ function resolveMediaUrl(path) {
 }
 
 /* ============================================================
+   MARKDOWN HELPERS (para otras páginas)
+============================================================ */
+async function fetchMarkdownFile(url) {
+  const res = await fetch(`${url}?t=${Date.now()}`, { cache: "no-store" });
+  if (!res.ok) throw new Error(`No se pudo obtener ${url}`);
+  return res.text();
+}
+
+function parseMarkdownFrontmatter(md) {
+  const match = /^---\s*([\s\S]*?)\s*---/.exec(md);
+  const data = { frontmatter: {}, content: md };
+
+  if (match) {
+    const lines = match[1].split("\n");
+    let currentKey = null;
+
+    lines.forEach((line) => {
+      // lista YAML (ej: tags: \n  - valor)
+      if (/^\s*-\s*/.test(line) && currentKey) {
+        data.frontmatter[currentKey] = data.frontmatter[currentKey] || [];
+        const value = line.replace(/^\s*-\s*/, "").trim().replace(/^['"]|['"]$/g, "");
+        if (value) data.frontmatter[currentKey].push(value);
+        return;
+      }
+
+      const [key, ...rest] = line.split(":");
+      if (!key || rest.length === 0) return;
+
+      currentKey = key.trim();
+      const value = rest.join(":").trim();
+
+      if (value) {
+        data.frontmatter[currentKey] = value.replace(/^['"]|['"]$/g, "");
+        currentKey = null;
+      } else {
+        // valor vacío => se asume que vienen ítems de lista debajo
+        data.frontmatter[currentKey] = [];
+      }
+    });
+
+    data.content = md.replace(match[0], "").trim();
+  }
+
+  return data;
+}
+
+function extractSummaryFromMarkdown(content, maxLength = 200) {
+  if (!content) return "";
+
+  const plain = content
+    .replace(/!\[[^\]]*]\([^)]*\)/g, "") // imágenes
+    .replace(/\[[^\]]*]\([^)]*\)/g, "") // links
+    .replace(/[#>*_`~-]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  if (plain.length <= maxLength) return plain;
+  return `${plain.slice(0, maxLength - 1)}…`;
+}
+
+function buildNewsCardFromMarkdown(filename, frontmatter, content) {
+  const slug = filename.replace(/\.md$/i, "");
+  const url = `noticia.html?type=noticias&id=${encodeURIComponent(slug)}`;
+
+  const img =
+    frontmatter.thumbnail || "https://placehold.co/600x400/eee/999?text=Perspectivas";
+
+  const summary = frontmatter.summary || extractSummaryFromMarkdown(content);
+
+  return `
+    <article class="card">
+      <div class="card-img-container">
+        <a href="${url}">
+          <img src="${img}" loading="lazy" alt="${frontmatter.title || "Noticia"}">
+        </a>
+      </div>
+      <div class="card-content">
+        <small class="card-meta">${formatDate(frontmatter.date)} | ${
+    frontmatter.category || "General"
+  }</small>
+        <h3><a href="${url}">${frontmatter.title || "Sin título"}</a></h3>
+        ${summary ? `<p>${summary}</p>` : ""}
+      </div>
+    </article>`;
+}
+
+/* ============================================================
    TEMPLATES HTML
 ============================================================ */
 function cardHTML(item, showVideo) {
