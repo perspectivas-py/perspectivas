@@ -1,5 +1,5 @@
 ---
-title: ¿Porqué todos hablan del boom económico?
+title: ¿Por qué todos hablan del boom económico?
 author: El Equipo de Perspectivas
 date: 2025-11-12T21:54:00.000-03:00
 summary: "Este es un material de prueba "
