@@ -68,7 +68,7 @@ ${validPosts.map(p => `
   }
 }
 
-function parseFrontmatter(md) {
+export function parseFrontmatter(md) {
   const m = /^---\s*([\s\S]*?)\s*---/.exec(md);
   const data = { frontmatter: {}, content: md };
 
