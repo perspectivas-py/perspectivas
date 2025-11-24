@@ -24,37 +24,54 @@ async function loadCategoryNews() {
   }
 
   titleEl.textContent = formCategoryTitle(currentCategory);
+    gridEl.innerHTML = "<p>Cargando noticias...</p>";
 
   try {
-    const files = await fetch(`https://api.github.com/repos/${CAT_REPO}/contents/${CAT_PATH}?ref=${CAT_BRANCH}`);
+   const files = await fetch(
+      `https://api.github.com/repos/${CAT_REPO}/contents/${CAT_PATH}?ref=${CAT_BRANCH}`,
+      { cache: "no-store" }
+    );
+
+    if (!files.ok) throw new Error("No se pudo cargar el listado de noticias.");
+
     const list = await files.json();
+   const markdownFiles = Array.isArray(list)
+      ? list.filter((f) => f.type === "file" && f.download_url)
+      : [];
 
     let posts = await Promise.all(
-      list.map(async file => {
-        const res = await fetch(file.download_url);
-        const md = await res.text();
-        const { frontmatter, content } = parseFrontmatter(md);
+  markdownFiles.map(async (file) => {
+        const md = await fetchMarkdownFile(file.download_url);
+        const { frontmatter, content } = parseMarkdownFrontmatter(md);
 
         return {
           name: file.name,
           frontmatter,
           content,
-          category: frontmatter.category || "sin-categoria"
+          category: normalizeCategory(frontmatter.category)
         };
       })
     );
 
-    posts = posts.filter(p => p.category === currentCategory);
+    posts = posts
+      .filter((p) => p.category === normalizeCategory(currentCategory))
+      .sort((a, b) => {
+        const dateA = new Date(a.frontmatter.date || 0).getTime();
+        const dateB = new Date(b.frontmatter.date || 0).getTime();
+        if (dateA !== dateB) return dateB - dateA;
+        return b.name.localeCompare(a.name);
+      });
 
     if (posts.length === 0) {
       gridEl.innerHTML = `<p>No hay noticias en esta categoría.</p>`;
       return;
     }
 
-    gridEl.innerHTML = posts.map(post => createNewsCard(
-      post.name, post.frontmatter, post.content, post.category
-    )).join("");
-
+    gridEl.innerHTML = posts
+      .map(({ name, frontmatter, content }) =>
+        buildNewsCardFromMarkdown(name, frontmatter, content)
+      )
+      .join("");
   } catch (err) {
     console.error(err);
     gridEl.innerHTML = `<p>Error cargando noticias.</p>`;
@@ -64,4 +81,8 @@ async function loadCategoryNews() {
 // título bonito:
 function formCategoryTitle(cat) {
   return cat.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase());
+}
+
+function normalizeCategory(cat) {
+  return (cat || "").toString().trim().toLowerCase();
 }
