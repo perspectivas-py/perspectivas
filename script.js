@@ -52,8 +52,8 @@ function resolveMediaUrl(path) {
 /* ============================================================
    TEMPLATES HTML
 ============================================================ */
-function cardHTML(item, showVideo) {
-  const link = `post.html?id=${item.id}&type=${item.type}`;
+function cardHTML(item, showVideo, defaultType = "") {
+  const link = `post.html?id=${item.id}&type=${item.type || defaultType}`;
   const img = item.thumbnail || "https://placehold.co/600x400/eee/999?text=Perspectivas";
 
   let media = `
@@ -229,7 +229,7 @@ function renderHome(data) {
   const newsGrid = document.getElementById("news-grid");
   if (newsGrid) {
     newsGrid.innerHTML = news.slice(4, 4 + CONFIG.limitNews)
-      .map(n => cardHTML(n))
+      .map(n => cardHTML(n, false, "noticias"))
       .join("");
   }
 
@@ -237,7 +237,7 @@ function renderHome(data) {
   const progGrid = document.getElementById("program-grid");
   if (progGrid) {
     progGrid.innerHTML = prog.slice(0, 6)
-      .map(p => cardHTML(p, true))
+      .map(p => cardHTML(p, true, "programa"))
       .join("");
   }
 
@@ -245,7 +245,7 @@ function renderHome(data) {
   const anaGrid = document.getElementById("analisis-grid");
   if (anaGrid) {
     anaGrid.innerHTML = analisis.slice(0, 4)
-      .map(a => cardHTML(a))
+      .map(a => cardHTML(a, false, "analisis"))
       .join("");
   }
 
@@ -280,12 +280,12 @@ async function initHome() {
 
       if (!term || term.length < 2) {
         newsGrid.innerHTML = data.noticias.slice(4, 4 + CONFIG.limitNews)
-          .map(cardHTML)
+          .map(n => cardHTML(n, false, "noticias"))
           .join("");
       } else {
         newsGrid.innerHTML = data.noticias
           .filter(n => n.title.toLowerCase().includes(term))
-          .map(cardHTML)
+          .map(n => cardHTML(n, false, "noticias"))
           .join("");
       }
     });
