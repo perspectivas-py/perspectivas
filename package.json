@@ -1,0 +1,12 @@
+{
+  "name": "perspectivas",
+  "version": "1.0.0",
+  "description": "Sitio Perspectivas - JSON auto generado",
+  "scripts": {
+    "build:content": "node scripts/build-content.js",
+    "build": "npm run build:content"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3"
+  }
+}
