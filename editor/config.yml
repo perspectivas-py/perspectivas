@@ -1,84 +1,138 @@
 backend:
   name: github
-  repo: perspectivas-py/perspectivas
+  repo: perspectivas-py/perspectivas-site
   branch: main
-  base_url: https://decap-oauth.vercel.app
-  auth_endpoint: auth
+  site_domain: perspectivaspy.vercel.app
 
 media_folder: "assets/img"
 public_folder: "/assets/img"
 
+publish_mode: editorial_workflow
+
+local_backend: true
+
+site_url: https://perspectivaspy.vercel.app
+display_url: https://perspectivaspy.vercel.app
+
+logo_url: https://placehold.co/180x50?text=Perspectivas
+
 collections:
-  - name: "content"
-    label: "Contenido del sitio"
-    files:
-      - file: "api/content.json"
-        label: "Content JSON"
-        name: "content_json"
-        format: "json"
-        fields:
-          - label: "Noticias"
-            name: "noticias"
-            widget: "list"
-            fields:
-              - { label: "Slug", name: "slug", widget: "string" }
-              - { label: "Título", name: "title", widget: "string" }
-              - { label: "Fecha", name: "date", widget: "datetime" }
-              - { label: "Categoría", name: "category", widget: "string", default: "Noticia", required: false }
-              - { label: "Descripción", name: "description", widget: "text", required: false }
-              - { label: "Thumbnail", name: "thumbnail", widget: "image", required: false }
-              - { label: "Body (Markdown)", name: "body", widget: "markdown" }
-              - { label: "Tipo", name: "type", widget: "hidden", default: "noticias" }
 
-          - label: "Programa"
-            name: "programa"
-            widget: "list"
-            fields:
-              - { label: "Slug", name: "slug", widget: "string" }
-              - { label: "Título", name: "title", widget: "string" }
-              - { label: "Fecha", name: "date", widget: "datetime" }
-              - { label: "Thumbnail", name: "thumbnail", widget: "image", required: false }
-              - { label: "Body (Markdown)", name: "body", widget: "markdown" }
-              - { label: "Embed YouTube", name: "embed_url", widget: "string", required: false }
-              - { label: "Tipo", name: "type", widget: "hidden", default: "programa" }
+  # ============================================================
+  # NOTICIAS
+  # ============================================================
+  - name: "noticias"
+    label: "Noticias"
+    folder: "content/noticias"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "ID", name: "id", widget: "string", hint: "Debe ser único. Ej: macro-enero-2025" }
+      - { label: "Type", name: "type", widget: "hidden", default: "noticias" }
+      - { label: "Categoría", name: "category", widget: "string" }
+      - { label: "Fecha", name: "date", widget: "datetime" }
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Descripción corta", name: "description", widget: "text" }
 
-          - label: "Análisis"
-            name: "analisis"
-            widget: "list"
-            fields:
-              - { label: "Slug", name: "slug", widget: "string" }
-              - { label: "Título", name: "title", widget: "string" }
-              - { label: "Fecha", name: "date", widget: "datetime" }
-              - { label: "Thumbnail", name: "thumbnail", widget: "image", required: false }
-              - { label: "Body (Markdown)", name: "body", widget: "markdown" }
-              - { label: "Tipo", name: "type", widget: "hidden", default: "analisis" }
+      # -------- PORTADA manual (obligatorio) --------
+      - label: "Imagen de portada"
+        name: "thumbnail"
+        widget: "image"
+        required: true
 
-          - label: "Podcast"
-            name: "podcast"
-            widget: "list"
-            fields:
-              - { label: "Slug", name: "slug", widget: "string" }
-              - { label: "Título", name: "title", widget: "string" }
-              - { label: "Fecha", name: "date", widget: "datetime" }
-              - { label: "Thumbnail", name: "thumbnail", widget: "image", required: false }
-              - { label: "Body (Markdown)", name: "body", widget: "markdown", required: false }
-              - { label: "Audio/Video URL", name: "embed_url", widget: "string", required: false }
-              - { label: "Tipo", name: "type", widget: "hidden", default: "podcast" }
+      - { label: "Cuerpo (Markdown)", name: "body", widget: "markdown" }
+      - { label: "Slug", name: "slug", widget: "string", hint: "Opcional. Si no lo completás será igual al filename." }
 
-          - label: "Sponsors"
-            name: "sponsors"
-            widget: "list"
-            fields:
-              - { label: "Slug", name: "slug", widget: "string" }
-              - { label: "Nombre", name: "title", widget: "string" }
-              - { label: "Logo", name: "logo", widget: "image" }
-              - { label: "URL", name: "url", widget: "string", required: false }
-              - { label: "Sector", name: "sector", widget: "string", required: false }
-              - { label: "Nivel", name: "tier", widget: "select", options: ["Gold", "Silver", "Bronze"], required: false }
-              - { label: "Prioridad (1 = más alto)", name: "priority", widget: "number", required: false }
-              - { label: "Destacado", name: "featured", widget: "boolean", default: false, required: false }
-              - { label: "Activo", name: "active", widget: "boolean", default: true, required: false }
-              - { label: "Inicio campaña", name: "campaign_start", widget: "datetime", required: false }
-              - { label: "Fin campaña", name: "campaign_end", widget: "datetime", required: false }
-              - { label: "Titular patrocinado", name: "headline", widget: "string", required: false }
-              - { label: "Resumen", name: "excerpt", widget: "text", required: false }
+  # ============================================================
+  # ANALISIS
+  # ============================================================
+  - name: "analisis"
+    label: "Análisis"
+    folder: "content/analisis"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    fields:
+      - { label: "ID", name: "id", widget: "string" }
+      - { label: "Type", name: "type", widget: "hidden", default: "analisis" }
+      - { label: "Categoría", name: "category", widget: "string" }
+      - { label: "Fecha", name: "date", widget: "datetime" }
+      - { label: "Título", name: "title", widget: "string" }
+
+      # portada manual
+      - label: "Imagen de portada"
+        name: "thumbnail"
+        widget: "image"
+        required: true
+
+      - { label: "Contenido HTML", name: "body_html", widget: "markdown", hint: "Contenido del análisis" }
+      - { label: "Slug", name: "slug", widget: "string" }
+
+  # ============================================================
+  # PROGRAMA (Videos YouTube)
+  # ============================================================
+  - name: "programa"
+    label: "Programa Perspectivas (Videos)"
+    folder: "content/programa"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    fields:
+      - { label: "ID", name: "id", widget: "string" }
+      - { label: "Type", name: "type", widget: "hidden", default: "programa" }
+      - { label: "Categoría", name: "category", widget: "string" }
+      - { label: "Fecha", name: "date", widget: "datetime" }
+      - { label: "Título", name: "title", widget: "string" }
+
+      # portada manual
+      - label: "Imagen miniatura"
+        name: "thumbnail"
+        widget: "image"
+        required: true
+
+      - { label: "URL Video YouTube", name: "embed_url", widget: "string" }
+
+  # ============================================================
+  # PODCAST
+  # ============================================================
+  - name: "podcast"
+    label: "Podcast"
+    folder: "content/podcast"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    fields:
+      - { label: "ID", name: "id", widget: "string" }
+      - { label: "Type", name: "type", widget: "hidden", default: "podcast" }
+      - { label: "Fecha", name: "date", widget: "datetime" }
+      - { label: "Título", name: "title", widget: "string" }
+
+      # portada manual
+      - label: "Imagen del episodio"
+        name: "thumbnail"
+        widget: "image"
+        required: true
+
+  # ============================================================
+  # SPONSORS
+  # ============================================================
+  - name: "sponsors"
+    label: "Patrocinadores & Aliados"
+    folder: "content/sponsors"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    fields:
+      - { label: "ID", name: "id", widget: "string" }
+      - { label: "Título / Marca", name: "title", widget: "string" }
+      - { label: "Headline", name: "headline", widget: "string" }
+      - { label: "Descripción breve", name: "excerpt", widget: "text" }
+      - { label: "URL Externa", name: "url", widget: "string" }
+
+      # portada manual
+      - label: "Logo"
+        name: "logo"
+        widget: "image"
+        required: true
