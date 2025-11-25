@@ -1,6 +1,7 @@
 {
   "noticias": [
     {
+      "id": "macro",
       "category": "Noticia",
       "type": "noticias",
       "date": "2025-11-23T01:52:40.610Z",
@@ -11,17 +12,17 @@
       "slug": "Macro"
     },
     {
+      "id": "mercados",
       "category": "Noticia",
       "type": "noticias",
       "date": "2025-11-23T02:53:30.706Z",
-      "slug": "Mercados",
       "title": "Lanzamiento de Link Center: un nuevo hito para el skyline de Asunción",
       "description": "si",
       "body": "En una noche que reunió...",
-      "thumbnail": "/assets/img/2024-08-16-billetes.jpg"
+      "thumbnail": "/assets/img/2024-08-16-billetes.jpg",
+      "slug": "Mercados"
     }
   ],
-
   "programa": [],
   "analisis": [],
   "podcast": [],
