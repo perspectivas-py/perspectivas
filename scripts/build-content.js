@@ -1,14 +1,13 @@
 /**
  * build-content.js
- * Genera content.json y api/content.json desde Markdown del CMS
- * Compatible con Decap CMS, Vercel y Netlify
+ * Genera content.json y api/content.json desde Markdown (Decap CMS)
  */
 
 const fs = require("fs");
 const path = require("path");
 const matter = require("gray-matter");
 
-// carpetas de contenido
+// colecciones manejadas por Decap CMS
 const COLLECTIONS = {
   noticias: "content/noticias",
   analisis: "content/analisis",
@@ -17,7 +16,6 @@ const COLLECTIONS = {
   sponsors: "content/sponsors"
 };
 
-// lectura de archivos .md de una carpeta
 function loadCollection(folder, typeName) {
   const dir = path.join(process.cwd(), folder);
 
@@ -26,11 +24,10 @@ function loadCollection(folder, typeName) {
   const files = fs.readdirSync(dir).filter(f => f.endsWith(".md"));
 
   return files.map(filename => {
-    const filePath = path.join(dir, filename);
-    const raw = fs.readFileSync(filePath, "utf-8");
+    const raw = fs.readFileSync(path.join(dir, filename), "utf-8");
     const { data: frontmatter, content } = matter(raw);
 
-    // id obligatorio
+    // id seguro
     const id =
       frontmatter.id ||
       frontmatter.slug ||
@@ -45,7 +42,6 @@ function loadCollection(folder, typeName) {
   });
 }
 
-// genera el JSON final
 function buildJSON() {
   const output = {};
 
@@ -56,21 +52,19 @@ function buildJSON() {
   return output;
 }
 
-// rutas de salida
-const outRoot = path.join(process.cwd(), "public", "content.json");
-const outApi = path.join(process.cwd(), "api", "content.json");
+// rutas de salida (AQUÍ ESTÁ EL CAMBIO: raíz del repo)
+const outRoot = path.join(process.cwd(), "content.json");
+const outApiFolder = path.join(process.cwd(), "api");
+const outApi = path.join(outApiFolder, "content.json");
 
-// asegurar carpetas
-if (!fs.existsSync(path.join(process.cwd(), "public")))
-  fs.mkdirSync(path.join(process.cwd(), "public"));
-
-if (!fs.existsSync(path.join(process.cwd(), "api")))
-  fs.mkdirSync(path.join(process.cwd(), "api"));
+// aseguro carpeta /api
+if (!fs.existsSync(outApiFolder)) {
+  fs.mkdirSync(outApiFolder);
+}
 
 const json = buildJSON();
 
-// escribir archivos
 fs.writeFileSync(outRoot, JSON.stringify(json, null, 2));
 fs.writeFileSync(outApi, JSON.stringify(json, null, 2));
 
-console.log("✔ content.json y api/content.json generados con éxito.");
+console.log("✔ content.json y api/content.json generados correctamente en la raíz.");
