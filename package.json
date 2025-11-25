@@ -1,7 +1,7 @@
 {
   "name": "perspectivas",
   "version": "1.0.0",
-  "description": "Sitio Perspectivas - JSON auto generado",
+  "description": "Sitio Perspectivas",
   "scripts": {
     "build:content": "node scripts/build-content.js",
     "build": "npm run build:content"
