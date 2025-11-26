@@ -1,12 +1,15 @@
 {
   "name": "perspectivas",
   "version": "1.0.0",
-  "description": "Sitio Perspectivas",
+  "description": "Sitio de periodismo económico JAMstack",
   "scripts": {
-    "build:content": "node scripts/build-content.js",
-    "build": "npm run build:content"
+    "build": "node scripts/build-content.js",
+    "start": "serve"
   },
   "dependencies": {
     "gray-matter": "^4.0.3"
+  },
+  "devDependencies": {
+    "serve": "^14.2.0"
   }
 }
