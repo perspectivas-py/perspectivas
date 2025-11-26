@@ -13,7 +13,7 @@ const CONFIG = {
 ============================================================ */
 async function loadContentJSON() {
   try {
-    const res = await fetch("/content.json", { cache: "no-store" });
+    const res = await fetch("/public/content.json", { cache: "no-store" });
     if (!res.ok) throw new Error("No se pudo cargar content.json");
     return await res.json();
   } catch (e) {
