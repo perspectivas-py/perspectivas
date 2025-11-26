@@ -1,6 +1,11 @@
 const { AuthorizationCode } = require('simple-oauth2');
 
 module.exports = async (req, res) => {
+  // Debugging: Ver en los logs de Vercel si la variable existe
+  console.log("Intentando Login...");
+  console.log("Host:", req.headers.host);
+  console.log("Client ID Status:", process.env.OAUTH_CLIENT_ID ? "CARGADO CORRECTAMENTE" : "ESTÁ UNDEFINED / VACÍO");
+
   const client = new AuthorizationCode({
     client: {
       id: process.env.OAUTH_CLIENT_ID,
@@ -15,7 +20,7 @@ module.exports = async (req, res) => {
 
   const authorizationUri = client.authorizeURL({
     redirect_uri: `https://${req.headers.host}/api/callback`,
-    scope: 'repo,user', // Permisos para leer y escribir en el repo
+    scope: 'repo,user',
     state: Math.random().toString(36).substring(7),
   });
 
