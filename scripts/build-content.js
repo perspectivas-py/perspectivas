@@ -3,66 +3,73 @@
  * Genera /public/content.json y /api/content.json desde Markdown (Decap CMS)
  */
 
-const fs = require("fs");
-const path = require("path");
-const matter = require("gray-matter");
+const fs = require('fs');
+const path = require('path');
+const matter = require('gray-matter');
 
-const COLLECTIONS = {
-  noticias: "content/noticias/posts",
-  analisis: "content/analisis/posts",
-  programa: "content/programa/posts",
-  podcast: "content/podcast/posts",
-  sponsors: "api/sponsors"
+// Configuración de rutas
+const contentDir = path.join(__dirname, '../content');
+// CAMBIO CLAVE: Guardamos en la raíz (../content.json) en lugar de (../public/content.json)
+const outputFile = path.join(__dirname, '../content.json');
+
+// Definir las colecciones y sus rutas relativas dentro de /content/
+const collections = [
+    { name: 'noticias', path: 'noticias/posts' },
+    { name: 'analisis', path: 'analisis' }, // Ajustar si tienen subcarpeta posts
+    { name: 'podcast', path: 'podcast' },
+    { name: 'programa', path: 'programa' },
+    { name: 'sponsors', path: 'sponsors' }
+];
+
+const allContent = {};
+
+// Función para obtener archivos de una colección
+const getCollectionData = (collectionName, relativePath) => {
+    const dirPath = path.join(contentDir, relativePath);
+    
+    // Verificar si la carpeta existe
+    if (!fs.existsSync(dirPath)) {
+        console.warn(`⚠️ Advertencia: La carpeta ${dirPath} no existe. Se saltará.`);
+        return [];
+    }
+
+    const files = fs.readdirSync(dirPath).filter(file => file.endsWith('.md'));
+    
+    const items = files.map(filename => {
+        const filePath = path.join(dirPath, filename);
+        const fileContent = fs.readFileSync(filePath, 'utf-8');
+        const { data, content } = matter(fileContent);
+
+        return {
+            ...data, // Metadatos (título, fecha, autor, imagen)
+            slug: filename.replace('.md', ''),
+            body: content, // El cuerpo del artículo
+            collection: collectionName
+        };
+    });
+
+    // Ordenar por fecha descendente (lo más nuevo primero) si tienen fecha
+    return items.sort((a, b) => {
+        if (a.date && b.date) {
+            return new Date(b.date) - new Date(a.date);
+        }
+        return 0;
+    });
 };
 
-/* Lee archivos .md */
-function loadCollection(folder) {
-  const dir = path.join(process.cwd(), folder);
-  if (!fs.existsSync(dir)) return [];
+// Ejecutar proceso
+console.log('🏗️  Iniciando construcción de content.json...');
 
-  const files = fs.readdirSync(dir).filter(f => f.endsWith(".md"));
+try {
+    collections.forEach(col => {
+        allContent[col.name] = getCollectionData(col.name, col.path);
+        console.log(`✅ Colección procesada: ${col.name} (${allContent[col.name].length} items)`);
+    });
 
-  return files.map(filename => {
-    const raw = fs.readFileSync(path.join(dir, filename), "utf-8");
-    const { data, content } = matter(raw);
+    fs.writeFileSync(outputFile, JSON.stringify(allContent, null, 2));
+    console.log(`🎉 ÉXITO: content.json generado correctamente en: ${outputFile}`);
 
-    return {
-      id: data.slug || filename.replace(".md", ""),
-      type: data.type || "",
-      category: data.category || "",
-      date: data.date || "",
-      title: data.title || "",
-      description: data.description || "",
-      thumbnail: data.thumbnail || "",
-      embed_url: data.embed_url || "",
-      body: content.trim(),
-      slug: data.slug || ""
-    };
-  });
+} catch (error) {
+    console.error('❌ ERROR FATAL construyendo content.json:', error);
+    process.exit(1);
 }
-
-function buildJSON() {
-  const output = {};
-  for (const [key, folder] of Object.entries(COLLECTIONS)) {
-    output[key] = loadCollection(folder);
-  }
-  return output;
-}
-
-function writeOutputs() {
-  const json = buildJSON();
-
-  const outPublic = path.join(process.cwd(), "public", "content.json");
-  const outApiFolder = path.join(process.cwd(), "api");
-  const outApi = path.join(outApiFolder, "content.json");
-
-  if (!fs.existsSync("public")) fs.mkdirSync("public");
-  if (!fs.existsSync(outApiFolder)) fs.mkdirSync(outApiFolder);
-
-  fs.writeFileSync(outPublic, JSON.stringify(json, null, 2));
-  fs.writeFileSync(outApi, JSON.stringify(json, null, 2));
-
-  console.log("✔ content.json generado correctamente en /public y /api/");
-}
-
-writeOutputs();
