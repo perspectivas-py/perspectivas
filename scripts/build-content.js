@@ -1,97 +1,68 @@
-/*
-  build-content.js
-  Generador unificado de content.json para Perspectivas
-  PRO v3 — salida única en /public/content.json
-*/
+/**
+ * build-content.js
+ * Genera /public/content.json y /api/content.json desde Markdown (Decap CMS)
+ */
 
 const fs = require("fs");
 const path = require("path");
 const matter = require("gray-matter");
 
-/* ============================================================
-   CONFIG
-============================================================ */
-
-const CONTENT_FOLDERS = {
-  noticias: "content/noticias",
-  analisis: "content/analisis",
-  programa: "content/programa",
-  podcast: "content/podcast",
-  sponsors: "content/sponsors"
+const COLLECTIONS = {
+  noticias: "content/noticias/posts",
+  analisis: "content/analisis/posts",
+  programa: "content/programa/posts",
+  podcast: "content/podcast/posts",
+  sponsors: "api/sponsors"
 };
 
-/* ============================================================
-   Helpers
-============================================================ */
+/* Lee archivos .md */
+function loadCollection(folder) {
+  const dir = path.join(process.cwd(), folder);
+  if (!fs.existsSync(dir)) return [];
 
-function loadCollection(folder, key) {
-  const folderPath = path.join(process.cwd(), folder);
-  const items = [];
+  const files = fs.readdirSync(dir).filter(f => f.endsWith(".md"));
 
-  if (!fs.existsSync(folderPath)) {
-    console.warn("⚠️ Carpeta no encontrada:", folderPath);
-    return items;
-  }
+  return files.map(filename => {
+    const raw = fs.readFileSync(path.join(dir, filename), "utf-8");
+    const { data, content } = matter(raw);
 
-  const files = fs.readdirSync(folderPath);
-
-  for (const file of files) {
-    if (!file.endsWith(".md") && !file.endsWith(".json")) continue;
-
-    const fullPath = path.join(folderPath, file);
-
-    if (file.endsWith(".md")) {
-      // archivos Markdown + frontmatter
-      const raw = fs.readFileSync(fullPath, "utf8");
-      const parsed = matter(raw);
-
-      items.push({
-        id: parsed.data.slug || path.basename(file, ".md"),
-        type: key,
-        ...parsed.data,
-        body: parsed.content || parsed.data.body || "",
-        body_html: parsed.data.body_html || ""
-      });
-
-    } else if (file.endsWith(".json")) {
-      // archivos JSON puros
-      const obj = JSON.parse(fs.readFileSync(fullPath, "utf8"));
-      items.push(obj);
-    }
-  }
-
-  return items;
+    return {
+      id: data.slug || filename.replace(".md", ""),
+      type: data.type || "",
+      category: data.category || "",
+      date: data.date || "",
+      title: data.title || "",
+      description: data.description || "",
+      thumbnail: data.thumbnail || "",
+      embed_url: data.embed_url || "",
+      body: content.trim(),
+      slug: data.slug || ""
+    };
+  });
 }
-
-/* ============================================================
-   Build JSON
-============================================================ */
 
 function buildJSON() {
   const output = {};
-
-  for (const key of Object.keys(CONTENT_FOLDERS)) {
-    const folder = CONTENT_FOLDERS[key];
-    output[key] = loadCollection(folder, key);
+  for (const [key, folder] of Object.entries(COLLECTIONS)) {
+    output[key] = loadCollection(folder);
   }
-
   return output;
 }
 
-/* ============================================================
-   SALIDA FINAL (ÚNICA) — /public/content.json
-============================================================ */
+function writeOutputs() {
+  const json = buildJSON();
 
-const publicFolder = path.join(process.cwd(), "public");
-const outPublic = path.join(publicFolder, "content.json");
+  const outPublic = path.join(process.cwd(), "public", "content.json");
+  const outApiFolder = path.join(process.cwd(), "api");
+  const outApi = path.join(outApiFolder, "content.json");
 
-// Crear carpeta /public si no existe
-if (!fs.existsSync(publicFolder)) {
-  fs.mkdirSync(publicFolder);
+  if (!fs.existsSync("public")) fs.mkdirSync("public");
+  if (!fs.existsSync(outApiFolder)) fs.mkdirSync(outApiFolder);
+
+  fs.writeFileSync(outPublic, JSON.stringify(json, null, 2));
+  fs.writeFileSync(outApi, JSON.stringify(json, null, 2));
+
+  console.log("✔ content.json generado correctamente en /public y /api/");
 }
 
-const json = buildJSON();
-
-fs.writeFileSync(outPublic, JSON.stringify(json, null, 2));
-
-console.log("✓ content.json generado correctamente en /public/content.json");
+writeOutputs();
