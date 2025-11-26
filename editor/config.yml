@@ -1,15 +1,17 @@
 backend:
   name: github
-  repo: perspectivas-py/perspectivas-site
+  repo: perspectivas-py/perspectivas-site # Asegurate que este sea tu repo real
   branch: main
-  site_domain: perspectivaspy.vercel.app
+  base_url: https://perspectivaspy.vercel.app
+  auth_endpoint: api/auth
 
 media_folder: "assets/img"
 public_folder: "/assets/img"
 
 publish_mode: editorial_workflow
 
-local_backend: true
+# Borré local_backend: true para evitar confusiones en producción,
+# pero podés dejarlo si corres npx decap-server localmente.
 
 site_url: https://perspectivaspy.vercel.app
 display_url: https://perspectivaspy.vercel.app
