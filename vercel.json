@@ -1,8 +1,17 @@
 {
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/editor/(.*)",
-      "destination": "/editor/index.html"
+      "src": "package.json",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "index.html",
+      "use": "@vercel/static"
     }
+  ],
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
