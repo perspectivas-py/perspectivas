@@ -4,8 +4,8 @@ module.exports = async (req, res) => {
   // --- CREDENCIALES ---
   const client = new AuthorizationCode({
     client: {
-      id: 'Ov23li5ZS4FB1zXwg4Q8', 
-      secret: 'cf16325cbe8eb9382deaaad250da7feedce35de2', 
+      id: 'TU_CLIENT_ID', 
+      secret: 'TU_CLIENT_SECRET', 
     },
     auth: {
       tokenHost: 'https://github.com',
@@ -24,45 +24,39 @@ module.exports = async (req, res) => {
     const token = accessToken.token.access_token;
     const provider = 'github'; 
 
-    // Preparamos el mensaje exacto
-    const data = JSON.stringify({ token: token, provider: provider });
-    const msg = `authorization:${provider}:success:${data}`;
+    // ESTRUCTURA EXACTA: authorization:github:success:{ "token": "...", "provider": "github" }
+    const content = JSON.stringify({ token, provider });
+    const msg = `authorization:${provider}:success:${content}`;
 
     const htmlResponse = `
       <!DOCTYPE html>
       <html lang="en">
       <body>
-        <h3>✅ Autenticado</h3>
-        <p id="status">Enviando credenciales...</p>
+        <h3>✅ Autenticación Completada</h3>
+        <p>Conectando con el CMS...</p>
         <script>
           const msg = '${msg}';
-          
-          // Debug para la ventana popup
-          console.log("Enviando mensaje:", msg);
+          console.log("Enviando mensaje único:", msg);
 
-          // Función de envío
           function send() {
+            // Enviar mensaje al origen exacto (seguridad y precisión)
+            // Si window.opener existe, le enviamos el mensaje
             if (window.opener) {
-              // 1. Enviar formato estándar
               window.opener.postMessage(msg, "*");
-              // 2. Enviar formato JSON puro (por si acaso)
-              window.opener.postMessage({ token: "${token}", provider: "${provider}" }, "*");
-              
-              // Intentar escribir en la consola de la ventana padre (El Espía)
-              try {
-                window.opener.console.log("✅ EL POPUP ESCRIBIÓ ESTO EN TU CONSOLA: Conexión establecida");
-              } catch(e) {}
-            } else {
-              document.getElementById("status").innerText = "Error: No encuentro la ventana del editor.";
             }
           }
 
-          // Enviar inmediatamente y repetir
+          // Enviar inmediatamente
           send();
-          setInterval(send, 500);
+          
+          // Reintentar cada 0.5s por si el CMS estaba cargando
+          const interval = setInterval(send, 500);
 
-          // Cerrar en 3 segundos
-          setTimeout(() => window.close(), 3000);
+          // Cerrar ventana a los 2 segundos
+          setTimeout(() => {
+            clearInterval(interval);
+            window.close();
+          }, 2000);
         </script>
       </body>
       </html>
