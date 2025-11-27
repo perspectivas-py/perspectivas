@@ -1,8 +1,8 @@
 backend:
   name: github
-  repo: perspectivas-py/perspectivas # Asegurate que este sea tu repo real
+  repo: perspectivas-py/perspectivas
   branch: main
-  #base_url: https://perspectivaspy.vercel.app
+  base_url: https://perspectivaspy.vercel.app  # <--- IMPORTANTE: PONER ESTO DE NUEVO
   auth_endpoint: /api/auth
 
 media_folder: "assets/img"
