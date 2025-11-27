@@ -5,20 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gestor de Contenidos | Perspectivas</title>
 </head>
-
 <body>
-  <!-- Cargar Decap CMS desde CDN seguro -->
-  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.0.7/dist/decap-cms.js"></script>
-
-  <!-- Inicializar CMS -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      if (window.CMS) {
-        window.CMS.init({ configPath: "config.yml" });
-      } else {
-        document.body.innerHTML = "<h1>Error cargando Decap CMS</h1><p>Revisa la consola (F12).</p>";
-      }
-    });
-  </script>
+  <!-- Script oficial de Decap CMS -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>
