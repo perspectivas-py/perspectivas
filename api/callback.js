@@ -3,8 +3,9 @@ const { AuthorizationCode } = require('simple-oauth2');
 module.exports = async (req, res) => {
   const client = new AuthorizationCode({
     client: {
-      id: process.env.OAUTH_CLIENT_ID,
-      secret: process.env.OAUTH_CLIENT_SECRET,
+      // 👇 PEGA TUS CREDENCIALES AQUÍ DENTRO DE LAS COMILLAS
+      id: 'Ov23li5ZS4FB1zXwg4Q8', 
+      secret: 'cf16325cbe8eb9382deaaad250da7feedce35de2', 
     },
     auth: {
       tokenHost: 'https://github.com',
@@ -28,17 +29,12 @@ module.exports = async (req, res) => {
         (function() {
           function recieveMessage(e) {
             console.log("recieveMessage %o", e);
-            
-            // Enviar mensaje al opener (la ventana del CMS)
             window.opener.postMessage(
               'authorization:github:success:${JSON.stringify({ token, provider: 'github' })}', 
               e.origin
             );
           }
-
           window.addEventListener("message", recieveMessage, false);
-          
-          // Disparar el mensaje inmediatamente
           window.opener.postMessage(
             'authorization:github:success:${JSON.stringify({ token, provider: 'github' })}', 
             '*'
