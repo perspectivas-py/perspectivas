@@ -1,7 +1,7 @@
 const { AuthorizationCode } = require('simple-oauth2');
 
 module.exports = async (req, res) => {
-  // --- CREDENCIALES ---
+  // --- TUS CREDENCIALES ---
   const client = new AuthorizationCode({
     client: {
       id: 'Ov23li5ZS4FB1zXwg4Q8', 
@@ -21,34 +21,50 @@ module.exports = async (req, res) => {
       redirect_uri: `https://${req.headers.host}/api/callback`,
     });
 
+    // Obtenemos el token limpio
     const token = accessToken.token.access_token;
-    const provider = 'github'; // Debe coincidir con el 'name' en config.yml
+    const provider = 'github';
 
+    // Preparamos el objeto de datos de forma segura
+    const data = JSON.stringify({ token: token, provider: provider });
+
+    // Generamos el HTML. Nota cómo pasamos 'data' directamente para evitar errores de sintaxis.
     const htmlResponse = `
       <!DOCTYPE html>
       <html lang="en">
       <body>
-        <h3>✅ Conectado con GitHub</h3>
-        <p>Enviando llave de acceso al CMS...</p>
+        <h3>✅ Autenticado correctamente</h3>
+        <p>Cerrando ventana y volviendo al editor...</p>
         <script>
-          const token = "${token}";
-          const provider = "${provider}";
-          const message = "authorization:" + provider + ":success:{\"token\":\"" + token + "\",\"provider\":\"" + provider + "\"}";
-          
-          console.log("Iniciando envío repetitivo del mensaje...");
+          (function() {
+            try {
+              // Recuperamos los datos que inyectamos desde el servidor
+              const data = ${data};
+              
+              // Construimos el mensaje en el formato exacto que pide Decap CMS
+              // Formato: authorization:provider:success:{json}
+              const message = "authorization:" + data.provider + ":success:" + JSON.stringify(data);
+              
+              console.log("Enviando mensaje al CMS:", message);
 
-          // ENVIAR MENSAJE CADA 500ms (Fuerza bruta)
-          // Esto asegura que si el CMS pestañeó, lo reciba en el siguiente intento.
-          const interval = setInterval(() => {
-            window.opener.postMessage(message, "*");
-            window.opener.postMessage({ token: token, provider: provider }, "*");
-          }, 500);
+              // Usamos setInterval para insistir hasta que la ventana se cierre
+              // Esto asegura que el CMS reciba el mensaje sí o sí.
+              const interval = setInterval(function() {
+                if (window.opener) {
+                  window.opener.postMessage(message, "*");
+                }
+              }, 200);
 
-          // Cerrar la ventana después de 4 segundos (tiempo suficiente para conectar)
-          setTimeout(() => {
-             clearInterval(interval);
-             window.close();
-          }, 4000);
+              // Cerramos la ventana a los 2 segundos
+              setTimeout(function() {
+                clearInterval(interval);
+                window.close();
+              }, 2000);
+
+            } catch (err) {
+              alert("Error en el script de callback: " + err.message);
+            }
+          })();
         </script>
       </body>
       </html>
