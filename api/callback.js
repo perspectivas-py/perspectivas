@@ -1,7 +1,7 @@
 const { AuthorizationCode } = require('simple-oauth2');
 
 module.exports = async (req, res) => {
-  // 1. TUS CREDENCIALES (No olvides pegarlas aquí de nuevo)
+  // --- CREDENCIALES ---
   const client = new AuthorizationCode({
     client: {
       id: 'Ov23li5ZS4FB1zXwg4Q8', 
@@ -16,48 +16,39 @@ module.exports = async (req, res) => {
   const { code } = req.query;
 
   try {
-    // 2. Obtener el token
     const accessToken = await client.getToken({
       code,
       redirect_uri: `https://${req.headers.host}/api/callback`,
     });
 
     const token = accessToken.token.access_token;
-    const provider = 'github';
+    const provider = 'github'; // Debe coincidir con el 'name' en config.yml
 
-    // 3. Generar HTML que bombardea al CMS con el token en todos los formatos posibles
     const htmlResponse = `
       <!DOCTYPE html>
       <html lang="en">
       <body>
-        <h3>✅ Autenticado. Conectando...</h3>
+        <h3>✅ Conectado con GitHub</h3>
+        <p>Enviando llave de acceso al CMS...</p>
         <script>
-          (function() {
-            const token = "${token}";
-            const provider = "${provider}";
-            
-            console.log("Enviando credenciales...");
+          const token = "${token}";
+          const provider = "${provider}";
+          const message = "authorization:" + provider + ":success:{\"token\":\"" + token + "\",\"provider\":\"" + provider + "\"}";
+          
+          console.log("Iniciando envío repetitivo del mensaje...");
 
-            // Objeto de datos
-            const data = { token: token, provider: provider };
-            
-            // INTENTO 1: Formato estándar de Netlify (Texto)
-            // Es el más común para Decap CMS
-            const msg1 = "authorization:" + provider + ":success:" + JSON.stringify(data);
-            window.opener.postMessage(msg1, "*");
-            
-            // INTENTO 2: Objeto JSON puro
-            // Algunas versiones modernas lo prefieren así
-            window.opener.postMessage(data, "*");
+          // ENVIAR MENSAJE CADA 500ms (Fuerza bruta)
+          // Esto asegura que si el CMS pestañeó, lo reciba en el siguiente intento.
+          const interval = setInterval(() => {
+            window.opener.postMessage(message, "*");
+            window.opener.postMessage({ token: token, provider: provider }, "*");
+          }, 500);
 
-            // INTENTO 3: Formato Stringify directo
-            window.opener.postMessage(JSON.stringify(data), "*");
-
-            // Cerrar ventana
-            setTimeout(function() {
-               window.close();
-            }, 500);
-          })();
+          // Cerrar la ventana después de 4 segundos (tiempo suficiente para conectar)
+          setTimeout(() => {
+             clearInterval(interval);
+             window.close();
+          }, 4000);
         </script>
       </body>
       </html>
