@@ -8,7 +8,7 @@ backend:
 media_folder: "assets/img"
 public_folder: "/assets/img"
 
-publish_mode: editorial_workflow
+#publish_mode: editorial_workflow
 
 # Borré local_backend: true para evitar confusiones en producción,
 # pero podés dejarlo si corres npx decap-server localmente.
