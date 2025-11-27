@@ -6,7 +6,14 @@
   <title>Gestor de Contenidos | Perspectivas</title>
 </head>
 <body>
-  <!-- Usamos la versión 3.1.2 que es muy estable -->
-  <script src="https://unpkg.com/decap-cms@3.1.2/dist/decap-cms.js"></script>
+  <!-- Script de depuración (EL ESPÍA) -->
+  <script>
+    window.addEventListener("message", function(event) {
+      console.log("📩 MENSAJE RECIBIDO DESDE POPUP:", event.data);
+    }, false);
+  </script>
+
+  <!-- Script oficial de Decap CMS -->
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>
