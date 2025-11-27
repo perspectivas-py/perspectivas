@@ -1,15 +1,10 @@
 const { AuthorizationCode } = require('simple-oauth2');
 
 module.exports = async (req, res) => {
-  // Debugging: Ver en los logs de Vercel si la variable existe
-  console.log("Intentando Login...");
-  console.log("Host:", req.headers.host);
-  console.log("Client ID Status:", process.env.OAUTH_CLIENT_ID ? "CARGADO CORRECTAMENTE" : "ESTÁ UNDEFINED / VACÍO");
-
   const client = new AuthorizationCode({
     client: {
-      id: process.env.OAUTH_CLIENT_ID,
-      secret: process.env.OAUTH_CLIENT_SECRET,
+      id: 'Ov23li5ZS4FB1zXwg4Q8', // <--- PEGA TU ID AQUÍ (mantén las comillas)
+      secret: process.env.OAUTH_CLIENT_SECRET, // El secreto lo dejamos oculto por ahora
     },
     auth: {
       tokenHost: 'https://github.com',
