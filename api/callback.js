@@ -22,42 +22,47 @@ module.exports = async (req, res) => {
     });
 
     const token = accessToken.token.access_token;
-    const provider = 'github'; // Debe coincidir con el backend name del config.yml
+    const provider = 'github'; 
 
-    // --- CORRECCIÓN AQUÍ ---
-    // 1. Creamos el objeto puro
-    const messageContent = { token: token, provider: provider };
-    
-    // 2. Construimos el string mágico que espera Decap CMS
-    // Estructura: authorization:PROVIDER:success:JSON_STRING
-    const message = "authorization:" + provider + ":success:" + JSON.stringify(messageContent);
+    // Preparamos el mensaje exacto
+    const data = JSON.stringify({ token: token, provider: provider });
+    const msg = `authorization:${provider}:success:${data}`;
 
     const htmlResponse = `
       <!DOCTYPE html>
       <html lang="en">
       <body>
         <h3>✅ Autenticado</h3>
-        <p>Volviendo al gestor...</p>
+        <p id="status">Enviando credenciales...</p>
         <script>
-          (function() {
-            // El mensaje ya viene preparado desde el servidor correctamente
-            const msg = '${message}';
-            
-            console.log("Enviando a CMS:", msg);
+          const msg = '${msg}';
+          
+          // Debug para la ventana popup
+          console.log("Enviando mensaje:", msg);
 
-            // Intentar enviar repetidamente por si el navegador va lento
-            const interval = setInterval(function() {
-              if (window.opener) {
-                window.opener.postMessage(msg, "*");
-              }
-            }, 200);
+          // Función de envío
+          function send() {
+            if (window.opener) {
+              // 1. Enviar formato estándar
+              window.opener.postMessage(msg, "*");
+              // 2. Enviar formato JSON puro (por si acaso)
+              window.opener.postMessage({ token: "${token}", provider: "${provider}" }, "*");
+              
+              // Intentar escribir en la consola de la ventana padre (El Espía)
+              try {
+                window.opener.console.log("✅ EL POPUP ESCRIBIÓ ESTO EN TU CONSOLA: Conexión establecida");
+              } catch(e) {}
+            } else {
+              document.getElementById("status").innerText = "Error: No encuentro la ventana del editor.";
+            }
+          }
 
-            // Cerrar ventana
-            setTimeout(function() {
-              clearInterval(interval);
-              window.close();
-            }, 1500);
-          })();
+          // Enviar inmediatamente y repetir
+          send();
+          setInterval(send, 500);
+
+          // Cerrar en 3 segundos
+          setTimeout(() => window.close(), 3000);
         </script>
       </body>
       </html>
