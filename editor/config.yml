@@ -4,6 +4,7 @@ backend:
   branch: main
   base_url: https://perspectivaspy.vercel.app  # <--- IMPORTANTE: PONER ESTO DE NUEVO
   auth_endpoint: api/auth
+  redirect_uri: https://perspectivaspy.vercel.app/api/callback   # <-- AÑADIR ESTO
 
 media_folder: "assets/img"
 public_folder: "/assets/img"
