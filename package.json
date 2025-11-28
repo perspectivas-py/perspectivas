@@ -14,8 +14,3 @@
     "serve": "^14.2.0"
   }
 }
-{
-  "scripts": {
-    "build": "node scripts/build-content.js"
-  }
-}
