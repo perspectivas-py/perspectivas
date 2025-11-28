@@ -72,4 +72,6 @@ try {
 } catch (error) {
     console.error('❌ ERROR FATAL construyendo content.json:', error);
     process.exit(1);
+    module.exports = {};
+
 }
