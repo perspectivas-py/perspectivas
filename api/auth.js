@@ -4,7 +4,7 @@ module.exports = async (req, res) => {
   const client = new AuthorizationCode({
     client: {
       id: 'Ov23li5ZS4FB1zXwg4Q8', // <--- PEGA TU ID AQUÍ (mantén las comillas)
-      secret: process.env.OAUTH_CLIENT_SECRET, // El secreto lo dejamos oculto por ahora
+      secret: process.env.cf16325cbe8eb9382deaaad250da7feedce35de2, // El secreto lo dejamos oculto por ahora
     },
     auth: {
       tokenHost: 'https://github.com',
