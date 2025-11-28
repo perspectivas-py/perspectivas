@@ -1,4 +1,5 @@
 // /api/auth.js
+
 module.exports = (req, res) => {
   const clientId = process.env.GITHUB_CLIENT_ID;
   const redirectUri = process.env.REDIRECT_URI;
@@ -11,7 +12,8 @@ module.exports = (req, res) => {
   const scope = 'repo,user';
 
   const authorizeUrl =
-    `https://github.com/login/oauth/authorize?client_id=${encodeURIComponent(clientId)}` +
+    `https://github.com/login/oauth/authorize` +
+    `?client_id=${encodeURIComponent(clientId)}` +
     `&redirect_uri=${encodeURIComponent(redirectUri)}` +
     `&scope=${encodeURIComponent(scope)}`;
 
