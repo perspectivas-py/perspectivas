@@ -1,6 +1,5 @@
 // /api/callback.js
-// Serverless Function en Vercel (Node)
-// Requiere simple-oauth2: npm install simple-oauth2
+// Requiere: npm install simple-oauth2
 
 const { AuthorizationCode } = require('simple-oauth2');
 
@@ -32,7 +31,6 @@ function buildHtml(status, payload) {
       (function () {
         function receiveMessage(e) {
           console.log("receiveMessage %o", e);
-          // Envía el mensaje final al window principal donde está Decap CMS
           window.opener.postMessage(
             ${message},
             e.origin
@@ -41,10 +39,8 @@ function buildHtml(status, payload) {
           window.close();
         }
 
-        // Escucha handshake desde la ventana principal
         window.addEventListener("message", receiveMessage, false);
 
-        // Inicia el handshake con el CMS
         console.log("Sending message: %o", "github");
         window.opener.postMessage("authorizing:github", "*");
       })();
@@ -79,11 +75,11 @@ module.exports = async (req, res) => {
       scope: 'repo,user',
     };
 
-    let token;
+    let accessToken;
+
     try {
       const result = await client.getToken(tokenParams);
-      // simple-oauth2 devuelve un AccessToken con la info en .token
-      token = result.token && result.token.access_token
+      accessToken = result.token && result.token.access_token
         ? result.token.access_token
         : result.access_token;
     } catch (error) {
@@ -103,16 +99,15 @@ module.exports = async (req, res) => {
       return;
     }
 
-    if (!token) {
+    if (!accessToken) {
       console.error('No access_token received from GitHub');
       const html = buildHtml('error', { error: 'missing_access_token' });
       res.status(500).setHeader('Content-Type', 'text/html').send(html);
       return;
     }
 
-    // Éxito: devolvemos HTML que hace postMessage al CMS
     const html = buildHtml('success', {
-      token,
+      token: accessToken,
       provider: 'github',
     });
 
