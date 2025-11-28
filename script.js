@@ -1,4 +1,4 @@
-/* script.js - Perspectivas Engine PRO v3 (JSON Unified Loader) */
+/* script.js - Perspectivas Engine PRO v4 (Home HERO Featured + Secondary News + JSON Unified Loader) */
 
 /* ============================================================
    CONFIG
@@ -9,7 +9,7 @@ const CONFIG = {
 };
 
 /* ============================================================
-   LOAD JSON (content.json en la raíz)
+   LOAD JSON
 ============================================================ */
 async function loadContentJSON() {
   try {
@@ -50,228 +50,50 @@ function resolveMediaUrl(path) {
 }
 
 /* ============================================================
-   MARKDOWN HELPERS (para otras páginas)
+   HERO PRO — NOTICIA DESTACADA FEATURED
 ============================================================ */
-async function fetchMarkdownFile(url) {
-  const res = await fetch(`${url}?t=${Date.now()}`, { cache: "no-store" });
-  if (!res.ok) throw new Error(`No se pudo obtener ${url}`);
-  return res.text();
-}
+function renderHeroFeatured(posts) {
+  const featured = posts.find(p => String(p.featured) === "true" || p.featured === true);
+  if (!featured) return;
 
-function parseMarkdownFrontmatter(md) {
-  const match = /^---\s*([\s\S]*?)\s*---/.exec(md);
-  const data = { frontmatter: {}, content: md };
+  const heroEl = document.getElementById("hero");
+  if (!heroEl) return;
 
-  if (match) {
-    const lines = match[1].split("\n");
-    let currentKey = null;
+  const img = featured.thumbnail || featured.image || "https://placehold.co/1200x600?text=Perspectivas";
 
-    lines.forEach((line) => {
-      // lista YAML (ej: tags: \n  - valor)
-      if (/^\s*-\s*/.test(line) && currentKey) {
-        data.frontmatter[currentKey] = data.frontmatter[currentKey] || [];
-        const value = line.replace(/^\s*-\s*/, "").trim().replace(/^['"]|['"]$/g, "");
-        if (value) data.frontmatter[currentKey].push(value);
-        return;
-      }
-
-      const [key, ...rest] = line.split(":");
-      if (!key || rest.length === 0) return;
-
-      currentKey = key.trim();
-      const value = rest.join(":").trim();
-
-      if (value) {
-        data.frontmatter[currentKey] = value.replace(/^['"]|['"]$/g, "");
-        currentKey = null;
-      } else {
-        // valor vacío => se asume que vienen ítems de lista debajo
-        data.frontmatter[currentKey] = [];
-      }
-    });
-
-    data.content = md.replace(match[0], "").trim();
-  }
-
-  return data;
-}
-
-function extractSummaryFromMarkdown(content, maxLength = 200) {
-  if (!content) return "";
-
-  const plain = content
-    .replace(/!\[[^\]]*]\([^)]*\)/g, "") // imágenes
-    .replace(/\[[^\]]*]\([^)]*\)/g, "") // links
-    .replace(/[#>*_`~-]/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
-
-  if (plain.length <= maxLength) return plain;
-  return `${plain.slice(0, maxLength - 1)}…`;
-}
-
-function buildNewsCardFromMarkdown(filename, frontmatter, content) {
-  const slug = filename.replace(/\.md$/i, "");
-  const url = `noticia.html?type=noticias&id=${encodeURIComponent(slug)}`;
-
-  const img =
-    frontmatter.thumbnail || "https://placehold.co/600x400/eee/999?text=Perspectivas";
-
-  const summary = frontmatter.summary || extractSummaryFromMarkdown(content);
-
-  return `
-    <article class="card">
-      <div class="card-img-container">
-        <a href="${url}">
-          <img src="${img}" loading="lazy" alt="${frontmatter.title || "Noticia"}">
-        </a>
-      </div>
-      <div class="card-content">
-        <small class="card-meta">${formatDate(frontmatter.date)} | ${
-    frontmatter.category || "General"
-  }</small>
-        <h3><a href="${url}">${frontmatter.title || "Sin título"}</a></h3>
-        ${summary ? `<p>${summary}</p>` : ""}
-      </div>
-    </article>`;
-}
-
-/* ============================================================
-   TEMPLATES HTML
-============================================================ */
-function cardHTML(item, showVideo) {
-  const link = `post.html?id=${item.id}&type=${item.type}`;
-  const img = item.thumbnail || "https://placehold.co/600x400/eee/999?text=Perspectivas";
-
-  let media = `
-    <div class="card-img-container">
-      <a href="${link}">
-        <img src="${img}" loading="lazy" alt="${item.title}">
-      </a>
-    </div>`;
-
-  if (showVideo && item.embed_url && getYoutubeId(item.embed_url)) {
-    media = `
-      <div class="video-wrapper">
-        <iframe src="https://www.youtube.com/embed/${getYoutubeId(item.embed_url)}"
-                frameborder="0" allowfullscreen></iframe>
-      </div>`;
-  }
-
-  return `
-    <article class="card">
-      ${media}
-      <div class="card-content">
-        <small class="card-meta">${formatDate(item.date)} | ${item.category || "General"}</small>
-        <h3><a href="${link}">${item.title}</a></h3>
-      </div>
-    </article>`;
-}
-
-function podcastHTML(item) {
-  const link = `post.html?id=${item.id}&type=${item.type}`;
-  const img = item.thumbnail || "https://placehold.co/150x150/333/fff?text=Audio";
-
-  return `
-    <article class="podcast-card">
-      <a href="${link}" class="podcast-img-link">
-        <img src="${img}" loading="lazy">
-        <div class="play-overlay"><span class="play-icon">▶</span></div>
-      </a>
-      <div class="podcast-content">
-        <small class="podcast-meta">${formatDate(item.date)} | EPISODIO</small>
-        <h3 class="podcast-title"><a href="${link}">${item.title}</a></h3>
-      </div>
-    </article>`;
-}
-
-/* ============================================================
-   SPONSORS — SELECCIÓN SMART
-============================================================ */
-function pickSponsorSmart(sponsors) {
-  const now = new Date();
-
-  let active = sponsors.filter(s => String(s.active) !== "false");
-
-  // aplicar campañas
-  let campaign = active.filter(s => {
-    const start = s.campaign_start ? new Date(s.campaign_start) : null;
-    const end = s.campaign_end ? new Date(s.campaign_end) : null;
-
-    if (start && end) return now >= start && now <= end;
-    if (start && !end) return now >= start;
-    if (!start && end) return now <= end;
-    return true;
-  });
-
-  const pool = campaign.length ? campaign : active;
-
-  pool.sort((a, b) => {
-    const pa = a.priority ? Number(a.priority) : 999;
-    const pb = b.priority ? Number(b.priority) : 999;
-    return pa - pb;
-  });
-
-  return pool[0];
-}
-
-/* Render del bloque patrocinado */
-function renderSponsoredSite(sponsors) {
-  const cardEl = document.getElementById("sponsoredSiteCard");
-  if (!cardEl) return;
-
-  const d = pickSponsorSmart(sponsors);
-  if (!d) return;
-
-  const logoUrl = resolveMediaUrl(d.logo);
-
-  cardEl.innerHTML = `
-    <div>
-      <div class="sponsored-meta">Contenido patrocinado · Perspectivas</div>
-      <h3>${d.headline || d.title}</h3>
-
-      ${d.excerpt
-        ? `<p>${d.excerpt}</p>`
-        : `<p class="sponsored-tagline">
-             Conocé a <strong>${d.title}</strong>, aliado de Perspectivas.
-           </p>`
-      }
-
-      ${d.sector ? `<div class="sponsored-sector">Sector: ${d.sector}</div>` : ""}
-
-      ${d.url
-        ? `<div class="sponsored-actions">
-             <a class="sponsored-cta" href="${d.url}"
-                target="_blank" rel="noopener noreferrer sponsored">
-               Visitar sitio patrocinado
-             </a>
-           </div>`
-        : ""
-      }
-    </div>
-
-    <div>
-      <img src="${logoUrl}" alt="${d.title}">
+  heroEl.innerHTML = `
+    <img src="${img}" alt="${featured.title}" class="hero-img">
+    <div class="hero-content">
+      <span class="hero-section">${featured.section || featured.category || "Noticias"}</span>
+      <h2 class="hero-title">
+        <a href="post.html?id=${featured.id}&type=noticias">${featured.title}</a>
+      </h2>
+      ${featured.excerpt ? `<p class="hero-excerpt">${featured.excerpt}</p>` : ""}
     </div>
   `;
 }
 
-/* Rotación Smart */
-function startSponsorsRotation(sponsors) {
-  renderSponsoredSite(sponsors);
+/* ============================================================
+   NOTICIAS SECUNDARIAS (NO featured)
+============================================================ */
+function renderSecondaryNews(posts) {
+  const secondary = posts
+    .filter(p => !(String(p.featured) === "true" || p.featured === true))
+    .slice(0, 4);
 
-  const cardEl = document.getElementById("sponsoredSiteCard");
-  if (!cardEl) return;
+  const container = document.getElementById("secondary-news");
+  if (!container) return;
 
-  setInterval(() => {
-    cardEl.style.opacity = 0;
-
-    setTimeout(() => {
-      renderSponsoredSite(sponsors);
-      cardEl.style.opacity = 1;
-    }, 500);
-
-  }, CONFIG.rotationTime);
+  container.innerHTML = secondary.map(n => `
+    <article class="card">
+      <img src="${n.thumbnail || n.image || 'https://placehold.co/400x250'}" loading="lazy">
+      <div>
+        <h3><a href="post.html?id=${n.id}&type=noticias">${n.title}</a></h3>
+        <small>${formatDate(n.date)}</small>
+        ${n.excerpt ? `<p>${n.excerpt}</p>` : ""}
+      </div>
+    </article>
+  `).join("");
 }
 
 /* ============================================================
@@ -284,39 +106,19 @@ function renderHome(data) {
   const podcasts = data.podcast || [];
   const sponsors = data.sponsors || [];
 
-  /* HERO */
-  if (news.length) {
-    const hero = news[0];
-    const heroEl = document.querySelector(".featured-card-bbc");
+  /* HERO PRO FEATURED */
+  if (news.length) renderHeroFeatured(news);
 
-    if (heroEl) {
-      const img = hero.thumbnail || "https://placehold.co/800x400?text=Perspectivas";
-
-      heroEl.innerHTML = `
-        <a href="post.html?id=${hero.id}&type=noticias">
-          <img src="${img}">
-          <h2>${hero.title}</h2>
-          <p>${hero.description || ""}</p>
-        </a>`;
-    }
-
-    const topList = document.getElementById("top-list-bbc");
-    if (topList) {
-      topList.innerHTML = news.slice(1, 4).map(n => `
-        <li>
-          <a href="post.html?id=${n.id}&type=noticias">
-            <h4>${n.title}</h4>
-            <small>${formatDate(n.date)}</small>
-          </a>
-        </li>`).join("");
-    }
-  }
+  /* SECUNDARIAS */
+  renderSecondaryNews(news);
 
   /* NEWS GRID */
   const newsGrid = document.getElementById("news-grid");
   if (newsGrid) {
-    newsGrid.innerHTML = news.slice(4, 4 + CONFIG.limitNews)
-      .map(n => cardHTML(n))
+    newsGrid.innerHTML = news
+      .filter(n => !(String(n.featured) === "true" || n.featured === true))
+      .slice(4, 4 + CONFIG.limitNews)
+      .map(cardHTML)
       .join("");
   }
 
@@ -366,7 +168,9 @@ async function initHome() {
       if (!newsGrid) return;
 
       if (!term || term.length < 2) {
-        newsGrid.innerHTML = data.noticias.slice(4, 4 + CONFIG.limitNews)
+        newsGrid.innerHTML = data.noticias
+          .filter(n => !(String(n.featured) === "true" || n.featured === true))
+          .slice(4, 4 + CONFIG.limitNews)
           .map(cardHTML)
           .join("");
       } else {
