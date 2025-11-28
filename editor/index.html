@@ -1,24 +1,18 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gestor de Contenidos | Perspectivas</title>
+
+  <script>
+    window.CMS_CONFIGURATION = {
+      config: '/editor/config.yml'
+    };
+  </script>
+
+  <script src="https://unpkg.com/decap-cms@3.9.0/dist/decap-cms.js"></script>
 </head>
 <body>
-  <!-- Script de depuración (EL ESPÍA) -->
-  <script>
-    window.addEventListener("message", function(event) {
-      console.log("📩 MENSAJE RECIBIDO DESDE POPUP:", event.data);
-    }, false);
-  </script>
-<script>
-  window.CMS_CONFIGURATION = {
-    config: '/editor/config.yml'
-  };
-</script>
-
-  <!-- Script oficial de Decap CMS -->
-  <script src="https://unpkg.com/decap-cms@3.9.0/dist/decap-cms.js"></script>
+  <div id="cms"></div>
 </body>
 </html>
