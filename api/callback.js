@@ -5,8 +5,8 @@ const { AuthorizationCode } = require('simple-oauth2');
 
 const config = {
   client: {
-    id: process.env.Ov23li5ZS4FB1zXwg4Q8,
-    secret: process.env.cf16325cbe8eb9382deaaad250da7feedce35de2,
+    id: process.env.GITHUB_CLIENT_ID,
+    secret: process.env.GITHUB_CLIENT_SECRET,
   },
   auth: {
     tokenHost: 'https://github.com',
