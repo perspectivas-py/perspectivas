@@ -148,6 +148,19 @@ function renderHome(data) {
 
   /* SPONSORS */
   if (sponsors.length) startSponsorsRotation(sponsors);
+   
+/* MÁS LEÍDAS */
+const topEl = document.getElementById("top-reads");
+if (topEl && ranked.length) {
+  topEl.innerHTML = ranked.map((n, i) => `
+    <li>
+      <a href="post.html?id=${n.id}&type=noticias">
+        <strong>${i + 1}. ${n.title}</strong>
+        <small style="display:block;color:#666">${n.views} visitas</small>
+      </a>
+    </li>
+  `).join("");
+}
 }
 
 /* ============================================================
@@ -158,6 +171,20 @@ async function initHome() {
   if (!data) return;
 
   renderHome(data);
+
+   const news = data.noticias || [];
+/* LOAD VIEW COUNTS */
+const views = JSON.parse(localStorage.getItem("views") || "{}");
+
+/* JOIN DATA + VIEWS */
+const ranked = news
+  .map(n => ({
+    ...n,
+    views: views[n.id] || 0
+  }))
+  .sort((a, b) => b.views - a.views) // mayor a menor
+  .slice(0, 5); // TOP 5
+
 
   /* Buscador */
   const search = document.getElementById("search-input");
@@ -197,6 +224,13 @@ async function initPost() {
   const list = data[type] || [];
   const item = list.find(x => x.id === id);
   if (!item) return;
+   /* =======================
+   CONTADOR DE VISITAS LOCAL
+   ======================= */
+const views = JSON.parse(localStorage.getItem("views") || "{}");
+views[item.id] = (views[item.id] || 0) + 1;
+localStorage.setItem("views", JSON.stringify(views));
+
 
   const el = document.getElementById("article-detail");
   if (!el) return;
