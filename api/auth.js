@@ -1,27 +1,20 @@
-const { AuthorizationCode } = require('simple-oauth2');
-
 // /api/auth.js
-
 module.exports = (req, res) => {
-  const clientId = process.env.Ov23li5ZS4FB1zXwg4Q8;
-  const redirectUri = process.env.https://perspectivaspy.vercel.app/api/callback
-;
+  const clientId = process.env.GITHUB_CLIENT_ID;
+  const redirectUri = process.env.REDIRECT_URI;
 
   if (!clientId || !redirectUri) {
-    console.error('Faltan GITHUB_CLIENT_ID o REDIRECT_URI en las env vars');
+    console.error('Faltan variables de entorno');
     return res.status(500).send('Server config error');
   }
 
   const scope = 'repo,user';
 
-  const authorizeUrl = `https://github.com/login/oauth/authorize` +
-    `?client_id=${encodeURIComponent(clientId)}` +
+  const authorizeUrl =
+    `https://github.com/login/oauth/authorize?client_id=${encodeURIComponent(clientId)}` +
     `&redirect_uri=${encodeURIComponent(redirectUri)}` +
     `&scope=${encodeURIComponent(scope)}`;
 
   res.writeHead(302, { Location: authorizeUrl });
   res.end();
-};
-
-  res.redirect(authorizationUri);
 };
