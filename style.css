@@ -29,12 +29,12 @@ ul { list-style: none; }
 
 /* HERO (BBC Style) */
 .hero { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-top: 2rem; margin-bottom: 3rem; }
-.featured-card-bbc img { width: 100%; height: 400px; object-fit: cover; border-radius: 4px; margin-bottom: 1rem; }
+/* .featured-card-bbc img { width: 100%; height: 400px; object-fit: cover; border-radius: 4px; margin-bottom: 1rem; }
 .featured-card-bbc h2 { font-family: var(--font-headline); font-size: 2.2rem; line-height: 1.1; margin-bottom: 0.5rem; }
 .featured-card-bbc:hover h2 { color: var(--color-accent); }
 
 /* Sidebar */
-.hero-secondary h3 { border-bottom: 2px solid var(--color-accent); display: inline-block; margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase; }
+/* .hero-secondary h3 { border-bottom: 2px solid var(--color-accent); display: inline-block; margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase; }
 #top-list-bbc li { margin-bottom: 1rem; border-bottom: 1px solid #eee; padding-bottom: 1rem; }
 #top-list-bbc h4 { font-family: var(--font-headline); font-size: 1.1rem; margin-bottom: 0.2rem; }
 #top-list-bbc small { color: #666; font-size: 0.8rem; }
