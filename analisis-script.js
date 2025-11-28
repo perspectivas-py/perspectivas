@@ -36,5 +36,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-function crearTarjetaAnalisis(md,filename){const{frontmatter:f}=parseFrontmatter(md);return`<article class="card">${f.image?`<img src="${f.image}" alt="">`:""}<div class="card-content"><h3><a href="noticia.html?type=analisis&id=${filename}">${f.title||"Sin título"}</a></h3><p class="meta" style="color: var(--color-text-secondary); font-size: 0.9em;">Por: ${f.author||"Anónimo"}</p></div></article>`}
+function crearTarjetaAnalisis(md,filename){const{frontmatter:f}=parseFrontmatter(md);return`<article class="card">${f.image?`<img src="${f.image}" alt="">`:""}<div class="card-content"><h3><a href="noticia.html?type=analisis&id=${encodeURIComponent(filename)}">${f.title||"Sin título"}</a></h3><p class="meta" style="color: var(--color-text-secondary); font-size: 0.9em;">Por: ${f.author||"Anónimo"}</p></div></article>`}
 function parseFrontmatter(md){const match=/^---\s*([\s\S]*?)\s*---/.exec(md),data={frontmatter:{},content:md};if(match){data.content=md.replace(match[0],"").trim(),match[1].split("\n").forEach(line=>{const[key,...valueParts]=line.split(":");key&&valueParts.length>0&&(data.frontmatter[key.trim()]=valueParts.join(":").trim().replace(/"/g,""))});}const imageMatch=data.content.match(/!\[.*\]\((.*)\)/);return imageMatch&&(data.frontmatter.image=imageMatch[1]),data}
