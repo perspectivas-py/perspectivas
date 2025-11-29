@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Sitio de periodismo económico JAMstack",
   "scripts": {
-    "build": "node scripts/build-content.js"
+    "build": "node scripts/build-content.js",
     "start": "serve"
   },
   "dependencies": {
