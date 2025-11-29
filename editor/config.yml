@@ -2,18 +2,13 @@ backend:
   name: github
   repo: perspectivas-py/perspectivas
   branch: main
-  base_url: https://perspectivaspy.vercel.app  # <--- IMPORTANTE: PONER ESTO DE NUEVO
+  base_url: https://perspectivaspy.vercel.app
   auth_endpoint: api/auth
-  redirect_uri: https://perspectivaspy.vercel.app/api/callback   # <-- AÑADIR ESTO
-
-media_folder: "assets/img"
-public_folder: "/assets/img"
 
 publish_mode: editorial_workflow
-# Nuevo!
-hooks:
-  - event: after_publish
-    url: "https://api.vercel.com/v1/integrations/deploy/prj_0GzabF6iVutw8vbfiNZDN7mWx5Sl/teg36of8ls"
+
+# 🔥 Hook para regenerar content.json después de cada publicación
+deploy_url: "https://api.vercel.com/v1/integrations/deploy/prj_0GzabF6iVutw8vbfiNZDN7mWx5Sl/teg36of8ls"
 
 # Borré local_backend: true para evitar confusiones en producción,
 # pero podés dejarlo si corres npx decap-server localmente.
