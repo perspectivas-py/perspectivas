@@ -1,7 +1,7 @@
 // === PERSPECTIVAS - script.js PRO ===
 // Versión 2025 - Sistema dinámico de contenidos desde content.json
 
-const CONTENT_URL = "https://perspectivaspy.vercel.app/content.json"; // 👈 SIN /public
+const CONTENT_URL = "/content.json";
 
 document.addEventListener("DOMContentLoaded", initSite);
 
