@@ -1,4 +1,5 @@
 // === PERSPECTIVAS - script.js PRO ===
+
 // Versión 2025 - Sistema dinámico de contenidos desde content.json
 
 const CONTENT_URL = "/content.json";
