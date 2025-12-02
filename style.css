@@ -560,3 +560,44 @@ ul { list-style: none; }
 #top-reads li a:hover { color: var(--color-accent); }
 
 #top-reads small { font-size: 0.75rem; opacity: 0.7; }
+#home-news {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.news-card {
+  display: flex;
+  gap: 1rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+}
+
+.news-thumb {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.news-title {
+  margin: 0;
+}
+
+.news-meta {
+  font-size: .8rem;
+  color: #666;
+}
+
+#loading {
+  padding: 1rem;
+  text-align: center;
+}
+
+.error-box {
+  background: #ffcaca;
+  padding: .8rem;
+  text-align: center;
+  margin-top: 1rem;
+  border: 1px solid #ff0000;
+}
