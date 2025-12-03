@@ -5,7 +5,7 @@ console.log("🚀 Perspectivas PRO v3 inicializado");
 
 async function loadContent() {
   try {
-    const res = await fetch(`/content.json?ts=${Date.now()}`);
+    const res = await fetch(`/.vercel/path0/content.json?ts=${Date.now()}`);
     if (!res.ok) throw new Error("No se pudo cargar content.json");
 
     const data = await res.json();
