@@ -1,77 +1,48 @@
-/**
- * build-content.js
- * Genera /public/content.json y /api/content.json desde Markdown (Decap CMS)
- */
+// scripts/build-content.js — Versión PRO v3 Final
 
-const fs = require('fs');
-const path = require('path');
-const matter = require('gray-matter');
+import fs from "fs";
+import matter from "gray-matter";
+import path from "path";
 
-// Configuración de rutas
-const contentDir = path.join(__dirname, '../content');
-// CAMBIO CLAVE: Guardamos en la raíz (../content.json) en lugar de (../public/content.json)
-const outputFile = path.join(__dirname, '../content.json');
-
-// Definir las colecciones y sus rutas relativas dentro de /content/
 const collections = [
-    { name: 'noticias', path: 'noticias/posts' },
-    { name: 'analisis', path: 'analisis' }, // Ajustar si tienen subcarpeta posts
-    { name: 'podcast', path: 'podcast' },
-    { name: 'programa', path: 'programa' },
-    { name: 'sponsors', path: 'sponsors' }
+  { key: "noticias", folder: "content/noticias/posts" },
+  { key: "analisis", folder: "content/analisis" },
+  { key: "programa", folder: "content/programa/posts" },
+  { key: "podcast", folder: "content/podcast/posts" },
+  { key: "sponsors", folder: "content/sponsors" }
 ];
 
-const allContent = {};
+function loadCollection({ key, folder }) {
+  const dir = path.join(process.cwd(), folder);
+  if (!fs.existsSync(dir)) return [];
 
-// Función para obtener archivos de una colección
-const getCollectionData = (collectionName, relativePath) => {
-    const dirPath = path.join(contentDir, relativePath);
-    
-    // Verificar si la carpeta existe
-    if (!fs.existsSync(dirPath)) {
-        console.warn(`⚠️ Advertencia: La carpeta ${dirPath} no existe. Se saltará.`);
-        return [];
-    }
+  return fs.readdirSync(dir)
+    .filter(f => f.endsWith(".md") || f.endsWith(".mdx"))
+    .map(file => {
+      const raw = fs.readFileSync(path.join(dir, file), "utf8");
+      const { data, content } = matter(raw);
 
-    const files = fs.readdirSync(dirPath).filter(file => file.endsWith('.md'));
-    
-    const items = files.map(filename => {
-        const filePath = path.join(dirPath, filename);
-        const fileContent = fs.readFileSync(filePath, 'utf-8');
-        const { data, content } = matter(fileContent);
-
-        return {
-            ...data, // Metadatos (título, fecha, autor, imagen)
-            slug: filename.replace('.md', ''),
-            body: content, // El cuerpo del artículo
-            collection: collectionName
-        };
-    });
-
-    // Ordenar por fecha descendente (lo más nuevo primero) si tienen fecha
-    return items.sort((a, b) => {
-        if (a.date && b.date) {
-            return new Date(b.date) - new Date(a.date);
-        }
-        return 0;
-    });
-};
-
-// Ejecutar proceso
-console.log('🏗️  Iniciando construcción de content.json...');
-
-try {
-    collections.forEach(col => {
-        allContent[col.name] = getCollectionData(col.name, col.path);
-        console.log(`✅ Colección procesada: ${col.name} (${allContent[col.name].length} items)`);
-    });
-
-    fs.writeFileSync(outputFile, JSON.stringify(allContent, null, 2));
-    console.log(`🎉 ÉXITO: content.json generado correctamente en: ${outputFile}`);
-
-} catch (error) {
-    console.error('❌ ERROR FATAL construyendo content.json:', error);
-    process.exit(1);
-    module.exports = {};
-
+      return {
+        ...data,
+        body: content.trim(),
+        slug: data.slug || file.replace(/\.mdx?$/, "")
+      };
+    })
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
 }
+
+(function build() {
+  console.log("🛠️ Generando content.json...");
+
+  const data = {};
+  collections.forEach(col => {
+    data[col.key] = loadCollection(col);
+  });
+
+  fs.writeFileSync(
+    "content.json",
+    JSON.stringify(data, null, 2)
+  );
+
+  console.log("✅ content.json actualizado con éxito");
+})();
