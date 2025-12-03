@@ -1,7 +1,8 @@
-// === PERSPECTIVAS - script.js PRO ===
-// Versión 2025 - Sistema dinámico de contenidos desde content.json
+// === Perspectivas v3 PRO ===
+// Sistema dinámico usando content.json en la RAÍZ del proyecto
+// Arquitectura optimizada para Vercel - 2025
 
-const CONTENT_URL = "/content.json";
+const CONTENT_URL = "/content.json"; // 👈 JSON único ORIGEN DE DATOS
 
 document.addEventListener("DOMContentLoaded", initSite);
 
@@ -11,36 +12,59 @@ async function initSite() {
     const data = await fetchContent();
     hideLoading();
     renderHome(data);
+    renderSecondary(data);
+    renderSponsors(data.sponsors || []);
   } catch (err) {
     showError(err);
   }
 }
 
-// Fetch del JSON
+/* ==========================
+   FETCH DEL JSON PRINCIPAL
+   ========================== */
 async function fetchContent() {
   const res = await fetch(CONTENT_URL, { cache: "no-store" });
-  if (!res.ok) throw new Error("No se pudo cargar content.json");
+  if (!res.ok) throw new Error("Error cargando content.json");
   return res.json();
 }
 
-// Renderizado portada
+/* ==========================
+   PORTADA PRINCIPAL
+   ========================== */
 function renderHome(data) {
-  if (!data?.noticias?.length) {
-    return renderEmpty("#home-news", "No hay noticias cargadas");
-  }
+  const noticias = data.noticias || [];
+  if (!noticias.length) return;
 
-  const container = document.querySelector("#home-news");
-  const latest = data.noticias.slice(0, 5); // primeras 5 noticias
+  const hero = noticias[0]; // la más reciente
+  document.querySelector("#hero").innerHTML = `
+    <article class="hero-main">
+      <img src="${hero.thumbnail}" alt="${hero.title}" class="hero-img">
+      <div class="hero-content">
+        <span class="hero-section">${hero.category}</span>
+        <h1 class="hero-title">${hero.title}</h1>
+        <p class="hero-excerpt">${hero.description ?? ""}</p>
+      </div>
+    </article>
+  `;
+}
 
-  container.innerHTML = latest
+/* ==========================
+   NOTICIAS SECUNDARIAS
+   ========================== */
+function renderSecondary(data) {
+  const noticias = data.noticias?.slice(1, 5) || []; // siguientes 4
+  const container = document.querySelector("#secondary-news");
+
+  container.innerHTML = noticias
     .map(
-      item => `
-      <article class="news-card">
-        <img src="${item.thumbnail}" alt="${item.title}" class="news-thumb"/>
-        <div class="news-body">
-          <h2 class="news-title">${item.title}</h2>
-          <p class="news-meta">${formatDate(item.date)} | ${item.category}</p>
-          <p class="news-desc">${item.description ?? ""}</p>
+      n => `
+      <article class="card">
+        <div class="card-img-container">
+          <img src="${n.thumbnail}" alt="">
+        </div>
+        <div>
+          <h3>${n.title}</h3>
+          <p class="card-meta">${formatDate(n.date)} — ${n.category}</p>
         </div>
       </article>
     `
@@ -48,41 +72,48 @@ function renderHome(data) {
     .join("");
 }
 
-// Mostrar mensaje si no hay nada
-function renderEmpty(selector, text) {
-  document.querySelector(selector).innerHTML =
-    `<p class="empty">${text}</p>`;
+/* ==========================
+   SPONSORS (Aliados)
+   ========================== */
+function renderSponsors(sponsors) {
+  if (!sponsors.length) return;
+
+  const grid = document.querySelector("#sponsorsGrid");
+  grid.innerHTML = sponsors
+    .map(
+      s => `
+      <div class="sponsor-item tier-Gold">
+        <a href="${s.url}" target="_blank" rel="noopener">
+          <img src="${s.logo}" alt="${s.title}">
+        </a>
+      </div>
+    `
+    )
+    .join("");
 }
 
-// LOADING
-function showLoading() {
-  document.body.insertAdjacentHTML(
-    "beforeend",
-    `<div id="loading">Cargando contenido...</div>`
-  );
-}
-
-function hideLoading() {
-  document.querySelector("#loading")?.remove();
-}
-
-// Error
-function showError(err) {
-  console.error("❌ ERROR CARGANDO CONTENIDO:", err);
-  document.body.insertAdjacentHTML(
-    "beforeend",
-    `<div class="error-box">
-       Error al cargar el contenido.
-       <button onclick="location.reload()">Reintentar</button>
-     </div>`
-  );
-}
-
-// Formato fecha
+/* ==========================
+   UTILIDADES
+   ========================== */
 function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString("es-PY", {
     day: "2-digit",
     month: "short",
     year: "numeric"
   });
+}
+
+/* LOADING & ERRORES */
+function showLoading() {
+  document.body.insertAdjacentHTML("beforeend", `<div id="loading">Cargando contenido...</div>`);
+}
+function hideLoading() {
+  document.querySelector("#loading")?.remove();
+}
+function showError(err) {
+  console.error("❌ ERROR:", err);
+  document.body.insertAdjacentHTML(
+    "beforeend",
+    `<div class="error-box">Error cargando contenido. <button onclick="location.reload()">Reintentar</button></div>`
+  );
 }
