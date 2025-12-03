@@ -1,119 +1,120 @@
-// === Perspectivas v3 PRO ===
-// Sistema dinámico usando content.json en la RAÍZ del proyecto
-// Arquitectura optimizada para Vercel - 2025
+// script.js — PRO v3 FINAL
+// Lee SIEMPRE el content.json más reciente generado por Vercel
 
-const CONTENT_URL = "/content.json"; // 👈 JSON único ORIGEN DE DATOS
+console.log("🚀 Perspectivas PRO v3 inicializado");
 
-document.addEventListener("DOMContentLoaded", initSite);
-
-async function initSite() {
-  showLoading();
+async function loadContent() {
   try {
-    const data = await fetchContent();
-    hideLoading();
-    renderHome(data);
-    renderSecondary(data);
-    renderSponsors(data.sponsors || []);
+    const res = await fetch(`/content.json?ts=${Date.now()}`);
+    if (!res.ok) throw new Error("No se pudo cargar content.json");
+
+    const data = await res.json();
+
+    renderHero(data.noticias);
+    renderSecondary(data.noticias);
+    renderNoticiasLocales(data.noticias);
+    renderAnalisis(data.analisis);
+    renderPrograma(data.programa);
+    renderPodcast(data.podcast);
+    renderSponsors(data.sponsors);
+
   } catch (err) {
-    showError(err);
+    console.error("❌ Error cargando contenido:", err);
+    document.getElementById("home-news").innerHTML =
+      `<div class="error-box">Error al cargar contenido</div>`;
   }
 }
 
-/* ==========================
-   FETCH DEL JSON PRINCIPAL
-   ========================== */
-async function fetchContent() {
-  const res = await fetch(CONTENT_URL, { cache: "no-store" });
-  if (!res.ok) throw new Error("Error cargando content.json");
-  return res.json();
-}
+function renderHero(noticias) {
+  if (!noticias?.length) return;
 
-/* ==========================
-   PORTADA PRINCIPAL
-   ========================== */
-function renderHome(data) {
-  const noticias = data.noticias || [];
-  if (!noticias.length) return;
-
-  const hero = noticias[0]; // la más reciente
-  document.querySelector("#hero").innerHTML = `
-    <article class="hero-main">
-      <img src="${hero.thumbnail}" alt="${hero.title}" class="hero-img">
-      <div class="hero-content">
-        <span class="hero-section">${hero.category}</span>
-        <h1 class="hero-title">${hero.title}</h1>
-        <p class="hero-excerpt">${hero.description ?? ""}</p>
-      </div>
-    </article>
+  const main = noticias[0];
+  document.getElementById("hero").innerHTML = `
+    <img src="${main.thumbnail}" alt="${main.title}" class="hero-img"/>
+    <div class="hero-content">
+      <div class="hero-section">${main.category}</div>
+      <h2 class="hero-title">${main.title}</h2>
+      <p class="hero-excerpt">${main.description || ""}</p>
+    </div>
   `;
 }
 
-/* ==========================
-   NOTICIAS SECUNDARIAS
-   ========================== */
-function renderSecondary(data) {
-  const noticias = data.noticias?.slice(1, 5) || []; // siguientes 4
-  const container = document.querySelector("#secondary-news");
-
-  container.innerHTML = noticias
-    .map(
-      n => `
-      <article class="card">
-        <div class="card-img-container">
-          <img src="${n.thumbnail}" alt="">
-        </div>
-        <div>
-          <h3>${n.title}</h3>
-          <p class="card-meta">${formatDate(n.date)} — ${n.category}</p>
-        </div>
-      </article>
-    `
-    )
-    .join("");
-}
-
-/* ==========================
-   SPONSORS (Aliados)
-   ========================== */
-function renderSponsors(sponsors) {
-  if (!sponsors.length) return;
-
-  const grid = document.querySelector("#sponsorsGrid");
-  grid.innerHTML = sponsors
-    .map(
-      s => `
-      <div class="sponsor-item tier-Gold">
-        <a href="${s.url}" target="_blank" rel="noopener">
-          <img src="${s.logo}" alt="${s.title}">
-        </a>
+function renderSecondary(noticias) {
+  const container = document.getElementById("secondary-news");
+  container.innerHTML = noticias.slice(1, 4).map(n => `
+    <div class="card">
+      <img src="${n.thumbnail}" />
+      <div>
+        <h3>${n.title}</h3>
+        <small>${formatDate(n.date)}</small>
       </div>
-    `
-    )
-    .join("");
+    </div>
+  `).join("");
 }
 
-/* ==========================
-   UTILIDADES
-   ========================== */
-function formatDate(dateStr) {
-  return new Date(dateStr).toLocaleDateString("es-PY", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric"
+function renderNoticiasLocales(noticias) {
+  const grid = document.getElementById("news-grid");
+  grid.innerHTML = noticias.map(n => `
+    <div class="card">
+      <div class="card-img-container">
+        <img src="${n.thumbnail}" alt="${n.title}">
+      </div>
+      <h3>${n.title}</h3>
+      <div class="card-meta">${formatDate(n.date)}</div>
+    </div>
+  `).join("");
+}
+
+function renderAnalisis(items) {
+  document.getElementById("analisis-grid").innerHTML = items.map(a => `
+    <div class="card">
+      <div class="card-img-container">
+        <img src="${a.thumbnail}" alt="${a.title}">
+      </div>
+      <h3>${a.title}</h3>
+      <div class="card-meta">${formatDate(a.date)}</div>
+    </div>
+  `).join("");
+}
+
+function renderPrograma(items) {
+  document.getElementById("program-grid").innerHTML = items.map(p => `
+    <div class="card">
+      <div class="video-wrapper">
+        <iframe src="${p.embed_url}" frameborder="0"></iframe>
+      </div>
+      <h3>${p.title}</h3>
+    </div>
+  `).join("");
+}
+
+function renderPodcast(items) {
+  document.getElementById("podcast-grid").innerHTML = items.map(pod => `
+    <div class="podcast-card">
+      <a class="podcast-img-link">
+        <img src="${pod.thumbnail}">
+        <span class="play-overlay"><span class="play-icon">▶</span></span>
+      </a>
+      <div class="podcast-content">
+        <div class="podcast-meta">${formatDate(pod.date)}</div>
+        <p class="podcast-title">${pod.title}</p>
+      </div>
+    </div>
+  `).join("");
+}
+
+function renderSponsors(items) {
+  document.getElementById("sponsorsGrid").innerHTML = items.map(s => `
+    <div class="sponsor-item tier-Gold">
+      <a href="${s.url}" target="_blank"><img src="${s.logo}" /></a>
+    </div>
+  `).join("");
+}
+
+function formatDate(date) {
+  return new Date(date).toLocaleDateString("es-PY", {
+    day: "2-digit", month: "short", year: "numeric"
   });
 }
 
-/* LOADING & ERRORES */
-function showLoading() {
-  document.body.insertAdjacentHTML("beforeend", `<div id="loading">Cargando contenido...</div>`);
-}
-function hideLoading() {
-  document.querySelector("#loading")?.remove();
-}
-function showError(err) {
-  console.error("❌ ERROR:", err);
-  document.body.insertAdjacentHTML(
-    "beforeend",
-    `<div class="error-box">Error cargando contenido. <button onclick="location.reload()">Reintentar</button></div>`
-  );
-}
+loadContent();
