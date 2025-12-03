@@ -1,0 +1,178 @@
+{
+  "noticias": [
+    {
+      "id": "macro",
+      "type": "noticias",
+      "category": "Macroeconomía",
+      "date": "2025-11-23T01:52:40.610Z",
+      "title": "BCP mantiene \"anclada\" la tasa de interés con una inflación a la baja",
+      "description": "El Banco Central mantiene la política monetaria sin cambios en un contexto de moderación inflacionaria.",
+      "thumbnail": "/assets/img/knmg6a6szzcshjyavygmnkhpbi.jpg",
+      "body": "En su reunión de la fecha, el Comité de Política Monetaria (CPM) decidió, por unanimidad, mantener la tasa de interés de política monetaria (TPM) en 6,0% anual.\n\nEl Comité destaca que los indicadores de actividad económica y de ventas continuaron mostrando un buen dinamismo en el margen...",
+      "slug": "macro"
+    },
+    {
+      "id": "mercados",
+      "type": "noticias",
+      "category": "Mercados",
+      "date": "2025-11-23T02:53:30.706Z",
+      "title": "Lanzamiento de Link Center: un nuevo hito para el skyline de Asunción",
+      "description": "El sector inmobiliario suma un nuevo desarrollo de alto impacto con enfoque corporativo.",
+      "thumbnail": "/assets/img/2024-08-16-billetes.jpg",
+      "body": "En una noche que reunió a empresarios, referentes del sector financiero y líderes del mercado inmobiliario, se presentó oficialmente Link Center...",
+      "slug": "mercados"
+    }
+  ],
+
+  "analisis": [
+    {
+      "id": "inflacion-2025",
+      "type": "analisis",
+      "category": "Macroeconomía",
+      "date": "2025-11-15",
+      "title": "Inflación 2025: ¿un escenario más estable para Paraguay?",
+      "thumbnail": "https://placehold.co/800x400?text=Analisis",
+      "body_html": "<p>El proceso de convergencia inflacionaria continúa...</p>"
+    },
+    {
+      "id": "dolar-escenario",
+      "type": "analisis",
+      "category": "Mercados",
+      "date": "2025-11-10",
+      "title": "El dólar opera en calma: señales para el cierre del año",
+      "thumbnail": "https://placehold.co/800x400?text=D%C3%B3lar",
+      "body_html": "<p>El tipo de cambio presenta menor volatilidad...</p>"
+    },
+    {
+      "id": "agro-2025",
+      "type": "analisis",
+      "category": "Agro",
+      "date": "2025-11-05",
+      "title": "El agro paraguayo en 2025: proyecciones y desafíos",
+      "thumbnail": "https://placehold.co/800x400?text=Agro",
+      "body_html": "<p>El sector agrícola se encuentra en un punto clave...</p>"
+    },
+    {
+      "id": "empleo-joven",
+      "type": "analisis",
+      "category": "Sociedad",
+      "date": "2025-11-01",
+      "title": "Empleo joven: señales mixtas en el mercado laboral",
+      "thumbnail": "https://placehold.co/800x400?text=Empleo",
+      "body_html": "<p>La inserción laboral juvenil muestra avances, pero persisten desafíos...</p>"
+    }
+  ],
+
+  "programa": [
+    {
+      "id": "ep1-cde",
+      "type": "programa",
+      "category": "Entrevistas",
+      "date": "2025-11-20",
+      "title": "Ciudad del Este: auge inmobiliario y demanda triplicada",
+      "embed_url": "https://www.youtube.com/watch?v=abcd1234xyz",
+      "thumbnail": "https://placehold.co/600x400?text=Programa+1"
+    },
+    {
+      "id": "ep2-bcp",
+      "type": "programa",
+      "category": "Macroeconomía",
+      "date": "2025-11-18",
+      "title": "¿Por qué el BCP mantiene la TPM?",
+      "embed_url": "https://www.youtube.com/watch?v=abcd5678xyz",
+      "thumbnail": "https://placehold.co/600x400?text=Programa+2"
+    },
+    {
+      "id": "ep3-agro",
+      "type": "programa",
+      "category": "Agro",
+      "date": "2025-11-10",
+      "title": "Agro 2025: precio de la soja y clima",
+      "embed_url": "https://www.youtube.com/watch?v=abcd9999xyz",
+      "thumbnail": "https://placehold.co/600x400?text=Programa+3"
+    },
+    {
+      "id": "ep4-asuncion",
+      "type": "programa",
+      "category": "Urbanismo",
+      "date": "2025-11-09",
+      "title": "Asunción 2030: ciudades, inversión y movilidad",
+      "embed_url": "https://www.youtube.com/watch?v=xyz1111abc",
+      "thumbnail": "https://placehold.co/600x400?text=Programa+4"
+    }
+  ],
+
+  "podcast": [
+    {
+      "id": "pod-ec1",
+      "type": "podcast",
+      "date": "2025-11-21",
+      "title": "¿Está Paraguay preparado para la economía del conocimiento?",
+      "thumbnail": "https://placehold.co/300x300?text=Podcast+1"
+    },
+    {
+      "id": "pod-ec2",
+      "type": "podcast",
+      "date": "2025-11-19",
+      "title": "Inflación y mercados: semana clave",
+      "thumbnail": "https://placehold.co/300x300?text=Podcast+2"
+    },
+    {
+      "id": "pod-ec3",
+      "type": "podcast",
+      "date": "2025-11-16",
+      "title": "La transformación digital en Paraguay",
+      "thumbnail": "https://placehold.co/300x300?text=Podcast+3"
+    },
+    {
+      "id": "pod-ec4",
+      "type": "podcast",
+      "date": "2025-11-12",
+      "title": "Inversión extranjera: señales positivas",
+      "thumbnail": "https://placehold.co/300x300?text=Podcast+4"
+    }
+  ],
+
+  "sponsors": [
+    {
+      "id": "banco-centro",
+      "title": "Banco Centro",
+      "headline": "Soluciones financieras para tu futuro",
+      "excerpt": "Apoyamos el crecimiento y la inversión en Paraguay.",
+      "url": "https://bancocentro.com",
+      "logo": "https://placehold.co/200x100?text=BC",
+      "priority": 1,
+      "active": true
+    },
+    {
+      "id": "agro-tec",
+      "title": "AgroTec",
+      "headline": "Innovación para el campo paraguayo",
+      "excerpt": "Tecnología y desarrollo para el agro.",
+      "url": "https://agrotec.com",
+      "logo": "https://placehold.co/200x100?text=AT",
+      "priority": 2,
+      "active": true
+    },
+    {
+      "id": "link-center",
+      "title": "Link Center",
+      "headline": "El nuevo ícono corporativo de Asunción",
+      "excerpt": "Arquitectura moderna y sustentable.",
+      "url": "https://linkcenter.com",
+      "logo": "https://placehold.co/200x100?text=LC",
+      "priority": 3,
+      "active": true
+    },
+    {
+      "id": "telefutura",
+      "title": "Telefutura",
+      "headline": "Conectando Paraguay",
+      "excerpt": "Servicios de telecomunicaciones de alta velocidad.",
+      "url": "https://telefutura.com",
+      "logo": "https://placehold.co/200x100?text=TF",
+      "priority": 4,
+      "active": true
+    }
+  ]
+}
