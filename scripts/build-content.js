@@ -45,4 +45,11 @@ function loadCollection({ key, folder }) {
   );
 
   console.log("✅ content.json actualizado con éxito");
+  import fs from "fs";
+import path from "path";
+
+const output = path.join(process.cwd(), "public", "content.json");
+fs.writeFileSync(output, JSON.stringify(data, null, 2));
+console.log("✔ content.json copiado a /public/");
+
 })();
