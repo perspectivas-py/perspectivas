@@ -1,8 +1,8 @@
-// script.js — PRO v3 FIX
-// Lee SIEMPRE el content.json más reciente generado por Vercel
+// 🚀 Perspectivas PRO v3 FINAL — cache busting on Vercel
 
 console.log("🚀 Perspectivas PRO v3 inicializado");
 
+// Siempre cargar la versión más reciente del JSON
 async function loadContent() {
   try {
     const res = await fetch("/content.json", { cache: "no-store" });
@@ -93,28 +93,4 @@ function renderPodcast(items) {
     <div class="podcast-card">
       <a class="podcast-img-link">
         <img src="${pod.thumbnail}">
-        <span class="play-overlay"><span class="play-icon">▶</span></span>
-      </a>
-      <div class="podcast-content">
-        <div class="podcast-meta">${formatDate(pod.date)}</div>
-        <p class="podcast-title">${pod.title}</p>
-      </div>
-    </div>
-  `).join("");
-}
-
-function renderSponsors(items) {
-  document.getElementById("sponsorsGrid").innerHTML = items.map(s => `
-    <div class="sponsor-item tier-Gold">
-      <a href="${s.url}" target="_blank"><img src="${s.logo}" /></a>
-    </div>
-  `).join("");
-}
-
-function formatDate(date) {
-  return new Date(date).toLocaleDateString("es-PY", {
-    day: "2-digit", month: "short", year: "numeric"
-  });
-}
-
-loadContent();
+        <span class
