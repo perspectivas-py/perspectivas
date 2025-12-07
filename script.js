@@ -1,11 +1,11 @@
-// script.js — PRO v3 FINAL
+// script.js — PRO v3 FIX
 // Lee SIEMPRE el content.json más reciente generado por Vercel
 
 console.log("🚀 Perspectivas PRO v3 inicializado");
 
 async function loadContent() {
   try {
-    const res = await fetch("/content.json")}`);
+    const res = await fetch("/content.json", { cache: "no-store" });
     if (!res.ok) throw new Error("No se pudo cargar content.json");
 
     const data = await res.json();
