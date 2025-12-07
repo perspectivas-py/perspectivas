@@ -20,7 +20,7 @@
       <nav class="main-nav">
         <button id="menu-toggle" class="menu-toggle">☰</button>
         <ul id="nav-list" class="nav-list">
-          <li><a href="#home">Inicio</a></li>
+          <li><a href="#hero">Inicio</a></li>
           <li><a href="#noticias">Noticias</a></li>
           <li><a href="#programa">Programa</a></li>
           <li><a href="#analisis">Análisis</a></li>
@@ -30,21 +30,25 @@
   </header>
 
   <main>
+
     <!-- HERO (Estilo BBC) -->
     <section id="hero" class="hero"></section>
-    <section id="home-news"></section>
 
+    <section class="home-layout">
+      <div class="main-news">
+        <div id="secondary-news" class="secondary-news"></div>
+      </div>
 
-<section class="home-layout">
-  <div class="main-news">
-    <div id="secondary-news" class="secondary-news"></div>
-  </div>
+      <aside class="sidebar">
+        <!-- ESTE ES EL ÚNICO sidebar-top -->
+        <div id="sidebar-top" class="sidebar-block">
+          <h3>Más leídas</h3>
+          <ul id="top-reads"></ul>
+        </div>
 
-  <aside class="sidebar">
-    <div id="sidebar-top" class="sidebar-block"></div>
-    <div id="sidebar-sponsors" class="sidebar-block sponsors"></div>
-  </aside>
-</section>
+        <div id="sidebar-sponsors" class="sidebar-block sponsors"></div>
+      </aside>
+    </section>
 
     <!-- Noticias Locales -->
     <section id="noticias" class="wrap section">
@@ -54,115 +58,70 @@
           <input type="text" id="search-input" placeholder="Buscar noticias...">
         </div>
       </div>
-      <!-- Filtros generados por JS o estáticos -->
+
       <div id="category-filters" class="category-filters"></div>
-      
       <div id="news-grid" class="cards-grid"></div>
     </section>
 
-    <!-- SECCIÓN NUEVA: Programa (Fondo Oscuro) -->
+    <!-- PROGRAMA -->
     <section id="programa" class="wrap section muted-bg">
       <div class="section-header">
         <h2>Programa Perspectivas</h2>
         <p style="color: #ccc; margin-top: 5px;">Archivo Multimedia y Entrevistas</p>
       </div>
-      <div id="program-grid" class="cards-grid">
-        <!-- JS inyectará videos aquí -->
-      </div>
+      <div id="program-grid" class="cards-grid"></div>
     </section>
 
-    <!-- SECCIÓN NUEVA: Análisis -->
+    <!-- ANÁLISIS -->
     <section id="analisis" class="wrap section">
       <div class="section-header">
         <h2>Análisis & Opinión</h2>
       </div>
-      <div id="analisis-grid" class="cards-grid">
-        <!-- JS inyectará análisis aquí -->
+      <div id="analisis-grid" class="cards-grid"></div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section id="newsletter" class="wrap section callout">
+      <div class="newsletter-inner">
+        <h2>Newsletter Premium</h2>
+        <p>Recibí análisis avanzado, resúmenes de mercado y proyecciones exclusivas cada semana.</p>
         
+        <form id="newsletter-form" class="newsletter-form" novalidate>
+          <div class="input-group">
+            <input id="email" type="email" placeholder="Tu email profesional" required aria-label="Email">
+            <select id="plan" aria-label="Seleccionar plan">
+              <option value="free">Newsletter (Gratis)</option>
+              <option value="premium">Premium — Análisis profundos</option>
+            </select>
+            <button type="submit">Suscribirme</button>
+          </div>
+          <p id="newsletter-msg" class="msg-feedback"></p>
+        </form>
+
+        <p class="disclaimer">No enviamos spam. Podés darte de baja cuando quieras.</p>
       </div>
     </section>
-<aside id="sidebar-top" class="sidebar-block">
-  <h3>Más leídas</h3>
-  <ul id="top-reads"></ul>
-</aside>
 
-    
-    <!-- Newsletter Premium -->
-<section id="newsletter" class="wrap section callout">
-  <div class="newsletter-inner">
-    <h2>Newsletter Premium</h2>
-    <p>Recibí análisis avanzado, resúmenes de mercado y proyecciones exclusivas cada semana en tu bandeja de entrada.</p>
-    
-    <form id="newsletter-form" class="newsletter-form" novalidate>
-      <div class="input-group">
-        <input id="email" type="email" placeholder="Tu email profesional" required aria-label="Email">
-        <select id="plan" aria-label="Seleccionar plan">
-          <option value="free">Newsletter (Gratis)</option>
-          <option value="premium">Premium — Análisis profundos</option>
-        </select>
-        <button type="submit">Suscribirme</button>
+    <!-- PODCAST -->
+    <section id="podcast" class="wrap section">
+      <div class="section-header">
+        <h2>Podcast Exclusivo</h2>
+        <p class="sub">Conversaciones a fondo con los protagonistas de la economía.</p>
       </div>
-      <p id="newsletter-msg" class="msg-feedback"></p>
-    </form>
-    
-    <p class="disclaimer">No enviamos spam. Puedes darte de baja cuando quieras.</p>
-  </div>
-</section>
-    
-    <!-- Podcast -->
-<section id="podcast" class="wrap section">
-  <div class="section-header">
-    <h2>Podcast Exclusivo</h2>
-    <p class="sub">Conversaciones a fondo con los protagonistas de la economía.</p>
-  </div>
+      <div id="podcast-grid" class="cards-grid podcast-grid"></div>
+    </section>
 
-  <!-- Usaremos una clase extra 'podcast-grid' para cambiar el estilo -->
-  <div id="podcast-grid" class="cards-grid podcast-grid">
-    <!-- JS inyectará los episodios aquí -->
-  </div>
-</section>
-    
-    
-    <!-- =========================================
-     ALIADOS & PATROCINADORES
-     ========================================= -->
-<section class="sponsors-strip" id="patrocinadores">
-  <div class="wrap">
-    <div class="home-section-header">
-      <h2>Aliados &amp; Patrocinadores</h2>
-      <p>Organizaciones que apoyan el análisis económico independiente.</p>
-    </div>
+    <!-- PATROCINADORES -->
+    <section class="sponsors-strip" id="patrocinadores">
+      <div class="wrap">
+        <div class="home-section-header">
+          <h2>Aliados & Patrocinadores</h2>
+          <p>Organizaciones que apoyan el análisis económico independiente.</p>
+        </div>
 
-    <div id="sponsorsGrid" class="sponsors-grid">
-      <!-- Skeletons de carga, se reemplazan vía JS -->
-      <div class="skeleton skeleton-sponsor"></div>
-      <div class="skeleton skeleton-sponsor"></div>
-      <div class="skeleton skeleton-sponsor"></div>
-      <div class="skeleton skeleton-sponsor"></div>
-    </div>
-  </div>
-</section>
-
-<!-- =========================================
-     SITIO PATROCINADO
-     ========================================= -->
-<section class="sponsored-site-section">
-  <div class="wrap">
-    <div class="home-section-header">
-      <h2>Sitio patrocinado</h2>
-      <p>Contenido recomendado por nuestros aliados comerciales.</p>
-    </div>
-
-    <article id="sponsoredSiteCard" class="sponsored-site-card skeleton-card sponsored-rotator">
-    <article id="sponsoredSiteCardNext" class="sponsored-site-card sponsored-next" style="display:none;"></article>
-
-      <div class="skeleton skeleton-img"></div>
-      <div class="skeleton skeleton-text" style="width: 65%;"></div>
-      <div class="skeleton skeleton-text" style="width: 90%;"></div>
-      <div class="skeleton skeleton-text" style="width: 45%;"></div>
-    </article>
-  </div>
-</section>
+        <div id="sponsorsGrid" class="sponsors-grid"></div>
+      </div>
+    </section>
 
   </main>
 
