@@ -32,6 +32,19 @@ async function initHome() {
     if(hero) hero.innerHTML = `<p style="text-align:center; padding: 2rem; color: red;">Hubo un error cargando las noticias. Por favor recarga la página.</p>`;
   }
 }
+// --- GENERADOR UNIVERSAL DE TARJETAS ---
+// Esta función se usa cuando se renderizan listas dinámicas
+function cardHTML(item) {
+  return `
+    <div class="card">
+      <div class="card-img-container">
+        <img src="${item.thumbnail}" alt="${item.title}">
+      </div>
+      <h3>${item.title}</h3>
+      <div class="card-meta">${formatDate(item.date)}</div>
+    </div>
+  `;
+}
 
 // --- FUNCIONES DE RENDERIZADO ---
 
