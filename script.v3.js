@@ -6,7 +6,25 @@ const CONTENT_URL = "/content.json";
 
 async function initHome() {
   try {
-    const res = await fetch(CONTENT_URL + `?t=${Date.now()}`); // evita cache viejo
+    const res = await fetch(CONTENT_URL = '/content.json';
+
+async function initApp() {
+    console.log("🚀 Sistema Perspectivas V3 iniciado..."); // Log para verificar carga
+
+    try {
+        // Agregamos un timestamp para evitar caché del navegador
+        const response = await fetch(`${DATA_URL}?t=${new Date().getTime()}`);
+        
+        if (!response.ok) throw new Error('Error de red al cargar JSON');
+        
+        const data = await response.json();
+        console.log("📦 Datos recibidos:", data); // Verificá en consola qué fecha tienen estas noticias
+
+        renderHome(data); // Tu función principal
+    } catch (error) {
+        console.error("🔥 Error crítico:", error);
+    }
+}`); // evita cache viejo
     if (!res.ok) throw new Error("No se pudo cargar content.json");
 
     const data = await res.json();
