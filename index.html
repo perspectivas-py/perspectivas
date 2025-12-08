@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="Perspectivas — periodismo económico local con análisis profesional.">
   <title>Perspectivas — Análisis Económico</title>
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
-  
+
   <link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
   <header class="site-header">
     <div class="wrap">
-      <a class="brand" href="index.html">Perspectivas</a>
+      <a class="brand" href="/">Perspectivas</a>
       <nav class="main-nav">
         <button id="menu-toggle" class="menu-toggle">☰</button>
         <ul id="nav-list" class="nav-list">
@@ -30,49 +30,37 @@
   </header>
 
   <main>
-
-    <!-- HERO (Estilo BBC) -->
     <section id="hero" class="hero"></section>
 
     <section class="home-layout">
       <div class="main-news">
         <div id="secondary-news" class="secondary-news"></div>
       </div>
-
       <aside class="sidebar">
-        <!-- ESTE ES EL ÚNICO sidebar-top -->
         <div id="sidebar-top" class="sidebar-block">
           <h3>Más leídas</h3>
           <ul id="top-reads"></ul>
         </div>
-
         <div id="sidebar-sponsors" class="sidebar-block sponsors"></div>
       </aside>
     </section>
 
-    <!-- Noticias Locales -->
     <section id="noticias" class="wrap section">
       <div class="section-header">
         <h2>Noticias Locales</h2>
-        <div class="search-bar">
-          <input type="text" id="search-input" placeholder="Buscar noticias...">
-        </div>
+        <input type="text" id="search-input" placeholder="Buscar noticias...">
       </div>
-
-      <div id="category-filters" class="category-filters"></div>
+      <div id="category-filters"></div>
       <div id="news-grid" class="cards-grid"></div>
     </section>
 
-    <!-- PROGRAMA -->
     <section id="programa" class="wrap section muted-bg">
       <div class="section-header">
         <h2>Programa Perspectivas</h2>
-        <p style="color: #ccc; margin-top: 5px;">Archivo Multimedia y Entrevistas</p>
       </div>
       <div id="program-grid" class="cards-grid"></div>
     </section>
 
-    <!-- ANÁLISIS -->
     <section id="analisis" class="wrap section">
       <div class="section-header">
         <h2>Análisis & Opinión</h2>
@@ -80,45 +68,18 @@
       <div id="analisis-grid" class="cards-grid"></div>
     </section>
 
-    <!-- NEWSLETTER -->
-    <section id="newsletter" class="wrap section callout">
-      <div class="newsletter-inner">
-        <h2>Newsletter Premium</h2>
-        <p>Recibí análisis avanzado, resúmenes de mercado y proyecciones exclusivas cada semana.</p>
-        
-        <form id="newsletter-form" class="newsletter-form" novalidate>
-          <div class="input-group">
-            <input id="email" type="email" placeholder="Tu email profesional" required aria-label="Email">
-            <select id="plan" aria-label="Seleccionar plan">
-              <option value="free">Newsletter (Gratis)</option>
-              <option value="premium">Premium — Análisis profundos</option>
-            </select>
-            <button type="submit">Suscribirme</button>
-          </div>
-          <p id="newsletter-msg" class="msg-feedback"></p>
-        </form>
-
-        <p class="disclaimer">No enviamos spam. Podés darte de baja cuando quieras.</p>
-      </div>
-    </section>
-
-    <!-- PODCAST -->
     <section id="podcast" class="wrap section">
       <div class="section-header">
         <h2>Podcast Exclusivo</h2>
-        <p class="sub">Conversaciones a fondo con los protagonistas de la economía.</p>
       </div>
       <div id="podcast-grid" class="cards-grid podcast-grid"></div>
     </section>
 
-    <!-- PATROCINADORES -->
     <section class="sponsors-strip" id="patrocinadores">
       <div class="wrap">
         <div class="home-section-header">
           <h2>Aliados & Patrocinadores</h2>
-          <p>Organizaciones que apoyan el análisis económico independiente.</p>
         </div>
-
         <div id="sponsorsGrid" class="sponsors-grid"></div>
       </div>
     </section>
@@ -132,5 +93,6 @@
   </footer>
 
   <script src="https://unpkg.com/marked@^4.0.0/marked.min.js"></script>
+  <script src="/script.v3.js?v=4.0"></script>
 </body>
-<script src="script.v3.js?v=4.0"></script>
+</html>
