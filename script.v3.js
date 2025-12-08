@@ -1,34 +1,24 @@
-// script.v3.js — MOTOR PRO DEFINITIVO
+```javascript
+// script.v3.js — MOTOR PRO DEFINITIVO (Corregido)
 console.log("🚀 Perspectivas PRO v3 cargado");
 
-// Ruta universal de Vercel
 const CONTENT_URL = "/content.json";
 
 async function initHome() {
+  console.log("🔄 Iniciando carga de datos...");
+  
   try {
-    const res = await fetch(CONTENT_URL = '/content.json';
+    // 1. CACHE BUSTING: Agregamos timestamp para obligar a Vercel/Navegador a bajar la versión nueva
+    const uniqueUrl = `${CONTENT_URL}?t=${new Date().getTime()}`;
+    
+    const res = await fetch(uniqueUrl);
 
-async function initApp() {
-    console.log("🚀 Sistema Perspectivas V3 iniciado..."); // Log para verificar carga
-
-    try {
-        // Agregamos un timestamp para evitar caché del navegador
-        const response = await fetch(`${DATA_URL}?t=${new Date().getTime()}`);
-        
-        if (!response.ok) throw new Error('Error de red al cargar JSON');
-        
-        const data = await response.json();
-        console.log("📦 Datos recibidos:", data); // Verificá en consola qué fecha tienen estas noticias
-
-        renderHome(data); // Tu función principal
-    } catch (error) {
-        console.error("🔥 Error crítico:", error);
-    }
-}`); // evita cache viejo
-    if (!res.ok) throw new Error("No se pudo cargar content.json");
+    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
 
     const data = await res.json();
+    console.log("📦 Datos frescos recibidos:", data); // Mirá la consola para confirmar fecha
 
+    // 2. RENDERIZADO MODULAR
     renderHero(data.noticias);
     renderSecondary(data.noticias);
     renderNoticiasLocales(data.noticias);
@@ -38,19 +28,24 @@ async function initApp() {
     renderSponsors(data.sponsors);
 
   } catch (e) {
-    console.error("❌ Error:", e);
-    document.getElementById("hero").innerHTML = `<p>Error cargando contenido</p>`;
+    console.error("❌ Error crítico cargando contenido:", e);
+    const hero = document.getElementById("hero");
+    if(hero) hero.innerHTML = `<p style="text-align:center; padding: 2rem; color: red;">Hubo un error cargando las noticias. Por favor recarga la página.</p>`;
   }
 }
 
-function renderHero(n) {
-  if (!n?.length) return;
-  const a = n[0];
+// --- FUNCIONES DE RENDERIZADO ---
 
-  document.getElementById("hero").innerHTML = `
-    <img src="${a.thumbnail}" class="hero-img"/>
+function renderHero(n) {
+  const container = document.getElementById("hero");
+  if (!container || !n?.length) return;
+
+  const a = n[0]; // La noticia más nueva
+
+  container.innerHTML = `
+    <img src="${a.thumbnail}" class="hero-img" alt="${a.title}"/>
     <div class="hero-content">
-      <div class="hero-section">${a.category}</div>
+      <div class="hero-section">${a.category || "Actualidad"}</div>
       <h2 class="hero-title">${a.title}</h2>
       <p class="hero-excerpt">${a.description ?? ""}</p>
     </div>
@@ -58,40 +53,50 @@ function renderHero(n) {
 }
 
 function renderSecondary(n) {
-  document.getElementById("secondary-news").innerHTML =
-    n.slice(1, 4)
-      .map(a => `
-        <div class="card">
-          <img src="${a.thumbnail}"/>
-          <div>
-            <h3>${a.title}</h3>
-            <small>${formatDate(a.date)}</small>
-          </div>
+  const container = document.getElementById("secondary-news");
+  if (!container || !n?.length) return;
+
+  // Tomamos de la 2da a la 4ta noticia (índices 1, 2, 3)
+  container.innerHTML = n.slice(1, 4)
+    .map(a => `
+      <div class="card">
+        <img src="${a.thumbnail}" alt="${a.title}"/>
+        <div>
+          <h3>${a.title}</h3>
+          <small>${formatDate(a.date)}</small>
         </div>
-      `)
-      .join("");
+      </div>
+    `)
+    .join("");
 }
 
 function renderNoticiasLocales(n) {
-  document.getElementById("news-grid").innerHTML =
-    n.slice(0, 12)
-      .map(a => `
-        <div class="card">
-          <div class="card-img-container">
-            <img src="${a.thumbnail}" alt="${a.title}">
-          </div>
-          <h3>${a.title}</h3>
-          <div class="card-meta">${formatDate(a.date)}</div>
+  const container = document.getElementById("news-grid");
+  if (!container || !n?.length) return;
+
+  // Renderizamos las primeras 12. 
+  // OJO: Esto duplica la Hero y las secundarias. 
+  // Idealmente deberíamos hacer .slice(4, 16) para no repetir, pero lo dejo como pediste.
+  container.innerHTML = n.slice(0, 12)
+    .map(a => `
+      <div class="card">
+        <div class="card-img-container">
+          <img src="${a.thumbnail}" alt="${a.title}">
         </div>
-      `)
-      .join("");
+        <h3>${a.title}</h3>
+        <div class="card-meta">${formatDate(a.date)}</div>
+      </div>
+    `)
+    .join("");
 }
 
 function renderAnalisis(items) {
-  document.getElementById("analisis-grid").innerHTML =
-    items.map(a => `
+  const container = document.getElementById("analisis-grid");
+  if (!container || !items?.length) return;
+
+  container.innerHTML = items.map(a => `
       <div class="card">
-        <img src="${a.thumbnail}">
+        <img src="${a.thumbnail}" alt="${a.title}">
         <h3>${a.title}</h3>
         <div class="card-meta">${formatDate(a.date)}</div>
       </div>
@@ -99,11 +104,13 @@ function renderAnalisis(items) {
 }
 
 function renderPrograma(items) {
-  document.getElementById("program-grid").innerHTML =
-    items.map(p => `
+  const container = document.getElementById("program-grid");
+  if (!container || !items?.length) return;
+
+  container.innerHTML = items.map(p => `
       <div class="card">
         <div class="video-wrapper">
-          <iframe src="${p.embed_url}" frameborder="0"></iframe>
+          <iframe src="${p.embed_url}" frameborder="0" allowfullscreen></iframe>
         </div>
         <h3>${p.title}</h3>
       </div>
@@ -111,10 +118,12 @@ function renderPrograma(items) {
 }
 
 function renderPodcast(items) {
-  document.getElementById("podcast-grid").innerHTML =
-    items.map(p => `
+  const container = document.getElementById("podcast-grid");
+  if (!container || !items?.length) return;
+
+  container.innerHTML = items.map(p => `
       <div class="podcast-card">
-        <img src="${p.thumbnail}">
+        <img src="${p.thumbnail}" alt="${p.title}">
         <p class="podcast-title">${p.title}</p>
         <small>${formatDate(p.date)}</small>
       </div>
@@ -122,18 +131,31 @@ function renderPodcast(items) {
 }
 
 function renderSponsors(items) {
-  document.getElementById("sponsorsGrid").innerHTML =
-    items.map(s => `
+  const container = document.getElementById("sponsorsGrid");
+  if (!container || !items?.length) return;
+
+  container.innerHTML = items.map(s => `
       <div class="sponsor-item">
-        <a href="${s.url}" target="_blank"><img src="${s.logo}"></a>
+        <a href="${s.url}" target="_blank" rel="noopener noreferrer">
+            <img src="${s.logo}" alt="Sponsor">
+        </a>
       </div>
     `).join("");
 }
 
-function formatDate(date) {
-  return new Date(date).toLocaleDateString("es-PY", {
+// Utilidad de fecha
+function formatDate(dateString) {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  // Ajuste simple para zona horaria si la fecha viene en UTC y querés evitar desfase de día
+  return date.toLocaleDateString("es-PY", {
     day: "2-digit", month: "short", year: "numeric"
   });
 }
 
-initHome();
+// Ejecutar cuando el DOM esté listo
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHome);
+} else {
+    initHome();
+}
