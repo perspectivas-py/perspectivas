@@ -1,6 +1,7 @@
 {
   "name": "perspectivas",
   "version": "1.0.0",
+  "type": "module",
   "description": "Sitio de periodismo económico JAMstack",
   "scripts": {
     "build": "node scripts/build-content.js",
