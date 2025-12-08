@@ -164,10 +164,60 @@ function formatDate(dateString) {
     day: "2-digit", month: "short", year: "numeric"
   });
 }
+// --- RENDER DE NOTICIA INDIVIDUAL ---
+async function renderNoticia() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+  if (!id) return; // no estamos en página de noticia
+
+  const container = document.getElementById("contenido-noticia");
+  if (!container) return;
+
+  try {
+    const res = await fetch(`${CONTENT_URL}?t=${new Date().getTime()}`);
+    const data = await res.json();
+    const item = data.noticias.find(n => n.slug === id || n.id === id);
+
+    if (!item) {
+      container.innerHTML = `<p style="padding:40px;text-align:center;color:red;">
+        ❌ Noticia no encontrada
+      </p>`;
+      return;
+    }
+
+    container.innerHTML = `
+      <h1 class="article-title">${item.title}</h1>
+      <div class="article-meta">
+        <span>${item.category || ""}</span> — 
+        <span>${formatDate(item.date)}</span>
+      </div>
+
+      <img class="article-img" src="${item.thumbnail}" alt="${item.title}"/>
+
+      <div class="article-body">
+        ${marked.parse(item.body || "")}
+      </div>
+    `;
+  } catch (e) {
+    container.innerHTML = `<p style="padding:40px;text-align:center;color:red;">
+      ⚠️ Error cargando la noticia. Intentá más tarde.
+    </p>`;
+    console.error("Error renderNoticia()", e);
+  }
+}
 
 // Ejecutar cuando el DOM esté listo
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHome);
-} else {
-    initHome();
+function initRouter() {
+  const isHome = document.getElementById("hero") !== null;
+  const isNoticia = document.getElementById("contenido-noticia") !== null;
+
+  if (isHome) initHome();
+  if (isNoticia) renderNoticia();
 }
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initRouter);
+} else {
+  initRouter();
+}
+
