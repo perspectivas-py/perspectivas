@@ -4,20 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Categoría | Perspectivas</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="/style.css">
 </head>
-<body>
 
+<body>
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="/">Perspectivas</a>
-
-    <nav aria-label="Menú principal">
+    <nav>
       <a href="/">Inicio</a>
       <a href="/analisis.html">Análisis</a>
       <a href="/programa.html">Programa</a>
@@ -26,25 +20,15 @@
 </header>
 
 <main class="wrap section">
-  <!-- Título dinámico de la categoría -->
   <h1 id="category-title">Cargando categoría...</h1>
-
-  <!-- Grid donde se pintan las noticias -->
-  <div id="category-grid" class="cards-grid" aria-live="polite">
-    <p>Cargando noticias...</p>
-  </div>
+  <div id="category-grid" class="cards-grid"></div>
 </main>
 
 <footer class="site-footer">
-  <div class="wrap">
-    <strong>Perspectivas</strong> © 2025
-  </div>
+  <div class="wrap">Perspectivas © 2025</div>
 </footer>
 
-<script src="https://unpkg.com/marked@^4.0.0/marked.min.js"></script>
-
-<!-- MOTOR ÚNICO -->
-<script src="/script.v3.js"></script>
-
+<script src="/script.v3.js?v=4.0"></script>
+<script src="/categoria-script.js"></script>
 </body>
 </html>
