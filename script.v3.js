@@ -1,4 +1,3 @@
-```javascript
 // script.v3.js — MOTOR PRO DEFINITIVO (Corregido)
 console.log("🚀 Perspectivas PRO v3 cargado");
 
