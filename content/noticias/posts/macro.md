@@ -1,8 +1,8 @@
 ---
-title: "BCP mantiene 'anclada' la tasa..."
+title: "BCP mantiene 'anclada' la tasa de interés"
 date: 2025-11-23
 category: "Macroeconomía"
 thumbnail: "/assets/img/knmg6a6szzcshjyavygmnkhpbi.jpg"
 ---
 
-Contenido completo aquí...
+El Banco Central decidió mantener la tasa...
