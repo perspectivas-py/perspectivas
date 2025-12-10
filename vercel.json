@@ -2,15 +2,4 @@
   "version": 2,
   "buildCommand": "npm run build",
   "outputDirectory": ".",
-  "functions": {
-    "api/*.js": {
-      "runtime": "nodejs18.x"
     }
-  },
-  "routes": [
-    {
-      "src": "/content.json",
-      "dest": "/api/content.js"
-    }
-  ]
-}
