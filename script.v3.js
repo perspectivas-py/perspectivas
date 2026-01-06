@@ -1,15 +1,15 @@
 // script.v3.js — MOTOR PRO DEFINITIVO (Corregido)
 console.log("🚀 Perspectivas PRO v3 cargado");
 
-const CONTENT_URL = "/content.json";
+const CONTENT_URL = "content.json";
 
 async function initHome() {
   console.log("🔄 Iniciando carga de datos...");
-  
+
   try {
     // 1. CACHE BUSTING: Agregamos timestamp para obligar a Vercel/Navegador a bajar la versión nueva
     const uniqueUrl = `${CONTENT_URL}?t=${new Date().getTime()}`;
-    
+
     const res = await fetch(uniqueUrl);
 
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
@@ -29,7 +29,7 @@ async function initHome() {
   } catch (e) {
     console.error("❌ Error crítico cargando contenido:", e);
     const hero = document.getElementById("hero");
-    if(hero) hero.innerHTML = `<p style="text-align:center; padding: 2rem; color: red;">Hubo un error cargando las noticias. Por favor recarga la página.</p>`;
+    if (hero) hero.innerHTML = `<p style="text-align:center; padding: 2rem; color: red;">Hubo un error cargando las noticias. Por favor recarga la página.</p>`;
   }
 }
 // --- GENERADOR UNIVERSAL DE TARJETAS ---
