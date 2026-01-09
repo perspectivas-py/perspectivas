@@ -1,26 +1,244 @@
 {
     "noticias": [
         {
-            "id": "macro",
+            "id": "1",
             "type": "noticias",
             "category": "Macroeconomía",
             "date": "2025-11-23T01:52:40.610Z",
-            "title": "BCP mantiene \"anclada\" la tasa de interés con una inflación a la baja",
-            "description": "El Banco Central mantiene la política monetaria sin cambios en un contexto de moderación inflacionaria.",
-            "thumbnail": "assets/img/knmg6a6szzcshjyavygmnkhpbi.jpg",
-            "body": "En su reunión de la fecha, el Comité de Política Monetaria (CPM) decidió, por unanimidad, mantener la tasa de interés de política monetaria (TPM) en 6,0% anual. El Comité destaca que los indicadores de actividad económica y de ventas continuaron mostrando un buen dinamismo en el margen...",
-            "slug": "macro"
+            "title": "BCP mantiene tasa de política monetaria en 6% anual",
+            "description": "El Banco Central del Paraguay mantiene la tasa sin cambios en un contexto de moderación inflacionaria.",
+            "thumbnail": "https://images.unsplash.com/photo-1611974789855-9c2046dd4c58?w=800&h=400&fit=crop",
+            "body": "En su reunión de la fecha, el Comité de Política Monetaria decidió mantener la tasa de interés de política monetaria en 6,0% anual.",
+            "slug": "bcp-tpm",
+            "views": 1250
         },
         {
-            "id": "mercados",
+            "id": "2",
             "type": "noticias",
             "category": "Mercados",
-            "date": "2025-11-23T02:53:30.706Z",
-            "title": "Lanzamiento de Link Center: un nuevo hito para el skyline de Asunción",
+            "date": "2025-11-22T14:30:00.000Z",
+            "title": "Lanzamiento de Link Center: nuevo hito para Asunción",
             "description": "El sector inmobiliario suma un nuevo desarrollo de alto impacto con enfoque corporativo.",
-            "thumbnail": "assets/img/2024-08-16-billetes.jpg",
-            "body": "En una noche que reunió a empresarios, referentes del sector financiero y líderes del mercado inmobiliario, se presentó oficialmente Link Center...",
-            "slug": "mercados"
+            "thumbnail": "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&h=400&fit=crop",
+            "body": "En una noche que reunió a empresarios, se presentó oficialmente Link Center.",
+            "slug": "link-center",
+            "views": 980
+        },
+        {
+            "id": "3",
+            "type": "noticias",
+            "category": "Macroeconomía",
+            "date": "2025-11-21T10:15:00.000Z",
+            "title": "Inflación en Paraguay cierra octubre bajo expectativas",
+            "description": "Los precios mostraron una moderación importante en el mes, convergiendo hacia el rango meta.",
+            "thumbnail": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop",
+            "body": "La variación mensual de precios fue menor a la esperada por analistas.",
+            "slug": "inflacion-octubre",
+            "views": 1450
+        },
+        {
+            "id": "4",
+            "type": "noticias",
+            "category": "Mercados",
+            "date": "2025-11-20T09:45:00.000Z",
+            "title": "Dólar se fortalece ante presiones de política exterior",
+            "description": "El tipo de cambio experimenta volatilidad en medio de incertidumbre global.",
+            "thumbnail": "https://images.unsplash.com/photo-1520335684233-360e66201fcf?w=800&h=400&fit=crop",
+            "body": "Las presiones sobre el dólar reflejan la incertidumbre en mercados internacionales.",
+            "slug": "dolar-volatilidad",
+            "views": 1100
+        },
+        {
+            "id": "5",
+            "type": "noticias",
+            "category": "Agro",
+            "date": "2025-11-19T11:20:00.000Z",
+            "title": "Precio de la soja sigue en alza: análisis de expertos",
+            "description": "Los precios internacionales de granos siguen presionados al alza.",
+            "thumbnail": "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800&h=400&fit=crop",
+            "body": "El mercado de commodities muestra signos de presión alcista.",
+            "slug": "soja-precios",
+            "views": 890
+        },
+        {
+            "id": "6",
+            "type": "noticias",
+            "category": "Sociedad",
+            "date": "2025-11-18T15:10:00.000Z",
+            "title": "Empleo juvenil registra crecimiento moderado",
+            "description": "El mercado laboral para jóvenes muestra señales positivas en el tercer trimestre.",
+            "thumbnail": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=400&fit=crop",
+            "body": "Los datos de empleo juvenil muestran una mejora gradual.",
+            "slug": "empleo-joven",
+            "views": 750
+        },
+        {
+            "id": "7",
+            "type": "noticias",
+            "category": "Tecnología",
+            "date": "2025-11-17T13:30:00.000Z",
+            "title": "Transformación digital: Paraguay avanza en adopción tecnológica",
+            "description": "Empresas paraguayas intensifican sus inversiones en herramientas digitales.",
+            "thumbnail": "https://images.unsplash.com/photo-1518976506554-666c5054fecf?w=800&h=400&fit=crop",
+            "body": "La adopción de tecnología digital se acelera en el país.",
+            "slug": "transformacion-digital",
+            "views": 620
+        },
+        {
+            "id": "8",
+            "type": "noticias",
+            "category": "Inversión",
+            "date": "2025-11-16T08:55:00.000Z",
+            "title": "Inversión extranjera directa crece 15% en lo que va del año",
+            "description": "Paraguay continúa atrayendo capital internacional con proyectos de envergadura.",
+            "thumbnail": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=400&fit=crop",
+            "body": "Las inversiones extranjeras directas muestran un importante crecimiento.",
+            "slug": "ied-crecimiento",
+            "views": 1380
+        },
+        {
+            "id": "9",
+            "type": "noticias",
+            "category": "Macroeconomía",
+            "date": "2025-11-15T12:40:00.000Z",
+            "title": "Comercio exterior movió USD 14.182 millones en 10 meses",
+            "description": "Las exportaciones e importaciones muestran dinamismo en el año.",
+            "thumbnail": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&h=400&fit=crop",
+            "body": "El comercio exterior paraguayo sigue con buen ritmo.",
+            "slug": "comercio-exterior",
+            "views": 920
+        },
+        {
+            "id": "10",
+            "type": "noticias",
+            "category": "Agro",
+            "date": "2025-11-14T14:25:00.000Z",
+            "title": "Productores esperan cosecha record de maíz este año",
+            "description": "Las condiciones climáticas favorecen la producción de maíz.",
+            "thumbnail": "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800&h=400&fit=crop",
+            "body": "Los productores son optimistas respecto a la cosecha.",
+            "slug": "cosecha-maiz",
+            "views": 680
+        },
+        {
+            "id": "11",
+            "type": "noticias",
+            "category": "Finanzas",
+            "date": "2025-11-13T10:15:00.000Z",
+            "title": "Sistema bancario reporta fortaleza patrimonial",
+            "description": "Los bancos del país mantienen ratios de solvencia por encima de lo requerido.",
+            "thumbnail": "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=800&h=400&fit=crop",
+            "body": "La solidez del sistema financiero se mantiene.",
+            "slug": "bancos-solvencia",
+            "views": 540
+        },
+        {
+            "id": "12",
+            "type": "noticias",
+            "category": "Mercados",
+            "date": "2025-11-12T09:35:00.000Z",
+            "title": "Bolsa de Valores de Asunción registra importante volumen",
+            "description": "Las transacciones bursátiles muestran recuperación.",
+            "thumbnail": "https://images.unsplash.com/photo-1611974789855-9c2046dd4c58?w=800&h=400&fit=crop",
+            "body": "El mercado bursátil muestra signos de actividad.",
+            "slug": "bolsa-asuncion",
+            "views": 610
+        },
+        {
+            "id": "13",
+            "type": "noticias",
+            "category": "Sociedad",
+            "date": "2025-11-11T16:50:00.000Z",
+            "title": "Confianza del consumidor sube en noviembre",
+            "description": "Los indicadores de confianza muestran mejora en la percepción.",
+            "thumbnail": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=400&fit=crop",
+            "body": "Los consumidores muestran mayor optimismo.",
+            "slug": "confianza-consumidor",
+            "views": 730
+        },
+        {
+            "id": "14",
+            "type": "noticias",
+            "category": "Inversión",
+            "date": "2025-11-10T11:20:00.000Z",
+            "title": "Paraguay atrae megaproyecto de energía renovable",
+            "description": "Un importante proyecto de energías limpias se instala en el país.",
+            "thumbnail": "https://images.unsplash.com/photo-1509391366360-2e938bf37ba6?w=800&h=400&fit=crop",
+            "body": "Nuevo megaproyecto energético llega a Paraguay.",
+            "slug": "energia-renovable",
+            "views": 1600
+        },
+        {
+            "id": "15",
+            "type": "noticias",
+            "category": "Agro",
+            "date": "2025-11-09T13:45:00.000Z",
+            "title": "Cadiem celebra 22 años consolidándose como actor clave",
+            "description": "La principal cámara de la industria marca un hito importante.",
+            "thumbnail": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=400&fit=crop",
+            "body": "Cadiem continúa siendo protagonista en el sector empresarial.",
+            "slug": "cadiem-aniversario",
+            "views": 850
+        },
+        {
+            "id": "16",
+            "type": "noticias",
+            "category": "Macroeconomía",
+            "date": "2025-11-08T10:30:00.000Z",
+            "title": "Banco Mundial prevé caída de commodities en 2026",
+            "description": "Las proyecciones internacionales anticipan presión en precios.",
+            "thumbnail": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop",
+            "body": "Organismos internacionales advierten sobre precios futuros.",
+            "slug": "commodities-2026",
+            "views": 1320
+        },
+        {
+            "id": "17",
+            "type": "noticias",
+            "category": "Finanzas",
+            "date": "2025-11-07T15:15:00.000Z",
+            "title": "Superintendencia inicia consulta pública de proyectos regulatorios",
+            "description": "Se abre espacio para participación en nuevas regulaciones.",
+            "thumbnail": "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=800&h=400&fit=crop",
+            "body": "La autoridad regulatoria busca insumos del sector.",
+            "slug": "superintendencia-consulta",
+            "views": 480
+        },
+        {
+            "id": "18",
+            "type": "noticias",
+            "category": "Mercados",
+            "date": "2025-11-06T12:05:00.000Z",
+            "title": "Índice Bursátil paraguayo muestra estabilidad relativa",
+            "description": "Los valores principales registran movimientos moderados.",
+            "thumbnail": "https://images.unsplash.com/photo-1611974789855-9c2046dd4c58?w=800&h=400&fit=crop",
+            "body": "El mercado mantiene una tendencia equilibrada.",
+            "slug": "indice-estabilidad",
+            "views": 560
+        },
+        {
+            "id": "19",
+            "type": "noticias",
+            "category": "Inversión",
+            "date": "2025-11-05T14:40:00.000Z",
+            "title": "Ciudad del Este atrae inversión inmobiliaria sin precedentes",
+            "description": "La demanda triplicada genera nuevos proyectos en la frontera.",
+            "thumbnail": "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&h=400&fit=crop",
+            "body": "Ciudad del Este vive un boom inmobiliario.",
+            "slug": "cde-inversion",
+            "views": 1170
+        },
+        {
+            "id": "20",
+            "type": "noticias",
+            "category": "Tecnología",
+            "date": "2025-11-04T09:25:00.000Z",
+            "title": "Startups paraguayas buscan financiamiento en el exterior",
+            "description": "El ecosistema de innovación busca expandirse hacia mercados globales.",
+            "thumbnail": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=400&fit=crop",
+            "body": "Las startups locales miran hacia oportunidades internacionales.",
+            "slug": "startups-financiamiento",
+            "views": 420
         }
     ],
     "analisis": [
@@ -30,7 +248,7 @@
             "category": "Macroeconomía",
             "date": "2025-11-15",
             "title": "Inflación 2025: ¿un escenario más estable para Paraguay?",
-            "thumbnail": "https://placehold.co/800x400?text=Analisis",
+            "thumbnail": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop",
             "body_html": "<p>El proceso de convergencia inflacionaria continúa...</p>"
         },
         {
@@ -39,7 +257,7 @@
             "category": "Mercados",
             "date": "2025-11-10",
             "title": "El dólar opera en calma: señales para el cierre del año",
-            "thumbnail": "https://placehold.co/800x400?text=D%C3%B3lar",
+            "thumbnail": "https://images.unsplash.com/photo-1520335684233-360e66201fcf?w=800&h=400&fit=crop",
             "body_html": "<p>El tipo de cambio presenta menor volatilidad...</p>"
         },
         {
@@ -48,7 +266,7 @@
             "category": "Agro",
             "date": "2025-11-05",
             "title": "El agro paraguayo en 2025: proyecciones y desafíos",
-            "thumbnail": "https://placehold.co/800x400?text=Agro",
+            "thumbnail": "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800&h=400&fit=crop",
             "body_html": "<p>El sector agrícola se encuentra en un punto clave...</p>"
         },
         {
@@ -57,7 +275,7 @@
             "category": "Sociedad",
             "date": "2025-11-01",
             "title": "Empleo joven: señales mixtas en el mercado laboral",
-            "thumbnail": "https://placehold.co/800x400?text=Empleo",
+            "thumbnail": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=400&fit=crop",
             "body_html": "<p>La inserción laboral juvenil muestra avances, pero persisten desafíos...</p>"
         }
     ],
@@ -69,7 +287,7 @@
             "date": "2025-11-20",
             "title": "Ciudad del Este: auge inmobiliario y demanda triplicada",
             "embed_url": "https://www.youtube.com/embed/abcd1234xyz",
-            "thumbnail": "https://placehold.co/600x400?text=Programa+1"
+            "thumbnail": "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&h=400&fit=crop"
         },
         {
             "id": "ep2-bcp",
@@ -78,7 +296,7 @@
             "date": "2025-11-18",
             "title": "¿Por qué el BCP mantiene la TPM?",
             "embed_url": "https://www.youtube.com/embed/abcd5678xyz",
-            "thumbnail": "https://placehold.co/600x400?text=Programa+2"
+            "thumbnail": "https://images.unsplash.com/photo-1611974789855-9c2046dd4c58?w=600&h=400&fit=crop"
         },
         {
             "id": "ep3-agro",
@@ -87,7 +305,7 @@
             "date": "2025-11-10",
             "title": "Agro 2025: precio de la soja y clima",
             "embed_url": "https://www.youtube.com/embed/abcd9999xyz",
-            "thumbnail": "https://placehold.co/600x400?text=Programa+3"
+            "thumbnail": "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=600&h=400&fit=crop"
         },
         {
             "id": "ep4-asuncion",
@@ -96,7 +314,7 @@
             "date": "2025-11-09",
             "title": "Asunción 2030: ciudades, inversión y movilidad",
             "embed_url": "https://www.youtube.com/embed/xyz1111abc",
-            "thumbnail": "https://placehold.co/600x400?text=Programa+4"
+            "thumbnail": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop"
         }
     ],
     "podcast": [
@@ -105,28 +323,28 @@
             "type": "podcast",
             "date": "2025-11-21",
             "title": "¿Está Paraguay preparado para la economía del conocimiento?",
-            "thumbnail": "https://placehold.co/300x300?text=Podcast+1"
+            "thumbnail": "https://images.unsplash.com/photo-1518976506554-666c5054fecf?w=300&h=300&fit=crop"
         },
         {
             "id": "pod-ec2",
             "type": "podcast",
             "date": "2025-11-19",
             "title": "Inflación y mercados: semana clave",
-            "thumbnail": "https://placehold.co/300x300?text=Podcast+2"
+            "thumbnail": "https://images.unsplash.com/photo-1611974789855-9c2046dd4c58?w=300&h=300&fit=crop"
         },
         {
             "id": "pod-ec3",
             "type": "podcast",
             "date": "2025-11-16",
             "title": "La transformación digital en Paraguay",
-            "thumbnail": "https://placehold.co/300x300?text=Podcast+3"
+            "thumbnail": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&h=300&fit=crop"
         },
         {
             "id": "pod-ec4",
             "type": "podcast",
             "date": "2025-11-12",
             "title": "Inversión extranjera: señales positivas",
-            "thumbnail": "https://placehold.co/300x300?text=Podcast+4"
+            "thumbnail": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=300&h=300&fit=crop"
         }
     ],
     "sponsors": [
@@ -136,7 +354,7 @@
             "headline": "Soluciones financieras para tu futuro",
             "excerpt": "Apoyamos el crecimiento y la inversión en Paraguay.",
             "url": "https://bancocentro.com",
-            "logo": "https://placehold.co/200x100?text=BC",
+            "logo": "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=300&h=150&fit=crop",
             "priority": 1,
             "active": true
         },
@@ -146,7 +364,7 @@
             "headline": "Innovación para el campo paraguayo",
             "excerpt": "Tecnología y desarrollo para el agro.",
             "url": "https://agrotec.com",
-            "logo": "https://placehold.co/200x100?text=AT",
+            "logo": "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=300&h=150&fit=crop",
             "priority": 2,
             "active": true
         },
@@ -156,7 +374,7 @@
             "headline": "El nuevo ícono corporativo de Asunción",
             "excerpt": "Arquitectura moderna y sustentable.",
             "url": "https://linkcenter.com",
-            "logo": "https://placehold.co/200x100?text=LC",
+            "logo": "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=300&h=150&fit=crop",
             "priority": 3,
             "active": true
         },
@@ -166,7 +384,7 @@
             "headline": "Conectando Paraguay",
             "excerpt": "Servicios de telecomunicaciones de alta velocidad.",
             "url": "https://telefutura.com",
-            "logo": "https://placehold.co/200x100?text=TF",
+            "logo": "https://images.unsplash.com/photo-1518976506554-666c5054fecf?w=300&h=150&fit=crop",
             "priority": 4,
             "active": true
         }

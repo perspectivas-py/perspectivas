@@ -3,8 +3,408 @@ console.log("🚀 Perspectivas PRO v3 cargado");
 
 const CONTENT_URL = "content.json";
 
+const MARKET_QUOTES = [
+  { label: "USD / Gs", value: "7.320", change: "+0,4%" },
+  { label: "Peso Argentino", value: "Gs. 13,20", change: "-1,1%" },
+  { label: "Real Brasileño", value: "Gs. 1.470", change: "+0,2%" },
+  { label: "Euro", value: "Gs. 8.020", change: "+0,3%" },
+  { label: "Petróleo WTI", value: "USD 72,45", change: "-0,8%" },
+  { label: "Soja CME", value: "USD 13,05/bu", change: "+0,5%" },
+  { label: "Carne (USDA)", value: "USD 4,85/kg", change: "+0,1%" }
+];
+
+const FX_SPREAD = 0.006; // 0.6% spread estimado
+const FLAG_CDN_BASE = "https://flagcdn.com";
+const FX_REFERENCE_FALLBACK = "exchangerate.host · Indicativo";
+
+const FX_CONFIG = [
+  {
+    currency: "Dólar estadounidense",
+    code: "USD",
+    amount: "1 USD",
+    units: 1,
+    flagCode: "us",
+    reference: "Banco Central del Paraguay",
+    fallback: {
+      buy: "₲ 7.300",
+      sell: "₲ 7.360",
+      variation: "+0,4%",
+      lastUpdate: "08 Ene 2026 · 11:35"
+    }
+  },
+  {
+    currency: "Euro",
+    code: "EUR",
+    amount: "1 EUR",
+    units: 1,
+    flagCode: "eu",
+    reference: "BCE / bancos corresponsales",
+    fallback: {
+      buy: "₲ 7.880",
+      sell: "₲ 7.980",
+      variation: "+0,3%",
+      lastUpdate: "08 Ene 2026 · 11:20"
+    }
+  },
+  {
+    currency: "Real brasileño",
+    code: "BRL",
+    amount: "1 BRL",
+    units: 1,
+    flagCode: "br",
+    reference: "Banco Central do Brasil",
+    fallback: {
+      buy: "₲ 1.430",
+      sell: "₲ 1.470",
+      variation: "-0,1%",
+      lastUpdate: "08 Ene 2026 · 10:55"
+    }
+  },
+  {
+    currency: "Peso argentino",
+    code: "ARS",
+    amount: "1.000 ARS",
+    units: 1000,
+    flagCode: "ar",
+    reference: "BCRA · dólar export",
+    fallback: {
+      buy: "₲ 9.600",
+      sell: "₲ 9.950",
+      variation: "+1,4%",
+      lastUpdate: "08 Ene 2026 · 10:10"
+    }
+  },
+  {
+    currency: "Peso chileno",
+    code: "CLP",
+    amount: "1.000 CLP",
+    units: 1000,
+    flagCode: "cl",
+    reference: "Banco Central de Chile",
+    fallback: {
+      buy: "₲ 10.020",
+      sell: "₲ 10.250",
+      variation: "+0,8%",
+      lastUpdate: "08 Ene 2026 · 11:00"
+    }
+  },
+  {
+    currency: "Peso uruguayo",
+    code: "UYU",
+    amount: "1 UYU",
+    units: 1,
+    flagCode: "uy",
+    reference: "BROU · pizarra",
+    fallback: {
+      buy: "₲ 178",
+      sell: "₲ 185",
+      variation: "+0,2%",
+      lastUpdate: "08 Ene 2026 · 09:45"
+    }
+  },
+  {
+    currency: "Guaraní paraguayo",
+    code: "PYG",
+    amount: "1.000 PYG",
+    units: 1000,
+    flagCode: "py",
+    reference: "Base local",
+    fallback: {
+      buy: "₲ 1.000",
+      sell: "₲ 1.000",
+      variation: "0,0%",
+      lastUpdate: "08 Ene 2026 · 11:35"
+    }
+  }
+];
+
+const FX_RETAIL_SPEC = {
+  currency: "Dólar minorista (casas de cambio)",
+  code: "USD MIN",
+  amount: "1 USD",
+  units: 1,
+  flagCode: "us",
+  reference: "Casas de cambio minoristas · Asunción",
+  margin: 0.018,
+  fallback: {
+    buy: "₲ 7.360",
+    sell: "₲ 7.520",
+    variation: "+0,6%",
+    lastUpdate: "08 Ene 2026 · 11:35"
+  }
+};
+
+const FX_FALLBACK_QUOTES = (() => {
+  const base = FX_CONFIG.map(cfg => ({
+    currency: cfg.currency,
+    code: cfg.code,
+    amount: cfg.amount,
+    flagCode: cfg.flagCode,
+    buy: cfg.fallback.buy,
+    sell: cfg.fallback.sell,
+    variation: cfg.fallback.variation,
+    reference: cfg.reference,
+    lastUpdate: cfg.fallback.lastUpdate,
+    midValue: computeFallbackMid(cfg.fallback.buy, cfg.fallback.sell)
+  }));
+
+  const retailFallback = buildRetailFallbackQuote(base, FX_RETAIL_SPEC);
+  if (retailFallback) base.push(retailFallback);
+  return base;
+})();
+
+const flagIconUrl = (code = "") => {
+  const normalized = (code || "").toLowerCase();
+  return `${FLAG_CDN_BASE}/w40/${normalized || "un"}.png`;
+};
+
+const NOTICIAS_INITIAL_LIMIT = 15;
+const NOTICIAS_INCREMENT = 15;
+let noticiasLocalesState = {
+  source: [],
+  visible: NOTICIAS_INITIAL_LIMIT
+};
+let noticiasViewMoreBtn = null;
+let categoryFilterContainers = [];
+let currentCategory = "all";
+let noticiasFilterSource = [];
+
+const SECTION_LIMIT = 6;
+const SECTION_INCREMENT = 6;
+
+function createSectionController({ gridId, buttonId, limit = SECTION_LIMIT, increment = SECTION_INCREMENT, renderItem, emptyMessage }) {
+  const state = { source: [], visible: limit };
+  let button = null;
+
+  function updateButton() {
+    if (!button) return;
+    const hasMore = state.source.length > state.visible;
+    button.hidden = !hasMore;
+  }
+
+  function render() {
+    const container = document.getElementById(gridId);
+    if (!container) return;
+
+    if (!state.source.length) {
+      container.innerHTML = emptyMessage || `<p class="empty-copy">No hay contenido disponible.</p>`;
+      updateButton();
+      return;
+    }
+
+    const slice = state.source.slice(0, state.visible);
+    const meta = { total: state.source.length };
+    container.innerHTML = slice
+      .map((item, idx) => renderItem(item, idx, meta))
+      .join("");
+
+    updateButton();
+  }
+
+  function setSource(items) {
+    state.source = Array.isArray(items) ? items : [];
+    state.visible = Math.min(limit, state.source.length);
+    render();
+  }
+
+  function handleViewMore() {
+    state.visible = Math.min(state.source.length, state.visible + increment);
+    render();
+  }
+
+  function init(items) {
+    button = document.getElementById(buttonId);
+    if (button && !button.dataset.bound) {
+      button.addEventListener("click", handleViewMore);
+      button.dataset.bound = "true";
+    }
+    setSource(items);
+  }
+
+  return { init, setSource, render };
+}
+
+const analisisController = createSectionController({
+  gridId: "analisis-grid",
+  buttonId: "analisis-view-more",
+  renderItem: (item) => `
+    <div class="card">
+      <img src="${item.thumbnail}" alt="${item.title}">
+      <h3>${item.title}</h3>
+      <div class="card-meta">${formatDate(item.date)}</div>
+    </div>
+  `,
+  emptyMessage: `<p class="empty-copy">No encontramos análisis disponibles.</p>`
+});
+
+const programaController = createSectionController({
+  gridId: "program-grid",
+  buttonId: "program-view-more",
+  renderItem: (item) => `
+    <div class="program-item">
+      <div class="card">
+        <div class="video-wrapper">
+          <iframe src="${item.embed_url}" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+      <h3>${item.title}</h3>
+    </div>
+  `,
+  emptyMessage: `<p class="empty-copy">Aún no cargamos episodios del programa.</p>`
+});
+
+const podcastController = createSectionController({
+  gridId: "podcast-grid",
+  buttonId: "podcast-view-more",
+  renderItem: (item, idx, meta) => {
+    const total = meta && typeof meta.total === "number" ? meta.total : 0;
+    const episodeNumber = total ? String(total - idx).padStart(2, "0") : String(idx + 1).padStart(2, "0");
+    const dateLabel = formatDate(item.date);
+    return `
+      <article class="podcast-card">
+        <div class="podcast-cover">
+          <img src="${item.thumbnail}" alt="${item.title}" loading="lazy">
+          <span class="podcast-badge">EP ${episodeNumber}</span>
+          <button class="podcast-play" type="button" aria-label="Reproducir episodio ${episodeNumber}">
+            <span>▶</span>
+          </button>
+        </div>
+        <div class="podcast-body">
+          <p class="podcast-meta">${dateLabel || "Nuevo"}</p>
+          <h3>${item.title}</h3>
+          <p class="podcast-tagline">Serie Perspectivas Podcast</p>
+          <div class="podcast-actions">
+            <a class="podcast-listen" href="podcast.html?id=${item.id}">Escuchar ahora</a>
+            <button class="podcast-share" type="button" aria-label="Compartir episodio ${episodeNumber}">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6">
+                <circle cx="18" cy="5" r="3" />
+                <circle cx="6" cy="12" r="3" />
+                <circle cx="18" cy="19" r="3" />
+                <path d="M8.59 10.51 15.4 6.49" />
+                <path d="M8.59 13.49 15.4 17.51" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </article>
+    `;
+  },
+  emptyMessage: `<p class="empty-copy">No hay episodios del podcast para mostrar.</p>`
+});
+
+// Toggle del buscador
+function initSearchToggle() {
+  const searchToggle = document.getElementById("search-toggle");
+  const searchInput = document.getElementById("search-input");
+  
+  if (!searchToggle || !searchInput) return;
+  if (searchToggle.dataset.bound === "true") return;
+  searchToggle.dataset.bound = "true";
+  
+  searchToggle.addEventListener("click", (e) => {
+    e.preventDefault();
+    searchInput.classList.toggle("active");
+    if (searchInput.classList.contains("active")) {
+      searchInput.focus();
+    }
+  });
+  
+  // Cerrar buscador al presionar Escape
+  searchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      searchInput.classList.remove("active");
+      searchInput.value = "";
+    }
+  });
+}
+
+function initMenuToggle() {
+  const menuToggle = document.getElementById("menu-toggle");
+  const navList = document.getElementById("nav-list");
+  if (!menuToggle || !navList) return;
+  if (menuToggle.dataset.bound === "true") return;
+  menuToggle.dataset.bound = "true";
+
+  const closeMenu = () => {
+    navList.classList.remove("active");
+    menuToggle.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("nav-open");
+  };
+
+  menuToggle.addEventListener("click", () => {
+    const isOpen = !navList.classList.contains("active");
+    navList.classList.toggle("active", isOpen);
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    document.body.classList.toggle("nav-open", isOpen);
+  });
+
+  navList.querySelectorAll("a").forEach(link =>
+    link.addEventListener("click", closeMenu)
+  );
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) {
+      closeMenu();
+    }
+  });
+
+  document.addEventListener("keyup", (event) => {
+    if (event.key === "Escape") {
+      closeMenu();
+    }
+  });
+}
+
+function initHeaderScrollState() {
+  const header = document.querySelector(".site-header");
+  const anchor = document.getElementById("noticias");
+  if (!header) return;
+  if (header.dataset.bound === "true") return;
+  header.dataset.bound = "true";
+
+  let collapsePoint = 140;
+  let ticking = false;
+
+  const computeCollapsePoint = () => {
+    if (anchor) {
+      const rect = anchor.getBoundingClientRect();
+      const scrollTop = window.scrollY || window.pageYOffset;
+      collapsePoint = rect.top + scrollTop - (header.offsetHeight || 0) - 16;
+    } else {
+      collapsePoint = 140;
+    }
+  };
+
+  const update = () => {
+    const shouldCompact = window.scrollY > collapsePoint;
+    header.classList.toggle("scrolled", shouldCompact);
+    ticking = false;
+  };
+
+  computeCollapsePoint();
+  update();
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      window.requestAnimationFrame(update);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  window.addEventListener("resize", () => {
+    computeCollapsePoint();
+    update();
+  });
+}
+
 async function initHome() {
   console.log("🔄 Iniciando carga de datos...");
+
+  renderMarketTicker("ticker-track-top");
+  renderMarketTicker("ticker-track-bottom");
+  initSearchToggle();
+  initMenuToggle();
+  await loadFxQuotes();
 
   try {
     // 1. CACHE BUSTING: Agregamos timestamp para obligar a Vercel/Navegador a bajar la versión nueva
@@ -18,12 +418,15 @@ async function initHome() {
     console.log("📦 Datos frescos recibidos:", data); // Mirá la consola para confirmar fecha
 
     // 2. RENDERIZADO MODULAR
-    renderHero(data.noticias);
+    await renderHeroFromFile();
+    
     renderSecondary(data.noticias);
-    renderNoticiasLocales(data.noticias);
-    renderAnalisis(data.analisis);
-    renderPrograma(data.programa);
-    renderPodcast(data.podcast);
+    initNoticiasLocales(data.noticias);
+    renderCategoryFilters(data.noticias);
+    renderTopReads(data.noticias);
+    initAnalisisSection(data.analisis);
+    initProgramaSection(data.programa);
+    initPodcastSection(data.podcast);
     renderSponsors(data.sponsors);
 
   } catch (e) {
@@ -48,6 +451,65 @@ function cardHTML(item) {
 
 // --- FUNCIONES DE RENDERIZADO ---
 
+async function renderHeroFromFile() {
+  const container = document.getElementById("hero");
+  if (!container) return;
+
+  try {
+    // Cargar el archivo markdown más reciente
+    const filePath = "content/noticias/posts/2025-11-22-bcp-mantiene-anclada-la-tasa-de-interes.md?t=" + new Date().getTime();
+    const res = await fetch(filePath);
+    const markdown = await res.text();
+
+    // Extraer frontmatter
+    const match = markdown.match(/^---\n([\s\S]*?)\n---/);
+    if (!match) throw new Error("No frontmatter found");
+
+    const frontmatter = match[1];
+    const body = markdown.replace(/^---\n[\s\S]*?\n---\n/, "");
+
+    // Parser simple de YAML frontmatter
+    const title = frontmatter.match(/title:\s*(.+)/)?.[1]?.trim() || "Sin título";
+    const summary = frontmatter.match(/summary:\s*(.+)/)?.[1]?.trim() || "Sin resumen";
+    let thumbnail = frontmatter.match(/thumbnail:\s*(.+)/)?.[1]?.trim() || "";
+    
+    // Si la ruta es relativa, convertirla a URL completa
+    if (thumbnail.startsWith('/')) {
+      thumbnail = window.location.origin + thumbnail;
+    }
+    
+    // Fallback si no hay thumbnail válido
+    if (!thumbnail || thumbnail.startsWith('/')) {
+      thumbnail = "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1200&h=500&fit=crop&q=80";
+    }
+    
+    const category = frontmatter.match(/category:\s*(.+)/)?.[1]?.trim() || "Actualidad";
+
+    container.innerHTML = `
+      <img src="${thumbnail}" class="hero-img" alt="${title}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%221200%22 height=%22500%22%3E%3Crect fill=%22%23667eea%22 width=%221200%22 height=%22500%22/%3E%3C/svg%3E'"/>
+      <div class="hero-content">
+        <div class="hero-section">${category.toUpperCase()}</div>
+        <h2 class="hero-title">${title}</h2>
+        <p class="hero-excerpt">${summary}</p>
+      </div>
+    `;
+  } catch (e) {
+    console.error("Error cargando hero desde archivo:", e);
+    // Fallback completo
+    const container = document.getElementById("hero");
+    if (container) {
+      container.innerHTML = `
+        <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1200&h=500&fit=crop&q=80" class="hero-img" alt="Portada"/>
+        <div class="hero-content">
+          <div class="hero-section">MACROECONOMÍA</div>
+          <h2 class="hero-title">BCP mantiene "anclada" la tasa de interés con una inflación a la baja</h2>
+          <p class="hero-excerpt">El Comité de Política Monetaria decidió, por unanimidad, mantener la tasa de interés de política monetaria (TPM) en 6,0% anual.</p>
+        </div>
+      `;
+    }
+  }
+}
+
 function renderHero(n) {
   const container = document.getElementById("hero");
   if (!container || !n?.length) return;
@@ -68,8 +530,8 @@ function renderSecondary(n) {
   const container = document.getElementById("secondary-news");
   if (!container || !n?.length) return;
 
-  // Tomamos de la 2da a la 4ta noticia (índices 1, 2, 3)
-  container.innerHTML = n.slice(1, 4)
+  // Tomamos solo 2 destacados (índices 1, 2)
+  const cardsHtml = n.slice(1, 4)
     .map(a => `
       <div class="card">
         <img src="${a.thumbnail}" alt="${a.title}"/>
@@ -80,16 +542,60 @@ function renderSecondary(n) {
       </div>
     `)
     .join("");
+
+  container.innerHTML = `
+    <p class="secondary-news-label">Destacadas</p>
+    ${cardsHtml}
+  `;
 }
 
-function renderNoticiasLocales(n) {
-  const container = document.getElementById("news-grid");
-  if (!container || !n?.length) return;
+function initNoticiasLocales(noticias) {
+  noticiasViewMoreBtn = document.getElementById("news-view-more");
+  if (noticiasViewMoreBtn && !noticiasViewMoreBtn.dataset.bound) {
+    noticiasViewMoreBtn.addEventListener("click", handleNoticiasViewMore);
+    noticiasViewMoreBtn.dataset.bound = "true";
+  }
+  setNoticiasLocalesSource(noticias);
+}
 
-  // Renderizamos las primeras 12. 
-  // OJO: Esto duplica la Hero y las secundarias. 
-  // Idealmente deberíamos hacer .slice(4, 16) para no repetir, pero lo dejo como pediste.
-  container.innerHTML = n.slice(0, 12)
+function setNoticiasLocalesSource(list) {
+  noticiasLocalesState.source = Array.isArray(list) ? list : [];
+  noticiasLocalesState.visible = Math.min(
+    NOTICIAS_INITIAL_LIMIT,
+    noticiasLocalesState.source.length
+  );
+  renderNoticiasLocales();
+  updateNoticiasViewMore();
+}
+
+function handleNoticiasViewMore() {
+  noticiasLocalesState.visible = Math.min(
+    noticiasLocalesState.source.length,
+    noticiasLocalesState.visible + NOTICIAS_INCREMENT
+  );
+  renderNoticiasLocales();
+  updateNoticiasViewMore();
+}
+
+function updateNoticiasViewMore() {
+  if (!noticiasViewMoreBtn) return;
+  const hasMore = noticiasLocalesState.source.length > noticiasLocalesState.visible;
+  noticiasViewMoreBtn.hidden = !hasMore;
+}
+
+function renderNoticiasLocales() {
+  const container = document.getElementById("news-grid");
+  if (!container) return;
+
+  const data = noticiasLocalesState.source || [];
+  if (!data.length) {
+    container.innerHTML = `<p class="empty-copy">No encontramos noticias en esta categoría.</p>`;
+    updateNoticiasViewMore();
+    return;
+  }
+
+  const slice = data.slice(0, noticiasLocalesState.visible);
+  container.innerHTML = slice
     .map(a => `
       <div class="card">
         <div class="card-img-container">
@@ -102,44 +608,16 @@ function renderNoticiasLocales(n) {
     .join("");
 }
 
-function renderAnalisis(items) {
-  const container = document.getElementById("analisis-grid");
-  if (!container || !items?.length) return;
-
-  container.innerHTML = items.map(a => `
-      <div class="card">
-        <img src="${a.thumbnail}" alt="${a.title}">
-        <h3>${a.title}</h3>
-        <div class="card-meta">${formatDate(a.date)}</div>
-      </div>
-    `).join("");
+function initAnalisisSection(items) {
+  analisisController.init(items);
 }
 
-function renderPrograma(items) {
-  const container = document.getElementById("program-grid");
-  if (!container || !items?.length) return;
-
-  container.innerHTML = items.map(p => `
-      <div class="card">
-        <div class="video-wrapper">
-          <iframe src="${p.embed_url}" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <h3>${p.title}</h3>
-      </div>
-    `).join("");
+function initProgramaSection(items) {
+  programaController.init(items);
 }
 
-function renderPodcast(items) {
-  const container = document.getElementById("podcast-grid");
-  if (!container || !items?.length) return;
-
-  container.innerHTML = items.map(p => `
-      <div class="podcast-card">
-        <img src="${p.thumbnail}" alt="${p.title}">
-        <p class="podcast-title">${p.title}</p>
-        <small>${formatDate(p.date)}</small>
-      </div>
-    `).join("");
+function initPodcastSection(items) {
+  podcastController.init(items);
 }
 
 function renderSponsors(items) {
@@ -153,6 +631,398 @@ function renderSponsors(items) {
         </a>
       </div>
     `).join("");
+}
+
+// Renderizar filtros de categorías
+function renderCategoryFilters(noticias) {
+  noticiasFilterSource = Array.isArray(noticias) ? noticias : [];
+  const containers = [
+    document.getElementById("category-filters"),
+    document.getElementById("category-drawer-filters")
+  ].filter(Boolean);
+
+  if (!containers.length || !noticiasFilterSource.length) return;
+
+  const categories = [...new Set(noticiasFilterSource.map(n => n.category).filter(Boolean))].sort();
+  const html = [
+    '<button class="filter-btn" data-category="all">Todas</button>',
+    ...categories.map(cat => `<button class="filter-btn" data-category="${cat}">${cat}</button>`)
+  ].join("");
+
+  categoryFilterContainers = containers;
+
+  containers.forEach(container => {
+    container.innerHTML = html;
+    container.querySelectorAll(".filter-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const category = btn.dataset.category || "all";
+        applyCategoryFilter(category);
+        if (container.id === "category-drawer-filters") {
+          closeCategoryDrawer();
+        }
+      });
+    });
+  });
+
+  applyCategoryFilter(currentCategory);
+}
+
+function applyCategoryFilter(category) {
+  currentCategory = category || "all";
+  syncCategoryFilterState();
+  const filtered = currentCategory === "all"
+    ? noticiasFilterSource
+    : noticiasFilterSource.filter(n => n.category === currentCategory);
+  setNoticiasLocalesSource(filtered);
+}
+
+function syncCategoryFilterState() {
+  categoryFilterContainers.forEach(container => {
+    container.querySelectorAll(".filter-btn").forEach(btn => {
+      const target = btn.dataset.category || "all";
+      btn.classList.toggle("active", target === currentCategory);
+    });
+  });
+}
+
+function setCategoryDrawerState(open) {
+  const drawer = document.getElementById("category-drawer");
+  const toggle = document.getElementById("category-drawer-toggle");
+  if (!drawer || !toggle) return;
+  drawer.classList.toggle("open", !!open);
+  toggle.setAttribute("aria-expanded", String(!!open));
+  drawer.setAttribute("aria-hidden", String(!open));
+}
+
+function closeCategoryDrawer() {
+  setCategoryDrawerState(false);
+}
+
+function initCategoryDrawer() {
+  const toggle = document.getElementById("category-drawer-toggle");
+  const drawer = document.getElementById("category-drawer");
+  const closeBtn = document.getElementById("category-drawer-close");
+  if (!toggle || !drawer) return;
+  if (toggle.dataset.bound === "true") return;
+  toggle.dataset.bound = "true";
+
+  toggle.addEventListener("click", () => {
+    const isOpen = drawer.classList.contains("open");
+    setCategoryDrawerState(!isOpen);
+  });
+
+  if (closeBtn && !closeBtn.dataset.bound) {
+    closeBtn.dataset.bound = "true";
+    closeBtn.addEventListener("click", () => setCategoryDrawerState(false));
+  }
+
+  if (!drawer.dataset.bound) {
+    drawer.dataset.bound = "true";
+    document.addEventListener("click", (event) => {
+      if (!drawer.classList.contains("open")) return;
+      if (drawer.contains(event.target) || toggle.contains(event.target)) return;
+      setCategoryDrawerState(false);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        setCategoryDrawerState(false);
+      }
+    });
+  }
+}
+
+// Renderizar top 5 de más leídas en grid
+function renderTopReads(noticias) {
+  const container = document.getElementById("top-reads-grid");
+  if (!container || !noticias?.length) return;
+
+  // Ordenar por views (descendente) y tomar top 5
+  const withViews = noticias.filter(n => !Number.isNaN(Number(n.views)));
+  const source = withViews.length ? withViews : [...noticias];
+
+  const topReads = source
+    .sort((a, b) => {
+      if (withViews.length) {
+        return Number(b.views) - Number(a.views);
+      }
+      return new Date(b.date || 0) - new Date(a.date || 0);
+    })
+    .slice(0, 5);
+
+  container.innerHTML = topReads.map((n, idx) => {
+    const thumb = n.thumbnail || "/assets/img/nasdaq.avif";
+    const paddedRank = String(idx + 1).padStart(2, "0");
+    const metaPieces = [
+      formatDate(n.date),
+      n.views ? `${Number(n.views).toLocaleString("es-PY")} lecturas` : null
+    ].filter(Boolean);
+
+    return `
+      <article class="top-read-card">
+        <span class="top-read-rank">${paddedRank}</span>
+        <div class="top-read-thumb">
+          <img src="${thumb}" alt="${n.title}" loading="lazy" />
+        </div>
+        <div class="top-read-info">
+          <p class="top-read-category">${n.category || "Noticias"}</p>
+          <h3>${n.title}</h3>
+          ${metaPieces.length ? `<p class="top-read-meta">${metaPieces.join(" · ")}</p>` : ""}
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
+async function loadFxQuotes() {
+  try {
+    const quotes = await fetchFxQuotes();
+    renderQuotes(quotes);
+  } catch (error) {
+    console.warn("⚠️ No pudimos traer cotizaciones en vivo, usamos fallback.", error);
+    renderQuotes(FX_FALLBACK_QUOTES);
+  }
+}
+
+async function fetchFxQuotes() {
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  const previousDate = yesterday.toISOString().split("T")[0];
+
+  const requests = FX_CONFIG.map(async (cfg) => {
+    if (cfg.code === "PYG") {
+      return {
+        currency: cfg.currency,
+        code: cfg.code,
+        amount: cfg.amount,
+        flagCode: cfg.flagCode,
+        buy: cfg.fallback.buy,
+        sell: cfg.fallback.sell,
+        variation: cfg.fallback.variation,
+        reference: cfg.reference,
+        lastUpdate: cfg.fallback.lastUpdate
+      };
+    }
+
+    const units = cfg.units || 1;
+    const latestUrl = `https://api.exchangerate.host/latest?base=${cfg.code}&symbols=PYG`;
+    const prevUrl = `https://api.exchangerate.host/${previousDate}?base=${cfg.code}&symbols=PYG`;
+
+    try {
+      const [latestRes, prevRes] = await Promise.all([
+        fetch(latestUrl),
+        fetch(prevUrl)
+      ]);
+
+      if (!latestRes.ok) throw new Error(`HTTP ${latestRes.status}`);
+      const latestData = await latestRes.json();
+      const prevData = prevRes.ok ? await prevRes.json() : null;
+
+      const latestRate = latestData?.rates?.PYG;
+      if (!latestRate) throw new Error("Sin rate PYG");
+      const prevRate = prevData?.rates?.PYG || null;
+
+      const midValue = latestRate * units;
+      const prevValue = prevRate ? prevRate * units : null;
+      const spread = cfg.spread ?? FX_SPREAD;
+      const halfSpread = spread / 2;
+      const buyValue = midValue * (1 - halfSpread);
+      const sellValue = midValue * (1 + halfSpread);
+      const variationPct = prevValue ? ((midValue - prevValue) / prevValue) * 100 : 0;
+
+      return {
+        currency: cfg.currency,
+        code: cfg.code,
+        amount: cfg.amount,
+        flagCode: cfg.flagCode,
+        buy: formatGuarani(buyValue),
+        sell: formatGuarani(sellValue),
+        variation: formatVariation(variationPct),
+        reference: cfg.reference || FX_REFERENCE_FALLBACK,
+        lastUpdate: formatUpdateLabel(latestData?.date),
+        midValue
+      };
+    } catch (error) {
+      console.warn(`⚠️ Falló la cotización de ${cfg.code}`, error);
+      return {
+        currency: cfg.currency,
+        code: cfg.code,
+        amount: cfg.amount,
+        flagCode: cfg.flagCode,
+        buy: cfg.fallback.buy,
+        sell: cfg.fallback.sell,
+        variation: cfg.fallback.variation,
+        reference: cfg.reference || FX_REFERENCE_FALLBACK,
+        lastUpdate: cfg.fallback.lastUpdate,
+        midValue: computeFallbackMid(cfg.fallback.buy, cfg.fallback.sell)
+      };
+    }
+  });
+
+  const quotes = await Promise.all(requests);
+  const retailQuote = buildRetailQuoteFromUsd(quotes, FX_RETAIL_SPEC);
+  if (retailQuote) quotes.push(retailQuote);
+  return quotes;
+}
+
+function formatGuarani(value) {
+  if (!Number.isFinite(value)) return "—";
+  return new Intl.NumberFormat("es-PY", {
+    style: "currency",
+    currency: "PYG",
+    maximumFractionDigits: 0
+  }).format(value);
+}
+
+function formatVariation(value) {
+  if (!Number.isFinite(value)) return "0,0%";
+  const sign = value > 0 ? "+" : "";
+  return `${sign}${value.toFixed(2).replace(".", ",")}%`;
+}
+
+function formatUpdateLabel(dateStr) {
+  const now = new Date();
+  const baseDate = dateStr ? new Date(`${dateStr}T12:00:00Z`) : now;
+  const dateLabel = baseDate.toLocaleDateString("es-PY", { day: "2-digit", month: "short" });
+  const timeLabel = now.toLocaleTimeString("es-PY", { hour: "2-digit", minute: "2-digit", hour12: false });
+  return `${dateLabel} · ${timeLabel}`;
+}
+
+function parseGuaraniValue(value) {
+  if (typeof value !== "string") return Number(value) || NaN;
+  const normalized = value
+    .replace(/[^0-9,.-]/g, "")
+    .replace(/\./g, "")
+    .replace(/,/g, ".");
+  return Number(normalized);
+}
+
+function computeFallbackMid(buy, sell) {
+  const buyNum = parseGuaraniValue(buy);
+  const sellNum = parseGuaraniValue(sell);
+  if (Number.isFinite(buyNum) && Number.isFinite(sellNum)) {
+    return (buyNum + sellNum) / 2;
+  }
+  if (Number.isFinite(buyNum)) return buyNum;
+  if (Number.isFinite(sellNum)) return sellNum;
+  return NaN;
+}
+
+function buildRetailQuoteFromUsd(quotes, spec) {
+  if (!spec) return null;
+  const usdQuote = quotes?.find(q => q.code === "USD");
+  if (!usdQuote || !Number.isFinite(usdQuote.midValue)) {
+    const fallbackMid = computeFallbackMid(spec.fallback?.buy, spec.fallback?.sell);
+    return {
+      currency: spec.currency,
+      code: spec.code,
+      amount: spec.amount,
+      flagCode: spec.flagCode || "us",
+      buy: spec.fallback?.buy || "—",
+      sell: spec.fallback?.sell || "—",
+      variation: spec.fallback?.variation || "0,0%",
+      reference: spec.reference || FX_REFERENCE_FALLBACK,
+      lastUpdate: spec.fallback?.lastUpdate || "",
+      midValue: fallbackMid
+    };
+  }
+
+  const margin = spec.margin ?? 0.018;
+  const buyValue = usdQuote.midValue * (1 - margin);
+  const sellValue = usdQuote.midValue * (1 + margin);
+
+  return {
+    currency: spec.currency,
+    code: spec.code,
+    amount: spec.amount,
+    flagCode: spec.flagCode || usdQuote.flagCode || "us",
+    buy: formatGuarani(buyValue),
+    sell: formatGuarani(sellValue),
+    variation: usdQuote.variation,
+    reference: spec.reference || usdQuote.reference,
+    lastUpdate: usdQuote.lastUpdate,
+    midValue: usdQuote.midValue
+  };
+}
+
+function buildRetailFallbackQuote(baseQuotes, spec) {
+  if (!spec) return null;
+  const usdFallback = baseQuotes?.find(q => q.code === "USD");
+  const fallbackMid = computeFallbackMid(spec.fallback?.buy, spec.fallback?.sell);
+  return {
+    currency: spec.currency,
+    code: spec.code,
+    amount: spec.amount,
+    flagCode: spec.flagCode || usdFallback?.flagCode || "us",
+    buy: spec.fallback?.buy || usdFallback?.buy || "—",
+    sell: spec.fallback?.sell || usdFallback?.sell || "—",
+    variation: spec.fallback?.variation || usdFallback?.variation || "0,0%",
+    reference: spec.reference || usdFallback?.reference || FX_REFERENCE_FALLBACK,
+    lastUpdate: spec.fallback?.lastUpdate || usdFallback?.lastUpdate || "",
+    midValue: Number.isFinite(fallbackMid) ? fallbackMid : usdFallback?.midValue
+  };
+}
+
+function renderQuotes(quotes = FX_FALLBACK_QUOTES) {
+  const container = document.getElementById("quotes-grid");
+  if (!container) return;
+
+  const source = Array.isArray(quotes) && quotes.length ? quotes : FX_FALLBACK_QUOTES;
+
+  container.innerHTML = source.map(item => {
+    const change = (item.variation || "").trim();
+    const trend = change.startsWith("-") ? "down" : change.startsWith("+") ? "up" : "neutral";
+    const flagSrc = flagIconUrl(item.flagCode);
+    const referenceLabel = item.reference || FX_REFERENCE_FALLBACK;
+    const updateLabel = item.lastUpdate ? ` · ${item.lastUpdate}` : "";
+
+    return `
+      <article class="quote-card">
+        <div class="quote-flag-row">
+          <img class="quote-flag" src="${flagSrc}" alt="Bandera ${item.currency}" loading="lazy" width="48" height="32">
+          <div>
+            <p class="quote-country">${item.currency}</p>
+            <p class="quote-currency">${item.amount}</p>
+          </div>
+        </div>
+        <div class="quote-book">
+          <div class="quote-field">
+            <p class="quote-label">Compra</p>
+            <p class="quote-price">${item.buy}</p>
+          </div>
+          <div class="quote-field">
+            <p class="quote-label">Venta</p>
+            <p class="quote-price">${item.sell}</p>
+          </div>
+        </div>
+        ${change ? `<p class="quote-variation">Tendencia <span class="quote-change ${trend}">${change}</span></p>` : ""}
+        <p class="quote-meta">
+          <span class="quote-code">${item.code}</span> · ${referenceLabel}${updateLabel}
+        </p>
+      </article>
+    `;
+  }).join("");
+}
+
+function renderMarketTicker(trackId) {
+  const track = document.getElementById(trackId);
+  if (!track || !MARKET_QUOTES.length) return;
+
+  const itemsHtml = MARKET_QUOTES.map(item => {
+    const change = item.change || "";
+    const trimmed = change.trim();
+    const trend = trimmed.startsWith("-") ? "down" : trimmed.startsWith("+") ? "up" : "";
+
+    return `
+      <span class="ticker-item">
+        <span class="ticker-label-mini">${item.label}</span>
+        <span class="ticker-value">${item.value}</span>
+        ${change ? `<span class="ticker-change ${trend}">${change}</span>` : ""}
+      </span>
+    `;
+  }).join("");
+
+  track.innerHTML = itemsHtml + itemsHtml;
 }
 
 // Utilidad de fecha
@@ -208,6 +1078,8 @@ async function renderNoticia() {
 
 // Ejecutar cuando el DOM esté listo
 function initRouter() {
+  initHeaderScrollState();
+  initCategoryDrawer();
   const isHome = document.getElementById("hero") !== null;
   const isNoticia = document.getElementById("contenido-noticia") !== null;
 
