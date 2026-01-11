@@ -2,31 +2,36 @@
 
 module.exports = (req, res) => {
   try {
+    console.log('🔐 [AUTH] Inicio de OAuth');
+    console.log('  - Method:', req.method);
+    console.log('  - URL:', req.url);
+    console.log('  - Headers:', JSON.stringify(req.headers, null, 2));
+
     // Obtener el dominio actual dinámicamente
-    const protocol = req.headers['x-forwarded-proto'] || 'https';
-    const host = req.headers['x-forwarded-host'] || req.headers.host || 'perspectivaspy.vercel.app';
+    const protocol = req.headers['x-forwarded-proto'] || 'http';
+    const host = req.headers['x-forwarded-host'] || req.headers.host || 'localhost:3000';
     const baseUrl = `${protocol}://${host}`;
 
-    // Variables de entorno
-    const clientId = process.env.GITHUB_CLIENT_ID;
-    const redirectUri = `${baseUrl}/api/callback`;
-
-    console.log('🔐 [AUTH] OAuth iniciado');
     console.log('  - Protocol:', protocol);
     console.log('  - Host:', host);
     console.log('  - Base URL:', baseUrl);
-    console.log('  - Client ID:', clientId ? '✓ configurado' : '✗ FALTA');
-    console.log('  - Redirect URI:', redirectUri);
+
+    // Obtener variables de entorno
+    const clientId = process.env.GITHUB_CLIENT_ID;
+
+    console.log('  - Client ID:', clientId ? '✓ presente' : '✗ FALTA');
 
     if (!clientId) {
       console.error('❌ [AUTH] GITHUB_CLIENT_ID no configurado');
-      return res.status(500).json({ 
+      res.setHeader('Content-Type', 'application/json');
+      return res.status(500).json({
         error: 'Configuration Error',
         message: 'GITHUB_CLIENT_ID not configured in environment variables'
       });
     }
 
     const scope = 'repo,user';
+    const redirectUri = `${baseUrl}/api/callback`;
 
     // Construir URL de autorización de GitHub
     const authorizeUrl =
@@ -36,19 +41,28 @@ module.exports = (req, res) => {
       `&scope=${encodeURIComponent(scope)}` +
       `&allow_signup=true`;
 
-    console.log('✅ [AUTH] Redirigiendo a GitHub...');
+    console.log('✅ [AUTH] Redirigiendo a GitHub');
+    console.log('  - Redirect URI:', redirectUri);
+    console.log('  - Auth URL:', authorizeUrl);
 
     // Redirigir a GitHub
-    res.setHeader('Location', authorizeUrl);
-    res.status(302).end();
+    res.writeHead(302, {
+      'Location': authorizeUrl,
+      'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+      'Pragma': 'no-cache',
+      'Expires': '0'
+    });
+    res.end();
 
   } catch (error) {
-    console.error('❌ [AUTH] Error crítico:', error.message);
-    console.error(error.stack);
+    console.error('❌ [AUTH] Error capturado:', error.message);
+    console.error('Stack:', error.stack);
     
-    res.status(500).json({ 
+    res.setHeader('Content-Type', 'application/json');
+    res.status(500).json({
       error: 'Internal Server Error',
-      message: error.message
+      message: error.message,
+      type: error.name
     });
   }
 };
