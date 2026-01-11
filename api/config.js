@@ -26,6 +26,9 @@ module.exports = (req, res) => {
       logo_url: "https://placehold.co/180x50?text=Perspectivas",
       media_folder: "assets/img",
       public_folder: "/assets/img",
+      media_library: {
+        name: "github"
+      },
       collections: [
         {
           name: "noticias",
