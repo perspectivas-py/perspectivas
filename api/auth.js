@@ -1,12 +1,22 @@
 // /api/auth.js - OAuth GitHub para Decap CMS
 
 module.exports = (req, res) => {
-  // Obtener parámetros del query string
+  // Obtener el dominio actual dinámicamente
+  const protocol = req.headers['x-forwarded-proto'] || 'http';
+  const host = req.headers['x-forwarded-host'] || req.headers.host;
+  const baseUrl = `${protocol}://${host}`;
+
+  // Parámetros del query string
   const { provider = 'github', redirect_uri } = req.query;
 
   // Variables de entorno o valores por defecto
   const clientId = process.env.GITHUB_CLIENT_ID || 'Iv23liDtN7D3PYU7Rp1a';
-  const redirectUri = redirect_uri || process.env.REDIRECT_URI || 'https://perspectivaspy.vercel.app/editor';
+  const redirectUri = redirect_uri || `${baseUrl}/api/callback`;
+
+  console.log('🔐 OAuth Auth iniciado:');
+  console.log('  - Base URL:', baseUrl);
+  console.log('  - Redirect URI:', redirectUri);
+  console.log('  - Client ID:', clientId);
 
   if (!clientId) {
     console.error('❌ GITHUB_CLIENT_ID no configurado');
@@ -22,6 +32,8 @@ module.exports = (req, res) => {
     `&redirect_uri=${encodeURIComponent(redirectUri)}` +
     `&scope=${encodeURIComponent(scope)}` +
     `&allow_signup=true`;
+
+  console.log('🔗 Redirecting to:', authorizeUrl);
 
   // Redirigir a GitHub
   res.setHeader('Location', authorizeUrl);

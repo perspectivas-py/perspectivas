@@ -35,6 +35,15 @@ module.exports = async (req, res) => {
   try {
     const { code } = req.query || {};
 
+    // Obtener el dominio actual dinámicamente
+    const protocol = req.headers['x-forwarded-proto'] || 'http';
+    const host = req.headers['x-forwarded-host'] || req.headers.host;
+    const baseUrl = `${protocol}://${host}`;
+
+    console.log('🔄 Callback recibido:');
+    console.log('  - Code:', code);
+    console.log('  - Base URL:', baseUrl);
+
     if (!code) {
       console.error('❌ Missing "code" query param in /api/callback');
       const html = buildHtml('error', { error: 'missing_code' });
@@ -44,7 +53,11 @@ module.exports = async (req, res) => {
 
     const clientId = process.env.GITHUB_CLIENT_ID || 'Iv23liDtN7D3PYU7Rp1a';
     const clientSecret = process.env.GITHUB_CLIENT_SECRET;
-    const redirectUri = process.env.REDIRECT_URI || 'https://perspectivaspy.vercel.app/api/callback';
+    const redirectUri = `${baseUrl}/api/callback`;
+
+    console.log('🔐 OAuth Config:');
+    console.log('  - Client ID:', clientId);
+    console.log('  - Redirect URI:', redirectUri);
 
     if (!clientSecret) {
       console.error('❌ GITHUB_CLIENT_SECRET no configurado');
@@ -83,6 +96,8 @@ module.exports = async (req, res) => {
       res.status(400).setHeader('Content-Type', 'text/html').send(html);
       return;
     }
+
+    console.log('✅ Token obtenido exitosamente');
 
     // Éxito: enviar token al CMS
     const html = buildHtml('success', {
