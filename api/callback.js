@@ -1,22 +1,4 @@
-// /api/callback.js
-// Requiere: npm install simple-oauth2
-
-const { AuthorizationCode } = require('simple-oauth2');
-
-const config = {
-  client: {
-    id: process.env.GITHUB_CLIENT_ID,
-    secret: process.env.GITHUB_CLIENT_SECRET,
-  },
-  auth: {
-    tokenHost: 'https://github.com',
-    tokenPath: '/login/oauth/access_token',
-    authorizeHost: 'https://github.com',
-    authorizePath: '/login/oauth/authorize',
-  },
-};
-
-const client = new AuthorizationCode(config);
+// /api/callback.js - GitHub OAuth Callback Handler
 
 // Genera el HTML que envía el resultado al CMS vía postMessage
 function buildHtml(status, payload) {
@@ -54,30 +36,69 @@ module.exports = async (req, res) => {
     const { code } = req.query || {};
 
     if (!code) {
-      console.error('Missing "code" query param in /api/callback');
+      console.error('❌ Missing "code" query param in /api/callback');
       const html = buildHtml('error', { error: 'missing_code' });
       res.status(400).setHeader('Content-Type', 'text/html').send(html);
       return;
     }
 
-    const redirectUri = process.env.REDIRECT_URI;
+    const clientId = process.env.GITHUB_CLIENT_ID || 'Iv23liDtN7D3PYU7Rp1a';
+    const clientSecret = process.env.GITHUB_CLIENT_SECRET;
+    const redirectUri = process.env.REDIRECT_URI || 'https://perspectivaspy.vercel.app/api/callback';
 
-    if (!redirectUri) {
-      console.error('REDIRECT_URI env var not set');
-      const html = buildHtml('error', { error: 'missing_redirect_uri_env' });
+    if (!clientSecret) {
+      console.error('❌ GITHUB_CLIENT_SECRET no configurado');
+      const html = buildHtml('error', { error: 'server_config_error' });
       res.status(500).setHeader('Content-Type', 'text/html').send(html);
       return;
     }
 
-    const tokenParams = {
-      code,
-      redirect_uri: redirectUri,
-      scope: 'repo,user',
-    };
+    // Intercambiar code por access_token usando fetch
+    const tokenResponse = await fetch('https://github.com/login/oauth/access_token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({
+        client_id: clientId,
+        client_secret: clientSecret,
+        code: code,
+        redirect_uri: redirectUri,
+      }),
+    });
 
-    let accessToken;
+    if (!tokenResponse.ok) {
+      console.error('❌ Error obteniendo token:', tokenResponse.statusText);
+      const html = buildHtml('error', { error: 'token_exchange_failed' });
+      res.status(tokenResponse.status).setHeader('Content-Type', 'text/html').send(html);
+      return;
+    }
 
-    try {
+    const tokenData = await tokenResponse.json();
+
+    if (!tokenData.access_token) {
+      console.error('❌ No access_token en respuesta:', tokenData);
+      const html = buildHtml('error', { error: 'no_access_token' });
+      res.status(400).setHeader('Content-Type', 'text/html').send(html);
+      return;
+    }
+
+    // Éxito: enviar token al CMS
+    const html = buildHtml('success', {
+      token: tokenData.access_token,
+      provider: 'github',
+    });
+
+    res.setHeader('Content-Type', 'text/html');
+    res.status(200).send(html);
+
+  } catch (error) {
+    console.error('❌ Error en /api/callback:', error.message);
+    const html = buildHtml('error', { error: error.message });
+    res.status(500).setHeader('Content-Type', 'text/html').send(html);
+  }
+};
       const result = await client.getToken(tokenParams);
       accessToken = result.token && result.token.access_token
         ? result.token.access_token
