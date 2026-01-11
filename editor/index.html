@@ -19,8 +19,14 @@
 
   <!-- Configuración de CMS -->
   <script>
+    // Detectar si estamos en localhost o producción
+    const isProduction = window.location.hostname.includes('vercel.app');
+    const configUrl = isProduction 
+      ? 'https://perspectivaspy.vercel.app/editor/config.yml'
+      : '/editor/config.yml';
+    
     window.CMS_CONFIGURATION = {
-      config: './config.yml'
+      config: configUrl
     };
   </script>
 
