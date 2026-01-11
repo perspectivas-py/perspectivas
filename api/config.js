@@ -1,19 +1,224 @@
-// /api/config.js - Servir config.yml para Decap CMS
-const fs = require('fs');
-const path = require('path');
+// /api/config.js - Servir configuración de Decap CMS
+
+const config = {
+  backend: {
+    name: "github",
+    repo: "perspectivas-py/perspectivas",
+    branch: "main",
+    base_url: "https://perspectivaspy.vercel.app",
+    auth_endpoint: "api/auth"
+  },
+  publish_mode: "editorial_workflow",
+  site_url: "https://perspectivaspy.vercel.app",
+  display_url: "https://perspectivaspy.vercel.app",
+  logo_url: "https://placehold.co/180x50?text=Perspectivas",
+  media_folder: "assets/img",
+  public_folder: "/assets/img",
+  media_library: {
+    name: "uploadcare"
+  },
+  collections: [
+    {
+      name: "noticias",
+      label: "📰 Noticias",
+      folder: "content/noticias/posts",
+      create: true,
+      slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
+      extension: "md",
+      format: "frontmatter",
+      sortable_fields: ["date"],
+      sort: "-date",
+      fields: [
+        { label: "📝 Título", name: "title", widget: "string", required: true },
+        { label: "📅 Fecha de publicación", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", required: true },
+        { label: "⏰ Programar publicación", name: "publish_date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", hint: "Dejar en blanco si se publica inmediatamente", required: false },
+        { label: "📄 Resumen/Descripción", name: "summary", widget: "text", required: true, hint: "Texto corto que aparecerá en las listas" },
+        {
+          label: "🏷️ Etiquetas",
+          name: "tags",
+          widget: "select",
+          multiple: true,
+          options: [
+            { label: "Economía", value: "economia" },
+            { label: "Mercado de Valores", value: "mercado-valores" },
+            { label: "Política Fiscal", value: "politica-fiscal" },
+            { label: "Inversión", value: "inversion" },
+            { label: "Negocios", value: "negocios" },
+            { label: "Finanzas", value: "finanzas" },
+            { label: "Comercio Exterior", value: "comercio-exterior" },
+            { label: "Empleo", value: "empleo" },
+            { label: "Inflación", value: "inflacion" },
+            { label: "Banco Central", value: "banco-central" },
+            { label: "Empresa", value: "empresa" },
+            { label: "Mercado Laboral", value: "mercado-laboral" },
+            { label: "Agricultura", value: "agricultura" },
+            { label: "Commodities", value: "commodities" },
+            { label: "Desarrollo", value: "desarrollo" }
+          ]
+        },
+        { label: "🖼️ Imagen de portada", name: "thumbnail", widget: "image", required: true, hint: "Imagen que aparecerá en las listas y en el artículo" },
+        {
+          label: "⭐ Opciones de visibilidad",
+          name: "featured",
+          widget: "object",
+          hint: "Controla dónde aparece la nota",
+          fields: [
+            { label: "¿Destacado en portada?", name: "is_featured", widget: "boolean", default: false, hint: "Aparecerá en la sección principal de la home" },
+            { label: "¿En portada principal?", name: "is_main_featured", widget: "boolean", default: false, hint: "Será la noticia principal destacada" },
+            { label: "¿Mostrar en últimas noticias?", name: "show_in_latest", widget: "boolean", default: true, hint: "Aparecerá en la lista general de noticias" }
+          ]
+        },
+        { label: "📝 Contenido", name: "body", widget: "markdown", required: true, hint: "Contenido completo de la noticia (Markdown)" },
+        { label: "🔗 Slug personalizado", name: "slug", widget: "string", required: false, hint: "Opcional. URL personalizada de la nota" }
+      ]
+    },
+    {
+      name: "analisis",
+      label: "📊 Análisis",
+      folder: "content/analisis/posts",
+      create: true,
+      slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
+      extension: "md",
+      sortable_fields: ["date"],
+      sort: "-date",
+      fields: [
+        { label: "📝 Título", name: "title", widget: "string", required: true },
+        { label: "📅 Fecha de publicación", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", required: true },
+        { label: "⏰ Programar publicación", name: "publish_date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", hint: "Dejar en blanco si se publica inmediatamente", required: false },
+        { label: "📄 Resumen", name: "summary", widget: "text", required: true },
+        {
+          label: "🏷️ Etiquetas",
+          name: "tags",
+          widget: "select",
+          multiple: true,
+          options: [
+            { label: "Análisis Económico", value: "analisis-economico" },
+            { label: "Mercado de Valores", value: "mercado-valores" },
+            { label: "Inversión", value: "inversion" },
+            { label: "Tendencias", value: "tendencias" },
+            { label: "Proyecciones", value: "proyecciones" },
+            { label: "Reportes", value: "reportes" }
+          ]
+        },
+        { label: "🖼️ Imagen de portada", name: "thumbnail", widget: "image", required: true },
+        {
+          label: "⭐ ¿Destacado?",
+          name: "featured",
+          widget: "object",
+          fields: [
+            { label: "¿Mostrar como análisis destacado?", name: "is_featured", widget: "boolean", default: false },
+            { label: "¿Análisis principal?", name: "is_main_featured", widget: "boolean", default: false }
+          ]
+        },
+        { label: "📝 Contenido", name: "body", widget: "markdown", required: true },
+        { label: "🔗 Slug", name: "slug", widget: "string", required: false }
+      ]
+    },
+    {
+      name: "programa",
+      label: "📺 Programa Perspectivas",
+      folder: "content/programa/posts",
+      create: true,
+      slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
+      extension: "md",
+      sortable_fields: ["date"],
+      sort: "-date",
+      fields: [
+        { label: "📝 Título del episodio", name: "title", widget: "string", required: true },
+        { label: "📅 Fecha de transmisión", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", required: true },
+        { label: "⏰ Programar publicación", name: "publish_date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", required: false },
+        { label: "📄 Descripción", name: "summary", widget: "text", required: true },
+        {
+          label: "🏷️ Categorías",
+          name: "tags",
+          widget: "select",
+          multiple: true,
+          options: [
+            { label: "Economía Local", value: "economia-local" },
+            { label: "Mercados Globales", value: "mercados-globales" },
+            { label: "Inversionistas", value: "inversionistas" },
+            { label: "Emprendimiento", value: "emprendimiento" }
+          ]
+        },
+        { label: "🖼️ Miniatura del episodio", name: "thumbnail", widget: "image", required: true },
+        { label: "📺 URL Video YouTube", name: "embed_url", widget: "string", required: true, hint: "Ej: https://www.youtube.com/embed/VIDEO_ID" },
+        {
+          label: "⭐ ¿Destacado?",
+          name: "featured",
+          widget: "object",
+          fields: [
+            { label: "¿Mostrar como destacado?", name: "is_featured", widget: "boolean", default: false }
+          ]
+        }
+      ]
+    },
+    {
+      name: "podcast",
+      label: "🎙️ Podcast",
+      folder: "content/podcast/posts",
+      create: true,
+      slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
+      extension: "md",
+      sortable_fields: ["date"],
+      sort: "-date",
+      fields: [
+        { label: "🎙️ Título del episodio", name: "title", widget: "string", required: true },
+        { label: "📅 Fecha de publicación", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", required: true },
+        { label: "⏰ Programar publicación", name: "publish_date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", required: false },
+        { label: "📄 Descripción del episodio", name: "summary", widget: "text", required: true },
+        {
+          label: "🏷️ Temas",
+          name: "tags",
+          widget: "select",
+          multiple: true,
+          options: [
+            { label: "Economía", value: "economia" },
+            { label: "Finanzas", value: "finanzas" },
+            { label: "Inversión", value: "inversion" },
+            { label: "Negocios", value: "negocios" },
+            { label: "Entrevistas", value: "entrevistas" }
+          ]
+        },
+        { label: "🖼️ Imagen del episodio", name: "thumbnail", widget: "image", required: true },
+        { label: "🎵 URL Archivo de audio", name: "audio_url", widget: "string", required: true, hint: "Link a archivo MP3 o plataforma de streaming" },
+        {
+          label: "⭐ ¿Destacado?",
+          name: "featured",
+          widget: "object",
+          fields: [
+            { label: "¿Mostrar como destacado?", name: "is_featured", widget: "boolean", default: false }
+          ]
+        }
+      ]
+    },
+    {
+      name: "sponsors",
+      label: "🤝 Patrocinadores & Aliados",
+      folder: "content/sponsors",
+      create: true,
+      slug: "{{slug}}",
+      extension: "md",
+      fields: [
+        { label: "🏢 Nombre de la empresa", name: "title", widget: "string", required: true },
+        { label: "📝 Titular", name: "headline", widget: "string", required: true },
+        { label: "📄 Descripción breve", name: "excerpt", widget: "text", required: true },
+        { label: "🌐 URL Externa", name: "url", widget: "string", required: true, hint: "Web o LinkedIn de la empresa" },
+        { label: "🖼️ Logo de la empresa", name: "logo", widget: "image", required: true },
+        { label: "⭐ ¿Destacado?", name: "featured", widget: "boolean", default: false, hint: "Aparecerá en primer lugar en patrocinadores" }
+      ]
+    }
+  ]
+};
 
 module.exports = (req, res) => {
   try {
-    // Leer el archivo config.yml
-    const configPath = path.join(process.cwd(), 'editor', 'config.yml');
-    const configContent = fs.readFileSync(configPath, 'utf8');
-
-    // Servir con el MIME type correcto
-    res.setHeader('Content-Type', 'application/x-yaml');
+    console.log('📋 [CONFIG] Sirviendo configuración de Decap CMS');
+    
+    res.setHeader('Content-Type', 'application/json');
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-    res.status(200).send(configContent);
+    res.status(200).json(config);
   } catch (error) {
-    console.error('❌ Error sirviendo config.yml:', error.message);
-    res.status(404).json({ error: 'Config not found', message: error.message });
+    console.error('❌ [CONFIG] Error:', error.message);
+    res.status(500).json({ error: 'Failed to load config', message: error.message });
   }
 };
