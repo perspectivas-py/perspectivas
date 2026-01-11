@@ -1,3 +1,14 @@
 {
-  "version": 2
+  "version": 2,
+  "headers": [
+    {
+      "source": "/editor/config.yml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/x-yaml"
+        }
+      ]
+    }
+  ]
 }
