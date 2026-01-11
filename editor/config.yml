@@ -19,9 +19,9 @@ logo_url: https://placehold.co/180x50?text=Perspectivas
 media_folder: "assets/img"
 public_folder: "/assets/img"
 
-# 🖼️ Librería de medios
+# 🖼️ Librería de medios - Uploadcare (gratuita)
 media_library:
-  name: github
+  name: uploadcare
 
 collections:
 
