@@ -221,3 +221,40 @@ if (document.readyState === 'loading') {
   initRouter();
 }
 
+// --- WIDGET DE CLIMA ---
+async function initWeatherWidget() {
+  const weatherWidget = document.getElementById('weather-widget');
+  const weatherTemp = document.getElementById('weather-temp');
+  
+  if (!weatherWidget || !weatherTemp) return;
+  
+  try {
+    // Usar Open-Meteo API (sin apikey necesaria)
+    const response = await fetch(
+      'https://api.open-meteo.com/v1/forecast?latitude=-25.2637&longitude=-57.5759&current=temperature_2m&timezone=America/Asuncion'
+    );
+    
+    if (!response.ok) throw new Error('Error obteniendo clima');
+    
+    const data = await response.json();
+    const temp = Math.round(data.current.temperature_2m);
+    
+    weatherTemp.textContent = `${temp}°C`;
+    weatherWidget.title = `Clima en Asunción: ${temp}°C`;
+  } catch (error) {
+    console.warn('No se pudo obtener el clima:', error);
+    weatherTemp.textContent = '--°C';
+  }
+}
+
+// Inicializar widget de clima cuando el DOM esté listo
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initWeatherWidget);
+} else {
+  initWeatherWidget();
+}
+
+// Actualizar clima cada 10 minutos
+setInterval(initWeatherWidget, 10 * 60 * 1000);
+
+

@@ -51,16 +51,18 @@ ul { list-style: none; }
   z-index: 100;
   transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
   transition: background 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .header-top {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   max-width: var(--container);
   padding: 0.75rem 1rem;
   transition: padding 0.3s ease;
   padding: 0.75rem 1rem;
+  gap: 1rem;
 }
 
 .header-controls {
@@ -70,13 +72,17 @@ ul { list-style: none; }
 }
 
 .header-controls.left-controls {
-  flex: 1;
+  flex: 0;
   justify-content: flex-start;
+  order: 1;
+  margin-right: auto;
 }
 
 .header-controls.right-controls {
-  flex: 1;
+  flex: 0;
   justify-content: flex-end;
+  order: 3;
+  margin-left: auto;
 }
 
 .brand {
@@ -85,6 +91,9 @@ ul { list-style: none; }
   font-size: 2rem;
   text-align: center;
   flex: 0 1 auto;
+  color: #1e40af;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  order: 2;
 }
 
 .main-nav {
@@ -155,6 +164,34 @@ ul { list-style: none; }
 .site-header.scrolled {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
 }
+
+.weather-widget {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.weather-widget:hover {
+  background-color: var(--bg-secondary);
+}
+
+.weather-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--text-primary);
+}
+
+.weather-temp {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  min-width: 45px;
+}
+
 .theme-toggle,
 .search-toggle,
 .category-drawer-toggle {
