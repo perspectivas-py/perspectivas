@@ -36,37 +36,40 @@ module.exports = async (req, res) => {
     const { code } = req.query || {};
 
     // Obtener el dominio actual dinámicamente
-    const protocol = req.headers['x-forwarded-proto'] || 'http';
-    const host = req.headers['x-forwarded-host'] || req.headers.host;
+    const protocol = req.headers['x-forwarded-proto'] || 'https';
+    const host = req.headers['x-forwarded-host'] || req.headers.host || 'perspectivaspy.vercel.app';
     const baseUrl = `${protocol}://${host}`;
 
-    console.log('🔄 Callback recibido:');
-    console.log('  - Code:', code);
+    console.log('🔄 [CALLBACK] Recibido');
+    console.log('  - Code:', code ? '✓ presente' : '✗ FALTA');
     console.log('  - Base URL:', baseUrl);
 
     if (!code) {
-      console.error('❌ Missing "code" query param in /api/callback');
+      console.error('❌ [CALLBACK] Missing code');
       const html = buildHtml('error', { error: 'missing_code' });
       res.status(400).setHeader('Content-Type', 'text/html').send(html);
       return;
     }
 
-    const clientId = process.env.GITHUB_CLIENT_ID || 'Iv23liDtN7D3PYU7Rp1a';
+    const clientId = process.env.GITHUB_CLIENT_ID;
     const clientSecret = process.env.GITHUB_CLIENT_SECRET;
     const redirectUri = `${baseUrl}/api/callback`;
 
-    console.log('🔐 OAuth Config:');
-    console.log('  - Client ID:', clientId);
+    console.log('🔐 [CALLBACK] OAuth Config:');
+    console.log('  - Client ID:', clientId ? '✓ configurado' : '✗ FALTA');
+    console.log('  - Client Secret:', clientSecret ? '✓ configurado' : '✗ FALTA');
     console.log('  - Redirect URI:', redirectUri);
 
-    if (!clientSecret) {
-      console.error('❌ GITHUB_CLIENT_SECRET no configurado');
+    if (!clientId || !clientSecret) {
+      console.error('❌ [CALLBACK] Missing credentials');
       const html = buildHtml('error', { error: 'server_config_error' });
       res.status(500).setHeader('Content-Type', 'text/html').send(html);
       return;
     }
 
-    // Intercambiar code por access_token usando fetch
+    // Intercambiar code por access_token
+    console.log('📡 [CALLBACK] Intercambiando code por token...');
+    
     const tokenResponse = await fetch('https://github.com/login/oauth/access_token', {
       method: 'POST',
       headers: {
@@ -82,22 +85,25 @@ module.exports = async (req, res) => {
     });
 
     if (!tokenResponse.ok) {
-      console.error('❌ Error obteniendo token:', tokenResponse.statusText);
-      const html = buildHtml('error', { error: 'token_exchange_failed' });
+      console.error('❌ [CALLBACK] Token response not OK:', tokenResponse.status, tokenResponse.statusText);
+      const errorData = await tokenResponse.text();
+      console.error('  Response:', errorData);
+      const html = buildHtml('error', { error: 'token_exchange_failed', status: tokenResponse.status });
       res.status(tokenResponse.status).setHeader('Content-Type', 'text/html').send(html);
       return;
     }
 
     const tokenData = await tokenResponse.json();
+    console.log('📦 [CALLBACK] Token response:', JSON.stringify(tokenData, null, 2));
 
     if (!tokenData.access_token) {
-      console.error('❌ No access_token en respuesta:', tokenData);
+      console.error('❌ [CALLBACK] No access_token en respuesta');
       const html = buildHtml('error', { error: 'no_access_token' });
       res.status(400).setHeader('Content-Type', 'text/html').send(html);
       return;
     }
 
-    console.log('✅ Token obtenido exitosamente');
+    console.log('✅ [CALLBACK] Token obtenido exitosamente');
 
     // Éxito: enviar token al CMS
     const html = buildHtml('success', {
@@ -109,12 +115,12 @@ module.exports = async (req, res) => {
     res.status(200).send(html);
 
   } catch (error) {
-    console.error('❌ Error en /api/callback:', error.message);
+    console.error('❌ [CALLBACK] Error:', error.message);
+    console.error(error.stack);
     const html = buildHtml('error', { error: error.message });
     res.status(500).setHeader('Content-Type', 'text/html').send(html);
   }
 };
-      const result = await client.getToken(tokenParams);
       accessToken = result.token && result.token.access_token
         ? result.token.access_token
         : result.access_token;
