@@ -19,15 +19,35 @@
   <header class="site-header">
     <div class="header-top">
       <div class="header-controls left-controls">
-        <button id="category-drawer-toggle" class="category-drawer-toggle" aria-label="Explorar etiquetas" aria-expanded="false" aria-controls="category-drawer">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+        <div class="controls-group">
+          <button id="category-drawer-toggle" class="category-drawer-toggle" aria-label="Explorar etiquetas" aria-expanded="false" aria-controls="category-drawer">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <button id="search-toggle-header" class="search-toggle" aria-label="Buscar en el panel">
+            <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </button>
+        </div>
         <button id="menu-toggle" class="menu-toggle" aria-label="Abrir navegación" aria-expanded="false" aria-controls="nav-list">☰</button>
       </div>
       <a class="brand" href="index.html">Perspectivas</a>
       <div class="header-controls right-controls">
+      </div>
+    </div>
+    <nav class="main-nav">
+      <ul id="nav-list" class="nav-list">
+        <li><a href="#hero">Inicio</a></li>
+        <li><a href="#noticias">Noticias</a></li>
+        <li><a href="#programa">Programa</a></li>
+        <li><a href="#analisis">Análisis</a></li>
+        <li><a href="#podcast">Podcast</a></li>
+        <li><a href="#cotizaciones">Cotizaciones</a></li>
+      </ul>
+      <div class="nav-search-wrapper">
         <div id="weather-widget" class="weather-widget" aria-label="Clima de Asunción">
           <svg class="weather-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path>
@@ -48,31 +68,21 @@
           </svg>
         </button>
       </div>
-    </div>
-    <nav class="main-nav">
-      <ul id="nav-list" class="nav-list">
-        <li><a href="#hero">Inicio</a></li>
-        <li><a href="#noticias">Noticias</a></li>
-        <li><a href="#programa">Programa</a></li>
-        <li><a href="#analisis">Análisis</a></li>
-        <li><a href="#podcast">Podcast</a></li>
-        <li><a href="#cotizaciones">Cotizaciones</a></li>
-      </ul>
-      <div class="nav-search-wrapper">
-        <button id="search-toggle" class="search-toggle" aria-label="Buscar">
-          <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8"></circle>
-            <path d="m21 21-4.35-4.35"></path>
-          </svg>
-        </button>
-        <input type="text" id="search-input" class="nav-search" placeholder="Buscar noticias...">
-      </div>
     </nav>
     <div id="category-drawer" class="category-drawer" aria-hidden="true">
       <div class="category-drawer-inner">
         <div class="category-drawer-header">
           <p>Explorar temas</p>
           <button id="category-drawer-close" class="category-drawer-close" aria-label="Cerrar etiquetas">×</button>
+        </div>
+        <div class="drawer-search-wrapper">
+          <button id="search-toggle" class="search-toggle" aria-label="Buscar">
+            <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </button>
+          <input type="text" id="search-input" class="drawer-search hidden" placeholder="Buscar noticias...">
         </div>
         <div id="category-drawer-filters" class="category-drawer-filters"></div>
       </div>
@@ -150,8 +160,11 @@
         <h2>Programa Perspectivas</h2>
         <p style="color: #ccc; margin-top: 5px;">Archivo Multimedia y Entrevistas</p>
       </div>
-      <div id="program-grid" class="cards-grid"></div>
-      <button id="program-view-more" class="view-more-btn" type="button" hidden>Ver más</button>
+      <div class="program-carousel-container">
+        <button id="program-prev" class="program-nav-btn program-prev" aria-label="Anterior">&lt;</button>
+        <div id="program-grid" class="program-carousel"></div>
+        <button id="program-next" class="program-nav-btn program-next" aria-label="Siguiente">&gt;</button>
+      </div>
     </section>
 
     <!-- ANÁLISIS -->

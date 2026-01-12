@@ -241,11 +241,9 @@ const programaController = createSectionController({
   gridId: "program-grid",
   buttonId: "program-view-more",
   renderItem: (item) => `
-    <div class="program-item">
-      <div class="card">
-        <div class="video-wrapper">
-          <iframe src="${item.embed_url}" frameborder="0" allowfullscreen></iframe>
-        </div>
+    <div class="card">
+      <div class="video-wrapper">
+        <iframe src="${item.embed_url}" frameborder="0" allowfullscreen></iframe>
       </div>
       <h3>${item.title}</h3>
     </div>
@@ -292,30 +290,64 @@ const podcastController = createSectionController({
   emptyMessage: `<p class="empty-copy">No hay episodios del podcast para mostrar.</p>`
 });
 
-// Toggle del buscador
+// Toggle del buscador en el drawer
 function initSearchToggle() {
-  const searchToggle = document.getElementById("search-toggle");
+  const searchToggleHeader = document.getElementById("search-toggle-header");
+  const searchToggleDrawer = document.getElementById("search-toggle");
   const searchInput = document.getElementById("search-input");
+  const drawer = document.getElementById("category-drawer");
   
-  if (!searchToggle || !searchInput) return;
-  if (searchToggle.dataset.bound === "true") return;
-  searchToggle.dataset.bound = "true";
+  if (!searchInput) return;
   
-  searchToggle.addEventListener("click", (e) => {
-    e.preventDefault();
-    searchInput.classList.toggle("active");
-    if (searchInput.classList.contains("active")) {
-      searchInput.focus();
-    }
+  // Click en el icono de búsqueda del header
+  if (searchToggleHeader && searchToggleHeader.dataset.bound !== "true") {
+    searchToggleHeader.dataset.bound = "true";
+    searchToggleHeader.addEventListener("click", (e) => {
+      e.preventDefault();
+      // Abrir drawer si está cerrado
+      if (!drawer.classList.contains("open")) {
+        drawer.classList.add("open");
+        document.getElementById("category-drawer-toggle").setAttribute("aria-expanded", "true");
+        drawer.setAttribute("aria-hidden", "false");
+      }
+      // Mostrar campo de búsqueda
+      searchInput.classList.remove("hidden");
+      setTimeout(() => searchInput.focus(), 100);
+    });
+  }
+  
+  // Click en el icono de búsqueda dentro del drawer
+  if (searchToggleDrawer && searchToggleDrawer.dataset.bound !== "true") {
+    searchToggleDrawer.dataset.bound = "true";
+    searchToggleDrawer.addEventListener("click", (e) => {
+      e.preventDefault();
+      searchInput.classList.toggle("hidden");
+      if (!searchInput.classList.contains("hidden")) {
+        searchInput.focus();
+      }
+    });
+  }
+  
+  // Filtrar noticias mientras se escribe
+  searchInput.addEventListener("input", (e) => {
+    const query = e.target.value.toLowerCase().trim();
+    filterNewsBySearch(query);
   });
   
   // Cerrar buscador al presionar Escape
   searchInput.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      searchInput.classList.remove("active");
+      searchInput.classList.add("hidden");
       searchInput.value = "";
+      filterNewsBySearch("");
     }
   });
+}
+
+function filterNewsBySearch(query) {
+  // Aquí puedes implementar la lógica de filtrado de noticias
+  // Por ahora solo limpiamos o aplicamos el filtro
+  console.log("Buscando:", query);
 }
 
 function initMenuToggle() {
@@ -530,8 +562,8 @@ function renderSecondary(n) {
   const container = document.getElementById("secondary-news");
   if (!container || !n?.length) return;
 
-  // Tomamos solo 2 destacados (índices 1, 2)
-  const cardsHtml = n.slice(1, 4)
+  // Tomamos solo 4 destacados (índices 1, 2, 3, 4)
+  const cardsHtml = n.slice(1, 5)
     .map(a => `
       <div class="card">
         <img src="${a.thumbnail}" alt="${a.title}"/>
@@ -595,17 +627,42 @@ function renderNoticiasLocales() {
   }
 
   const slice = data.slice(0, noticiasLocalesState.visible);
-  container.innerHTML = slice
-    .map(a => `
-      <div class="card">
+  
+  // Primera noticia como mini portada (si hay contenido)
+  let html = '';
+  if (slice.length > 0) {
+    const featured = slice[0];
+    html += `
+      <div class="card card-featured">
         <div class="card-img-container">
-          <img src="${a.thumbnail}" alt="${a.title}">
+          <img src="${featured.thumbnail}" alt="${featured.title}">
         </div>
-        <h3>${a.title}</h3>
-        <div class="card-meta">${formatDate(a.date)}</div>
+        <div class="card-featured-content">
+          <h3>${featured.title}</h3>
+          <div class="card-meta">${formatDate(featured.date)}</div>
+        </div>
       </div>
-    `)
-    .join("");
+    `;
+  }
+  
+  // Resto de noticias normales
+  if (slice.length > 1) {
+    html += '<div class="news-grid-secondary">';
+    html += slice.slice(1)
+      .map(a => `
+        <div class="card">
+          <div class="card-img-container">
+            <img src="${a.thumbnail}" alt="${a.title}">
+          </div>
+          <h3>${a.title}</h3>
+          <div class="card-meta">${formatDate(a.date)}</div>
+        </div>
+      `)
+      .join("");
+    html += '</div>';
+  }
+  
+  container.innerHTML = html;
 }
 
 function initAnalisisSection(items) {
@@ -614,6 +671,25 @@ function initAnalisisSection(items) {
 
 function initProgramaSection(items) {
   programaController.init(items);
+  initProgramCarousel();
+}
+
+function initProgramCarousel() {
+  const carousel = document.getElementById("program-grid");
+  const prevBtn = document.getElementById("program-prev");
+  const nextBtn = document.getElementById("program-next");
+  
+  if (!carousel || !prevBtn || !nextBtn) return;
+  
+  const scrollAmount = 350; // Ancho de tarjeta + gap
+  
+  prevBtn.addEventListener("click", () => {
+    carousel.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+  });
+  
+  nextBtn.addEventListener("click", () => {
+    carousel.scrollBy({ left: scrollAmount, behavior: "smooth" });
+  });
 }
 
 function initPodcastSection(items) {
@@ -643,7 +719,11 @@ function renderCategoryFilters(noticias) {
 
   if (!containers.length || !noticiasFilterSource.length) return;
 
-  const categories = [...new Set(noticiasFilterSource.map(n => n.category).filter(Boolean))].sort();
+  // Categorías ordenadas y sin duplicadas
+  const categoryOrder = ["Macroeconomía", "Mercados", "Commodities", "Finanzas", "Negocios", "Agro", "Inversión", "Tecnología", "Sociedad"];
+  const availableCategories = [...new Set(noticiasFilterSource.map(n => n.category).filter(Boolean))];
+  const categories = categoryOrder.filter(cat => availableCategories.includes(cat));
+  
   const html = [
     '<button class="filter-btn" data-category="all">Todas</button>',
     ...categories.map(cat => `<button class="filter-btn" data-category="${cat}">${cat}</button>`)
@@ -752,7 +832,7 @@ function renderTopReads(noticias) {
 
   container.innerHTML = topReads.map((n, idx) => {
     const thumb = n.thumbnail || "/assets/img/nasdaq.avif";
-    const paddedRank = String(idx + 1).padStart(2, "0");
+    const rank = idx + 1;
     const metaPieces = [
       formatDate(n.date),
       n.views ? `${Number(n.views).toLocaleString("es-PY")} lecturas` : null
@@ -760,9 +840,9 @@ function renderTopReads(noticias) {
 
     return `
       <article class="top-read-card">
-        <span class="top-read-rank">${paddedRank}</span>
         <div class="top-read-thumb">
           <img src="${thumb}" alt="${n.title}" loading="lazy" />
+          <span class="top-read-rank">${rank}</span>
         </div>
         <div class="top-read-info">
           <p class="top-read-category">${n.category || "Noticias"}</p>
