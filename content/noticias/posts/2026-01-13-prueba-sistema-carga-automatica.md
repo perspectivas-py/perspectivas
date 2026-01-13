@@ -1,14 +1,15 @@
 ---
-title: "✅ Prueba - Sistema de Carga Automática Funcionando"
+title: ✅ Prueba - Sistema de Carga Automática Funcionando
 date: 2026-01-13T14:30:00.000Z
-summary: "Esta es una noticia de prueba para verificar que el sistema Decap + Vercel carga automáticamente las nuevas noticias en la página principal."
-thumbnail: "/assets/img/default.jpg"
+summary: Esta es una noticia de prueba para verificar que el sistema Decap +
+  Vercel carga automáticamente las nuevas noticias en la página principal.
 tags:
-  - "test"
-  - "desarrollo"
+  - test
+  - desarrollo
+thumbnail: /assets/img/exportación.jpg
 featured:
-  is_featured: true
-  is_main_featured: false
+  is_featured: false
+  is_main_featured: true
   show_in_latest: true
 ---
 
