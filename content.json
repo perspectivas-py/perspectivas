@@ -1,6 +1,26 @@
 {
   "noticias": [
     {
+      "id": "2026-01-13-prueba-sistema-carga-automatica",
+      "type": "noticias",
+      "slug": "2026-01-13-prueba-sistema-carga-automatica",
+      "category": "",
+      "title": "✅ Prueba - Sistema de Carga Automática Funcionando",
+      "description": "Esta es una noticia de prueba para verificar que el sistema Decap + Vercel carga automáticamente las nuevas noticias en la página principal.",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "## Sistema Funcionando Correctamente ✅\r\n\r\nEsta noticia fue creada para probar que el gestor de contenido **Decap CMS** está conectado correctamente con tu página.\r\n\r\n### Qué significa esto:\r\n\r\n1. **La noticia fue publicada en Decap CMS** o creada directamente en GitHub\r\n2. **Vercel detectó el cambio** automáticamente\r\n3. **El script `build-content.js` ejecutó** y generó el `content.json`\r\n4. **Tu página cargó esta noticia** de forma automática\r\n\r\n### El flujo completo:\r\n\r\n```\r\nDecap CMS → GitHub (commit) → Vercel (build) → content.json → Tu página\r\n```\r\n\r\n### Próximos pasos:\r\n\r\n- Puedes crear más noticias directamente desde Decap CMS\r\n- Cada publicación se sincronizará automáticamente\r\n- Las nuevas noticias aparecerán en tu home en 2-3 minutos\r\n\r\n¡Todo está listo para usar! 🚀",
+      "date": "2026-01-13T14:30:00.000Z",
+      "featured": {
+        "is_featured": true,
+        "is_main_featured": false,
+        "show_in_latest": true
+      },
+      "tags": [
+        "test",
+        "desarrollo"
+      ]
+    },
+    {
       "id": "macro",
       "type": "noticias",
       "slug": "macro",
@@ -44,33 +64,18 @@
       ]
     },
     {
-      "id": "2025-11-19-modernización-bursátil-presentarán-ante-emisores-la-nueva-estructura-y-los-procesos-de-registro-1",
-      "type": "noticias",
-      "slug": "2025-11-19-modernización-bursátil-presentarán-ante-emisores-la-nueva-estructura-y-los-procesos-de-registro-1",
-      "category": "macro",
-      "title": "\"Modernización bursátil: Presentarán ante emisores la nueva estructura y los procesos de registro\"",
-      "description": "El encuentro se llevará a cabo este jueves 20 de noviembre",
-      "thumbnail": "/assets/img/default.jpg",
-      "body": "![Objetivo es presentar a las empresas emisoras las novedades](/assets/img/nasdaq.avif \"Nasdaq\")\r\n\r\n“Modernización bursátil: Nueva estructura y procesos para emisores” se denomina la charla que se encuentran organizando la Bolsa de Valores de Asunción (BVA), la Caja de Valores del Paraguay (CAVAPY) y la Asociación de Casas de Bolsa del Paraguay (Asobolsa), para este jueves 20 de noviembre.\r\n\r\nEl objetivo es presentar a las empresas emisoras las novedades que se están implementando en el mercado de valores, en el marco de la transformación tecnológica, regulatoria y de infraestructura por la que atraviesa el sector.\r\n\r\nEntre los temas que se abordarán en la oportunidad, se destaca el próximo lanzamiento del Registro Único del Mercado de Valores, que integrará procesos ante la Superintendencia de Valores (SIV), la BVA y CAVAPY, y se aplicará tanto a registro de emisores como de instrumentos de negociación.\r\n\r\nAdemás, se presentarán las oportunidades de conexión con los mercados globales que se están generando con la contratación de los sistemas Nasdaq -desde la BVAy Montran -desde CAVAPY-; y la nueva regulación que se implementará a partir de la Ley del Mercado de Valores recientemente promulgada.\r\n\r\nEl encuentro arrancará a las 08:00, en el Hotel Dazzler de Asunción, con la presencia de autoridades y directivos de las instituciones organizadoras, así como de representantes de empresas emisoras y casas de bolsa que operan en el mercado bursátil local.",
-      "date": "2025-11-19T16:49:12.638Z",
-      "featured": true,
-      "tags": [
-        "bursátil"
-      ]
-    },
-    {
       "id": "2025-11-19-modernización-bursátil-presentarán-ante-emisores-la-nueva-estructura-y-los-procesos-de-registro",
       "type": "noticias",
       "slug": "2025-11-19-modernización-bursátil-presentarán-ante-emisores-la-nueva-estructura-y-los-procesos-de-registro",
       "category": "macro",
       "title": "\"Modernización bursátil: Presentarán ante emisores la nueva estructura y los procesos de registro\"",
       "description": "El encuentro se llevará a cabo este jueves 20 de noviembre",
-      "thumbnail": "/assets/img/default.jpg",
+      "thumbnail": "/assets/img/py.-imagen-de-pru-no-usar.jpg",
       "body": "![Objetivo es presentar a las empresas emisoras las novedades](/assets/img/nasdaq.avif \"Nasdaq\")\r\n\r\n“Modernización bursátil: Nueva estructura y procesos para emisores” se denomina la charla que se encuentran organizando la Bolsa de Valores de Asunción (BVA), la Caja de Valores del Paraguay (CAVAPY) y la Asociación de Casas de Bolsa del Paraguay (Asobolsa), para este jueves 20 de noviembre.\r\n\r\nEl objetivo es presentar a las empresas emisoras las novedades que se están implementando en el mercado de valores, en el marco de la transformación tecnológica, regulatoria y de infraestructura por la que atraviesa el sector.\r\n\r\nEntre los temas que se abordarán en la oportunidad, se destaca el próximo lanzamiento del Registro Único del Mercado de Valores, que integrará procesos ante la Superintendencia de Valores (SIV), la BVA y CAVAPY, y se aplicará tanto a registro de emisores como de instrumentos de negociación.\r\n\r\nAdemás, se presentarán las oportunidades de conexión con los mercados globales que se están generando con la contratación de los sistemas Nasdaq -desde la BVAy Montran -desde CAVAPY-; y la nueva regulación que se implementará a partir de la Ley del Mercado de Valores recientemente promulgada.\r\n\r\nEl encuentro arrancará a las 08:00, en el Hotel Dazzler de Asunción, con la presencia de autoridades y directivos de las instituciones organizadoras, así como de representantes de empresas emisoras y casas de bolsa que operan en el mercado bursátil local.",
       "date": "2025-11-19T15:55:52.535Z",
       "featured": true,
       "tags": [
-        "bursátil"
+        "inversion"
       ]
     },
     {
@@ -282,12 +287,16 @@
       "slug": "2025-11-21-perspectivas-03-05-25",
       "category": "",
       "title": "PERSPECTIVAS - 03/05/25",
-      "description": "",
-      "thumbnail": "/assets/img/default.jpg",
+      "description": "Una mirada mas allá de la economía",
+      "thumbnail": "/assets/img/2024-08-16-billetes.jpg",
       "body": "Escuchá nuestra edición y enterate de los temas principales en el ámbito económico del país.",
       "date": "2025-05-04T00:49:26.304Z",
-      "featured": false,
-      "tags": []
+      "featured": {
+        "is_featured": true
+      },
+      "tags": [
+        "economia-local"
+      ]
     },
     {
       "id": "2025-11-21-perspectivas-19-04-25",
@@ -330,7 +339,7 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-13T11:16:08.498Z",
+      "date": "2026-01-13T15:53:55.626Z",
       "featured": false,
       "tags": []
     },
@@ -343,7 +352,7 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-13T11:16:08.497Z",
+      "date": "2026-01-13T15:53:55.625Z",
       "featured": true,
       "tags": []
     },
@@ -356,7 +365,7 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-13T11:16:08.496Z",
+      "date": "2026-01-13T15:53:55.608Z",
       "featured": false,
       "tags": []
     },
@@ -369,7 +378,7 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-13T11:16:08.493Z",
+      "date": "2026-01-13T15:53:55.607Z",
       "featured": false,
       "tags": []
     },
@@ -382,7 +391,7 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-13T11:16:08.490Z",
+      "date": "2026-01-13T15:53:55.606Z",
       "featured": false,
       "tags": []
     }
