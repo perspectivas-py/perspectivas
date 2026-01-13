@@ -5,9 +5,10 @@ backend:
   base_url: https://perspectivaspy.vercel.app
   auth_endpoint: api/auth
 
-publish_mode: editorial_workflow
+# 🔥 PUBLICACIÓN INMEDIATA: Los cambios se publican directamente en main (sin workflow)
+publish_mode: simple
 
-# 🔥 Hook para regenerar content.json después de cada publicación
+# 🚀 Hook para regenerar content.json después de cada publicación en Vercel
 deploy_url: "https://api.vercel.com/v1/integrations/deploy/prj_0GzabF6iVutw8vbfiNZDN7mWx5Sl/teg36of8ls"
 
 site_url: https://perspectivaspy.vercel.app
