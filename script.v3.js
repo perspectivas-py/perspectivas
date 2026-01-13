@@ -224,18 +224,74 @@ function createSectionController({ gridId, buttonId, limit = SECTION_LIMIT, incr
   return { init, setSource, render };
 }
 
-const analisisController = createSectionController({
-  gridId: "analisis-grid",
-  buttonId: "analisis-view-more",
-  renderItem: (item) => `
-    <div class="card">
-      <img src="${item.thumbnail}" alt="${item.title}">
-      <h3>${item.title}</h3>
-      <div class="card-meta">${formatDate(item.date)}</div>
-    </div>
-  `,
-  emptyMessage: `<p class="empty-copy">No encontramos análisis disponibles.</p>`
-});
+const analisisController = (() => {
+  const state = { source: [], visible: 6 };
+  let button = null;
+
+  function render() {
+    const featured = document.getElementById("analisis-featured");
+    const grid = document.getElementById("analisis-grid");
+    
+    if (!featured || !grid) return;
+
+    if (!state.source.length) {
+      featured.innerHTML = "";
+      grid.innerHTML = `<p class="empty-copy">No encontramos análisis disponibles.</p>`;
+      if (button) button.hidden = true;
+      return;
+    }
+
+    // Primera nota como miniportada
+    const firstItem = state.source[0];
+    featured.innerHTML = `
+      <a href="#" class="featured-card">
+        <div class="featured-card-img">
+          <img src="${firstItem.thumbnail}" alt="${firstItem.title}"/>
+        </div>
+        <div class="featured-card-content">
+          <h3>${firstItem.title}</h3>
+          <small>${formatDate(firstItem.date)}</small>
+        </div>
+      </a>
+    `;
+
+    // Resto en grid (a partir del índice 1)
+    const remaining = state.source.slice(1, state.visible);
+    grid.innerHTML = remaining
+      .map(item => `
+        <div class="card">
+          <img src="${item.thumbnail}" alt="${item.title}">
+          <h3>${item.title}</h3>
+          <div class="card-meta">${formatDate(item.date)}</div>
+        </div>
+      `)
+      .join("");
+
+    // Botón "Ver más" si hay más de lo visible
+    if (button) {
+      button.hidden = state.source.length <= state.visible;
+    }
+  }
+
+  function setSource(items) {
+    state.source = Array.isArray(items) ? items : [];
+    state.visible = 6; // Mostrar la primera (featured) + 5 en grid = 6 total
+    render();
+  }
+
+  function init() {
+    button = document.getElementById("analisis-view-more");
+    if (button && !button.dataset.bound) {
+      button.addEventListener("click", () => {
+        state.visible += 6;
+        render();
+      });
+      button.dataset.bound = "true";
+    }
+  }
+
+  return { init, setSource };
+})();
 
 const programaController = createSectionController({
   gridId: "program-grid",
@@ -665,7 +721,8 @@ function renderNoticiasLocales() {
 }
 
 function initAnalisisSection(items) {
-  analisisController.init(items);
+  analisisController.init();
+  analisisController.setSource(items);
 }
 
 function initProgramaSection(items) {
