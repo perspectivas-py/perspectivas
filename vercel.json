@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "npm install",
+  "buildCommand": "npm install && npm run build",
   "outputDirectory": ".",
   "public": true,
   "headers": [
@@ -10,6 +10,15 @@
         {
           "key": "Content-Type",
           "value": "application/x-yaml"
+        }
+      ]
+    },
+    {
+      "source": "/content.json",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300, s-maxage=300"
         }
       ]
     },
