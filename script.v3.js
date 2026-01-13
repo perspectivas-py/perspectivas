@@ -559,6 +559,7 @@ async function renderHeroFromFile() {
     // Parser simple de YAML frontmatter
     const title = frontmatter.match(/title:\s*(.+)/)?.[1]?.trim() || "Sin título";
     const summary = frontmatter.match(/summary:\s*(.+)/)?.[1]?.trim() || "Sin resumen";
+    const slug = frontmatter.match(/slug:\s*(.+)/)?.[1]?.trim() || "default";
     let thumbnail = frontmatter.match(/thumbnail:\s*(.+)/)?.[1]?.trim() || "";
     
     // Si la ruta es relativa, convertirla a URL completa
@@ -573,26 +574,34 @@ async function renderHeroFromFile() {
     
     const category = frontmatter.match(/category:\s*(.+)/)?.[1]?.trim() || "Actualidad";
 
+    // Cambiar la clase del contenedor a hero
+    container.className = 'hero';
+
     container.innerHTML = `
-      <img src="${thumbnail}" class="hero-img" alt="${title}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%221200%22 height=%22500%22%3E%3Crect fill=%22%23667eea%22 width=%221200%22 height=%22500%22/%3E%3C/svg%3E'"/>
-      <div class="hero-content">
-        <div class="hero-section">${category.toUpperCase()}</div>
-        <h2 class="hero-title">${title}</h2>
-        <p class="hero-excerpt">${summary}</p>
-      </div>
+      <a href="/noticia.html?id=${encodeURIComponent(slug)}" class="hero-link-wrapper">
+        <img src="${thumbnail}" class="hero-img" alt="${title}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%221200%22 height=%22500%22%3E%3Crect fill=%22%23667eea%22 width=%221200%22 height=%22500%22/%3E%3C/svg%3E'"/>
+        <div class="hero-content">
+          <div class="hero-section">${category.toUpperCase()}</div>
+          <h2 class="hero-title">${title}</h2>
+          <p class="hero-excerpt">${summary}</p>
+        </div>
+      </a>
     `;
   } catch (e) {
     console.error("Error cargando hero desde archivo:", e);
     // Fallback completo
     const container = document.getElementById("hero");
     if (container) {
+      container.className = 'hero';
       container.innerHTML = `
-        <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1200&h=500&fit=crop&q=80" class="hero-img" alt="Portada"/>
-        <div class="hero-content">
-          <div class="hero-section">MACROECONOMÍA</div>
-          <h2 class="hero-title">BCP mantiene "anclada" la tasa de interés con una inflación a la baja</h2>
-          <p class="hero-excerpt">El Comité de Política Monetaria decidió, por unanimidad, mantener la tasa de interés de política monetaria (TPM) en 6,0% anual.</p>
-        </div>
+        <a href="/noticia.html?id=2025-11-22-bcp-mantiene-anclada-la-tasa-de-interes" class="hero-link-wrapper">
+          <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1200&h=500&fit=crop&q=80" class="hero-img" alt="Portada"/>
+          <div class="hero-content">
+            <div class="hero-section">MACROECONOMÍA</div>
+            <h2 class="hero-title">BCP mantiene "anclada" la tasa de interés con una inflación a la baja</h2>
+            <p class="hero-excerpt">El Comité de Política Monetaria decidió, por unanimidad, mantener la tasa de interés de política monetaria (TPM) en 6,0% anual.</p>
+          </div>
+        </a>
       `;
     }
   }
