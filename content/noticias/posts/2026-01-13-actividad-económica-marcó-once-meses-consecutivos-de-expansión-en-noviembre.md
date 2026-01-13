@@ -9,8 +9,8 @@ tags:
   - economia
 thumbnail: /assets/img/top-view-office-desk-with-growth-chart-coffee-cup.jpg
 featured:
-  is_featured: true
-  is_main_featured: false
+  is_featured: false
+  is_main_featured: true
   show_in_latest: true
 slug: ""
 ---
