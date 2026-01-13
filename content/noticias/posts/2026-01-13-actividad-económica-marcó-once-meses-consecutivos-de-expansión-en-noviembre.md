@@ -7,13 +7,12 @@ summary: >
   crecimiento de 5,8% al cierre del mes de noviembre del 2025.
 tags:
   - economia
-  - banco-central
 thumbnail: /assets/img/top-view-office-desk-with-growth-chart-coffee-cup.jpg
 featured:
-  is_featured: false
-  is_main_featured: true
+  is_featured: true
+  is_main_featured: false
   show_in_latest: true
-slug: "Macroeconomía "
+slug: ""
 ---
 
 En noviembre, la actividad económica continúa con buen dinamismo, marcando once meses consecutivos de
