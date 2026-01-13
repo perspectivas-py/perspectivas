@@ -55,12 +55,14 @@ function renderHero(n) {
   const a = n[0]; // La noticia más nueva
 
   container.innerHTML = `
-    <img src="${a.thumbnail}" class="hero-img" alt="${a.title}"/>
-    <div class="hero-content">
-      <div class="hero-section">${a.category || "Actualidad"}</div>
-      <h2 class="hero-title">${a.title}</h2>
-      <p class="hero-excerpt">${a.description ?? ""}</p>
-    </div>
+    <a href="/noticia.html?id=${encodeURIComponent(a.slug || a.id)}" class="hero-link">
+      <img src="${a.thumbnail}" class="hero-img" alt="${a.title}"/>
+      <div class="hero-content">
+        <div class="hero-section">${a.category || "Actualidad"}</div>
+        <h2 class="hero-title">${a.title}</h2>
+        <p class="hero-excerpt">${a.description ?? ""}</p>
+      </div>
+    </a>
   `;
 }
 
@@ -71,7 +73,7 @@ function renderSecondary(n) {
   // Tomamos de la 2da a la 5ta noticia (índices 1, 2, 3, 4) - 4 destacadas en grid perfecto
   container.innerHTML = n.slice(1, 5)
     .map(a => `
-      <a href="#" class="secondary-card">
+      <a href="/noticia.html?id=${encodeURIComponent(a.slug || a.id)}" class="secondary-card">
         <div class="secondary-card-img">
           <img src="${a.thumbnail}" alt="${a.title}"/>
         </div>
@@ -91,13 +93,13 @@ function renderNoticiasLocales(n) {
   // Idealmente deberíamos hacer .slice(4, 16) para no repetir, pero lo dejo como pediste.
   container.innerHTML = n.slice(0, 12)
     .map(a => `
-      <div class="card">
+      <a href="/noticia.html?id=${encodeURIComponent(a.slug || a.id)}" class="card">
         <div class="card-img-container">
           <img src="${a.thumbnail}" alt="${a.title}">
         </div>
         <h3>${a.title}</h3>
         <div class="card-meta">${formatDate(a.date)}</div>
-      </div>
+      </a>
     `)
     .join("");
 }
@@ -107,11 +109,11 @@ function renderAnalisis(items) {
   if (!container || !items?.length) return;
 
   container.innerHTML = items.map(a => `
-      <div class="card">
+      <a href="/noticia.html?id=${encodeURIComponent(a.slug || a.id)}" class="card">
         <img src="${a.thumbnail}" alt="${a.title}">
         <h3>${a.title}</h3>
         <div class="card-meta">${formatDate(a.date)}</div>
-      </div>
+      </a>
     `).join("");
 }
 

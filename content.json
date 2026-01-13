@@ -1,392 +1,390 @@
 {
-    "noticias": [
-        {
-            "id": "1",
-            "type": "noticias",
-            "category": "Macroeconomía",
-            "date": "2025-11-23T01:52:40.610Z",
-            "title": "BCP mantiene tasa de política monetaria en 6% anual",
-            "description": "El Banco Central del Paraguay mantiene la tasa sin cambios en un contexto de moderación inflacionaria.",
-            "thumbnail": "https://images.unsplash.com/photo-1611974789855-9c2046dd4c58?w=800&h=400&fit=crop",
-            "body": "En su reunión de la fecha, el Comité de Política Monetaria decidió mantener la tasa de interés de política monetaria en 6,0% anual.",
-            "slug": "bcp-tpm",
-            "views": 1250
-        },
-        {
-            "id": "2",
-            "type": "noticias",
-            "category": "Mercados",
-            "date": "2025-11-22T14:30:00.000Z",
-            "title": "Lanzamiento de Link Center: nuevo hito para Asunción",
-            "description": "El sector inmobiliario suma un nuevo desarrollo de alto impacto con enfoque corporativo.",
-            "thumbnail": "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&h=400&fit=crop",
-            "body": "En una noche que reunió a empresarios, se presentó oficialmente Link Center.",
-            "slug": "link-center",
-            "views": 980
-        },
-        {
-            "id": "3",
-            "type": "noticias",
-            "category": "Macroeconomía",
-            "date": "2025-11-21T10:15:00.000Z",
-            "title": "Inflación en Paraguay cierra octubre bajo expectativas",
-            "description": "Los precios mostraron una moderación importante en el mes, convergiendo hacia el rango meta.",
-            "thumbnail": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop",
-            "body": "La variación mensual de precios fue menor a la esperada por analistas.",
-            "slug": "inflacion-octubre",
-            "views": 1450
-        },
-        {
-            "id": "4",
-            "type": "noticias",
-            "category": "Mercados",
-            "date": "2025-11-20T09:45:00.000Z",
-            "title": "Dólar se fortalece ante presiones de política exterior",
-            "description": "El tipo de cambio experimenta volatilidad en medio de incertidumbre global.",
-            "thumbnail": "https://images.unsplash.com/photo-1520335684233-360e66201fcf?w=800&h=400&fit=crop",
-            "body": "Las presiones sobre el dólar reflejan la incertidumbre en mercados internacionales.",
-            "slug": "dolar-volatilidad",
-            "views": 1100
-        },
-        {
-            "id": "5",
-            "type": "noticias",
-            "category": "Agro",
-            "date": "2025-11-19T11:20:00.000Z",
-            "title": "Precio de la soja sigue en alza: análisis de expertos",
-            "description": "Los precios internacionales de granos siguen presionados al alza.",
-            "thumbnail": "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800&h=400&fit=crop",
-            "body": "El mercado de commodities muestra signos de presión alcista.",
-            "slug": "soja-precios",
-            "views": 890
-        },
-        {
-            "id": "6",
-            "type": "noticias",
-            "category": "Sociedad",
-            "date": "2025-11-18T15:10:00.000Z",
-            "title": "Empleo juvenil registra crecimiento moderado",
-            "description": "El mercado laboral para jóvenes muestra señales positivas en el tercer trimestre.",
-            "thumbnail": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=400&fit=crop",
-            "body": "Los datos de empleo juvenil muestran una mejora gradual.",
-            "slug": "empleo-joven",
-            "views": 750
-        },
-        {
-            "id": "7",
-            "type": "noticias",
-            "category": "Tecnología",
-            "date": "2025-11-17T13:30:00.000Z",
-            "title": "Transformación digital: Paraguay avanza en adopción tecnológica",
-            "description": "Empresas paraguayas intensifican sus inversiones en herramientas digitales.",
-            "thumbnail": "https://images.unsplash.com/photo-1518976506554-666c5054fecf?w=800&h=400&fit=crop",
-            "body": "La adopción de tecnología digital se acelera en el país.",
-            "slug": "transformacion-digital",
-            "views": 620
-        },
-        {
-            "id": "8",
-            "type": "noticias",
-            "category": "Inversión",
-            "date": "2025-11-16T08:55:00.000Z",
-            "title": "Inversión extranjera directa crece 15% en lo que va del año",
-            "description": "Paraguay continúa atrayendo capital internacional con proyectos de envergadura.",
-            "thumbnail": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=400&fit=crop",
-            "body": "Las inversiones extranjeras directas muestran un importante crecimiento.",
-            "slug": "ied-crecimiento",
-            "views": 1380
-        },
-        {
-            "id": "9",
-            "type": "noticias",
-            "category": "Macroeconomía",
-            "date": "2025-11-15T12:40:00.000Z",
-            "title": "Comercio exterior movió USD 14.182 millones en 10 meses",
-            "description": "Las exportaciones e importaciones muestran dinamismo en el año.",
-            "thumbnail": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&h=400&fit=crop",
-            "body": "El comercio exterior paraguayo sigue con buen ritmo.",
-            "slug": "comercio-exterior",
-            "views": 920
-        },
-        {
-            "id": "10",
-            "type": "noticias",
-            "category": "Agro",
-            "date": "2025-11-14T14:25:00.000Z",
-            "title": "Productores esperan cosecha record de maíz este año",
-            "description": "Las condiciones climáticas favorecen la producción de maíz.",
-            "thumbnail": "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800&h=400&fit=crop",
-            "body": "Los productores son optimistas respecto a la cosecha.",
-            "slug": "cosecha-maiz",
-            "views": 680
-        },
-        {
-            "id": "11",
-            "type": "noticias",
-            "category": "Finanzas",
-            "date": "2025-11-13T10:15:00.000Z",
-            "title": "Sistema bancario reporta fortaleza patrimonial",
-            "description": "Los bancos del país mantienen ratios de solvencia por encima de lo requerido.",
-            "thumbnail": "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=800&h=400&fit=crop",
-            "body": "La solidez del sistema financiero se mantiene.",
-            "slug": "bancos-solvencia",
-            "views": 540
-        },
-        {
-            "id": "12",
-            "type": "noticias",
-            "category": "Mercados",
-            "date": "2025-11-12T09:35:00.000Z",
-            "title": "Bolsa de Valores de Asunción registra importante volumen",
-            "description": "Las transacciones bursátiles muestran recuperación.",
-            "thumbnail": "https://images.unsplash.com/photo-1611974789855-9c2046dd4c58?w=800&h=400&fit=crop",
-            "body": "El mercado bursátil muestra signos de actividad.",
-            "slug": "bolsa-asuncion",
-            "views": 610
-        },
-        {
-            "id": "13",
-            "type": "noticias",
-            "category": "Sociedad",
-            "date": "2025-11-11T16:50:00.000Z",
-            "title": "Confianza del consumidor sube en noviembre",
-            "description": "Los indicadores de confianza muestran mejora en la percepción.",
-            "thumbnail": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=400&fit=crop",
-            "body": "Los consumidores muestran mayor optimismo.",
-            "slug": "confianza-consumidor",
-            "views": 730
-        },
-        {
-            "id": "14",
-            "type": "noticias",
-            "category": "Inversión",
-            "date": "2025-11-10T11:20:00.000Z",
-            "title": "Paraguay atrae megaproyecto de energía renovable",
-            "description": "Un importante proyecto de energías limpias se instala en el país.",
-            "thumbnail": "https://images.unsplash.com/photo-1509391366360-2e938bf37ba6?w=800&h=400&fit=crop",
-            "body": "Nuevo megaproyecto energético llega a Paraguay.",
-            "slug": "energia-renovable",
-            "views": 1600
-        },
-        {
-            "id": "15",
-            "type": "noticias",
-            "category": "Agro",
-            "date": "2025-11-09T13:45:00.000Z",
-            "title": "Cadiem celebra 22 años consolidándose como actor clave",
-            "description": "La principal cámara de la industria marca un hito importante.",
-            "thumbnail": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=400&fit=crop",
-            "body": "Cadiem continúa siendo protagonista en el sector empresarial.",
-            "slug": "cadiem-aniversario",
-            "views": 850
-        },
-        {
-            "id": "16",
-            "type": "noticias",
-            "category": "Macroeconomía",
-            "date": "2025-11-08T10:30:00.000Z",
-            "title": "Banco Mundial prevé caída de commodities en 2026",
-            "description": "Las proyecciones internacionales anticipan presión en precios.",
-            "thumbnail": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop",
-            "body": "Organismos internacionales advierten sobre precios futuros.",
-            "slug": "commodities-2026",
-            "views": 1320
-        },
-        {
-            "id": "17",
-            "type": "noticias",
-            "category": "Finanzas",
-            "date": "2025-11-07T15:15:00.000Z",
-            "title": "Superintendencia inicia consulta pública de proyectos regulatorios",
-            "description": "Se abre espacio para participación en nuevas regulaciones.",
-            "thumbnail": "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=800&h=400&fit=crop",
-            "body": "La autoridad regulatoria busca insumos del sector.",
-            "slug": "superintendencia-consulta",
-            "views": 480
-        },
-        {
-            "id": "18",
-            "type": "noticias",
-            "category": "Mercados",
-            "date": "2025-11-06T12:05:00.000Z",
-            "title": "Índice Bursátil paraguayo muestra estabilidad relativa",
-            "description": "Los valores principales registran movimientos moderados.",
-            "thumbnail": "https://images.unsplash.com/photo-1611974789855-9c2046dd4c58?w=800&h=400&fit=crop",
-            "body": "El mercado mantiene una tendencia equilibrada.",
-            "slug": "indice-estabilidad",
-            "views": 560
-        },
-        {
-            "id": "19",
-            "type": "noticias",
-            "category": "Inversión",
-            "date": "2025-11-05T14:40:00.000Z",
-            "title": "Ciudad del Este atrae inversión inmobiliaria sin precedentes",
-            "description": "La demanda triplicada genera nuevos proyectos en la frontera.",
-            "thumbnail": "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&h=400&fit=crop",
-            "body": "Ciudad del Este vive un boom inmobiliario.",
-            "slug": "cde-inversion",
-            "views": 1170
-        },
-        {
-            "id": "20",
-            "type": "noticias",
-            "category": "Tecnología",
-            "date": "2025-11-04T09:25:00.000Z",
-            "title": "Startups paraguayas buscan financiamiento en el exterior",
-            "description": "El ecosistema de innovación busca expandirse hacia mercados globales.",
-            "thumbnail": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=400&fit=crop",
-            "body": "Las startups locales miran hacia oportunidades internacionales.",
-            "slug": "startups-financiamiento",
-            "views": 420
-        }
-    ],
-    "analisis": [
-        {
-            "id": "inflacion-2025",
-            "type": "analisis",
-            "category": "Macroeconomía",
-            "date": "2025-11-15",
-            "title": "Inflación 2025: ¿un escenario más estable para Paraguay?",
-            "thumbnail": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop",
-            "body_html": "<p>El proceso de convergencia inflacionaria continúa...</p>"
-        },
-        {
-            "id": "dolar-escenario",
-            "type": "analisis",
-            "category": "Mercados",
-            "date": "2025-11-10",
-            "title": "El dólar opera en calma: señales para el cierre del año",
-            "thumbnail": "https://images.unsplash.com/photo-1520335684233-360e66201fcf?w=800&h=400&fit=crop",
-            "body_html": "<p>El tipo de cambio presenta menor volatilidad...</p>"
-        },
-        {
-            "id": "agro-2025",
-            "type": "analisis",
-            "category": "Agro",
-            "date": "2025-11-05",
-            "title": "El agro paraguayo en 2025: proyecciones y desafíos",
-            "thumbnail": "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800&h=400&fit=crop",
-            "body_html": "<p>El sector agrícola se encuentra en un punto clave...</p>"
-        },
-        {
-            "id": "empleo-joven",
-            "type": "analisis",
-            "category": "Sociedad",
-            "date": "2025-11-01",
-            "title": "Empleo joven: señales mixtas en el mercado laboral",
-            "thumbnail": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=400&fit=crop",
-            "body_html": "<p>La inserción laboral juvenil muestra avances, pero persisten desafíos...</p>"
-        }
-    ],
-    "programa": [
-        {
-            "id": "ep1-cde",
-            "type": "programa",
-            "category": "Entrevistas",
-            "date": "2025-11-20",
-            "title": "Ciudad del Este: auge inmobiliario y demanda triplicada",
-            "embed_url": "https://www.youtube.com/embed/abcd1234xyz",
-            "thumbnail": "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&h=400&fit=crop"
-        },
-        {
-            "id": "ep2-bcp",
-            "type": "programa",
-            "category": "Macroeconomía",
-            "date": "2025-11-18",
-            "title": "¿Por qué el BCP mantiene la TPM?",
-            "embed_url": "https://www.youtube.com/embed/abcd5678xyz",
-            "thumbnail": "https://images.unsplash.com/photo-1611974789855-9c2046dd4c58?w=600&h=400&fit=crop"
-        },
-        {
-            "id": "ep3-agro",
-            "type": "programa",
-            "category": "Agro",
-            "date": "2025-11-10",
-            "title": "Agro 2025: precio de la soja y clima",
-            "embed_url": "https://www.youtube.com/embed/abcd9999xyz",
-            "thumbnail": "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=600&h=400&fit=crop"
-        },
-        {
-            "id": "ep4-asuncion",
-            "type": "programa",
-            "category": "Urbanismo",
-            "date": "2025-11-09",
-            "title": "Asunción 2030: ciudades, inversión y movilidad",
-            "embed_url": "https://www.youtube.com/embed/xyz1111abc",
-            "thumbnail": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop"
-        }
-    ],
-    "podcast": [
-        {
-            "id": "pod-ec1",
-            "type": "podcast",
-            "date": "2025-11-21",
-            "title": "¿Está Paraguay preparado para la economía del conocimiento?",
-            "thumbnail": "https://images.unsplash.com/photo-1518976506554-666c5054fecf?w=300&h=300&fit=crop"
-        },
-        {
-            "id": "pod-ec2",
-            "type": "podcast",
-            "date": "2025-11-19",
-            "title": "Inflación y mercados: semana clave",
-            "thumbnail": "https://images.unsplash.com/photo-1611974789855-9c2046dd4c58?w=300&h=300&fit=crop"
-        },
-        {
-            "id": "pod-ec3",
-            "type": "podcast",
-            "date": "2025-11-16",
-            "title": "La transformación digital en Paraguay",
-            "thumbnail": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=300&h=300&fit=crop"
-        },
-        {
-            "id": "pod-ec4",
-            "type": "podcast",
-            "date": "2025-11-12",
-            "title": "Inversión extranjera: señales positivas",
-            "thumbnail": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=300&h=300&fit=crop"
-        }
-    ],
-    "sponsors": [
-        {
-            "id": "banco-centro",
-            "title": "Banco Centro",
-            "headline": "Soluciones financieras para tu futuro",
-            "excerpt": "Apoyamos el crecimiento y la inversión en Paraguay.",
-            "url": "https://bancocentro.com",
-            "logo": "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=300&h=150&fit=crop",
-            "priority": 1,
-            "active": true
-        },
-        {
-            "id": "agro-tec",
-            "title": "AgroTec",
-            "headline": "Innovación para el campo paraguayo",
-            "excerpt": "Tecnología y desarrollo para el agro.",
-            "url": "https://agrotec.com",
-            "logo": "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=300&h=150&fit=crop",
-            "priority": 2,
-            "active": true
-        },
-        {
-            "id": "link-center",
-            "title": "Link Center",
-            "headline": "El nuevo ícono corporativo de Asunción",
-            "excerpt": "Arquitectura moderna y sustentable.",
-            "url": "https://linkcenter.com",
-            "logo": "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=300&h=150&fit=crop",
-            "priority": 3,
-            "active": true
-        },
-        {
-            "id": "telefutura",
-            "title": "Telefutura",
-            "headline": "Conectando Paraguay",
-            "excerpt": "Servicios de telecomunicaciones de alta velocidad.",
-            "url": "https://telefutura.com",
-            "logo": "https://images.unsplash.com/photo-1518976506554-666c5054fecf?w=300&h=150&fit=crop",
-            "priority": 4,
-            "active": true
-        }
-    ]
+  "noticias": [
+    {
+      "id": "macro",
+      "type": "noticias",
+      "slug": "macro",
+      "category": "Macroeconomía",
+      "title": "BCP mantiene 'anclada' la tasa de interés",
+      "description": "",
+      "thumbnail": "/assets/img/knmg6a6szzcshjyavygmnkhpbi.jpg",
+      "body": "El Banco Central decidió mantener la tasa...",
+      "date": "2025-11-23T00:00:00.000Z",
+      "featured": false,
+      "tags": []
+    },
+    {
+      "id": "2025-11-22-bcp-mantiene-anclada-la-tasa-de-interes",
+      "type": "noticias",
+      "slug": "2025-11-22-bcp-mantiene-anclada-la-tasa-de-interes",
+      "category": "macro",
+      "title": "BCP mantiene \"anclada\" la tasa de interes con una inflación a la baja",
+      "description": "El Comité de Política Monetaria decidió, por unanimidad, mantener la tasa de interés de política monetaria (TPM) en 6,0% anual.",
+      "thumbnail": "/assets/img/knmg6a6szzcshjyavygmnkhpbi.jpg",
+      "body": "En su reunión del viernes 21 de noviembre, el Comité de Política Monetaria (CPM) decidió, por unanimidad, mantener la tasa de interés de política monetaria (TPM) en 6,0% anual.\r\n\r\nEl Comité destaca que los indicadores de actividad económica y de ventas continuaron mostrando un buen dinamismo en el margen. En cuanto a precios, la inflación interanual se ha desacelerado en meses recientes, reflejando, en parte, el efecto de la apreciación del tipo de cambio sobre los precios de los bienes no alimenticios —en particular, los durables— y de ciertos servicios.\r\n\r\nEl fortalecimiento de la moneda local, además de la disminución de las cotizaciones internacionales del petróleo, también contribuyó a la reducción de los precios de los combustibles a nivel local. Con la economía operando en torno a su nivel potencial, expectativas de inflación alineadas con la meta y menores presiones cambiarias, se proyecta que la inflación se ubique alrededor del 4,0% al cierre de 2025, para luego converger al 3,5% durante 2026.\r\n\r\n![El Comité de Política Monetaria decidió, por unanimidad, mantener la tasa de interés de política monetaria (TPM) en 6,0% anual.](/assets/img/mercado-libre-e1584221732666.jpg \"Inflación\")\r\n\r\nEn el ámbito externo, el mercado anticipa con menor probabilidad un nuevo recorte del rango objetivo para la tasa de interés de la Reserva Federal en su reunión de diciembre. En cuanto a los commodities, los precios del petróleo disminuyeron en el último mes.\r\n\r\nEl CPM reafirma su compromiso con la estabilidad de precios y seguirá monitoreando atentamente los desarrollos internos y externos, con el fin de anticipar sus posibles implicancias en la trayectoria de la inflación y tomar las medidas oportunas para garantizar el cumplimiento de la meta del 3,5% en el horizonte de política monetaria.\r\n\r\nLa próxima reunión del CPM se llevará a cabo el 22 de diciembre de 2025 y el comunicado respectivo será publicado a partir de las 15:00 del mismo día.",
+      "date": "2025-11-22T16:34:48.889Z",
+      "featured": true,
+      "tags": [
+        "TPM"
+      ]
+    },
+    {
+      "id": "README",
+      "type": "noticias",
+      "slug": "README",
+      "category": "educacion-financiera",
+      "title": "¿Qué hacer con el aguinaldo?",
+      "description": "El aguinaldo es un pago extra de salario que reciben los trabajadores de forma anual o semestral como reconocimiento a su labor. ",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "![sadadadaasd](/assets/img/que-es-aguinaldo.jpg \"el ahui\")\r\n\r\nEl aguinaldo es un pago extra de salario que reciben los trabajadores de forma anual o semestral como reconocimiento a su labor. Su monto y forma de pago varían según el país, pero generalmente se calcula sumando los ingresos del año o semestre y dividiéndolos entre 12 o dos cuotas semestrales, respectivamente. Su origen está en la tradición de dar un obsequio en las fiestas navideñas, y su pago es obligatorio para los empleadores y está regulado por ley en muchos lugares. \r\n\r\nCaracterísticas principales:\r\n\r\nPago adicional: Es un ingreso extra al salario mensual que se otorga como recompensa por el esfuerzo del año.\r\n\r\nObligatorio: Es un derecho laboral que los empleadores están obligados por ley a pagar.\r\n\r\nCálculo: Se calcula de diferentes maneras, como el 50% del mejor salario semestral percibido (en países como Argentina) o sumando todos los ingresos del año y dividiendo el total entre 12 (en otros países).",
+      "date": "2025-11-20T02:57:34.108Z",
+      "featured": true,
+      "tags": [
+        "aguinaldo"
+      ]
+    },
+    {
+      "id": "2025-11-19-modernización-bursátil-presentarán-ante-emisores-la-nueva-estructura-y-los-procesos-de-registro-1",
+      "type": "noticias",
+      "slug": "2025-11-19-modernización-bursátil-presentarán-ante-emisores-la-nueva-estructura-y-los-procesos-de-registro-1",
+      "category": "macro",
+      "title": "\"Modernización bursátil: Presentarán ante emisores la nueva estructura y los procesos de registro\"",
+      "description": "El encuentro se llevará a cabo este jueves 20 de noviembre",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "![Objetivo es presentar a las empresas emisoras las novedades](/assets/img/nasdaq.avif \"Nasdaq\")\r\n\r\n“Modernización bursátil: Nueva estructura y procesos para emisores” se denomina la charla que se encuentran organizando la Bolsa de Valores de Asunción (BVA), la Caja de Valores del Paraguay (CAVAPY) y la Asociación de Casas de Bolsa del Paraguay (Asobolsa), para este jueves 20 de noviembre.\r\n\r\nEl objetivo es presentar a las empresas emisoras las novedades que se están implementando en el mercado de valores, en el marco de la transformación tecnológica, regulatoria y de infraestructura por la que atraviesa el sector.\r\n\r\nEntre los temas que se abordarán en la oportunidad, se destaca el próximo lanzamiento del Registro Único del Mercado de Valores, que integrará procesos ante la Superintendencia de Valores (SIV), la BVA y CAVAPY, y se aplicará tanto a registro de emisores como de instrumentos de negociación.\r\n\r\nAdemás, se presentarán las oportunidades de conexión con los mercados globales que se están generando con la contratación de los sistemas Nasdaq -desde la BVAy Montran -desde CAVAPY-; y la nueva regulación que se implementará a partir de la Ley del Mercado de Valores recientemente promulgada.\r\n\r\nEl encuentro arrancará a las 08:00, en el Hotel Dazzler de Asunción, con la presencia de autoridades y directivos de las instituciones organizadoras, así como de representantes de empresas emisoras y casas de bolsa que operan en el mercado bursátil local.",
+      "date": "2025-11-19T16:49:12.638Z",
+      "featured": true,
+      "tags": [
+        "bursátil"
+      ]
+    },
+    {
+      "id": "2025-11-19-modernización-bursátil-presentarán-ante-emisores-la-nueva-estructura-y-los-procesos-de-registro",
+      "type": "noticias",
+      "slug": "2025-11-19-modernización-bursátil-presentarán-ante-emisores-la-nueva-estructura-y-los-procesos-de-registro",
+      "category": "macro",
+      "title": "\"Modernización bursátil: Presentarán ante emisores la nueva estructura y los procesos de registro\"",
+      "description": "El encuentro se llevará a cabo este jueves 20 de noviembre",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "![Objetivo es presentar a las empresas emisoras las novedades](/assets/img/nasdaq.avif \"Nasdaq\")\r\n\r\n“Modernización bursátil: Nueva estructura y procesos para emisores” se denomina la charla que se encuentran organizando la Bolsa de Valores de Asunción (BVA), la Caja de Valores del Paraguay (CAVAPY) y la Asociación de Casas de Bolsa del Paraguay (Asobolsa), para este jueves 20 de noviembre.\r\n\r\nEl objetivo es presentar a las empresas emisoras las novedades que se están implementando en el mercado de valores, en el marco de la transformación tecnológica, regulatoria y de infraestructura por la que atraviesa el sector.\r\n\r\nEntre los temas que se abordarán en la oportunidad, se destaca el próximo lanzamiento del Registro Único del Mercado de Valores, que integrará procesos ante la Superintendencia de Valores (SIV), la BVA y CAVAPY, y se aplicará tanto a registro de emisores como de instrumentos de negociación.\r\n\r\nAdemás, se presentarán las oportunidades de conexión con los mercados globales que se están generando con la contratación de los sistemas Nasdaq -desde la BVAy Montran -desde CAVAPY-; y la nueva regulación que se implementará a partir de la Ley del Mercado de Valores recientemente promulgada.\r\n\r\nEl encuentro arrancará a las 08:00, en el Hotel Dazzler de Asunción, con la presencia de autoridades y directivos de las instituciones organizadoras, así como de representantes de empresas emisoras y casas de bolsa que operan en el mercado bursátil local.",
+      "date": "2025-11-19T15:55:52.535Z",
+      "featured": true,
+      "tags": [
+        "bursátil"
+      ]
+    },
+    {
+      "id": "2025-11-19-mef-paga-hoy-más-g-227-000-millones-a-proveedores-y-acreedores-del-estado",
+      "type": "noticias",
+      "slug": "2025-11-19-mef-paga-hoy-más-g-227-000-millones-a-proveedores-y-acreedores-del-estado",
+      "category": "politica-economica",
+      "title": "MEF paga hoy más G. 227.000 millones a proveedores y acreedores del Estado",
+      "description": " Procesará hoy martes 18 de noviembre ₲ 227.489 millones para pago a proveedores y acreedores del Estado. ",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "![ procesará hoy martes 18 de noviembre ₲ 227.489 millones para pago a proveedores y acreedores del Estado. ](/assets/img/2024-08-16-billetes.jpg \"Pago a proveedores\")\r\n\r\nEl Ministerio de Economía y Finanzas (MEF), a través de la Dirección General del Tesoro Público (DGTP), dependiente de la Gerencia de Gestión Financiera del Estado, procesará hoy martes 18 de noviembre G. 227.489 millones para pago a proveedores y acreedores del Estado.\r\n\r\nSerán procesadas las Solicitudes de Transferencias de Recursos (STR) que ingresaron a la DGTP el jueves 13, viernes 14 y lunes 17 de noviembre de 2025, correspondientes a compromisos financiados con Fuente 20 “Recursos del Crédito Público” y 30 “Recursos Institucionales”, principalmente.\r\n\r\nEn ese sentido, se procesará en Fuente 10 (en concepto de: Caja Chica, Gastos Reservados) la suma de ₲ 242 millones; en Fuente 20 (Pago a Proveedores y Acreedores del Estado) ₲ 132.799; y en Fuente 30 (en concepto de Caja Chica, Pago a Proveedores y Acreedores del Estado) unos ₲ 94.448 millones.\r\n\r\n\r\n\r\nDe esta forma, cabe resaltar que la Dirección General del Tesoro Público realiza el proceso de transferencias de manera sostenida, conforme a la fecha presentación de las STR ingresadas por las instituciones públicas.\r\n\r\n\r\n\r\nEl calendario detallado de pagos está disponible en el sitio web del Ministerio de Economía y Finanzas (https://www.mef.gov.py), o accediendo directamente al siguiente enlace: https://www.mef.gov.py/consulta-ciudadana/calendario-de-pagos/pago-a-proveedores",
+      "date": "2025-11-19T00:54:51.371Z",
+      "featured": false,
+      "tags": [
+        "pago"
+      ]
+    },
+    {
+      "id": "2025-11-18-superintendencia-de-valores-inicia-consulta-pública-de-proyectos-de-reglamentación",
+      "type": "noticias",
+      "slug": "2025-11-18-superintendencia-de-valores-inicia-consulta-pública-de-proyectos-de-reglamentación",
+      "category": "politica-economica",
+      "title": "Superintendencia de Valores inicia consulta pública de proyectos de reglamentación",
+      "description": "\"Superintendencia de Valores inicia consulta pública de proyectos de reglamentación\"",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "![](/assets/img/knmg6a6szzcshjyavygmnkhpbi.jpg)\r\n\r\nLa Superintendencia de Valores informa que tras la promulgación de la Ley N.º 7572/2025 “Mercado de Valores y Productos”, se inicia el proceso de consulta pública de los proyectos de reglamentación del nuevo marco regulatorio del mercado de capitales. Este paso proactivo refleja el compromiso institucional de asegurar una implementación ordenada, técnica y oportuna de la nueva ley.\r\n\r\n\r\n\r\n\r\n\r\nEl objetivo de los proyectos normativos es ordenar y actualizar el marco regulatorio aplicable al mercado, alinearlo con estándares internacionales y fortalecer la protección del inversionista, la transparencia y la competitividad. La etapa de socialización es abierta a todos los participantes del mercado e interesados en general, quienes podrán remitir sus aportes y comentarios hasta el 31 de diciembre de 2025 a través del siguiente formulario.\r\n\r\n\r\n\r\nEl Banco Central del Paraguay y la Superintendencia de Valores reafirman su compromiso con un mercado de valores y productos más seguro, moderno y previsible, y destacan que la colaboración activa del sector es fundamental para consolidar la transformación regulatoria que fortalecerá el desarrollo del mercado de capitales de Paraguay.",
+      "date": "2025-11-18T16:51:08.840Z",
+      "featured": true,
+      "tags": [
+        "seguro"
+      ]
+    },
+    {
+      "id": "2025-11-17-banco-mundial-prevé-caída-de-precios-de-commodities-en-2026",
+      "type": "noticias",
+      "slug": "2025-11-17-banco-mundial-prevé-caída-de-precios-de-commodities-en-2026",
+      "category": "Macro",
+      "title": "Banco Mundial prevé caída de precios de commodities en 2026",
+      "description": "Enfrentarían en el 2026 su cuarto año consecutivo de descenso de precios",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "![](/assets/img/precios-de-commodities-en-baja-bm.jpg)\r\n\r\n\r\nLos mercados globales de commodities enfrentarían en el 2026 su cuarto año consecutivo de descenso de precios, según el informe Commodity Markets Outlook del Banco Mundial. El organismo proyecta caídas de 7% de los precios tanto en 2025 como para el próximo año, en un contexto de crecimiento mundial moderado y un superávit energético en aumento.​\r\n\r\nLa baja de los precios energéticos continúa aportando alivio a la inflación global, mientras que el retroceso del arroz y el trigo mejora la accesibilidad de alimentos en países en desarrollo. No obstante, los fertilizantes registrarían un aumento de 21% en 2025, lo que podría presionar los márgenes agrícolas.​\r\n\r\nEntre los metales preciosos, el oro se mantiene como refugio en un contexto de incertidumbre, con un incremento estimado de 42% de sus precios en 2025. El informe advierte que, pese a la moderación reciente, el panorama continúa expuesto a riesgos derivados de tensiones geopolíticas, posibles sanciones adicionales, fenómenos climáticos como La Niña y el aumento de la demanda eléctrica asociada a la expansión de la inteligencia artificial.",
+      "date": "2025-11-17T00:00:00.000Z",
+      "featured": true,
+      "tags": []
+    },
+    {
+      "id": "2025-11-15-paraguay-destacó-su-política-fiscal-responsable-en-seminario-internacional",
+      "type": "noticias",
+      "slug": "2025-11-15-paraguay-destacó-su-política-fiscal-responsable-en-seminario-internacional",
+      "category": "",
+      "title": "Paraguay destacó su política fiscal responsable en seminario internacional",
+      "description": "Se debatió sobre los desafíos y tendencias de la gestión presupuestaria, así como para promover el intercambio técnico y político orientado a fortalecer la sostenibilidad fiscal.",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "![Del evento, en representación del MEF participaron la gerente de Gestión Financiera del Estado, Teodora Recalde de Spinzi, y el director general de Presupuesto, Jorge Paredes.](/assets/img/exportación.jpg)\r\n\r\nEl Ministerio de Economía y Finanzas (MEF) representó a Paraguay en el 52° Seminario Internacional de Presupuesto Público, organizado por la Asociación Internacional de Presupuesto Público (ASIP) en República Dominicana. El encuentro reunió a autoridades fiscales y especialistas de la región para debatir sobre los desafíos y tendencias de la gestión presupuestaria, así como para promover el intercambio técnico y político orientado a fortalecer la sostenibilidad fiscal, optimizar la eficiencia del gasto y consolidar la estabilidad macroeconómica en América Latina.\r\n\r\nDel evento, en representación del MEF participaron la gerente de Gestión Financiera del Estado, Teodora Recalde de Spinzi, y el director general de Presupuesto, Jorge Paredes.\r\n\r\nEn este contexto, el director general de Presupuesto del MEF, Jorge Paredes, expuso sobre las políticas instrumentadas por el país para atenuar los efectos presupuestarios derivados de la inestabilidad mundial, destacando la prudencia fiscal y las reformas institucionales que fortalecen la gestión pública.\r\n\r\nDurante su intervención, el director subrayó que Paraguay mantiene un crecimiento económico sólido y sostenido, con una proyección del PIB real de 5,3% para 2025, respaldada por la estabilidad macroeconómica y una política fiscal responsable.\r\n\r\nAsimismo, señaló que el país avanza de manera ordenada hacia la convergencia con la regla fiscal en el 2026, tras reducir el déficit desde -6,1% del PIB en el 2020 a -1,9% en el 2025, en cumplimiento del plan de consolidación fiscal del MEF.\r\n\r\nEn materia de gasto público, destacó que Paraguay sostiene una gestión orientada a prioridades estratégicas, con incrementos dirigidos a salud, educación, desarrollo social y seguridad, fortaleciendo un modelo de crecimiento con enfoque social y responsabilidad fiscal. Al cierre de su exposición, remarcó que el país apunta a mantener la estabilidad y avanzar en el desarrollo social con responsabilidad fiscal y eficiencia en la gestión pública.",
+      "date": "2025-11-16T21:24:00.000Z",
+      "featured": true,
+      "tags": []
+    },
+    {
+      "id": "2025-11-15-paraguay-destacó-su-política-fiscal-responsable-en-seminario-internacional-1",
+      "type": "noticias",
+      "slug": "2025-11-15-paraguay-destacó-su-política-fiscal-responsable-en-seminario-internacional-1",
+      "category": "",
+      "title": "2 Paraguay destacó su política fiscal responsable en seminario internacional",
+      "description": "El encuentro reunió a autoridades fiscales y especialistas de la región para debatir sobre los desafíos y tendencias de la gestión presupuestaria, así como para promover el intercambio técnico y político orientado a fortalecer la sostenibilidad fiscal.",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "![El Ministerio de Economía y Finanzas (MEF) representó a Paraguay en el 52° Seminario Internacional de Presupuesto Público, organizado por la Asociación Internacional de Presupuesto Público (ASIP) en República Dominicana.](/assets/img/mercado-libre-e1584221732666.jpg \"SIII\")\r\n\r\nEl Ministerio de Economía y Finanzas (MEF) representó a Paraguay en el 52° Seminario Internacional de Presupuesto Público, organizado por la Asociación Internacional de Presupuesto Público (ASIP) en República Dominicana. El encuentro reunió a autoridades fiscales y especialistas de la región para debatir sobre los desafíos y tendencias de la gestión presupuestaria, así como para promover el intercambio técnico y político orientado a fortalecer la sostenibilidad fiscal, optimizar la eficiencia del gasto y consolidar la estabilidad macroeconómica en América Latina.\r\n\r\nDel evento, en representación del MEF participaron la gerente de Gestión Financiera del Estado, Teodora Recalde de Spinzi, y el director general de Presupuesto, Jorge Paredes.\r\n\r\nEn este contexto, el director general de Presupuesto del MEF, Jorge Paredes, expuso sobre las políticas instrumentadas por el país para atenuar los efectos presupuestarios derivados de la inestabilidad mundial, destacando la prudencia fiscal y las reformas institucionales que fortalecen la gestión pública.\r\n\r\nDurante su intervención, el director subrayó que Paraguay mantiene un crecimiento económico sólido y sostenido, con una proyección del PIB real de 5,3% para 2025, respaldada por la estabilidad macroeconómica y una política fiscal responsable.\r\n\r\nAsimismo, señaló que el país avanza de manera ordenada hacia la convergencia con la regla fiscal en el 2026, tras reducir el déficit desde -6,1% del PIB en el 2020 a -1,9% en el 2025, en cumplimiento del plan de consolidación fiscal del MEF.\r\n\r\nEn materia de gasto público, destacó que Paraguay sostiene una gestión orientada a prioridades estratégicas, con incrementos dirigidos a salud, educación, desarrollo social y seguridad, fortaleciendo un modelo de crecimiento con enfoque social y responsabilidad fiscal. Al cierre de su exposición, remarcó que el país apunta a mantener la estabilidad y avanzar en el desarrollo social con responsabilidad fiscal y eficiencia en la gestión pública.",
+      "date": "2025-11-15T21:24:00.000Z",
+      "featured": false,
+      "tags": []
+    },
+    {
+      "id": "2025-11-14-confianza-del-consumidor-se-reduce-en-octubre",
+      "type": "noticias",
+      "slug": "2025-11-14-confianza-del-consumidor-se-reduce-en-octubre",
+      "category": "",
+      "title": "Confianza del consumidor se reduce en octubre",
+      "description": "En octubre de 2025, el Índice de Confianza del Consumidor se ubicó en 48,32 puntos. Por su parte, el Índice de Expectativas Económicas y el Índice de Situación Económica se ubicaron en 61,75 y 34,88 puntos respectivamente.\n",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "![](/assets/img/mercado-libre-e1584221732666.jpg)\r\n\r\n\r\n\r\n\r\nEn octubre de 2025, el Índice de Confianza del Consumidor (ICC) registró un nivel de 48,32, ubicándose por debajo del valor observado en el mes previo (49,86) y del nivel registrado en octubre de 2024 (54,46).\r\n\r\nEl Índice de Situación Económica (ISE) registró un valor de 34,88, menor en 1,12 puntos respecto al mes anterior y en 5,83 puntos al dato registrado en octubre de 2024. Por su parte, el Índice de Expectativas Económicas (IEE) alcanzó un resultado de 61,75, menor que el índice del mes anterior en 1,96 puntos y al valor de octubre de 2024 en 6,46 puntos.\r\n\r\nEn cuanto a la predisposición a ahorrar, el porcentaje de encuestados que respondió de forma afirmativa a esta consulta fue de 18,25%. Este resultado fue inferior en 1,25 puntos porcentuales (pp) al del mes anterior y en 4,50 pp al valor registrado en octubre de 2024.\r\n\r\nPor otro lado, la predisposición a adquirir bienes durables registró incrementos mensuales en las categorías de electrodomésticos, casas y autos. En contraste, se observó una reducción en la predisposición a adquirir motos. En términos interanuales, todas las categorías de bienes presentaron reducciones.",
+      "date": "2025-11-14T17:45:00.000Z",
+      "featured": false,
+      "tags": []
+    },
+    {
+      "id": "2025-11-14-comercio-exterior-movió-usd-14-182-1-millones-en-10-meses",
+      "type": "noticias",
+      "slug": "2025-11-14-comercio-exterior-movió-usd-14-182-1-millones-en-10-meses",
+      "category": "",
+      "title": "Comercio exterior movió US$ 14.182,1 millones en 10 meses",
+      "description": "Las exportaciones totales, al mes de octubre de 2025, alcanzaron un valor de US$ 14.182,1 millones, 3,3% por encima de los US$ 13.273,9 millones observados a octubre del año anterior. ",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "![lucas-van-oort-fbzovyf-96w-unsplash.jpg](/assets/img/lucas-van-oort-fbzovyf-96w-unsplash.jpg \"lucas-van-oort-fbzovyf-96w-unsplash.jpg\")\r\n\r\nLas exportaciones totales, al mes de octubre de 2025, alcanzaron un valor de US$ 14.182,1 millones, 3,3% por encima de los US$ 13.273,9 millones observados a octubre del año anterior. Las exportaciones registradas representaron el 67,1% del total, alcanzando US$ 9.513,9 millones, inferior en 0,8% al valor acumulado a octubre del 2024.\r\n\r\nLas reexportaciones, por su parte, con el 26,4% del total, registraron un valor de US$ 3.746,0 millones, con un aumento de 15,3%. Las otras exportaciones, con el 6,5% de participación, registraron un aumento del 4,1%, situándose en un nivel de US$ 922,3 millones. \r\n\r\nLa reducción observada en las exportaciones registradas se encuentra explicada principalmente por menores ventas de granos de soja, arroz parbolizado y harina de soja. Los envíos realizados bajo el régimen de maquila alcanzaron los USD 1.098,9 millones, superior en 10,9% a lo registrado en el mismo periodo del año 2024.",
+      "date": "2025-11-14T00:12:00.000Z",
+      "featured": false,
+      "tags": []
+    },
+    {
+      "id": "2025-11-13-cadiem-celebra-22-años-de-trayectoria-consolidándose-como-actor-clave-en-el-mercado",
+      "type": "noticias",
+      "slug": "2025-11-13-cadiem-celebra-22-años-de-trayectoria-consolidándose-como-actor-clave-en-el-mercado",
+      "category": "",
+      "title": "CADIEM celebra 22 años de trayectoria, consolidándose como actor clave",
+      "description": "Con la obtención de la primera nota en grado de inversión para el Paraguay, y a la\nespera de una segunda, desde la empresa se augura un horizonte de proyectos\ncada vez más grandes que resulten atractivos ante los inversionistas a nivel\ninternacional",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "![Cadien 123](/assets/img/dsc_7982.jpg \"Cadien\")\r\n\r\nCADIEM Casa de Bolsa celebra 22 años de trayectoria institucional, en un contexto de sostenido crecimiento del mercado de valores, tanto en el segmento bursátil como en el de fondos mutuos y de inversión. En este contexto, Gloria Ayala Person, socia fundadora y directora de la compañía, recordó los inicios del emprendimiento que ya tiene más de dos décadas operando.\r\n\r\n“Recuerdo con emoción los comienzos de CADIEM. Desde el primer día, nuestro impulso fue un sueño claro: contribuir al desarrollo del Paraguay ofreciendo productos financieros hechos por y para las personas. Aquello era casi una ´quijotada´ en un mercado que apenas iniciaba, pero teníamos ilusión y convicción”, expresó la\r\nejecutiva en ocasión de un aniversario más de la empresa.\r\n\r\nSiendo una de las firmas pioneras en el sector, Ayala Person considera que poner al cliente en el centro ha sido uno de los mayores aciertos del grupo a lo largo de estos años. “Este compromiso lo comparto con el Directorio y con todo el equipo, porque comulgamos la visión de un Paraguay donde la inversión sea un camino al bienestar colectivo”, comentó sobre este tema. \r\n\r\nCon respecto al futuro, aseguró ver un horizonte “muy prometedor para el mercado de valores paraguayo”, ya que la reciente obtención del grado de inversión ha sido un hito histórico que proyecta al país como un destino más atractivo para el ahorro y las inversiones extranjeras. Esto genera, a su criterio, una gran oportunidad de atraer capital y financiar proyectos locales. \r\n\r\n## **Proyectos a mayor escala**\r\n\r\nPor su parte, Elías Gelay, presidente de CADIEM Casa de Bolsa, resaltó que este aniversario llega en un momento inmejorable para el mercado de valores paraguayo. A la espera de la segunda calificación en grado de inversión, señaló que los distintos actores del mercado se están preparando para recibir nuevas inversiones y promover proyectos de mayor escala, capaces de atraer el interés de inversionistas globales.\r\n\r\n“Hoy el mercado genera más de USD 7.000 millones en transacciones, con proyectos importantes que estamos financiando. Son hitos relevantes para CADIEM, pero principalmente para el mercado de capitales, porque estamos buscando desarrollar proyectos que sean más grandes y que sean interesantes para los inversores que van a venir del exterior”, puntualizó Gelay.\r\n\r\nExpresó su satisfacción por los logros alcanzados, pero aseguró que “lo mejor está por venir”, ya que para los próximos años se abre la posibilidad de establecer alianzas con agentes extranjeros, quienes comienzan a mirar a Paraguay con nuevos ojos, impulsados por la estabilidad alcanzada y el surgimiento de proyectos de creciente envergadura.",
+      "date": "2025-11-13T23:54:00.000Z",
+      "featured": false,
+      "tags": []
+    },
+    {
+      "id": "2025-11-13-cadiem-celebra-22-años-de-trayectoria-consolidándose-como-actor-clave",
+      "type": "noticias",
+      "slug": "2025-11-13-cadiem-celebra-22-años-de-trayectoria-consolidándose-como-actor-clave",
+      "category": "",
+      "title": "CADIEM celebra 22 años de trayectoria, consolidándose como actor clave",
+      "description": "Con la obtención de la primera nota en grado de inversión para el Paraguay, y a la\nespera de una segunda, desde la empresa se augura un horizonte de proyectos\ncada vez más grandes que resulten atractivos ante los inversionistas a nivel\ninternacional",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "![Cadien 123](/assets/img/dsc_7982.jpg \"Cadien\")\r\n\r\nCADIEM Casa de Bolsa celebra 22 años de trayectoria institucional, en un contexto de sostenido crecimiento del mercado de valores, tanto en el segmento bursátil como en el de fondos mutuos y de inversión. En este contexto, Gloria Ayala Person, socia fundadora y directora de la compañía, recordó los inicios del emprendimiento que ya tiene más de dos décadas operando.\r\n\r\n“Recuerdo con emoción los comienzos de CADIEM. Desde el primer día, nuestro impulso fue un sueño claro: contribuir al desarrollo del Paraguay ofreciendo productos financieros hechos por y para las personas. Aquello era casi una ´quijotada´ en un mercado que apenas iniciaba, pero teníamos ilusión y convicción”, expresó la\r\nejecutiva en ocasión de un aniversario más de la empresa.\r\n\r\nSiendo una de las firmas pioneras en el sector, Ayala Person considera que poner al cliente en el centro ha sido uno de los mayores aciertos del grupo a lo largo de estos años. “Este compromiso lo comparto con el Directorio y con todo el equipo, porque comulgamos la visión de un Paraguay donde la inversión sea un camino al bienestar colectivo”, comentó sobre este tema. \r\n\r\nCon respecto al futuro, aseguró ver un horizonte “muy prometedor para el mercado de valores paraguayo”, ya que la reciente obtención del grado de inversión ha sido un hito histórico que proyecta al país como un destino más atractivo para el ahorro y las inversiones extranjeras. Esto genera, a su criterio, una gran oportunidad de atraer capital y financiar proyectos locales. \r\n\r\n## **Proyectos a mayor escala**\r\n\r\nPor su parte, Elías Gelay, presidente de CADIEM Casa de Bolsa, resaltó que este aniversario llega en un momento inmejorable para el mercado de valores paraguayo. A la espera de la segunda calificación en grado de inversión, señaló que los distintos actores del mercado se están preparando para recibir nuevas inversiones y promover proyectos de mayor escala, capaces de atraer el interés de inversionistas globales.\r\n\r\n“Hoy el mercado genera más de USD 7.000 millones en transacciones, con proyectos importantes que estamos financiando. Son hitos relevantes para CADIEM, pero principalmente para el mercado de capitales, porque estamos buscando desarrollar proyectos que sean más grandes y que sean interesantes para los inversores que van a venir del exterior”, puntualizó Gelay.\r\n\r\nExpresó su satisfacción por los logros alcanzados, pero aseguró que “lo mejor está por venir”, ya que para los próximos años se abre la posibilidad de establecer alianzas con agentes extranjeros, quienes comienzan a mirar a Paraguay con nuevos ojos, impulsados por la estabilidad alcanzada y el surgimiento de proyectos de creciente envergadura.",
+      "date": "2025-11-13T23:54:00.000Z",
+      "featured": false,
+      "tags": []
+    }
+  ],
+  "analisis": [
+    {
+      "id": "2025-11-21-ley-del-mercado-de-valores-fortalece-protección-al-inversionista",
+      "type": "analisis",
+      "slug": "2025-11-21-ley-del-mercado-de-valores-fortalece-protección-al-inversionista",
+      "category": "",
+      "title": "Ley del Mercado de Valores fortalece protección al inversionista ",
+      "description": "Ley del Mercado de Valores y Productos fortalece protección al inversionista ",
+      "thumbnail": "/assets/img/2024-08-16-billetes.jpg",
+      "body": "El superintendente de Valores, Rodrigo Ruiz, participó como panelista del conversatorio “Nuevo Régimen Jurídico del Mercado de Valores” organizado por FERRERE Abogados, junto a representantes de la Bolsa de Valores de Asunción (BVA), la Caja de Valores del Paraguay (CAVAPY) y especialistas del estudio anfitrión.\r\n\r\n\r\n\r\nDurante el encuentro que reunió a referentes del sector financiero, jurídico y del mercado de capitales se analizaron los principales alcances de la Ley N.º 7572/2025 “Mercado de Valores y Productos”, destacando su importancia para modernizar y unificar el marco regulatorio, fortalecer la protección al inversionista y consolidar un enfoque de supervisión basado en riesgos. \r\n\r\n\r\n\r\nEn su exposición, Ruiz destacó que la normativa pone fin a la fragmentación normativa que regulaba el mercado y establece por primera vez de forma explícita el triple objetivo de proteger al inversionista, promover un mercado equitativo, eficiente y transparente, y reducir el riesgo sistémico.\r\n\r\n\r\n\r\nEl superintendente anticipó que durante el 2026 se completará la primera generación de reglamentos habilitantes y se avanzará en innovación (fondos privados, crowdfunding, tokenización y DLT, emisiones extranjeras) en una segunda generación. En este tiempo se fortalecerá la supervisión basada en riesgos para abordar riesgos de liquidez y la resiliencia operativa de las infraestructuras, entre otros.\r\n\r\n\r\n\r\nAsimismo, Ruiz destacó los desafíos que plantean los productos innovadores, como crowdfunding, tokenización y activos emitidos en tecnologías DLT, y enfatizó que el criterio rector será la correcta delimitación del perímetro regulatorio: cuando hay captación de recursos del público, expectativa de rendimiento y asimetría de información, el instrumento debe quedar bajo supervisión. \r\n\r\n\r\n\r\nFinalmente, resaltó que la ley representa un paso decisivo para construir un mercado más transparente, previsible y seguro, alineado con estándares internacionales.",
+      "date": "2025-11-21T01:33:03.864Z",
+      "featured": false,
+      "tags": []
+    },
+    {
+      "id": "2025-11-20-modernización-del-mercado-de-valores",
+      "type": "analisis",
+      "slug": "2025-11-20-modernización-del-mercado-de-valores",
+      "category": "",
+      "title": "Modernización del mercado de valores",
+      "description": "El encuentro se llevará a cabo este jueves 20 de noviembre, desde las 08:00, en el Hotel Dazzler (Av. Aviadores del Chaco y Vasconcellos) ",
+      "thumbnail": "/assets/img/nasdaq.avif",
+      "body": "![](/assets/img/2024-08-16-billetes.jpg)\r\n\r\n\r\n\r\nEn una charla organizada por la Bolsa de Valores de Asunción, la Caja de Valores del Paraguay y la Asociación de Casas de Bolsa, se brindarán detalles sobre las novedades que está trayendo el proceso de modernización del mercado de valores, entre ellas, los ajustes que se implementarán en la operativa con las empresas emisoras de títulos.\r\n\r\n\r\n\r\n\t•\tEl encuentro se llevará a cabo este jueves 20 de noviembre, desde las 08:00, en el Hotel Dazzler (Av. Aviadores del Chaco y Vasconcellos) \r\n\r\n\r\n\r\n(Asunción, 19 de noviembre de 2025).- “Modernización bursátil: Nueva estructura y procesos para emisores” se denomina la charla que se encuentran organizando la Bolsa de Valores de Asunción (BVA), la Caja de Valores del Paraguay (CAVAPY) y la Asociación de Casas de Bolsa del Paraguay (Asobolsa), para este jueves 20 de noviembre.\r\n\r\n\r\n\r\nEl objetivo es presentar a las empresas emisoras las novedades que se están implementando en el mercado de valores, en el marco de la transformación tecnológica, regulatoria y de infraestructura por la que atraviesa el sector.\r\n\r\n\r\n\r\nEntre los temas que se abordarán en la oportunidad, se destaca el próximo lanzamiento del Registro Único del Mercado de Valores, que integrará procesos ante la Superintendencia de Valores (SIV), la BVA y CAVAPY, y se aplicará tanto a registro de emisores como de instrumentos de negociación. \r\n\r\n\r\n\r\nAdemás, se presentarán las oportunidades de conexión con los mercados globales que se están generando con la contratación de los sistemas Nasdaq -desde la BVA- y Montran -desde CAVAPY-; y la nueva regulación que se implementará a partir de la Ley del Mercado de Valores recientemente promulgada.\r\n\r\n\r\n\r\nEl encuentro arrancará a las 08:00, en el Hotel Dazzler de Asunción, con la presencia de directivos de las instituciones organizadoras, así como de representantes de empresas emisoras y casas de bolsa que operan en el mercado bursátil local.",
+      "date": "2025-11-20T15:23:03.846Z",
+      "featured": false,
+      "tags": []
+    }
+  ],
+  "programa": [
+    {
+      "id": "2025-11-21-perspectivas-08-11-25",
+      "type": "programa",
+      "slug": "2025-11-21-perspectivas-08-11-25",
+      "category": "",
+      "title": "PERSPECTIVAS 08/11/25",
+      "description": "",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "Escuchá nuestra edición y enterate de los temas principales en el ámbito económico del país.",
+      "date": "2025-11-09T00:57:51.355Z",
+      "featured": false,
+      "tags": []
+    },
+    {
+      "id": "2025-11-21-perspectivas-21-06-2025",
+      "type": "programa",
+      "slug": "2025-11-21-perspectivas-21-06-2025",
+      "category": "",
+      "title": "PERSPECTIVAS - 21/06/2025",
+      "description": "",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "Escuchá nuestra edición y enterate de los temas principales en el ámbito económico del país.",
+      "date": "2025-06-22T00:39:10.699Z",
+      "featured": false,
+      "tags": []
+    },
+    {
+      "id": "2025-11-21-perspectivas-24-05-25",
+      "type": "programa",
+      "slug": "2025-11-21-perspectivas-24-05-25",
+      "category": "",
+      "title": "PERSPECTIVAS - 24/05/25",
+      "description": "",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "Escuchá nuestra edición y enterate de los temas principales en el ámbito económico del país.",
+      "date": "2025-05-25T00:53:37.496Z",
+      "featured": false,
+      "tags": []
+    },
+    {
+      "id": "2025-11-21-perspectivas-17-05-25",
+      "type": "programa",
+      "slug": "2025-11-21-perspectivas-17-05-25",
+      "category": "",
+      "title": "PERSPECTIVAS - 17/05/25",
+      "description": "",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "Escuchá nuestra edición y enterate de los temas principales en el ámbito económico del país.",
+      "date": "2025-05-18T00:51:06.240Z",
+      "featured": false,
+      "tags": []
+    },
+    {
+      "id": "2025-11-21-perspectivas-03-05-25",
+      "type": "programa",
+      "slug": "2025-11-21-perspectivas-03-05-25",
+      "category": "",
+      "title": "PERSPECTIVAS - 03/05/25",
+      "description": "",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "Escuchá nuestra edición y enterate de los temas principales en el ámbito económico del país.",
+      "date": "2025-05-04T00:49:26.304Z",
+      "featured": false,
+      "tags": []
+    },
+    {
+      "id": "2025-11-21-perspectivas-19-04-25",
+      "type": "programa",
+      "slug": "2025-11-21-perspectivas-19-04-25",
+      "category": "",
+      "title": "PERSPECTIVAS - 19/04/25",
+      "description": "",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "Escuchá nuestra edición y enterate de los temas principales en el ámbito económico del país.",
+      "date": "2025-04-20T00:33:46.704Z",
+      "featured": false,
+      "tags": []
+    }
+  ],
+  "podcast": [
+    {
+      "id": "2025-11-20-proyecciones-económicas-una-mirada-local-e-internacional",
+      "type": "podcast",
+      "slug": "2025-11-20-proyecciones-económicas-una-mirada-local-e-internacional",
+      "category": "",
+      "title": "Proyecciones económicas - una mirada local e internacional",
+      "description": "Entrevista al titular del BCP",
+      "thumbnail": [
+        "/assets/img/knmg6a6szzcshjyavygmnkhpbi.jpg"
+      ],
+      "body": "En esta entrega entrevistamos al presidente del Banco Central del Paraguay (BCP), Carlos Carvallos.",
+      "date": "2025-11-20T15:57:35.783Z",
+      "featured": false,
+      "tags": []
+    }
+  ],
+  "sponsors": [
+    {
+      "id": "perspectivacompany",
+      "type": "sponsors",
+      "slug": "perspectivacompany",
+      "category": "",
+      "title": "PerspectivasCompany",
+      "description": "",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "",
+      "date": "2026-01-13T11:16:08.498Z",
+      "featured": false,
+      "tags": []
+    },
+    {
+      "id": "cadiem-casa-de-bolsa",
+      "type": "sponsors",
+      "slug": "cadiem-casa-de-bolsa",
+      "category": "",
+      "title": "Cadiem Casa de Bolsa",
+      "description": "",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "",
+      "date": "2026-01-13T11:16:08.497Z",
+      "featured": true,
+      "tags": []
+    },
+    {
+      "id": "banco-itaú-paraguay",
+      "type": "sponsors",
+      "slug": "banco-itaú-paraguay",
+      "category": "",
+      "title": "Banco Itaú Paraguay",
+      "description": "",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "",
+      "date": "2026-01-13T11:16:08.496Z",
+      "featured": false,
+      "tags": []
+    },
+    {
+      "id": "banco-atlas",
+      "type": "sponsors",
+      "slug": "banco-atlas",
+      "category": "",
+      "title": "Banco Atlas",
+      "description": "",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "",
+      "date": "2026-01-13T11:16:08.493Z",
+      "featured": false,
+      "tags": []
+    },
+    {
+      "id": "bancard",
+      "type": "sponsors",
+      "slug": "bancard",
+      "category": "",
+      "title": "Bancard",
+      "description": "",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "",
+      "date": "2026-01-13T11:16:08.490Z",
+      "featured": false,
+      "tags": []
+    }
+  ]
 }

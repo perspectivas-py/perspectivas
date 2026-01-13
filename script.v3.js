@@ -1,7 +1,7 @@
 // script.v3.js — MOTOR PRO DEFINITIVO (Corregido)
 console.log("🚀 Perspectivas PRO v3 cargado");
 
-const CONTENT_URL = "content.json";
+const CONTENT_URL = "/content.json";
 
 const MARKET_QUOTES = [
   { label: "USD / Gs", value: "7.320", change: "+0,4%" },
@@ -244,7 +244,7 @@ const analisisController = (() => {
     // Primera nota como miniportada
     const firstItem = state.source[0];
     featured.innerHTML = `
-      <a href="#" class="featured-card">
+      <a href="/noticia.html?id=${encodeURIComponent(firstItem.slug || firstItem.id)}" class="featured-card">
         <div class="featured-card-img">
           <img src="${firstItem.thumbnail}" alt="${firstItem.title}"/>
         </div>
@@ -259,11 +259,11 @@ const analisisController = (() => {
     const remaining = state.source.slice(1, state.visible);
     grid.innerHTML = remaining
       .map(item => `
-        <div class="card">
+        <a href="/noticia.html?id=${encodeURIComponent(item.slug || item.id)}" class="card">
           <img src="${item.thumbnail}" alt="${item.title}">
           <h3>${item.title}</h3>
           <div class="card-meta">${formatDate(item.date)}</div>
-        </div>
+        </a>
       `)
       .join("");
 
@@ -297,12 +297,12 @@ const programaController = createSectionController({
   gridId: "program-grid",
   buttonId: "program-view-more",
   renderItem: (item) => `
-    <div class="card">
+    <a href="/noticia.html?id=${encodeURIComponent(item.slug || item.id)}" class="card">
       <div class="video-wrapper">
         <iframe src="${item.embed_url}" frameborder="0" allowfullscreen></iframe>
       </div>
       <h3>${item.title}</h3>
-    </div>
+    </a>
   `,
   emptyMessage: `<p class="empty-copy">Aún no cargamos episodios del programa.</p>`
 });
@@ -328,7 +328,7 @@ const podcastController = createSectionController({
           <h3>${item.title}</h3>
           <p class="podcast-tagline">Serie Perspectivas Podcast</p>
           <div class="podcast-actions">
-            <a class="podcast-listen" href="podcast.html?id=${item.id}">Escuchar ahora</a>
+            <a class="podcast-listen" href="/noticia.html?id=${encodeURIComponent(item.slug || item.id)}">Escuchar ahora</a>
             <button class="podcast-share" type="button" aria-label="Compartir episodio ${episodeNumber}">
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6">
                 <circle cx="18" cy="5" r="3" />
@@ -604,13 +604,18 @@ function renderHero(n) {
 
   const a = n[0]; // La noticia más nueva
 
+  // Cambiar la clase del contenedor a hero
+  container.className = 'hero';
+  
   container.innerHTML = `
-    <img src="${a.thumbnail}" class="hero-img" alt="${a.title}"/>
-    <div class="hero-content">
-      <div class="hero-section">${a.category || "Actualidad"}</div>
-      <h2 class="hero-title">${a.title}</h2>
-      <p class="hero-excerpt">${a.description ?? ""}</p>
-    </div>
+    <a href="/noticia.html?id=${encodeURIComponent(a.slug || a.id)}" class="hero-link-wrapper">
+      <img src="${a.thumbnail}" class="hero-img" alt="${a.title}"/>
+      <div class="hero-content">
+        <div class="hero-section">${a.category || "Actualidad"}</div>
+        <h2 class="hero-title">${a.title}</h2>
+        <p class="hero-excerpt">${a.description ?? ""}</p>
+      </div>
+    </a>
   `;
 }
 
@@ -621,13 +626,13 @@ function renderSecondary(n) {
   // Tomamos solo 4 destacados (índices 1, 2, 3, 4)
   const cardsHtml = n.slice(1, 5)
     .map(a => `
-      <div class="card">
-        <img src="${a.thumbnail}" alt="${a.title}"/>
-        <div>
-          <h3>${a.title}</h3>
-          <small>${formatDate(a.date)}</small>
+      <a href="/noticia.html?id=${encodeURIComponent(a.slug || a.id)}" class="secondary-card">
+        <div class="secondary-card-img">
+          <img src="${a.thumbnail}" alt="${a.title}"/>
         </div>
-      </div>
+        <h3>${a.title}</h3>
+        <small>${formatDate(a.date)}</small>
+      </a>
     `)
     .join("");
 
@@ -688,7 +693,7 @@ function renderNoticiasLocales() {
   if (slice.length > 0) {
     const featured = slice[0];
     html += `
-      <div class="card card-featured">
+      <a href="/noticia.html?id=${encodeURIComponent(featured.slug || featured.id)}" class="card card-featured">
         <div class="card-img-container">
           <img src="${featured.thumbnail}" alt="${featured.title}">
         </div>
@@ -696,7 +701,7 @@ function renderNoticiasLocales() {
           <h3>${featured.title}</h3>
           <div class="card-meta">${formatDate(featured.date)}</div>
         </div>
-      </div>
+      </a>
     `;
   }
   
@@ -705,13 +710,13 @@ function renderNoticiasLocales() {
     html += '<div class="news-grid-secondary">';
     html += slice.slice(1)
       .map(a => `
-        <div class="card">
+        <a href="/noticia.html?id=${encodeURIComponent(a.slug || a.id)}" class="card">
           <div class="card-img-container">
             <img src="${a.thumbnail}" alt="${a.title}">
           </div>
           <h3>${a.title}</h3>
           <div class="card-meta">${formatDate(a.date)}</div>
-        </div>
+        </a>
       `)
       .join("");
     html += '</div>';
