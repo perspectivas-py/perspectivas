@@ -576,7 +576,6 @@ function renderSecondary(n) {
     .join("");
 
   container.innerHTML = `
-    <p class="secondary-news-label">Destacadas</p>
     ${cardsHtml}
   `;
 }

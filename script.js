@@ -68,16 +68,16 @@ function renderSecondary(n) {
   const container = document.getElementById("secondary-news");
   if (!container || !n?.length) return;
 
-  // Tomamos de la 2da a la 4ta noticia (índices 1, 2, 3)
-  container.innerHTML = n.slice(1, 4)
+  // Tomamos de la 2da a la 5ta noticia (índices 1, 2, 3, 4) - 4 destacadas en grid perfecto
+  container.innerHTML = n.slice(1, 5)
     .map(a => `
-      <div class="card">
-        <img src="${a.thumbnail}" alt="${a.title}"/>
-        <div>
-          <h3>${a.title}</h3>
-          <small>${formatDate(a.date)}</small>
+      <a href="#" class="secondary-card">
+        <div class="secondary-card-img">
+          <img src="${a.thumbnail}" alt="${a.title}"/>
         </div>
-      </div>
+        <h3>${a.title}</h3>
+        <small>${formatDate(a.date)}</small>
+      </a>
     `)
     .join("");
 }
