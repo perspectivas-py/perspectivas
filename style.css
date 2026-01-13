@@ -1278,7 +1278,8 @@ ul { list-style: none; }
 
 .sponsors-strip {
   position: relative;
-  padding: 70px 0;
+  padding: 70px 0 100px 0;
+  margin-bottom: 3rem;
   border: none;
   background: radial-gradient(circle at top, rgba(244, 199, 183, 0.35), transparent 45%),
               linear-gradient(135deg, #070b16, #151f33);
@@ -1363,6 +1364,7 @@ ul { list-style: none; }
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(51, 65, 85, 0.1));
   border-radius: 26px;
   padding: 3.5rem 2.75rem;
+  margin-top: 3rem;
   box-shadow: 0 15px 35px rgba(37, 99, 235, 0.15), 0 35px 70px rgba(37, 99, 235, 0.1);
   border: 1px solid rgba(37, 99, 235, 0.25);
   position: relative;
