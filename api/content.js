@@ -12,11 +12,33 @@ function parseFrontmatter(md) {
 
   if (m) {
     data.content = md.replace(m[0], "").trim();
+    let currentKey = null;
+    let currentIndent = -1;
+    let nestedObj = null;
+    
     m[1].split("\n").forEach(line => {
-      const [key, ...v] = line.split(":");
+      if (!line.trim()) return;
+      
+      const indent = line.search(/\S/);
+      const lineContent = line.trim();
+      const [key, ...v] = lineContent.split(":");
+      
       if (key && v.length > 0) {
         const value = v.join(":").trim().replace(/^["']|["']$/g, "");
-        data.frontmatter[key.trim()] = value;
+        
+        if (!value || value === '{}') {
+          currentKey = key.trim();
+          nestedObj = {};
+          data.frontmatter[currentKey] = nestedObj;
+          currentIndent = indent;
+        } else {
+          if (nestedObj && indent > currentIndent) {
+            nestedObj[key.trim()] = value;
+          } else {
+            nestedObj = null;
+            data.frontmatter[key.trim()] = value;
+          }
+        }
       }
     });
   }
@@ -46,6 +68,20 @@ async function loadCollectionFromGitHub(folder, type) {
             const { frontmatter, content } = parseFrontmatter(text);
             const slug = f.name.replace(/\.mdx?$/, "");
 
+            let featuredObj = {
+              is_featured: false,
+              is_main_featured: false,
+              show_in_latest: true
+            };
+            
+            if (typeof frontmatter.featured === 'object' && frontmatter.featured !== null) {
+              featuredObj = {
+                is_featured: frontmatter.featured.is_featured === "true" || frontmatter.featured.is_featured === true,
+                is_main_featured: frontmatter.featured.is_main_featured === "true" || frontmatter.featured.is_main_featured === true,
+                show_in_latest: frontmatter.featured.show_in_latest !== "false" && frontmatter.featured.show_in_latest !== false
+              };
+            }
+            
             return {
               id: frontmatter.id || slug,
               type,
@@ -56,7 +92,7 @@ async function loadCollectionFromGitHub(folder, type) {
               thumbnail: frontmatter.thumbnail || "/assets/img/default.jpg",
               body: content.trim(),
               date: frontmatter.date ? new Date(frontmatter.date).toISOString() : new Date().toISOString(),
-              featured: frontmatter.featured === "true" || frontmatter.featured === true,
+              featured: featuredObj,
               tags: frontmatter.tags ? (Array.isArray(frontmatter.tags) ? frontmatter.tags : frontmatter.tags.split(",").map(t => t.trim())) : [],
             };
           } catch (error) {

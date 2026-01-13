@@ -79,7 +79,7 @@ collections:
         hint: "Controla dónde aparece la nota"
         fields:
           - { label: "¿Destacado en portada?", name: "is_featured", widget: "boolean", default: false, hint: "Aparecerá en la sección principal de la home" }
-          - { label: "¿En portada principal?", name: "is_main_featured", widget: "boolean", default: false, hint: "Será la noticia principal destacada" }
+          - { label: "🔴 ¿PORTADA PRINCIPAL (HERO)?", name: "is_main_featured", widget: "boolean", default: false, hint: "⚠️ IMPORTANTE: Activa esto para que la noticia sea tu PORTADA PRINCIPAL en el hero. Solo una noticia debe tener esto activado." }
           - { label: "¿Mostrar en últimas noticias?", name: "show_in_latest", widget: "boolean", default: true, hint: "Aparecerá en la lista general de noticias" }
 
       - { label: "📝 Contenido", name: "body", widget: "markdown", required: true, hint: "Contenido completo de la noticia (Markdown)" }
