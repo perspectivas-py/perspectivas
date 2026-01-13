@@ -1997,3 +1997,260 @@ ul { list-style: none; }
   margin-top: 1rem;
   border: 1px solid #ff0000;
 }
+
+/* =========================================
+   ESTILOS PARA ARTÍCULOS Y NOTICIAS
+   ========================================= */
+
+.full-article {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.article-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.article-category {
+  display: inline-block;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border-radius: 24px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.article-header h1 {
+  font-family: var(--font-headline);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 1rem 0;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.article-meta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin: 1rem 0 0;
+}
+
+.article-hero {
+  margin: 2.5rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.article-hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  max-height: 500px;
+}
+
+.article-body {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+  margin: 3rem 0;
+  text-align: justify;
+}
+
+.article-body h2 {
+  font-family: var(--font-headline);
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 2.5rem 0 1.5rem;
+  color: var(--text-primary);
+}
+
+.article-body h3 {
+  font-family: var(--font-headline);
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 2rem 0 1rem;
+  color: var(--text-primary);
+}
+
+.article-body p {
+  margin-bottom: 1.5rem;
+  max-width: 100%;
+}
+
+.article-body blockquote {
+  border-left: 4px solid var(--color-accent);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  font-style: italic;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  padding: 1.5rem;
+  padding-left: 1.5rem;
+  border-radius: 8px;
+}
+
+.article-body ul,
+.article-body ol {
+  margin: 1.5rem 0;
+  padding-left: 2rem;
+}
+
+.article-body li {
+  margin-bottom: 0.75rem;
+}
+
+.article-body a {
+  color: #2563eb;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.article-body a:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+.article-body img {
+  max-width: 100%;
+  height: auto;
+  margin: 2rem 0;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.article-share {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 3rem 0 2rem;
+  padding: 2rem 0;
+  border-top: 1px solid var(--border-color);
+}
+
+.article-share span {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-right: 1rem;
+}
+
+.article-share a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-secondary);
+  border: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+  text-decoration: none;
+}
+
+.article-share a:hover {
+  background: transparent;
+  color: var(--color-accent);
+  border: none;
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+
+.article-share i {
+  font-size: 1.5rem;
+}
+
+/* Responsive para artículos */
+@media (max-width: 768px) {
+  .full-article {
+    padding: 1rem 0;
+  }
+
+  .article-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .article-header h1 {
+    font-size: 2rem;
+  }
+
+  .article-body {
+    font-size: 1rem;
+    margin: 2rem 0;
+  }
+
+  .article-body h2 {
+    font-size: 1.8rem;
+    margin: 2rem 0 1rem;
+  }
+
+  .article-body h3 {
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.75rem;
+  }
+
+  .article-share {
+    gap: 1.25rem;
+    margin: 2rem 0 1rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .article-share span {
+    margin-right: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  .article-share i {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .article-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .article-meta {
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+  }
+
+  .article-body {
+    font-size: 1rem;
+  }
+
+  .article-share {
+    gap: 1rem;
+    margin: 2rem 0 1rem;
+    flex-wrap: wrap;
+  }
+
+  .article-share span {
+    width: 100%;
+    text-align: center;
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .article-share a {
+    flex: 0 1 auto;
+  }
+}

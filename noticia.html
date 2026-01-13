@@ -19,22 +19,37 @@
 
   <!-- HEADER CONSISTENTE CON EL RESTO DEL SITIO -->
   <header class="site-header">
-    <div class="wrap">
+    <div class="header-top">
+      <div class="header-controls left-controls">
+        <button id="menu-toggle" class="menu-toggle" aria-label="Abrir navegación" aria-expanded="false" aria-controls="nav-list">☰</button>
+      </div>
       <a class="brand" href="/">Perspectivas</a>
-
-      <nav class="main-nav" aria-label="Menú principal">
-        <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="nav-list">☰</button>
-        <ul id="nav-list" class="nav-list">
-          <li><a href="/">Inicio</a></li>
-          <li><a href="/analisis.html">Análisis</a></li>
-          <li><a href="/programa.html">Programa</a></li>
-        </ul>
-      </nav>
-
-      <button id="themeToggle" class="theme-toggle" aria-label="Alternar modo oscuro">
-        <span class="icon">🌙</span>
-      </button>
+      <div class="header-controls right-controls">
+        <button id="themeToggle" class="theme-toggle" aria-label="Cambiar tema">
+          <svg class="theme-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+      </div>
     </div>
+    <nav class="main-nav" aria-label="Menú principal">
+      <ul id="nav-list" class="nav-list">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/#noticias">Noticias</a></li>
+        <li><a href="/#programa">Programa</a></li>
+        <li><a href="/#analisis">Análisis</a></li>
+        <li><a href="/#podcast">Podcast</a></li>
+        <li><a href="/#cotizaciones">Cotizaciones</a></li>
+      </ul>
+    </nav>
   </header>
 
   <!-- CONTENIDO PRINCIPAL DE LA NOTICIA -->
