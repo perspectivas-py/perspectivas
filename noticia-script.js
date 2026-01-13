@@ -156,28 +156,30 @@ async function loadArticle() {
       </figure>
       ` : ""}
 
+      <div class="article-toolbar">
+        <div class="article-share">
+          <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(location.href)}&text=${encodeURIComponent(article.title)}"
+             target="_blank" rel="noopener noreferrer" aria-label="Compartir en X">
+            <i class="fab fa-x-twitter"></i>
+          </a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(location.href)}"
+             target="_blank" rel="noopener noreferrer" aria-label="Compartir en Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://api.whatsapp.com/send?text=${encodeURIComponent(article.title + ' ' + location.href)}"
+             target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(location.href)}&title=${encodeURIComponent(article.title)}"
+             target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </div>
+        <div class="article-reading-time">${lectura}</div>
+      </div>
+
       <section class="article-body">
         ${htmlBody}
-      </section>
-
-      <section class="article-share">
-        <span>Compartir:</span>
-        <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(location.href)}&text=${encodeURIComponent(article.title)}"
-           target="_blank" rel="noopener noreferrer" aria-label="Compartir en X">
-          <i class="fab fa-x-twitter"></i>
-        </a>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(location.href)}"
-           target="_blank" rel="noopener noreferrer" aria-label="Compartir en Facebook">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="https://api.whatsapp.com/send?text=${encodeURIComponent(article.title + ' ' + location.href)}"
-           target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp">
-          <i class="fab fa-whatsapp"></i>
-        </a>
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(location.href)}&title=${encodeURIComponent(article.title)}"
-           target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn">
-          <i class="fab fa-linkedin-in"></i>
-        </a>
       </section>
     `;
 
