@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnóstico - Noticia</title>
+  <style>
+    body { font-family: Arial; padding: 20px; max-width: 1000px; margin: 0 auto; }
+    .section { margin: 2rem 0; padding: 1rem; border: 1px solid #ddd; border-radius: 4px; }
+    .success { background: #e8f5e9; border-color: #4caf50; }
+    .error { background: #ffebee; border-color: #f44336; }
+    .warning { background: #fff3e0; border-color: #ff9800; }
+    h2 { margin-top: 0; }
+    pre { background: #f5f5f5; padding: 10px; overflow: auto; max-height: 200px; }
+    code { background: #f0f0f0; padding: 2px 4px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <h1>🔍 Diagnóstico de Carga de Artículo</h1>
+  
+  <div id="diagnostico"></div>
+
+  <script>
+    const diag = document.getElementById('diagnostico');
+    
+    function addLog(title, content, type = 'info') {
+      const className = type === 'success' ? 'section success' : 
+                       type === 'error' ? 'section error' : 
+                       type === 'warning' ? 'section warning' : 'section';
+      diag.innerHTML += `
+        <div class="${className}">
+          <h2>${title}</h2>
+          <pre>${content}</pre>
+        </div>
+      `;
+    }
+
+    async function runDiagnostics() {
+      try {
+        // 1. URL y parámetros
+        addLog('1️⃣ URL Actual', window.location.href, 'info');
+        
+        const params = new URLSearchParams(window.location.search);
+        const articleId = params.get('id');
+        addLog('2️⃣ Parámetro ID', articleId || '(ninguno)', articleId ? 'success' : 'error');
+
+        // 2. Verificar que marked.js esté cargado
+        const markedLoaded = typeof marked !== 'undefined';
+        addLog('3️⃣ Librería Marked.js', markedLoaded ? 'CARGADA ✓' : 'NO CARGADA ✗', markedLoaded ? 'success' : 'error');
+
+        // 3. Intentar cargar content.json
+        const contentUrl = '/content.json?t=' + Date.now();
+        let response;
+        try {
+          response = await fetch(contentUrl);
+          if (!response.ok) {
+            addLog('4️⃣ Cargar Content.json', `HTTP ${response.status} - ${response.statusText}`, 'error');
+            return;
+          }
+          addLog('4️⃣ Cargar Content.json', `HTTP ${response.status} - OK ✓`, 'success');
+        } catch (err) {
+          addLog('4️⃣ Cargar Content.json', `Error de red: ${err.message}`, 'error');
+          return;
+        }
+
+        // 4. Parsear JSON
+        let data;
+        try {
+          data = await response.json();
+          addLog('5️⃣ Parsear JSON', `OK ✓\nNoticias: ${data.noticias?.length}\nAnálisis: ${data.analisis?.length}\nPrograma: ${data.programa?.length}`, 'success');
+        } catch (err) {
+          addLog('5️⃣ Parsear JSON', `Error: ${err.message}`, 'error');
+          return;
+        }
+
+        // 5. Combinar todas las colecciones
+        const allNews = [...(data.noticias || []), ...(data.analisis || []), ...(data.programa || [])];
+        addLog('6️⃣ Total de Artículos', `${allNews.length} artículos disponibles`, 'success');
+
+        // 6. Buscar el artículo
+        if (!articleId) {
+          addLog('7️⃣ Búsqueda de Artículo', 'NO HAY PARÁMETRO ID EN LA URL', 'error');
+          const firstFewSlugs = allNews.slice(0, 5).map(a => a.slug).join('\n');
+          addLog('📋 Slugs Disponibles (primeros 5)', firstFewSlugs, 'warning');
+          return;
+        }
+
+        const article = allNews.find(a => (a.slug === articleId) || (a.id === articleId));
+        
+        if (!article) {
+          addLog('7️⃣ Búsqueda de Artículo', `NO ENCONTRADO\nBuscando: "${articleId}"`, 'error');
+          const allSlugs = allNews.map(a => a.slug).join('\n');
+          addLog('📋 Todos los Slugs Disponibles', allSlugs, 'warning');
+          return;
+        }
+
+        addLog('7️⃣ Búsqueda de Artículo', `ENCONTRADO ✓\nTítulo: ${article.title}\nTipo: ${article.type}`, 'success');
+
+        // 7. Verificar que el contenedor exista
+        const container = document.getElementById('contenido-noticia');
+        if (!container) {
+          addLog('8️⃣ Contenedor HTML', 'NO EXISTE #contenido-noticia', 'error');
+          return;
+        }
+        addLog('8️⃣ Contenedor HTML', 'Existe #contenido-noticia ✓', 'success');
+
+        // 8. Verificar que marked funcione
+        if (markedLoaded) {
+          try {
+            const testMarkdown = '# Test';
+            const testHtml = marked.parse(testMarkdown);
+            addLog('9️⃣ Marked.parse()', 'Funciona correctamente ✓', 'success');
+          } catch (err) {
+            addLog('9️⃣ Marked.parse()', `Error: ${err.message}`, 'error');
+          }
+        }
+
+        // 9. Mostrar datos del artículo
+        addLog('📄 Datos del Artículo', JSON.stringify(article, null, 2), 'success');
+
+        addLog('✅ DIAGNÓSTICO COMPLETO', 'Todo parece estar en orden. El artículo debería cargar correctamente.', 'success');
+
+      } catch (err) {
+        addLog('❌ ERROR GENERAL', err.message + '\n' + err.stack, 'error');
+      }
+    }
+
+    // Ejecutar diagnósticos
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', runDiagnostics);
+    } else {
+      runDiagnostics();
+    }
+  </script>
+</body>
+</html>

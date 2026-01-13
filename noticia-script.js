@@ -1,7 +1,7 @@
 // noticia-script.js — MÓDULO PRO DE NOTICIA v3
 console.log("📰 Noticia PRO v3 cargado");
 
-const CONTENT_URL = "/content.json";
+const ARTICLE_CONTENT_URL = "/content.json";
 
 // Lee el id (slug) desde ?id=xxx
 function getArticleIdFromUrl() {
@@ -82,7 +82,7 @@ async function loadArticle() {
   try {
     // Cache busting sencillo para navegador
     console.log("📥 Cargando content.json...");
-    const res = await fetch(`${CONTENT_URL}?t=${Date.now()}`);
+    const res = await fetch(`${ARTICLE_CONTENT_URL}?t=${Date.now()}`);
     
     if (!res.ok) {
       throw new Error(`No se pudo cargar content.json (HTTP ${res.status})`);
@@ -269,7 +269,7 @@ async function loadArticle() {
 
   try {
     // Cache busting sencillo para Vercel/navegador
-    const res = await fetch(`${CONTENT_URL}?t=${Date.now()}`);
+    const res = await fetch(`${ARTICLE_CONTENT_URL}?t=${Date.now()}`);
     if (!res.ok) throw new Error(`No se pudo cargar content.json (status ${res.status})`);
 
     const data = await res.json();

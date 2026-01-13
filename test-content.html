@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Content Loading</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .success { color: green; }
+    .error { color: red; }
+    pre { background: #f0f0f0; padding: 10px; overflow: auto; }
+  </style>
+</head>
+<body>
+  <h1>Test de Carga de Content.json</h1>
+  <div id="results"></div>
+
+  <script>
+    async function testContent() {
+      const results = document.getElementById('results');
+      
+      try {
+        const res = await fetch('/content.json?t=' + Date.now());
+        console.log('Response status:', res.status);
+        
+        if (!res.ok) {
+          results.innerHTML += `<p class="error">❌ Error: HTTP ${res.status}</p>`;
+          return;
+        }
+
+        const data = await res.json();
+        results.innerHTML += `<p class="success">✅ Content.json cargado correctamente</p>`;
+        results.innerHTML += `<p>Noticias: ${data.noticias?.length || 0}</p>`;
+        results.innerHTML += `<p>Análisis: ${data.analisis?.length || 0}</p>`;
+        results.innerHTML += `<p>Programa: ${data.programa?.length || 0}</p>`;
+        
+        // Listar slugs de noticias
+        results.innerHTML += `<h3>Slugs disponibles:</h3>`;
+        results.innerHTML += `<pre>${data.noticias.map(n => `- ${n.slug}`).join('\n')}</pre>`;
+        
+        // Probar búsqueda
+        results.innerHTML += `<h3>Prueba de búsqueda:</h3>`;
+        const article = data.noticias.find(n => n.slug === 'macro');
+        if (article) {
+          results.innerHTML += `<p class="success">✅ Artículo 'macro' encontrado</p>`;
+          results.innerHTML += `<pre>${JSON.stringify(article, null, 2)}</pre>`;
+        } else {
+          results.innerHTML += `<p class="error">❌ Artículo 'macro' NO encontrado</p>`;
+        }
+        
+      } catch (err) {
+        results.innerHTML += `<p class="error">❌ Error: ${err.message}</p>`;
+        console.error(err);
+      }
+    }
+
+    testContent();
+  </script>
+</body>
+</html>

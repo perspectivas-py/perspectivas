@@ -5,11 +5,12 @@
   "description": "Sitio de periodismo económico JAMstack",
   "scripts": {
     "build": "node scripts/build-content.js",
-    "start": "serve"
+    "start": "node server.js"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
-    "simple-oauth2": "^5.0.0"
+    "simple-oauth2": "^5.0.0",
+    "yaml": "^2.8.2"
   },
   "devDependencies": {
     "serve": "^14.2.0"

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Noticia Loading</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    .success { color: green; font-weight: bold; }
+    .error { color: red; font-weight: bold; }
+    pre { background: #f0f0f0; padding: 10px; max-height: 300px; overflow: auto; }
+  </style>
+</head>
+<body>
+  <h1>Test de Carga de Artículo</h1>
+  <p>URL actual: <code id="url-actual"></code></p>
+  <p>Slug solicitado: <code id="slug-solicitado"></code></p>
+  
+  <div id="results"></div>
+
+  <script>
+    const results = document.getElementById('results');
+    const urlActual = document.getElementById('url-actual');
+    const slugSolicitado = document.getElementById('slug-solicitado');
+    
+    // Mostrar URL actual
+    urlActual.textContent = window.location.href;
+    
+    // Obtener parámetro id
+    const params = new URLSearchParams(window.location.search);
+    const articleId = params.get("id");
+    slugSolicitado.textContent = articleId || '(ninguno)';
+
+    async function testArticle() {
+      try {
+        if (!articleId) {
+          results.innerHTML += `<p class="error">❌ No hay parámetro 'id' en la URL</p>`;
+          return;
+        }
+
+        // Cargar content.json
+        const res = await fetch('/content.json?t=' + Date.now());
+        if (!res.ok) {
+          results.innerHTML += `<p class="error">❌ Error cargando content.json: ${res.status}</p>`;
+          return;
+        }
+
+        const data = await res.json();
+        results.innerHTML += `<p class="success">✅ content.json cargado</p>`;
+
+        // Buscar el artículo
+        const allNews = [...(data.noticias || []), ...(data.analisis || []), ...(data.programa || [])];
+        const article = allNews.find(a => (a.slug === articleId) || (a.id === articleId));
+
+        if (!article) {
+          results.innerHTML += `<p class="error">❌ Artículo no encontrado</p>`;
+          results.innerHTML += `<p>Slugs disponibles:</p>`;
+          results.innerHTML += `<pre>${allNews.map(a => a.slug).join('\n')}</pre>`;
+          return;
+        }
+
+        results.innerHTML += `<p class="success">✅ Artículo encontrado: ${article.title}</p>`;
+        results.innerHTML += `<h3>Datos del artículo:</h3>`;
+        results.innerHTML += `<pre>${JSON.stringify(article, null, 2)}</pre>`;
+
+      } catch (err) {
+        results.innerHTML += `<p class="error">❌ Error: ${err.message}</p>`;
+        console.error(err);
+      }
+    }
+
+    testArticle();
+  </script>
+</body>
+</html>

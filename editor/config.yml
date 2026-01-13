@@ -44,6 +44,21 @@ collections:
       - { label: "⏰ Programar publicación", name: "publish_date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", hint: "Dejar en blanco si se publica inmediatamente", required: false }
       - { label: "📄 Resumen/Descripción", name: "summary", widget: "text", required: true, hint: "Texto corto que aparecerá en las listas" }
       
+      # -------- CATEGORÍA PRINCIPAL --------
+      - label: "📑 Categoría Principal"
+        name: "category"
+        widget: "select"
+        required: true
+        options:
+          - { label: "Macroeconomía", value: "macro" }
+          - { label: "Mercados e Inversión", value: "mercados-inversion" }
+          - { label: "Política Económica", value: "politica-economica" }
+          - { label: "Empresas", value: "empresas" }
+          - { label: "Empleo", value: "empleo" }
+          - { label: "Finanzas Personales", value: "finanzas-personales" }
+          - { label: "Educación Financiera", value: "educacion-financiera" }
+          - { label: "Actualidad", value: "actualidad" }
+      
       # -------- ETIQUETAS EN ESPAÑOL --------
       - label: "🏷️ Etiquetas"
         name: "tags"
@@ -102,6 +117,19 @@ collections:
       - { label: "📅 Fecha de publicación", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", required: true }
       - { label: "⏰ Programar publicación", name: "publish_date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", hint: "Dejar en blanco si se publica inmediatamente", required: false }
       - { label: "📄 Resumen", name: "summary", widget: "text", required: true }
+      
+      # -------- CATEGORÍA PRINCIPAL --------
+      - label: "📑 Categoría Principal"
+        name: "category"
+        widget: "select"
+        required: true
+        options:
+          - { label: "Análisis Económico", value: "analisis-economico" }
+          - { label: "Mercado de Valores", value: "mercado-valores" }
+          - { label: "Inversión", value: "inversion" }
+          - { label: "Tendencias", value: "tendencias" }
+          - { label: "Proyecciones", value: "proyecciones" }
+          - { label: "Reportes", value: "reportes" }
       
       - label: "🏷️ Etiquetas"
         name: "tags"
@@ -186,6 +214,18 @@ collections:
       - { label: "📅 Fecha de publicación", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", required: true }
       - { label: "⏰ Programar publicación", name: "publish_date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", required: false }
       - { label: "📄 Descripción del episodio", name: "summary", widget: "text", required: true }
+
+      # -------- CATEGORÍA PRINCIPAL --------
+      - label: "📑 Categoría Principal"
+        name: "category"
+        widget: "select"
+        required: true
+        options:
+          - { label: "Economía", value: "economia" }
+          - { label: "Finanzas", value: "finanzas" }
+          - { label: "Inversión", value: "inversion" }
+          - { label: "Negocios", value: "negocios" }
+          - { label: "Entrevistas", value: "entrevistas" }
 
       - label: "🏷️ Temas"
         name: "tags"
