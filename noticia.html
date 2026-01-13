@@ -25,7 +25,7 @@
       </div>
       <a class="brand" href="/">Perspectivas</a>
       <div class="header-controls right-controls">
-        <button id="themeToggle" class="theme-toggle" aria-label="Cambiar tema">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">
           <svg class="theme-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -84,6 +84,46 @@
 
   <!-- MARKED PARA RENDERIZAR MARKDOWN DEL BODY -->
   <script src="https://unpkg.com/marked@^4.0.0/marked.min.js"></script>
+
+  <!-- SCRIPT DE TEMA OSCURO -->
+  <script>
+    // Dark Mode Toggle Script
+    const themeToggle = document.getElementById('theme-toggle');
+    const htmlElement = document.documentElement;
+    
+    // Cargar tema guardado o detectar preferencia del sistema
+    function loadTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      let theme = savedTheme;
+      
+      if (!savedTheme) {
+        // Detectar preferencia del sistema
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      
+      applyTheme(theme);
+    }
+    
+    function applyTheme(theme) {
+      htmlElement.setAttribute('data-theme', theme === 'dark' ? 'dark' : '');
+      localStorage.setItem('theme', theme);
+      updateThemeButton(theme);
+    }
+    
+    function updateThemeButton(theme) {
+      themeToggle.title = theme === 'dark' ? 'Modo claro' : 'Modo oscuro';
+    }
+    
+    // Toggle al hacer click
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = localStorage.getItem('theme') || 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(newTheme);
+    });
+    
+    // Cargar tema al inicio
+    loadTheme();
+  </script>
 
   <!-- MÓDULO PRO DE NOTICIA -->
   <script src="/noticia-script.js?v=3.0.0"></script>
