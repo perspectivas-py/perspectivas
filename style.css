@@ -2327,3 +2327,36 @@ ul { list-style: none; }
     font-size: 1rem;
   }
 }
+
+/* Etiquetas (Tags) en Noticias */
+.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 0.5rem 0 1.5rem;
+}
+
+.tag-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: lowercase;
+  transition: all 0.2s ease;
+}
+
+.tag-badge:hover {
+  background: var(--color-accent);
+  color: white;
+  border-color: var(--color-accent);
+}
+
+[data-theme="dark"] .tag-badge {
+  background: #1e293b;
+  border-color: #334155;
+}
