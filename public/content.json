@@ -1,6 +1,45 @@
 {
   "noticias": [
     {
+      "id": "2026-01-13-prueba-hero-portada-principal",
+      "type": "noticias",
+      "slug": "2026-01-13-prueba-hero-portada-principal",
+      "category": "macro",
+      "title": "🧪 PRUEBA - Esta es la Portada Principal del Hero",
+      "description": "Esta es una noticia de prueba para verificar que el sistema de portada principal (Hero) funciona correctamente desde Decap CMS.",
+      "thumbnail": "/assets/img/captura-de-pantalla-2026-01-13-181157.png",
+      "body": "## Sistema de Portada Principal - ¡FUNCIONANDO! ✅\r\n\r\nEsta noticia fue creada para **probar que el sistema de Portada Principal (Hero) funciona correctamente**.\r\n\r\n### ¿Qué significa esto?\r\n\r\n1. **Esta noticia está marcada como `is_main_featured: true`** en su frontmatter\r\n2. **El script `renderHero()` en `script.js` debe buscarla y mostrarla**\r\n3. **Si ves esta nota en el Hero, todo funciona perfecto** 🎉\r\n\r\n### Cómo debería verse:\r\n\r\n- En el Home, en la sección Hero (la más grande arriba)\r\n- Con la imagen por defecto, el título y el resumen\r\n- Debería estar en lugar de la noticia más reciente\r\n\r\n### Próximos pasos:\r\n\r\nSi todo funciona correctamente, puedes:\r\n1. Ir a Decap CMS\r\n2. Crear nuevas noticias\r\n3. Marcar `¿PORTADA PRINCIPAL (HERO)?` = true\r\n4. Publicar\r\n5. Ver cómo la noticia aparece automáticamente en el Hero\r\n\r\n¡Esto debería estar completamente funcional ahora! 🚀",
+      "date": "2026-01-14T00:37:00.000Z",
+      "featured": {
+        "is_featured": true,
+        "is_main_featured": true,
+        "show_in_latest": true
+      },
+      "tags": [
+        "test",
+        "desarrollo"
+      ]
+    },
+    {
+      "id": "macro",
+      "type": "noticias",
+      "slug": "macro",
+      "category": "macro",
+      "title": "BCP mantiene 'anclada' la tasa de interés",
+      "description": "El Banco Central volvió a mantener la tasa de Política a la baja, por meses consecutivos",
+      "thumbnail": "/assets/img/knmg6a6szzcshjyavygmnkhpbi.jpg",
+      "body": "El Banco Central decidió mantener la tasa...",
+      "date": "2026-01-14T00:32:00.000Z",
+      "featured": {
+        "show_in_latest": true,
+        "is_featured": true,
+        "is_main_featured": false
+      },
+      "tags": [
+        "economia"
+      ]
+    },
+    {
       "id": "2026-01-13-bcp-actividad-económica-marcó-once-meses-consecutivos-de-expansión-en-noviembre",
       "type": "noticias",
       "slug": "2026-01-13-bcp-actividad-económica-marcó-once-meses-consecutivos-de-expansión-en-noviembre",
@@ -8,35 +47,15 @@
       "title": "BCP: Actividad económica marcó once meses consecutivos de expansión en noviembre",
       "description": "En base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cierre del mes de noviembre del 2025.\n",
       "thumbnail": "/assets/img/female-working-environment-projects.jpg",
-      "body": "En noviembre, la actividad económica continúa con buen dinamismo, marcando once meses consecutivos de\r\nexpansión interanual.\r\n\r\nEn base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cierre del mes de noviembre del 2025.\r\nEn el crecimiento interanual incidieron favorablemente los servicios y el sector primario.\r\n\r\nSector Primario\r\n\r\nEl sector primario registró un incremento interanual de 9,6%, acumulando con este resultado un aumento de 5,4% al cierre del mes de noviembre del 2025.\r\nLa agricultura, conforme a los nuevos datos del cierre de la campaña agrícola 2024/2025 y estimaciones 2025/2026, proveídas por el Ministerio de Agricultura y Ganadería (MAG), registró un crecimiento explicado por los mayores niveles de producción de maíz, trigo, arroz y algodón. Sin embargo, el menor nivel de producción de soja atenuó el resultado positivo.",
+      "body": "En noviembre, la actividad económica continúa con buen dinamismo, marcando once meses consecutivos de expansión interanual.\r\n\r\nEn base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cierre del mes de noviembre del 2025.\r\nEn el crecimiento interanual incidieron favorablemente los servicios y el sector primario.\r\n\r\nSector Primario\r\n\r\nEl sector primario registró un incremento interanual de 9,6%, acumulando con este resultado un aumento de 5,4% al cierre del mes de noviembre del 2025.\r\nLa agricultura, conforme a los nuevos datos del cierre de la campaña agrícola 2024/2025 y estimaciones 2025/2026, proveídas por el Ministerio de Agricultura y Ganadería (MAG), registró un crecimiento explicado por los mayores niveles de producción de maíz, trigo, arroz y algodón. Sin embargo, el menor nivel de producción de soja atenuó el resultado positivo.",
       "date": "2026-01-13T23:36:00.000Z",
       "featured": {
-        "is_featured": true,
-        "is_main_featured": true,
-        "show_in_latest": true
-      },
-      "tags": [
-        "economia"
-      ]
-    },
-    {
-      "id": "2026-01-13-prueba-hero-portada-principal",
-      "type": "noticias",
-      "slug": "2026-01-13-prueba-hero-portada-principal",
-      "category": "macro",
-      "title": "🧪 PRUEBA - Esta es la Portada Principal del Hero",
-      "description": "Esta es una noticia de prueba para verificar que el sistema de portada principal (Hero) funciona correctamente desde Decap CMS.",
-      "thumbnail": "/assets/img/default.jpg",
-      "body": "## Sistema de Portada Principal - ¡FUNCIONANDO! ✅\r\n\r\nEsta noticia fue creada para **probar que el sistema de Portada Principal (Hero) funciona correctamente**.\r\n\r\n### ¿Qué significa esto?\r\n\r\n1. **Esta noticia está marcada como `is_main_featured: true`** en su frontmatter\r\n2. **El script `renderHero()` en `script.js` debe buscarla y mostrarla**\r\n3. **Si ves esta nota en el Hero, todo funciona perfecto** 🎉\r\n\r\n### Cómo debería verse:\r\n\r\n- En el Home, en la sección Hero (la más grande arriba)\r\n- Con la imagen por defecto, el título y el resumen\r\n- Debería estar en lugar de la noticia más reciente\r\n\r\n### Próximos pasos:\r\n\r\nSi todo funciona correctamente, puedes:\r\n1. Ir a Decap CMS\r\n2. Crear nuevas noticias\r\n3. Marcar `¿PORTADA PRINCIPAL (HERO)?` = true\r\n4. Publicar\r\n5. Ver cómo la noticia aparece automáticamente en el Hero\r\n\r\n¡Esto debería estar completamente funcional ahora! 🚀",
-      "date": "2026-01-13T23:30:00.000Z",
-      "featured": {
-        "is_featured": true,
+        "is_featured": false,
         "is_main_featured": false,
         "show_in_latest": true
       },
       "tags": [
-        "test",
-        "desarrollo"
+        "economia"
       ]
     },
     {
@@ -76,34 +95,6 @@
       "tags": [
         "test",
         "desarrollo"
-      ]
-    },
-    {
-      "id": "macro",
-      "type": "noticias",
-      "slug": "macro",
-      "category": "macro",
-      "title": "BCP mantiene 'anclada' la tasa de interés",
-      "description": "",
-      "thumbnail": "/assets/img/knmg6a6szzcshjyavygmnkhpbi.jpg",
-      "body": "El Banco Central decidió mantener la tasa...",
-      "date": "2025-11-23T00:00:00.000Z",
-      "featured": false,
-      "tags": []
-    },
-    {
-      "id": "2025-11-22-bcp-mantiene-anclada-la-tasa-de-interes",
-      "type": "noticias",
-      "slug": "2025-11-22-bcp-mantiene-anclada-la-tasa-de-interes",
-      "category": "macro",
-      "title": "BCP mantiene \"anclada\" la tasa de interes con una inflación a la baja",
-      "description": "El Comité de Política Monetaria decidió, por unanimidad, mantener la tasa de interés de política monetaria (TPM) en 6,0% anual.",
-      "thumbnail": "/assets/img/knmg6a6szzcshjyavygmnkhpbi.jpg",
-      "body": "En su reunión del viernes 21 de noviembre, el Comité de Política Monetaria (CPM) decidió, por unanimidad, mantener la tasa de interés de política monetaria (TPM) en 6,0% anual.\r\n\r\nEl Comité destaca que los indicadores de actividad económica y de ventas continuaron mostrando un buen dinamismo en el margen. En cuanto a precios, la inflación interanual se ha desacelerado en meses recientes, reflejando, en parte, el efecto de la apreciación del tipo de cambio sobre los precios de los bienes no alimenticios —en particular, los durables— y de ciertos servicios.\r\n\r\nEl fortalecimiento de la moneda local, además de la disminución de las cotizaciones internacionales del petróleo, también contribuyó a la reducción de los precios de los combustibles a nivel local. Con la economía operando en torno a su nivel potencial, expectativas de inflación alineadas con la meta y menores presiones cambiarias, se proyecta que la inflación se ubique alrededor del 4,0% al cierre de 2025, para luego converger al 3,5% durante 2026.\r\n\r\n![El Comité de Política Monetaria decidió, por unanimidad, mantener la tasa de interés de política monetaria (TPM) en 6,0% anual.](/assets/img/mercado-libre-e1584221732666.jpg \"Inflación\")\r\n\r\nEn el ámbito externo, el mercado anticipa con menor probabilidad un nuevo recorte del rango objetivo para la tasa de interés de la Reserva Federal en su reunión de diciembre. En cuanto a los commodities, los precios del petróleo disminuyeron en el último mes.\r\n\r\nEl CPM reafirma su compromiso con la estabilidad de precios y seguirá monitoreando atentamente los desarrollos internos y externos, con el fin de anticipar sus posibles implicancias en la trayectoria de la inflación y tomar las medidas oportunas para garantizar el cumplimiento de la meta del 3,5% en el horizonte de política monetaria.\r\n\r\nLa próxima reunión del CPM se llevará a cabo el 22 de diciembre de 2025 y el comunicado respectivo será publicado a partir de las 15:00 del mismo día.",
-      "date": "2025-11-22T16:34:48.889Z",
-      "featured": true,
-      "tags": [
-        "TPM"
       ]
     },
     {
@@ -432,20 +423,7 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-14T00:45:59.997Z",
-      "featured": false,
-      "tags": []
-    },
-    {
-      "id": "banco-itaú-paraguay",
-      "type": "sponsors",
-      "slug": "banco-itaú-paraguay",
-      "category": "",
-      "title": "Banco Itaú Paraguay",
-      "description": "",
-      "thumbnail": "/assets/img/default.jpg",
-      "body": "",
-      "date": "2026-01-14T00:45:59.996Z",
+      "date": "2026-01-14T02:02:52.709Z",
       "featured": false,
       "tags": []
     },
@@ -458,8 +436,21 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-14T00:45:59.996Z",
+      "date": "2026-01-14T02:02:52.708Z",
       "featured": true,
+      "tags": []
+    },
+    {
+      "id": "banco-itaú-paraguay",
+      "type": "sponsors",
+      "slug": "banco-itaú-paraguay",
+      "category": "",
+      "title": "Banco Itaú Paraguay",
+      "description": "",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "",
+      "date": "2026-01-14T02:02:52.705Z",
+      "featured": false,
       "tags": []
     },
     {
@@ -471,7 +462,7 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-14T00:45:59.995Z",
+      "date": "2026-01-14T02:02:52.700Z",
       "featured": false,
       "tags": []
     },
@@ -484,7 +475,7 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-14T00:45:59.994Z",
+      "date": "2026-01-14T02:02:52.699Z",
       "featured": false,
       "tags": []
     }

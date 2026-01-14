@@ -1,7 +1,7 @@
 // script.v3.js — MOTOR PRO DEFINITIVO (Corregido)
 console.log("🚀 Perspectivas PRO v3 cargado");
 
-const CONTENT_URL = "/content.json";
+const CONTENT_URL = "content.json";
 
 const MARKET_QUOTES = [
   { label: "USD / Gs", value: "7.320", change: "+0,4%" },
@@ -231,7 +231,7 @@ const analisisController = (() => {
   function render() {
     const featured = document.getElementById("analisis-featured");
     const grid = document.getElementById("analisis-grid");
-    
+
     if (!featured || !grid) return;
 
     if (!state.source.length) {
@@ -352,9 +352,9 @@ function initSearchToggle() {
   const searchToggleDrawer = document.getElementById("search-toggle");
   const searchInput = document.getElementById("search-input");
   const drawer = document.getElementById("category-drawer");
-  
+
   if (!searchInput) return;
-  
+
   // Click en el icono de búsqueda del header
   if (searchToggleHeader && searchToggleHeader.dataset.bound !== "true") {
     searchToggleHeader.dataset.bound = "true";
@@ -371,7 +371,7 @@ function initSearchToggle() {
       setTimeout(() => searchInput.focus(), 100);
     });
   }
-  
+
   // Click en el icono de búsqueda dentro del drawer
   if (searchToggleDrawer && searchToggleDrawer.dataset.bound !== "true") {
     searchToggleDrawer.dataset.bound = "true";
@@ -383,13 +383,13 @@ function initSearchToggle() {
       }
     });
   }
-  
+
   // Filtrar noticias mientras se escribe
   searchInput.addEventListener("input", (e) => {
     const query = e.target.value.toLowerCase().trim();
     filterNewsBySearch(query);
   });
-  
+
   // Cerrar buscador al presionar Escape
   searchInput.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
@@ -506,12 +506,15 @@ async function initHome() {
     console.log("📦 Datos frescos recibidos:", data); // Mirá la consola para confirmar fecha
 
     // 2. RENDERIZADO MODULAR
-    await renderHeroFromFile();
-    
-    renderSecondary(data.noticias);
-    initNoticiasLocales(data.noticias);
-    renderCategoryFilters(data.noticias);
-    renderTopReads(data.noticias);
+    const heroArticle = renderHero(data.noticias);
+
+    // Filtrar la noticia que se usó como Hero para que no se repita en el resto de la página
+    const remainingNoticias = data.noticias.filter(n => (n.slug || n.id) !== (heroArticle.slug || heroArticle.id));
+
+    renderSecondary(remainingNoticias);
+    initNoticiasLocales(remainingNoticias);
+    renderCategoryFilters(remainingNoticias);
+    renderTopReads(remainingNoticias);
     initAnalisisSection(data.analisis);
     initProgramaSection(data.programa);
     initPodcastSection(data.podcast);
@@ -561,17 +564,17 @@ async function renderHeroFromFile() {
     const summary = frontmatter.match(/summary:\s*(.+)/)?.[1]?.trim() || "Sin resumen";
     const slug = frontmatter.match(/slug:\s*(.+)/)?.[1]?.trim() || "default";
     let thumbnail = frontmatter.match(/thumbnail:\s*(.+)/)?.[1]?.trim() || "";
-    
+
     // Si la ruta es relativa, convertirla a URL completa
     if (thumbnail.startsWith('/')) {
       thumbnail = window.location.origin + thumbnail;
     }
-    
+
     // Fallback si no hay thumbnail válido
     if (!thumbnail || thumbnail.startsWith('/')) {
       thumbnail = "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1200&h=500&fit=crop&q=80";
     }
-    
+
     const category = frontmatter.match(/category:\s*(.+)/)?.[1]?.trim() || "Actualidad";
 
     // Cambiar la clase del contenedor a hero
@@ -609,16 +612,16 @@ async function renderHeroFromFile() {
 
 function renderHero(n) {
   const container = document.getElementById("hero");
-  if (!container || !n?.length) return;
+  if (!container || !n?.length) return null;
 
   // 🎯 Buscar la noticia marcada como is_main_featured
   let heroArticle = n.find(noticia => {
     const featured = noticia.featured;
-    return featured && 
-           typeof featured === 'object' && 
-           featured.is_main_featured === true;
+    return featured &&
+      typeof featured === 'object' &&
+      featured.is_main_featured === true;
   });
-  
+
   // Si no hay ninguna marcada como principal, usa la más reciente
   if (!heroArticle) {
     heroArticle = n[0];
@@ -626,7 +629,7 @@ function renderHero(n) {
 
   // Cambiar la clase del contenedor a hero
   container.className = 'hero';
-  
+
   container.innerHTML = `
     <a href="/noticia.html?id=${encodeURIComponent(heroArticle.slug || heroArticle.id)}" class="hero-link-wrapper">
       <img src="${heroArticle.thumbnail}" class="hero-img" alt="${heroArticle.title}"/>
@@ -637,17 +640,19 @@ function renderHero(n) {
       </div>
     </a>
   `;
-  
-  console.log("📰 Hero actualizado con:", heroArticle.title, "(is_main_featured:", 
+
+  console.log("📰 Hero actualizado con:", heroArticle.title, "(is_main_featured:",
     (typeof heroArticle.featured === 'object' && heroArticle.featured?.is_main_featured) || false, ")");
+
+  return heroArticle;
 }
 
 function renderSecondary(n) {
   const container = document.getElementById("secondary-news");
   if (!container || !n?.length) return;
 
-  // Tomamos solo 4 destacados (índices 1, 2, 3, 4)
-  const cardsHtml = n.slice(1, 5)
+  // Tomamos los primeros 4 de la lista recibida (que ya debería venir sin la Hero)
+  const cardsHtml = n.slice(0, 4)
     .map(a => `
       <a href="/noticia.html?id=${encodeURIComponent(a.slug || a.id)}" class="secondary-card">
         <div class="secondary-card-img">
@@ -710,7 +715,7 @@ function renderNoticiasLocales() {
   }
 
   const slice = data.slice(0, noticiasLocalesState.visible);
-  
+
   // Primera noticia como mini portada (si hay contenido)
   let html = '';
   if (slice.length > 0) {
@@ -727,7 +732,7 @@ function renderNoticiasLocales() {
       </a>
     `;
   }
-  
+
   // Resto de noticias normales
   if (slice.length > 1) {
     html += '<div class="news-grid-secondary">';
@@ -744,7 +749,7 @@ function renderNoticiasLocales() {
       .join("");
     html += '</div>';
   }
-  
+
   container.innerHTML = html;
 }
 
@@ -762,15 +767,15 @@ function initProgramCarousel() {
   const carousel = document.getElementById("program-grid");
   const prevBtn = document.getElementById("program-prev");
   const nextBtn = document.getElementById("program-next");
-  
+
   if (!carousel || !prevBtn || !nextBtn) return;
-  
+
   const scrollAmount = 350; // Ancho de tarjeta + gap
-  
+
   prevBtn.addEventListener("click", () => {
     carousel.scrollBy({ left: -scrollAmount, behavior: "smooth" });
   });
-  
+
   nextBtn.addEventListener("click", () => {
     carousel.scrollBy({ left: scrollAmount, behavior: "smooth" });
   });
@@ -819,12 +824,12 @@ function renderCategoryFilters(noticias) {
 
   // Obtener categorías disponibles y normalizarlas
   const availableCategories = [...new Set(noticiasFilterSource.map(n => n.category).filter(Boolean))];
-  
+
   // Crear lista ordenada de categorías con sus etiquetas
   const categories = Object.entries(categoryLabels)
     .filter(([key]) => availableCategories.includes(key))
     .map(([key, label]) => ({ key, label }));
-  
+
   const html = [
     '<button class="filter-btn" data-category="all">Todas</button>',
     ...categories.map(cat => `<button class="filter-btn" data-category="${cat.key}">${cat.label}</button>`)
