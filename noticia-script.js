@@ -179,11 +179,8 @@ async function loadArticle() {
         
         ${tagsHtml}
 
-        <div class="article-meta">
-          ${article.author ? `<span>Por <strong>${article.author}</strong></span> <span>·</span>` : ""}
+        <div class="article-meta-top">
           <span>${formatDate(article.date)}</span>
-          <span>·</span>
-          <span>${lectura}</span>
         </div>
       </header>
 
@@ -194,7 +191,13 @@ async function loadArticle() {
       ` : ""}
 
       <div class="article-toolbar">
+        <div class="article-author-info">
+          ${article.author ? `<span class="author-name">Por <strong>${article.author}</strong></span>` : ""}
+          <span class="reading-time"><i class="far fa-clock"></i> ${lectura}</span>
+        </div>
+        
         <div class="article-share">
+          <span class="share-label">Compartir:</span>
           <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(location.href)}&text=${encodeURIComponent(article.title)}"
              target="_blank" rel="noopener noreferrer" aria-label="Compartir en X">
             <i class="fab fa-x-twitter"></i>
@@ -212,7 +215,6 @@ async function loadArticle() {
             <i class="fab fa-linkedin-in"></i>
           </a>
         </div>
-        <div class="article-reading-time">${lectura}</div>
       </div>
 
       <section class="article-body">
