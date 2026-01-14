@@ -106,7 +106,7 @@ ul {
 }
 
 .header-controls.left-controls {
-  left: 1rem;
+  left: 0.5rem;
 }
 
 .header-controls.right-controls {
@@ -160,11 +160,15 @@ ul {
 }
 
 .menu-toggle {
-  display: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 1.5rem;
   background: none;
   border: none;
   cursor: pointer;
+  padding: 0.35rem;
+  color: var(--text-primary);
 }
 
 .nav-search-wrapper {
@@ -177,7 +181,7 @@ ul {
 .controls-group {
   display: flex;
   align-items: center;
-  gap: 0rem;
+  gap: 0.5rem;
 }
 
 .site-header.scrolled .header-top {
