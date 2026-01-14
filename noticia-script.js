@@ -176,7 +176,6 @@ async function loadArticle() {
       <header class="article-header">
         <p class="article-category">${categoryLabel}</p>
         <h1>${article.title}</h1>
-        ${tagsHtml}
         <div class="article-meta">
           <span>${formatDate(article.date)}</span>
           <span>·</span>
@@ -214,6 +213,7 @@ async function loadArticle() {
 
       <section class="article-body">
         ${htmlBody}
+        ${tagsHtml}
       </section>
     `;
 
