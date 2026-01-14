@@ -2390,11 +2390,12 @@ ul {
 }
 
 .article-body {
-  font-size: 1.1rem;
+  max-width: 740px;
+  margin: 3rem auto;
+  font-size: 1.15rem;
   line-height: 1.8;
   color: var(--text-primary);
-  margin: 3rem 0;
-  text-align: justify;
+  text-align: left;
 }
 
 .article-body h2 {
@@ -2592,14 +2593,11 @@ ul {
 .article-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.6rem;
   justify-content: flex-start;
-  margin: 2rem 0 1.5rem;
-}
-
-.article-header .article-tags {
-  justify-content: center;
-  margin: 1rem 0;
+  margin: 4rem 0 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
 }
 
 .tag-badge {
