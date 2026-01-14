@@ -1270,7 +1270,7 @@ function initRouter() {
   const isNoticia = document.getElementById("contenido-noticia") !== null;
 
   if (isHome) initHome();
-  if (isNoticia) renderNoticia();
+  // if (isNoticia) renderNoticia(); // Deshabilitado para evitar conflicto con noticia-script.js
 }
 
 if (document.readyState === 'loading') {

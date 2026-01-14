@@ -2589,6 +2589,11 @@ ul {
   margin: 2rem 0 1.5rem;
 }
 
+.article-header .article-tags {
+  justify-content: center;
+  margin: 1rem 0;
+}
+
 .tag-badge {
   display: inline-block;
   padding: 0.2rem 0.6rem;
