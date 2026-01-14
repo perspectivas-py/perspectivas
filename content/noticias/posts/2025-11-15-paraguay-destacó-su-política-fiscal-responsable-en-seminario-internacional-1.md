@@ -1,4 +1,5 @@
 ---
+category: macro
 featured: false
 title: 2 Paraguay destacó su política fiscal responsable en seminario internacional
 date: 2025-11-15T18:24:00.000-03:00
@@ -20,3 +21,5 @@ Durante su intervención, el director subrayó que Paraguay mantiene un crecimie
 Asimismo, señaló que el país avanza de manera ordenada hacia la convergencia con la regla fiscal en el 2026, tras reducir el déficit desde -6,1% del PIB en el 2020 a -1,9% en el 2025, en cumplimiento del plan de consolidación fiscal del MEF.
 
 En materia de gasto público, destacó que Paraguay sostiene una gestión orientada a prioridades estratégicas, con incrementos dirigidos a salud, educación, desarrollo social y seguridad, fortaleciendo un modelo de crecimiento con enfoque social y responsabilidad fiscal. Al cierre de su exposición, remarcó que el país apunta a mantener la estabilidad y avanzar en el desarrollo social con responsabilidad fiscal y eficiencia en la gestión pública.
+
+

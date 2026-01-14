@@ -789,14 +789,31 @@ function renderCategoryFilters(noticias) {
 
   if (!containers.length || !noticiasFilterSource.length) return;
 
-  // Categorías ordenadas y sin duplicadas
-  const categoryOrder = ["Macroeconomía", "Mercados", "Commodities", "Finanzas", "Negocios", "Agro", "Inversión", "Tecnología", "Sociedad"];
+  // Mapeo de categorías: value -> label en español
+  const categoryLabels = {
+    "macro": "Macroeconomía",
+    "mercados-inversion": "Mercados e Inversión",
+    "politica-economica": "Política Económica",
+    "empresas": "Empresas",
+    "empleo": "Empleo",
+    "finanzas-personales": "Finanzas Personales",
+    "educacion-financiera": "Educación Financiera",
+    "actualidad": "Actualidad",
+    "economia": "Economía",
+    "negocios": "Negocios"
+  };
+
+  // Obtener categorías disponibles y normalizarlas
   const availableCategories = [...new Set(noticiasFilterSource.map(n => n.category).filter(Boolean))];
-  const categories = categoryOrder.filter(cat => availableCategories.includes(cat));
+  
+  // Crear lista ordenada de categorías con sus etiquetas
+  const categories = Object.entries(categoryLabels)
+    .filter(([key]) => availableCategories.includes(key))
+    .map(([key, label]) => ({ key, label }));
   
   const html = [
     '<button class="filter-btn" data-category="all">Todas</button>',
-    ...categories.map(cat => `<button class="filter-btn" data-category="${cat}">${cat}</button>`)
+    ...categories.map(cat => `<button class="filter-btn" data-category="${cat.key}">${cat.label}</button>`)
   ].join("");
 
   categoryFilterContainers = containers;

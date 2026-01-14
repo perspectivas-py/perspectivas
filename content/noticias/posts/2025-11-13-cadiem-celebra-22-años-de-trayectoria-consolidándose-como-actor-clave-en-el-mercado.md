@@ -1,4 +1,5 @@
 ---
+category: negocios
 title: CADIEM celebra 22 años de trayectoria, consolidándose como actor clave
 date: 2025-11-13T20:54:00.000-03:00
 summary: >-
@@ -29,3 +30,5 @@ Por su parte, Elías Gelay, presidente de CADIEM Casa de Bolsa, resaltó que est
 “Hoy el mercado genera más de USD 7.000 millones en transacciones, con proyectos importantes que estamos financiando. Son hitos relevantes para CADIEM, pero principalmente para el mercado de capitales, porque estamos buscando desarrollar proyectos que sean más grandes y que sean interesantes para los inversores que van a venir del exterior”, puntualizó Gelay.
 
 Expresó su satisfacción por los logros alcanzados, pero aseguró que “lo mejor está por venir”, ya que para los próximos años se abre la posibilidad de establecer alianzas con agentes extranjeros, quienes comienzan a mirar a Paraguay con nuevos ojos, impulsados por la estabilidad alcanzada y el surgimiento de proyectos de creciente envergadura.
+
+

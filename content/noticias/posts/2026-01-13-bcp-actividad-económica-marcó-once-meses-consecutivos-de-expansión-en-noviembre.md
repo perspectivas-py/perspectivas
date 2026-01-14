@@ -1,4 +1,5 @@
 ---
+category: macro
 title: "BCP: Actividad económica marcó once meses consecutivos de expansión en
   noviembre"
 date: 2026-01-13T20:36:00.000-03:00
@@ -26,3 +27,5 @@ Sector Primario
 
 El sector primario registró un incremento interanual de 9,6%, acumulando con este resultado un aumento de 5,4% al cierre del mes de noviembre del 2025.
 La agricultura, conforme a los nuevos datos del cierre de la campaña agrícola 2024/2025 y estimaciones 2025/2026, proveídas por el Ministerio de Agricultura y Ganadería (MAG), registró un crecimiento explicado por los mayores niveles de producción de maíz, trigo, arroz y algodón. Sin embargo, el menor nivel de producción de soja atenuó el resultado positivo.
+
+

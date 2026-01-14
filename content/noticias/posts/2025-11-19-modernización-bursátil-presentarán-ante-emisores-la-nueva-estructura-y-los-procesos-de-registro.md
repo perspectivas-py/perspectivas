@@ -20,3 +20,4 @@ Entre los temas que se abordarán en la oportunidad, se destaca el próximo lanz
 Además, se presentarán las oportunidades de conexión con los mercados globales que se están generando con la contratación de los sistemas Nasdaq -desde la BVAy Montran -desde CAVAPY-; y la nueva regulación que se implementará a partir de la Ley del Mercado de Valores recientemente promulgada.
 
 El encuentro arrancará a las 08:00, en el Hotel Dazzler de Asunción, con la presencia de autoridades y directivos de las instituciones organizadoras, así como de representantes de empresas emisoras y casas de bolsa que operan en el mercado bursátil local.
+

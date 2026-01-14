@@ -1,4 +1,5 @@
 ---
+category: economia
 title: Confianza del consumidor se reduce en octubre
 date: 2025-11-14T14:45:00.000-03:00
 summary: >+
@@ -18,3 +19,5 @@ El Índice de Situación Económica (ISE) registró un valor de 34,88, menor en 
 En cuanto a la predisposición a ahorrar, el porcentaje de encuestados que respondió de forma afirmativa a esta consulta fue de 18,25%. Este resultado fue inferior en 1,25 puntos porcentuales (pp) al del mes anterior y en 4,50 pp al valor registrado en octubre de 2024.
 
 Por otro lado, la predisposición a adquirir bienes durables registró incrementos mensuales en las categorías de electrodomésticos, casas y autos. En contraste, se observó una reducción en la predisposición a adquirir motos. En términos interanuales, todas las categorías de bienes presentaron reducciones.
+
+

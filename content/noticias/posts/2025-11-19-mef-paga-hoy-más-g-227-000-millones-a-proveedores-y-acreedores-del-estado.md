@@ -1,6 +1,6 @@
 ---
 featured: false
-category: politica-economica
+category: negocios
 tags:
   - pago
 title: MEF paga hoy más G. 227.000 millones a proveedores y acreedores del Estado

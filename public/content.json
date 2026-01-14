@@ -1,10 +1,68 @@
 {
   "noticias": [
     {
+      "id": "2026-01-13-bcp-actividad-económica-marcó-once-meses-consecutivos-de-expansión-en-noviembre",
+      "type": "noticias",
+      "slug": "2026-01-13-bcp-actividad-económica-marcó-once-meses-consecutivos-de-expansión-en-noviembre",
+      "category": "macro",
+      "title": "BCP: Actividad económica marcó once meses consecutivos de expansión en noviembre",
+      "description": "En base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cierre del mes de noviembre del 2025.\n",
+      "thumbnail": "/assets/img/female-working-environment-projects.jpg",
+      "body": "En noviembre, la actividad económica continúa con buen dinamismo, marcando once meses consecutivos de\r\nexpansión interanual.\r\n\r\nEn base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cierre del mes de noviembre del 2025.\r\nEn el crecimiento interanual incidieron favorablemente los servicios y el sector primario.\r\n\r\nSector Primario\r\n\r\nEl sector primario registró un incremento interanual de 9,6%, acumulando con este resultado un aumento de 5,4% al cierre del mes de noviembre del 2025.\r\nLa agricultura, conforme a los nuevos datos del cierre de la campaña agrícola 2024/2025 y estimaciones 2025/2026, proveídas por el Ministerio de Agricultura y Ganadería (MAG), registró un crecimiento explicado por los mayores niveles de producción de maíz, trigo, arroz y algodón. Sin embargo, el menor nivel de producción de soja atenuó el resultado positivo.",
+      "date": "2026-01-13T23:36:00.000Z",
+      "featured": {
+        "is_featured": true,
+        "is_main_featured": true,
+        "show_in_latest": true
+      },
+      "tags": [
+        "economia"
+      ]
+    },
+    {
+      "id": "2026-01-13-prueba-hero-portada-principal",
+      "type": "noticias",
+      "slug": "2026-01-13-prueba-hero-portada-principal",
+      "category": "macro",
+      "title": "🧪 PRUEBA - Esta es la Portada Principal del Hero",
+      "description": "Esta es una noticia de prueba para verificar que el sistema de portada principal (Hero) funciona correctamente desde Decap CMS.",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "## Sistema de Portada Principal - ¡FUNCIONANDO! ✅\r\n\r\nEsta noticia fue creada para **probar que el sistema de Portada Principal (Hero) funciona correctamente**.\r\n\r\n### ¿Qué significa esto?\r\n\r\n1. **Esta noticia está marcada como `is_main_featured: true`** en su frontmatter\r\n2. **El script `renderHero()` en `script.js` debe buscarla y mostrarla**\r\n3. **Si ves esta nota en el Hero, todo funciona perfecto** 🎉\r\n\r\n### Cómo debería verse:\r\n\r\n- En el Home, en la sección Hero (la más grande arriba)\r\n- Con la imagen por defecto, el título y el resumen\r\n- Debería estar en lugar de la noticia más reciente\r\n\r\n### Próximos pasos:\r\n\r\nSi todo funciona correctamente, puedes:\r\n1. Ir a Decap CMS\r\n2. Crear nuevas noticias\r\n3. Marcar `¿PORTADA PRINCIPAL (HERO)?` = true\r\n4. Publicar\r\n5. Ver cómo la noticia aparece automáticamente en el Hero\r\n\r\n¡Esto debería estar completamente funcional ahora! 🚀",
+      "date": "2026-01-13T23:30:00.000Z",
+      "featured": {
+        "is_featured": true,
+        "is_main_featured": true,
+        "show_in_latest": true
+      },
+      "tags": [
+        "test",
+        "desarrollo"
+      ]
+    },
+    {
+      "id": "2026-01-13-actividad-económica-marcó-once-meses-consecutivos-de-expansión-en-noviembre",
+      "type": "noticias",
+      "slug": "2026-01-13-actividad-económica-marcó-once-meses-consecutivos-de-expansión-en-noviembre",
+      "category": "macro",
+      "title": "Actividad económica marcó once meses consecutivos de expansión en noviembre",
+      "description": "En base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cierre del mes de noviembre del 2025.\n",
+      "thumbnail": "/assets/img/top-view-office-desk-with-growth-chart-coffee-cup.jpg",
+      "body": "En noviembre, la actividad económica continúa con buen dinamismo, marcando once meses consecutivos de\r\nexpansión interanual.\r\n\r\nEn base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cierre del mes de noviembre del 2025.\r\nEn el crecimiento interanual incidieron favorablemente los servicios y el sector primario.\r\n\r\nSector Primario\r\n\r\nEl sector primario registró un incremento interanual de 9,6%, acumulando con este resultado un aumento de 5,4% al cierre del mes de noviembre del 2025.\r\nLa agricultura, conforme a los nuevos datos del cierre de la campaña agrícola 2024/2025 y estimaciones 2025/2026, proveídas por el Ministerio de Agricultura y Ganadería (MAG), registró un crecimiento explicado por los mayores niveles de producción de maíz, trigo, arroz y algodón. Sin embargo, el menor nivel de producción de soja atenuó el resultado positivo.",
+      "date": "2026-01-13T21:26:00.000Z",
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": true,
+        "show_in_latest": true
+      },
+      "tags": [
+        "economia"
+      ]
+    },
+    {
       "id": "2026-01-13-prueba-sistema-carga-automatica",
       "type": "noticias",
       "slug": "2026-01-13-prueba-sistema-carga-automatica",
-      "category": "",
+      "category": "macro",
       "title": "✅ Prueba - Sistema de Carga Automática Funcionando",
       "description": "Esta es una noticia de prueba para verificar que el sistema Decap + Vercel carga automáticamente las nuevas noticias en la página principal.",
       "thumbnail": "/assets/img/default.jpg",
@@ -24,7 +82,7 @@
       "id": "macro",
       "type": "noticias",
       "slug": "macro",
-      "category": "Macroeconomía",
+      "category": "macro",
       "title": "BCP mantiene 'anclada' la tasa de interés",
       "description": "",
       "thumbnail": "/assets/img/knmg6a6szzcshjyavygmnkhpbi.jpg",
@@ -82,7 +140,7 @@
       "id": "2025-11-19-mef-paga-hoy-más-g-227-000-millones-a-proveedores-y-acreedores-del-estado",
       "type": "noticias",
       "slug": "2025-11-19-mef-paga-hoy-más-g-227-000-millones-a-proveedores-y-acreedores-del-estado",
-      "category": "politica-economica",
+      "category": "negocios",
       "title": "MEF paga hoy más G. 227.000 millones a proveedores y acreedores del Estado",
       "description": " Procesará hoy martes 18 de noviembre ₲ 227.489 millones para pago a proveedores y acreedores del Estado. ",
       "thumbnail": "/assets/img/default.jpg",
@@ -112,7 +170,7 @@
       "id": "2025-11-17-banco-mundial-prevé-caída-de-precios-de-commodities-en-2026",
       "type": "noticias",
       "slug": "2025-11-17-banco-mundial-prevé-caída-de-precios-de-commodities-en-2026",
-      "category": "Macro",
+      "category": "macro",
       "title": "Banco Mundial prevé caída de precios de commodities en 2026",
       "description": "Enfrentarían en el 2026 su cuarto año consecutivo de descenso de precios",
       "thumbnail": "/assets/img/default.jpg",
@@ -125,7 +183,7 @@
       "id": "2025-11-15-paraguay-destacó-su-política-fiscal-responsable-en-seminario-internacional",
       "type": "noticias",
       "slug": "2025-11-15-paraguay-destacó-su-política-fiscal-responsable-en-seminario-internacional",
-      "category": "",
+      "category": "macro",
       "title": "Paraguay destacó su política fiscal responsable en seminario internacional",
       "description": "Se debatió sobre los desafíos y tendencias de la gestión presupuestaria, así como para promover el intercambio técnico y político orientado a fortalecer la sostenibilidad fiscal.",
       "thumbnail": "/assets/img/default.jpg",
@@ -138,7 +196,7 @@
       "id": "2025-11-15-paraguay-destacó-su-política-fiscal-responsable-en-seminario-internacional-1",
       "type": "noticias",
       "slug": "2025-11-15-paraguay-destacó-su-política-fiscal-responsable-en-seminario-internacional-1",
-      "category": "",
+      "category": "macro",
       "title": "2 Paraguay destacó su política fiscal responsable en seminario internacional",
       "description": "El encuentro reunió a autoridades fiscales y especialistas de la región para debatir sobre los desafíos y tendencias de la gestión presupuestaria, así como para promover el intercambio técnico y político orientado a fortalecer la sostenibilidad fiscal.",
       "thumbnail": "/assets/img/default.jpg",
@@ -151,7 +209,7 @@
       "id": "2025-11-14-confianza-del-consumidor-se-reduce-en-octubre",
       "type": "noticias",
       "slug": "2025-11-14-confianza-del-consumidor-se-reduce-en-octubre",
-      "category": "",
+      "category": "economia",
       "title": "Confianza del consumidor se reduce en octubre",
       "description": "En octubre de 2025, el Índice de Confianza del Consumidor se ubicó en 48,32 puntos. Por su parte, el Índice de Expectativas Económicas y el Índice de Situación Económica se ubicaron en 61,75 y 34,88 puntos respectivamente.\n",
       "thumbnail": "/assets/img/default.jpg",
@@ -164,7 +222,7 @@
       "id": "2025-11-14-comercio-exterior-movió-usd-14-182-1-millones-en-10-meses",
       "type": "noticias",
       "slug": "2025-11-14-comercio-exterior-movió-usd-14-182-1-millones-en-10-meses",
-      "category": "",
+      "category": "economia",
       "title": "Comercio exterior movió US$ 14.182,1 millones en 10 meses",
       "description": "Las exportaciones totales, al mes de octubre de 2025, alcanzaron un valor de US$ 14.182,1 millones, 3,3% por encima de los US$ 13.273,9 millones observados a octubre del año anterior. ",
       "thumbnail": "/assets/img/default.jpg",
@@ -177,7 +235,7 @@
       "id": "2025-11-13-cadiem-celebra-22-años-de-trayectoria-consolidándose-como-actor-clave-en-el-mercado",
       "type": "noticias",
       "slug": "2025-11-13-cadiem-celebra-22-años-de-trayectoria-consolidándose-como-actor-clave-en-el-mercado",
-      "category": "",
+      "category": "negocios",
       "title": "CADIEM celebra 22 años de trayectoria, consolidándose como actor clave",
       "description": "Con la obtención de la primera nota en grado de inversión para el Paraguay, y a la\nespera de una segunda, desde la empresa se augura un horizonte de proyectos\ncada vez más grandes que resulten atractivos ante los inversionistas a nivel\ninternacional",
       "thumbnail": "/assets/img/default.jpg",
@@ -190,7 +248,7 @@
       "id": "2025-11-13-cadiem-celebra-22-años-de-trayectoria-consolidándose-como-actor-clave",
       "type": "noticias",
       "slug": "2025-11-13-cadiem-celebra-22-años-de-trayectoria-consolidándose-como-actor-clave",
-      "category": "",
+      "category": "macro",
       "title": "CADIEM celebra 22 años de trayectoria, consolidándose como actor clave",
       "description": "Con la obtención de la primera nota en grado de inversión para el Paraguay, y a la\nespera de una segunda, desde la empresa se augura un horizonte de proyectos\ncada vez más grandes que resulten atractivos ante los inversionistas a nivel\ninternacional",
       "thumbnail": "/assets/img/default.jpg",
@@ -201,6 +259,24 @@
     }
   ],
   "analisis": [
+    {
+      "id": "2026-01-13-aportes-a-la-caja-fiscal-solo-alcanzan-para-financiar-5años-de-jubilación-en-promedio",
+      "type": "analisis",
+      "slug": "2026-01-13-aportes-a-la-caja-fiscal-solo-alcanzan-para-financiar-5años-de-jubilación-en-promedio",
+      "category": "",
+      "title": "Aportes a la Caja Fiscal solo alcanzan para financiar 5años de jubilación en promedio",
+      "description": "Los aportes de un trabajador a la Caja Fiscal solo alcanzan para financiar cinco años de jubilación en promedio\n",
+      "thumbnail": "/assets/img/mef-villa-serrati_4_0.jpg",
+      "body": "En las condiciones actuales del Sistema de Jubilaciones y Pensiones del sector público, conocido como Caja Fiscal, el dinero acumulado por un trabajador durante su vida activa alcanza únicamente para financiar, en promedio, cinco años de su jubilación. A partir de ese momento, el pago del beneficio pasa a depender del sistema solidario. Así lo explicó la gerente de Desarrollo Económico del Ministerio de Economía y Finanzas (MEF), Liz Coronel, en una entrevista emitido por Telefuturo.",
+      "date": "2026-01-13T23:36:00.000Z",
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": true
+      },
+      "tags": [
+        "analisis-economico"
+      ]
+    },
     {
       "id": "2025-11-21-ley-del-mercado-de-valores-fortalece-protección-al-inversionista",
       "type": "analisis",
@@ -229,6 +305,23 @@
     }
   ],
   "programa": [
+    {
+      "id": "2026-01-13-perspectivas-capítulo-13-12-25",
+      "type": "programa",
+      "slug": "2026-01-13-perspectivas-capítulo-13-12-25",
+      "category": "",
+      "title": "Perspectivas: Capítulo 13/12/25",
+      "description": "Todo el análisis de la economía local e internacional",
+      "thumbnail": "/assets/img/captura-de-pantalla-2026-01-13-181157.png",
+      "body": "",
+      "date": "2025-12-13T13:07:00.000Z",
+      "featured": {
+        "is_featured": true
+      },
+      "tags": [
+        "economia-local"
+      ]
+    },
     {
       "id": "2025-11-21-perspectivas-08-11-25",
       "type": "programa",
@@ -339,7 +432,7 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-13T16:16:28.593Z",
+      "date": "2026-01-14T00:00:47.545Z",
       "featured": false,
       "tags": []
     },
@@ -352,21 +445,8 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-13T16:16:28.592Z",
+      "date": "2026-01-14T00:00:47.544Z",
       "featured": true,
-      "tags": []
-    },
-    {
-      "id": "banco-itaú-paraguay",
-      "type": "sponsors",
-      "slug": "banco-itaú-paraguay",
-      "category": "",
-      "title": "Banco Itaú Paraguay",
-      "description": "",
-      "thumbnail": "/assets/img/default.jpg",
-      "body": "",
-      "date": "2026-01-13T16:16:28.581Z",
-      "featured": false,
       "tags": []
     },
     {
@@ -378,7 +458,20 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-13T16:16:28.580Z",
+      "date": "2026-01-14T00:00:47.543Z",
+      "featured": false,
+      "tags": []
+    },
+    {
+      "id": "banco-itaú-paraguay",
+      "type": "sponsors",
+      "slug": "banco-itaú-paraguay",
+      "category": "",
+      "title": "Banco Itaú Paraguay",
+      "description": "",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "",
+      "date": "2026-01-14T00:00:47.543Z",
       "featured": false,
       "tags": []
     },
@@ -391,7 +484,7 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-13T16:16:28.578Z",
+      "date": "2026-01-14T00:00:47.542Z",
       "featured": false,
       "tags": []
     }

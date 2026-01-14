@@ -1,4 +1,5 @@
 ---
+category: macro
 title: "✅ Prueba - Sistema de Carga Automática Funcionando"
 date: 2026-01-13T14:30:00.000Z
 summary: "Esta es una noticia de prueba para verificar que el sistema Decap + Vercel carga automáticamente las nuevas noticias en la página principal."
@@ -36,3 +37,5 @@ Decap CMS → GitHub (commit) → Vercel (build) → content.json → Tu página
 - Las nuevas noticias aparecerán en tu home en 2-3 minutos
 
 ¡Todo está listo para usar! 🚀
+
+
