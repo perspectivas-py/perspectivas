@@ -10,7 +10,7 @@ tags:
 thumbnail: /assets/img/mef-villa-serrati_4_0.jpg
 featured:
   is_featured: false
-  is_main_featured: true
+  is_main_featured: false
 slug: ""
 ---
 En las condiciones actuales del Sistema de Jubilaciones y Pensiones del sector público, conocido como Caja Fiscal, el dinero acumulado por un trabajador durante su vida activa alcanza únicamente para financiar, en promedio, cinco años de su jubilación. A partir de ese momento, el pago del beneficio pasa a depender del sistema solidario. Así lo explicó la gerente de Desarrollo Económico del Ministerio de Economía y Finanzas (MEF), Liz Coronel, en una entrevista emitido por Telefuturo.
