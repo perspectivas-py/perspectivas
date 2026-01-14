@@ -1,17 +1,18 @@
 ---
-title: "🧪 PRUEBA - Esta es la Portada Principal del Hero"
-date: 2026-01-13T23:30:00.000Z
+title: 🧪 PRUEBA - Esta es la Portada Principal del Hero
+date: 2026-01-13T21:37:00.000-03:00
+summary: Esta es una noticia de prueba para verificar que el sistema de portada
+  principal (Hero) funciona correctamente desde Decap CMS.
 category: macro
-summary: "Esta es una noticia de prueba para verificar que el sistema de portada principal (Hero) funciona correctamente desde Decap CMS."
 tags:
   - test
   - desarrollo
-thumbnail: /assets/img/default.jpg
+thumbnail: /assets/img/captura-de-pantalla-2026-01-13-181157.png
 featured:
   is_featured: true
-  is_main_featured: false
+  is_main_featured: true
   show_in_latest: true
-slug: "prueba-hero-portada-principal"
+slug: prueba-hero-portada-principal
 ---
 
 ## Sistema de Portada Principal - ¡FUNCIONANDO! ✅

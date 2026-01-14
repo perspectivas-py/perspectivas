@@ -1,5 +1,4 @@
 ---
-category: macro
 title: "BCP: Actividad económica marcó once meses consecutivos de expansión en
   noviembre"
 date: 2026-01-13T20:36:00.000-03:00
@@ -7,11 +6,12 @@ summary: >
   En base a informaciones preliminares, el IMAEP registró un incremento de 4,0%
   con respecto al mismo mes del año anterior. Con este resultado, acumuló un
   crecimiento de 5,8% al cierre del mes de noviembre del 2025.
+category: macro
 tags:
   - economia
 thumbnail: /assets/img/female-working-environment-projects.jpg
 featured:
-  is_featured: true
+  is_featured: false
   is_main_featured: true
   show_in_latest: true
 slug: ""
