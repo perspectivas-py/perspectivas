@@ -39,6 +39,7 @@ function loadCollection(folder, type) {
         date: data.date ? new Date(data.date).toISOString() : new Date().toISOString(),
         featured: data.featured || false,
         tags: data.tags || [],
+        ...data, // Mantener todos los campos del frontmatter (incluyendo embed_url, audio_url, author, etc)
       };
     })
     .sort((a, b) => new Date(b.date) - new Date(a.date)); // Más recientes arriba
@@ -67,7 +68,7 @@ async function main() {
   const publicPath = path.join(publicDir, "content.json");
   fs.writeFileSync(publicPath, JSON.stringify(data, null, 2));
   console.log("✨ content.json también disponible en /public/content.json");
-  
+
   console.log(`📊 Estadísticas: ${data.noticias.length} noticias, ${data.analisis.length} análisis`);
 
   console.log("🏁 Finalizado con éxito!");

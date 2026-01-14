@@ -1,9 +1,55 @@
 {
   "noticias": [
     {
+      "id": "2026-01-14-créditos-para-la-vivienda-abarca-cerca-de-la-mitad-de-la-cartera-de-la-afd​",
+      "type": "noticias",
+      "slug": "2026-01-14-créditos-para-la-vivienda-abarca-cerca-de-la-mitad-de-la-cartera-de-la-afd​",
+      "category": "politica-economica",
+      "title": "Créditos para la vivienda abarca cerca de la mitad de la cartera de la AFD​",
+      "description": "La AFD desembolsó G 205 mil millones para créditos en el mes de noviembre. De esta manera, el acumulado sumó G 2,4 billones, 48,5% mayor.​\n\n",
+      "thumbnail": "/assets/img/couple-holding-small-house-medium-shot.jpg",
+      "body": "La Agencia Financiera de Desarrollo (AFD) desembolsó PYG 205 mil millones (USD 24 millones) para créditos en el mes de noviembre. De esta manera el acumulado a dicho mes sumó PYG 2,4 billones (USD 321 millones), siendo 48,5% mayor interanualmente., según Mentu.\r\n\r\nLos mayores desembolsos a noviembre se dieron en créditos para la vivienda, con el 37,2%, equivalente a PYG 911 mil millones (USD 121 millones), así como un 31,6% para comercio y servicios, sectores que en conjunto representan 68,9% del total. ​\r\n\r\nCon estos desembolsos, la cartera vigente de la AFD ascendió a PYG 9,6 billones (USD 1,4 mil millones), con un incremento interanual de 11,5%. El principal sector de esta cartera es el de la vivienda, con 48,8% del total, beneficiando a 20.811 personas. ​\r\n\r\nA dicho sector le siguen el comercial (13,4%; 16.665 beneficiarios), el agrícola (12,7%; 3.694 beneficiarios) y el industrial (11,4%; 416 beneficiarios). El 86,3% de la cartera vigente de la AFD se concentra en estos cuatro sectores, que suman 41.586 beneficiarios, es decir, 98,7% del total.​",
+      "date": "2026-01-14T16:14:00.000Z",
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": true,
+        "show_in_latest": true
+      },
+      "tags": [
+        "economia",
+        "inversion",
+        "desarrollo"
+      ],
+      "summary": "La AFD desembolsó G 205 mil millones para créditos en el mes de noviembre. De esta manera, el acumulado sumó G 2,4 billones, 48,5% mayor.​\n\n",
+      "author": "Perspectivas"
+    },
+    {
+      "id": "2026-01-14-exportaciones-repuntaron-casi-6-durante-el-2025",
+      "type": "noticias",
+      "slug": "2026-01-14-exportaciones-repuntaron-casi-6-durante-el-2025",
+      "category": "macro",
+      "title": "Exportaciones repuntaron casi 6% durante el 2025",
+      "description": "Durante el año 2025, las exportaciones totales, alcanzaron un valor de USD 16.720,3 millones, 5,8% por encima de los USD 15.806,1 millones observados a diciembre del año anterior. ",
+      "thumbnail": "/assets/img/exportación.jpg",
+      "body": "Durante el año 2025, las exportaciones totales, alcanzaron un valor de USD 16.720,3 millones, 5,8% por encima de los USD 15.806,1 millones observados a diciembre del año anterior. Las exportaciones registradas representaron el 66,3% del total, alcanzando USD 11.082,1 millones, superior en 1,5% al valor acumulado a diciembre del 2024. Las reexportaciones, por su parte, con el 27,4% del total, registraron un valor de USD 4.584,7 millones, con un aumento de 17,2%. Las otras exportaciones, con el 6,3% de participación, registraron un aumento del 7,7%, situándose en un nivel de USD 1.053,5 millones. El incremento observado en las exportaciones registradas se encuentra explicada principalmente por mayores ventas de carne, maíz y aceite de soja. Los envíos realizados bajo el régimen de maquila alcanzaron los USD 1.236,7 millones, superior en 10,0% a lo registrado en el mismo periodo del año 2024.\r\n\r\n\r\n\r\n## **Importaciones**\r\n\r\nDurante el año 2025, las importaciones totales, alcanzaron USD 18.111,1 millones, 10,6% mayor a los USD 16.379,4 millones registrados a diciembre de 2024. Las importaciones registradas representaron el 97,9% del total, alcanzando un valor de USD 17.721,9 millones, un 11,2% superior con respecto al valor del mismo periodo del 2024, mientras que las otras importaciones representaron el 2,1% restante, por un valor de USD 389,1 millones y con una reducción del 12,9% con respecto al valor acumulado en el mismo mes del año anterior. En volúmenes, se observó un incremento de 10,5%.",
+      "date": "2026-01-14T13:15:00.000Z",
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": true,
+        "show_in_latest": true
+      },
+      "tags": [
+        "comercio-exterior",
+        "economia",
+        "banco-central",
+        "commodities"
+      ],
+      "summary": "Durante el año 2025, las exportaciones totales, alcanzaron un valor de USD 16.720,3 millones, 5,8% por encima de los USD 15.806,1 millones observados a diciembre del año anterior. "
+    },
+    {
       "id": "2026-01-13-prueba-hero-portada-principal",
       "type": "noticias",
-      "slug": "2026-01-13-prueba-hero-portada-principal",
+      "slug": "prueba-hero-portada-principal",
       "category": "macro",
       "title": "🧪 PRUEBA - Esta es la Portada Principal del Hero",
       "description": "Esta es una noticia de prueba para verificar que el sistema de portada principal (Hero) funciona correctamente desde Decap CMS.",
@@ -18,7 +64,8 @@
       "tags": [
         "test",
         "desarrollo"
-      ]
+      ],
+      "summary": "Esta es una noticia de prueba para verificar que el sistema de portada principal (Hero) funciona correctamente desde Decap CMS."
     },
     {
       "id": "macro",
@@ -37,7 +84,8 @@
       },
       "tags": [
         "economia"
-      ]
+      ],
+      "summary": "El Banco Central volvió a mantener la tasa de Política a la baja, por meses consecutivos"
     },
     {
       "id": "2026-01-13-bcp-actividad-económica-marcó-once-meses-consecutivos-de-expansión-en-noviembre",
@@ -56,12 +104,13 @@
       },
       "tags": [
         "economia"
-      ]
+      ],
+      "summary": "En base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cierre del mes de noviembre del 2025.\n"
     },
     {
       "id": "2026-01-13-actividad-económica-marcó-once-meses-consecutivos-de-expansión-en-noviembre",
       "type": "noticias",
-      "slug": "2026-01-13-actividad-económica-marcó-once-meses-consecutivos-de-expansión-en-noviembre",
+      "slug": "",
       "category": "macro",
       "title": "Actividad económica marcó once meses consecutivos de expansión en noviembre",
       "description": "En base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cierre del mes de noviembre del 2025.\n",
@@ -75,7 +124,8 @@
       },
       "tags": [
         "economia"
-      ]
+      ],
+      "summary": "En base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cierre del mes de noviembre del 2025.\n"
     },
     {
       "id": "2026-01-13-prueba-sistema-carga-automatica",
@@ -95,7 +145,8 @@
       "tags": [
         "test",
         "desarrollo"
-      ]
+      ],
+      "summary": "Esta es una noticia de prueba para verificar que el sistema Decap + Vercel carga automáticamente las nuevas noticias en la página principal."
     },
     {
       "id": "README",
@@ -110,7 +161,8 @@
       "featured": true,
       "tags": [
         "aguinaldo"
-      ]
+      ],
+      "summary": "El aguinaldo es un pago extra de salario que reciben los trabajadores de forma anual o semestral como reconocimiento a su labor. "
     },
     {
       "id": "2025-11-19-modernización-bursátil-presentarán-ante-emisores-la-nueva-estructura-y-los-procesos-de-registro",
@@ -125,7 +177,8 @@
       "featured": true,
       "tags": [
         "inversion"
-      ]
+      ],
+      "summary": "El encuentro se llevará a cabo este jueves 20 de noviembre"
     },
     {
       "id": "2025-11-19-mef-paga-hoy-más-g-227-000-millones-a-proveedores-y-acreedores-del-estado",
@@ -140,7 +193,8 @@
       "featured": false,
       "tags": [
         "pago"
-      ]
+      ],
+      "summary": " Procesará hoy martes 18 de noviembre ₲ 227.489 millones para pago a proveedores y acreedores del Estado. "
     },
     {
       "id": "2025-11-18-superintendencia-de-valores-inicia-consulta-pública-de-proyectos-de-reglamentación",
@@ -155,7 +209,8 @@
       "featured": true,
       "tags": [
         "seguro"
-      ]
+      ],
+      "summary": "\"Superintendencia de Valores inicia consulta pública de proyectos de reglamentación\""
     },
     {
       "id": "2025-11-17-banco-mundial-prevé-caída-de-precios-de-commodities-en-2026",
@@ -168,7 +223,10 @@
       "body": "![](/assets/img/precios-de-commodities-en-baja-bm.jpg)\r\n\r\n\r\nLos mercados globales de commodities enfrentarían en el 2026 su cuarto año consecutivo de descenso de precios, según el informe Commodity Markets Outlook del Banco Mundial. El organismo proyecta caídas de 7% de los precios tanto en 2025 como para el próximo año, en un contexto de crecimiento mundial moderado y un superávit energético en aumento.​\r\n\r\nLa baja de los precios energéticos continúa aportando alivio a la inflación global, mientras que el retroceso del arroz y el trigo mejora la accesibilidad de alimentos en países en desarrollo. No obstante, los fertilizantes registrarían un aumento de 21% en 2025, lo que podría presionar los márgenes agrícolas.​\r\n\r\nEntre los metales preciosos, el oro se mantiene como refugio en un contexto de incertidumbre, con un incremento estimado de 42% de sus precios en 2025. El informe advierte que, pese a la moderación reciente, el panorama continúa expuesto a riesgos derivados de tensiones geopolíticas, posibles sanciones adicionales, fenómenos climáticos como La Niña y el aumento de la demanda eléctrica asociada a la expansión de la inteligencia artificial.",
       "date": "2025-11-17T00:00:00.000Z",
       "featured": true,
-      "tags": []
+      "tags": [],
+      "subcategory": "Commodities",
+      "summary": "Enfrentarían en el 2026 su cuarto año consecutivo de descenso de precios",
+      "image": "/assets/img/precios-de-commodities-en-baja-bm.jpg"
     },
     {
       "id": "2025-11-15-paraguay-destacó-su-política-fiscal-responsable-en-seminario-internacional",
@@ -181,7 +239,8 @@
       "body": "![Del evento, en representación del MEF participaron la gerente de Gestión Financiera del Estado, Teodora Recalde de Spinzi, y el director general de Presupuesto, Jorge Paredes.](/assets/img/exportación.jpg)\r\n\r\nEl Ministerio de Economía y Finanzas (MEF) representó a Paraguay en el 52° Seminario Internacional de Presupuesto Público, organizado por la Asociación Internacional de Presupuesto Público (ASIP) en República Dominicana. El encuentro reunió a autoridades fiscales y especialistas de la región para debatir sobre los desafíos y tendencias de la gestión presupuestaria, así como para promover el intercambio técnico y político orientado a fortalecer la sostenibilidad fiscal, optimizar la eficiencia del gasto y consolidar la estabilidad macroeconómica en América Latina.\r\n\r\nDel evento, en representación del MEF participaron la gerente de Gestión Financiera del Estado, Teodora Recalde de Spinzi, y el director general de Presupuesto, Jorge Paredes.\r\n\r\nEn este contexto, el director general de Presupuesto del MEF, Jorge Paredes, expuso sobre las políticas instrumentadas por el país para atenuar los efectos presupuestarios derivados de la inestabilidad mundial, destacando la prudencia fiscal y las reformas institucionales que fortalecen la gestión pública.\r\n\r\nDurante su intervención, el director subrayó que Paraguay mantiene un crecimiento económico sólido y sostenido, con una proyección del PIB real de 5,3% para 2025, respaldada por la estabilidad macroeconómica y una política fiscal responsable.\r\n\r\nAsimismo, señaló que el país avanza de manera ordenada hacia la convergencia con la regla fiscal en el 2026, tras reducir el déficit desde -6,1% del PIB en el 2020 a -1,9% en el 2025, en cumplimiento del plan de consolidación fiscal del MEF.\r\n\r\nEn materia de gasto público, destacó que Paraguay sostiene una gestión orientada a prioridades estratégicas, con incrementos dirigidos a salud, educación, desarrollo social y seguridad, fortaleciendo un modelo de crecimiento con enfoque social y responsabilidad fiscal. Al cierre de su exposición, remarcó que el país apunta a mantener la estabilidad y avanzar en el desarrollo social con responsabilidad fiscal y eficiencia en la gestión pública.",
       "date": "2025-11-16T21:24:00.000Z",
       "featured": true,
-      "tags": []
+      "tags": [],
+      "summary": "Se debatió sobre los desafíos y tendencias de la gestión presupuestaria, así como para promover el intercambio técnico y político orientado a fortalecer la sostenibilidad fiscal."
     },
     {
       "id": "2025-11-15-paraguay-destacó-su-política-fiscal-responsable-en-seminario-internacional-1",
@@ -194,7 +253,8 @@
       "body": "![El Ministerio de Economía y Finanzas (MEF) representó a Paraguay en el 52° Seminario Internacional de Presupuesto Público, organizado por la Asociación Internacional de Presupuesto Público (ASIP) en República Dominicana.](/assets/img/mercado-libre-e1584221732666.jpg \"SIII\")\r\n\r\nEl Ministerio de Economía y Finanzas (MEF) representó a Paraguay en el 52° Seminario Internacional de Presupuesto Público, organizado por la Asociación Internacional de Presupuesto Público (ASIP) en República Dominicana. El encuentro reunió a autoridades fiscales y especialistas de la región para debatir sobre los desafíos y tendencias de la gestión presupuestaria, así como para promover el intercambio técnico y político orientado a fortalecer la sostenibilidad fiscal, optimizar la eficiencia del gasto y consolidar la estabilidad macroeconómica en América Latina.\r\n\r\nDel evento, en representación del MEF participaron la gerente de Gestión Financiera del Estado, Teodora Recalde de Spinzi, y el director general de Presupuesto, Jorge Paredes.\r\n\r\nEn este contexto, el director general de Presupuesto del MEF, Jorge Paredes, expuso sobre las políticas instrumentadas por el país para atenuar los efectos presupuestarios derivados de la inestabilidad mundial, destacando la prudencia fiscal y las reformas institucionales que fortalecen la gestión pública.\r\n\r\nDurante su intervención, el director subrayó que Paraguay mantiene un crecimiento económico sólido y sostenido, con una proyección del PIB real de 5,3% para 2025, respaldada por la estabilidad macroeconómica y una política fiscal responsable.\r\n\r\nAsimismo, señaló que el país avanza de manera ordenada hacia la convergencia con la regla fiscal en el 2026, tras reducir el déficit desde -6,1% del PIB en el 2020 a -1,9% en el 2025, en cumplimiento del plan de consolidación fiscal del MEF.\r\n\r\nEn materia de gasto público, destacó que Paraguay sostiene una gestión orientada a prioridades estratégicas, con incrementos dirigidos a salud, educación, desarrollo social y seguridad, fortaleciendo un modelo de crecimiento con enfoque social y responsabilidad fiscal. Al cierre de su exposición, remarcó que el país apunta a mantener la estabilidad y avanzar en el desarrollo social con responsabilidad fiscal y eficiencia en la gestión pública.",
       "date": "2025-11-15T21:24:00.000Z",
       "featured": false,
-      "tags": []
+      "tags": [],
+      "summary": "El encuentro reunió a autoridades fiscales y especialistas de la región para debatir sobre los desafíos y tendencias de la gestión presupuestaria, así como para promover el intercambio técnico y político orientado a fortalecer la sostenibilidad fiscal."
     },
     {
       "id": "2025-11-14-confianza-del-consumidor-se-reduce-en-octubre",
@@ -207,7 +267,8 @@
       "body": "![](/assets/img/mercado-libre-e1584221732666.jpg)\r\n\r\n\r\n\r\n\r\nEn octubre de 2025, el Índice de Confianza del Consumidor (ICC) registró un nivel de 48,32, ubicándose por debajo del valor observado en el mes previo (49,86) y del nivel registrado en octubre de 2024 (54,46).\r\n\r\nEl Índice de Situación Económica (ISE) registró un valor de 34,88, menor en 1,12 puntos respecto al mes anterior y en 5,83 puntos al dato registrado en octubre de 2024. Por su parte, el Índice de Expectativas Económicas (IEE) alcanzó un resultado de 61,75, menor que el índice del mes anterior en 1,96 puntos y al valor de octubre de 2024 en 6,46 puntos.\r\n\r\nEn cuanto a la predisposición a ahorrar, el porcentaje de encuestados que respondió de forma afirmativa a esta consulta fue de 18,25%. Este resultado fue inferior en 1,25 puntos porcentuales (pp) al del mes anterior y en 4,50 pp al valor registrado en octubre de 2024.\r\n\r\nPor otro lado, la predisposición a adquirir bienes durables registró incrementos mensuales en las categorías de electrodomésticos, casas y autos. En contraste, se observó una reducción en la predisposición a adquirir motos. En términos interanuales, todas las categorías de bienes presentaron reducciones.",
       "date": "2025-11-14T17:45:00.000Z",
       "featured": false,
-      "tags": []
+      "tags": [],
+      "summary": "En octubre de 2025, el Índice de Confianza del Consumidor se ubicó en 48,32 puntos. Por su parte, el Índice de Expectativas Económicas y el Índice de Situación Económica se ubicaron en 61,75 y 34,88 puntos respectivamente.\n"
     },
     {
       "id": "2025-11-14-comercio-exterior-movió-usd-14-182-1-millones-en-10-meses",
@@ -220,7 +281,8 @@
       "body": "![lucas-van-oort-fbzovyf-96w-unsplash.jpg](/assets/img/lucas-van-oort-fbzovyf-96w-unsplash.jpg \"lucas-van-oort-fbzovyf-96w-unsplash.jpg\")\r\n\r\nLas exportaciones totales, al mes de octubre de 2025, alcanzaron un valor de US$ 14.182,1 millones, 3,3% por encima de los US$ 13.273,9 millones observados a octubre del año anterior. Las exportaciones registradas representaron el 67,1% del total, alcanzando US$ 9.513,9 millones, inferior en 0,8% al valor acumulado a octubre del 2024.\r\n\r\nLas reexportaciones, por su parte, con el 26,4% del total, registraron un valor de US$ 3.746,0 millones, con un aumento de 15,3%. Las otras exportaciones, con el 6,5% de participación, registraron un aumento del 4,1%, situándose en un nivel de US$ 922,3 millones. \r\n\r\nLa reducción observada en las exportaciones registradas se encuentra explicada principalmente por menores ventas de granos de soja, arroz parbolizado y harina de soja. Los envíos realizados bajo el régimen de maquila alcanzaron los USD 1.098,9 millones, superior en 10,9% a lo registrado en el mismo periodo del año 2024.",
       "date": "2025-11-14T00:12:00.000Z",
       "featured": false,
-      "tags": []
+      "tags": [],
+      "summary": "Las exportaciones totales, al mes de octubre de 2025, alcanzaron un valor de US$ 14.182,1 millones, 3,3% por encima de los US$ 13.273,9 millones observados a octubre del año anterior. "
     },
     {
       "id": "2025-11-13-cadiem-celebra-22-años-de-trayectoria-consolidándose-como-actor-clave-en-el-mercado",
@@ -233,7 +295,8 @@
       "body": "![Cadien 123](/assets/img/dsc_7982.jpg \"Cadien\")\r\n\r\nCADIEM Casa de Bolsa celebra 22 años de trayectoria institucional, en un contexto de sostenido crecimiento del mercado de valores, tanto en el segmento bursátil como en el de fondos mutuos y de inversión. En este contexto, Gloria Ayala Person, socia fundadora y directora de la compañía, recordó los inicios del emprendimiento que ya tiene más de dos décadas operando.\r\n\r\n“Recuerdo con emoción los comienzos de CADIEM. Desde el primer día, nuestro impulso fue un sueño claro: contribuir al desarrollo del Paraguay ofreciendo productos financieros hechos por y para las personas. Aquello era casi una ´quijotada´ en un mercado que apenas iniciaba, pero teníamos ilusión y convicción”, expresó la\r\nejecutiva en ocasión de un aniversario más de la empresa.\r\n\r\nSiendo una de las firmas pioneras en el sector, Ayala Person considera que poner al cliente en el centro ha sido uno de los mayores aciertos del grupo a lo largo de estos años. “Este compromiso lo comparto con el Directorio y con todo el equipo, porque comulgamos la visión de un Paraguay donde la inversión sea un camino al bienestar colectivo”, comentó sobre este tema. \r\n\r\nCon respecto al futuro, aseguró ver un horizonte “muy prometedor para el mercado de valores paraguayo”, ya que la reciente obtención del grado de inversión ha sido un hito histórico que proyecta al país como un destino más atractivo para el ahorro y las inversiones extranjeras. Esto genera, a su criterio, una gran oportunidad de atraer capital y financiar proyectos locales. \r\n\r\n## **Proyectos a mayor escala**\r\n\r\nPor su parte, Elías Gelay, presidente de CADIEM Casa de Bolsa, resaltó que este aniversario llega en un momento inmejorable para el mercado de valores paraguayo. A la espera de la segunda calificación en grado de inversión, señaló que los distintos actores del mercado se están preparando para recibir nuevas inversiones y promover proyectos de mayor escala, capaces de atraer el interés de inversionistas globales.\r\n\r\n“Hoy el mercado genera más de USD 7.000 millones en transacciones, con proyectos importantes que estamos financiando. Son hitos relevantes para CADIEM, pero principalmente para el mercado de capitales, porque estamos buscando desarrollar proyectos que sean más grandes y que sean interesantes para los inversores que van a venir del exterior”, puntualizó Gelay.\r\n\r\nExpresó su satisfacción por los logros alcanzados, pero aseguró que “lo mejor está por venir”, ya que para los próximos años se abre la posibilidad de establecer alianzas con agentes extranjeros, quienes comienzan a mirar a Paraguay con nuevos ojos, impulsados por la estabilidad alcanzada y el surgimiento de proyectos de creciente envergadura.",
       "date": "2025-11-13T23:54:00.000Z",
       "featured": false,
-      "tags": []
+      "tags": [],
+      "summary": "Con la obtención de la primera nota en grado de inversión para el Paraguay, y a la\nespera de una segunda, desde la empresa se augura un horizonte de proyectos\ncada vez más grandes que resulten atractivos ante los inversionistas a nivel\ninternacional"
     },
     {
       "id": "2025-11-13-cadiem-celebra-22-años-de-trayectoria-consolidándose-como-actor-clave",
@@ -246,27 +309,30 @@
       "body": "![Cadien 123](/assets/img/dsc_7982.jpg \"Cadien\")\r\n\r\nCADIEM Casa de Bolsa celebra 22 años de trayectoria institucional, en un contexto de sostenido crecimiento del mercado de valores, tanto en el segmento bursátil como en el de fondos mutuos y de inversión. En este contexto, Gloria Ayala Person, socia fundadora y directora de la compañía, recordó los inicios del emprendimiento que ya tiene más de dos décadas operando.\r\n\r\n“Recuerdo con emoción los comienzos de CADIEM. Desde el primer día, nuestro impulso fue un sueño claro: contribuir al desarrollo del Paraguay ofreciendo productos financieros hechos por y para las personas. Aquello era casi una ´quijotada´ en un mercado que apenas iniciaba, pero teníamos ilusión y convicción”, expresó la\r\nejecutiva en ocasión de un aniversario más de la empresa.\r\n\r\nSiendo una de las firmas pioneras en el sector, Ayala Person considera que poner al cliente en el centro ha sido uno de los mayores aciertos del grupo a lo largo de estos años. “Este compromiso lo comparto con el Directorio y con todo el equipo, porque comulgamos la visión de un Paraguay donde la inversión sea un camino al bienestar colectivo”, comentó sobre este tema. \r\n\r\nCon respecto al futuro, aseguró ver un horizonte “muy prometedor para el mercado de valores paraguayo”, ya que la reciente obtención del grado de inversión ha sido un hito histórico que proyecta al país como un destino más atractivo para el ahorro y las inversiones extranjeras. Esto genera, a su criterio, una gran oportunidad de atraer capital y financiar proyectos locales. \r\n\r\n## **Proyectos a mayor escala**\r\n\r\nPor su parte, Elías Gelay, presidente de CADIEM Casa de Bolsa, resaltó que este aniversario llega en un momento inmejorable para el mercado de valores paraguayo. A la espera de la segunda calificación en grado de inversión, señaló que los distintos actores del mercado se están preparando para recibir nuevas inversiones y promover proyectos de mayor escala, capaces de atraer el interés de inversionistas globales.\r\n\r\n“Hoy el mercado genera más de USD 7.000 millones en transacciones, con proyectos importantes que estamos financiando. Son hitos relevantes para CADIEM, pero principalmente para el mercado de capitales, porque estamos buscando desarrollar proyectos que sean más grandes y que sean interesantes para los inversores que van a venir del exterior”, puntualizó Gelay.\r\n\r\nExpresó su satisfacción por los logros alcanzados, pero aseguró que “lo mejor está por venir”, ya que para los próximos años se abre la posibilidad de establecer alianzas con agentes extranjeros, quienes comienzan a mirar a Paraguay con nuevos ojos, impulsados por la estabilidad alcanzada y el surgimiento de proyectos de creciente envergadura.",
       "date": "2025-11-13T23:54:00.000Z",
       "featured": false,
-      "tags": []
+      "tags": [],
+      "summary": "Con la obtención de la primera nota en grado de inversión para el Paraguay, y a la\nespera de una segunda, desde la empresa se augura un horizonte de proyectos\ncada vez más grandes que resulten atractivos ante los inversionistas a nivel\ninternacional"
     }
   ],
   "analisis": [
     {
       "id": "2026-01-13-aportes-a-la-caja-fiscal-solo-alcanzan-para-financiar-5años-de-jubilación-en-promedio",
       "type": "analisis",
-      "slug": "2026-01-13-aportes-a-la-caja-fiscal-solo-alcanzan-para-financiar-5años-de-jubilación-en-promedio",
-      "category": "",
+      "slug": "",
+      "category": "inversion",
       "title": "Aportes a la Caja Fiscal solo alcanzan para financiar 5años de jubilación en promedio",
       "description": "Los aportes de un trabajador a la Caja Fiscal solo alcanzan para financiar cinco años de jubilación en promedio\n",
       "thumbnail": "/assets/img/mef-villa-serrati_4_0.jpg",
       "body": "En las condiciones actuales del Sistema de Jubilaciones y Pensiones del sector público, conocido como Caja Fiscal, el dinero acumulado por un trabajador durante su vida activa alcanza únicamente para financiar, en promedio, cinco años de su jubilación. A partir de ese momento, el pago del beneficio pasa a depender del sistema solidario. Así lo explicó la gerente de Desarrollo Económico del Ministerio de Economía y Finanzas (MEF), Liz Coronel, en una entrevista emitido por Telefuturo.",
-      "date": "2026-01-13T23:36:00.000Z",
+      "date": "2026-01-14T13:18:00.000Z",
       "featured": {
-        "is_featured": false,
-        "is_main_featured": false
+        "is_featured": true,
+        "is_main_featured": true
       },
       "tags": [
-        "analisis-economico"
-      ]
+        "analisis-economico",
+        "inversion"
+      ],
+      "summary": "Los aportes de un trabajador a la Caja Fiscal solo alcanzan para financiar cinco años de jubilación en promedio\n"
     },
     {
       "id": "2025-11-21-ley-del-mercado-de-valores-fortalece-protección-al-inversionista",
@@ -279,7 +345,9 @@
       "body": "El superintendente de Valores, Rodrigo Ruiz, participó como panelista del conversatorio “Nuevo Régimen Jurídico del Mercado de Valores” organizado por FERRERE Abogados, junto a representantes de la Bolsa de Valores de Asunción (BVA), la Caja de Valores del Paraguay (CAVAPY) y especialistas del estudio anfitrión.\r\n\r\n\r\n\r\nDurante el encuentro que reunió a referentes del sector financiero, jurídico y del mercado de capitales se analizaron los principales alcances de la Ley N.º 7572/2025 “Mercado de Valores y Productos”, destacando su importancia para modernizar y unificar el marco regulatorio, fortalecer la protección al inversionista y consolidar un enfoque de supervisión basado en riesgos. \r\n\r\n\r\n\r\nEn su exposición, Ruiz destacó que la normativa pone fin a la fragmentación normativa que regulaba el mercado y establece por primera vez de forma explícita el triple objetivo de proteger al inversionista, promover un mercado equitativo, eficiente y transparente, y reducir el riesgo sistémico.\r\n\r\n\r\n\r\nEl superintendente anticipó que durante el 2026 se completará la primera generación de reglamentos habilitantes y se avanzará en innovación (fondos privados, crowdfunding, tokenización y DLT, emisiones extranjeras) en una segunda generación. En este tiempo se fortalecerá la supervisión basada en riesgos para abordar riesgos de liquidez y la resiliencia operativa de las infraestructuras, entre otros.\r\n\r\n\r\n\r\nAsimismo, Ruiz destacó los desafíos que plantean los productos innovadores, como crowdfunding, tokenización y activos emitidos en tecnologías DLT, y enfatizó que el criterio rector será la correcta delimitación del perímetro regulatorio: cuando hay captación de recursos del público, expectativa de rendimiento y asimetría de información, el instrumento debe quedar bajo supervisión. \r\n\r\n\r\n\r\nFinalmente, resaltó que la ley representa un paso decisivo para construir un mercado más transparente, previsible y seguro, alineado con estándares internacionales.",
       "date": "2025-11-21T01:33:03.864Z",
       "featured": false,
-      "tags": []
+      "tags": [],
+      "author": "Perspectivas",
+      "summary": "Ley del Mercado de Valores y Productos fortalece protección al inversionista "
     },
     {
       "id": "2025-11-20-modernización-del-mercado-de-valores",
@@ -292,7 +360,9 @@
       "body": "![](/assets/img/2024-08-16-billetes.jpg)\r\n\r\n\r\n\r\nEn una charla organizada por la Bolsa de Valores de Asunción, la Caja de Valores del Paraguay y la Asociación de Casas de Bolsa, se brindarán detalles sobre las novedades que está trayendo el proceso de modernización del mercado de valores, entre ellas, los ajustes que se implementarán en la operativa con las empresas emisoras de títulos.\r\n\r\n\r\n\r\n\t•\tEl encuentro se llevará a cabo este jueves 20 de noviembre, desde las 08:00, en el Hotel Dazzler (Av. Aviadores del Chaco y Vasconcellos) \r\n\r\n\r\n\r\n(Asunción, 19 de noviembre de 2025).- “Modernización bursátil: Nueva estructura y procesos para emisores” se denomina la charla que se encuentran organizando la Bolsa de Valores de Asunción (BVA), la Caja de Valores del Paraguay (CAVAPY) y la Asociación de Casas de Bolsa del Paraguay (Asobolsa), para este jueves 20 de noviembre.\r\n\r\n\r\n\r\nEl objetivo es presentar a las empresas emisoras las novedades que se están implementando en el mercado de valores, en el marco de la transformación tecnológica, regulatoria y de infraestructura por la que atraviesa el sector.\r\n\r\n\r\n\r\nEntre los temas que se abordarán en la oportunidad, se destaca el próximo lanzamiento del Registro Único del Mercado de Valores, que integrará procesos ante la Superintendencia de Valores (SIV), la BVA y CAVAPY, y se aplicará tanto a registro de emisores como de instrumentos de negociación. \r\n\r\n\r\n\r\nAdemás, se presentarán las oportunidades de conexión con los mercados globales que se están generando con la contratación de los sistemas Nasdaq -desde la BVA- y Montran -desde CAVAPY-; y la nueva regulación que se implementará a partir de la Ley del Mercado de Valores recientemente promulgada.\r\n\r\n\r\n\r\nEl encuentro arrancará a las 08:00, en el Hotel Dazzler de Asunción, con la presencia de directivos de las instituciones organizadoras, así como de representantes de empresas emisoras y casas de bolsa que operan en el mercado bursátil local.",
       "date": "2025-11-20T15:23:03.846Z",
       "featured": false,
-      "tags": []
+      "tags": [],
+      "author": "Perspectivas",
+      "summary": "El encuentro se llevará a cabo este jueves 20 de noviembre, desde las 08:00, en el Hotel Dazzler (Av. Aviadores del Chaco y Vasconcellos) "
     }
   ],
   "programa": [
@@ -311,7 +381,9 @@
       },
       "tags": [
         "economia-local"
-      ]
+      ],
+      "summary": "Todo el análisis de la economía local e internacional",
+      "embed_url": "https://www.youtube.com/embed/TAAcjJXFJbQ"
     },
     {
       "id": "2025-11-21-perspectivas-08-11-25",
@@ -324,7 +396,8 @@
       "body": "Escuchá nuestra edición y enterate de los temas principales en el ámbito económico del país.",
       "date": "2025-11-09T00:57:51.355Z",
       "featured": false,
-      "tags": []
+      "tags": [],
+      "embed_url": "https://www.youtube.com/embed/IZ_1l3Q656Q"
     },
     {
       "id": "2025-11-21-perspectivas-21-06-2025",
@@ -337,7 +410,8 @@
       "body": "Escuchá nuestra edición y enterate de los temas principales en el ámbito económico del país.",
       "date": "2025-06-22T00:39:10.699Z",
       "featured": false,
-      "tags": []
+      "tags": [],
+      "embed_url": "https://www.youtube.com/embed/Jb7U95VQq8k"
     },
     {
       "id": "2025-11-21-perspectivas-24-05-25",
@@ -350,7 +424,8 @@
       "body": "Escuchá nuestra edición y enterate de los temas principales en el ámbito económico del país.",
       "date": "2025-05-25T00:53:37.496Z",
       "featured": false,
-      "tags": []
+      "tags": [],
+      "embed_url": "https://www.youtube.com/embed/LRr3RZ8Jo4Q"
     },
     {
       "id": "2025-11-21-perspectivas-17-05-25",
@@ -363,7 +438,8 @@
       "body": "Escuchá nuestra edición y enterate de los temas principales en el ámbito económico del país.",
       "date": "2025-05-18T00:51:06.240Z",
       "featured": false,
-      "tags": []
+      "tags": [],
+      "embed_url": "https://www.youtube.com/embed/aKKcU3S7TIg"
     },
     {
       "id": "2025-11-21-perspectivas-03-05-25",
@@ -380,7 +456,9 @@
       },
       "tags": [
         "economia-local"
-      ]
+      ],
+      "summary": "Una mirada mas allá de la economía",
+      "embed_url": "https://www.youtube.com/embed/6TO6xE6IiBE"
     },
     {
       "id": "2025-11-21-perspectivas-19-04-25",
@@ -393,7 +471,8 @@
       "body": "Escuchá nuestra edición y enterate de los temas principales en el ámbito económico del país.",
       "date": "2025-04-20T00:33:46.704Z",
       "featured": false,
-      "tags": []
+      "tags": [],
+      "embed_url": "https://www.youtube.com/embed/yf5WjqOtsUU"
     }
   ],
   "podcast": [
@@ -410,7 +489,8 @@
       "body": "En esta entrega entrevistamos al presidente del Banco Central del Paraguay (BCP), Carlos Carvallos.",
       "date": "2025-11-20T15:57:35.783Z",
       "featured": false,
-      "tags": []
+      "tags": [],
+      "embed_url": "https://www.youtube.com/watch?v=6TO6xE6IiBE"
     }
   ],
   "sponsors": [
@@ -423,9 +503,19 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-14T03:04:59.820Z",
+      "date": "2026-01-14T16:42:16.943Z",
       "featured": false,
-      "tags": []
+      "tags": [],
+      "tier": "Gold",
+      "url": "perspectivaspy.vercel.app",
+      "logo": "/assets/img/perspectivas-logo.jpeg",
+      "sector": "Media",
+      "active": true,
+      "headline": "Innovación que impulsa la economía",
+      "excerpt": "Perspectiva Company apoya el desarrollo del periodismo económico independiente.",
+      "priority": 2,
+      "campaign_start": "2025-11-22T19:06:10.808Z",
+      "campaign_end": "2025-12-05T19:06:31.989Z"
     },
     {
       "id": "cadiem-casa-de-bolsa",
@@ -436,9 +526,19 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-14T03:04:58.618Z",
+      "date": "2026-01-14T16:42:16.911Z",
       "featured": true,
-      "tags": []
+      "tags": [],
+      "tier": "Silver",
+      "url": "https://www.cadiem.com.py/",
+      "logo": "/assets/img/cadiem-casa-de-bolsa.png",
+      "sector": "Bursátil",
+      "active": true,
+      "headline": "Donde tu dinero trabaja para vos",
+      "excerpt": "Casa de Bolsa y Administradora de Fondos con más de 20 años de experiencia en el mercado de valores.",
+      "priority": 1,
+      "campaign_start": "2025-11-22T11:49:59.367Z",
+      "campaign_end": "2025-12-31T18:36:07.001Z"
     },
     {
       "id": "banco-itaú-paraguay",
@@ -449,9 +549,19 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-14T03:04:58.616Z",
+      "date": "2026-01-14T16:42:16.904Z",
       "featured": false,
-      "tags": []
+      "tags": [],
+      "tier": "Silver",
+      "url": "https://www.itau.com.py/",
+      "logo": "/assets/img/banco-itau.png",
+      "sector": "Banca",
+      "active": true,
+      "headline": "Para lo importante, Itaú",
+      "excerpt": "Es una entidad financiera de capital extranjero, filial del banco brasileño Itaú Unibanco, que ofrece servicios bancarios a personas y empresas en el país. ",
+      "priority": 6,
+      "campaign_start": "2025-11-22T19:07:33.649Z",
+      "campaign_end": "2025-11-29T19:07:44.073Z"
     },
     {
       "id": "banco-atlas",
@@ -462,9 +572,19 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-14T03:04:58.615Z",
+      "date": "2026-01-14T16:42:16.894Z",
       "featured": false,
-      "tags": []
+      "tags": [],
+      "tier": "Silver",
+      "url": "https://www.bancoatlas.com.py/web",
+      "logo": "/assets/img/banco-atlas.png",
+      "sector": "Banca",
+      "active": true,
+      "headline": "Lo hacemos simple Lo hacemos digital",
+      "excerpt": "Es una entidad bancaria que opera tanto en el segmento corporativo como en el de personas, ofreciendo servicios de consumo, banca privada y de negocios. ",
+      "priority": 1,
+      "campaign_start": "2025-11-22T19:07:00.073Z",
+      "campaign_end": "2025-11-28T19:07:09.066Z"
     },
     {
       "id": "bancard",
@@ -475,9 +595,19 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-14T03:04:58.614Z",
+      "date": "2026-01-14T16:42:16.892Z",
       "featured": false,
-      "tags": []
+      "tags": [],
+      "tier": "Silver",
+      "url": "https://www.bancard.com.py/",
+      "logo": "/assets/img/bancard.png",
+      "sector": "Procesadora de tarjetas",
+      "active": true,
+      "headline": "Tu vida más simple",
+      "excerpt": "Más de 80.000 comercios y 39 años de experiencia nos avalan como el socio ideal para tu negocio",
+      "priority": 3,
+      "campaign_start": "2025-11-22T18:35:00.021Z",
+      "campaign_end": "2025-11-30T18:35:33.826Z"
     }
   ]
 }
