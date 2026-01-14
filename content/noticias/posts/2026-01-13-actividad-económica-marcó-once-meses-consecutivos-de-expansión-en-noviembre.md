@@ -11,7 +11,7 @@ tags:
 thumbnail: /assets/img/top-view-office-desk-with-growth-chart-coffee-cup.jpg
 featured:
   is_featured: false
-  is_main_featured: true
+  is_main_featured: false
   show_in_latest: true
 slug: ""
 ---

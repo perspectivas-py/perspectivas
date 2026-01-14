@@ -62,7 +62,7 @@
           "hint": "Controla dónde aparece la nota",
           "fields": [
             {"label": "¿Destacado en portada?", "name": "is_featured", "widget": "boolean", "default": false, "hint": "Aparecerá en la sección principal de la home"},
-            {"label": "¿En portada principal?", "name": "is_main_featured", "widget": "boolean", "default": false, "hint": "Será la noticia principal destacada"},
+            {"label": "🔴 ¿PORTADA PRINCIPAL (HERO)?", "name": "is_main_featured", "widget": "boolean", "default": false, "hint": "⚠️ CRÍTICO: Solo UNA noticia puede tener esto ACTIVADO. Si la activas aquí, debes DESACTIVARLA en todas las demás. De lo contrario, la portada mostrará la noticia más reciente marcada."},
             {"label": "¿Mostrar en últimas noticias?", "name": "show_in_latest", "widget": "boolean", "default": true, "hint": "Aparecerá en la lista general de noticias"}
           ]
         },

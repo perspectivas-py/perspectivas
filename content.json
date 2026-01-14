@@ -31,7 +31,7 @@
       "date": "2026-01-13T23:30:00.000Z",
       "featured": {
         "is_featured": true,
-        "is_main_featured": true,
+        "is_main_featured": false,
         "show_in_latest": true
       },
       "tags": [
@@ -51,7 +51,7 @@
       "date": "2026-01-13T21:26:00.000Z",
       "featured": {
         "is_featured": false,
-        "is_main_featured": true,
+        "is_main_featured": false,
         "show_in_latest": true
       },
       "tags": [
@@ -432,7 +432,7 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-14T00:00:47.545Z",
+      "date": "2026-01-14T00:21:48.502Z",
       "featured": false,
       "tags": []
     },
@@ -445,7 +445,7 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-14T00:00:47.544Z",
+      "date": "2026-01-14T00:21:48.501Z",
       "featured": true,
       "tags": []
     },
@@ -458,7 +458,7 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-14T00:00:47.543Z",
+      "date": "2026-01-14T00:21:48.500Z",
       "featured": false,
       "tags": []
     },
@@ -471,7 +471,7 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-14T00:00:47.543Z",
+      "date": "2026-01-14T00:21:48.500Z",
       "featured": false,
       "tags": []
     },
@@ -484,7 +484,7 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-14T00:00:47.542Z",
+      "date": "2026-01-14T00:21:48.499Z",
       "featured": false,
       "tags": []
     }

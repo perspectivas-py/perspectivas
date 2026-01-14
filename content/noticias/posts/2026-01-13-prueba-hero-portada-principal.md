@@ -9,7 +9,7 @@ tags:
 thumbnail: /assets/img/default.jpg
 featured:
   is_featured: true
-  is_main_featured: true
+  is_main_featured: false
   show_in_latest: true
 slug: "prueba-hero-portada-principal"
 ---

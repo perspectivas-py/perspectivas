@@ -4,7 +4,7 @@
   "type": "module",
   "description": "Sitio de periodismo económico JAMstack",
   "scripts": {
-    "build": "node scripts/build-content.js",
+    "build": "node scripts/build-content.js && node scripts/validate-hero.js",
     "start": "node server.js"
   },
   "dependencies": {

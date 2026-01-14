@@ -611,21 +611,35 @@ function renderHero(n) {
   const container = document.getElementById("hero");
   if (!container || !n?.length) return;
 
-  const a = n[0]; // La noticia más nueva
+  // 🎯 Buscar la noticia marcada como is_main_featured
+  let heroArticle = n.find(noticia => {
+    const featured = noticia.featured;
+    return featured && 
+           typeof featured === 'object' && 
+           featured.is_main_featured === true;
+  });
+  
+  // Si no hay ninguna marcada como principal, usa la más reciente
+  if (!heroArticle) {
+    heroArticle = n[0];
+  }
 
   // Cambiar la clase del contenedor a hero
   container.className = 'hero';
   
   container.innerHTML = `
-    <a href="/noticia.html?id=${encodeURIComponent(a.slug || a.id)}" class="hero-link-wrapper">
-      <img src="${a.thumbnail}" class="hero-img" alt="${a.title}"/>
+    <a href="/noticia.html?id=${encodeURIComponent(heroArticle.slug || heroArticle.id)}" class="hero-link-wrapper">
+      <img src="${heroArticle.thumbnail}" class="hero-img" alt="${heroArticle.title}"/>
       <div class="hero-content">
-        <div class="hero-section">${a.category || "Actualidad"}</div>
-        <h2 class="hero-title">${a.title}</h2>
-        <p class="hero-excerpt">${a.description ?? ""}</p>
+        <div class="hero-section">${heroArticle.category || "Actualidad"}</div>
+        <h2 class="hero-title">${heroArticle.title}</h2>
+        <p class="hero-excerpt">${heroArticle.description ?? ""}</p>
       </div>
     </a>
   `;
+  
+  console.log("📰 Hero actualizado con:", heroArticle.title, "(is_main_featured:", 
+    (typeof heroArticle.featured === 'object' && heroArticle.featured?.is_main_featured) || false, ")");
 }
 
 function renderSecondary(n) {
