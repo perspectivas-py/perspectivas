@@ -43,6 +43,7 @@ collections:
       - { label: "📅 Fecha de publicación", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", required: true }
       - { label: "⏰ Programar publicación", name: "publish_date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", hint: "Dejar en blanco si se publica inmediatamente", required: false }
       - { label: "📄 Resumen/Descripción", name: "summary", widget: "text", required: true, hint: "Texto corto que aparecerá en las listas" }
+      - { label: "✍️ Autor", name: "author", widget: "string", required: false, default: "Perspectivas", hint: "Nombre del autor o redactor de la noticia" }
       
       # -------- CATEGORÍA PRINCIPAL --------
       - label: "📑 Categoría Principal"
@@ -117,6 +118,7 @@ collections:
       - { label: "📅 Fecha de publicación", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", required: true }
       - { label: "⏰ Programar publicación", name: "publish_date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", hint: "Dejar en blanco si se publica inmediatamente", required: false }
       - { label: "📄 Resumen", name: "summary", widget: "text", required: true }
+      - { label: "✍️ Autor", name: "author", widget: "string", required: false, default: "Perspectivas", hint: "Nombre del autor del análisis" }
       
       # -------- CATEGORÍA PRINCIPAL --------
       - label: "📑 Categoría Principal"
@@ -174,6 +176,7 @@ collections:
       - { label: "📅 Fecha de transmisión", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", required: true }
       - { label: "⏰ Programar publicación", name: "publish_date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", required: false }
       - { label: "📄 Descripción", name: "summary", widget: "text", required: true }
+      - { label: "✍️ Presentador/Autor", name: "author", widget: "string", required: false, default: "Perspectivas", hint: "Nombre del presentador o equipo" }
 
       - label: "🏷️ Categorías"
         name: "tags"
@@ -214,6 +217,7 @@ collections:
       - { label: "📅 Fecha de publicación", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", required: true }
       - { label: "⏰ Programar publicación", name: "publish_date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", required: false }
       - { label: "📄 Descripción del episodio", name: "summary", widget: "text", required: true }
+      - { label: "✍️ Host/Autor", name: "author", widget: "string", required: false, default: "Perspectivas", hint: "Nombre del host o conductor del podcast" }
 
       # -------- CATEGORÍA PRINCIPAL --------
       - label: "📑 Categoría Principal"

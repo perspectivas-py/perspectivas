@@ -8,15 +8,44 @@ import YAML from 'yaml';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const PUBLIC_DIR = __dirname;
 
 const server = http.createServer((req, res) => {
   const parsedUrl = url.parse(req.url, true);
   let pathname = parsedUrl.pathname;
-  
+
   // Log de la solicitud
   console.log(`📍 ${req.method} ${pathname} ${JSON.stringify(parsedUrl.query)}`);
+
+  // --- NUEVO: Manejo dinámico de API ---
+  if (pathname.startsWith('/api/') && pathname !== '/api/config') {
+    const apiRoute = pathname.replace('/api/', '');
+    const apiFilePath = path.join(PUBLIC_DIR, 'api', `${apiRoute}.js`);
+
+    if (fs.existsSync(apiFilePath)) {
+      (async () => {
+        try {
+          // Importar dinámicamente el handler
+          const module = await import(url.pathToFileURL(apiFilePath).href);
+          const handler = module.default;
+
+          if (typeof handler === 'function') {
+            await handler(req, res);
+          } else {
+            console.error(`❌ Handler no encontrado en ${apiFilePath}`);
+            res.writeHead(500);
+            res.end(JSON.stringify({ error: 'Invalid API handler' }));
+          }
+        } catch (e) {
+          console.error(`❌ Error ejecutando API ${apiRoute}:`, e);
+          res.writeHead(500);
+          res.end(JSON.stringify({ error: 'API Execution Error', message: e.message }));
+        }
+      })();
+      return;
+    }
+  }
 
   // ENDPOINT: /api/config - Servir config.yml como JSON para Decap CMS
   if (pathname === '/api/config') {
@@ -27,18 +56,21 @@ const server = http.createServer((req, res) => {
         res.end(JSON.stringify({ error: 'Config not found' }));
         return;
       }
-      
+
       try {
         const config = YAML.parse(content);
-        
-        // Detectar si es localhost y ajustar URLs
-        const isLocalhost = req.headers.host?.includes('localhost');
-        if (isLocalhost) {
-          config.backend.base_url = `http://${req.headers.host}`;
-          config.site_url = `http://${req.headers.host}`;
-          config.display_url = `http://${req.headers.host}`;
+
+        // Detectar si es localhost o ngrok y ajustar URLs
+        const isLocal = req.headers.host?.includes('localhost') || req.headers.host?.includes('.ngrok');
+        if (isLocal) {
+          const protocol = req.headers['x-forwarded-proto'] || 'http';
+          const host = req.headers.host;
+          config.backend.base_url = `${protocol}://${host}`;
+          config.site_url = `${protocol}://${host}`;
+          config.display_url = `${protocol}://${host}`;
+          console.log(`🔧 [CONFIG] Ajustando URLs para entorno local/ngrok: ${config.backend.base_url}`);
         }
-        
+
         res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ config }));
       } catch (e) {

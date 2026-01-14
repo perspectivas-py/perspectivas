@@ -1,6 +1,6 @@
 // /api/auth.js - OAuth GitHub para Decap CMS
 
-module.exports = (req, res) => {
+export default (req, res) => {
   try {
     console.log('🔐 [AUTH] Inicio de OAuth');
     console.log('  - Method:', req.method);
@@ -23,11 +23,13 @@ module.exports = (req, res) => {
 
     if (!clientId) {
       console.error('❌ [AUTH] GITHUB_CLIENT_ID no configurado');
+      res.statusCode = 500;
       res.setHeader('Content-Type', 'application/json');
-      return res.status(500).json({
+      res.end(JSON.stringify({
         error: 'Configuration Error',
         message: 'GITHUB_CLIENT_ID not configured in environment variables'
-      });
+      }));
+      return;
     }
 
     const scope = 'repo,user';
@@ -57,12 +59,13 @@ module.exports = (req, res) => {
   } catch (error) {
     console.error('❌ [AUTH] Error capturado:', error.message);
     console.error('Stack:', error.stack);
-    
+
+    res.statusCode = 500;
     res.setHeader('Content-Type', 'application/json');
-    res.status(500).json({
+    res.end(JSON.stringify({
       error: 'Internal Server Error',
       message: error.message,
       type: error.name
-    });
+    }));
   }
 };
