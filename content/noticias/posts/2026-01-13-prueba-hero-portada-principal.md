@@ -9,7 +9,7 @@ tags:
   - desarrollo
 thumbnail: /assets/img/captura-de-pantalla-2026-01-13-181157.png
 featured:
-  is_featured: false
+  is_featured: true
   is_main_featured: true
   show_in_latest: true
 slug: prueba-hero-portada-principal
