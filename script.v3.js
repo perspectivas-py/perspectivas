@@ -296,14 +296,35 @@ const analisisController = (() => {
 const programaController = createSectionController({
   gridId: "program-grid",
   buttonId: "program-view-more",
-  renderItem: (item) => `
-    <a href="/noticia.html?id=${encodeURIComponent(item.slug || item.id)}" class="card">
-      <div class="video-wrapper">
-        <iframe src="${item.embed_url}" frameborder="0" allowfullscreen></iframe>
+  renderItem: (item) => {
+    // Helper para obtener miniatura de YouTube si no hay thumbnail explícito
+    let thumb = item.thumbnail;
+    if ((!thumb || thumb.includes("default_news")) && item.embed_url && item.embed_url.includes("youtube")) {
+         try {
+             // asume formato embed/VIDEO_ID
+             const parts = item.embed_url.split('/');
+             const vid = parts.pop() || parts.pop(); 
+             thumb = `https://img.youtube.com/vi/${vid}/hqdefault.jpg`;
+         } catch(e) {}
+    }
+    thumb = thumb || '/assets/img/default_news.jpg';
+
+    return `
+    <a href="/noticia.html?type=programa&id=${encodeURIComponent(item.slug || item.id)}" class="program-card">
+      <div class="program-thumb-wrapper">
+        <img src="${thumb}" alt="${item.title}" loading="lazy">
+        <div class="play-overlay">
+           <svg class="play-icon" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+        </div>
       </div>
-      <h3>${item.title}</h3>
+      <div class="program-card-content">
+        <h3 class="program-card-title">${item.title}</h3>
+        <p class="program-card-desc">${item.description || ''}</p>
+        <span class="program-card-meta">Programa Perspectivas</span>
+      </div>
     </a>
-  `,
+  `;
+  },
   emptyMessage: `<p class="empty-copy">Aún no cargamos episodios del programa.</p>`
 });
 

@@ -145,15 +145,23 @@
     </section>
 
     <!-- PROGRAMA -->
-    <section id="programa" class="wrap section muted-bg">
-      <div class="section-header">
-        <h2>🎬 Programa Perspectivas</h2>
-        <p style="color: #ccc; margin-top: 5px;">Archivo Multimedia y Entrevistas</p>
-      </div>
-      <div class="program-carousel-container">
-        <button id="program-prev" class="program-nav-btn program-prev" aria-label="Anterior">&lt;</button>
-        <div id="program-grid" class="program-carousel"></div>
-        <button id="program-next" class="program-nav-btn program-next" aria-label="Siguiente">&gt;</button>
+    <section id="programa" class="program-section-dark">
+      <div class="wrap">
+        <div class="program-section-header">
+          <h2>PROGRAMA PERSPECTIVAS <span class="header-arrow">›</span></h2>
+          <div class="program-nav-controls">
+            <button id="program-prev" class="program-nav-btn" aria-label="Anterior">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button id="program-next" class="program-nav-btn" aria-label="Siguiente">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        </div>
+        
+        <div class="program-carousel-container">
+          <div id="program-grid" class="program-carousel"></div>
+        </div>
       </div>
     </section>
 
