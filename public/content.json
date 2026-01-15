@@ -21,7 +21,8 @@
         "desarrollo"
       ],
       "summary": "La AFD desembolsó G 205 mil millones para créditos en el mes de noviembre. De esta manera, el acumulado sumó G 2,4 billones, 48,5% mayor.​\n\n",
-      "author": "Perspectivas"
+      "author": "Perspectivas",
+      "caption": "Una familia observa su nueva propiedad. La AFD ha financiado más del 48% de su cartera en créditos para vivienda."
     },
     {
       "id": "2026-01-14-exportaciones-repuntaron-casi-6-durante-el-2025",
@@ -44,7 +45,8 @@
         "banco-central",
         "commodities"
       ],
-      "summary": "Durante el año 2025, las exportaciones totales, alcanzaron un valor de USD 16.720,3 millones, 5,8% por encima de los USD 15.806,1 millones observados a diciembre del año anterior. "
+      "summary": "Durante el año 2025, las exportaciones totales, alcanzaron un valor de USD 16.720,3 millones, 5,8% por encima de los USD 15.806,1 millones observados a diciembre del año anterior. ",
+      "caption": "Productos exportados desde Paraguay. Las exportaciones repuntaron 5.8% durante 2025."
     },
     {
       "id": "2026-01-13-prueba-hero-portada-principal",
@@ -65,7 +67,8 @@
         "test",
         "desarrollo"
       ],
-      "summary": "Esta es una noticia de prueba para verificar que el sistema de portada principal (Hero) funciona correctamente desde Decap CMS."
+      "summary": "Esta es una noticia de prueba para verificar que el sistema de portada principal (Hero) funciona correctamente desde Decap CMS.",
+      "caption": "Imagen relacionada al artículo"
     },
     {
       "id": "macro",
@@ -85,7 +88,8 @@
       "tags": [
         "economia"
       ],
-      "summary": "El Banco Central volvió a mantener la tasa de Política a la baja, por meses consecutivos"
+      "summary": "El Banco Central volvió a mantener la tasa de Política a la baja, por meses consecutivos",
+      "caption": "Imagen relacionada al artículo"
     },
     {
       "id": "2026-01-13-bcp-actividad-económica-marcó-once-meses-consecutivos-de-expansión-en-noviembre",
@@ -105,7 +109,8 @@
       "tags": [
         "economia"
       ],
-      "summary": "En base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cierre del mes de noviembre del 2025.\n"
+      "summary": "En base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cierre del mes de noviembre del 2025.\n",
+      "caption": "Profesional trabajando en un entorno moderno. Las empresas mantienen expectativas positivas en empleo."
     },
     {
       "id": "2026-01-13-actividad-económica-marcó-once-meses-consecutivos-de-expansión-en-noviembre",
@@ -125,7 +130,8 @@
       "tags": [
         "economia"
       ],
-      "summary": "En base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cierre del mes de noviembre del 2025.\n"
+      "summary": "En base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cierre del mes de noviembre del 2025.\n",
+      "caption": "Analista revisando gráficos de crecimiento. Datos económicos positivos continúan impulsando la economía."
     },
     {
       "id": "2026-01-13-prueba-sistema-carga-automatica",
@@ -146,7 +152,8 @@
         "test",
         "desarrollo"
       ],
-      "summary": "Esta es una noticia de prueba para verificar que el sistema Decap + Vercel carga automáticamente las nuevas noticias en la página principal."
+      "summary": "Esta es una noticia de prueba para verificar que el sistema Decap + Vercel carga automáticamente las nuevas noticias en la página principal.",
+      "caption": "Imagen relacionada al artículo"
     },
     {
       "id": "README",
@@ -162,7 +169,8 @@
       "tags": [
         "aguinaldo"
       ],
-      "summary": "El aguinaldo es un pago extra de salario que reciben los trabajadores de forma anual o semestral como reconocimiento a su labor. "
+      "summary": "El aguinaldo es un pago extra de salario que reciben los trabajadores de forma anual o semestral como reconocimiento a su labor. ",
+      "caption": "Imagen relacionada al artículo"
     },
     {
       "id": "2025-11-19-modernización-bursátil-presentarán-ante-emisores-la-nueva-estructura-y-los-procesos-de-registro",
@@ -178,7 +186,8 @@
       "tags": [
         "inversion"
       ],
-      "summary": "El encuentro se llevará a cabo este jueves 20 de noviembre"
+      "summary": "El encuentro se llevará a cabo este jueves 20 de noviembre",
+      "caption": "Imagen relacionada al artículo"
     },
     {
       "id": "2025-11-19-mef-paga-hoy-más-g-227-000-millones-a-proveedores-y-acreedores-del-estado",
@@ -194,7 +203,8 @@
       "tags": [
         "pago"
       ],
-      "summary": " Procesará hoy martes 18 de noviembre ₲ 227.489 millones para pago a proveedores y acreedores del Estado. "
+      "summary": " Procesará hoy martes 18 de noviembre ₲ 227.489 millones para pago a proveedores y acreedores del Estado. ",
+      "caption": "Imagen relacionada al artículo"
     },
     {
       "id": "2025-11-18-superintendencia-de-valores-inicia-consulta-pública-de-proyectos-de-reglamentación",
@@ -210,7 +220,8 @@
       "tags": [
         "seguro"
       ],
-      "summary": "\"Superintendencia de Valores inicia consulta pública de proyectos de reglamentación\""
+      "summary": "\"Superintendencia de Valores inicia consulta pública de proyectos de reglamentación\"",
+      "caption": "Imagen relacionada al artículo"
     },
     {
       "id": "2025-11-17-banco-mundial-prevé-caída-de-precios-de-commodities-en-2026",
@@ -226,7 +237,8 @@
       "tags": [],
       "subcategory": "Commodities",
       "summary": "Enfrentarían en el 2026 su cuarto año consecutivo de descenso de precios",
-      "image": "/assets/img/precios-de-commodities-en-baja-bm.jpg"
+      "image": "/assets/img/precios-de-commodities-en-baja-bm.jpg",
+      "caption": "Imagen relacionada al artículo"
     },
     {
       "id": "2025-11-15-paraguay-destacó-su-política-fiscal-responsable-en-seminario-internacional",
@@ -240,7 +252,8 @@
       "date": "2025-11-16T21:24:00.000Z",
       "featured": true,
       "tags": [],
-      "summary": "Se debatió sobre los desafíos y tendencias de la gestión presupuestaria, así como para promover el intercambio técnico y político orientado a fortalecer la sostenibilidad fiscal."
+      "summary": "Se debatió sobre los desafíos y tendencias de la gestión presupuestaria, así como para promover el intercambio técnico y político orientado a fortalecer la sostenibilidad fiscal.",
+      "caption": "Imagen relacionada al artículo"
     },
     {
       "id": "2025-11-15-paraguay-destacó-su-política-fiscal-responsable-en-seminario-internacional-1",
@@ -254,7 +267,8 @@
       "date": "2025-11-15T21:24:00.000Z",
       "featured": false,
       "tags": [],
-      "summary": "El encuentro reunió a autoridades fiscales y especialistas de la región para debatir sobre los desafíos y tendencias de la gestión presupuestaria, así como para promover el intercambio técnico y político orientado a fortalecer la sostenibilidad fiscal."
+      "summary": "El encuentro reunió a autoridades fiscales y especialistas de la región para debatir sobre los desafíos y tendencias de la gestión presupuestaria, así como para promover el intercambio técnico y político orientado a fortalecer la sostenibilidad fiscal.",
+      "caption": "Imagen relacionada al artículo"
     },
     {
       "id": "2025-11-14-confianza-del-consumidor-se-reduce-en-octubre",
@@ -268,7 +282,8 @@
       "date": "2025-11-14T17:45:00.000Z",
       "featured": false,
       "tags": [],
-      "summary": "En octubre de 2025, el Índice de Confianza del Consumidor se ubicó en 48,32 puntos. Por su parte, el Índice de Expectativas Económicas y el Índice de Situación Económica se ubicaron en 61,75 y 34,88 puntos respectivamente.\n"
+      "summary": "En octubre de 2025, el Índice de Confianza del Consumidor se ubicó en 48,32 puntos. Por su parte, el Índice de Expectativas Económicas y el Índice de Situación Económica se ubicaron en 61,75 y 34,88 puntos respectivamente.\n",
+      "caption": "Imagen relacionada al artículo"
     },
     {
       "id": "2025-11-14-comercio-exterior-movió-usd-14-182-1-millones-en-10-meses",
@@ -282,7 +297,8 @@
       "date": "2025-11-14T00:12:00.000Z",
       "featured": false,
       "tags": [],
-      "summary": "Las exportaciones totales, al mes de octubre de 2025, alcanzaron un valor de US$ 14.182,1 millones, 3,3% por encima de los US$ 13.273,9 millones observados a octubre del año anterior. "
+      "summary": "Las exportaciones totales, al mes de octubre de 2025, alcanzaron un valor de US$ 14.182,1 millones, 3,3% por encima de los US$ 13.273,9 millones observados a octubre del año anterior. ",
+      "caption": "Imagen relacionada al artículo"
     },
     {
       "id": "2025-11-13-cadiem-celebra-22-años-de-trayectoria-consolidándose-como-actor-clave-en-el-mercado",
@@ -296,7 +312,8 @@
       "date": "2025-11-13T23:54:00.000Z",
       "featured": false,
       "tags": [],
-      "summary": "Con la obtención de la primera nota en grado de inversión para el Paraguay, y a la\nespera de una segunda, desde la empresa se augura un horizonte de proyectos\ncada vez más grandes que resulten atractivos ante los inversionistas a nivel\ninternacional"
+      "summary": "Con la obtención de la primera nota en grado de inversión para el Paraguay, y a la\nespera de una segunda, desde la empresa se augura un horizonte de proyectos\ncada vez más grandes que resulten atractivos ante los inversionistas a nivel\ninternacional",
+      "caption": "Imagen relacionada al artículo"
     },
     {
       "id": "2025-11-13-cadiem-celebra-22-años-de-trayectoria-consolidándose-como-actor-clave",
@@ -310,7 +327,8 @@
       "date": "2025-11-13T23:54:00.000Z",
       "featured": false,
       "tags": [],
-      "summary": "Con la obtención de la primera nota en grado de inversión para el Paraguay, y a la\nespera de una segunda, desde la empresa se augura un horizonte de proyectos\ncada vez más grandes que resulten atractivos ante los inversionistas a nivel\ninternacional"
+      "summary": "Con la obtención de la primera nota en grado de inversión para el Paraguay, y a la\nespera de una segunda, desde la empresa se augura un horizonte de proyectos\ncada vez más grandes que resulten atractivos ante los inversionistas a nivel\ninternacional",
+      "caption": "Imagen relacionada al artículo"
     }
   ],
   "analisis": [
@@ -332,7 +350,8 @@
         "analisis-economico",
         "inversion"
       ],
-      "summary": "Los aportes de un trabajador a la Caja Fiscal solo alcanzan para financiar cinco años de jubilación en promedio\n"
+      "summary": "Los aportes de un trabajador a la Caja Fiscal solo alcanzan para financiar cinco años de jubilación en promedio\n",
+      "caption": "Imagen relacionada al artículo"
     },
     {
       "id": "2025-11-21-ley-del-mercado-de-valores-fortalece-protección-al-inversionista",
@@ -347,7 +366,8 @@
       "featured": false,
       "tags": [],
       "author": "Perspectivas",
-      "summary": "Ley del Mercado de Valores y Productos fortalece protección al inversionista "
+      "summary": "Ley del Mercado de Valores y Productos fortalece protección al inversionista ",
+      "caption": "Imagen relacionada al artículo"
     },
     {
       "id": "2025-11-20-modernización-del-mercado-de-valores",
@@ -362,7 +382,8 @@
       "featured": false,
       "tags": [],
       "author": "Perspectivas",
-      "summary": "El encuentro se llevará a cabo este jueves 20 de noviembre, desde las 08:00, en el Hotel Dazzler (Av. Aviadores del Chaco y Vasconcellos) "
+      "summary": "El encuentro se llevará a cabo este jueves 20 de noviembre, desde las 08:00, en el Hotel Dazzler (Av. Aviadores del Chaco y Vasconcellos) ",
+      "caption": "Imagen relacionada al artículo"
     }
   ],
   "programa": [
@@ -383,7 +404,8 @@
         "economia-local"
       ],
       "summary": "Todo el análisis de la economía local e internacional",
-      "embed_url": "https://www.youtube.com/embed/TAAcjJXFJbQ"
+      "embed_url": "https://www.youtube.com/embed/TAAcjJXFJbQ",
+      "caption": "Imagen relacionada al artículo"
     },
     {
       "id": "2025-11-21-perspectivas-08-11-25",
@@ -397,7 +419,8 @@
       "date": "2025-11-09T00:57:51.355Z",
       "featured": false,
       "tags": [],
-      "embed_url": "https://www.youtube.com/embed/IZ_1l3Q656Q"
+      "embed_url": "https://www.youtube.com/embed/IZ_1l3Q656Q",
+      "caption": "Imagen relacionada al artículo"
     },
     {
       "id": "2025-11-21-perspectivas-21-06-2025",
@@ -411,7 +434,8 @@
       "date": "2025-06-22T00:39:10.699Z",
       "featured": false,
       "tags": [],
-      "embed_url": "https://www.youtube.com/embed/Jb7U95VQq8k"
+      "embed_url": "https://www.youtube.com/embed/Jb7U95VQq8k",
+      "caption": "Imagen relacionada al artículo"
     },
     {
       "id": "2025-11-21-perspectivas-24-05-25",
@@ -425,7 +449,8 @@
       "date": "2025-05-25T00:53:37.496Z",
       "featured": false,
       "tags": [],
-      "embed_url": "https://www.youtube.com/embed/LRr3RZ8Jo4Q"
+      "embed_url": "https://www.youtube.com/embed/LRr3RZ8Jo4Q",
+      "caption": "Imagen relacionada al artículo"
     },
     {
       "id": "2025-11-21-perspectivas-17-05-25",
@@ -439,7 +464,8 @@
       "date": "2025-05-18T00:51:06.240Z",
       "featured": false,
       "tags": [],
-      "embed_url": "https://www.youtube.com/embed/aKKcU3S7TIg"
+      "embed_url": "https://www.youtube.com/embed/aKKcU3S7TIg",
+      "caption": "Imagen relacionada al artículo"
     },
     {
       "id": "2025-11-21-perspectivas-03-05-25",
@@ -458,7 +484,8 @@
         "economia-local"
       ],
       "summary": "Una mirada mas allá de la economía",
-      "embed_url": "https://www.youtube.com/embed/6TO6xE6IiBE"
+      "embed_url": "https://www.youtube.com/embed/6TO6xE6IiBE",
+      "caption": "Imagen relacionada al artículo"
     },
     {
       "id": "2025-11-21-perspectivas-19-04-25",
@@ -472,7 +499,8 @@
       "date": "2025-04-20T00:33:46.704Z",
       "featured": false,
       "tags": [],
-      "embed_url": "https://www.youtube.com/embed/yf5WjqOtsUU"
+      "embed_url": "https://www.youtube.com/embed/yf5WjqOtsUU",
+      "caption": "Imagen relacionada al artículo"
     }
   ],
   "podcast": [
@@ -490,7 +518,8 @@
       "date": "2025-11-20T15:57:35.783Z",
       "featured": false,
       "tags": [],
-      "embed_url": "https://www.youtube.com/watch?v=6TO6xE6IiBE"
+      "embed_url": "https://www.youtube.com/watch?v=6TO6xE6IiBE",
+      "caption": "Imagen relacionada al artículo"
     }
   ],
   "sponsors": [

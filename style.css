@@ -2283,9 +2283,8 @@ ul {
 
 .article-header {
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   padding-bottom: 2rem;
-  border-bottom: 1px solid var(--border-color);
 }
 
 .article-category {
@@ -2311,20 +2310,110 @@ ul {
   color: var(--text-primary);
 }
 
-.article-meta-top {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
+.article-description {
+  font-size: 1.1rem;
   color: var(--text-secondary);
   margin: 1rem 0 0;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* NUEVA ESTRUCTURA ESTILO TELEGRAPH */
+.article-hero-section {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 2.5rem;
+  margin: 3rem 0;
+  align-items: flex-start;
+}
+
+.article-meta-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.meta-label {
+  font-size: 0.7rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
+  font-weight: 800;
+  color: var(--text-secondary);
+}
+
+.author-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.author-name {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.article-date {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.reading-time {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.social-links {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.social-icon:hover {
+  background-color: var(--text-primary);
+  color: white;
+  border-color: var(--text-primary);
+}
+
+.tags-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tag-link {
+  font-size: 0.85rem;
+  color: #2563eb;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.tag-link:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
 }
 
 .article-hero {
-  margin: 2.5rem 0;
+  margin: 0;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
@@ -2338,63 +2427,16 @@ ul {
   max-height: 500px;
 }
 
-.article-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 0 2.5rem;
-  padding: 1.5rem 0;
-  border-bottom: 2px solid var(--border-color);
-  gap: 2rem;
-}
-
-.article-author-info {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  color: var(--text-primary);
-}
-
-.author-name {
-  font-size: 1rem;
-}
-
-.author-name strong {
-  color: var(--color-accent);
-}
-
-.reading-time {
-  font-size: 0.95rem;
+.article-hero figcaption {
+  font-size: 0.85rem;
   color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg-secondary);
+  font-style: italic;
+  line-height: 1.5;
 }
 
-.article-share {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-}
 
-.share-label {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.article-share a {
-  color: var(--text-secondary);
-  transition: all 0.2s ease;
-  font-size: 1.2rem;
-}
-
-.article-share a:hover {
-  color: var(--color-accent);
-  transform: translateY(-2px);
-}
 
 .article-body {
   max-width: 740px;
@@ -2467,47 +2509,7 @@ ul {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* Bloque de compartir al final del artículo (opcional, ocultable si se prefiere solo arriba) */
-.article-body-footer {
-  margin: 4rem 0 2rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border-color);
-  display: flex;
-  justify-content: center;
-}
 
-.article-share span {
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-right: 1rem;
-}
-
-.article-share a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: auto;
-  height: auto;
-  padding: 0;
-  border-radius: 0;
-  background: transparent;
-  color: var(--text-secondary);
-  border: none;
-  transition: color 0.2s ease, transform 0.2s ease;
-  text-decoration: none;
-}
-
-.article-share a:hover {
-  background: transparent;
-  color: var(--color-accent);
-  border: none;
-  transform: translateY(-2px);
-  box-shadow: none;
-}
-
-.article-share i {
-  font-size: 1.5rem;
-}
 
 /* Responsive para artículos */
 @media (max-width: 768px) {
@@ -2521,26 +2523,31 @@ ul {
   }
 
   .article-header h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
-  .article-toolbar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.25rem;
-    padding: 1.25rem 0;
+  .article-hero-section {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
-  .article-author-info {
-    width: 100%;
-    justify-content: space-between;
+  .article-meta-sidebar {
+    order: 2;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border-radius: 8px;
   }
 
-  .article-share {
-    width: 100%;
-    justify-content: space-between;
-    border-top: 1px solid var(--border-color);
-    padding-top: 1.25rem;
+  .meta-item {
+    flex: 1;
+    min-width: 150px;
+  }
+
+  .article-hero {
+    order: 1;
   }
 
   .article-body {
