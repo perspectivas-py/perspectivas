@@ -459,13 +459,20 @@ function initHeaderScrollState() {
       const scrollTop = window.scrollY || window.pageYOffset;
       collapsePoint = rect.top + scrollTop - (header.offsetHeight || 0) - 16;
     } else {
-      collapsePoint = 140;
+      collapsePoint = 100; // Collapse sooner on article pages
     }
   };
 
   const update = () => {
-    const shouldCompact = window.scrollY > collapsePoint;
-    header.classList.toggle("scrolled", shouldCompact);
+    const scrollTop = window.scrollY || window.pageYOffset;
+    const buffer = 10;
+
+    // Hysteresis logic to prevent flickering
+    if (scrollTop > collapsePoint + buffer) {
+      header.classList.add("scrolled");
+    } else if (scrollTop < collapsePoint - buffer) {
+      header.classList.remove("scrolled");
+    }
     ticking = false;
   };
 
@@ -945,7 +952,7 @@ function renderTopReads(noticias) {
     ].filter(Boolean);
 
     return `
-      <article class="top-read-card">
+      <a href="/noticia.html?id=${encodeURIComponent(n.slug || n.id)}" class="top-read-card">
         <div class="top-read-thumb">
           <img src="${thumb}" alt="${n.title}" loading="lazy" />
           <span class="top-read-rank">${rank}</span>
@@ -955,7 +962,7 @@ function renderTopReads(noticias) {
           <h3>${n.title}</h3>
           ${metaPieces.length ? `<p class="top-read-meta">${metaPieces.join(" · ")}</p>` : ""}
         </div>
-      </article>
+      </a>
     `;
   }).join("");
 }

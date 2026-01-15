@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Lato:wght@400;700&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=3.5">
 </head>
 
 <body>
@@ -20,13 +20,15 @@
     <div class="header-top">
       <div class="header-controls left-controls">
         <div class="controls-group">
-          <button id="category-drawer-toggle" class="category-drawer-toggle" aria-label="Explorar etiquetas" aria-expanded="false" aria-controls="category-drawer">
+          <button id="category-drawer-toggle" class="category-drawer-toggle" aria-label="Explorar etiquetas"
+            aria-expanded="false" aria-controls="category-drawer">
             <span></span>
             <span></span>
             <span></span>
           </button>
           <button id="search-toggle-header" class="search-toggle" aria-label="Buscar en el panel">
-            <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+              stroke-width="2">
               <circle cx="11" cy="11" r="8"></circle>
               <path d="m21 21-4.35-4.35"></path>
             </svg>
@@ -48,13 +50,16 @@
       </ul>
       <div class="nav-search-wrapper">
         <div id="weather-widget" class="weather-widget" aria-label="Clima de Asunción">
-          <svg class="weather-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path>
+          <svg class="weather-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2">
+            </path>
           </svg>
           <span id="weather-temp" class="weather-temp">--°C</span>
         </div>
         <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">
-          <svg class="theme-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <svg class="theme-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+            stroke-width="2">
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -76,7 +81,8 @@
         </div>
         <div class="drawer-search-wrapper">
           <button id="search-toggle" class="search-toggle" aria-label="Buscar">
-            <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+              stroke-width="2">
               <circle cx="11" cy="11" r="8"></circle>
               <path d="m21 21-4.35-4.35"></path>
             </svg>
@@ -102,7 +108,7 @@
     <!-- HERO CON NOTICIAS DESTACADAS -->
     <section class="hero-with-sidebar">
       <div id="hero" class="hero"></div>
-      
+
       <div class="hero-sidebar-wrapper">
         <h3 class="secondary-news-title">Destacadas</h3>
         <!-- NOTICIAS DESTACADAS EN GRID -->
@@ -233,7 +239,8 @@
                 <a class="about-social-link" href="#" aria-label="Facebook">
                   <span class="about-social-icon">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <path fill="currentColor" d="M14 9h3V6h-3c-1.66 0-3 1.34-3 3v2H9v3h2v6h3v-6h2.6l.6-3H14V9.9c0-.5.4-.9 1-.9Z" />
+                      <path fill="currentColor"
+                        d="M14 9h3V6h-3c-1.66 0-3 1.34-3 3v2H9v3h2v6h3v-6h2.6l.6-3H14V9.9c0-.5.4-.9 1-.9Z" />
                     </svg>
                   </span>
                 </a>
@@ -298,37 +305,37 @@
     // Dark Mode Toggle Script
     const themeToggle = document.getElementById('theme-toggle');
     const htmlElement = document.documentElement;
-    
+
     // Cargar tema guardado o detectar preferencia del sistema
     function loadTheme() {
       const savedTheme = localStorage.getItem('theme');
       let theme = savedTheme;
-      
+
       if (!savedTheme) {
         // Detectar preferencia del sistema
         theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       }
-      
+
       applyTheme(theme);
     }
-    
+
     function applyTheme(theme) {
       htmlElement.setAttribute('data-theme', theme === 'dark' ? 'dark' : '');
       localStorage.setItem('theme', theme);
       updateThemeButton(theme);
     }
-    
+
     function updateThemeButton(theme) {
       themeToggle.title = theme === 'dark' ? 'Modo claro' : 'Modo oscuro';
     }
-    
+
     // Toggle al hacer click
     themeToggle.addEventListener('click', () => {
       const currentTheme = localStorage.getItem('theme') || 'light';
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
       applyTheme(newTheme);
     });
-    
+
     // Cargar tema al inicio
     loadTheme();
   </script>
