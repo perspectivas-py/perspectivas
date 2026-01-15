@@ -3164,3 +3164,240 @@ ul {
 .footer-bottom-links a:hover {
   text-decoration: underline;
 }
+
+/* =========================================
+   NUEVO LAYOUT NOTICIA PRO (Tipo Telegraph)
+   ========================================= */
+
+.article-container-pro {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+/* Header Full Width */
+.article-header-full {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  max-width: 900px; /* Limit line length for readability */
+}
+
+.article-title-hero {
+  font-family: var(--font-headline);
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.article-subtitle-hero {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+/* Grid Layout */
+.article-layout-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr 260px; /* Meta - Content - Related */
+  gap: 3.5rem;
+  align-items: start;
+}
+
+/* Columna Izquierda: Metadata */
+.article-left-col {
+  /* Separador vertical sutil si se desea, estilo Telegraph no lo tiene siempre, pero ayuda */
+}
+
+.sticky-meta {
+  position: sticky;
+  top: 6rem;
+}
+
+/* Dentro del sticky meta reutilizamos estilos existentes, pero ajustamos espacios */
+.article-meta-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.meta-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #888;
+  font-weight: 700;
+}
+
+.author-name, .article-date {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.tags-list-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tag-badge-small {
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Columna Central: Contenido */
+.article-content-col {
+  min-width: 0;
+}
+
+.article-hero-wide {
+  margin-bottom: 2rem;
+}
+
+.article-hero-wide img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  display: block;
+}
+
+.article-hero-wide figcaption {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+.article-body-text {
+  font-family: 'Merriweather', serif; /* Mejor para lectura larga tipo periódico */
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+}
+
+.article-body-text p {
+  margin-bottom: 1.5rem;
+}
+
+.article-body-text h2, 
+.article-body-text h3 {
+  font-family: var(--font-headline);
+  color: var(--text-primary);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.article-body-text blockquote {
+  border-left: 4px solid var(--color-accent);
+  padding-left: 1.5rem;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  margin: 2rem 0;
+}
+
+/* Columna Derecha: Relacionadas */
+.article-right-col {
+  border-left: 1px solid var(--border-color);
+  padding-left: 1.5rem;
+}
+
+.related-section-slim h3 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--color-accent);
+  display: inline-block;
+}
+
+.related-cards-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.related-card h4 {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.related-card-img {
+  height: 120px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .article-container-pro {
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .article-layout-grid {
+    grid-template-columns: 200px 1fr;
+    gap: 2rem;
+  }
+  .article-right-col {
+    display: none; /* Ocultar sidebar derecha en tablets/laptops pequeñas para priorizar lectura */
+  }
+}
+
+@media (max-width: 768px) {
+  .article-title-hero {
+    font-size: 2rem;
+  }
+  
+  .article-layout-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .article-left-col {
+    order: -1; /* Meta arriba en mobile pero debajo del título */
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+  }
+  
+  .sticky-meta {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .meta-item {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .tags-list-sidebar {
+    display: none; /* Ahorrar espacio en móvil cabecera */
+  }
+
+  .article-meta-sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .article-body-text {
+    font-size: 1rem;
+  }
+}

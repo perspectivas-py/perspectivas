@@ -287,6 +287,12 @@ async function loadArticle() {
     if (titleEl) {
       titleEl.textContent = article.title;
     }
+
+    // 1b. Inyectar subtítulo (si existe elemento y contenido)
+    const subtitleEl = document.getElementById("article-subtitle");
+    if (subtitleEl) {
+      subtitleEl.textContent = article.description || "";
+    }
     
     // 2. Inyectar foto
     const heroFigure = document.getElementById("article-hero-figure");
