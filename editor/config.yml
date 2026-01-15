@@ -88,6 +88,8 @@ collections:
         widget: "image"
         required: true
         hint: "Imagen que aparecerá en las listas y en el artículo"
+      
+      - { label: "📝 Pie de foto (Caption)", name: "caption", widget: "string", required: false, hint: "Texto pequeño debajo de la imagen principal" }
 
       - label: "⭐ Opciones de visibilidad"
         name: "featured"
@@ -149,6 +151,8 @@ collections:
         name: "thumbnail"
         widget: "image"
         required: true
+      
+      - { label: "📝 Pie de foto (Caption)", name: "caption", widget: "string", required: false, hint: "Texto pequeño debajo de la imagen principal" }
 
       - label: "⭐ ¿Destacado?"
         name: "featured"
