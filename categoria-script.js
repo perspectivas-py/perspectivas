@@ -1,13 +1,12 @@
 // -------------------------------------------------------------
-// CARGADOR DE NOTICIAS POR CATEGORÍA
+// CARGADOR DE NOTICIAS POR CATEGORÍA - v4.0 (JSON Based)
 // -------------------------------------------------------------
-const CAT_REPO = "perspectivas-py/perspectivas";
-const CAT_BRANCH = "main";
-const CAT_PATH = "content/noticias/posts";
+const CONTENT_URL = "content.json";
 
-// leer parámetro cat de la URL
+// leer parámetro cat o tag de la URL
 const params = new URLSearchParams(window.location.search);
 const currentCategory = params.get("cat") || "";
+const currentTag = params.get("tag") || "";
 
 // ejecutar carga
 document.addEventListener("DOMContentLoaded", loadCategoryNews);
@@ -17,72 +16,104 @@ async function loadCategoryNews() {
   const titleEl = document.getElementById("category-title");
   const gridEl = document.getElementById("category-grid");
 
-  if (!currentCategory) {
+  if (!currentCategory && !currentTag) {
     titleEl.textContent = "Categoría no especificada";
     gridEl.innerHTML = "<p>No se puede cargar la categoría.</p>";
     return;
   }
 
-  titleEl.textContent = formCategoryTitle(currentCategory);
-    gridEl.innerHTML = "<p>Cargando noticias...</p>";
+  // Set initial title
+  if (currentTag) {
+    titleEl.textContent = `Etiqueta: ${formCategoryTitle(currentTag)}`;
+  } else {
+    titleEl.textContent = formCategoryTitle(currentCategory);
+  }
+  gridEl.innerHTML = "<p>Cargando noticias...</p>";
 
   try {
-   const files = await fetch(
-      `https://api.github.com/repos/${CAT_REPO}/contents/${CAT_PATH}?ref=${CAT_BRANCH}`,
-      { cache: "no-store" }
-    );
+    // 1. Fetch content.json
+    const res = await fetch(`${CONTENT_URL}?t=${Date.now()}`); // cache busting
+    if (!res.ok) throw new Error("No se pudo cargar content.json");
 
-    if (!files.ok) throw new Error("No se pudo cargar el listado de noticias.");
+    const data = await res.json();
 
-    const list = await files.json();
-   const markdownFiles = Array.isArray(list)
-      ? list.filter((f) => f.type === "file" && f.download_url)
-      : [];
+    // 2. Combine all content sources
+    const allPosts = [
+      ...(data.noticias || []),
+      ...(data.analisis || []),
+      ...(data.programa || []),
+      ...(data.podcast || [])
+    ];
 
-    let posts = await Promise.all(
-  markdownFiles.map(async (file) => {
-        const md = await fetchMarkdownFile(file.download_url);
-        const { frontmatter, content } = parseMarkdownFrontmatter(md);
+    // 3. Filter
+    const posts = allPosts.filter(p => {
+      if (currentTag) {
+        // Check tags array (case insensitive / accent insensitive)
+        const tags = p.tags || [];
+        return tags.some(t => normalizeCategory(t) === normalizeCategory(currentTag));
+      } else {
+        // Check category
+        return normalizeCategory(p.category) === normalizeCategory(currentCategory);
+      }
+    }).sort((a, b) => {
+      // Sort by date desc
+      return new Date(b.date || 0) - new Date(a.date || 0);
+    });
 
-        return {
-          name: file.name,
-          frontmatter,
-          content,
-          category: normalizeCategory(frontmatter.category)
-        };
-      })
-    );
-
-    posts = posts
-      .filter((p) => p.category === normalizeCategory(currentCategory))
-      .sort((a, b) => {
-        const dateA = new Date(a.frontmatter.date || 0).getTime();
-        const dateB = new Date(b.frontmatter.date || 0).getTime();
-        if (dateA !== dateB) return dateB - dateA;
-        return b.name.localeCompare(a.name);
-      });
-
+    // 4. Render
     if (posts.length === 0) {
-      gridEl.innerHTML = `<p>No hay noticias en esta categoría.</p>`;
+      gridEl.innerHTML = `<p>No hay noticias en esta sección.</p>`;
       return;
     }
 
-    gridEl.innerHTML = posts
-      .map(({ name, frontmatter, content }) =>
-        buildNewsCardFromMarkdown(name, frontmatter, content)
-      )
-      .join("");
+    gridEl.innerHTML = posts.map(item => buildNewsCard(item)).join("");
+
   } catch (err) {
     console.error(err);
-    gridEl.innerHTML = `<p>Error cargando noticias.</p>`;
+    gridEl.innerHTML = `<p>Error cargando noticias: ${err.message}</p>`;
   }
 }
 
-// título bonito:
+// -------------------------------------------------------------
+// HELPERS
+// -------------------------------------------------------------
+
 function formCategoryTitle(cat) {
   return cat.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase());
 }
 
 function normalizeCategory(cat) {
-  return (cat || "").toString().trim().toLowerCase();
+  // Normalize: lowercase, remove accents
+  return (cat || "").toString().trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+function buildNewsCard(item) {
+  const thumb = item.thumbnail || "/assets/img/default_news.jpg";
+  const cat = item.category || "General";
+  const id = item.slug || item.id;
+
+  let dateStr = "";
+  if (item.date) {
+    try {
+      const d = new Date(item.date);
+      dateStr = d.toLocaleDateString("es-PY", { day: '2-digit', month: 'short', year: 'numeric' });
+    } catch (e) { }
+  }
+
+  return `
+    <article class="card">
+      <a href="/noticia.html?id=${encodeURIComponent(id)}">
+        <div class="card-img-container">
+          <img src="${thumb}" alt="${item.title}" loading="lazy">
+        </div>
+        <div class="card-content">
+          <span class="card-category text-accent">${cat}</span>
+          <h3>${item.title}</h3>
+          <div class="card-meta">
+            <span class="card-date">${dateStr}</span>
+          </div>
+        </div>
+      </a>
+    </article>
+  `;
 }

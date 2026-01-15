@@ -142,7 +142,8 @@ ul {
   padding: 0.35rem 1rem;
   transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease, border-color 0.3s ease;
   overflow: hidden;
-  max-height: 100px; /* Arbitrary large enough value */
+  max-height: 100px;
+  /* Arbitrary large enough value */
 }
 
 .nav-list {
@@ -2628,4 +2629,34 @@ ul {
 [data-theme="dark"] .tag-badge {
   background: #1e293b;
   border-color: #334155;
+}
+
+/* Sub-navigation (Article Tags) */
+.sub-navigation {
+  background-color: var(--color-muted-bg, #1a2332);
+  color: #fff;
+  padding: 0.4rem 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  font-size: 0.78rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.sub-nav-link {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.sub-nav-link:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-underline-offset: 4px;
 }

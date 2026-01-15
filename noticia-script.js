@@ -170,6 +170,39 @@ async function loadArticle() {
       </div>`
       : "";
 
+    // Sub-navegación (Etiquetas en header oscuro)
+    const subNav = document.getElementById("sub-navigation");
+    if (subNav) {
+      subNav.innerHTML = "";
+      let subItems = [];
+
+      // 1. Agregar Categoría (si existe)
+      if (article.category) {
+        const catKey = article.category.toLowerCase();
+        const catLabel = CATEGORY_LABELS[catKey] || article.category;
+        subItems.push(`<a href="/categoria.html?cat=${encodeURIComponent(article.category)}" class="sub-nav-link" style="font-weight:800; color: #fff;">${catLabel.toUpperCase()}</a>`);
+
+        // Separador sutil
+        if (article.tags && article.tags.length > 0) {
+          subItems.push('<span style="opacity:0.25; color: white;">|</span>');
+        }
+      }
+
+      // 2. Agregar Tags
+      if (article.tags && article.tags.length > 0) {
+        article.tags.forEach(t => {
+          subItems.push(`<a href="/categoria.html?tag=${encodeURIComponent(t)}" class="sub-nav-link">#${t}</a>`);
+        });
+      }
+
+      if (subItems.length > 0) {
+        subNav.innerHTML = subItems.join("");
+        subNav.hidden = false;
+      } else {
+        subNav.hidden = true;
+      }
+    }
+
     // Plantilla principal del artículo
     console.log("🎨 Renderizando HTML del artículo...");
     container.innerHTML = `
