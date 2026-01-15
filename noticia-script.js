@@ -217,64 +217,93 @@ async function loadArticle() {
       caption: article.caption
     });
     
-    // COLUMNA IZQUIERDA (STICKY): METADATA COMPACTA
-    let sidebarHtml = `<div class="article-meta-sidebar">`;
+    // COLUMNA IZQUIERDA (STICKY): METADATA NUEVA - DISEÑO MODERNO
     
-    // Autor
-    if (article.author) {
-      sidebarHtml += `
-        <div class="meta-item author-section">
-          <span class="meta-label">POR</span>
-          <span class="author-name">${article.author}</span>
-        </div>`;
+    // Preparar datos para el sidebar
+    const pageUrl = encodeURIComponent(window.location.href);
+    const pageTitle = encodeURIComponent(article.title);
+    
+    // Fecha completa
+    const fullDateOptions = { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+    let fullDateStr = "";
+    if (article.date) {
+        // Ajustamos la zona horaria si es necesario, o lo dejamos por defecto
+        fullDateStr = new Date(article.date).toLocaleDateString('es-PY', fullDateOptions) + " GMT"; 
     }
+
+    // Datos de autor (Mock / Lógica simple)
+    const authorName = article.author || "Redacción Perspectivas";
+    const authorRole = authorName.includes("Perspectivas") ? "Equipo Editorial" : "Colaborador Especial";
+    const authorImg = authorName.includes("Perspectivas") 
+      ? "assets/img/perspectivas-logo.jpeg" 
+      : `https://ui-avatars.com/api/?name=${encodeURIComponent(authorName)}&background=f0f0f0&color=333&size=128`;
+
+    let sidebarHtml = `<div class="article-meta-sidebar-new">`;
     
-    // Fecha
+    // 1. Autor
     sidebarHtml += `
-      <div class="meta-item date-section">
-        <span class="meta-label">FECHA</span>
-        <span class="article-date">${formatDate(article.date)}</span>
+      <div class="author-profile">
+        <img src="${authorImg}" class="author-avatar" alt="${authorName}">
+        <div class="author-details">
+          <span class="author-name">${authorName}</span>
+          <span class="author-role">${authorRole}</span>
+        </div>
       </div>`;
     
-    // Etiquetas (si existen)
+    // 2. Fecha
+    sidebarHtml += `
+      <div class="sidebar-date-section">
+        <span class="article-date-full">${fullDateStr}</span>
+      </div>`;
+    
+    // 3. Temas (Tags)
     if (article.tags && article.tags.length > 0) {
       sidebarHtml += `
-        <div class="meta-item tags-section">
-          <span class="meta-label">TEMAS</span>
-          <div class="tags-list-sidebar">
-            ${article.tags.map(t => `<span class="tag-badge-small">#${t}</span>`).join("")}
+        <div class="sidebar-topics-section">
+          <span class="sidebar-label">Temas relacionados</span>
+          <div class="topics-list-text">
+            ${article.tags.map(t => `<a href="/categoria.html?tag=${encodeURIComponent(t)}" class="topic-link">${t}</a>`).join(", ")}
           </div>
         </div>`;
     }
     
-    // Tiempo de lectura
+    // 4. Acciones (Lectura, Bookmark, Gift)
     sidebarHtml += `
-      <div class="meta-item reading-time-section">
-        <span class="reading-time">${lectura}</span>
+      <div class="sidebar-actions-section">
+         <div style="font-size: 0.85rem; margin-bottom: 0.75rem; color: #555; display:flex; align-items:center; gap:0.5rem">
+            <i class="far fa-clock"></i> ${lectura}
+         </div>
+         <div class="action-row">
+            <button class="action-icon-btn" aria-label="Guardar" title="Guardar para leer después">
+              <i class="far fa-bookmark"></i>
+            </button>
+            <button class="action-icon-btn" aria-label="Comentarios" title="Ver comentarios">
+              <i class="far fa-comment"></i> <span style="font-size: 0.8em">3</span>
+            </button>
+         </div>
+         <button class="gift-article-btn" style="margin-top:0.5rem;">
+           <i class="fas fa-gift"></i> Regale este artículo
+         </button>
       </div>`;
-    
-    // Iconos de compartir (redes sociales)
-    const pageUrl = encodeURIComponent(window.location.href);
-    const pageTitle = encodeURIComponent(article.title);
+
+    // 5. Redes Sociales (Circulares)
     sidebarHtml += `
-      <div class="meta-item share-section">
-        <div class="share-icons-sidebar">
-          <a href="https://www.facebook.com/sharer/sharer.php?u=${pageUrl}" target="_blank" class="share-icon-small facebook" title="Facebook">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}" target="_blank" class="share-icon-small twitter" title="Twitter/X">
+      <div class="sidebar-social-row">
+        <a href="https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}" target="_blank" class="social-circle-btn" aria-label="X">
             <i class="fab fa-x-twitter"></i>
-          </a>
-          <a href="https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}" target="_blank" class="share-icon-small linkedin" title="LinkedIn">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-          <a href="https://wa.me/?text=${pageTitle}%20${pageUrl}" target="_blank" class="share-icon-small whatsapp" title="WhatsApp">
+        </a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=${pageUrl}" target="_blank" class="social-circle-btn" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+         <a href="https://wa.me/?text=${pageTitle}%20${pageUrl}" target="_blank" class="social-circle-btn" aria-label="WhatsApp">
             <i class="fab fa-whatsapp"></i>
-          </a>
-        </div>
+        </a>
+        <a href="mailto:?subject=${pageTitle}&body=${pageUrl}" class="social-circle-btn" aria-label="Email">
+            <i class="far fa-envelope"></i>
+        </a>
       </div>`;
     
-    sidebarHtml += `</div>`;
+    sidebarHtml += `</div>`; // Cierre sidebar
     
     const sidebarLeftContainer = document.getElementById("sidebar-left-content");
     if (sidebarLeftContainer) {
