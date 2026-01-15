@@ -3434,6 +3434,10 @@ ul {
   margin-bottom: 0.35rem;
   font-weight: 700;
   font-family: var(--font-body);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .related-card-date {
