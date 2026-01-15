@@ -76,12 +76,23 @@
   <!-- CONTENIDO PRINCIPAL DE LA NOTICIA -->
   <main class="article-main-wrapper">
     <div class="article-container">
-      <!-- SIDEBAR IZQUIERDO: METADATA -->
-      <aside class="article-sidebar-left">
-        <div id="sidebar-left-content"></div>
-      </aside>
+      <!-- HEADER DEL ARTÍCULO: METADATA A LA IZQUIERDA + FOTO A LA DERECHA -->
+      <div class="article-header-section">
+        <!-- COLUMNA IZQUIERDA: TÍTULO + METADATA -->
+        <div class="article-metadata-column">
+          <h1 id="article-title-main" class="article-title">Cargando...</h1>
+          <div id="article-metadata-content"></div>
+        </div>
 
-      <!-- CONTENIDO CENTRAL: ARTÍCULO -->
+        <!-- COLUMNA DERECHA: FOTO PRINCIPAL -->
+        <div class="article-hero-column">
+          <figure id="article-hero-figure" class="article-hero">
+            <p style="padding: 20px;">Cargando imagen...</p>
+          </figure>
+        </div>
+      </div>
+
+      <!-- CONTENIDO PRINCIPAL: ARTÍCULO (ANCHO COMPLETO) -->
       <article id="contenido-noticia" class="full-article">
         <p style="text-align: center; padding: 40px;">Cargando contenido...</p>
       </article>

@@ -217,51 +217,92 @@ async function loadArticle() {
       caption: article.caption
     });
     
-    // SIDEBAR IZQUIERDO - SOLO AUTOR Y FECHA (STICKY)
-    let sidebarHtml = `<div class="article-meta-sidebar">`;
+    // HEADER: METADATA IZQUIERDA + FOTO DERECHA
+    // 1. Título principal
+    const titleEl = document.getElementById("article-title-main");
+    if (titleEl) {
+      titleEl.textContent = article.title;
+    }
+    
+    // 2. Metadata (Autor, Fecha, Etiquetas, Tiempo lectura, Iconos)
+    let metadataHtml = `<div class="article-meta-header">`;
     
     // Autor
     if (article.author) {
-      sidebarHtml += `
+      metadataHtml += `
         <div class="meta-item author-section">
-          <span class="meta-label">Por</span>
+          <span class="meta-label">POR</span>
           <span class="author-name">${article.author}</span>
         </div>`;
     }
     
     // Fecha
-    sidebarHtml += `
+    metadataHtml += `
       <div class="meta-item date-section">
-        <span class="meta-label">Fecha</span>
+        <span class="meta-label">FECHA</span>
         <span class="article-date">${formatDate(article.date)}</span>
       </div>`;
     
-    sidebarHtml += `</div>`;
-    
-    // Imagen
-    let heroHtml = '';
-    if (article.thumbnail) {
-      heroHtml = `<figure class="article-hero">
-        <img src="${article.thumbnail}" alt="${article.title}">
-        ${article.caption ? `<figcaption>${article.caption}</figcaption>` : ""}
-      </figure>`;
+    // Etiquetas
+    if (article.tags && article.tags.length > 0) {
+      metadataHtml += `
+        <div class="meta-item tags-section">
+          <span class="meta-label">TEMAS</span>
+          <div class="tags-list">
+            ${article.tags.map(t => `<span class="tag-badge">#${t}</span>`).join("")}
+          </div>
+        </div>`;
     }
     
-    // Renderizar sidebar izquierdo
-    const sidebarLeftContainer = document.getElementById("sidebar-left-content");
-    if (sidebarLeftContainer) {
-      sidebarLeftContainer.innerHTML = sidebarHtml;
+    // Tiempo de lectura
+    metadataHtml += `
+      <div class="meta-item reading-time-section">
+        <span class="reading-time">${lectura}</span>
+      </div>`;
+    
+    // Iconos de compartir (redes sociales)
+    const pageUrl = encodeURIComponent(window.location.href);
+    const pageTitle = encodeURIComponent(article.title);
+    metadataHtml += `
+      <div class="meta-item share-section">
+        <span class="meta-label">COMPARTIR</span>
+        <div class="share-icons">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=${pageUrl}" target="_blank" class="share-icon facebook" title="Compartir en Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}" target="_blank" class="share-icon twitter" title="Compartir en Twitter/X">
+            <i class="fab fa-x-twitter"></i>
+          </a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}" target="_blank" class="share-icon linkedin" title="Compartir en LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="https://wa.me/?text=${pageTitle}%20${pageUrl}" target="_blank" class="share-icon whatsapp" title="Compartir en WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>`;
+    
+    metadataHtml += `</div>`;
+    
+    const metadataContainer = document.getElementById("article-metadata-content");
+    if (metadataContainer) {
+      metadataContainer.innerHTML = metadataHtml;
     }
     
+    // 3. Foto principal (en la columna derecha del header)
+    const heroFigure = document.getElementById("article-hero-figure");
+    if (heroFigure) {
+      if (article.thumbnail) {
+        heroFigure.innerHTML = `
+          <img src="${article.thumbnail}" alt="${article.title}">
+          ${article.caption ? `<figcaption>${article.caption}</figcaption>` : ""}`;
+      } else {
+        heroFigure.innerHTML = `<p style="padding: 20px;">Imagen no disponible</p>`;
+      }
+    }
+    
+    // 4. Contenido principal del artículo
     container.innerHTML = `
-      <header class="article-header">
-        <p class="article-category">${categoryLabel}</p>
-        <h1>${article.title}</h1>
-        <p class="article-description">${article.description || ""}</p>
-      </header>
-
-      ${heroHtml}
-
       <section class="article-body">
         ${htmlBody}
       </section>
