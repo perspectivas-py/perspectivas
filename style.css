@@ -3369,16 +3369,59 @@ ul {
 .related-cards-vertical {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
-.related-card h4 {
-  font-size: 1rem;
-  margin-bottom: 0.25rem;
+.related-card a {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  text-decoration: none;
+  color: inherit;
+}
+
+.related-card a:hover h4 {
+  color: var(--color-accent);
 }
 
 .related-card-img {
-  height: 120px;
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.related-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.related-card:hover .related-card-img img {
+  transform: scale(1.05);
+}
+
+.related-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.related-card h4 {
+  font-size: 0.95rem; /* Ajustado para mejor lectura */
+  line-height: 1.3;
+  margin-bottom: 0.35rem;
+  font-weight: 700;
+  font-family: var(--font-body);
+}
+
+.related-card-date {
+  font-size: 0.75rem;
+  color: #888;
+  font-weight: 600;
 }
 
 /* Responsive */
