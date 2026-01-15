@@ -158,10 +158,88 @@ async function loadArticle() {
 
     const lectura = estimateReadingTime(bodySource || article.description || "");
 
-    // Actualizamos el <title> del documento
+    // Actualizamos el <title>
     document.title = `${article.title} | Perspectivas`;
 
-    // Resolver Categoría a mostrar
+    // ----------------------------------------------------
+    // DETECCIÓN DE MODO CINE (TIPO PROGRAMA / VIDEO)
+    // ----------------------------------------------------
+    if (article.type === "programa" || article.type === "video") {
+        console.log("🎬 Activando MODO CINE / VIDEO");
+        document.body.classList.add("cinema-mode");
+        
+        // Reemplazar main completo para layout personalizado
+        const mainWrapper = document.querySelector('.article-main-wrapper');
+        if (mainWrapper) {
+            
+            // Buscar video relacionado (Sidebar)
+            const relatedVideos = allNews
+               .filter(a => a.type === "programa" && (a.slug || a.id) !== articleId)
+               .slice(0, 5); // Tomar 5 videos
+
+            // Obtener URL de embed (limpia)
+            let embedSrc = article.embed_url || "";
+            if(embedSrc.includes("watch?v=")) {
+                embedSrc = embedSrc.replace("watch?v=", "embed/");
+            }
+            
+            // Construir HTML del sidebar lateral
+            const sidebarHtml = relatedVideos.map(vid => {
+                 let thumb = vid.thumbnail || '/assets/img/default_news.jpg';
+                 return `
+                 <a href="/noticia.html?type=programa&id=${encodeURIComponent(vid.slug || vid.id)}" class="sidebar-video-card">
+                    <div class="sidebar-video-thumb">
+                        <img src="${thumb}" alt="${vid.title}">
+                    </div>
+                    <div class="sidebar-video-info">
+                        <h4>${vid.title}</h4>
+                        <span class="sidebar-video-time">${formatDate(vid.date)}</span>
+                    </div>
+                 </a>`;
+            }).join("");
+
+            mainWrapper.innerHTML = `
+            <div class="cinema-layout-container">
+                <!-- COLUMNA PRINCIPAL -->
+                <div class="cinema-main-column">
+                    
+                    <!-- VIDEO PLAYER -->
+                    <div class="cinema-video-wrapper">
+                         ${ embedSrc ? `<iframe src="${embedSrc}" allowfullscreen allow="autoplay; encrypted-media"></iframe>` : '<p style="color:#fff; padding:2rem; text-align:center;">Video no disponible.</p>' }
+                    </div>
+                    
+                    <!-- HEADER INFO -->
+                    <div class="cinema-header">
+                        <h1 class="cinema-title">${article.title}</h1>
+                        <p class="cinema-subtitle">${article.description || ''}</p>
+                        
+                        <div class="cinema-meta-row">
+                             <span class="cinema-tag">Programa TV</span>
+                             <span class="meta-date">${formatDate(article.date)}</span>
+                             <span class="meta-share">Comparte esto <i class="fas fa-share-alt" style="margin-left:5px;"></i></span>
+                        </div>
+                    </div>
+                    
+                    <!-- DETALLE TEXTO (Si hubiere) -->
+                    <div class="article-body-text" style="color: #ccc; max-width: 100%;">
+                        ${htmlBody}
+                    </div>
+
+                </div>
+
+                <!-- COLUMNA LATERAL (EXPLORAR) -->
+                <aside class="cinema-sidebar">
+                    <h3 class="cinema-sidebar-title">Explorar más</h3>
+                    ${sidebarHtml}
+                </aside>
+            </div>
+            `;
+            // Detenemos aquí, ya no ejecutamos el renderizado estándar de noticia
+            return; 
+        }
+    }
+
+    // Resolver Categoría a mostrar (Lógica normal si NO es programa)
     const categoryKey = article.category?.toLowerCase();
     const categoryLabel = CATEGORY_LABELS[categoryKey] || TYPE_LABELS[article.type] || "Actualidad";
 

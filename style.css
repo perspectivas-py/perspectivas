@@ -3856,3 +3856,195 @@ ul {
   margin-top: auto;
 }
 
+
+/* MODO CINE (PROGRAMA TV) - ESTILO BBC DARK */
+body.cinema-mode {
+    background-color: #0f1012; /* Fondo casi negro BBC */
+    color: #e5e5e5;
+}
+
+body.cinema-mode .site-header {
+    background-color: #0f1012;
+    border-bottom-color: #333;
+}
+
+body.cinema-mode .site-header .brand {
+    color: #fff;
+}
+
+/* Ocultar elementos estándar que no queremos en modo cine */
+body.cinema-mode .site-footer-new {
+    border-top: 1px solid #333;
+    background-color: #0f1012;
+    color: #ccc;
+}
+/* Layout específico para Cinema */
+.cinema-layout-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    display: grid;
+    grid-template-columns: 1fr 340px; /* Video grande + Sidebar */
+    gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+    .cinema-layout-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Área Principal (Video + Info) */
+.cinema-main-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.cinema-video-wrapper {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-color: #000;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.cinema-video-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.cinema-header {
+    border-bottom: 1px solid #333;
+    padding-bottom: 1.5rem;
+}
+
+.cinema-title {
+    font-family: var(--font-headline);
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+}
+
+.cinema-subtitle {
+    font-size: 1.1rem;
+    color: #bbb;
+    line-height: 1.6;
+    max-width: 900px;
+}
+
+.cinema-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.cinema-tag {
+    background-color: #222;
+    color: #fff;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* Sidebar Oscuro (Explorar) */
+.cinema-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.cinema-sidebar-title {
+    font-size: 0.9rem;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.sidebar-video-card {
+    display: flex;
+    gap: 1rem;
+    text-decoration: none;
+    group: sidebar-card;
+    align-items: flex-start;
+}
+
+.sidebar-video-thumb {
+    width: 140px;
+    aspect-ratio: 16/9;
+    flex-shrink: 0;
+    position: relative;
+    background-color: #222;
+}
+
+.sidebar-video-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.sidebar-video-thumb::after {
+    content: "▶";
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    background: #000;
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-video-card:hover .sidebar-video-thumb img {
+    opacity: 1;
+}
+
+.sidebar-video-info h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #ddd;
+    line-height: 1.3;
+    transition: color 0.2s;
+    margin-bottom: 0.3rem;
+}
+
+.sidebar-video-card:hover h4 {
+    color: #fff;
+}
+
+.sidebar-video-time {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+/* Carousel inferior (más videos) */
+.cinema-bottom-section {
+    padding-top: 2rem;
+    border-top: 1px solid #333;
+    margin-top: 3rem;
+}
+
+.cinema-carousel-title {
+    color: #fff;
+    margin-bottom: 1.5rem;
+}
+
