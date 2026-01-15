@@ -46,11 +46,21 @@ async function loadCategoryNews() {
     ];
 
     // 3. Filter
+    console.log(`🔎 Filtrando por: ${currentTag ? 'Tag=' + currentTag : 'Cat=' + currentCategory}`);
+    
     const posts = allPosts.filter(p => {
       if (currentTag) {
         // Check tags array (case insensitive / accent insensitive)
         const tags = p.tags || [];
-        return tags.some(t => normalizeCategory(t) === normalizeCategory(currentTag));
+        if (!Array.isArray(tags)) return false; // Protección si tags no es array
+        
+        // Normalizamos el tag buscado una sola vez
+        const searchTag = normalizeCategory(currentTag);
+        
+        // Buscamos coincidencia
+        const found = tags.some(t => normalizeCategory(t) === searchTag);
+        if (found) console.log(`✅ Coincidencia encontrada: ${p.title} (tags: ${tags.join(', ')})`);
+        return found;
       } else {
         // Check category
         return normalizeCategory(p.category) === normalizeCategory(currentCategory);

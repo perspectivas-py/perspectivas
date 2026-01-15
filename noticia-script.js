@@ -165,14 +165,6 @@ async function loadArticle() {
     const categoryKey = article.category?.toLowerCase();
     const categoryLabel = CATEGORY_LABELS[categoryKey] || TYPE_LABELS[article.type] || "Actualidad";
 
-    // Generar HTML de etiquetas
-    const tagsHtml = (article.tags && article.tags.length > 0)
-      ? `
-      <div class="article-tags">
-        ${article.tags.map(t => `<span class="tag-badge">#${t}</span>`).join("")}
-      </div>`
-      : "";
-
     // Sub-navegación (Etiquetas en header oscuro)
     const subNav = document.getElementById("sub-navigation");
     if (subNav) {
