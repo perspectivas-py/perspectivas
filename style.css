@@ -2384,25 +2384,156 @@ ul {
 }
 
 .article-container {
-  display: flex;
-  flex-direction: column;
-  max-width: 1000px;
+  display: grid;
+  grid-template-columns: 220px 1fr 280px;
+  gap: 2.5rem;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
+  align-items: flex-start;
+}
+
+/* SIDEBAR IZQUIERDO: METADATA COMPACTA (STICKY) */
+.article-sidebar-left {
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+}
+
+.article-meta-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.meta-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.meta-label {
+  font-size: 0.6rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-secondary);
+}
+
+.author-section .author-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.date-section .article-date {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.tags-section {
+  gap: 0.5rem !important;
+}
+
+.tags-list-sidebar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag-badge-small {
+  display: inline-block;
+  background: var(--bg-secondary);
+  color: var(--color-accent);
+  padding: 0.3rem 0.6rem;
+  border-radius: 3px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.reading-time-section {
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.6rem 0;
+  gap: 0.3rem !important;
+}
+
+.reading-time {
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.share-section {
+  gap: 0.5rem !important;
+}
+
+.share-icons-sidebar {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.share-icon-small {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: 1px solid var(--border-color);
+  font-size: 0.85rem;
+}
+
+.share-icon-small:hover {
+  background: var(--color-accent);
+  color: white;
+  border-color: var(--color-accent);
+  transform: scale(1.1);
+}
+
+.share-icon-small.facebook:hover {
+  background: #1877f2;
+  border-color: #1877f2;
+}
+
+.share-icon-small.twitter:hover {
+  background: #000000;
+  border-color: #000000;
+}
+
+.share-icon-small.linkedin:hover {
+  background: #0a66c2;
+  border-color: #0a66c2;
+}
+
+.share-icon-small.whatsapp:hover {
+  background: #25d366;
+  border-color: #25d366;
+}
+
+/* COLUMNA CENTRAL: CONTENIDO PRINCIPAL */
+.full-article {
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
 }
 
-/* HEADER DEL ARTÍCULO: LAYOUT TELEGRAPH (METADATA IZQUIERDA + FOTO DERECHA) */
-.article-header-section {
-  display: grid;
-  grid-template-columns: 350px 1fr;
-  gap: 3rem;
-  align-items: flex-start;
-  padding-bottom: 2rem;
-  border-bottom: 2px solid var(--border-color);
-}
-
-.article-metadata-column {
+.article-content-wrapper {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -2412,133 +2543,9 @@ ul {
   font-family: var(--font-headline);
   font-size: 2.8rem;
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.15;
   color: var(--text-primary);
   margin: 0;
-}
-
-.article-meta-header {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-
-.meta-item {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.meta-label {
-  font-size: 0.65rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-secondary);
-}
-
-.author-section .author-name {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.date-section .article-date {
-  font-size: 0.9rem;
-  color: var(--text-primary);
-}
-
-.tags-section {
-  gap: 0.6rem !important;
-}
-
-.tags-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-}
-
-.tag-badge {
-  display: inline-block;
-  background: var(--bg-secondary);
-  color: var(--color-accent);
-  padding: 0.35rem 0.7rem;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.reading-time-section {
-  padding-top: 0.6rem;
-  border-top: 1px solid var(--border-color);
-  gap: 0.3rem !important;
-}
-
-.reading-time {
-  font-size: 0.85rem;
-  color: var(--text-primary);
-  font-weight: 500;
-}
-
-.share-section {
-  padding-top: 0.8rem;
-  border-top: 1px solid var(--border-color);
-  gap: 0.6rem !important;
-}
-
-.share-icons {
-  display: flex;
-  gap: 0.8rem;
-  flex-wrap: wrap;
-}
-
-.share-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--bg-secondary);
-  color: var(--text-primary);
-  text-decoration: none;
-  transition: all 0.2s ease;
-  border: 1px solid var(--border-color);
-  font-size: 0.9rem;
-}
-
-.share-icon:hover {
-  background: var(--color-accent);
-  color: white;
-  border-color: var(--color-accent);
-  transform: scale(1.1);
-}
-
-.share-icon.facebook:hover {
-  background: #1877f2;
-  border-color: #1877f2;
-}
-
-.share-icon.twitter:hover {
-  background: #000000;
-  border-color: #000000;
-}
-
-.share-icon.linkedin:hover {
-  background: #0a66c2;
-  border-color: #0a66c2;
-}
-
-.share-icon.whatsapp:hover {
-  background: #25d366;
-  border-color: #25d366;
-}
-
-/* COLUMNA DERECHA: FOTO PRINCIPAL */
-.article-hero-column {
-  display: flex;
-  flex-direction: column;
 }
 
 .article-hero {
@@ -2555,7 +2562,7 @@ ul {
   height: auto;
   display: block;
   object-fit: cover;
-  max-height: 400px;
+  max-height: 500px;
 }
 
 .article-hero figcaption {
@@ -2572,7 +2579,7 @@ ul {
 .article-body {
   max-width: 100%;
   margin: 0;
-  padding: 2rem 0;
+  padding: 0;
   font-size: 1.1rem;
   line-height: 1.8;
   color: var(--text-primary);
@@ -2742,50 +2749,70 @@ ul {
 
 /* Responsive para artículos */
 @media (max-width: 1024px) {
-  .article-header-section {
+  .article-container {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  .article-sidebar-left {
+    position: static;
+    top: auto;
+  }
+
+  .article-title {
+    font-size: 2.2rem;
   }
 }
 
 @media (max-width: 768px) {
-  .article-header-section {
+  .article-container {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+    padding: 0 0.75rem;
   }
 
-  .article-title {
-    font-size: 2rem;
+  .article-sidebar-left {
+    position: static;
   }
 
-  .article-meta-header {
-    gap: 1rem;
+  .article-meta-sidebar {
+    gap: 0.8rem;
   }
 
   .meta-item {
+    padding-bottom: 0.6rem;
     gap: 0.3rem;
   }
 
   .meta-label {
-    font-size: 0.6rem;
+    font-size: 0.55rem;
   }
 
   .author-section .author-name {
-    font-size: 0.9rem;
-  }
-
-  .date-section .article-date {
     font-size: 0.85rem;
   }
 
-  .share-icons {
-    gap: 0.6rem;
+  .date-section .article-date {
+    font-size: 0.8rem;
   }
 
-  .share-icon {
-    width: 32px;
-    height: 32px;
-    font-size: 0.8rem;
+  .tag-badge-small {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .reading-time {
+    font-size: 0.75rem;
+  }
+
+  .share-icon-small {
+    width: 28px;
+    height: 28px;
+    font-size: 0.75rem;
+  }
+
+  .article-title {
+    font-size: 1.8rem;
   }
 
   .article-body {
@@ -2793,11 +2820,11 @@ ul {
   }
 
   .article-body h2 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
 
   .article-body h3 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 
   .article-main-wrapper {

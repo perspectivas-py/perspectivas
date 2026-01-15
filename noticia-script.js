@@ -206,7 +206,7 @@ async function loadArticle() {
       }
     }
 
-    // Plantilla principal del artículo - ESTILO TELEGRAPH
+    // Plantilla principal del artículo - ESTILO TELEGRAPH (3 COLUMNAS)
     console.log("🎨 Renderizando HTML del artículo...");
     console.log("📊 Datos del artículo:", {
       title: article.title,
@@ -217,19 +217,12 @@ async function loadArticle() {
       caption: article.caption
     });
     
-    // HEADER: METADATA IZQUIERDA + FOTO DERECHA
-    // 1. Título principal
-    const titleEl = document.getElementById("article-title-main");
-    if (titleEl) {
-      titleEl.textContent = article.title;
-    }
-    
-    // 2. Metadata (Autor, Fecha, Etiquetas, Tiempo lectura, Iconos)
-    let metadataHtml = `<div class="article-meta-header">`;
+    // COLUMNA IZQUIERDA (STICKY): METADATA COMPACTA
+    let sidebarHtml = `<div class="article-meta-sidebar">`;
     
     // Autor
     if (article.author) {
-      metadataHtml += `
+      sidebarHtml += `
         <div class="meta-item author-section">
           <span class="meta-label">POR</span>
           <span class="author-name">${article.author}</span>
@@ -237,25 +230,25 @@ async function loadArticle() {
     }
     
     // Fecha
-    metadataHtml += `
+    sidebarHtml += `
       <div class="meta-item date-section">
         <span class="meta-label">FECHA</span>
         <span class="article-date">${formatDate(article.date)}</span>
       </div>`;
     
-    // Etiquetas
+    // Etiquetas (si existen)
     if (article.tags && article.tags.length > 0) {
-      metadataHtml += `
+      sidebarHtml += `
         <div class="meta-item tags-section">
           <span class="meta-label">TEMAS</span>
-          <div class="tags-list">
-            ${article.tags.map(t => `<span class="tag-badge">#${t}</span>`).join("")}
+          <div class="tags-list-sidebar">
+            ${article.tags.map(t => `<span class="tag-badge-small">#${t}</span>`).join("")}
           </div>
         </div>`;
     }
     
     // Tiempo de lectura
-    metadataHtml += `
+    sidebarHtml += `
       <div class="meta-item reading-time-section">
         <span class="reading-time">${lectura}</span>
       </div>`;
@@ -263,33 +256,39 @@ async function loadArticle() {
     // Iconos de compartir (redes sociales)
     const pageUrl = encodeURIComponent(window.location.href);
     const pageTitle = encodeURIComponent(article.title);
-    metadataHtml += `
+    sidebarHtml += `
       <div class="meta-item share-section">
-        <span class="meta-label">COMPARTIR</span>
-        <div class="share-icons">
-          <a href="https://www.facebook.com/sharer/sharer.php?u=${pageUrl}" target="_blank" class="share-icon facebook" title="Compartir en Facebook">
+        <div class="share-icons-sidebar">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=${pageUrl}" target="_blank" class="share-icon-small facebook" title="Facebook">
             <i class="fab fa-facebook-f"></i>
           </a>
-          <a href="https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}" target="_blank" class="share-icon twitter" title="Compartir en Twitter/X">
+          <a href="https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}" target="_blank" class="share-icon-small twitter" title="Twitter/X">
             <i class="fab fa-x-twitter"></i>
           </a>
-          <a href="https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}" target="_blank" class="share-icon linkedin" title="Compartir en LinkedIn">
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}" target="_blank" class="share-icon-small linkedin" title="LinkedIn">
             <i class="fab fa-linkedin-in"></i>
           </a>
-          <a href="https://wa.me/?text=${pageTitle}%20${pageUrl}" target="_blank" class="share-icon whatsapp" title="Compartir en WhatsApp">
+          <a href="https://wa.me/?text=${pageTitle}%20${pageUrl}" target="_blank" class="share-icon-small whatsapp" title="WhatsApp">
             <i class="fab fa-whatsapp"></i>
           </a>
         </div>
       </div>`;
     
-    metadataHtml += `</div>`;
+    sidebarHtml += `</div>`;
     
-    const metadataContainer = document.getElementById("article-metadata-content");
-    if (metadataContainer) {
-      metadataContainer.innerHTML = metadataHtml;
+    const sidebarLeftContainer = document.getElementById("sidebar-left-content");
+    if (sidebarLeftContainer) {
+      sidebarLeftContainer.innerHTML = sidebarHtml;
     }
     
-    // 3. Foto principal (en la columna derecha del header)
+    // COLUMNA CENTRAL: TÍTULO + FOTO + CONTENIDO
+    // 1. Inyectar título
+    const titleEl = document.getElementById("article-title-main");
+    if (titleEl) {
+      titleEl.textContent = article.title;
+    }
+    
+    // 2. Inyectar foto
     const heroFigure = document.getElementById("article-hero-figure");
     if (heroFigure) {
       if (article.thumbnail) {
@@ -301,12 +300,11 @@ async function loadArticle() {
       }
     }
     
-    // 4. Contenido principal del artículo
-    container.innerHTML = `
-      <section class="article-body">
-        ${htmlBody}
-      </section>
-    `;
+    // 3. Inyectar contenido del artículo
+    const bodyContainer = document.getElementById("article-body-content");
+    if (bodyContainer) {
+      bodyContainer.innerHTML = `<section class="article-body">${htmlBody}</section>`;
+    }
 
     console.log("✅ Artículo renderizado correctamente");
 
