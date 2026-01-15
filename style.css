@@ -3301,10 +3301,12 @@ ul {
 
 /* Columna Central: Contenido */
 .article-content-col {
-  min-width: 0;
+  display: contents; /* MAGIC: Allows children to participate in the main grid */
 }
 
 .article-hero-wide {
+  grid-column: 2;
+  grid-row: 1;
   margin-bottom: 2rem;
 }
 
@@ -3323,7 +3325,9 @@ ul {
 }
 
 .article-body-text {
-  font-family: 'Merriweather', serif; /* Mejor para lectura larga tipo periódico */
+  grid-column: 2;
+  grid-row: 2;
+  font-family: 'Merriweather', serif;
   font-size: 1.125rem;
   line-height: 1.8;
   color: var(--text-primary);
@@ -3352,8 +3356,22 @@ ul {
 
 /* Columna Derecha: Relacionadas */
 .article-right-col {
+  grid-column: 3;
+  grid-row: 2; /* Starts exactly where body text starts */
   border-left: 1px solid var(--border-color);
   padding-left: 1.5rem;
+  height: 100%; /* Stretch to fill text height */
+}
+
+.article-left-col {
+  grid-column: 1;
+  grid-row: 1 / span 2; /* Spans across image and text rows */
+}
+
+/* Make inner container sticky */
+.related-section-slim {
+  position: sticky;
+  top: 1.5rem; /* Offset from viewport top */
 }
 
 .related-section-slim h3 {
