@@ -92,6 +92,7 @@ async function loadArticle() {
   }
 
   const articleId = getArticleIdFromUrl();
+  console.log("📍 Article ID:", articleId);
   if (!articleId) {
     console.warn("⚠️ No hay parámetro 'id' en la URL");
     container.innerHTML = `
@@ -205,6 +206,84 @@ async function loadArticle() {
 
     // Plantilla principal del artículo - ESTILO TELEGRAPH
     console.log("🎨 Renderizando HTML del artículo...");
+    console.log("📊 Datos del artículo:", {
+      title: article.title,
+      author: article.author,
+      date: article.date,
+      tags: article.tags,
+      thumbnail: article.thumbnail,
+      caption: article.caption
+    });
+    
+    let sidebarHtml = `<div class="article-meta-sidebar">`;
+    
+    // Autor
+    if (article.author) {
+      sidebarHtml += `
+        <div class="meta-item author-section">
+          <div class="author-info">
+            <span class="meta-label">Por</span>
+            <span class="author-name">${article.author}</span>
+          </div>
+        </div>`;
+    }
+    
+    // Fecha
+    sidebarHtml += `
+      <div class="meta-item date-section">
+        <span class="meta-label">Fecha</span>
+        <span class="article-date">${formatDate(article.date)}</span>
+      </div>`;
+    
+    // Tiempo de lectura
+    sidebarHtml += `
+      <div class="meta-item reading-section">
+        <span class="meta-label">Lectura</span>
+        <span class="reading-time">${lectura}</span>
+      </div>`;
+    
+    // Compartir
+    sidebarHtml += `
+      <div class="meta-item share-section">
+        <span class="meta-label">Compartir</span>
+        <div class="social-links">
+          <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(location.href)}&text=${encodeURIComponent(article.title)}" target="_blank" rel="noopener noreferrer" aria-label="Compartir en X" class="social-icon">
+            <i class="fab fa-x-twitter"></i>
+          </a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(location.href)}" target="_blank" rel="noopener noreferrer" aria-label="Compartir en Facebook" class="social-icon">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://api.whatsapp.com/send?text=${encodeURIComponent(article.title + ' ' + location.href)}" target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp" class="social-icon">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(location.href)}&title=${encodeURIComponent(article.title)}" target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn" class="social-icon">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </div>
+      </div>`;
+    
+    // Tags
+    if (article.tags && article.tags.length > 0) {
+      sidebarHtml += `
+        <div class="meta-item tags-section">
+          <span class="meta-label">Temas</span>
+          <div class="tags-list">
+            ${article.tags.map(t => `<a href="/categoria.html?tag=${encodeURIComponent(t)}" class="tag-link">#${t}</a>`).join("")}
+          </div>
+        </div>`;
+    }
+    
+    sidebarHtml += `</div>`;
+    
+    // Imagen
+    let heroHtml = '';
+    if (article.thumbnail) {
+      heroHtml = `<figure class="article-hero">
+        <img src="${article.thumbnail}" alt="${article.title}">
+        ${article.caption ? `<figcaption>${article.caption}</figcaption>` : ""}
+      </figure>`;
+    }
+    
     container.innerHTML = `
       <header class="article-header">
         <p class="article-category">${categoryLabel}</p>
@@ -213,64 +292,8 @@ async function loadArticle() {
       </header>
 
       <div class="article-hero-section">
-        <div class="article-meta-sidebar">
-          <div class="meta-item author-section">
-            ${article.author ? `
-              <div class="author-info">
-                <span class="meta-label">Por</span>
-                <span class="author-name">${article.author}</span>
-              </div>
-            ` : ""}
-          </div>
-
-          <div class="meta-item date-section">
-            <span class="meta-label">Fecha</span>
-            <span class="article-date">${formatDate(article.date)}</span>
-          </div>
-
-          <div class="meta-item reading-section">
-            <span class="meta-label">Lectura</span>
-            <span class="reading-time">${lectura}</span>
-          </div>
-
-          <div class="meta-item share-section">
-            <span class="meta-label">Compartir</span>
-            <div class="social-links">
-              <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(location.href)}&text=${encodeURIComponent(article.title)}"
-                 target="_blank" rel="noopener noreferrer" aria-label="Compartir en X" class="social-icon">
-                <i class="fab fa-x-twitter"></i>
-              </a>
-              <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(location.href)}"
-                 target="_blank" rel="noopener noreferrer" aria-label="Compartir en Facebook" class="social-icon">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="https://api.whatsapp.com/send?text=${encodeURIComponent(article.title + ' ' + location.href)}"
-                 target="_blank" rel="noopener noreferrer" aria-label="Compartir en WhatsApp" class="social-icon">
-                <i class="fab fa-whatsapp"></i>
-              </a>
-              <a href="https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(location.href)}&title=${encodeURIComponent(article.title)}"
-                 target="_blank" rel="noopener noreferrer" aria-label="Compartir en LinkedIn" class="social-icon">
-                <i class="fab fa-linkedin-in"></i>
-              </a>
-            </div>
-          </div>
-
-          ${article.tags && article.tags.length > 0 ? `
-          <div class="meta-item tags-section">
-            <span class="meta-label">Temas</span>
-            <div class="tags-list">
-              ${article.tags.map(t => `<a href="/categoria.html?tag=${encodeURIComponent(t)}" class="tag-link">#${t}</a>`).join("")}
-            </div>
-          </div>
-          ` : ""}
-        </div>
-
-        ${article.thumbnail ? `
-        <figure class="article-hero">
-          <img src="${article.thumbnail}" alt="${article.title}">
-          ${article.caption ? `<figcaption>${article.caption}</figcaption>` : ""}
-        </figure>
-        ` : ""}
+        ${sidebarHtml}
+        ${heroHtml}
       </div>
 
       <section class="article-body">
