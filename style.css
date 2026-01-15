@@ -2675,14 +2675,15 @@ ul {
 
 .footer-top-bar {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1.5rem 1rem;
+  background-color: #ffffff;
+  /* White background spans full width */
+}
+
+.footer-top-bar .wrap {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffffff;
-  /* White background requested */
-  margin: 0 -1rem;
-  /* Negative margin to span full width inside wrap if needed, or better, apply to new container */
+  padding: 1.5rem 1rem;
 }
 
 /* Fix: apply background to the full width of top bar if possible, 
@@ -2701,6 +2702,19 @@ ul {
   color: #0b141c;
   /* Dark text for white background */
   text-decoration: none;
+}
+
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  height: auto;
+}
+
+.footer-logo img {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
 }
 
 
@@ -2735,6 +2749,7 @@ ul {
   width: 16px;
   height: 16px;
   fill: currentColor;
+  stroke: currentColor;
 }
 
 .footer-links-grid {
