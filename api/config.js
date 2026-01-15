@@ -21,7 +21,7 @@ module.exports = (req, res) => {
         auth_endpoint: "api/auth"
       },
       // 🔥 PUBLICACIÓN INMEDIATA: Los cambios se publican directamente en main (sin workflow)
-      publish_mode: "simple",
+      publish_mode: "editorial_workflow",
       
       // 🚀 Hook para regenerar content.json después de cada publicación en Vercel
       deploy_url: "https://api.vercel.com/v1/integrations/deploy/prj_0GzabF6iVutw8vbfiNZDN7mWx5Sl/teg36of8ls",
@@ -32,7 +32,7 @@ module.exports = (req, res) => {
       media_folder: "assets/img",
       public_folder: "/assets/img",
       media_library: {
-        name: "uploadcare"
+        name: "github"
       },
       collections: [
         {
