@@ -18,6 +18,7 @@ featured:
   is_featured: true
   is_main_featured: false
   show_in_latest: true
+slug: economía
 ---
 Mediante el Decreto N° 5221, **el Poder Ejecutivo declaró de interés nacional el proceso de acercamiento de la República del Paraguay a la Organización para la Cooperación y el Desarrollo Económicos (OCDE),** con miras a la obtención de una membresía plena.
 
