@@ -2660,3 +2660,161 @@ ul {
   text-decoration-color: var(--color-accent);
   text-underline-offset: 4px;
 }
+
+/* =========================================
+   NEW FOOTER 2026 (Telegraph Style)
+   ========================================= */
+.site-footer-new {
+  background-color: #0b141c;
+  /* Dark blue/black specific tone */
+  color: #ffffff;
+  font-family: var(--font-body);
+  padding: 0;
+  border-top: 1px solid #1f2b38;
+}
+
+.footer-top-bar {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  /* White background requested */
+  margin: 0 -1rem;
+  /* Negative margin to span full width inside wrap if needed, or better, apply to new container */
+}
+
+/* Fix: apply background to the full width of top bar if possible, 
+   but since it is inside .wrap, we might need a different approach.
+   However, given the structure, let's just make the bar white. 
+   Actually, usually 'wrap' constrains width. 
+   To make the *strip* white, we might need to modify HTML, 
+   but for now let's apply it to this block and see. 
+   The user said "donde está Perspectivas... un tono más claro".
+*/
+
+.footer-brand {
+  font-family: var(--font-headline);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #0b141c;
+  /* Dark text for white background */
+  text-decoration: none;
+}
+
+
+.footer-socials {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-social-link {
+  color: #0b141c;
+  /* Dark icons */
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  /* Darker subtle border */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.footer-social-link:hover {
+  background-color: #0b141c;
+  /* Dark background on hover */
+  color: #ffffff;
+  /* White icon on hover */
+  border-color: #0b141c;
+}
+
+.footer-social-link svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.footer-links-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  padding: 3rem 0;
+}
+
+@media (max-width: 900px) {
+  .footer-links-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-links-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer-top-bar {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.footer-column h4 {
+  color: #ffffff;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  font-size: 0.95rem;
+}
+
+.footer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-list li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-list a {
+  color: #e2e8f0;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.2s;
+  font-weight: 400;
+}
+
+.footer-list a:hover {
+  color: #60a5fa;
+  /* Light blue accent */
+  text-decoration: underline;
+}
+
+.footer-bottom-bar {
+  background-color: #060a0f;
+  padding: 1.5rem 0;
+  font-size: 0.8rem;
+  color: #94a3b8;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-bottom-links {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-bottom-links a {
+  color: #94a3b8;
+  text-decoration: none;
+}
+
+.footer-bottom-links a:hover {
+  text-decoration: underline;
+}

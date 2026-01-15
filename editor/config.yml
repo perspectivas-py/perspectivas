@@ -280,3 +280,18 @@ collections:
         widget: "boolean"
         default: false
         hint: "Aparecerá en primer lugar en patrocinadores"
+
+  # ============================================================
+  # PÁGINAS INSTITUCIONALES (Static Pages)
+  # ============================================================
+  - name: "pages"
+    label: "📄 Páginas Institucionales"
+    folder: "content/pages"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    fields:
+      - { label: "📝 Título de la página", name: "title", widget: "string", required: true }
+      - { label: "🔗 Slug (URL)", name: "slug", widget: "string", required: true, hint: "Ej: sobre-nosotros, historia, contacto" }
+      - { label: "📝 Contenido", name: "body", widget: "markdown", required: true }
+

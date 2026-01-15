@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Perspectivas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Lato:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=3.6">
+    <style>
+        .page-container {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 0 1rem;
+            min-height: 50vh;
+        }
+
+        .page-title {
+            font-family: var(--font-headline);
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--color-accent);
+            padding-bottom: 1rem;
+        }
+
+        .page-content {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+
+        .page-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .page-content h2,
+        .page-content h3 {
+            font-family: var(--font-headline);
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HEADER IS LOADED DYNAMICALLY OR DUPLICATED FROM INDEX.HTML FOR SIMPLICITY -->
+    <!-- For this implementation, I will duplicate the header structure for standalone functioning -->
+    <header class="site-header">
+        <div class="header-top">
+            <div class="header-controls left-controls">
+                <a href="index.html" style="font-size: 0.9rem; font-weight: 600;">&larr; Volver al inicio</a>
+            </div>
+            <a class="brand" href="index.html">Perspectivas</a>
+            <div class="header-controls right-controls"></div>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-container">
+            <h1 id="page-title" class="page-title">Cargando...</h1>
+            <div id="page-content" class="page-content"></div>
+        </div>
+    </main>
+
+    <footer class="site-footer-new">
+        <div class="wrap">
+            <div class="footer-top-bar">
+                <a href="index.html" class="footer-brand">Perspectivas</a>
+                <div class="footer-socials">
+                    <a href="#" class="footer-social-link"><svg viewBox="0 0 24 24">
+                            <path d="M14 9h3V6h-3c-1.66 0-3 1.34-3 3v2H9v3h2v6h3v-6h2.6l.6-3H14V9.9c0-.5.4-.9 1-.9Z" />
+                        </svg></a>
+                    <a href="#" class="footer-social-link"><svg viewBox="0 0 24 24">
+                            <path d="M6 6l12 12" />
+                            <path d="M18 6L6 18" />
+                        </svg></a>
+                </div>
+            </div>
+            <div class="footer-bottom-bar">
+                <div class="copyright">© Perspectivas Media Group Holdings Limited 2026</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/marked@^4.0.0/marked.min.js"></script>
+    <script src="page-script.js"></script>
+</body>
+
+</html>
