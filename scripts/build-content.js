@@ -16,6 +16,11 @@ const COLLECTIONS = {
   sponsors: "content/sponsors",
 };
 
+// Función de normalización consistente
+function normalizeTag(tag) {
+  return (tag || "").toString().trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
 function loadCollection(folder, type) {
   const collectionPath = path.join(process.cwd(), folder);
   if (!fs.existsSync(collectionPath)) return [];
@@ -26,7 +31,11 @@ function loadCollection(folder, type) {
       const raw = fs.readFileSync(path.join(collectionPath, file), "utf8");
       const { data, content } = matter(raw);
       const slug = file.replace(/\.mdx?$/, "");
-      // Mapear campos del frontmatter al formato esperado
+      
+      // Normalización de tags en tiempo de construcción
+      const rawTags = data.tags || [];
+      const tags = Array.isArray(rawTags) ? rawTags : [rawTags];
+      
       return {
         id: data.id || slug,
         type,
@@ -38,11 +47,12 @@ function loadCollection(folder, type) {
         body: content.trim(),
         date: data.date ? new Date(data.date).toISOString() : new Date().toISOString(),
         featured: data.featured || false,
-        tags: data.tags || [],
-        ...data, // Mantener todos los campos del frontmatter (incluyendo embed_url, audio_url, author, etc)
+        tags: tags,
+        tags_normalized: tags.map(t => normalizeTag(t)), // Índice normalizado pre-calculado
+        ...data, 
       };
     })
-    .sort((a, b) => new Date(b.date) - new Date(a.date)); // Más recientes arriba
+    .sort((a, b) => new Date(b.date) - new Date(a.date)); 
 }
 
 async function main() {
@@ -55,8 +65,43 @@ async function main() {
     podcast: loadCollection(COLLECTIONS.podcast, "podcast"),
     sponsors: loadCollection(COLLECTIONS.sponsors, "sponsors"),
   };
+  
+  // GENERAR ÍNDICE DE TAGS (BD de Etiquetas)
+  console.log("🗂️ Generando índice de etiquetas (tags.json)...");
+  const tagsIndex = {};
+  
+  [...data.noticias, ...data.analisis, ...data.programa, ...data.podcast].forEach(item => {
+      if(item.tags && Array.isArray(item.tags)) {
+          item.tags.forEach(tag => {
+              const key = normalizeTag(tag);
+              if(!tagsIndex[key]) {
+                  tagsIndex[key] = {
+                      label: tag, // Guardamos la primera versión "bonita" que encontremos
+                      items: []
+                  };
+              }
+              // Guardamos solo lo necesario para listar (ahorro de espacio)
+              tagsIndex[key].items.push({
+                  id: item.slug || item.id,
+                  title: item.title,
+                  thumbnail: item.thumbnail,
+                  date: item.date,
+                  type: item.type
+              });
+          });
+      }
+  });
+  
+  // Ordenar items dentro de cada tag por fecha
+  Object.keys(tagsIndex).forEach(key => {
+      tagsIndex[key].items.sort((a, b) => new Date(b.date) - new Date(a.date));
+  });
+  
+  // Guardar tags.json (Nuestra "Base de Datos" de etiquetas)
+  fs.writeFileSync(path.join(process.cwd(), "tags.json"), JSON.stringify(tagsIndex, null, 2));
+  fs.writeFileSync(path.join(process.cwd(), "public/tags.json"), JSON.stringify(tagsIndex, null, 2)); // Copia en public
 
-  // Guarda el archivo en la raíz (Vercel sirve archivos estáticos desde la raíz)
+  // Guarda el archivo principal
   const rootPath = path.join(process.cwd(), "content.json");
   fs.writeFileSync(rootPath, JSON.stringify(data, null, 2));
   console.log("✔ content.json generado en la raíz");

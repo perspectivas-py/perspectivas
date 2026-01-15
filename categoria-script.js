@@ -31,7 +31,31 @@ async function loadCategoryNews() {
   gridEl.innerHTML = "<p>Cargando noticias...</p>";
 
   try {
-    // 1. Fetch content.json
+    
+    // ESTRATEGIA HÍBRIDA: INTENTAR USAR tags.json (Base de datos optimizada) SI ES UNA BÚSQUEDA POR TAG
+    if(currentTag) {
+        try {
+            const tagsRes = await fetch(`tags.json?t=${Date.now()}`);
+            if(tagsRes.ok) {
+                const tagsDb = await tagsRes.json();
+                const searchKey = normalizeCategory(currentTag);
+                const tagData = tagsDb[searchKey];
+                
+                if(tagData && tagData.items && tagData.items.length > 0) {
+                    console.log(`✅ Tag encontrado en tags.json: ${tagData.label} (${tagData.items.length} items)`);
+                    titleEl.textContent = `Tema: ${tagData.label}`; // Usar el nombre bonito de la BD
+                    gridEl.innerHTML = tagData.items.map(item => buildNewsCard(item)).join("");
+                    return; // Terminamos aquí, mucho más rápido.
+                } else {
+                     console.warn(`Tag "${currentTag}" no encontrado en tags.json, intentando búsqueda manual en content.json...`);
+                }
+            }
+        } catch(e) {
+            console.warn("Fallo al leer tags.json, usando content.json como fallback", e);
+        }
+    }
+  
+    // 1. Fetch content.json (Fallback o Búsqueda por Categoría)
     const res = await fetch(`${CONTENT_URL}?t=${Date.now()}`); // cache busting
     if (!res.ok) throw new Error("No se pudo cargar content.json");
 
