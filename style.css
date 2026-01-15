@@ -3203,7 +3203,7 @@ ul {
 /* Grid Layout */
 .article-layout-grid {
   display: grid;
-  grid-template-columns: 165px 1fr 260px; /* Meta reduced 25% - Content - Related */
+  grid-template-columns: 145px 1fr 260px; /* Reduced by another 5-10% (approx 145px) */
   gap: 3.5rem;
   align-items: start;
 }
@@ -3222,39 +3222,81 @@ ul {
 .article-meta-sidebar {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem; /* Reduced gap */
 }
 
 .meta-item {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb; /* Separator lines */
+}
+
+.meta-item:last-child {
+  border-bottom: none;
 }
 
 .meta-label {
   font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #888;
-  font-weight: 700;
+  /* text-transform: uppercase; Removed uppercase to match style */
+  letter-spacing: normal;
+  color: #64748b;
+  font-weight: 500;
+  margin-bottom: 0.15rem;
 }
 
-.author-name, .article-date {
+.author-name {
   font-size: 0.95rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--color-accent); /* Author name in accent color often looks good or bold black */
+  line-height: 1.2;
+}
+
+.article-date {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
 }
 
 .tags-list-sidebar {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.25rem;
 }
 
 .tag-badge-small {
   color: var(--color-accent);
   font-size: 0.85rem;
   font-weight: 600;
+  text-decoration: none;
+  display: block; /* List style */
+}
+
+.tag-badge-small:hover {
+  text-decoration: underline;
+}
+
+.share-icons-sidebar {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.share-icon-small {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.share-icon-small:hover {
+  background: var(--color-accent);
+  color: white;
 }
 
 /* Columna Central: Contenido */
@@ -3348,7 +3390,7 @@ ul {
 
 @media (max-width: 1024px) {
   .article-layout-grid {
-    grid-template-columns: 165px 1fr;
+    grid-template-columns: 145px 1fr;
     gap: 2rem;
   }
   .article-right-col {
