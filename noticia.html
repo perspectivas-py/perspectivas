@@ -74,18 +74,20 @@
   </header>
 
   <!-- CONTENIDO PRINCIPAL DE LA NOTICIA -->
-  <main class="wrap section">
-    <article id="contenido-noticia" class="full-article">
-      <p style="text-align: center; padding: 40px;">Cargando contenido...</p>
-    </article>
+  <main class="article-main-wrapper">
+    <div class="article-container">
+      <article id="contenido-noticia" class="full-article">
+        <p style="text-align: center; padding: 40px;">Cargando contenido...</p>
+      </article>
 
-    <!-- BLOQUE DE NOTICIAS RELACIONADAS -->
-    <section class="section" aria-labelledby="relacionadas-title">
-      <div class="section-header">
-        <h2 id="relacionadas-title">Te puede interesar</h2>
-      </div>
-      <div id="relacionadas-grid" class="cards-grid"></div>
-    </section>
+      <!-- BLOQUE DE NOTICIAS RELACIONADAS (SIDEBAR DERECHO) -->
+      <aside class="article-sidebar-right">
+        <div class="related-section">
+          <h3 id="relacionadas-title">Más historias</h3>
+          <div id="relacionadas-grid" class="related-cards"></div>
+        </div>
+      </aside>
+    </div>
   </main>
 
   <!-- FOOTER -->

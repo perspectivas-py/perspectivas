@@ -61,7 +61,7 @@ function renderRelated(allNews, currentArticle) {
   const items = allNews
     .filter(a => (a.slug || a.id) !== currentId)
     .sort(() => Math.random() - 0.5)
-    .slice(0, 3);
+    .slice(0, 5);
 
   if (!items.length) {
     container.innerHTML = `<p class="muted">Pronto tendremos más contenido relacionado.</p>`;
@@ -69,13 +69,15 @@ function renderRelated(allNews, currentArticle) {
   }
 
   container.innerHTML = items.map(a => `
-    <article class="card">
+    <article class="related-card">
       <a href="/noticia.html?id=${encodeURIComponent(a.slug || a.id)}">
-        <div class="card-img-container">
+        <div class="related-card-img">
           <img src="${a.thumbnail}" alt="${a.title}">
         </div>
-        <h3>${a.title}</h3>
-        <div class="card-meta">${formatDate(a.date)}</div>
+        <div class="related-card-content">
+          <h4>${a.title}</h4>
+          <span class="related-card-date">${formatDate(a.date)}</span>
+        </div>
       </a>
     </article>
   `).join("");

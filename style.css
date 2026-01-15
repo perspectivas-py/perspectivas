@@ -2281,6 +2281,21 @@ ul {
   padding: 0;
 }
 
+/* LAYOUT DE 3 COLUMNAS TIPO TELEGRAPH */
+.article-main-wrapper {
+  width: 100%;
+  padding: 0;
+}
+
+.article-container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
 .article-header {
   text-align: center;
   margin-bottom: 2rem;
@@ -2509,10 +2524,127 @@ ul {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
+/* SIDEBAR DERECHO - MÁS HISTORIAS */
+.article-sidebar-right {
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+}
+
+.related-section {
+  padding: 1.5rem;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.related-section h3 {
+  font-family: var(--font-headline);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.related-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.related-card {
+  display: flex;
+  gap: 1rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--border-color);
+  transition: opacity 0.2s ease;
+}
+
+.related-card:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.related-card a {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.related-card:hover {
+  opacity: 0.8;
+}
+
+.related-card-img {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+
+.related-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.related-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+  flex: 1;
+}
+
+.related-card-content h4 {
+  font-family: var(--font-headline);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-primary);
+  line-height: 1.3;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.related-card-date {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.4rem;
+}
+
 
 
 /* Responsive para artículos */
+@media (max-width: 1024px) {
+  .article-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .article-sidebar-right {
+    position: static;
+    top: auto;
+  }
+}
+
 @media (max-width: 768px) {
+  .article-main-wrapper {
+    padding: 0;
+  }
+
+  .article-container {
+    padding: 0 1rem;
+  }
+
   .full-article {
     padding: 1rem 0;
   }
