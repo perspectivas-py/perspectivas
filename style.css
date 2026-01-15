@@ -3547,12 +3547,12 @@ ul {
 .author-name {
   font-family: var(--font-headline); /* Serif font for name usually looks classy */
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 0.9rem; /* Reducido de 1.05rem */
   color: var(--color-dark);
 }
 
 .author-role {
-  font-size: 0.85rem;
+  font-size: 0.75rem; /* Reducido de 0.85rem */
   color: var(--text-secondary);
   font-weight: 400;
 }

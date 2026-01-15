@@ -337,7 +337,7 @@ async function loadArticle() {
         </div>`;
     }
     
-    // 4. Acciones (Lectura, Bookmark, Gift)
+    // 4. Acciones (Lectura, Bookmark) - SIN GIFT
     sidebarHtml += `
       <div class="sidebar-actions-section">
          <div style="font-size: 0.85rem; margin-bottom: 0.75rem; color: #555; display:flex; align-items:center; gap:0.5rem">
@@ -351,9 +351,6 @@ async function loadArticle() {
               <i class="far fa-comment"></i> <span style="font-size: 0.8em">3</span>
             </button>
          </div>
-         <button class="gift-article-btn" style="margin-top:0.5rem;">
-           <i class="fas fa-gift"></i> Regale este artículo
-         </button>
       </div>`;
 
     // 5. Redes Sociales (Circulares)
