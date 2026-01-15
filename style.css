@@ -2287,59 +2287,11 @@ ul {
   padding: 0;
 }
 
-.article-container {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  gap: 3rem;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-.article-header {
-  text-align: center;
-  margin-bottom: 2rem;
-  padding-bottom: 2rem;
-}
-
-.article-category {
-  display: inline-block;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  color: white;
-  padding: 0.5rem 1.2rem;
-  border-radius: 24px;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
-}
-
-.article-header h1 {
-  font-family: var(--font-headline);
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin: 1rem 0;
-  line-height: 1.2;
-  color: var(--text-primary);
-}
-
-.article-description {
-  font-size: 1.1rem;
-  color: var(--text-secondary);
-  margin: 1rem 0 0;
-  font-style: italic;
-  line-height: 1.6;
-}
-
-/* NUEVA ESTRUCTURA ESTILO TELEGRAPH */
-.article-hero-section {
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 2.5rem;
-  margin: 3rem 0;
-  align-items: flex-start;
+/* SIDEBAR IZQUIERDO - METADATA */
+.article-sidebar-left {
+  position: sticky;
+  top: 100px;
+  height: fit-content;
 }
 
 .article-meta-sidebar {
@@ -2388,6 +2340,7 @@ ul {
   display: flex;
   gap: 0.75rem;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .social-icon {
@@ -2426,6 +2379,55 @@ ul {
   color: var(--color-accent);
   text-decoration: underline;
 }
+
+.article-container {
+  display: grid;
+  grid-template-columns: 200px 1fr 280px;
+  gap: 2.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.article-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+}
+
+.article-category {
+  display: inline-block;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border-radius: 24px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.article-header h1 {
+  font-family: var(--font-headline);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 1rem 0;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.article-description {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin: 1rem 0 0;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* NUEVA ESTRUCTURA ESTILO TELEGRAPH */
+
 
 .article-hero {
   margin: 0;
@@ -2636,6 +2638,19 @@ ul {
   }
 }
 
+@media (max-width: 1024px) {
+  .article-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .article-sidebar-left,
+  .article-sidebar-right {
+    position: static;
+    top: auto;
+  }
+}
+
 @media (max-width: 768px) {
   .article-main-wrapper {
     padding: 0;
@@ -2643,6 +2658,28 @@ ul {
 
   .article-container {
     padding: 0 1rem;
+    grid-template-columns: 1fr;
+  }
+
+  .article-sidebar-left {
+    order: 2;
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    margin-top: 1.5rem;
+    position: static;
+    top: auto;
+  }
+
+  .article-sidebar-right {
+    order: 3;
+    margin-top: 1.5rem;
+    position: static;
+    top: auto;
+  }
+
+  #contenido-noticia {
+    order: 1;
   }
 
   .full-article {
@@ -2658,28 +2695,8 @@ ul {
     font-size: 1.8rem;
   }
 
-  .article-hero-section {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .article-meta-sidebar {
-    order: 2;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    padding: 1.5rem;
-    background: var(--bg-secondary);
-    border-radius: 8px;
-  }
-
-  .meta-item {
-    flex: 1;
-    min-width: 150px;
-  }
-
   .article-hero {
-    order: 1;
+    margin: 1.5rem 0;
   }
 
   .article-body {

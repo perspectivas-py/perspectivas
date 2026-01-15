@@ -286,6 +286,12 @@ async function loadArticle() {
       </figure>`;
     }
     
+    // Renderizar sidebar izquierdo
+    const sidebarLeftContainer = document.getElementById("sidebar-left-content");
+    if (sidebarLeftContainer) {
+      sidebarLeftContainer.innerHTML = sidebarHtml;
+    }
+    
     container.innerHTML = `
       <header class="article-header">
         <p class="article-category">${categoryLabel}</p>
@@ -293,10 +299,7 @@ async function loadArticle() {
         <p class="article-description">${article.description || ""}</p>
       </header>
 
-      <div class="article-hero-section">
-        ${sidebarHtml}
-        ${heroHtml}
-      </div>
+      ${heroHtml}
 
       <section class="article-body">
         ${htmlBody}
