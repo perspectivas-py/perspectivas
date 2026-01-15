@@ -289,6 +289,12 @@ collections:
         default: false
         hint: "Aparecerá en primer lugar en patrocinadores"
 
+      - label: "👁️ ¿Visible en Web?"
+        name: "visible"
+        widget: "boolean"
+        default: true
+        hint: "Desactivar para ocultar al patrocinador sin eliminarlo"
+
   # ============================================================
   # PÁGINAS INSTITUCIONALES (Static Pages)
   # ============================================================

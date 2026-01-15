@@ -816,8 +816,18 @@ function initPodcastSection(items) {
 function renderSponsors(items) {
   const container = document.getElementById("sponsorsGrid");
   if (!container || !items?.length) return;
+  
+  // Filtrar solo los visibles (visible !== false para dar soporte a los que no tienen el campo)
+  const visibleItems = items.filter(s => s.visible !== false);
+  
+  if (visibleItems.length === 0) {
+      container.parentElement.style.display = 'none'; // Ocultar sección si no hay nada
+      return;
+  } else {
+      container.parentElement.style.display = 'block';
+  }
 
-  container.innerHTML = items.map(s => `
+  container.innerHTML = visibleItems.map(s => `
       <div class="sponsor-item">
         <a href="${s.url}" target="_blank" rel="noopener noreferrer">
             <img src="${s.logo}" alt="Sponsor">
