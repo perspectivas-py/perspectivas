@@ -304,9 +304,20 @@ async function loadArticle() {
     // Datos de autor (Mock / Lógica simple)
     const authorName = article.author || "Redacción Perspectivas";
     const authorRole = authorName.includes("Perspectivas") ? "Equipo Editorial" : "Colaborador Especial";
-    const authorImg = authorName.includes("Perspectivas") 
-      ? "assets/img/perspectivas-logo.jpeg" 
-      : `https://ui-avatars.com/api/?name=${encodeURIComponent(authorName)}&background=f0f0f0&color=333&size=128`;
+    
+    // Lógica inteligente para imagen de autor
+    let authorImg = "assets/img/perspectivas-logo.jpeg"; // Default
+    
+    if (article.author_image) {
+        // 1. Si el artículo tiene foto de autor explícita (cargada via CMS)
+        authorImg = article.author_image;
+    } else if (authorName.includes("Perspectivas")) {
+        // 2. Si es de la casa
+        authorImg = "assets/img/perspectivas-logo.jpeg";
+    } else {
+        // 3. Fallback: Avatar generado con iniciales
+        authorImg = `https://ui-avatars.com/api/?name=${encodeURIComponent(authorName)}&background=f0f0f0&color=333&size=128`;
+    }
 
     let sidebarHtml = `<div class="article-meta-sidebar-new">`;
     
