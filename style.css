@@ -3203,7 +3203,7 @@ ul {
 /* Grid Layout */
 .article-layout-grid {
   display: grid;
-  grid-template-columns: 220px 1fr 260px; /* Meta - Content - Related */
+  grid-template-columns: 165px 1fr 260px; /* Meta reduced 25% - Content - Related */
   gap: 3.5rem;
   align-items: start;
 }
@@ -3348,7 +3348,7 @@ ul {
 
 @media (max-width: 1024px) {
   .article-layout-grid {
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 165px 1fr;
     gap: 2rem;
   }
   .article-right-col {
