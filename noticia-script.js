@@ -254,7 +254,7 @@ async function loadArticle() {
         <div class="sidebar-topics-section">
           <span class="sidebar-label">Temas relacionados</span>
           <div class="topics-list-text">
-            ${article.tags.map(t => `<a href="/categoria.html?tag=${encodeURIComponent(t)}" class="topic-link">${t}</a>`).join(", ")}
+            ${article.tags.map(t => `<a href="categoria.html?tag=${encodeURIComponent(t)}" class="topic-link">${t}</a>`).join(", ")}
           </div>
         </div>`;
     }
