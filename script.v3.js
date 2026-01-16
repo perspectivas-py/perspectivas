@@ -622,10 +622,20 @@ function initMenuToggle() {
 }
 
 function initHeaderScrollState() {
+  console.log("🔧 initHeaderScrollState iniciado");
   const header = document.querySelector(".site-header");
-  if (!header) return;
-  if (header.dataset.scrollBound === "true") return;
+  if (!header) {
+    console.log("❌ Header no encontrado");
+    return;
+  }
+  console.log("✓ Header encontrado:", header);
+  
+  if (header.dataset.scrollBound === "true") {
+    console.log("⚠️ Scroll listener ya está bound");
+    return;
+  }
   header.dataset.scrollBound = "true";
+  console.log("📌 Scroll listener marcado como bound");
 
   // Ya no necesitamos el sentinel con scroll listener
   let lastScrollState = null;
@@ -642,6 +652,7 @@ function initHeaderScrollState() {
       // Solo actualizar si el estado cambió
       if (lastScrollState !== isScrolled) {
         lastScrollState = isScrolled;
+        console.log("🔄 Scroll state cambió:", isScrolled ? "scrolled" : "top", "scrollY:", currentScroll);
         header.classList.toggle("scrolled", isScrolled);
         
         // Controlar el market-ticker top
@@ -656,7 +667,9 @@ function initHeaderScrollState() {
   };
 
   // Agregar el listener de scroll
+  console.log("🎧 Agregando listener de scroll");
   window.addEventListener("scroll", handleScroll, { passive: true });
+  console.log("✓ Listener de scroll agregado");
 
   let resizeRaf = null;
   window.addEventListener("resize", () => {
