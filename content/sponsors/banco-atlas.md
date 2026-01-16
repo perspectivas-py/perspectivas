@@ -12,6 +12,6 @@ logo: /assets/img/banco-atlas.png
 campaign_end: 2025-11-28T19:07:09.066Z
 url: https://www.bancoatlas.com.py/web
 featured: false
-visible: true
+visible: false
 campaign_start: 2025-11-22T19:07:00.073Z
 ---
