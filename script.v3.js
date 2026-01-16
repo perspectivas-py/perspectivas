@@ -628,52 +628,48 @@ function initHeaderScrollState() {
   if (header.dataset.bound === "true") return;
   header.dataset.bound = "true";
 
-  let collapsePoint = 140;
-  let ticking = false;
+  if (!anchor) {
+    header.classList.remove("scrolled");
+    return;
+  }
 
-  const computeCollapsePoint = () => {
-    if (anchor) {
-      const rect = anchor.getBoundingClientRect();
-      const scrollTop = window.scrollY || window.pageYOffset;
-      collapsePoint = rect.top + scrollTop - (header.offsetHeight || 0) - 16;
-    } else {
-      // En páginas de artículo preferimos mantener el encabezado estable
-      collapsePoint = Number.POSITIVE_INFINITY;
-    }
+  const existingSentinel = document.querySelector(".header-scroll-sentinel");
+  const sentinel = existingSentinel || document.createElement("span");
+  if (!existingSentinel) {
+    sentinel.className = "header-scroll-sentinel";
+    sentinel.setAttribute("aria-hidden", "true");
+    anchor.parentElement?.insertBefore(sentinel, anchor);
+  }
+
+  let observer = null;
+
+  const bindObserver = () => {
+    if (observer) observer.disconnect();
+
+    const headerHeight = header.offsetHeight || 0;
+    const topMargin = -(headerHeight + 16);
+
+    observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          header.classList.remove("scrolled");
+        } else {
+          header.classList.add("scrolled");
+        }
+      },
+      {
+        rootMargin: `${topMargin}px 0px 0px 0px`,
+        threshold: 0
+      }
+    );
+
+    observer.observe(sentinel);
   };
 
-  const update = () => {
-    const scrollTop = window.scrollY || window.pageYOffset;
-    const buffer = 10;
-
-    if (!Number.isFinite(collapsePoint)) {
-      header.classList.remove("scrolled");
-      ticking = false;
-      return;
-    }
-
-    // Hysteresis logic to prevent flickering
-    if (scrollTop > collapsePoint + buffer) {
-      header.classList.add("scrolled");
-    } else if (scrollTop < collapsePoint - buffer) {
-      header.classList.remove("scrolled");
-    }
-    ticking = false;
-  };
-
-  computeCollapsePoint();
-  update();
-
-  window.addEventListener("scroll", () => {
-    if (!ticking) {
-      window.requestAnimationFrame(update);
-      ticking = true;
-    }
-  }, { passive: true });
+  bindObserver();
 
   window.addEventListener("resize", () => {
-    computeCollapsePoint();
-    update();
+    bindObserver();
   });
 }
 

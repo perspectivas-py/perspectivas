@@ -74,6 +74,14 @@ ul {
   padding-top: 2rem;
 }
 
+.header-scroll-sentinel {
+  display: block;
+  height: 1px;
+  margin: -1px 0 0;
+  pointer-events: none;
+  opacity: 0;
+}
+
 /* Header */
 .site-header {
   border-bottom: 1px solid var(--border-color);
