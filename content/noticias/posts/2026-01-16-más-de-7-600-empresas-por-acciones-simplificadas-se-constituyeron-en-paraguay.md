@@ -4,8 +4,8 @@ date: 2026-01-16T19:02:00.000-03:00
 summary: "Según datos de la Dirección General del Sistema Unificado de Apertura
   y Cierre de Empresas (SUACE), las EAS constituidas en 2025 movilizaron una
   inversión total de USD 363 millones. "
-author: Armando G Larrosa
-author_image: /assets/img/authors/armando-autorweb.jpg
+author: Perspectivas
+author_image: ""
 category: empleo
 tags:
   - negocios
@@ -22,10 +22,15 @@ featured:
   is_featured: false
   is_main_featured: true
   show_in_latest: true
+  highlights:
+    - Las inversiones de origen nacional alcanzaron los USD 317 millones.
+    - Continúan posicionándose como una alternativa ágil y eficiente para
+      emprendedores e inversionistas.
+    - De febrero 2021 a diciembre 2025 se han constituido 21.891 firmas.
 ---
-Durante el año 2025, un total de 7.618 Empresas por Acciones Simplificadas (EAS) fueron constituidas en Paraguay, lo que representa un incremento del 28% con respecto al año anterior, consolidando a esta figura jurídica como una de las principales herramientas para la formalización y dinamización del tejido empresarial.
+Durante el año 2025, **un total de 7.618 Empresas por Acciones Simplificadas (EAS) fueron constituidas en Paraguay, lo que representa un incremento del 28% con respecto al año anterio**r, consolidando a esta figura jurídica como una de las principales herramientas para la formalización y dinamización del tejido empresarial.
 
-Según datos de la Dirección General del Sistema Unificado de Apertura y Cierre de Empresas (SUACE), las EAS constituidas en 2025 movilizaron una inversión total de USD 363 millones. De ese monto, las inversiones de origen nacional alcanzaron los USD 317 millones, mientras que las inversiones extranjeras sumaron USD 45 millones, reflejando el interés tanto local como internacional por operar bajo este régimen empresarial.
+Según datos de la **Dirección General del Sistema Unificado de Apertura y Cierre de Empresas (SUACE), las EAS constituidas en 2025 movilizaron una inversión total de USD 363 millones.** De ese monto, las inversiones de origen nacional alcanzaron los USD 317 millones, mientras que las inversiones extranjeras sumaron USD 45 millones, reflejando el interés tanto local como internacional por operar bajo este régimen empresarial.
 
 En cuanto a los sectores económicos, el informe resalta que el 85% de las EAS constituidas corresponde a los rubros de comercio y servicios, seguido por los sectores industrial y agropecuario.
 
