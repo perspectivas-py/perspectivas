@@ -99,6 +99,19 @@ collections:
         fields:
           - { label: "¿Destacado en portada?", name: "is_featured", widget: "boolean", default: false, hint: "Aparecerá en la sección principal de la home" }
           - { label: "🔴 ¿PORTADA PRINCIPAL (HERO)?", name: "is_main_featured", widget: "boolean", default: false, hint: "⚠️ CRÍTICO: Solo UNA noticia puede tener esto ACTIVADO. Si la activas aquí, debes DESACTIVARLA en todas las demás. De lo contrario, la portada mostrará la noticia más reciente marcada." }
+          - label: "🟦 Claves del día (Hero)"
+            name: "highlights"
+            widget: "list"
+            required: false
+            max: 3
+            label_singular: "Dato clave"
+            summary: "{{fields.highlight}}"
+            hint: "Solo completa si marcas Portada Principal. Máximo 3 puntos breves que aparecerán en la barra lateral del Hero."
+            field:
+              label: "Dato clave"
+              name: "highlight"
+              widget: "string"
+              hint: "Escribe una oración corta (80 caracteres aprox.)."
           - { label: "¿Mostrar en últimas noticias?", name: "show_in_latest", widget: "boolean", default: true, hint: "Aparecerá en la lista general de noticias" }
 
       - { label: "📝 Contenido", name: "body", widget: "markdown", required: true, hint: "Contenido completo de la noticia (Markdown)" }
