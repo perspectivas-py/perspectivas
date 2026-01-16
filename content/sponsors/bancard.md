@@ -11,6 +11,6 @@ logo: /assets/img/bancard.png
 campaign_end: 2025-11-30T18:35:33.826Z
 url: https://www.bancard.com.py/
 featured: false
-visible: true
+visible: false
 campaign_start: 2025-11-22T18:35:00.021Z
 ---
