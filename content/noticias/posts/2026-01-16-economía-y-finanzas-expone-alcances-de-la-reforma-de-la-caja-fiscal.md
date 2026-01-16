@@ -5,7 +5,7 @@ summary: El equipo técnico del MEF instaló un espacio de diálogo, debate y
   construcción de consensos con representantes de los círculos de oficiales y
   suboficiales retirados de las Fuerzas Públicas (policías y militares).
 author: Perspectivas
-author_image: /assets/img/authors/icono-perspectivas.svg
+author_image: /assets/img/authors/logo-completo-perspectivas.svg
 category: politica-economica
 tags:
   - politica-fiscal
