@@ -183,7 +183,15 @@ function extractHeroHighlights(article) {
   const featuredHighlights = article?.featured?.highlights;
   if (Array.isArray(featuredHighlights) && featuredHighlights.length) {
     return featuredHighlights
-      .map(highlight => (highlight || "").toString().trim())
+      .map(item => {
+        if (typeof item === "string") return item;
+        if (item && typeof item === "object") {
+          const value = item.highlight || item.value || item.text;
+          if (typeof value === "string") return value;
+        }
+        return String(item || "");
+      })
+      .map(entry => entry.toString().trim())
       .filter(Boolean)
       .slice(0, 2);
   }
