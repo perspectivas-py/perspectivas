@@ -651,7 +651,8 @@ function initHeaderScrollState() {
 
   const computeOptions = () => {
     const headerHeight = header.getBoundingClientRect().height || 0;
-    const buffer = Math.max(64, headerHeight * 0.4);
+    // Buffer más grande para reducir sensibilidad y evitar parpadeos
+    const buffer = Math.max(120, headerHeight * 0.8);
     const topMargin = -(headerHeight + buffer);
     return {
       rootMargin: `${topMargin}px 0px 0px 0px`,
@@ -672,6 +673,7 @@ function initHeaderScrollState() {
   };
 
   let observer = null;
+  let updateTimeout = null;
 
   const bindObserver = () => {
     if (observer) observer.disconnect();

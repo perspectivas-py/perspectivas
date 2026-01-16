@@ -89,7 +89,7 @@ ul {
   top: 0;
   background: var(--header-bg);
   z-index: 100;
-  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease, padding 0.35s ease;
+  transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease, padding 0.4s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
@@ -148,7 +148,7 @@ ul {
   align-items: center;
   gap: 1.5rem;
   padding: 0.35rem 1rem;
-  transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease, border-color 0.3s ease;
+  transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease, border-color 0.4s ease;
   overflow: hidden;
   max-height: 100px;
   /* Arbitrary large enough value */
@@ -208,7 +208,7 @@ ul {
   opacity: 0;
   pointer-events: none;
   transform: translateY(-8px);
-  transition: opacity 0.35s ease, transform 0.35s ease;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .site-header.scrolled .main-nav {
@@ -225,7 +225,7 @@ ul {
 .site-header:not(.scrolled) .nav-search-wrapper {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 0.35s ease, transform 0.35s ease;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .site-header.scrolled {
@@ -488,9 +488,10 @@ ul {
   border-top: 1px solid rgba(255, 255, 255, 0.15);
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   overflow: hidden;
-  transition: all 0.35s ease, max-height 0.35s ease, margin 0.35s ease;
+  transition: max-height 0.4s ease, opacity 0.4s ease, margin 0.4s ease, padding 0.4s ease, border-width 0.4s ease;
   max-height: 80px;
   opacity: 1;
+  padding: 0.5rem 1rem;
 }
 
 .market-ticker[data-variant="top"] {
@@ -503,9 +504,8 @@ ul {
   margin-bottom: 0;
   border-top-width: 0;
   border-bottom-width: 0;
-  overflow: hidden;
-  pointer-events: none;
   padding: 0;
+  pointer-events: none;
 }
 
 .market-ticker[data-variant="top"].hidden .ticker-track {
