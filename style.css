@@ -3038,14 +3038,25 @@ ul {
 .footer-logo {
   display: inline-flex;
   align-items: center;
+  gap: 12px;
   text-decoration: none;
   height: auto;
+  color: inherit;
 }
 
-.footer-logo img {
+.footer-logo-mark svg {
   height: 50px;
-  width: auto;
-  object-fit: contain;
+  width: 50px;
+  display: block;
+}
+
+.footer-logo-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: inherit;
 }
 
 
