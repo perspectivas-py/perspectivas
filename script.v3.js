@@ -623,53 +623,63 @@ function initMenuToggle() {
 
 function initHeaderScrollState() {
   const header = document.querySelector(".site-header");
-  const anchor = document.getElementById("noticias");
   if (!header) return;
   if (header.dataset.bound === "true") return;
   header.dataset.bound = "true";
 
-  if (!anchor) {
-    header.classList.remove("scrolled");
-    return;
-  }
+  const anchor = document.getElementById("noticias")
+    || document.querySelector("[data-header-anchor]")
+    || document.querySelector("#contenido-noticia")
+    || document.querySelector("main")
+    || header.nextElementSibling
+    || document.body.firstElementChild;
 
-  const existingSentinel = document.querySelector(".header-scroll-sentinel");
-  const sentinel = existingSentinel || document.createElement("span");
-  if (!existingSentinel) {
+  let sentinel = document.querySelector(".header-scroll-sentinel");
+  if (!sentinel) {
+    sentinel = document.createElement("span");
     sentinel.className = "header-scroll-sentinel";
     sentinel.setAttribute("aria-hidden", "true");
-    anchor.parentElement?.insertBefore(sentinel, anchor);
+
+    if (anchor?.parentElement) {
+      anchor.parentElement.insertBefore(sentinel, anchor);
+    } else if (header.parentElement) {
+      header.parentElement.insertBefore(sentinel, header.nextSibling);
+    } else {
+      document.body.insertBefore(sentinel, document.body.firstChild || null);
+    }
   }
+
+  const computeOptions = () => {
+    const headerHeight = header.getBoundingClientRect().height || 0;
+    const buffer = Math.max(64, headerHeight * 0.4);
+    const topMargin = -(headerHeight + buffer);
+    return {
+      rootMargin: `${topMargin}px 0px 0px 0px`,
+      threshold: 0
+    };
+  };
+
+  const updateState = (entry) => {
+    if (!entry) return;
+    header.classList.toggle("scrolled", !entry.isIntersecting);
+  };
 
   let observer = null;
 
   const bindObserver = () => {
     if (observer) observer.disconnect();
-
-    const headerHeight = header.offsetHeight || 0;
-    const topMargin = -(headerHeight + 16);
-
-    observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          header.classList.remove("scrolled");
-        } else {
-          header.classList.add("scrolled");
-        }
-      },
-      {
-        rootMargin: `${topMargin}px 0px 0px 0px`,
-        threshold: 0
-      }
-    );
-
+    observer = new IntersectionObserver(([entry]) => updateState(entry), computeOptions());
     observer.observe(sentinel);
   };
 
   bindObserver();
 
+  let resizeRaf = null;
   window.addEventListener("resize", () => {
-    bindObserver();
+    if (resizeRaf) cancelAnimationFrame(resizeRaf);
+    resizeRaf = window.requestAnimationFrame(() => {
+      bindObserver();
+    });
   });
 }
 
