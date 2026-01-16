@@ -118,6 +118,163 @@ const FX_CONFIG = [
   }
 ];
 
+const CATEGORY_LABELS = {
+  "macro": "Macroeconomía",
+  "mercados-inversion": "Mercados e Inversión",
+  "politica-economica": "Política Económica",
+  "economia": "Economía",
+  "inversion": "Inversión",
+  "negocios": "Negocios",
+  "empresas": "Empresas",
+  "empleo": "Empleo",
+  "finanzas-personales": "Finanzas Personales",
+  "educacion-financiera": "Educación Financiera",
+  "actualidad": "Actualidad",
+  "programa": "Programa",
+  "podcast": "Podcast",
+  "analisis": "Análisis"
+};
+
+const CATEGORY_ACCENT_PRESETS = [
+  { keys: ["macro", "economia"], primary: "#38bdf8", secondary: "#2563eb" },
+  { keys: ["politica", "fiscal"], primary: "#f97316", secondary: "#c2410c" },
+  { keys: ["negocios", "empresas"], primary: "#14b8a6", secondary: "#0f766e" },
+  { keys: ["mercado", "mercados-inversion", "inversion"], primary: "#c084fc", secondary: "#7c3aed" },
+  { keys: ["programa", "podcast"], primary: "#fbbf24", secondary: "#f59e0b" },
+  { keys: ["finanzas-personales", "educacion-financiera"], primary: "#22d3ee", secondary: "#0ea5e9" }
+];
+
+const DEFAULT_ACCENT = { primary: "#38bdf8", secondary: "#2563eb" };
+const HERO_TAGLINE = "Perspectivas · Redacción Económica";
+const HERO_IMAGE_FALLBACK = "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1200&h=500&fit=crop&q=80";
+
+function normalizeCategoryKey(category = "") {
+  return category.toString().trim().toLowerCase();
+}
+
+function capitalize(word = "") {
+  if (!word.length) return "";
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
+function resolveCategoryLabel(category) {
+  const normalized = normalizeCategoryKey(category);
+  if (CATEGORY_LABELS[normalized]) return CATEGORY_LABELS[normalized];
+
+  const fallback = Object.entries(CATEGORY_LABELS)
+    .find(([key]) => normalized.includes(key));
+
+  if (fallback) return fallback[1];
+  if (!normalized) return "Actualidad";
+  return normalized.split(/[-_]/g).map(capitalize).join(" ");
+}
+
+function resolveCategoryAccent(category) {
+  const normalized = normalizeCategoryKey(category);
+  for (const preset of CATEGORY_ACCENT_PRESETS) {
+    if (preset.keys.some(key => normalized.includes(key))) {
+      return { primary: preset.primary, secondary: preset.secondary };
+    }
+  }
+  return DEFAULT_ACCENT;
+}
+
+function extractHeroHighlights(article) {
+  const featuredHighlights = article?.featured?.highlights;
+  if (Array.isArray(featuredHighlights) && featuredHighlights.length) {
+    return featuredHighlights
+      .map(highlight => (highlight || "").toString().trim())
+      .filter(Boolean)
+      .slice(0, 2);
+  }
+
+  const copySource = (article?.summary || article?.description || "").replace(/\s+/g, " ").trim();
+  if (!copySource) return [];
+
+  const sentences = copySource.match(/[^.!?]+[.!?]?/g) || [];
+  return sentences.map(s => s.trim()).filter(Boolean).slice(0, 2);
+}
+
+function truncateCopy(copy, max = 180) {
+  if (!copy) return "";
+  const normalized = copy.replace(/\s+/g, " ").trim();
+  if (normalized.length <= max) return normalized;
+  return `${normalized.slice(0, max).trim().replace(/[\s,.–-]+$/, "")}…`;
+}
+
+function escapeHtml(str = "") {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function formatHeroDate(dateString) {
+  if (!dateString) return "";
+  const formatted = formatDate(dateString).replace(/\./g, "");
+  return formatted ? formatted.toUpperCase() : "";
+}
+
+function buildHeroMarkup(article) {
+  if (!article) return "";
+
+  const palette = resolveCategoryAccent(article.category);
+  const categoryLabel = resolveCategoryLabel(article.category).toUpperCase();
+  const title = escapeHtml(article.title || "Sin título");
+  const href = `/noticia.html?id=${encodeURIComponent(article.slug || article.id)}`;
+  const description = truncateCopy(article.summary || article.description || "");
+  const lede = description ? `<p class="hero-lede">${escapeHtml(description)}</p>` : "";
+  const highlights = extractHeroHighlights(article);
+  const highlightsHtml = highlights.length
+    ? `
+          <aside class="hero-side-info">
+            <h4 class="hero-side-title">Claves del día</h4>
+            <ul class="hero-highlights">
+              ${highlights.map(point => `<li>${escapeHtml(point)}</li>`).join("")}
+            </ul>
+          </aside>
+        `
+    : "";
+
+  const metaPieces = [];
+  const heroDate = formatHeroDate(article.date);
+  if (heroDate) metaPieces.push(heroDate);
+  if (article.author) metaPieces.push(article.author.toUpperCase());
+  const meta = metaPieces.length ? `<span class="hero-meta">${escapeHtml(metaPieces.join(" · "))}</span>` : "";
+
+  const ctaLabel = escapeHtml(article?.featured?.cta_label || "Leer informe");
+  const ctaTagline = escapeHtml(article?.featured?.cta_tagline || HERO_TAGLINE);
+  const image = escapeHtml(article.thumbnail || HERO_IMAGE_FALLBACK);
+
+  return `
+    <a href="${href}" class="hero-card" style="--hero-accent:${palette.primary};--hero-accent-secondary:${palette.secondary};">
+      <div class="hero-media">
+        <img src="${image}" class="hero-img" alt="${title}" loading="eager" fetchpriority="high" />
+        <div class="hero-overlay"></div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-ribbon">
+          <span class="hero-badge">${escapeHtml(categoryLabel)}</span>
+          ${meta}
+        </div>
+        <div class="hero-body">
+          <div class="hero-text-block">
+            <h2 class="hero-title">${title}</h2>
+            ${lede}
+            <div class="hero-cta">
+              <span class="hero-cta-pill">${ctaLabel}</span>
+              <span class="hero-tagline">${ctaTagline}</span>
+            </div>
+          </div>
+          ${highlightsHtml}
+        </div>
+      </div>
+    </a>
+  `;
+}
+
 const FX_RETAIL_SPEC = {
   currency: "Dólar minorista (casas de cambio)",
   code: "USD MIN",
@@ -592,13 +749,15 @@ async function renderHeroFromFile() {
     if (!match) throw new Error("No frontmatter found");
 
     const frontmatter = match[1];
-    const body = markdown.replace(/^---\n[\s\S]*?\n---\n/, "");
 
     // Parser simple de YAML frontmatter
     const title = frontmatter.match(/title:\s*(.+)/)?.[1]?.trim() || "Sin título";
     const summary = frontmatter.match(/summary:\s*(.+)/)?.[1]?.trim() || "Sin resumen";
     const slug = frontmatter.match(/slug:\s*(.+)/)?.[1]?.trim() || "default";
     let thumbnail = frontmatter.match(/thumbnail:\s*(.+)/)?.[1]?.trim() || "";
+    const category = frontmatter.match(/category:\s*(.+)/)?.[1]?.trim() || "Actualidad";
+    const date = frontmatter.match(/date:\s*(.+)/)?.[1]?.trim() || "";
+    const author = frontmatter.match(/author:\s*(.+)/)?.[1]?.trim() || "";
 
     // Si la ruta es relativa, convertirla a URL completa
     if (thumbnail.startsWith('/')) {
@@ -607,40 +766,43 @@ async function renderHeroFromFile() {
 
     // Fallback si no hay thumbnail válido
     if (!thumbnail || thumbnail.startsWith('/')) {
-      thumbnail = "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1200&h=500&fit=crop&q=80";
+      thumbnail = HERO_IMAGE_FALLBACK;
     }
-
-    const category = frontmatter.match(/category:\s*(.+)/)?.[1]?.trim() || "Actualidad";
 
     // Cambiar la clase del contenedor a hero
     container.className = 'hero';
-
-    container.innerHTML = `
-      <a href="/noticia.html?id=${encodeURIComponent(slug)}" class="hero-link-wrapper">
-        <img src="${thumbnail}" class="hero-img" alt="${title}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%221200%22 height=%22500%22%3E%3Crect fill=%22%23667eea%22 width=%221200%22 height=%22500%22/%3E%3C/svg%3E'"/>
-        <div class="hero-content">
-          <div class="hero-section">${category.toUpperCase()}</div>
-          <h2 class="hero-title">${title}</h2>
-          <p class="hero-excerpt">${summary}</p>
-        </div>
-      </a>
-    `;
+    container.innerHTML = buildHeroMarkup({
+      id: slug,
+      slug,
+      title,
+      summary,
+      description: summary,
+      thumbnail,
+      category,
+      date,
+      author
+    });
   } catch (e) {
     console.error("Error cargando hero desde archivo:", e);
     // Fallback completo
     const container = document.getElementById("hero");
     if (container) {
       container.className = 'hero';
-      container.innerHTML = `
-        <a href="/noticia.html?id=2025-11-22-bcp-mantiene-anclada-la-tasa-de-interes" class="hero-link-wrapper">
-          <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1200&h=500&fit=crop&q=80" class="hero-img" alt="Portada"/>
-          <div class="hero-content">
-            <div class="hero-section">MACROECONOMÍA</div>
-            <h2 class="hero-title">BCP mantiene "anclada" la tasa de interés con una inflación a la baja</h2>
-            <p class="hero-excerpt">El Comité de Política Monetaria decidió, por unanimidad, mantener la tasa de interés de política monetaria (TPM) en 6,0% anual.</p>
-          </div>
-        </a>
-      `;
+      container.innerHTML = buildHeroMarkup({
+        id: "2025-11-22-bcp-mantiene-anclada-la-tasa-de-interes",
+        slug: "2025-11-22-bcp-mantiene-anclada-la-tasa-de-interes",
+        title: "BCP mantiene \"anclada\" la tasa de interés con una inflación a la baja",
+        summary: "El Comité de Política Monetaria decidió, por unanimidad, mantener la tasa de interés de política monetaria (TPM) en 6,0% anual.",
+        description: "El Comité de Política Monetaria decidió, por unanimidad, mantener la tasa de interés de política monetaria (TPM) en 6,0% anual.",
+        thumbnail: HERO_IMAGE_FALLBACK,
+        category: "macro",
+        date: "2025-11-22T12:00:00-03:00",
+        author: "Perspectivas",
+        featured: {
+          cta_label: "Ver detalle",
+          cta_tagline: HERO_TAGLINE
+        }
+      });
     }
   }
 }
@@ -665,16 +827,7 @@ function renderHero(n) {
   // Cambiar la clase del contenedor a hero
   container.className = 'hero';
 
-  container.innerHTML = `
-    <a href="/noticia.html?id=${encodeURIComponent(heroArticle.slug || heroArticle.id)}" class="hero-link-wrapper">
-      <img src="${heroArticle.thumbnail}" class="hero-img" alt="${heroArticle.title}"/>
-      <div class="hero-content">
-        <div class="hero-section">${heroArticle.category || "Actualidad"}</div>
-        <h2 class="hero-title">${heroArticle.title}</h2>
-        <p class="hero-excerpt">${heroArticle.description ?? ""}</p>
-      </div>
-    </a>
-  `;
+  container.innerHTML = buildHeroMarkup(heroArticle);
 
   console.log("📰 Hero actualizado con:", heroArticle.title, "(is_main_featured:",
     (typeof heroArticle.featured === 'object' && heroArticle.featured?.is_main_featured) || false, ")");
@@ -686,22 +839,36 @@ function renderSecondary(n) {
   const container = document.getElementById("secondary-news");
   if (!container || !n?.length) return;
 
-  // Tomamos los primeros 4 de la lista recibida (que ya debería venir sin la Hero)
-  const cardsHtml = n.slice(0, 4)
-    .map(a => `
-      <a href="/noticia.html?id=${encodeURIComponent(a.slug || a.id)}" class="secondary-card">
-        <div class="secondary-card-img">
-          <img src="${a.thumbnail}" alt="${a.title}"/>
-        </div>
-        <h3>${a.title}</h3>
-        <small>${formatDate(a.date)}</small>
-      </a>
-    `)
+  // Tomamos los primeros 3 de la lista recibida (ya viene sin la Hero)
+  const cardsHtml = n.slice(0, 2)
+    .map(article => {
+      const palette = resolveCategoryAccent(article.category);
+      const categoryLabel = resolveCategoryLabel(article.category).toUpperCase();
+      const summary = truncateCopy(article.summary || article.description || "", 140);
+      const metaLabel = formatHeroDate(article.date);
+      const title = escapeHtml(article.title || "Noticia destacada");
+      const image = escapeHtml(article.thumbnail || HERO_IMAGE_FALLBACK);
+      const summaryHtml = summary ? `<p class="secondary-card-summary">${escapeHtml(summary)}</p>` : "";
+      const metaHtml = metaLabel ? `<span class="secondary-card-meta">${escapeHtml(metaLabel)}</span>` : "";
+
+      return `
+        <a href="/noticia.html?id=${encodeURIComponent(article.slug || article.id)}" class="secondary-card" style="--secondary-accent:${palette.primary};--secondary-accent-secondary:${palette.secondary};">
+          <div class="secondary-card-media">
+            <img src="${image}" alt="${title}" loading="lazy" />
+            <span class="secondary-card-badge">${escapeHtml(categoryLabel)}</span>
+            <div class="secondary-card-overlay"></div>
+          </div>
+          <div class="secondary-card-body">
+            <h3 class="secondary-card-title">${title}</h3>
+            ${summaryHtml}
+            ${metaHtml}
+          </div>
+        </a>
+      `;
+    })
     .join("");
 
-  container.innerHTML = `
-    ${cardsHtml}
-  `;
+  container.innerHTML = cardsHtml;
 }
 
 function initNoticiasLocales(noticias) {
@@ -853,27 +1020,13 @@ function renderCategoryFilters(noticias) {
 
   if (!containers.length || !noticiasFilterSource.length) return;
 
-  // Mapeo de categorías: value -> label en español
-  const categoryLabels = {
-    "macro": "Macroeconomía",
-    "mercados-inversion": "Mercados e Inversión",
-    "politica-economica": "Política Económica",
-    "empresas": "Empresas",
-    "empleo": "Empleo",
-    "finanzas-personales": "Finanzas Personales",
-    "educacion-financiera": "Educación Financiera",
-    "actualidad": "Actualidad",
-    "economia": "Economía",
-    "negocios": "Negocios"
-  };
-
   // Obtener categorías disponibles y normalizarlas
   const availableCategories = [...new Set(noticiasFilterSource.map(n => n.category).filter(Boolean))];
 
   // Crear lista ordenada de categorías con sus etiquetas
-  const categories = Object.entries(categoryLabels)
-    .filter(([key]) => availableCategories.includes(key))
-    .map(([key, label]) => ({ key, label }));
+  const categories = availableCategories
+    .map(key => ({ key, label: resolveCategoryLabel(key) }))
+    .sort((a, b) => a.label.localeCompare(b.label, "es", { sensitivity: "base" }));
 
   const html = [
     '<button class="filter-btn" data-category="all">Todas</button>',
@@ -1260,6 +1413,7 @@ function renderMarketTicker(trackId) {
 function formatDate(dateString) {
   if (!dateString) return "";
   const date = new Date(dateString);
+  if (Number.isNaN(date.getTime())) return "";
   // Ajuste simple para zona horaria si la fecha viene en UTC y querés evitar desfase de día
   return date.toLocaleDateString("es-PY", {
     day: "2-digit", month: "short", year: "numeric"
