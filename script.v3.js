@@ -624,51 +624,39 @@ function initMenuToggle() {
 function initHeaderScrollState() {
   const header = document.querySelector(".site-header");
   if (!header) return;
-  if (header.dataset.bound === "true") return;
-  header.dataset.bound = "true";
-
-  const anchor = document.getElementById("noticias")
-    || document.querySelector("[data-header-anchor]")
-    || document.querySelector("#contenido-noticia")
-    || document.querySelector("main")
-    || header.nextElementSibling
-    || document.body.firstElementChild;
+  if (header.dataset.scrollBound === "true") return;
+  header.dataset.scrollBound = "true";
 
   // Ya no necesitamos el sentinel con scroll listener
   let lastScrollState = null;
-
-  let observer = null;
   let scrollThrottleId = null;
   const SCROLL_THRESHOLD = 50; // Distancia de scroll antes de cambiar estado
 
-  const bindObserver = () => {
-    // Usar scroll listener en lugar de IntersectionObserver
-    // Es más confiable y evita parpadeos
-    window.addEventListener("scroll", () => {
-      if (scrollThrottleId) return;
+  const handleScroll = () => {
+    if (scrollThrottleId) return;
+    
+    scrollThrottleId = requestAnimationFrame(() => {
+      const currentScroll = window.scrollY;
+      const isScrolled = currentScroll > SCROLL_THRESHOLD;
       
-      scrollThrottleId = requestAnimationFrame(() => {
-        const currentScroll = window.scrollY;
-        const isScrolled = currentScroll > SCROLL_THRESHOLD;
+      // Solo actualizar si el estado cambió
+      if (lastScrollState !== isScrolled) {
+        lastScrollState = isScrolled;
+        header.classList.toggle("scrolled", isScrolled);
         
-        // Solo actualizar si el estado cambió
-        if (lastScrollState !== isScrolled) {
-          lastScrollState = isScrolled;
-          header.classList.toggle("scrolled", isScrolled);
-          
-          // Controlar el market-ticker top
-          const topTicker = document.querySelector('.market-ticker[data-variant="top"]');
-          if (topTicker) {
-            topTicker.classList.toggle("hidden", isScrolled);
-          }
+        // Controlar el market-ticker top
+        const topTicker = document.querySelector('.market-ticker[data-variant="top"]');
+        if (topTicker) {
+          topTicker.classList.toggle("hidden", isScrolled);
         }
-        
-        scrollThrottleId = null;
-      });
-    }, { passive: true });
+      }
+      
+      scrollThrottleId = null;
+    });
   };
 
-  bindObserver();
+  // Agregar el listener de scroll
+  window.addEventListener("scroll", handleScroll, { passive: true });
 
   let resizeRaf = null;
   window.addEventListener("resize", () => {
@@ -1465,7 +1453,9 @@ async function renderNoticia() {
 
 // Ejecutar cuando el DOM esté listo
 function initRouter() {
+  console.log("✓ initRouter ejecutado");
   initHeaderScrollState();
+  console.log("✓ initHeaderScrollState ejecutado");
   initCategoryDrawer();
   const isHome = document.getElementById("hero") !== null;
   const isNoticia = document.getElementById("contenido-noticia") !== null;
