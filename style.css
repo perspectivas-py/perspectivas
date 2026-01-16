@@ -91,6 +91,7 @@ ul {
   z-index: 100;
   transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease, padding 0.4s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  will-change: box-shadow, background, border-color;
 }
 
 .header-top {
@@ -492,6 +493,7 @@ ul {
   max-height: 80px;
   opacity: 1;
   padding: 0.5rem 1rem;
+  will-change: max-height, opacity, margin-bottom, padding;
 }
 
 .market-ticker[data-variant="top"] {
@@ -506,6 +508,7 @@ ul {
   border-bottom-width: 0;
   padding: 0;
   pointer-events: none;
+  overflow: hidden;
 }
 
 .market-ticker[data-variant="top"].hidden .ticker-track {
@@ -519,7 +522,6 @@ ul {
 .ticker-inner {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0.5rem 1rem;
   display: flex;
   align-items: center;
   gap: 1rem;

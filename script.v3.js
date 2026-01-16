@@ -634,51 +634,38 @@ function initHeaderScrollState() {
     || header.nextElementSibling
     || document.body.firstElementChild;
 
-  let sentinel = document.querySelector(".header-scroll-sentinel");
-  if (!sentinel) {
-    sentinel = document.createElement("span");
-    sentinel.className = "header-scroll-sentinel";
-    sentinel.setAttribute("aria-hidden", "true");
-
-    if (anchor?.parentElement) {
-      anchor.parentElement.insertBefore(sentinel, anchor);
-    } else if (header.parentElement) {
-      header.parentElement.insertBefore(sentinel, header.nextSibling);
-    } else {
-      document.body.insertBefore(sentinel, document.body.firstChild || null);
-    }
-  }
-
-  const computeOptions = () => {
-    const headerHeight = header.getBoundingClientRect().height || 0;
-    // Buffer más grande para reducir sensibilidad y evitar parpadeos
-    const buffer = Math.max(120, headerHeight * 0.8);
-    const topMargin = -(headerHeight + buffer);
-    return {
-      rootMargin: `${topMargin}px 0px 0px 0px`,
-      threshold: 0
-    };
-  };
-
-  const updateState = (entry) => {
-    if (!entry) return;
-    const isScrolled = !entry.isIntersecting;
-    header.classList.toggle("scrolled", isScrolled);
-    
-    // Controlar el market-ticker top para evitar parpadeos
-    const topTicker = document.querySelector('.market-ticker[data-variant="top"]');
-    if (topTicker) {
-      topTicker.classList.toggle("hidden", isScrolled);
-    }
-  };
+  // Ya no necesitamos el sentinel con scroll listener
+  let lastScrollState = null;
 
   let observer = null;
-  let updateTimeout = null;
+  let scrollThrottleId = null;
+  const SCROLL_THRESHOLD = 50; // Distancia de scroll antes de cambiar estado
 
   const bindObserver = () => {
-    if (observer) observer.disconnect();
-    observer = new IntersectionObserver(([entry]) => updateState(entry), computeOptions());
-    observer.observe(sentinel);
+    // Usar scroll listener en lugar de IntersectionObserver
+    // Es más confiable y evita parpadeos
+    window.addEventListener("scroll", () => {
+      if (scrollThrottleId) return;
+      
+      scrollThrottleId = requestAnimationFrame(() => {
+        const currentScroll = window.scrollY;
+        const isScrolled = currentScroll > SCROLL_THRESHOLD;
+        
+        // Solo actualizar si el estado cambió
+        if (lastScrollState !== isScrolled) {
+          lastScrollState = isScrolled;
+          header.classList.toggle("scrolled", isScrolled);
+          
+          // Controlar el market-ticker top
+          const topTicker = document.querySelector('.market-ticker[data-variant="top"]');
+          if (topTicker) {
+            topTicker.classList.toggle("hidden", isScrolled);
+          }
+        }
+        
+        scrollThrottleId = null;
+      });
+    }, { passive: true });
   };
 
   bindObserver();
@@ -687,7 +674,7 @@ function initHeaderScrollState() {
   window.addEventListener("resize", () => {
     if (resizeRaf) cancelAnimationFrame(resizeRaf);
     resizeRaf = window.requestAnimationFrame(() => {
-      bindObserver();
+      // No hay nada que recalcular
     });
   });
 }
