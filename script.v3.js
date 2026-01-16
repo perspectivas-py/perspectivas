@@ -480,13 +480,20 @@ function initHeaderScrollState() {
       const scrollTop = window.scrollY || window.pageYOffset;
       collapsePoint = rect.top + scrollTop - (header.offsetHeight || 0) - 16;
     } else {
-      collapsePoint = 100; // Collapse sooner on article pages
+      // En páginas de artículo preferimos mantener el encabezado estable
+      collapsePoint = Number.POSITIVE_INFINITY;
     }
   };
 
   const update = () => {
     const scrollTop = window.scrollY || window.pageYOffset;
     const buffer = 10;
+
+    if (!Number.isFinite(collapsePoint)) {
+      header.classList.remove("scrolled");
+      ticking = false;
+      return;
+    }
 
     // Hysteresis logic to prevent flickering
     if (scrollTop > collapsePoint + buffer) {
