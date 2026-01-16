@@ -12,6 +12,6 @@ logo: /assets/img/banco-itau.png
 campaign_end: 2025-11-29T19:07:44.073Z
 url: https://www.itau.com.py/
 featured: false
-visible: true
+visible: false
 campaign_start: 2025-11-22T19:07:33.649Z
 ---
