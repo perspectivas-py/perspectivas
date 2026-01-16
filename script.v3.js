@@ -661,7 +661,14 @@ function initHeaderScrollState() {
 
   const updateState = (entry) => {
     if (!entry) return;
-    header.classList.toggle("scrolled", !entry.isIntersecting);
+    const isScrolled = !entry.isIntersecting;
+    header.classList.toggle("scrolled", isScrolled);
+    
+    // Controlar el market-ticker top para evitar parpadeos
+    const topTicker = document.querySelector('.market-ticker[data-variant="top"]');
+    if (topTicker) {
+      topTicker.classList.toggle("hidden", isScrolled);
+    }
   };
 
   let observer = null;
