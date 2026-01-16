@@ -4,7 +4,8 @@ date: 2026-01-16T19:02:00.000-03:00
 summary: "Según datos de la Dirección General del Sistema Unificado de Apertura
   y Cierre de Empresas (SUACE), las EAS constituidas en 2025 movilizaron una
   inversión total de USD 363 millones. "
-author: Perspectivas
+author: Armando G Larrosa
+author_image: /assets/img/authors/armando-autorweb.jpg
 category: empleo
 tags:
   - negocios
