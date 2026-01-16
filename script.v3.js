@@ -1465,8 +1465,10 @@ function initRouter() {
 }
 
 if (document.readyState === 'loading') {
+  console.log("📋 readyState='loading', esperando DOMContentLoaded");
   document.addEventListener('DOMContentLoaded', initRouter);
 } else {
+  console.log("📋 readyState='" + document.readyState + "', ejecutando initRouter inmediatamente");
   initRouter();
 }
 
