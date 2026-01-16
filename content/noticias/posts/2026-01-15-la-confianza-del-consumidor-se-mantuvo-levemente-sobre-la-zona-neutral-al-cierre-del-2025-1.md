@@ -16,7 +16,7 @@ tags:
 thumbnail: /assets/img/mercado-libre-e1584221732666.jpg
 featured:
   is_featured: true
-  is_main_featured: true
+  is_main_featured: false
   show_in_latest: true
 ---
 En diciembre de 2025, el Índice de Confianza del Consumidor (ICC) registró un nivel de 51,69, ubicándose por debajo del valor observado en el mes previo y del verificado en diciembre de 2024.

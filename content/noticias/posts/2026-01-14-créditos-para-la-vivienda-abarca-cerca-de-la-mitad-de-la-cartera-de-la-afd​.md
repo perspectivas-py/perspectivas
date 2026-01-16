@@ -14,7 +14,7 @@ tags:
 thumbnail: /assets/img/couple-holding-small-house-medium-shot.jpg
 featured:
   is_featured: false
-  is_main_featured: true
+  is_main_featured: false
   show_in_latest: true
 ---
 La Agencia Financiera de Desarrollo (AFD) desembolsó PYG 205 mil millones (USD 24 millones) para créditos en el mes de noviembre. De esta manera el acumulado a dicho mes sumó PYG 2,4 billones (USD 321 millones), siendo 48,5% mayor interanualmente., según Mentu.

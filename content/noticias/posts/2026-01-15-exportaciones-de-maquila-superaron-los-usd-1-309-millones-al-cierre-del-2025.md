@@ -17,7 +17,7 @@ caption: "En materia de empleo, actualmente se registran 35.357 puestos de
   incremento interanual del 18%. Foto: IP Paraguay"
 featured:
   is_featured: false
-  is_main_featured: true
+  is_main_featured: false
   show_in_latest: true
 ---
 
