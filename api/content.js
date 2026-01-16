@@ -137,13 +137,16 @@ export default async function handler(req, res) {
 
     console.log(`✅ Generado: ${data.noticias.length} noticias, ${data.analisis.length} análisis`);
     
-    return res.status(200).json(data);
+    res.statusCode = 200;
+    res.end(JSON.stringify(data));
   } catch (error) {
     console.error("❌ Error generando content.json:", error);
-    return res.status(500).json({ 
+    res.statusCode = 500;
+    res.setHeader("Content-Type", "application/json");
+    res.end(JSON.stringify({ 
       error: "Error generando contenido",
       message: error.message 
-    });
+    }));
   }
 }
 

@@ -1,6 +1,6 @@
 // /api/config.js - Servir configuración de Decap CMS
 
-module.exports = (req, res) => {
+export default (req, res) => {
   try {
     // Detectar el dominio actual dinámicamente
     const protocol = req.headers['x-forwarded-proto'] || 'http';
@@ -283,9 +283,12 @@ module.exports = (req, res) => {
 
     res.setHeader('Content-Type', 'application/json');
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-    res.status(200).json(config);
+    res.statusCode = 200;
+    res.end(JSON.stringify(config));
   } catch (error) {
     console.error('❌ [CONFIG] Error:', error.message);
-    res.status(500).json({ error: 'Failed to load config', message: error.message });
+    res.statusCode = 500;
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify({ error: 'Failed to load config', message: error.message }));
   }
 };

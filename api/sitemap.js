@@ -60,11 +60,14 @@ ${validPosts.map(p => `
 </urlset>`;
 
     res.setHeader("Content-Type", "application/xml");
-    return res.status(200).send(sitemap);
+    res.statusCode = 200;
+    res.end(sitemap);
 
   } catch (err) {
     console.error("Sitemap error:", err);
-    res.status(500).send("Error generating sitemap");
+    res.statusCode = 500;
+    res.setHeader("Content-Type", "text/plain");
+    res.end("Error generating sitemap");
   }
 }
 
