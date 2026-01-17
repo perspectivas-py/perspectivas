@@ -1,20 +1,19 @@
 ---
 title: Alerta climática impacta la siembra temprana de soja
-slug: 2026-01-17-alerta-climatica-impacta-siembra-soja
 date: 2026-01-17T06:45:00.000-03:00
-summary: "Productores reportan atrasos de hasta dos semanas por exceso de lluvias en el sur y deficit hídrico en el norte del país."
+summary: Productores reportan atrasos de hasta dos semanas por exceso de lluvias
+  en el sur y deficit hídrico en el norte del país.
 category: macro
 tags:
-  - agro
-  - clima
-  - soja
-  - exportaciones
+  - economia
+  - comercio-exterior
 thumbnail: /assets/img/default.jpg
 featured:
   is_featured: false
   is_main_featured: false
   is_section_featured: false
   show_in_latest: true
+slug: 2026-01-17-alerta-climatica-impacta-siembra-soja
 ---
 El último informe agrometeorológico del MAG advierte que la campaña de soja 2026 enfrenta un escenario mixto: **exceso de humedad en Itapúa y Misiones** y falta de lluvias en Canindeyú y Alto Paraguay. Esta combinación obligó a los productores a reprogramar la siembra temprana y evaluar el uso de semillas más resistentes.
 
