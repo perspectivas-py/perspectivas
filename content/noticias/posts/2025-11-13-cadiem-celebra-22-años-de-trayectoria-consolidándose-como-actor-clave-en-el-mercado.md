@@ -11,8 +11,9 @@ summary: >-
   cada vez más grandes que resulten atractivos ante los inversionistas a nivel
 
   internacional
+thumbnail: /assets/img/uploads/female-working-environment-projects.jpg
 ---
-![Cadien 123](/assets/img/dsc_7982.jpg "Cadien")
+![Cadien 123](/assets/img/uploads/female-working-environment-projects.jpg "Cadien")
 
 CADIEM Casa de Bolsa celebra 22 años de trayectoria institucional, en un contexto de sostenido crecimiento del mercado de valores, tanto en el segmento bursátil como en el de fondos mutuos y de inversión. En este contexto, Gloria Ayala Person, socia fundadora y directora de la compañía, recordó los inicios del emprendimiento que ya tiene más de dos décadas operando.
 

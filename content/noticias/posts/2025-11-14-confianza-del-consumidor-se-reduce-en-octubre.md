@@ -6,8 +6,9 @@ summary: >+
   En octubre de 2025, el Índice de Confianza del Consumidor se ubicó en 48,32
   puntos. Por su parte, el Índice de Expectativas Económicas y el Índice de
   Situación Económica se ubicaron en 61,75 y 34,88 puntos respectivamente.
+thumbnail: /assets/img/uploads/mercado-libre-e1584221732666.jpg
 ---
-![](/assets/img/mercado-libre-e1584221732666.jpg)
+![](/assets/img/uploads/mercado-libre-e1584221732666.jpg)
 
 
 

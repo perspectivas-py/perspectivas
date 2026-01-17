@@ -5,9 +5,10 @@ date: 2025-11-17
 category: macro
 subcategory: Commodities
 summary: Enfrentarían en el 2026 su cuarto año consecutivo de descenso de precios
-image: /assets/img/precios-de-commodities-en-baja-bm.jpg
+image: /assets/img/uploads/precios-de-commodities-en-baja-bm.jpg
+thumbnail: /assets/img/uploads/precios-de-commodities-en-baja-bm.jpg
 ---
-![](/assets/img/precios-de-commodities-en-baja-bm.jpg)
+![](/assets/img/uploads/precios-de-commodities-en-baja-bm.jpg)
 
 
 Los mercados globales de commodities enfrentarían en el 2026 su cuarto año consecutivo de descenso de precios, según el informe Commodity Markets Outlook del Banco Mundial. El organismo proyecta caídas de 7% de los precios tanto en 2025 como para el próximo año, en un contexto de crecimiento mundial moderado y un superávit energético en aumento.​

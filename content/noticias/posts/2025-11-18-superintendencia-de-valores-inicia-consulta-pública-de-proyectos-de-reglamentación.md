@@ -8,8 +8,9 @@ title: Superintendencia de Valores inicia consulta pública de proyectos de
 date: 2025-11-18T16:51:08.840Z
 summary: '"Superintendencia de Valores inicia consulta pública de proyectos de
   reglamentación"'
+thumbnail: /assets/img/uploads/knmg6a6szzcshjyavygmnkhpbi.jpg
 ---
-![](/assets/img/knmg6a6szzcshjyavygmnkhpbi.jpg)
+![](/assets/img/uploads/knmg6a6szzcshjyavygmnkhpbi.jpg)
 
 La Superintendencia de Valores informa que tras la promulgación de la Ley N.º 7572/2025 “Mercado de Valores y Productos”, se inicia el proceso de consulta pública de los proyectos de reglamentación del nuevo marco regulatorio del mercado de capitales. Este paso proactivo refleja el compromiso institucional de asegurar una implementación ordenada, técnica y oportuna de la nueva ley.
 

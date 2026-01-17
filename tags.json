@@ -1,80 +1,14 @@
 {
-  "comercio-exterior": {
-    "label": "comercio-exterior",
-    "items": [
-      {
-        "id": "2026-01-17-exportaciones-de-maquila-superaron-los-usd-1-309-millones-al-cierre-del-2025",
-        "title": "Exportaciones de maquila superaron los USD 1.309 millones al cierre del 2025",
-        "thumbnail": "/assets/img/uploads/sumidenso-maquila-industria-trabajo-17.jpg",
-        "date": "2026-01-17T13:45:00.000Z",
-        "type": "noticias"
-      },
-      {
-        "id": "2026-01-17-mercosur-ue-acuerdo-es-una-ventana-de-oportunidad-para-impulsar-manufacturas",
-        "title": "Mercosur-UE: acuerdo es una ventana de oportunidad para impulsar manufacturas",
-        "thumbnail": "/assets/img/uploads/confecciones-manufacturas-maquilas-textiles-fabrica-mujeres-obreros-taller-trabajo-mano-de-obra.jpg",
-        "date": "2026-01-17T13:31:00.000Z",
-        "type": "noticias"
-      },
-      {
-        "id": "2026-01-17-alerta-climatica-impacta-siembra-soja",
-        "title": "Alerta climática impacta la siembra temprana de soja",
-        "thumbnail": "/assets/img/uploads/precios-de-commodities-en-baja-bm.jpg",
-        "date": "2026-01-17T09:45:00.000Z",
-        "type": "noticias"
-      },
-      {
-        "id": "2026-01-15-exportaciones-de-maquila-superaron-los-usd-1-309-millones-al-cierre-del-2025",
-        "title": "Exportaciones de maquila superaron los USD 1.309 millones al cierre del 2025",
-        "thumbnail": "/assets/img/uploads/sumidenso-maquila-industria-trabajo-17.jpg",
-        "date": "2026-01-15T19:38:00.000Z",
-        "type": "noticias"
-      },
-      {
-        "id": "2026-01-14-exportaciones-repuntaron-casi-6-durante-el-2025",
-        "title": "Exportaciones repuntaron casi 6% durante el 2025",
-        "thumbnail": "/assets/img/uploads/exportación.jpg",
-        "date": "2026-01-14T13:15:00.000Z",
-        "type": "noticias"
-      }
-    ]
-  },
-  "empleo": {
-    "label": "empleo",
-    "items": [
-      {
-        "id": "2026-01-17-exportaciones-de-maquila-superaron-los-usd-1-309-millones-al-cierre-del-2025",
-        "title": "Exportaciones de maquila superaron los USD 1.309 millones al cierre del 2025",
-        "thumbnail": "/assets/img/uploads/sumidenso-maquila-industria-trabajo-17.jpg",
-        "date": "2026-01-17T13:45:00.000Z",
-        "type": "noticias"
-      },
-      {
-        "id": "2026-01-16-más-de-7-600-empresas-por-acciones-simplificadas-se-constituyeron-en-paraguay",
-        "title": "Más de 7.600 Empresas por Acciones Simplificadas se constituyeron en Paraguay",
-        "thumbnail": "/assets/img/uploads/empresas-bajo-regimen-de-eas.jpg",
-        "date": "2026-01-16T22:02:00.000Z",
-        "type": "noticias"
-      },
-      {
-        "id": "2026-01-17-más-de-7-600-empresas-por-acciones-simplificadas-se-constituyeron-en-paraguay",
-        "title": "Más de 7.600 Empresas por Acciones Simplificadas se constituyeron en Paraguay",
-        "thumbnail": "/assets/img/uploads/empresas-bajo-regimen-de-eas.jpg",
-        "date": "2026-01-16T22:02:00.000Z",
-        "type": "noticias"
-      },
-      {
-        "id": "2026-01-15-exportaciones-de-maquila-superaron-los-usd-1-309-millones-al-cierre-del-2025",
-        "title": "Exportaciones de maquila superaron los USD 1.309 millones al cierre del 2025",
-        "thumbnail": "/assets/img/uploads/sumidenso-maquila-industria-trabajo-17.jpg",
-        "date": "2026-01-15T19:38:00.000Z",
-        "type": "noticias"
-      }
-    ]
-  },
   "economia": {
     "label": "economia",
     "items": [
+      {
+        "id": "2026-01-17-recuerdan-disponibilidad-del-servicio-en-línea-de-consultas-para-municipios-y-gobernaciones",
+        "title": "Recuerdan disponibilidad del servicio en línea de consultas para Municipios y Gobernaciones",
+        "thumbnail": "/assets/img/top-view-office-desk-with-growth-chart-coffee-cup.jpg",
+        "date": "2026-01-17T17:28:00.000Z",
+        "type": "noticias"
+      },
       {
         "id": "2026-01-17-exportaciones-de-maquila-superaron-los-usd-1-309-millones-al-cierre-del-2025",
         "title": "Exportaciones de maquila superaron los USD 1.309 millones al cierre del 2025",
@@ -192,6 +126,112 @@
         "title": "Actividad económica marcó once meses consecutivos de expansión en noviembre",
         "thumbnail": "/assets/img/uploads/top-view-office-desk-with-growth-chart-coffee-cup.jpg",
         "date": "2026-01-13T21:26:00.000Z",
+        "type": "noticias"
+      }
+    ]
+  },
+  "finanzas": {
+    "label": "finanzas",
+    "items": [
+      {
+        "id": "2026-01-17-recuerdan-disponibilidad-del-servicio-en-línea-de-consultas-para-municipios-y-gobernaciones",
+        "title": "Recuerdan disponibilidad del servicio en línea de consultas para Municipios y Gobernaciones",
+        "thumbnail": "/assets/img/top-view-office-desk-with-growth-chart-coffee-cup.jpg",
+        "date": "2026-01-17T17:28:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-16-economía-y-finanzas-expone-alcances-de-la-reforma-de-la-caja-fiscal",
+        "title": " Economía y Finanzas expone alcances de la reforma de la Caja Fiscal ",
+        "thumbnail": "/assets/img/uploads/mef-villa-serrati_4_0.jpg",
+        "date": "2026-01-16T23:34:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-15-el-poder-ejecutivo-declara-de-interés-nacional-el-acercamiento-de-paraguay-a-la-ocde-1",
+        "title": "El Poder Ejecutivo declara de interés nacional el acercamiento de Paraguay a la OCDE",
+        "thumbnail": "/assets/img/uploads/py.-imagen-de-pru-no-usar.jpg",
+        "date": "2026-01-15T00:08:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-15-el-poder-ejecutivo-declara-de-interés-nacional-el-acercamiento-de-paraguay-a-la-ocde",
+        "title": "El Poder Ejecutivo declara de interés nacional el acercamiento de Paraguay a la OCDE",
+        "thumbnail": "/assets/img/uploads/py.-imagen-de-pru-no-usar.jpg",
+        "date": "2026-01-15T00:08:00.000Z",
+        "type": "noticias"
+      }
+    ]
+  },
+  "comercio-exterior": {
+    "label": "comercio-exterior",
+    "items": [
+      {
+        "id": "2026-01-17-exportaciones-de-maquila-superaron-los-usd-1-309-millones-al-cierre-del-2025",
+        "title": "Exportaciones de maquila superaron los USD 1.309 millones al cierre del 2025",
+        "thumbnail": "/assets/img/uploads/sumidenso-maquila-industria-trabajo-17.jpg",
+        "date": "2026-01-17T13:45:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-17-mercosur-ue-acuerdo-es-una-ventana-de-oportunidad-para-impulsar-manufacturas",
+        "title": "Mercosur-UE: acuerdo es una ventana de oportunidad para impulsar manufacturas",
+        "thumbnail": "/assets/img/uploads/confecciones-manufacturas-maquilas-textiles-fabrica-mujeres-obreros-taller-trabajo-mano-de-obra.jpg",
+        "date": "2026-01-17T13:31:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-17-alerta-climatica-impacta-siembra-soja",
+        "title": "Alerta climática impacta la siembra temprana de soja",
+        "thumbnail": "/assets/img/uploads/precios-de-commodities-en-baja-bm.jpg",
+        "date": "2026-01-17T09:45:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-15-exportaciones-de-maquila-superaron-los-usd-1-309-millones-al-cierre-del-2025",
+        "title": "Exportaciones de maquila superaron los USD 1.309 millones al cierre del 2025",
+        "thumbnail": "/assets/img/uploads/sumidenso-maquila-industria-trabajo-17.jpg",
+        "date": "2026-01-15T19:38:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-14-exportaciones-repuntaron-casi-6-durante-el-2025",
+        "title": "Exportaciones repuntaron casi 6% durante el 2025",
+        "thumbnail": "/assets/img/uploads/exportación.jpg",
+        "date": "2026-01-14T13:15:00.000Z",
+        "type": "noticias"
+      }
+    ]
+  },
+  "empleo": {
+    "label": "empleo",
+    "items": [
+      {
+        "id": "2026-01-17-exportaciones-de-maquila-superaron-los-usd-1-309-millones-al-cierre-del-2025",
+        "title": "Exportaciones de maquila superaron los USD 1.309 millones al cierre del 2025",
+        "thumbnail": "/assets/img/uploads/sumidenso-maquila-industria-trabajo-17.jpg",
+        "date": "2026-01-17T13:45:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-16-más-de-7-600-empresas-por-acciones-simplificadas-se-constituyeron-en-paraguay",
+        "title": "Más de 7.600 Empresas por Acciones Simplificadas se constituyeron en Paraguay",
+        "thumbnail": "/assets/img/uploads/empresas-bajo-regimen-de-eas.jpg",
+        "date": "2026-01-16T22:02:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-17-más-de-7-600-empresas-por-acciones-simplificadas-se-constituyeron-en-paraguay",
+        "title": "Más de 7.600 Empresas por Acciones Simplificadas se constituyeron en Paraguay",
+        "thumbnail": "/assets/img/uploads/empresas-bajo-regimen-de-eas.jpg",
+        "date": "2026-01-16T22:02:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-15-exportaciones-de-maquila-superaron-los-usd-1-309-millones-al-cierre-del-2025",
+        "title": "Exportaciones de maquila superaron los USD 1.309 millones al cierre del 2025",
+        "thumbnail": "/assets/img/uploads/sumidenso-maquila-industria-trabajo-17.jpg",
+        "date": "2026-01-15T19:38:00.000Z",
         "type": "noticias"
       }
     ]
@@ -375,32 +415,6 @@
       }
     ]
   },
-  "finanzas": {
-    "label": "finanzas",
-    "items": [
-      {
-        "id": "2026-01-16-economía-y-finanzas-expone-alcances-de-la-reforma-de-la-caja-fiscal",
-        "title": " Economía y Finanzas expone alcances de la reforma de la Caja Fiscal ",
-        "thumbnail": "/assets/img/uploads/mef-villa-serrati_4_0.jpg",
-        "date": "2026-01-16T23:34:00.000Z",
-        "type": "noticias"
-      },
-      {
-        "id": "2026-01-15-el-poder-ejecutivo-declara-de-interés-nacional-el-acercamiento-de-paraguay-a-la-ocde-1",
-        "title": "El Poder Ejecutivo declara de interés nacional el acercamiento de Paraguay a la OCDE",
-        "thumbnail": "/assets/img/uploads/py.-imagen-de-pru-no-usar.jpg",
-        "date": "2026-01-15T00:08:00.000Z",
-        "type": "noticias"
-      },
-      {
-        "id": "2026-01-15-el-poder-ejecutivo-declara-de-interés-nacional-el-acercamiento-de-paraguay-a-la-ocde",
-        "title": "El Poder Ejecutivo declara de interés nacional el acercamiento de Paraguay a la OCDE",
-        "thumbnail": "/assets/img/uploads/py.-imagen-de-pru-no-usar.jpg",
-        "date": "2026-01-15T00:08:00.000Z",
-        "type": "noticias"
-      }
-    ]
-  },
   "mercado-laboral": {
     "label": "mercado-laboral",
     "items": [
@@ -462,7 +476,7 @@
       {
         "id": "README",
         "title": "¿Qué hacer con el aguinaldo?",
-        "thumbnail": "/assets/img/default.jpg",
+        "thumbnail": "/assets/img/uploads/2024-08-16-billetes.jpg",
         "date": "2025-11-20T02:57:34.108Z",
         "type": "noticias"
       }
@@ -474,7 +488,7 @@
       {
         "id": "2025-11-19-mef-paga-hoy-más-g-227-000-millones-a-proveedores-y-acreedores-del-estado",
         "title": "MEF paga hoy más G. 227.000 millones a proveedores y acreedores del Estado",
-        "thumbnail": "/assets/img/default.jpg",
+        "thumbnail": "/assets/img/uploads/mef-villa-serrati_4_0.jpg",
         "date": "2025-11-19T00:54:51.371Z",
         "type": "noticias"
       }
@@ -486,7 +500,7 @@
       {
         "id": "2025-11-18-superintendencia-de-valores-inicia-consulta-pública-de-proyectos-de-reglamentación",
         "title": "Superintendencia de Valores inicia consulta pública de proyectos de reglamentación",
-        "thumbnail": "/assets/img/default.jpg",
+        "thumbnail": "/assets/img/uploads/knmg6a6szzcshjyavygmnkhpbi.jpg",
         "date": "2025-11-18T16:51:08.840Z",
         "type": "noticias"
       }

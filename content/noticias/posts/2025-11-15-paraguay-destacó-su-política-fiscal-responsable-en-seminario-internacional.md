@@ -6,8 +6,9 @@ date: 2025-11-16T18:24:00.000-03:00
 summary: Se debatió sobre los desafíos y tendencias de la gestión
   presupuestaria, así como para promover el intercambio técnico y político
   orientado a fortalecer la sostenibilidad fiscal.
+thumbnail: /assets/img/uploads/seminario-fiscal.jpg
 ---
-![Del evento, en representación del MEF participaron la gerente de Gestión Financiera del Estado, Teodora Recalde de Spinzi, y el director general de Presupuesto, Jorge Paredes.](/assets/img/exportación.jpg)
+![Del evento, en representación del MEF participaron la gerente de Gestión Financiera del Estado, Teodora Recalde de Spinzi, y el director general de Presupuesto, Jorge Paredes.](/assets/img/uploads/seminario-fiscal.jpg)
 
 El Ministerio de Economía y Finanzas (MEF) representó a Paraguay en el 52° Seminario Internacional de Presupuesto Público, organizado por la Asociación Internacional de Presupuesto Público (ASIP) en República Dominicana. El encuentro reunió a autoridades fiscales y especialistas de la región para debatir sobre los desafíos y tendencias de la gestión presupuestaria, así como para promover el intercambio técnico y político orientado a fortalecer la sostenibilidad fiscal, optimizar la eficiencia del gasto y consolidar la estabilidad macroeconómica en América Latina.
 

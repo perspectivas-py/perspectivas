@@ -6,8 +6,9 @@ date: 2025-11-13T21:12:00.000-03:00
 summary: "Las exportaciones totales, al mes de octubre de 2025, alcanzaron un
   valor de US$ 14.182,1 millones, 3,3% por encima de los US$ 13.273,9 millones
   observados a octubre del año anterior. "
+thumbnail: /assets/img/uploads/exportación.jpg
 ---
-![lucas-van-oort-fbzovyf-96w-unsplash.jpg](/assets/img/lucas-van-oort-fbzovyf-96w-unsplash.jpg "lucas-van-oort-fbzovyf-96w-unsplash.jpg")
+![exportación.jpg](/assets/img/uploads/exportación.jpg "exportación.jpg")
 
 Las exportaciones totales, al mes de octubre de 2025, alcanzaron un valor de US$ 14.182,1 millones, 3,3% por encima de los US$ 13.273,9 millones observados a octubre del año anterior. Las exportaciones registradas representaron el 67,1% del total, alcanzando US$ 9.513,9 millones, inferior en 0,8% al valor acumulado a octubre del 2024.
 

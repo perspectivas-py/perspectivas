@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Perspectivas — periodismo económico local con análisis profesional.">
+  <title>Perspectivas — Análisis Económico</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700&family=Montserrat:wght@600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <link rel="icon" type="image/svg+xml" href="assets/img/icono-perspectivas.svg">
+  <link rel="stylesheet" href="style.css?v=3.5">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="header-top">
+      <div class="header-controls left-controls">
+        <div class="controls-group">
+          <button id="category-drawer-toggle" class="category-drawer-toggle" aria-label="Explorar etiquetas"
+            aria-expanded="false" aria-controls="category-drawer">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <button id="search-toggle-header" class="search-toggle" aria-label="Buscar en el panel">
+            <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <a class="brand" href="index.html">Perspectivas</a>
+      <div class="header-controls right-controls">
+      </div>
+    </div>
+    <nav class="main-nav">
+      <ul id="nav-list" class="nav-list">
+        <li><a href="#hero">Inicio</a></li>
+        <li><a href="#noticias">Noticias</a></li>
+        <li><a href="#programa">Programa</a></li>
+        <li><a href="#analisis">Análisis</a></li>
+        <li><a href="#podcast">Podcast</a></li>
+        <li><a href="#cotizaciones">Cotizaciones</a></li>
+      </ul>
+      <div class="nav-search-wrapper">
+        <div id="weather-widget" class="weather-widget" aria-label="Clima de Asunción">
+          <span id="weather-symbol" class="weather-symbol" aria-hidden="true">
+            <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true">
+              <circle cx="12" cy="12" r="6"></circle>
+              <path d="M20 12h3M1 12h3M12 1v3M12 21v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke-linecap="round"></path>
+            </svg>
+          </span>
+          <span id="weather-temp" class="weather-temp">--°C</span>
+        </div>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">
+          <!-- Icono de Sol (en modo claro) -->
+          <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <!-- Icono de Luna (en modo oscuro) -->
+          <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </nav>
+    <div id="category-drawer" class="category-drawer" aria-hidden="true">
+      <div class="category-drawer-inner">
+        <div class="category-drawer-header">
+          <p>Explorar temas</p>
+          <button id="category-drawer-close" class="category-drawer-close" aria-label="Cerrar etiquetas">×</button>
+        </div>
+        <div class="drawer-search-wrapper">
+          <button id="search-toggle" class="search-toggle" aria-label="Buscar">
+            <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </button>
+          <input type="text" id="search-input" class="drawer-search hidden" placeholder="Buscar noticias...">
+        </div>
+        <div id="category-drawer-filters" class="category-drawer-filters"></div>
+      </div>
+    </div>
+
+    <div id="weather-panel" class="weather-panel" aria-hidden="true">
+      <div class="weather-panel-inner" role="dialog" aria-labelledby="weather-panel-title" aria-modal="true">
+        <div class="weather-panel-header">
+          <div>
+            <p class="weather-panel-label">Pronóstico extendido</p>
+            <h3 id="weather-panel-title">Asunción · 5 días</h3>
+          </div>
+          <button id="weather-panel-close" class="weather-panel-close" aria-label="Cerrar pronóstico">×</button>
+        </div>
+        <div id="weather-panel-content" class="weather-panel-content">
+          <p class="weather-panel-empty">Cargando pronóstico...</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <div class="market-ticker" data-variant="top" aria-label="Cotizaciones en vivo">
+      <div class="ticker-inner">
+        <div class="ticker-headline">Mercado Hoy</div>
+        <div class="ticker-window">
+          <div class="ticker-track" id="ticker-track-top"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERO CON NOTICIAS DESTACADAS -->
+    <section class="wrap hero-with-sidebar">
+      <div id="hero" class="hero"></div>
+
+      <div class="hero-sidebar-wrapper">
+        <h3 class="secondary-news-title">Destacadas</h3>
+        <!-- NOTICIAS DESTACADAS EN GRID -->
+        <div id="secondary-news" class="secondary-news-grid"></div>
+      </div>
+    </section>
+
+    <!-- Noticias Locales -->
+    <section id="noticias" class="wrap section">
+      <div class="section-header">
+        <h2>Noticias Locales</h2>
+        <p class="sub">Cobertura macro, política económica y negocios en Paraguay.</p>
+      </div>
+
+      <div class="noticias-locales-v2">
+        <div class="nlv2-hero-stack">
+          <article id="nlv2-hero-main" class="nlv2-hero-main" aria-live="polite">
+            <p class="nlv2-placeholder">Seleccionaremos automáticamente la nota destacada de la sección.</p>
+          </article>
+          <div class="nlv2-hero-secondary" id="nlv2-hero-secondary">
+            <article class="nlv2-secondary-card">
+              <p class="nlv2-placeholder">Espacio para notas kicker</p>
+            </article>
+            <article class="nlv2-secondary-card">
+              <p class="nlv2-placeholder">Espacio para notas kicker</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="nlv2-grid-layout">
+          <div class="nlv2-grid-column">
+            <div id="category-filters" class="category-filters"></div>
+            <div id="news-grid" class="cards-grid nlv2-cards-grid"></div>
+            <button id="news-view-more" class="view-more-btn" type="button" hidden>Ver más</button>
+          </div>
+          <aside class="nlv2-context-column" aria-labelledby="nlv2-context-title">
+            <div class="nlv2-context-panel">
+              <div class="nlv2-context-header">
+                <p class="nlv2-context-eyebrow">Contexto</p>
+                <h3 id="nlv2-context-title">Notas en seguimiento</h3>
+              </div>
+              <div id="nlv2-context-feed" class="nlv2-context-feed">
+                <p class="nlv2-placeholder">Aquí mostraremos mini tarjetas con datos y enlaces.</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- MÁS LEÍDAS -->
+    <section id="top-reads-section" class="wrap section">
+      <div class="section-header">
+        <h2>Más Leídas</h2>
+      </div>
+      <div id="top-reads-grid" class="top-reads-grid"></div>
+    </section>
+
+    <!-- COTIZACIONES -->
+    <section id="cotizaciones" class="wrap section quotes-section">
+      <div class="section-header">
+        <h2>Cotizaciones del día</h2>
+        <p class="sub">Referencias expresadas en guaraníes · Actualización intradía</p>
+      </div>
+      <div id="quotes-grid" class="quotes-grid" aria-live="polite"></div>
+    </section>
+
+    <!-- PROGRAMA -->
+    <section id="programa" class="program-section-dark">
+      <div class="wrap">
+        <div class="program-section-header">
+          <h2>PROGRAMA PERSPECTIVAS <span class="header-arrow">›</span></h2>
+          <div class="program-nav-controls">
+            <button id="program-prev" class="program-nav-btn" aria-label="Anterior">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button id="program-next" class="program-nav-btn" aria-label="Siguiente">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        </div>
+        
+        <div class="program-carousel-container">
+          <div id="program-grid" class="program-carousel"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ANÁLISIS -->
+    <section id="analisis" class="wrap section">
+      <div class="section-header">
+        <h2>Análisis & Opinión</h2>
+      </div>
+      <div id="analisis-featured" class="featured-card"></div>
+      <div id="analisis-grid" class="cards-grid"></div>
+      <button id="analisis-view-more" class="view-more-btn" type="button" hidden>Ver más</button>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section id="newsletter" class="wrap section callout">
+      <div class="newsletter-inner">
+        <h2>Newsletter Premium</h2>
+        <p>Recibí análisis avanzado, resúmenes de mercado y proyecciones exclusivas cada semana.</p>
+
+        <form id="newsletter-form" class="newsletter-form" novalidate>
+          <div class="input-group">
+            <input id="email" type="email" placeholder="Tu email profesional" required aria-label="Email">
+            <select id="plan" aria-label="Seleccionar plan">
+              <option value="free">Newsletter (Gratis)</option>
+              <option value="premium">Premium — Análisis profundos</option>
+            </select>
+            <button type="submit">Suscribirme</button>
+          </div>
+          <p id="newsletter-msg" class="msg-feedback"></p>
+        </form>
+
+        <p class="disclaimer">No enviamos spam. Podés darte de baja cuando quieras.</p>
+      </div>
+    </section>
+
+    <!-- PODCAST -->
+    <section id="podcast" class="wrap section">
+      <div class="section-header">
+        <h2>Podcast Exclusivo</h2>
+        <p class="sub">Conversaciones a fondo con los protagonistas de la economía.</p>
+      </div>
+      <div id="podcast-grid" class="cards-grid podcast-grid"></div>
+      <button id="podcast-view-more" class="view-more-btn" type="button" hidden>Ver más</button>
+    </section>
+
+    <!-- PATROCINADORES -->
+    <section class="sponsors-strip" id="patrocinadores">
+      <div class="wrap">
+        <div class="home-section-header">
+          <h2>Aliados & Patrocinadores</h2>
+          <p>Organizaciones que apoyan el análisis económico independiente.</p>
+        </div>
+
+        <div id="sponsorsGrid" class="sponsors-grid"></div>
+      </div>
+    </section>
+
+    <section id="about" class="wrap section about-section">
+      <div class="about-grid">
+        <div class="about-copy">
+          <p class="about-eyebrow">Quiénes Somos</p>
+          <h2>Perspectivas, periodismo económico independiente</h2>
+          <p>
+            Somos un equipo editorial con base en Asunción dedicado a explicar el pulso financiero
+            de Paraguay y la región. Combinamos reporterismo de datos, análisis macro y cobertura
+            del mercado de capitales para ofrecer información clara, relevante y accionable.
+          </p>
+          <p>
+            Acompañamos a empresas, inversores y audiencia general con reportes diarios,
+            newsletters especializados, entrevistas y coberturas en tiempo real.
+          </p>
+        </div>
+        <div class="about-contact">
+          <div>
+            <p class="about-eyebrow">Contacto Directo</p>
+            <a class="about-email" href="mailto:prensa.perspectivas@gmail.com">prensa.perspectivas@gmail.com</a>
+            <p class="about-location">Asunción, Paraguay</p>
+          </div>
+          <div>
+            <p class="about-eyebrow">Redes Sociales</p>
+            <ul class="about-social">
+              <li>
+                <a class="about-social-link" href="#" aria-label="Facebook">
+                  <span class="about-social-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path fill="currentColor"
+                        d="M14 9h3V6h-3c-1.66 0-3 1.34-3 3v2H9v3h2v6h3v-6h2.6l.6-3H14V9.9c0-.5.4-.9 1-.9Z" />
+                    </svg>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="about-social-link" href="#" aria-label="X">
+                  <span class="about-social-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M6 6l12 12" />
+                      <path d="M18 6L6 18" />
+                    </svg>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="about-social-link" href="#" aria-label="TikTok">
+                  <span class="about-social-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M14.5 5.5v6.2c0 2-1.6 3.6-3.6 3.6s-3.6-1.6-3.6-3.6c0-1.3.8-2.4 1.9-3" />
+                      <path d="M14.5 5.5c1.1 1.7 3 2.8 5 2.8" />
+                    </svg>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a class="about-social-link" href="#" aria-label="Instagram">
+                  <span class="about-social-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <rect x="5" y="5" width="14" height="14" rx="4" />
+                      <circle cx="12" cy="12" r="3.5" />
+                      <circle cx="17" cy="7" r="1" fill="currentColor" stroke="none" />
+                    </svg>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="market-ticker" data-variant="bottom" aria-label="Cotizaciones al cierre">
+      <div class="ticker-inner">
+        <div class="ticker-headline">Cierre de Rueda</div>
+        <div class="ticker-window">
+          <div class="ticker-track" id="ticker-track-bottom"></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer-new">
+    <!-- Top Bar: Logo & Socials -->
+    <div class="footer-top-bar">
+      <div class="wrap">
+        <a href="index.html" class="footer-logo" aria-label="Perspectivas">
+          <span class="footer-logo-mark" aria-hidden="true">
+            <svg width="300" height="80" viewBox="0 0 420 100" preserveAspectRatio="xMinYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow: visible;">
+              <rect x="0" y="15" width="12" height="70" rx="2" fill="#1e40af"></rect>
+              <rect x="18" y="58" width="10" height="12" rx="2" fill="#3b82f6"></rect>
+              <rect x="34" y="42" width="10" height="28" rx="2" fill="#0ea5e9"></rect>
+              <rect x="50" y="24" width="10" height="46" rx="2" fill="#0284c7"></rect>
+              <text x="75" y="72" fill="#0f172a" style="font: 900 52px 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: -2px;">PERSPECTIVAS</text>
+            </svg>
+          </span>
+        </a>
+        <div class="footer-socials">
+          <a href="#" class="footer-social-link" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 9h3V6h-3c-1.66 0-3 1.34-3 3v2H9v3h2v6h3v-6h2.6l.6-3H14V9.9c0-.5.4-.9 1-.9Z" />
+            </svg>
+          </a>
+          <a href="#" class="footer-social-link" aria-label="X">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 6l12 12" />
+              <path d="M18 6L6 18" />
+            </svg>
+          </a>
+          <a href="#" class="footer-social-link" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="5" y="5" width="14" height="14" rx="4" />
+              <circle cx="12" cy="12" r="3.5" />
+              <circle cx="17" cy="7" r="1" />
+            </svg>
+          </a>
+          <a href="#" class="footer-social-link" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+              <rect x="2" y="9" width="4" height="12" />
+              <circle cx="4" cy="4" r="2" />
+            </svg>
+          </a>
+          <a href="#" class="footer-social-link" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" />
+              <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <!-- Main Navigation Grid -->
+      <div class="footer-links-grid">
+        <div class="footer-column">
+          <h4>Sobre Perspectivas</h4>
+          <ul class="footer-list">
+            <li><a href="page.html?slug=quienes-somos">Quiénes somos</a></li>
+            <li><a href="page.html?slug=historia">Nuestra historia</a></li>
+            <li><a href="page.html?slug=codigo-etica">Código de ética</a></li>
+            <li><a href="page.html?slug=equipo">Equipo editorial</a></li>
+            <li><a href="page.html?slug=empleo">Trabaja con nosotros</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Secciones</h4>
+          <ul class="footer-list">
+            <li><a href="#noticias">Noticias Locales</a></li>
+            <li><a href="#analisis">Análisis & Opinión</a></li>
+            <li><a href="#cotizaciones">Mercados</a></li>
+            <li><a href="#programa">Programa TV</a></li>
+            <li><a href="#podcast">Podcast</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Entidades Económicas</h4>
+          <ul class="footer-list">
+            <li><a href="page.html?slug=entidad-bcp">Banco Central del Paraguay</a></li>
+            <li><a href="page.html?slug=ministerio-economia">Ministerio de Economía</a></li>
+            <li><a href="page.html?slug=bolsa-valores">Bolsa de Valores</a></li>
+            <li><a href="page.html?slug=fmi-banco-mundial">FMI & Banco Mundial</a></li>
+            <li><a href="page.html?slug=camara-anunciantes">Cámara de Anunciantes</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Servicios</h4>
+          <ul class="footer-list">
+            <li><a href="#newsletter">Suscribirse al Newsletter</a></li>
+            <li><a href="page.html?slug=publicidad">Publicidad corporativa</a></li>
+            <li><a href="page.html?slug=eventos">Eventos y conferencias</a></li>
+            <li><a href="page.html?slug=archivo">Archivo de noticias</a></li>
+            <li><a href="page.html?slug=contacto">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom-bar">
+      <div class="wrap" style="width: 100%; display: flex; justify-content: space-between; flex-wrap: wrap;">
+        <div class="copyright">
+          © Perspectivas Media 2026
+        </div>
+        <div class="footer-bottom-links">
+          <a href="#">Sindicación y servicio</a>
+          <a href="#">Privacidad y Cookies</a>
+          <a href="#">Términos y condiciones</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/marked@^4.0.0/marked.min.js"></script>
+
+  <script>
+    // Dark Mode Toggle Script
+    const themeToggle = document.getElementById('theme-toggle');
+    const htmlElement = document.documentElement;
+
+    // Cargar tema guardado o detectar preferencia del sistema
+    function loadTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      let theme = savedTheme;
+
+      if (!savedTheme) {
+        // Detectar preferencia del sistema
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+
+      applyTheme(theme);
+    }
+
+    function applyTheme(theme) {
+      htmlElement.setAttribute('data-theme', theme === 'dark' ? 'dark' : '');
+      localStorage.setItem('theme', theme);
+      updateThemeButton(theme);
+    }
+
+    function updateThemeButton(theme) {
+      themeToggle.title = theme === 'dark' ? 'Modo claro' : 'Modo oscuro';
+    }
+
+    // Toggle al hacer click
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = localStorage.getItem('theme') || 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(newTheme);
+    });
+
+    // Cargar tema al inicio
+    loadTheme();
+  </script>
+
+  <script src="script.v3.js?v=20250113-hero-fix"></script>
+</body>

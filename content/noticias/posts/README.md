@@ -7,6 +7,7 @@ title: ¿Qué hacer con el aguinaldo?
 date: 2025-11-20T02:57:34.108Z
 summary: "El aguinaldo es un pago extra de salario que reciben los trabajadores
   de forma anual o semestral como reconocimiento a su labor. "
+thumbnail: /assets/img/uploads/2024-08-16-billetes.jpg
 ---
 
 

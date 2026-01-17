@@ -1,0 +1,164 @@
+
+/* PROGRAMA SECTION - DARK THEME REDESIGN */
+.program-section-dark {
+  background-color: #121212; /* Fondo muy oscuro casi negro */
+  color: #ffffff;
+  padding: 4rem 0;
+  width: 100%;
+}
+
+.program-section-dark .wrap {
+  position: relative;
+}
+
+.program-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #333;
+  padding-bottom: 1rem;
+}
+
+.program-section-header h2 {
+  font-family: var(--font-headline);
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+  margin: 0;
+}
+
+.header-arrow {
+  color: #fff;
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+.program-nav-controls {
+  display: flex;
+  gap: 1rem;
+}
+
+.program-nav-btn {
+  background: none;
+  border: none;
+  color: #aaa;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.program-nav-btn:hover {
+  color: #fff;
+}
+
+.program-carousel-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.program-carousel {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Hide scrollbar Firefox */
+  padding-bottom: 1rem;
+}
+
+.program-carousel::-webkit-scrollbar {
+  display: none; /* Hide scrollbar Chrome/Safari */
+}
+
+/* PROGRAM CARD STYLES */
+.program-card {
+  flex: 0 0 300px; /* Fixed width cards */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-decoration: none;
+  group: program-card;
+}
+
+.program-thumb-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  background-color: #222;
+}
+
+.program-thumb-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  opacity: 0.9;
+}
+
+.program-card:hover .program-thumb-wrapper img {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+.play-overlay {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+  background-color: #000; /* Black box per image */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.program-card:hover .play-overlay {
+  background-color: var(--color-accent);
+}
+
+.play-icon {
+  fill: #fff;
+  width: 14px;
+  height: 14px;
+}
+
+.program-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.program-card-title {
+  font-family: var(--font-headline);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.program-card-desc {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: #aaa;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.program-card-meta {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: auto;
+}

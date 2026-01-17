@@ -7,6 +7,7 @@ title: MEF paga hoy más G. 227.000 millones a proveedores y acreedores del Esta
 date: 2025-11-19T00:54:51.371Z
 summary: " Procesará hoy martes 18 de noviembre ₲ 227.489 millones para pago a
   proveedores y acreedores del Estado. "
+thumbnail: /assets/img/uploads/mef-villa-serrati_4_0.jpg
 ---
 
 
