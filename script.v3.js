@@ -148,6 +148,67 @@ const DEFAULT_ACCENT = { primary: "#38bdf8", secondary: "#2563eb" };
 const HERO_TAGLINE = "Perspectivas · Redacción Económica";
 const HERO_IMAGE_FALLBACK = "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1200&h=500&fit=crop&q=80";
 
+const WEATHER_API_URL = "https://api.open-meteo.com/v1/forecast";
+const WEATHER_COORDS = { latitude: -25.2827, longitude: -57.6359 };
+const WEATHER_UPDATE_INTERVAL = 10 * 60 * 1000;
+const WEATHER_FORECAST_DAYS = 5;
+const WEATHER_CONDITIONS = [
+  { codes: [0], icon: "☀️", label: "Cielo despejado", symbol: "sun" },
+  { codes: [1, 2], icon: "🌤️", label: "Parcialmente nublado", symbol: "partly" },
+  { codes: [3], icon: "⛅", label: "Nublado", symbol: "cloud" },
+  { codes: [45, 48], icon: "🌫️", label: "Niebla", symbol: "fog" },
+  { codes: [51, 53, 55], icon: "🌦️", label: "Llovizna", symbol: "drizzle" },
+  { codes: [61, 63, 65], icon: "🌧️", label: "Lluvia", symbol: "rain" },
+  { codes: [66, 67], icon: "🌧️", label: "Lluvia helada", symbol: "rain" },
+  { codes: [71, 73, 75], icon: "🌨️", label: "Nieve", symbol: "snow" },
+  { codes: [80, 81, 82], icon: "🌦️", label: "Chubascos", symbol: "showers" },
+  { codes: [95], icon: "⛈️", label: "Tormentas", symbol: "storm" },
+  { codes: [96, 99], icon: "⛈️", label: "Tormentas con granizo", symbol: "storm" }
+];
+
+const WEATHER_ICON_SVGS = {
+  sun: `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
+    <circle cx="16" cy="16" r="6"></circle>
+    <path d="M16 4v3M16 25v3M4 16h3M25 16h3M6.8 6.8l2.1 2.1M23.1 23.1l2.1 2.1M6.8 25.2l2.1-2.1M23.1 8.9l2.1-2.1" stroke-linecap="round"></path>
+  </svg>`,
+  partly: `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
+    <circle cx="12" cy="12" r="5"></circle>
+    <path d="M26 22a5 5 0 0 0-5-5 6 6 0 0 0-11.7 1.5A4 4 0 0 0 9 27h12a5 5 0 0 0 5-5z" fill="none"></path>
+    <path d="M6 12h2M12 4v2M4 20h2" stroke-linecap="round"></path>
+  </svg>`,
+  cloud: `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
+    <path d="M8 24h14a5 5 0 0 0 0-10 7 7 0 0 0-13.5 1.8A4 4 0 0 0 8 24z"></path>
+  </svg>`,
+  drizzle: `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
+    <path d="M8 23h14a5 5 0 0 0 0-10 7 7 0 0 0-13.5 1.8A4 4 0 0 0 8 23z"></path>
+    <path d="M12 26l-1 3M18 26l-1 3M24 26l-1 3" stroke-linecap="round"></path>
+  </svg>`,
+  rain: `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
+    <path d="M8 22h14a5 5 0 0 0 0-10 7 7 0 0 0-13.5 1.8A4 4 0 0 0 8 22z"></path>
+    <path d="M12 24l-1.5 4M18 24l-1.5 4M24 24l-1.5 4" stroke-linecap="round"></path>
+  </svg>`,
+  showers: `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
+    <path d="M8 21h14a5 5 0 0 0 0-10 7 7 0 0 0-13.5 1.8A4 4 0 0 0 8 21z"></path>
+    <path d="M11 23l-2 5M17 23l-2 5M23 23l-2 5" stroke-linecap="round"></path>
+  </svg>`,
+  storm: `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
+    <path d="M8 21h14a5 5 0 0 0 0-10 7 7 0 0 0-13.5 1.8A4 4 0 0 0 8 21z"></path>
+    <path d="M15 22l-2 6 4-3-1 5 4-7" stroke-linecap="round" fill="none"></path>
+  </svg>`,
+  snow: `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
+    <path d="M8 22h14a5 5 0 0 0 0-10 7 7 0 0 0-13.5 1.8A4 4 0 0 0 8 22z"></path>
+    <path d="M12 25.5l-1.5 1.5M12 27l-1.5-1.5M18 25.5l-1.5 1.5M18 27l-1.5-1.5M24 25.5l-1.5 1.5M24 27l-1.5-1.5" stroke-linecap="round"></path>
+  </svg>`,
+  fog: `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
+    <path d="M8 20h14a5 5 0 0 0 0-10 7 7 0 0 0-13.5 1.8A4 4 0 0 0 8 20z"></path>
+    <path d="M6 24h20M8 27h16" stroke-linecap="round"></path>
+  </svg>`,
+  default: `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
+    <circle cx="16" cy="16" r="6"></circle>
+    <path d="M16 4v3M16 25v3M4 16h3M25 16h3" stroke-linecap="round"></path>
+  </svg>`
+};
+
 function normalizeCategoryKey(category = "") {
   return category.toString().trim().toLowerCase();
 }
@@ -155,6 +216,18 @@ function normalizeCategoryKey(category = "") {
 function capitalize(word = "") {
   if (!word.length) return "";
   return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
+function resolveWeatherCondition(code) {
+  if (typeof code !== "number") return { icon: "ℹ️", label: "Dato no disponible" };
+  const match = WEATHER_CONDITIONS.find(entry => entry.codes.includes(code));
+  return match || { icon: "🌡️", label: "Clima local" };
+}
+
+function formatForecastDay(dateString) {
+  const date = new Date(dateString);
+  if (Number.isNaN(date.getTime())) return dateString || "--";
+  return date.toLocaleDateString("es-PY", { weekday: "short", day: "numeric" });
 }
 
 function resolveCategoryLabel(category) {
@@ -531,6 +604,131 @@ const podcastController = createSectionController({
   },
   emptyMessage: `<p class="empty-copy">No hay episodios del podcast para mostrar.</p>`
 });
+
+function initWeatherWidget() {
+  const widget = document.getElementById("weather-widget");
+  const tempEl = document.getElementById("weather-temp");
+  const symbolEl = document.getElementById("weather-symbol");
+  const panel = document.getElementById("weather-panel");
+  const panelContent = document.getElementById("weather-panel-content");
+  const panelClose = document.getElementById("weather-panel-close");
+
+  if (!widget || !tempEl) return;
+  if (widget.dataset.weatherBound === "true") return;
+  widget.dataset.weatherBound = "true";
+
+  let lastForecast = null;
+
+  const togglePanel = (open) => {
+    if (!panel) return;
+    panel.classList.toggle("open", open);
+    panel.setAttribute("aria-hidden", String(!open));
+    if (open && panelContent && !panelContent.dataset.hydrated) {
+      panelContent.innerHTML = `<p class="weather-panel-empty">Cargando pronóstico...</p>`;
+    }
+  };
+
+  const bindPanelEvents = () => {
+    if (!panel) return;
+    if (panel.dataset.bound === "true") return;
+    panel.dataset.bound = "true";
+
+    widget.addEventListener("click", () => togglePanel(true));
+    panelClose?.addEventListener("click", () => togglePanel(false));
+    panel.addEventListener("click", (event) => {
+      if (event.target === panel) {
+        togglePanel(false);
+      }
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        togglePanel(false);
+      }
+    });
+  };
+
+  bindPanelEvents();
+
+  const setStatus = (text, condition) => {
+    const label = condition?.label || "Clima local";
+    const symbol = condition?.symbol || "default";
+    tempEl.textContent = text;
+    if (symbolEl) {
+      const svgMarkup = WEATHER_ICON_SVGS[symbol] || WEATHER_ICON_SVGS.default;
+      symbolEl.innerHTML = svgMarkup;
+      symbolEl.dataset.symbol = symbol;
+    }
+    widget.setAttribute("title", `Clima en Asunción: ${label}${text !== "--°C" ? ` · ${text}` : ""}`);
+    widget.setAttribute("aria-label", `Clima en Asunción: ${label}${text !== "--°C" ? ` · ${text}` : ""}`);
+  };
+
+  const renderForecast = (daily) => {
+    if (!panelContent) return;
+    if (!daily?.time?.length) {
+      panelContent.innerHTML = `<p class="weather-panel-empty">No hay pronóstico disponible.</p>`;
+      return;
+    }
+
+    const cards = daily.time.slice(0, WEATHER_FORECAST_DAYS).map((dateStr, idx) => {
+      const condition = resolveWeatherCondition(daily.weathercode?.[idx]);
+      const max = daily.temperature_2m_max?.[idx];
+      const min = daily.temperature_2m_min?.[idx];
+      const maxLabel = typeof max === "number" ? `${Math.round(max)}°` : "--";
+      const minLabel = typeof min === "number" ? `${Math.round(min)}°` : "--";
+      return `
+        <article class="weather-forecast-card">
+          <strong>${formatForecastDay(dateStr)}</strong>
+          <div class="weather-forecast-symbol" aria-hidden="true">${condition.icon}</div>
+          <p class="weather-forecast-temps">${maxLabel} / ${minLabel}</p>
+          <small>${condition.label}</small>
+        </article>
+      `;
+    }).join("");
+
+    panelContent.innerHTML = `<div class="weather-forecast-grid">${cards}</div>`;
+    panelContent.dataset.hydrated = "true";
+  };
+
+  const fetchWeather = async () => {
+    const params = new URLSearchParams({
+      latitude: WEATHER_COORDS.latitude,
+      longitude: WEATHER_COORDS.longitude,
+      current_weather: "true",
+      daily: "weathercode,temperature_2m_max,temperature_2m_min",
+      timezone: "auto"
+    });
+    const response = await fetch(`${WEATHER_API_URL}?${params.toString()}`, { cache: "no-store" });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const payload = await response.json();
+    const current = payload?.current_weather;
+    if (!current) throw new Error("Sin datos de current_weather");
+    return {
+      temperature: typeof current.temperature === "number" ? Math.round(current.temperature) : null,
+      code: typeof current.weathercode === "number" ? current.weathercode : null,
+      daily: payload?.daily || null
+    };
+  };
+
+  const updateWeather = async () => {
+    try {
+      const data = await fetchWeather();
+      const condition = resolveWeatherCondition(data.code);
+      const tempLabel = typeof data.temperature === "number" ? `${data.temperature}°C` : "--°C";
+      setStatus(tempLabel, condition);
+      if (data.daily) {
+        lastForecast = data.daily;
+        renderForecast(lastForecast);
+      }
+    } catch (error) {
+      console.warn("⚠️ No se pudo actualizar el clima", error);
+      setStatus("--°C", { icon: "ℹ️", label: "Clima no disponible" });
+      panelContent && (panelContent.innerHTML = `<p class="weather-panel-empty">No pudimos obtener el pronóstico.</p>`);
+    }
+  };
+
+  updateWeather();
+  setInterval(updateWeather, WEATHER_UPDATE_INTERVAL);
+}
 
 // Toggle del buscador en el drawer
 function initSearchToggle() {
@@ -1487,6 +1685,7 @@ async function renderNoticia() {
 // Ejecutar cuando el DOM esté listo
 function initRouter() {
   console.log("✓ initRouter ejecutado");
+  initWeatherWidget();
   initHeaderScrollState();
   console.log("✓ initHeaderScrollState ejecutado");
   initCategoryDrawer();
