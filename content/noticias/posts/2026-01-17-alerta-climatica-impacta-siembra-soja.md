@@ -7,7 +7,7 @@ category: macro
 tags:
   - economia
   - comercio-exterior
-thumbnail: /assets/img/default.jpg
+thumbnail: /assets/img/uploads/precios-de-commodities-en-baja-bm.jpg
 featured:
   is_featured: false
   is_main_featured: false

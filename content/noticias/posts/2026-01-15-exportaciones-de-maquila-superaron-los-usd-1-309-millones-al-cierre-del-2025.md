@@ -1,4 +1,4 @@
----
+﻿---
 title: Exportaciones de maquila superaron los USD 1.309 millones al cierre del 2025
 date: 2026-01-15T16:38:00.000-03:00
 summary: Los envíos totales alcanzaron USD 1.309 millones, un nuevo récord para
@@ -11,7 +11,7 @@ tags:
   - economia
   - negocios
   - desarrollo
-thumbnail: /assets/img/sumidenso-maquila-industria-trabajo-17.jpg
+thumbnail: /assets/img/uploads/sumidenso-maquila-industria-trabajo-17.jpg
 caption: "En materia de empleo, actualmente se registran 35.357 puestos de
   trabajo vinculados a las industrias maquiladoras, lo que representa un
   incremento interanual del 18%. Foto: IP Paraguay"
@@ -54,3 +54,4 @@ El 91% de las empresas con programas de maquila aprobados se concentra en los de
 ### **Balanza comercial positiva**
 
 Con importaciones por USD 675 millones bajo este régimen, la balanza comercial cerró con un 87% más de exportaciones.
+

@@ -1,4 +1,4 @@
----
+﻿---
 title: El Poder Ejecutivo declara de interés nacional el acercamiento de
   Paraguay a la OCDE
 date: 2026-01-14T21:08:00.000-03:00
@@ -13,7 +13,7 @@ tags:
   - economia
   - finanzas
   - desarrollo
-thumbnail: /assets/img/py.-imagen-de-pru-no-usar.jpg
+thumbnail: /assets/img/uploads/py.-imagen-de-pru-no-usar.jpg
 featured:
   is_featured: true
   is_main_featured: false
@@ -35,3 +35,4 @@ Asimismo, se establece que los OEE dependientes del Poder Ejecutivo que sean con
 **El decreto también instruye a todas las instituciones y ministerios del Poder Ejecutivo** a arbitrar los medios necesarios para colaborar con el MEF y el MRE en los trabajos que se desarrollen en el marco del proceso de acercamiento a la OCDE, con miras a una futura membresía plena.
 
 La adhesión a la OCDE permitirá posicionar internacionalmente a Paraguay como un país confiable, con políticas públicas alineadas a los más altos estándares de gobernanza y desarrollo. Este avance complementa el reciente logro del Grado de Inversión y constituye un sello de calidad institucional que reafirma el compromiso del país con las mejores prácticas internacionales.
+

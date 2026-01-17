@@ -1,4 +1,4 @@
----
+﻿---
 id: Macro
 type: noticias
 category: BCP
@@ -7,7 +7,7 @@ title: Crédito en el sistema financiero creció casi 16 % a noviembre, señala 
   Banco Central
 description: El saldo de los créditos del sector bancario y financiero al sector
   privado se expandió 15,48%.
-thumbnail: /assets/img/2024-08-16-billetes.jpg
+thumbnail: /assets/img/uploads/2024-08-16-billetes.jpg
 slug: "Crédito "
 ---
 En noviembre de 2025, el saldo de los créditos del sector bancario y financiero al sector privado se expandió 15,48% interanualmente, explicado por el crecimiento de los créditos en moneda nacional (MN) en 13,94% y en moneda extranjera (ME) en 18,77%.
@@ -21,3 +21,4 @@ La tasa de interés activa promedio ponderada en ME de bancos y empresas financi
 En cuanto a los principales indicadores de solidez de bancos y empresas financieras, en términos mensuales la liquidez y la rentabilidad disminuyeron a 28,68% y 22,34% mientras que la solvencia y morosidad se redujeron a 16,04% y 2,45% respectivamente.
 
 En el mercado de valores el volumen negociado acumulado al mes de noviembre de 2025 alcanzó ₲ 54.082.318 millones, lo que representó un crecimiento interanual del 21,02%.
+

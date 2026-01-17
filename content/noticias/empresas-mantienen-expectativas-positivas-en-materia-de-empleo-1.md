@@ -1,4 +1,4 @@
----
+﻿---
 id: Comercio
 type: noticias
 category: Macro
@@ -7,7 +7,7 @@ title: Empresas mantienen expectativas positivas en materia de empleo
 description: En cuanto a la evolución del empleo en los últimos tres meses,
   todos los sectores se ubicaron en el umbral de optimismo, con excepción del
   sector inmobiliario.
-thumbnail: /assets/img/exportación.jpg
+thumbnail: /assets/img/uploads/exportación.jpg
 slug: Expectativas
 ---
 
@@ -22,3 +22,4 @@ En cuanto a la **evolución del empleo en los últimos tres meses**, todos los 
 Con relación a las **expectativas de empleo para los próximos tres meses**, la tendencia se mantiene en línea con la del trimestre anterior. La mayoría de los sectores proyecta un escenario de **optimismo sostenido**, con la excepción del **sector construcción**, que presenta una percepción menos favorable.
 
 En síntesis, los resultados evidencian que las empresas de los distintos rubros de **comercio y servicios** mantienen una **percepción favorable del empleo**, tanto en su evolución reciente como en sus perspectivas para los próximos meses. El **sector construcción**, aunque levemente por debajo del umbral de optimismo, **se mantiene próximo a la zona neutral.**
+

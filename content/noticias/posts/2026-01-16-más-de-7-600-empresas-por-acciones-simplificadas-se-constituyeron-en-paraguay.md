@@ -1,4 +1,4 @@
----
+﻿---
 title: Más de 7.600 Empresas por Acciones Simplificadas se constituyeron en Paraguay
 date: 2026-01-16T19:02:00.000-03:00
 summary: "Según datos de la Dirección General del Sistema Unificado de Apertura
@@ -14,7 +14,7 @@ tags:
   - mercado-laboral
   - desarrollo
   - inversion
-thumbnail: /assets/img/empresas-bajo-regimen-de-eas.jpg
+thumbnail: /assets/img/uploads/empresas-bajo-regimen-de-eas.jpg
 caption: "En cuanto a los sectores económicos, el informe resalta que el 85% de
   las EAS constituidas corresponde a los rubros de comercio y servicios, seguido
   por los sectores industrial y agropecuario. Foto: IP"
@@ -43,3 +43,4 @@ En términos acumulados, desde febrero de 2021, fecha de implementación de las 
 Durante este período, el monto total de inversión asciende a USD 1.014 millones, evidenciando el impacto sostenido de este modelo societario en la creación de empresas y en la captación de capitales.
 
 La evolución de estos indicadores reafirma el rol de las EAS como un instrumento clave para impulsar la formalización empresarial, fortalecer la actividad económica y fomentar la inversión en Paraguay.
+

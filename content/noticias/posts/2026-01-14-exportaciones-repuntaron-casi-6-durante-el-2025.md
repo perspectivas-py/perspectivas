@@ -1,4 +1,4 @@
----
+﻿---
 title: Exportaciones repuntaron casi 6% durante el 2025
 date: 2026-01-14T10:15:00.000-03:00
 summary: "Durante el año 2025, las exportaciones totales, alcanzaron un valor de
@@ -10,7 +10,7 @@ tags:
   - economia
   - banco-central
   - commodities
-thumbnail: /assets/img/exportación.jpg
+thumbnail: /assets/img/uploads/exportación.jpg
 featured:
   is_featured: false
   is_main_featured: false
@@ -23,3 +23,4 @@ Durante el año 2025, las exportaciones totales, alcanzaron un valor de USD 16.7
 ## **Importaciones**
 
 Durante el año 2025, las importaciones totales, alcanzaron USD 18.111,1 millones, 10,6% mayor a los USD 16.379,4 millones registrados a diciembre de 2024. Las importaciones registradas representaron el 97,9% del total, alcanzando un valor de USD 17.721,9 millones, un 11,2% superior con respecto al valor del mismo periodo del 2024, mientras que las otras importaciones representaron el 2,1% restante, por un valor de USD 389,1 millones y con una reducción del 12,9% con respecto al valor acumulado en el mismo mes del año anterior. En volúmenes, se observó un incremento de 10,5%.
+

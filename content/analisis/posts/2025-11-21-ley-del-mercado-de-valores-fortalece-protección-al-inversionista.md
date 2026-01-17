@@ -1,8 +1,8 @@
----
+﻿---
 author: Perspectivas
 title: "Ley del Mercado de Valores fortalece protección al inversionista "
 date: 2025-11-21T01:33:03.864Z
-thumbnail: /assets/img/2024-08-16-billetes.jpg
+thumbnail: /assets/img/uploads/2024-08-16-billetes.jpg
 summary: "Ley del Mercado de Valores y Productos fortalece protección al inversionista "
 ---
 El superintendente de Valores, Rodrigo Ruiz, participó como panelista del conversatorio “Nuevo Régimen Jurídico del Mercado de Valores” organizado por FERRERE Abogados, junto a representantes de la Bolsa de Valores de Asunción (BVA), la Caja de Valores del Paraguay (CAVAPY) y especialistas del estudio anfitrión.

@@ -1,8 +1,8 @@
----
+﻿---
 author: Perspectivas
 title: Modernización del mercado de valores
 date: 2025-11-20T15:23:03.846Z
-thumbnail: /assets/img/nasdaq.avif
+thumbnail: /assets/img/uploads/nasdaq.avif
 summary: "El encuentro se llevará a cabo este jueves 20 de noviembre, desde las
   08:00, en el Hotel Dazzler (Av. Aviadores del Chaco y Vasconcellos) "
 ---

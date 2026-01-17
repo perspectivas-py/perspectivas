@@ -1,4 +1,4 @@
----
+﻿---
 title: " Economía y Finanzas expone alcances de la reforma de la Caja Fiscal "
 date: 2026-01-16T20:34:00.000-03:00
 summary: El equipo técnico del MEF instaló un espacio de diálogo, debate y
@@ -11,7 +11,7 @@ tags:
   - politica-fiscal
   - economia
   - finanzas
-thumbnail: /assets/img/mef-villa-serrati_4_0.jpg
+thumbnail: /assets/img/uploads/mef-villa-serrati_4_0.jpg
 caption: "El Ministerio de Economía y Finanzas expone alcances de la reforma de
   la Caja Fiscal con representantes retirados de las Fuerzas Públicas. Foto:
   MEF"
@@ -48,3 +48,4 @@ Ante la preocupación de la Coordinadora de la Fuerza Pública, sobre los derech
 También han manifestado su desacuerdo en el establecimiento de la edad mínima de 57 años para acceder al haber de retiro teniendo en cuenta que los mismos pertenecen a una institución técnica operativa y con la aplicación de esta disposición se desnaturalizará a la profesión Militar y Policial. Al respecto, los representantes del MEF se ratificaron en la necesidad de una edad mínima, debido a que la ausencia de este requisito constituye el principal factor que presiona la sostenibilidad del sistema y compromete la disponibilidad de fondos para atender estas obligaciones.
 
 El proyecto de ley que propone las medidas para la reforma del sistema de jubilaciones y pensiones del sector público, así como la presentación realizada en la fecha, se encuentran disponibles en el sitio web institucional del MEF, en el siguiente enlace: <https://www.mef.gov.py/es/reforma-de-la-caja-fiscal>
+

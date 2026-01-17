@@ -1,36 +1,102 @@
 {
   "noticias": [
     {
-      "title": "Fintech locales amplían créditos sostenibles para mipymes",
-      "slug": "2026-01-17-fintech-locales-amplian-creditos-sostenibles",
-      "date": "2026-01-17T14:25:00.000Z",
-      "summary": "Tres plataformas anunciaron líneas especiales con tasa fija y monitoreo ambiental para cadenas agroindustriales y comercios urbanos.",
-      "category": "negocios",
+      "title": "Exportaciones de maquila superaron los USD 1.309 millones al cierre del 2025",
+      "date": "2026-01-17T13:45:00.000Z",
+      "summary": "Los envíos totales alcanzaron USD 1.309 millones, un nuevo récord para el sector, reportó el Viceministerio de Industria.",
+      "author": "Perspectivas",
+      "category": "empleo",
       "tags": [
-        "fintech",
-        "mipymes",
-        "creditos",
-        "sostenibilidad"
+        "comercio-exterior",
+        "empleo",
+        "economia",
+        "negocios",
+        "desarrollo"
       ],
-      "thumbnail": "/assets/img/default.jpg",
+      "thumbnail": "/assets/img/uploads/sumidenso-maquila-industria-trabajo-17.jpg",
+      "caption": "En materia de empleo, actualmente se registran 35.357 puestos de trabajo vinculados a las industrias maquiladoras, lo que representa un incremento interanual del 18%. Foto: IP Paraguay",
+      "featured": {
+        "is_featured": true,
+        "is_main_featured": false,
+        "show_in_latest": true,
+        "is_section_featured": false
+      },
+      "id": "2026-01-17-exportaciones-de-maquila-superaron-los-usd-1-309-millones-al-cierre-del-2025",
+      "type": "noticias",
+      "slug": "2026-01-17-exportaciones-de-maquila-superaron-los-usd-1-309-millones-al-cierre-del-2025",
+      "description": "Los envíos totales alcanzaron USD 1.309 millones, un nuevo récord para el sector, reportó el Viceministerio de Industria.",
+      "body": "Con los datos del mes de diciembre, las exportaciones de maquila confirmaron su crecimiento sostenido durante el 2025. Los envíos totales alcanzaron USD 1.309 millones, un nuevo récord para el sector, reportó el Viceministerio de Industria.\r\n\r\nDel total exportado, USD 1.262 millones corresponden a bienes de consumo, lo que representa un incremento de USD 153 millones en comparación con el mismo periodo del año anterior. En tanto, las exportaciones de servicios intangibles alcanzaron USD 47 millones, reflejando la diversificación de la oferta exportable.\r\n\r\nDurante el año, fueron aprobados 22 nuevos programas de maquila, que representan aproximadamente USD 50 millones en inversiones.\r\n\r\n### **Productos enviados**\r\n\r\nEn cuanto a la composición de las exportaciones, el Viceministerio señala que en el 2025 el 83% de los envíos se concentró en los rubros de autopartes, confecciones, aluminio, productos alimenticios y plásticos, mientras que, en menor medida, también se exportaron productos químicos-farmacéuticos y alimentos para mascotas.\r\n\r\nRespecto a los destinos, el 82% de las manufacturas maquiladoras tuvo como destino al Mercosur, donde Brasil concentró el 64% de los envíos y Argentina el 16%. Asimismo, los productos bajo este régimen llegaron a Estados Unidos, Países Bajos, Bolivia, Chile, Uruguay, entre otros destinos.\r\n\r\n![Durante el año, fueron aprobados 22 nuevos programas de maquila, que representan aproximadamente USD 50 millones en inversiones.](/assets/img/exportación.jpg)\r\n\r\n### **Nuevos destinos**\r\n\r\nEn los últimos 12 meses, las empresas maquiladoras lograron acceder a seis nuevos mercados internacionales, con exportaciones a Rusia (productos cárnicos), Islas Caimán (químicos), Omán (productos alimenticios), Letonia (madera y manufacturas), Ucrania (autopartes) y Nepal (alimentos para mascotas).\r\n\r\nAdemás, al cierre de 2025 las exportaciones de las industrias maquiladoras representan el 70% de las exportaciones de manufacturas de origen industrial del país.\r\n\r\n### **Mano de obra empleada**\r\n\r\nEn materia de empleo, actualmente se registran 35.357 puestos de trabajo vinculados a las industrias maquiladoras, lo que representa un incremento interanual del 18%, equivalente a 5.401 nuevos empleos respecto a 2024.\r\n\r\nEl 45% de estos empleos es ocupado por mujeres, mientras que los principales rubros generadores de empleo son confecciones y textiles, autopartes, servicios intangibles, plásticos y químicos-farmacéuticos, señala el reporte.\r\n\r\nEl 91% de las empresas con programas de maquila aprobados se concentra en los departamentos de Alto Paraná, Central, Capital y Amambay, consolidando estos territorios como polos estratégicos para el desarrollo industrial del país.\r\n\r\n### **Balanza comercial positiva**\r\n\r\nCon importaciones por USD 675 millones bajo este régimen, la balanza comercial cerró con un 87% más de exportaciones.",
+      "tags_normalized": [
+        "comercio-exterior",
+        "empleo",
+        "economia",
+        "negocios",
+        "desarrollo"
+      ],
+      "kicker": "empleo",
+      "summary_short": "Los envíos totales alcanzaron USD 1.309 millones, un nuevo récord para el sector, reportó el Viceministerio de Industria."
+    },
+    {
+      "title": "Fintech locales amplían créditos sostenibles para mipymes",
+      "date": "2026-01-17T13:43:00.000Z",
+      "summary": "Tres plataformas anunciaron líneas especiales con tasa fija y monitoreo ambiental para cadenas agroindustriales y comercios urbanos.",
+      "category": "educacion-financiera",
+      "tags": [
+        "economia"
+      ],
+      "thumbnail": "/assets/img/uploads/female-working-environment-projects.jpg",
       "featured": {
         "is_featured": true,
         "is_main_featured": false,
         "is_section_featured": false,
         "show_in_latest": true
       },
+      "slug": "2026-01-17-fintech-locales-amplian-creditos-sostenibles",
       "id": "2026-01-17-fintech-locales-amplian-creditos-sostenibles",
       "type": "noticias",
       "description": "Tres plataformas anunciaron líneas especiales con tasa fija y monitoreo ambiental para cadenas agroindustriales y comercios urbanos.",
       "body": "Las empresas fintech **Kogara**, **Pulsar** y **EdenPay** anunciaron la ampliación de sus líneas de crédito sostenibles dirigidas a mipymes. El paquete combina tasas fijas en guaraníes, plazos de hasta 36 meses y monitoreo del desempeño ambiental de los proyectos financiados.\r\n\r\nLos fondos —equivalentes a USD 35 millones— se obtuvieron mediante emisiones privadas respaldadas por inversionistas institucionales. Las fintech priorizarán cadenas agroindustriales con programas de trazabilidad, comercios que implementen planes de eficiencia energética y emprendimientos urbanos que reduzcan huella de carbono.\r\n\r\nSegún la Cámara Paraguaya de Servicios Financieros Digitales, estos créditos complementan la oferta bancaria tradicional y permiten que **más de 1.200 pequeñas empresas** accedan a capital de trabajo en menos de 72 horas. El gremio espera duplicar el volumen disponible antes del cierre del año.",
       "tags_normalized": [
-        "fintech",
-        "mipymes",
-        "creditos",
-        "sostenibilidad"
+        "economia"
       ],
-      "kicker": "negocios",
+      "kicker": "educacion-financiera",
       "summary_short": "Tres plataformas anunciaron líneas especiales con tasa fija y monitoreo ambiental para cadenas agroindustriales y comercios urbanos."
+    },
+    {
+      "title": "Mercosur-UE: acuerdo es una ventana de oportunidad para impulsar manufacturas",
+      "date": "2026-01-17T13:31:00.000Z",
+      "summary": "La firma del acuerdo entre ambos bloques será este 17 de enero en Asunción, sin embargo, aún quedan aprobaciones por parte del Parlamento Europeo y de los países del Mercosur.\n",
+      "author": "Perspectivas",
+      "category": "mercados-inversion",
+      "tags": [
+        "economia",
+        "comercio-exterior",
+        "desarrollo"
+      ],
+      "thumbnail": "/assets/img/uploads/confecciones-manufacturas-maquilas-textiles-fabrica-mujeres-obreros-taller-trabajo-mano-de-obra.jpg",
+      "caption": "Desde la Unión Industrial del Paraguay (UIP) ven al acuerdo comercial entre Mercosur y la Unión Europea como una ventana de oportunidad para producir manufacturas de exportación.",
+      "featured": {
+        "is_featured": true,
+        "is_main_featured": false,
+        "show_in_latest": true,
+        "highlights": [
+          "Se espera que las exportaciones de la UE al Mercosur crezcan casi 50.000 millones de euros al 2040. ",
+          "Las exportaciones del Mercosur al bloque europeo aumenten a 9.000 millones de euros."
+        ],
+        "is_section_featured": false
+      },
+      "id": "2026-01-17-mercosur-ue-acuerdo-es-una-ventana-de-oportunidad-para-impulsar-manufacturas",
+      "type": "noticias",
+      "slug": "2026-01-17-mercosur-ue-acuerdo-es-una-ventana-de-oportunidad-para-impulsar-manufacturas",
+      "description": "La firma del acuerdo entre ambos bloques será este 17 de enero en Asunción, sin embargo, aún quedan aprobaciones por parte del Parlamento Europeo y de los países del Mercosur.\n",
+      "body": "Desde la Unión Industrial del Paraguay (UIP) ven al acuerdo comercial entre Mercosur y la Unión Europea como una ventana de oportunidad para producir manufacturas de exportación.\r\n\r\nEl presidente del gremio, Enrique Duarte, señaló que con la posibilidad de contar con excepciones y facilidades arancelarias se genera la oportunidad para el sector de industrial de contar con mercados de valor.\r\n\r\n«Ahora tenemos que hacer el trabajo para adecuar nuestra producción para atender esos mercados», dijo en entrevista con Radio Nacional del Paraguay.\r\n\r\nLa firma del acuerdo entre ambos bloques será este 17 de enero en Asunción, sin embargo, aún quedan aprobaciones por parte del Parlamento Europeo y de los países del Mercosur, además de procesos de readecuación de normativas antes de la entrada en vigencia.\r\n\r\n«Debemos aprovechar este tiempo para preparar a nuestras industrias. Esta preparación incluye atraer inversiones locales y de los países europeos para adquirir la capacidad tecnológica en este proceso de industrialización», detalló Duarte.\r\n\r\nParaguay, como miembro del Mercosur, entrará a competir con los demás integrantes del bloque para captar los nuevos mercados que se abren, por lo que es necesario «generar las condiciones en capital humano y de capacidades tecnológicas para producir en condiciones más eficientes».\r\n\r\n### **Firma del acuerdo Mercosur-UE**\r\n\r\nEste sábado 17 de enero se hará en Asunción la firma oficial del acuerdo comercial más grande de la historia. El documento finaliza más de 20 años de negociaciones y vincula con capitulos para distintos tipos de productos a dos zonas con más de 700 millones de habitantes y un PIB pér capita de USD 34.000.\r\n\r\nCon el acuerdo se espera que las exportaciones de la UE al Mercosur crezcan casi EUR 50.000 millones al 2040. A su vez, las exportaciones del Mercosur al bloque europeo aumenten a EUR 9.000 millones.",
+      "tags_normalized": [
+        "economia",
+        "comercio-exterior",
+        "desarrollo"
+      ],
+      "kicker": "mercados-inversion",
+      "summary_short": "La firma del acuerdo entre ambos bloques será este 17 de enero en Asunción, sin embargo, aún quedan aprobaciones por parte del Parlamento Europeo y de los países del Mercosur."
     },
     {
       "title": "Inversión pública seguirá impulsando la obra pública en 2026",
@@ -44,7 +110,7 @@
         "economia",
         "politica-fiscal"
       ],
-      "thumbnail": "/assets/img/default.jpg",
+      "thumbnail": "/assets/img/uploads/seminario-fiscal.jpg",
       "featured": {
         "is_featured": true,
         "is_main_featured": false,
@@ -71,32 +137,28 @@
     },
     {
       "title": "Alerta climática impacta la siembra temprana de soja",
-      "slug": "2026-01-17-alerta-climatica-impacta-siembra-soja",
       "date": "2026-01-17T09:45:00.000Z",
       "summary": "Productores reportan atrasos de hasta dos semanas por exceso de lluvias en el sur y deficit hídrico en el norte del país.",
       "category": "macro",
       "tags": [
-        "agro",
-        "clima",
-        "soja",
-        "exportaciones"
+        "economia",
+        "comercio-exterior"
       ],
-      "thumbnail": "/assets/img/default.jpg",
+      "thumbnail": "/assets/img/uploads/precios-de-commodities-en-baja-bm.jpg",
       "featured": {
         "is_featured": false,
         "is_main_featured": false,
         "is_section_featured": false,
         "show_in_latest": true
       },
+      "slug": "2026-01-17-alerta-climatica-impacta-siembra-soja",
       "id": "2026-01-17-alerta-climatica-impacta-siembra-soja",
       "type": "noticias",
       "description": "Productores reportan atrasos de hasta dos semanas por exceso de lluvias en el sur y deficit hídrico en el norte del país.",
       "body": "El último informe agrometeorológico del MAG advierte que la campaña de soja 2026 enfrenta un escenario mixto: **exceso de humedad en Itapúa y Misiones** y falta de lluvias en Canindeyú y Alto Paraguay. Esta combinación obligó a los productores a reprogramar la siembra temprana y evaluar el uso de semillas más resistentes.\r\n\r\nLa Unión de Gremios de la Producción (UGP) estimó que la superficie implantada al 15 de enero alcanza apenas el 38%, cuando en años previos superaba el 55% a la misma fecha. \"El mayor riesgo es que los atrasos se traduzcan en cosechas escalonadas y en mayor presión logística durante marzo\", explicó el asesor agronómico Santiago Jara.\r\n\r\nEl Banco Central señaló que monitorea el impacto en las proyecciones de exportación. Por ahora mantiene la previsión anual, pero advirtió que el sector deberá acelerar labores culturales en febrero para evitar pérdida de rendimiento.",
       "tags_normalized": [
-        "agro",
-        "clima",
-        "soja",
-        "exportaciones"
+        "economia",
+        "comercio-exterior"
       ],
       "kicker": "macro",
       "summary_short": "Productores reportan atrasos de hasta dos semanas por exceso de lluvias en el sur y deficit hídrico en el norte del país."
@@ -113,7 +175,7 @@
         "economia",
         "finanzas"
       ],
-      "thumbnail": "/assets/img/mef-villa-serrati_4_0.jpg",
+      "thumbnail": "/assets/img/uploads/mef-villa-serrati_4_0.jpg",
       "caption": "El Ministerio de Economía y Finanzas expone alcances de la reforma de la Caja Fiscal con representantes retirados de las Fuerzas Públicas. Foto: MEF",
       "featured": {
         "is_featured": false,
@@ -154,7 +216,7 @@
         "desarrollo",
         "inversion"
       ],
-      "thumbnail": "/assets/img/empresas-bajo-regimen-de-eas.jpg",
+      "thumbnail": "/assets/img/uploads/empresas-bajo-regimen-de-eas.jpg",
       "caption": "En cuanto a los sectores económicos, el informe resalta que el 85% de las EAS constituidas corresponde a los rubros de comercio y servicios, seguido por los sectores industrial y agropecuario. Foto: IP",
       "featured": {
         "is_featured": false,
@@ -184,6 +246,50 @@
       "summary_short": "Según datos de la Dirección General del Sistema Unificado de Apertura y Cierre de Empresas (SUACE), las EAS constituidas en 2025 movilizaron una inversión total de USD 363 millones…"
     },
     {
+      "title": "Más de 7.600 Empresas por Acciones Simplificadas se constituyeron en Paraguay",
+      "date": "2026-01-16T22:02:00.000Z",
+      "summary": "Según datos de la Dirección General del Sistema Unificado de Apertura y Cierre de Empresas (SUACE), las EAS constituidas en 2025 movilizaron una inversión total de USD 363 millones. ",
+      "author": "Perspectivas",
+      "author_image": "",
+      "category": "empleo",
+      "tags": [
+        "negocios",
+        "empleo",
+        "economia",
+        "mercado-laboral",
+        "desarrollo",
+        "inversion"
+      ],
+      "thumbnail": "/assets/img/uploads/empresas-bajo-regimen-de-eas.jpg",
+      "caption": "En cuanto a los sectores económicos, el informe resalta que el 85% de las EAS constituidas corresponde a los rubros de comercio y servicios, seguido por los sectores industrial y agropecuario. Foto: IP",
+      "featured": {
+        "is_featured": true,
+        "is_main_featured": false,
+        "show_in_latest": true,
+        "highlights": [
+          "Las inversiones de origen nacional alcanzaron los USD 317 millones.",
+          "Continúan posicionándose como una alternativa ágil y eficiente para emprendedores e inversionistas.",
+          "De febrero 2021 a diciembre 2025 se han constituido 21.891 firmas."
+        ],
+        "is_section_featured": false
+      },
+      "id": "2026-01-17-más-de-7-600-empresas-por-acciones-simplificadas-se-constituyeron-en-paraguay",
+      "type": "noticias",
+      "slug": "2026-01-17-más-de-7-600-empresas-por-acciones-simplificadas-se-constituyeron-en-paraguay",
+      "description": "Según datos de la Dirección General del Sistema Unificado de Apertura y Cierre de Empresas (SUACE), las EAS constituidas en 2025 movilizaron una inversión total de USD 363 millones. ",
+      "body": "Durante el año 2025, **un total de 7.618 Empresas por Acciones Simplificadas (EAS) fueron constituidas en Paraguay, lo que representa un incremento del 28% con respecto al año anterio**r, consolidando a esta figura jurídica como una de las principales herramientas para la formalización y dinamización del tejido empresarial.\r\n\r\nSegún datos de la **Dirección General del Sistema Unificado de Apertura y Cierre de Empresas (SUACE), las EAS constituidas en 2025 movilizaron una inversión total de USD 363 millones.** De ese monto, las inversiones de origen nacional alcanzaron los USD 317 millones, mientras que las inversiones extranjeras sumaron USD 45 millones, reflejando el interés tanto local como internacional por operar bajo este régimen empresarial.\r\n\r\nEn cuanto a los sectores económicos, el informe resalta que el 85% de las EAS constituidas corresponde a los rubros de comercio y servicios, seguido por los sectores industrial y agropecuario.\r\n\r\nDesde el SUACE destacan que las EAS continúan posicionándose como una alternativa ágil y eficiente para emprendedores e inversionistas, gracias a la simplificación de trámites, la reducción de los tiempos de constitución y la posibilidad de operar en un entorno formal.\r\n\r\n## **EAS desde su implementación**\r\n\r\nEn términos acumulados, desde febrero de 2021, fecha de implementación de las EAS, hasta diciembre de 2025, se han constituido 21.891 Empresas por Acciones Simplificadas en todo el país.\r\n\r\nDurante este período, el monto total de inversión asciende a USD 1.014 millones, evidenciando el impacto sostenido de este modelo societario en la creación de empresas y en la captación de capitales.\r\n\r\nLa evolución de estos indicadores reafirma el rol de las EAS como un instrumento clave para impulsar la formalización empresarial, fortalecer la actividad económica y fomentar la inversión en Paraguay.",
+      "tags_normalized": [
+        "negocios",
+        "empleo",
+        "economia",
+        "mercado-laboral",
+        "desarrollo",
+        "inversion"
+      ],
+      "kicker": "empleo",
+      "summary_short": "Según datos de la Dirección General del Sistema Unificado de Apertura y Cierre de Empresas (SUACE), las EAS constituidas en 2025 movilizaron una inversión total de USD 363 millones…"
+    },
+    {
       "title": "Exportaciones de maquila superaron los USD 1.309 millones al cierre del 2025",
       "date": "2026-01-15T19:38:00.000Z",
       "summary": "Los envíos totales alcanzaron USD 1.309 millones, un nuevo récord para el sector, reportó el Viceministerio de Industria.",
@@ -196,7 +302,7 @@
         "negocios",
         "desarrollo"
       ],
-      "thumbnail": "/assets/img/sumidenso-maquila-industria-trabajo-17.jpg",
+      "thumbnail": "/assets/img/uploads/sumidenso-maquila-industria-trabajo-17.jpg",
       "caption": "En materia de empleo, actualmente se registran 35.357 puestos de trabajo vinculados a las industrias maquiladoras, lo que representa un incremento interanual del 18%. Foto: IP Paraguay",
       "featured": {
         "is_featured": false,
@@ -230,7 +336,7 @@
         "empresa",
         "negocios"
       ],
-      "thumbnail": "/assets/img/mercado-libre-e1584221732666.jpg",
+      "thumbnail": "/assets/img/uploads/mercado-libre-e1584221732666.jpg",
       "featured": {
         "is_featured": true,
         "is_main_featured": false,
@@ -261,7 +367,7 @@
         "finanzas",
         "desarrollo"
       ],
-      "thumbnail": "/assets/img/py.-imagen-de-pru-no-usar.jpg",
+      "thumbnail": "/assets/img/uploads/py.-imagen-de-pru-no-usar.jpg",
       "featured": {
         "is_featured": true,
         "is_main_featured": false,
@@ -292,7 +398,7 @@
         "finanzas",
         "desarrollo"
       ],
-      "thumbnail": "/assets/img/py.-imagen-de-pru-no-usar.jpg",
+      "thumbnail": "/assets/img/uploads/py.-imagen-de-pru-no-usar.jpg",
       "featured": {
         "is_featured": true,
         "is_main_featured": false,
@@ -323,7 +429,7 @@
         "inversion",
         "desarrollo"
       ],
-      "thumbnail": "/assets/img/couple-holding-small-house-medium-shot.jpg",
+      "thumbnail": "/assets/img/uploads/couple-holding-small-house-medium-shot.jpg",
       "featured": {
         "is_featured": false,
         "is_main_featured": false,
@@ -354,7 +460,7 @@
         "banco-central",
         "commodities"
       ],
-      "thumbnail": "/assets/img/exportación.jpg",
+      "thumbnail": "/assets/img/uploads/exportación.jpg",
       "featured": {
         "is_featured": false,
         "is_main_featured": false,
@@ -383,7 +489,7 @@
       "tags": [
         "economia"
       ],
-      "thumbnail": "/assets/img/knmg6a6szzcshjyavygmnkhpbi.jpg",
+      "thumbnail": "/assets/img/uploads/knmg6a6szzcshjyavygmnkhpbi.jpg",
       "featured": {
         "show_in_latest": true,
         "is_featured": true,
@@ -409,7 +515,7 @@
       "tags": [
         "economia"
       ],
-      "thumbnail": "/assets/img/female-working-environment-projects.jpg",
+      "thumbnail": "/assets/img/uploads/female-working-environment-projects.jpg",
       "featured": {
         "is_featured": false,
         "is_main_featured": false,
@@ -435,7 +541,7 @@
       "tags": [
         "economia"
       ],
-      "thumbnail": "/assets/img/top-view-office-desk-with-growth-chart-coffee-cup.jpg",
+      "thumbnail": "/assets/img/uploads/top-view-office-desk-with-growth-chart-coffee-cup.jpg",
       "featured": {
         "is_featured": false,
         "is_main_featured": false,
@@ -493,7 +599,7 @@
       "tags": [
         "inversion"
       ],
-      "thumbnail": "/assets/img/py.-imagen-de-pru-no-usar.jpg",
+      "thumbnail": "/assets/img/uploads/py.-imagen-de-pru-no-usar.jpg",
       "id": "2025-11-19-modernización-bursátil-presentarán-ante-emisores-la-nueva-estructura-y-los-procesos-de-registro",
       "type": "noticias",
       "slug": "2025-11-19-modernización-bursátil-presentarán-ante-emisores-la-nueva-estructura-y-los-procesos-de-registro",
@@ -702,7 +808,7 @@
         "analisis-economico",
         "inversion"
       ],
-      "thumbnail": "/assets/img/mef-villa-serrati_4_0.jpg",
+      "thumbnail": "/assets/img/uploads/mef-villa-serrati_4_0.jpg",
       "featured": {
         "is_featured": true,
         "is_main_featured": false,
@@ -725,7 +831,7 @@
       "author": "Perspectivas",
       "title": "Ley del Mercado de Valores fortalece protección al inversionista ",
       "date": "2025-11-21T01:33:03.864Z",
-      "thumbnail": "/assets/img/2024-08-16-billetes.jpg",
+      "thumbnail": "/assets/img/uploads/2024-08-16-billetes.jpg",
       "summary": "Ley del Mercado de Valores y Productos fortalece protección al inversionista ",
       "id": "2025-11-21-ley-del-mercado-de-valores-fortalece-protección-al-inversionista",
       "type": "analisis",
@@ -748,7 +854,7 @@
       "author": "Perspectivas",
       "title": "Modernización del mercado de valores",
       "date": "2025-11-20T15:23:03.846Z",
-      "thumbnail": "/assets/img/nasdaq.avif",
+      "thumbnail": "/assets/img/uploads/nasdaq.avif",
       "summary": "El encuentro se llevará a cabo este jueves 20 de noviembre, desde las 08:00, en el Hotel Dazzler (Av. Aviadores del Chaco y Vasconcellos) ",
       "id": "2025-11-20-modernización-del-mercado-de-valores",
       "type": "analisis",
@@ -776,7 +882,7 @@
       "tags": [
         "economia-local"
       ],
-      "thumbnail": "/assets/img/captura-de-pantalla-2026-01-13-181157.png",
+      "thumbnail": "/assets/img/uploads/captura-de-pantalla-2026-01-13-181157.png",
       "embed_url": "https://www.youtube.com/embed/TAAcjJXFJbQ",
       "featured": {
         "is_featured": true,
@@ -891,7 +997,7 @@
       "tags": [
         "economia-local"
       ],
-      "thumbnail": "/assets/img/2024-08-16-billetes.jpg",
+      "thumbnail": "/assets/img/uploads/2024-08-16-billetes.jpg",
       "embed_url": "https://www.youtube.com/embed/6TO6xE6IiBE",
       "featured": {
         "is_featured": true,
@@ -962,37 +1068,6 @@
   ],
   "sponsors": [
     {
-      "title": "PerspectivasCompany",
-      "tier": "Gold",
-      "url": "perspectivaspy.vercel.app",
-      "logo": "/assets/img/perspectivas-logo.jpeg",
-      "sector": "Media",
-      "active": true,
-      "featured": {
-        "is_featured": false,
-        "is_main_featured": false,
-        "is_section_featured": false,
-        "show_in_latest": true
-      },
-      "headline": "Innovación que impulsa la economía",
-      "excerpt": "Perspectiva Company apoya el desarrollo del periodismo económico independiente.",
-      "priority": 2,
-      "campaign_start": "2025-11-22T19:06:10.808Z",
-      "campaign_end": "2025-12-05T19:06:31.989Z",
-      "id": "perspectivacompany",
-      "type": "sponsors",
-      "slug": "perspectivacompany",
-      "category": "",
-      "description": "",
-      "thumbnail": "/assets/img/default.jpg",
-      "body": "",
-      "date": "2026-01-17T05:59:55.459Z",
-      "tags": [],
-      "tags_normalized": [],
-      "kicker": "",
-      "summary_short": ""
-    },
-    {
       "excerpt": "Casa de Bolsa y Administradora de Fondos con más de 20 años de experiencia en el mercado de valores.",
       "tier": "Silver",
       "priority": 1,
@@ -1018,39 +1093,38 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-17T05:59:55.458Z",
+      "date": "2026-01-17T18:01:00.860Z",
       "tags": [],
       "tags_normalized": [],
       "kicker": "",
       "summary_short": ""
     },
     {
-      "excerpt": "Es una entidad financiera de capital extranjero, filial del banco brasileño Itaú Unibanco, que ofrece servicios bancarios a personas y empresas en el país. ",
-      "tier": "Silver",
-      "priority": 6,
+      "title": "PerspectivasCompany",
+      "tier": "Gold",
+      "url": "perspectivaspy.vercel.app",
+      "logo": "/assets/img/perspectivas-logo.jpeg",
+      "sector": "Media",
       "active": true,
-      "sector": "Banca",
-      "title": "Banco Itaú Paraguay",
-      "headline": "Para lo importante, Itaú",
-      "logo": "/assets/img/banco-itau.png",
-      "campaign_end": "2025-11-29T19:07:44.073Z",
-      "url": "https://www.itau.com.py/",
       "featured": {
         "is_featured": false,
         "is_main_featured": false,
         "is_section_featured": false,
         "show_in_latest": true
       },
-      "visible": false,
-      "campaign_start": "2025-11-22T19:07:33.649Z",
-      "id": "banco-itaú-paraguay",
+      "headline": "Innovación que impulsa la economía",
+      "excerpt": "Perspectiva Company apoya el desarrollo del periodismo económico independiente.",
+      "priority": 2,
+      "campaign_start": "2025-11-22T19:06:10.808Z",
+      "campaign_end": "2025-12-05T19:06:31.989Z",
+      "id": "perspectivacompany",
       "type": "sponsors",
-      "slug": "banco-itaú-paraguay",
+      "slug": "perspectivacompany",
       "category": "",
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-17T05:59:55.457Z",
+      "date": "2026-01-17T18:01:00.860Z",
       "tags": [],
       "tags_normalized": [],
       "kicker": "",
@@ -1082,7 +1156,39 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-17T05:59:55.455Z",
+      "date": "2026-01-17T18:01:00.859Z",
+      "tags": [],
+      "tags_normalized": [],
+      "kicker": "",
+      "summary_short": ""
+    },
+    {
+      "excerpt": "Es una entidad financiera de capital extranjero, filial del banco brasileño Itaú Unibanco, que ofrece servicios bancarios a personas y empresas en el país. ",
+      "tier": "Silver",
+      "priority": 6,
+      "active": true,
+      "sector": "Banca",
+      "title": "Banco Itaú Paraguay",
+      "headline": "Para lo importante, Itaú",
+      "logo": "/assets/img/banco-itau.png",
+      "campaign_end": "2025-11-29T19:07:44.073Z",
+      "url": "https://www.itau.com.py/",
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
+      "visible": false,
+      "campaign_start": "2025-11-22T19:07:33.649Z",
+      "id": "banco-itaú-paraguay",
+      "type": "sponsors",
+      "slug": "banco-itaú-paraguay",
+      "category": "",
+      "description": "",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "",
+      "date": "2026-01-17T18:01:00.859Z",
       "tags": [],
       "tags_normalized": [],
       "kicker": "",
@@ -1114,7 +1220,7 @@
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-17T05:59:55.452Z",
+      "date": "2026-01-17T18:01:00.858Z",
       "tags": [],
       "tags_normalized": [],
       "kicker": "",

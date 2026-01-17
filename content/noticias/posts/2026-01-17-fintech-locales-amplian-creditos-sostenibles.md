@@ -6,7 +6,7 @@ summary: Tres plataformas anunciaron líneas especiales con tasa fija y monitore
 category: educacion-financiera
 tags:
   - economia
-thumbnail: /assets/img/default.jpg
+thumbnail: /assets/img/uploads/female-working-environment-projects.jpg
 featured:
   is_featured: true
   is_main_featured: false

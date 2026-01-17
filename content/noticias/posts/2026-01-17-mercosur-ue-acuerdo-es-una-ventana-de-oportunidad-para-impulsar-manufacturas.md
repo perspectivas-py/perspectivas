@@ -1,4 +1,4 @@
----
+﻿---
 title: "Mercosur-UE: acuerdo es una ventana de oportunidad para impulsar manufacturas"
 date: 2026-01-17T10:31:00.000-03:00
 summary: >
@@ -11,13 +11,13 @@ tags:
   - economia
   - comercio-exterior
   - desarrollo
-thumbnail: /assets/img/confecciones-manufacturas-maquilas-textiles-fabrica-mujeres-obreros-taller-trabajo-mano-de-obra.jpg
+thumbnail: /assets/img/uploads/confecciones-manufacturas-maquilas-textiles-fabrica-mujeres-obreros-taller-trabajo-mano-de-obra.jpg
 caption: Desde la Unión Industrial del Paraguay (UIP) ven al acuerdo comercial
   entre Mercosur y la Unión Europea como una ventana de oportunidad para
   producir manufacturas de exportación.
 featured:
   is_featured: true
-  is_main_featured: true
+  is_main_featured: false
   show_in_latest: true
   highlights:
     - "Se espera que las exportaciones de la UE al Mercosur crezcan casi 50.000
@@ -45,3 +45,4 @@ Paraguay, como miembro del Mercosur, entrará a competir con los demás integran
 Este sábado 17 de enero se hará en Asunción la firma oficial del acuerdo comercial más grande de la historia. El documento finaliza más de 20 años de negociaciones y vincula con capitulos para distintos tipos de productos a dos zonas con más de 700 millones de habitantes y un PIB pér capita de USD 34.000.
 
 Con el acuerdo se espera que las exportaciones de la UE al Mercosur crezcan casi EUR 50.000 millones al 2040. A su vez, las exportaciones del Mercosur al bloque europeo aumenten a EUR 9.000 millones.
+

@@ -9,7 +9,7 @@ tags:
   - inversion
   - economia
   - politica-fiscal
-thumbnail: /assets/img/default.jpg
+thumbnail: /assets/img/uploads/seminario-fiscal.jpg
 featured:
   is_featured: true
   is_main_featured: false

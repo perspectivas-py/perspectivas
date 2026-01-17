@@ -1,4 +1,4 @@
----
+﻿---
 title: Créditos para la vivienda abarca cerca de la mitad de la cartera de la AFD​
 date: 2026-01-14T13:14:00.000-03:00
 summary: >+
@@ -11,7 +11,7 @@ tags:
   - economia
   - inversion
   - desarrollo
-thumbnail: /assets/img/couple-holding-small-house-medium-shot.jpg
+thumbnail: /assets/img/uploads/couple-holding-small-house-medium-shot.jpg
 featured:
   is_featured: false
   is_main_featured: false
@@ -24,3 +24,4 @@ Los mayores desembolsos a noviembre se dieron en créditos para la vivienda, co
 Con estos desembolsos, la cartera vigente de la AFD ascendió a PYG 9,6 billones (USD 1,4 mil millones), con un incremento interanual de 11,5%. El principal sector de esta cartera es el de la vivienda, con 48,8% del total, beneficiando a 20.811 personas. ​
 
 A dicho sector le siguen el comercial (13,4%; 16.665 beneficiarios), el agrícola (12,7%; 3.694 beneficiarios) y el industrial (11,4%; 416 beneficiarios). El 86,3% de la cartera vigente de la AFD se concentra en estos cuatro sectores, que suman 41.586 beneficiarios, es decir, 98,7% del total.​
+
