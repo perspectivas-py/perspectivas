@@ -974,7 +974,8 @@ ul {
 
   .nlv2-hero-secondary {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    grid-template-rows: none;
+  }
+}
   }
 
   .nlv2-grid-layout {
