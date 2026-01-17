@@ -645,22 +645,25 @@ function initHeaderScrollState() {
   header.dataset.scrollBound = "true";
   console.log("📌 Scroll listener marcado como bound");
 
-  // Ya no necesitamos el sentinel con scroll listener
+  // Detectar la sección de Noticias Locales
+  const noticiasSection = document.getElementById("noticias");
+  let noticiasTop = noticiasSection ? noticiasSection.offsetTop : Infinity;
+  
   let lastScrollState = null;
   let scrollThrottleId = null;
-  const SCROLL_THRESHOLD = 50; // Distancia de scroll antes de cambiar estado
 
   const handleScroll = () => {
     if (scrollThrottleId) return;
     
     scrollThrottleId = requestAnimationFrame(() => {
       const currentScroll = window.scrollY;
-      const isScrolled = currentScroll > SCROLL_THRESHOLD;
+      // Solo activar scroll comprimido cuando se llega a la sección de Noticias
+      const isScrolled = currentScroll >= (noticiasTop - 50);
       
       // Solo actualizar si el estado cambió
       if (lastScrollState !== isScrolled) {
         lastScrollState = isScrolled;
-        console.log("🔄 Scroll state cambió:", isScrolled ? "scrolled" : "top", "scrollY:", currentScroll);
+        console.log("🔄 Scroll state cambió:", isScrolled ? "scrolled" : "top", "scrollY:", currentScroll, "noticiasTop:", noticiasTop);
         header.classList.toggle("scrolled", isScrolled);
         
         // Controlar el market-ticker top
