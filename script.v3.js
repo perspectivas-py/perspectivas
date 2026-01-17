@@ -645,9 +645,10 @@ function initHeaderScrollState() {
   header.dataset.scrollBound = "true";
   console.log("📌 Scroll listener marcado como bound");
 
-  // Detectar la sección de Noticias Locales
+  // Detectar la sección de Noticias Locales (solo existe en home)
   const noticiasSection = document.getElementById("noticias");
-  let noticiasTop = noticiasSection ? noticiasSection.offsetTop : Infinity;
+  let noticiasTop = noticiasSection ? noticiasSection.offsetTop : null;
+  const SCROLL_THRESHOLD = 50;
   
   let lastScrollState = null;
   let scrollThrottleId = null;
@@ -657,8 +658,14 @@ function initHeaderScrollState() {
     
     scrollThrottleId = requestAnimationFrame(() => {
       const currentScroll = window.scrollY;
-      // Solo activar scroll comprimido cuando se llega a la sección de Noticias
-      const isScrolled = currentScroll >= (noticiasTop - 50);
+      let isScrolled;
+      if (noticiasTop !== null) {
+        // Home: activar scroll comprimido cuando llegamos a Noticias Locales
+        isScrolled = currentScroll >= (noticiasTop - 50);
+      } else {
+        // Otras páginas: usar umbral genérico
+        isScrolled = currentScroll > SCROLL_THRESHOLD;
+      }
       
       // Solo actualizar si el estado cambió
       if (lastScrollState !== isScrolled) {
@@ -686,7 +693,9 @@ function initHeaderScrollState() {
   window.addEventListener("resize", () => {
     if (resizeRaf) cancelAnimationFrame(resizeRaf);
     resizeRaf = window.requestAnimationFrame(() => {
-      // No hay nada que recalcular
+      if (noticiasSection) {
+        noticiasTop = noticiasSection.offsetTop;
+      }
     });
   });
 }
