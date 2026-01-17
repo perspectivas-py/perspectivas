@@ -2665,6 +2665,7 @@ ul {
 .article-body p {
   margin-bottom: 1.5rem;
   max-width: 100%;
+  font-weight: 400;
 }
 
 .article-body blockquote {
@@ -3409,6 +3410,7 @@ ul {
 
 .article-body-text p {
   margin-bottom: 1.5rem;
+  font-weight: 400;
 }
 
 .article-body-text h2, 
