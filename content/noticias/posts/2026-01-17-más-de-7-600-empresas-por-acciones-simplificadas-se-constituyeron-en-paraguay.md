@@ -19,7 +19,7 @@ caption: "En cuanto a los sectores económicos, el informe resalta que el 85% de
   las EAS constituidas corresponde a los rubros de comercio y servicios, seguido
   por los sectores industrial y agropecuario. Foto: IP"
 featured:
-  is_featured: false
+  is_featured: true
   is_main_featured: false
   show_in_latest: true
   highlights:
