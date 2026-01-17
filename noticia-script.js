@@ -3,19 +3,6 @@ console.log("📰 Noticia PRO v3.1 cargado");
 
 const ARTICLE_CONTENT_URL = "content.json";
 
-const CATEGORY_LABELS = {
-  "macro": "Macroeconomía",
-  "mercados-inversion": "Mercados e Inversión",
-  "politica-economica": "Política Económica",
-  "empresas": "Empresas",
-  "empleo": "Empleo",
-  "finanzas-personales": "Finanzas Personales",
-  "educacion-financiera": "Educación Financiera",
-  "actualidad": "Actualidad",
-  "economia": "Economía",
-  "negocios": "Negocios"
-};
-
 const TYPE_LABELS = {
   "noticias": "Actualidad",
   "analisis": "Análisis",
@@ -436,8 +423,13 @@ async function loadArticle() {
 }
 
 // Ejecutar cuando el DOM esté listo
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", loadArticle);
-} else {
+function initNoticia() {
+  console.log("🎬 Inicializando noticia-script.js");
   loadArticle();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initNoticia);
+} else {
+  initNoticia();
 }
