@@ -743,6 +743,19 @@ let noticiasFilterSource = [];
 const SECTION_LIMIT = 6;
 const SECTION_INCREMENT = 6;
 
+function selectSectionHeroArticles(items = []) {
+  const collection = Array.isArray(items) ? [...items] : [];
+  if (!collection.length) {
+    return { main: null, secondary: [], remainder: [] };
+  }
+
+  const primary = collection.find(entry => entry?.featured?.is_section_featured) || collection[0];
+  const rest = collection.filter(entry => (entry.slug || entry.id) !== (primary?.slug || primary?.id));
+  const secondary = rest.slice(0, 2);
+  const remainder = rest.slice(2);
+  return { main: primary, secondary, remainder };
+}
+
 function createSectionController({ gridId, buttonId, limit = SECTION_LIMIT, increment = SECTION_INCREMENT, renderItem, emptyMessage }) {
   const state = { source: [], visible: limit };
   let button = null;
@@ -1466,53 +1479,92 @@ function updateNoticiasViewMore() {
 }
 
 function renderNoticiasLocales() {
-  const container = document.getElementById("news-grid");
-  if (!container) return;
+  const heroMain = document.getElementById("nlv2-hero-main");
+  const heroSecondary = document.getElementById("nlv2-hero-secondary");
+  const gridContainer = document.getElementById("news-grid");
+  const contextFeed = document.getElementById("nlv2-context-feed");
 
-  const data = noticiasLocalesState.source || [];
-  if (!data.length) {
-    container.innerHTML = `<p class="empty-copy">No encontramos noticias en esta categoría.</p>`;
+  if (!gridContainer) return;
+
+  const source = noticiasLocalesState.source || [];
+  if (!source.length) {
+    if (heroMain) heroMain.innerHTML = `<p class="nlv2-placeholder">Aún no hay notas destacadas para esta sección.</p>`;
+    if (heroSecondary) heroSecondary.innerHTML = `<article class="nlv2-secondary-card"><p class="nlv2-placeholder">Agregá más publicaciones para ver recomendaciones.</p></article>`;
+    gridContainer.innerHTML = `<p class="empty-copy">No encontramos noticias en esta categoría.</p>`;
+    if (contextFeed) contextFeed.innerHTML = `<p class="nlv2-placeholder">Sin historias relacionadas por ahora.</p>`;
     updateNoticiasViewMore();
     return;
   }
 
-  const slice = data.slice(0, noticiasLocalesState.visible);
+  const { main, secondary, remainder } = selectSectionHeroArticles(source);
 
-  // Primera noticia como mini portada (si hay contenido)
-  let html = '';
-  if (slice.length > 0) {
-    const featured = slice[0];
-    html += `
-      <a href="/noticia.html?id=${encodeURIComponent(featured.slug || featured.id)}" class="card card-featured">
+  if (heroMain && main) {
+    const kickerLabel = (main.kicker || main.category || "Actualidad").toUpperCase();
+    const summary = truncateCopy(main.summary_short || main.summary || main.description || "", 220);
+    heroMain.style.backgroundImage = `url(${main.thumbnail || HERO_IMAGE_FALLBACK})`;
+    heroMain.innerHTML = `
+      <div class="nlv2-hero-kicker">${escapeHtml(kickerLabel)}</div>
+      <h3>${escapeHtml(main.title || "Noticia principal")}</h3>
+      ${summary ? `<p>${escapeHtml(summary)}</p>` : ""}
+      <div class="nlv2-meta-row">
+        <span>${escapeHtml(formatDate(main.date))}</span>
+        <a class="btn-link" href="/noticia.html?id=${encodeURIComponent(main.slug || main.id)}">Leer informe →</a>
+      </div>`;
+  } else if (heroMain) {
+    heroMain.innerHTML = `<p class="nlv2-placeholder">Seleccionaremos automáticamente la nota destacada de la sección.</p>`;
+  }
+
+  if (heroSecondary) {
+    if (secondary.length) {
+      heroSecondary.innerHTML = secondary.map(article => {
+        const kickerLabel = (article.kicker || article.category || "Noticias").toUpperCase();
+        const summary = truncateCopy(article.summary_short || article.summary || article.description || "", 160);
+        return `
+          <article class="nlv2-secondary-card">
+            <div class="nlv2-meta-row">
+              <span>${escapeHtml(kickerLabel)}</span>
+              <span>·</span>
+              <span>${escapeHtml(formatDate(article.date))}</span>
+            </div>
+            <h4>${escapeHtml(article.title || "")}</h4>
+            ${summary ? `<p>${escapeHtml(summary)}</p>` : ""}
+            <a class="btn-link" href="/noticia.html?id=${encodeURIComponent(article.slug || article.id)}">Ver nota</a>
+          </article>`;
+      }).join("");
+    } else {
+      heroSecondary.innerHTML = `<article class="nlv2-secondary-card"><p class="nlv2-placeholder">Espacio para notas kicker.</p></article>`;
+    }
+  }
+
+  const gridLimit = Math.min(noticiasLocalesState.visible, remainder.length);
+  const gridItems = remainder.slice(0, gridLimit);
+
+  if (gridItems.length) {
+    gridContainer.innerHTML = gridItems.map(item => `
+      <a href="/noticia.html?id=${encodeURIComponent(item.slug || item.id)}" class="card">
         <div class="card-img-container">
-          <img src="${featured.thumbnail}" alt="${featured.title}">
+          <img src="${item.thumbnail || HERO_IMAGE_FALLBACK}" alt="${escapeHtml(item.title || "Noticia")}" loading="lazy">
         </div>
-        <div class="card-featured-content">
-          <h3>${featured.title}</h3>
-          <div class="card-meta">${formatDate(featured.date)}</div>
-        </div>
+        <h3>${escapeHtml(item.title || "Noticia")}</h3>
+        <div class="card-meta">${escapeHtml(formatDate(item.date))}</div>
       </a>
-    `;
+    `).join("");
+  } else {
+    gridContainer.innerHTML = `<p class="empty-copy">No hay más noticias en la categoría seleccionada.</p>`;
   }
 
-  // Resto de noticias normales
-  if (slice.length > 1) {
-    html += '<div class="news-grid-secondary">';
-    html += slice.slice(1)
-      .map(a => `
-        <a href="/noticia.html?id=${encodeURIComponent(a.slug || a.id)}" class="card">
-          <div class="card-img-container">
-            <img src="${a.thumbnail}" alt="${a.title}">
+  if (contextFeed) {
+    const contextItems = remainder.slice(0, 4);
+    contextFeed.innerHTML = contextItems.length
+      ? contextItems.map(item => `
+          <div class="nlv2-context-item">
+            <h4>${escapeHtml(item.title || "Noticia")}</h4>
+            <p>${escapeHtml(truncateCopy(item.summary_short || item.summary || item.description || "", 150))}</p>
+            <a class="btn-link" href="/noticia.html?id=${encodeURIComponent(item.slug || item.id)}">Seguir historia</a>
           </div>
-          <h3>${a.title}</h3>
-          <div class="card-meta">${formatDate(a.date)}</div>
-        </a>
-      `)
-      .join("");
-    html += '</div>';
+        `).join("")
+      : `<p class="nlv2-placeholder">Agregá más historias para ver notas en seguimiento.</p>`;
   }
-
-  container.innerHTML = html;
 }
 
 function initAnalisisSection(items) {

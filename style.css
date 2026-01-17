@@ -930,6 +930,26 @@ ul {
   color: rgba(15, 23, 42, 0.6);
 }
 
+.noticias-locales-v2 .btn-link {
+  font-weight: 700;
+  color: var(--nlv2-blue);
+  text-decoration: none;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.noticias-locales-v2 .btn-link::after {
+  content: "→";
+  font-weight: 600;
+  transition: transform 0.2s ease;
+}
+
+.noticias-locales-v2 .btn-link:hover::after {
+  transform: translateX(3px);
+}
+
 @keyframes nlv2CardFade {
   from {
     opacity: 0;
