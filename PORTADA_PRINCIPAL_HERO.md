@@ -30,6 +30,7 @@ Ahora puedes **seleccionar qué noticia aparece en la portada principal** direct
 - **Solo UNA noticia** debe tener `¿PORTADA PRINCIPAL (HERO)?` activado
 - Si **no activas** este campo en ninguna noticia, se mostrará la **más reciente automáticamente** (comportamiento anterior)
 - Si **dos o más** noticias tienen este campo activado, se mostrará la **primera que encuentre**
+- Para la sección "Noticias Locales 2.0" podés marcar adicionalmente `¿Destacar en Noticias Locales?` para activar el stack interno (ver abajo).
 
 ## Deshabilitar la Portada Principal Manual
 
@@ -56,6 +57,17 @@ Supongamos que tienes estas noticias:
 
 ---
 
+## Hero de sección (Noticias Locales V2)
+
+Además del Hero global, la sección "Noticias Locales" ahora cuenta con su propio stack (Hero + 2 secundarias + panel de contexto). Podés controlarlo desde Decap CMS así:
+
+1. En la noticia deseada, activá el campo `¿Destacar en Noticias Locales?` (mapea a `featured.is_section_featured: true`).
+2. Solo una nota debería tener este flag activo; si no hay ninguna, se usa la noticia más reciente.
+3. El subtítulo corto se toma de `summary_short` (si no existe, se calcula automáticamente a partir del summary/description).
+4. Las tarjetas secundarias y de contexto se llenan con las noticias siguientes, evitando duplicar la portada principal.
+
+> **Nota:** este flag no reemplaza al Hero principal. Podés tener una nota distinta en portada general y otra distinta como Hero de la sección.
+
 ## Para los Desarrolladores
 
 El código que hace esto funciona así:
@@ -74,9 +86,9 @@ if (!heroArticle) {
 ```
 
 Los cambios fueron realizados en:
-- `script.js` - Lógica del hero
-- `api/content.js` - Parsing del frontmatter YAML
-- `editor/config.yml` - Mejor descripción en la UI de Decap
+- `script.js` - Lógica del Hero global y del stack de Noticias Locales (`renderNoticiasLocales`).
+- `scripts/build-content.js` - Parsing del frontmatter, generación de `featured.is_section_featured`, `kicker` y `summary_short`.
+- `editor/config.yml` - Mejora de los campos en Decap (hero global + hero de sección).
 
 ---
 

@@ -20,7 +20,7 @@ caption: "En cuanto a los sectores económicos, el informe resalta que el 85% de
   por los sectores industrial y agropecuario. Foto: IP"
 featured:
   is_featured: false
-  is_main_featured: true
+  is_main_featured: false
   show_in_latest: true
   highlights:
     - Las inversiones de origen nacional alcanzaron los USD 317 millones.

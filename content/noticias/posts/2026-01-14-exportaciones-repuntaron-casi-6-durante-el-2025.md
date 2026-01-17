@@ -13,7 +13,7 @@ tags:
 thumbnail: /assets/img/exportación.jpg
 featured:
   is_featured: false
-  is_main_featured: true
+  is_main_featured: false
   show_in_latest: true
 ---
 Durante el año 2025, las exportaciones totales, alcanzaron un valor de USD 16.720,3 millones, 5,8% por encima de los USD 15.806,1 millones observados a diciembre del año anterior. Las exportaciones registradas representaron el 66,3% del total, alcanzando USD 11.082,1 millones, superior en 1,5% al valor acumulado a diciembre del 2024. Las reexportaciones, por su parte, con el 27,4% del total, registraron un valor de USD 4.584,7 millones, con un aumento de 17,2%. Las otras exportaciones, con el 6,3% de participación, registraron un aumento del 7,7%, situándose en un nivel de USD 1.053,5 millones. El incremento observado en las exportaciones registradas se encuentra explicada principalmente por mayores ventas de carne, maíz y aceite de soja. Los envíos realizados bajo el régimen de maquila alcanzaron los USD 1.236,7 millones, superior en 10,0% a lo registrado en el mismo periodo del año 2024.

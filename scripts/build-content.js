@@ -21,6 +21,44 @@ function normalizeTag(tag) {
   return (tag || "").toString().trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
+function deriveKicker(data = {}) {
+  const candidates = [data.kicker, data?.featured?.kicker, data.subcategory, data.category_label, data.category, data.type];
+  const value = candidates.find(entry => typeof entry === "string" && entry.trim());
+  return value ? value.trim() : "";
+}
+
+function deriveSummaryShort(data = {}, maxLength = 180) {
+  const raw = (data.summary || data.description || "").replace(/\s+/g, " ").trim();
+  if (!raw) return "";
+  if (raw.length <= maxLength) return raw;
+  return `${raw.slice(0, maxLength).trim().replace(/[\s,.;:-]+$/, "")}…`;
+}
+
+function normalizeFeatured(rawFeatured) {
+  const defaults = {
+    is_featured: false,
+    is_main_featured: false,
+    is_section_featured: false,
+    show_in_latest: true
+  };
+
+  if (typeof rawFeatured === "boolean") {
+    return { ...defaults, is_featured: rawFeatured };
+  }
+
+  if (rawFeatured && typeof rawFeatured === "object" && !Array.isArray(rawFeatured)) {
+    return {
+      ...rawFeatured,
+      is_featured: Boolean(rawFeatured.is_featured ?? rawFeatured.is_main_featured ?? false),
+      is_main_featured: Boolean(rawFeatured.is_main_featured),
+      is_section_featured: Boolean(rawFeatured.is_section_featured),
+      show_in_latest: rawFeatured.show_in_latest === undefined ? defaults.show_in_latest : Boolean(rawFeatured.show_in_latest)
+    };
+  }
+
+  return { ...defaults };
+}
+
 function loadCollection(folder, type) {
   const collectionPath = path.join(process.cwd(), folder);
   if (!fs.existsSync(collectionPath)) return [];
@@ -36,7 +74,10 @@ function loadCollection(folder, type) {
       const rawTags = data.tags || [];
       const tags = Array.isArray(rawTags) ? rawTags : [rawTags];
       
+      const normalizedFeatured = normalizeFeatured(data.featured);
+
       return {
+        ...data,
         id: data.id || slug,
         type,
         slug,
@@ -46,10 +87,11 @@ function loadCollection(folder, type) {
         thumbnail: data.thumbnail || "/assets/img/default.jpg",
         body: content.trim(),
         date: data.date ? new Date(data.date).toISOString() : new Date().toISOString(),
-        featured: data.featured || false,
+        featured: normalizedFeatured,
         tags: tags,
         tags_normalized: tags.map(t => normalizeTag(t)), // Índice normalizado pre-calculado
-        ...data, 
+        kicker: deriveKicker({ ...data, featured: normalizedFeatured }),
+        summary_short: deriveSummaryShort(data)
       };
     })
     .sort((a, b) => new Date(b.date) - new Date(a.date)); 

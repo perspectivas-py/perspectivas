@@ -1,739 +1,1124 @@
 {
   "noticias": [
     {
-      "id": "2026-01-15-exportaciones-de-maquila-superaron-los-usd-1-309-millones-al-cierre-del-2025",
+      "title": "Fintech locales amplían créditos sostenibles para mipymes",
+      "slug": "2026-01-17-fintech-locales-amplian-creditos-sostenibles",
+      "date": "2026-01-17T14:25:00.000Z",
+      "summary": "Tres plataformas anunciaron líneas especiales con tasa fija y monitoreo ambiental para cadenas agroindustriales y comercios urbanos.",
+      "category": "negocios",
+      "tags": [
+        "fintech",
+        "mipymes",
+        "creditos",
+        "sostenibilidad"
+      ],
+      "thumbnail": "/assets/img/default.jpg",
+      "featured": {
+        "is_featured": true,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
+      "id": "2026-01-17-fintech-locales-amplian-creditos-sostenibles",
       "type": "noticias",
-      "slug": "2026-01-15-exportaciones-de-maquila-superaron-los-usd-1-309-millones-al-cierre-del-2025",
-      "category": "empleo",
-      "title": "Exportaciones de maquila superaron los USD 1.309 millones al cierre del 2025",
-      "description": "Los envíos totales alcanzaron USD 1.309 millones, un nuevo récord para el sector, reportó el Viceministerio de Industria.",
-      "thumbnail": "/assets/img/sumidenso-maquila-industria-trabajo-17.jpg",
-      "body": "Con los datos del mes de diciembre, las exportaciones de maquila confirmaron su crecimiento sostenido durante el 2025. Los envíos totales alcanzaron USD 1.309 millones, un nuevo récord para el sector, reportó el Viceministerio de Industria.\r\n\r\nDel total exportado, USD 1.262 millones corresponden a bienes de consumo, lo que representa un incremento de USD 153 millones en comparación con el mismo periodo del año anterior. En tanto, las exportaciones de servicios intangibles alcanzaron USD 47 millones, reflejando la diversificación de la oferta exportable.\r\n\r\nDurante el año, fueron aprobados 22 nuevos programas de maquila, que representan aproximadamente USD 50 millones en inversiones.\r\n\r\n### **Productos enviados**\r\n\r\nEn cuanto a la composición de las exportaciones, el Viceministerio señala que en el 2025 el 83% de los envíos se concentró en los rubros de autopartes, confecciones, aluminio, productos alimenticios y plásticos, mientras que, en menor medida, también se exportaron productos químicos-farmacéuticos y alimentos para mascotas.\r\n\r\nRespecto a los destinos, el 82% de las manufacturas maquiladoras tuvo como destino al Mercosur, donde Brasil concentró el 64% de los envíos y Argentina el 16%. Asimismo, los productos bajo este régimen llegaron a Estados Unidos, Países Bajos, Bolivia, Chile, Uruguay, entre otros destinos.\r\n\r\n![Durante el año, fueron aprobados 22 nuevos programas de maquila, que representan aproximadamente USD 50 millones en inversiones.](/assets/img/exportación.jpg)\r\n\r\n### **Nuevos destinos**\r\n\r\nEn los últimos 12 meses, las empresas maquiladoras lograron acceder a seis nuevos mercados internacionales, con exportaciones a Rusia (productos cárnicos), Islas Caimán (químicos), Omán (productos alimenticios), Letonia (madera y manufacturas), Ucrania (autopartes) y Nepal (alimentos para mascotas).\r\n\r\nAdemás, al cierre de 2025 las exportaciones de las industrias maquiladoras representan el 70% de las exportaciones de manufacturas de origen industrial del país.\r\n\r\n### **Mano de obra empleada**\r\n\r\nEn materia de empleo, actualmente se registran 35.357 puestos de trabajo vinculados a las industrias maquiladoras, lo que representa un incremento interanual del 18%, equivalente a 5.401 nuevos empleos respecto a 2024.\r\n\r\nEl 45% de estos empleos es ocupado por mujeres, mientras que los principales rubros generadores de empleo son confecciones y textiles, autopartes, servicios intangibles, plásticos y químicos-farmacéuticos, señala el reporte.\r\n\r\nEl 91% de las empresas con programas de maquila aprobados se concentra en los departamentos de Alto Paraná, Central, Capital y Amambay, consolidando estos territorios como polos estratégicos para el desarrollo industrial del país.\r\n\r\n### **Balanza comercial positiva**\r\n\r\nCon importaciones por USD 675 millones bajo este régimen, la balanza comercial cerró con un 87% más de exportaciones.",
-      "date": "2026-01-15T19:38:00.000Z",
+      "description": "Tres plataformas anunciaron líneas especiales con tasa fija y monitoreo ambiental para cadenas agroindustriales y comercios urbanos.",
+      "body": "Las empresas fintech **Kogara**, **Pulsar** y **EdenPay** anunciaron la ampliación de sus líneas de crédito sostenibles dirigidas a mipymes. El paquete combina tasas fijas en guaraníes, plazos de hasta 36 meses y monitoreo del desempeño ambiental de los proyectos financiados.\r\n\r\nLos fondos —equivalentes a USD 35 millones— se obtuvieron mediante emisiones privadas respaldadas por inversionistas institucionales. Las fintech priorizarán cadenas agroindustriales con programas de trazabilidad, comercios que implementen planes de eficiencia energética y emprendimientos urbanos que reduzcan huella de carbono.\r\n\r\nSegún la Cámara Paraguaya de Servicios Financieros Digitales, estos créditos complementan la oferta bancaria tradicional y permiten que **más de 1.200 pequeñas empresas** accedan a capital de trabajo en menos de 72 horas. El gremio espera duplicar el volumen disponible antes del cierre del año.",
+      "tags_normalized": [
+        "fintech",
+        "mipymes",
+        "creditos",
+        "sostenibilidad"
+      ],
+      "kicker": "negocios",
+      "summary_short": "Tres plataformas anunciaron líneas especiales con tasa fija y monitoreo ambiental para cadenas agroindustriales y comercios urbanos."
+    },
+    {
+      "title": "Inversión pública seguirá impulsando la obra pública en 2026",
+      "slug": "2026-01-17-inversion-publica-seguira-impulsando-la-obra-publica",
+      "date": "2026-01-17T12:10:00.000Z",
+      "summary": "El MEF adelantó que el plan de inversión para el primer semestre prioriza corredores logísticos y obras de agua potable, con énfasis en alianzas público-privadas.",
+      "category": "politica-economica",
+      "tags": [
+        "obra-publica",
+        "inversion",
+        "economia",
+        "politica-fiscal"
+      ],
+      "thumbnail": "/assets/img/default.jpg",
+      "featured": {
+        "is_featured": true,
+        "is_main_featured": false,
+        "is_section_featured": true,
+        "show_in_latest": true,
+        "highlights": [
+          "El presupuesto prevé USD 620 millones sólo para infraestructura vial.",
+          "Se activan nuevos contratos bajo la Ley de Alianzas Público Privadas.",
+          "El Tesoro confirma que el financiamiento ya está asegurado."
+        ]
+      },
+      "id": "2026-01-17-inversion-publica-seguira-impulsando-la-obra-publica",
+      "type": "noticias",
+      "description": "El MEF adelantó que el plan de inversión para el primer semestre prioriza corredores logísticos y obras de agua potable, con énfasis en alianzas público-privadas.",
+      "body": "El Ministerio de Economía y Finanzas (MEF) confirmó que el plan de inversión pública para el primer semestre del 2026 priorizará **corredores logísticos, obras de saneamiento y sistemas de agua potable** en ocho departamentos. El portafolio representa un desembolso cercano a USD 1.050 millones e incluye la puesta en marcha de proyectos bajo esquemas de alianzas público-privadas (APP).\r\n\r\nDurante una presentación ante cámaras empresariales, el viceministro de Inversión Pública, José Valdovinos, detalló que **unas 26 obras viales** se encuentran listas para iniciar proceso de licitación o adjudicación, con énfasis en duplicación de rutas y pavimentación de accesos agrícolas. El MEF destacó que la **Ley de APP** permitirá acelerar los cronogramas de construcción, manteniendo el déficit fiscal dentro de los límites establecidos por la regla vigente.\r\n\r\nEl cronograma también incorpora inversiones para ampliar los sistemas de alcantarillado en Asunción y Gran Asunción, además de redes de agua potable gestionadas por Essap y gobiernos locales. \"El objetivo es sostener el dinamismo económico con obras que impacten en productividad y servicios esenciales\", mencionó Valdovinos.\r\n\r\n### Financiamiento garantizado\r\n\r\nDesde el Tesoro Nacional aseguraron que los fondos están respaldados con emisiones realizadas en 2025 y con líneas de crédito vigentes con multilaterales. \"Tenemos previsibilidad para todo el semestre\", dijo el director de Crédito Público, quien remarcó que **no se prevén atrasos en los pagos a contratistas**.\r\n\r\nEn paralelo, el MEF adelantó que trabaja con el Congreso en un paquete de ajuste normativo para destrabar proyectos que dependen de cofinanciamiento municipal, en particular aquellos relacionados con sistemas de alcantarillado y distribución de agua.",
+      "tags_normalized": [
+        "obra-publica",
+        "inversion",
+        "economia",
+        "politica-fiscal"
+      ],
+      "kicker": "politica-economica",
+      "summary_short": "El MEF adelantó que el plan de inversión para el primer semestre prioriza corredores logísticos y obras de agua potable, con énfasis en alianzas público-privadas."
+    },
+    {
+      "title": "Alerta climática impacta la siembra temprana de soja",
+      "slug": "2026-01-17-alerta-climatica-impacta-siembra-soja",
+      "date": "2026-01-17T09:45:00.000Z",
+      "summary": "Productores reportan atrasos de hasta dos semanas por exceso de lluvias en el sur y deficit hídrico en el norte del país.",
+      "category": "macro",
+      "tags": [
+        "agro",
+        "clima",
+        "soja",
+        "exportaciones"
+      ],
+      "thumbnail": "/assets/img/default.jpg",
       "featured": {
         "is_featured": false,
         "is_main_featured": false,
+        "is_section_featured": false,
         "show_in_latest": true
       },
-      "tags": [
-        "comercio-exterior",
-        "empleo",
-        "economia",
-        "negocios",
-        "desarrollo"
-      ],
+      "id": "2026-01-17-alerta-climatica-impacta-siembra-soja",
+      "type": "noticias",
+      "description": "Productores reportan atrasos de hasta dos semanas por exceso de lluvias en el sur y deficit hídrico en el norte del país.",
+      "body": "El último informe agrometeorológico del MAG advierte que la campaña de soja 2026 enfrenta un escenario mixto: **exceso de humedad en Itapúa y Misiones** y falta de lluvias en Canindeyú y Alto Paraguay. Esta combinación obligó a los productores a reprogramar la siembra temprana y evaluar el uso de semillas más resistentes.\r\n\r\nLa Unión de Gremios de la Producción (UGP) estimó que la superficie implantada al 15 de enero alcanza apenas el 38%, cuando en años previos superaba el 55% a la misma fecha. \"El mayor riesgo es que los atrasos se traduzcan en cosechas escalonadas y en mayor presión logística durante marzo\", explicó el asesor agronómico Santiago Jara.\r\n\r\nEl Banco Central señaló que monitorea el impacto en las proyecciones de exportación. Por ahora mantiene la previsión anual, pero advirtió que el sector deberá acelerar labores culturales en febrero para evitar pérdida de rendimiento.",
       "tags_normalized": [
-        "comercio-exterior",
-        "empleo",
-        "economia",
-        "negocios",
-        "desarrollo"
+        "agro",
+        "clima",
+        "soja",
+        "exportaciones"
       ],
-      "summary": "Los envíos totales alcanzaron USD 1.309 millones, un nuevo récord para el sector, reportó el Viceministerio de Industria.",
+      "kicker": "macro",
+      "summary_short": "Productores reportan atrasos de hasta dos semanas por exceso de lluvias en el sur y deficit hídrico en el norte del país."
+    },
+    {
+      "title": " Economía y Finanzas expone alcances de la reforma de la Caja Fiscal ",
+      "date": "2026-01-16T23:34:00.000Z",
+      "summary": "El equipo técnico del MEF instaló un espacio de diálogo, debate y construcción de consensos con representantes de los círculos de oficiales y suboficiales retirados de las Fuerzas Públicas (policías y militares).",
       "author": "Perspectivas",
-      "caption": "En materia de empleo, actualmente se registran 35.357 puestos de trabajo vinculados a las industrias maquiladoras, lo que representa un incremento interanual del 18%. Foto: IP Paraguay"
-    },
-    {
-      "id": "2026-01-15-la-confianza-del-consumidor-se-mantuvo-levemente-sobre-la-zona-neutral-al-cierre-del-2025-1",
-      "type": "noticias",
-      "slug": "2026-01-15-la-confianza-del-consumidor-se-mantuvo-levemente-sobre-la-zona-neutral-al-cierre-del-2025-1",
-      "category": "macro",
-      "title": "La confianza del consumidor se mantuvo levemente sobre la zona neutral al cierre del 2025",
-      "description": "En diciembre de 2025, el (ICC registró un nivel de 51,69, ubicándose por debajo del valor observado en el mes previo y del verificado en diciembre de 2024.\n\n",
-      "thumbnail": "/assets/img/mercado-libre-e1584221732666.jpg",
-      "body": "En diciembre de 2025, el Índice de Confianza del Consumidor (ICC) registró un nivel de 51,69, ubicándose por debajo del valor observado en el mes previo y del verificado en diciembre de 2024.\r\n\r\nEl Índice de Situación Económica (ISE) registró un valor de 39,09, mayor en 0,71 puntos con respecto al mes anterior, pero menor en 0,79 puntos al dato registrado en diciembre de 2024. Por su parte, el Índice de Expectativas Económicas (IEE) alcanzó un resultado de 64,29, menor al índice del mes anterior en 2,42 puntos, e inferior en 3,80 puntos al valor de diciembre de 2024.\r\n\r\n## Predisposición para ahorrar\r\n\r\nEn cuanto a la predisposición a ahorrar, el porcentaje de encuestados que respondió de forma afirmativa a esta consulta fue de 29,50  %. Este resultado fue superior en 6,50 puntos porcentuales (pp) respecto al mes anterior, y en la misma magnitud respecto al dato de diciembre de 2024.\r\n\r\nPor otro lado, en la predisposición a adquirir bienes duraderos, se registraron incrementos mensuales en las categorías de electrodomésticos y autos. En contraste, se observó una reducción en la predisposición a adquirir casas y motos. En términos interanuales, todas las categorías de bienes presentaron reducciones, a excepción de electrodomésticos, que no registró variación.",
-      "date": "2026-01-15T17:07:00.000Z",
-      "featured": {
-        "is_featured": true,
-        "is_main_featured": false,
-        "show_in_latest": true
-      },
-      "tags": [
-        "economia",
-        "empresa",
-        "negocios"
-      ],
-      "tags_normalized": [
-        "economia",
-        "empresa",
-        "negocios"
-      ],
-      "summary": "En diciembre de 2025, el (ICC registró un nivel de 51,69, ubicándose por debajo del valor observado en el mes previo y del verificado en diciembre de 2024.\n\n",
-      "author": "Perspectivas"
-    },
-    {
-      "id": "2026-01-15-el-poder-ejecutivo-declara-de-interés-nacional-el-acercamiento-de-paraguay-a-la-ocde-1",
-      "type": "noticias",
-      "slug": "economía",
+      "author_image": "/assets/img/authors/logo-completo-perspectivas.svg",
       "category": "politica-economica",
-      "title": "El Poder Ejecutivo declara de interés nacional el acercamiento de Paraguay a la OCDE",
-      "description": "El Poder Ejecutivo declaró de interés nacional el proceso de acercamiento de la República del Paraguay a la Organización para la Cooperación y el Desarrollo Económicos (OCDE), con miras a la obtención de una membresía plena.\n\n",
-      "thumbnail": "/assets/img/py.-imagen-de-pru-no-usar.jpg",
-      "body": "Mediante el Decreto N° 5221, **el Poder Ejecutivo declaró de interés nacional el proceso de acercamiento de la República del Paraguay a la Organización para la Cooperación y el Desarrollo Económicos (OCDE),** con miras a la obtención de una membresía plena.\r\n\r\nEste proceso de vinculación se inició en el año 2023 y se desarrolla en el marco del Programa País, aprobado por el Consejo de la OCDE. Dicho programa contempla la realización de una serie de estudios y evaluaciones orientados a analizar las políticas públicas y el marco normativo nacional, así como su grado de alineación con los estándares internacionales promovidos por la organización.\r\n\r\n**En este contexto, el decreto faculta al Ministerio de Economía y Finanzas (MEF), en coordinación con el Ministerio de Relaciones Exteriores (MRE), a llevar adelante las acciones de coordinación, gestión técnica y articulación interinstitucional necesarias para la implementación del Programa País OCDE.** Esto incluye la convocatoria a los Organismos y Entidades del Estado (OEE), así como a otros actores relevantes.\r\n\r\n![Dicho programa contempla la realización de una serie de estudios y evaluaciones orientados a analizar las políticas públicas y el marco normativo nacional, así como su grado de alineación con los estándares internacionales promovidos por la organización.](/assets/img/precios-de-commodities-en-baja-bm.jpg \"Economía\")\r\n\r\n## **Representantes**\r\n\r\nAsimismo, se establece que los OEE dependientes del Poder Ejecutivo que sean convocados en el marco del Programa País con la OCDE deberán designar, mediante resolución institucional, a sus representantes titulares y alternos para integrar los grupos de trabajo que se conformen.\r\n\r\n**El decreto también instruye a todas las instituciones y ministerios del Poder Ejecutivo** a arbitrar los medios necesarios para colaborar con el MEF y el MRE en los trabajos que se desarrollen en el marco del proceso de acercamiento a la OCDE, con miras a una futura membresía plena.\r\n\r\nLa adhesión a la OCDE permitirá posicionar internacionalmente a Paraguay como un país confiable, con políticas públicas alineadas a los más altos estándares de gobernanza y desarrollo. Este avance complementa el reciente logro del Grado de Inversión y constituye un sello de calidad institucional que reafirma el compromiso del país con las mejores prácticas internacionales.",
-      "date": "2026-01-15T00:08:00.000Z",
-      "featured": {
-        "is_featured": true,
-        "is_main_featured": false,
-        "show_in_latest": true
-      },
       "tags": [
+        "politica-fiscal",
         "economia",
-        "finanzas",
-        "desarrollo"
+        "finanzas"
       ],
-      "tags_normalized": [
-        "economia",
-        "finanzas",
-        "desarrollo"
-      ],
-      "summary": "El Poder Ejecutivo declaró de interés nacional el proceso de acercamiento de la República del Paraguay a la Organización para la Cooperación y el Desarrollo Económicos (OCDE), con miras a la obtención de una membresía plena.\n\n",
-      "author": "Armando G Larrosa"
-    },
-    {
-      "id": "2026-01-15-el-poder-ejecutivo-declara-de-interés-nacional-el-acercamiento-de-paraguay-a-la-ocde",
-      "type": "noticias",
-      "slug": "economía",
-      "category": "politica-economica",
-      "title": "El Poder Ejecutivo declara de interés nacional el acercamiento de Paraguay a la OCDE",
-      "description": "El Poder Ejecutivo declaró de interés nacional el proceso de acercamiento de la República del Paraguay a la Organización para la Cooperación y el Desarrollo Económicos (OCDE), con miras a la obtención de una membresía plena.\n\n",
-      "thumbnail": "/assets/img/py.-imagen-de-pru-no-usar.jpg",
-      "body": "Mediante el Decreto N° 5221, **el Poder Ejecutivo declaró de interés nacional el proceso de acercamiento de la República del Paraguay a la Organización para la Cooperación y el Desarrollo Económicos (OCDE),** con miras a la obtención de una membresía plena.\r\n\r\nEste proceso de vinculación se inició en el año 2023 y se desarrolla en el marco del Programa País, aprobado por el Consejo de la OCDE. Dicho programa contempla la realización de una serie de estudios y evaluaciones orientados a analizar las políticas públicas y el marco normativo nacional, así como su grado de alineación con los estándares internacionales promovidos por la organización.\r\n\r\n**En este contexto, el decreto faculta al Ministerio de Economía y Finanzas (MEF), en coordinación con el Ministerio de Relaciones Exteriores (MRE), a llevar adelante las acciones de coordinación, gestión técnica y articulación interinstitucional necesarias para la implementación del Programa País OCDE.** Esto incluye la convocatoria a los Organismos y Entidades del Estado (OEE), así como a otros actores relevantes.\r\n\r\n![Dicho programa contempla la realización de una serie de estudios y evaluaciones orientados a analizar las políticas públicas y el marco normativo nacional, así como su grado de alineación con los estándares internacionales promovidos por la organización.](/assets/img/precios-de-commodities-en-baja-bm.jpg \"Economía\")\r\n\r\n## **Representantes**\r\n\r\nAsimismo, se establece que los OEE dependientes del Poder Ejecutivo que sean convocados en el marco del Programa País con la OCDE deberán designar, mediante resolución institucional, a sus representantes titulares y alternos para integrar los grupos de trabajo que se conformen.\r\n\r\n**El decreto también instruye a todas las instituciones y ministerios del Poder Ejecutivo** a arbitrar los medios necesarios para colaborar con el MEF y el MRE en los trabajos que se desarrollen en el marco del proceso de acercamiento a la OCDE, con miras a una futura membresía plena.\r\n\r\nLa adhesión a la OCDE permitirá posicionar internacionalmente a Paraguay como un país confiable, con políticas públicas alineadas a los más altos estándares de gobernanza y desarrollo. Este avance complementa el reciente logro del Grado de Inversión y constituye un sello de calidad institucional que reafirma el compromiso del país con las mejores prácticas internacionales.",
-      "date": "2026-01-15T00:08:00.000Z",
-      "featured": {
-        "is_featured": true,
-        "is_main_featured": false,
-        "show_in_latest": true
-      },
-      "tags": [
-        "economia",
-        "finanzas",
-        "desarrollo"
-      ],
-      "tags_normalized": [
-        "economia",
-        "finanzas",
-        "desarrollo"
-      ],
-      "summary": "El Poder Ejecutivo declaró de interés nacional el proceso de acercamiento de la República del Paraguay a la Organización para la Cooperación y el Desarrollo Económicos (OCDE), con miras a la obtención de una membresía plena.\n\n",
-      "author": "Armando G Larrosa"
-    },
-    {
-      "id": "2026-01-14-créditos-para-la-vivienda-abarca-cerca-de-la-mitad-de-la-cartera-de-la-afd​",
-      "type": "noticias",
-      "slug": "2026-01-14-créditos-para-la-vivienda-abarca-cerca-de-la-mitad-de-la-cartera-de-la-afd​",
-      "category": "politica-economica",
-      "title": "Créditos para la vivienda abarca cerca de la mitad de la cartera de la AFD​",
-      "description": "La AFD desembolsó G 205 mil millones para créditos en el mes de noviembre. De esta manera, el acumulado sumó G 2,4 billones, 48,5% mayor.​\n\n",
-      "thumbnail": "/assets/img/couple-holding-small-house-medium-shot.jpg",
-      "body": "La Agencia Financiera de Desarrollo (AFD) desembolsó PYG 205 mil millones (USD 24 millones) para créditos en el mes de noviembre. De esta manera el acumulado a dicho mes sumó PYG 2,4 billones (USD 321 millones), siendo 48,5% mayor interanualmente., según Mentu.\r\n\r\nLos mayores desembolsos a noviembre se dieron en créditos para la vivienda, con el 37,2%, equivalente a PYG 911 mil millones (USD 121 millones), así como un 31,6% para comercio y servicios, sectores que en conjunto representan 68,9% del total. ​\r\n\r\nCon estos desembolsos, la cartera vigente de la AFD ascendió a PYG 9,6 billones (USD 1,4 mil millones), con un incremento interanual de 11,5%. El principal sector de esta cartera es el de la vivienda, con 48,8% del total, beneficiando a 20.811 personas. ​\r\n\r\nA dicho sector le siguen el comercial (13,4%; 16.665 beneficiarios), el agrícola (12,7%; 3.694 beneficiarios) y el industrial (11,4%; 416 beneficiarios). El 86,3% de la cartera vigente de la AFD se concentra en estos cuatro sectores, que suman 41.586 beneficiarios, es decir, 98,7% del total.​",
-      "date": "2026-01-14T16:14:00.000Z",
-      "featured": {
-        "is_featured": false,
-        "is_main_featured": false,
-        "show_in_latest": true
-      },
-      "tags": [
-        "economia",
-        "inversion",
-        "desarrollo"
-      ],
-      "tags_normalized": [
-        "economia",
-        "inversion",
-        "desarrollo"
-      ],
-      "summary": "La AFD desembolsó G 205 mil millones para créditos en el mes de noviembre. De esta manera, el acumulado sumó G 2,4 billones, 48,5% mayor.​\n\n",
-      "author": "Perspectivas"
-    },
-    {
-      "id": "2026-01-14-exportaciones-repuntaron-casi-6-durante-el-2025",
-      "type": "noticias",
-      "slug": "2026-01-14-exportaciones-repuntaron-casi-6-durante-el-2025",
-      "category": "macro",
-      "title": "Exportaciones repuntaron casi 6% durante el 2025",
-      "description": "Durante el año 2025, las exportaciones totales, alcanzaron un valor de USD 16.720,3 millones, 5,8% por encima de los USD 15.806,1 millones observados a diciembre del año anterior. ",
-      "thumbnail": "/assets/img/exportación.jpg",
-      "body": "Durante el año 2025, las exportaciones totales, alcanzaron un valor de USD 16.720,3 millones, 5,8% por encima de los USD 15.806,1 millones observados a diciembre del año anterior. Las exportaciones registradas representaron el 66,3% del total, alcanzando USD 11.082,1 millones, superior en 1,5% al valor acumulado a diciembre del 2024. Las reexportaciones, por su parte, con el 27,4% del total, registraron un valor de USD 4.584,7 millones, con un aumento de 17,2%. Las otras exportaciones, con el 6,3% de participación, registraron un aumento del 7,7%, situándose en un nivel de USD 1.053,5 millones. El incremento observado en las exportaciones registradas se encuentra explicada principalmente por mayores ventas de carne, maíz y aceite de soja. Los envíos realizados bajo el régimen de maquila alcanzaron los USD 1.236,7 millones, superior en 10,0% a lo registrado en el mismo periodo del año 2024.\r\n\r\n\r\n\r\n## **Importaciones**\r\n\r\nDurante el año 2025, las importaciones totales, alcanzaron USD 18.111,1 millones, 10,6% mayor a los USD 16.379,4 millones registrados a diciembre de 2024. Las importaciones registradas representaron el 97,9% del total, alcanzando un valor de USD 17.721,9 millones, un 11,2% superior con respecto al valor del mismo periodo del 2024, mientras que las otras importaciones representaron el 2,1% restante, por un valor de USD 389,1 millones y con una reducción del 12,9% con respecto al valor acumulado en el mismo mes del año anterior. En volúmenes, se observó un incremento de 10,5%.",
-      "date": "2026-01-14T13:15:00.000Z",
+      "thumbnail": "/assets/img/mef-villa-serrati_4_0.jpg",
+      "caption": "El Ministerio de Economía y Finanzas expone alcances de la reforma de la Caja Fiscal con representantes retirados de las Fuerzas Públicas. Foto: MEF",
       "featured": {
         "is_featured": false,
         "is_main_featured": true,
-        "show_in_latest": true
+        "show_in_latest": true,
+        "highlights": [
+          "Se presentó un diagnóstico detallado sobre la sostenibilidad financiera del sistema.",
+          "Expusieron los principales ejes del proyecto de ley impulsado por el Ejecutivo.",
+          "Más del 70% de los nuevos jubilados se retiró con menos de 55 años de edad."
+        ],
+        "is_section_featured": false
       },
+      "id": "2026-01-16-economía-y-finanzas-expone-alcances-de-la-reforma-de-la-caja-fiscal",
+      "type": "noticias",
+      "slug": "2026-01-16-economía-y-finanzas-expone-alcances-de-la-reforma-de-la-caja-fiscal",
+      "description": "El equipo técnico del MEF instaló un espacio de diálogo, debate y construcción de consensos con representantes de los círculos de oficiales y suboficiales retirados de las Fuerzas Públicas (policías y militares).",
+      "body": "Durante la reunión, realizada en el Edificio Ybaga de Asunción, sede del Viceministerio de Economía y Planificación, la Gerente de Desarrollo Económico del MEF, Liz Coronel, presentó un diagnóstico detallado sobre la sostenibilidad financiera del sistema, así como las proyecciones actuariales para los próximos años en caso de no avanzar con la reforma propuesta. Asimismo, expuso los principales ejes del proyecto de ley impulsado por el Poder Ejecutivo.\r\n\r\nEn ese contexto, el Viceministro González Soley reiteró la preocupación del Ministerio ante la inexistencia de una edad mínima de jubilación en sectores como el Magisterio Nacional, Docentes Universitarios, Policías y Militares, situación que propicia jubilaciones tempranas y profundiza el déficit del sistema.\r\n\r\nEn particular, se señaló que en el sector de las Fuerzas Públicas más del 70% de los nuevos jubilados en 2025 se retiró con menos de 55 años de edad. Bajo las reglas actuales, el total de aportes realizados por un policía o militar promedio apenas alcanza a cubrir tres años de retiro, debiendo el resto ser financiado con impuestos pagados por toda la ciudadanía.\r\n\r\nAsimismo, se recordó que el déficit de la Caja Fiscal en 2025 ascendió a USD 380 millones, equivalente al 0,8% del Producto Interno Bruto (PIB), lo que representa aproximadamente la mitad del déficit máximo permitido por la Ley de Responsabilidad Fiscal (LRF), que es de 1,5%.\r\n\r\nEn ese sentido, se explicó que, si bien actualmente, el Estado financia con impuestos el déficit del Programa No Civil, las proyecciones actuariales indican que, de mantenerse las reglas vigentes, a partir del año 2028 también el Programa Civil requerirá financiamiento con recursos tributarios. Esta dinámica implicaría una mayor presión sobre las finanzas públicas, desplazando recursos de áreas y programas estratégicos para el desarrollo, lo que refuerza la necesidad de avanzar en medidas de racionalización y ordenamiento del sistema previsional.\r\n\r\nEn cuanto a las medidas planteadas en el proyecto de reforma, se explicó que la iniciativa contempla el establecimiento de una edad mínima de acceso a la jubilación para los sectores de Magisterio Nacional, Docentes Universitarios, Magistrados Judiciales, Policías y Militares, así como una regla de acceso gradual a partir de los 20 años hasta los 35 años de servicio para el caso de policías y militares. Además, se prevé un esquema de aporte obrero-patronal del 22%, compuesto por un 19% a cargo del trabajador y un 3% del Estado.\r\n\r\nEl proyecto también incorpora tablas de sustitución que incentivan una mayor permanencia y mayores aportes al sistema, con tasas que inician en el 50% y pueden alcanzar hasta el 100% en el caso de policías y militares. Asimismo, establece una base de cálculo homogénea, tomando como referencia el promedio de los últimos cinco años de aportes, y un mecanismo uniforme de actualización de los haberes jubilatorios para todos los sectores, basado en la variación anual del Salario Mínimo Legal Vigente.\r\n\r\nAnte la preocupación de la Coordinadora de la Fuerza Pública, sobre los derechos adquiridos y en especial sobre la equiparación que se pretende derogar el Ministerio aclara que, además de la actualización del haber de retiro en la proporción del Salario Mínimo Legal Vigente previsto en el proyecto de ley, los ya retirados y los que ya tienen derechos adquiridos para acceder al haber de retiro tanto extraordinario como ordinario, no serán afectados por la derogación de los artículos que hacen referencia a la equiparación del haber de retiro con el salario del que está en actividad, es decir, los afiliados al sistema con derechos adquiridos, no serán afectados con las derogaciones referidas. Esto, en el marco del pleno reconocimiento y respeto de los derechos adquiridos de conformidad al Inc. d del Art. 3 del Proyecto de ley.\r\n\r\nTambién han manifestado su desacuerdo en el establecimiento de la edad mínima de 57 años para acceder al haber de retiro teniendo en cuenta que los mismos pertenecen a una institución técnica operativa y con la aplicación de esta disposición se desnaturalizará a la profesión Militar y Policial. Al respecto, los representantes del MEF se ratificaron en la necesidad de una edad mínima, debido a que la ausencia de este requisito constituye el principal factor que presiona la sostenibilidad del sistema y compromete la disponibilidad de fondos para atender estas obligaciones.\r\n\r\nEl proyecto de ley que propone las medidas para la reforma del sistema de jubilaciones y pensiones del sector público, así como la presentación realizada en la fecha, se encuentran disponibles en el sitio web institucional del MEF, en el siguiente enlace: <https://www.mef.gov.py/es/reforma-de-la-caja-fiscal>",
+      "tags_normalized": [
+        "politica-fiscal",
+        "economia",
+        "finanzas"
+      ],
+      "kicker": "politica-economica",
+      "summary_short": "El equipo técnico del MEF instaló un espacio de diálogo, debate y construcción de consensos con representantes de los círculos de oficiales y suboficiales retirados de las Fuerzas…"
+    },
+    {
+      "title": "Más de 7.600 Empresas por Acciones Simplificadas se constituyeron en Paraguay",
+      "date": "2026-01-16T22:02:00.000Z",
+      "summary": "Según datos de la Dirección General del Sistema Unificado de Apertura y Cierre de Empresas (SUACE), las EAS constituidas en 2025 movilizaron una inversión total de USD 363 millones. ",
+      "author": "Perspectivas",
+      "author_image": "",
+      "category": "empleo",
+      "tags": [
+        "negocios",
+        "empleo",
+        "economia",
+        "mercado-laboral",
+        "desarrollo",
+        "inversion"
+      ],
+      "thumbnail": "/assets/img/empresas-bajo-regimen-de-eas.jpg",
+      "caption": "En cuanto a los sectores económicos, el informe resalta que el 85% de las EAS constituidas corresponde a los rubros de comercio y servicios, seguido por los sectores industrial y agropecuario. Foto: IP",
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": false,
+        "show_in_latest": true,
+        "highlights": [
+          "Las inversiones de origen nacional alcanzaron los USD 317 millones.",
+          "Continúan posicionándose como una alternativa ágil y eficiente para emprendedores e inversionistas.",
+          "De febrero 2021 a diciembre 2025 se han constituido 21.891 firmas."
+        ],
+        "is_section_featured": false
+      },
+      "id": "2026-01-16-más-de-7-600-empresas-por-acciones-simplificadas-se-constituyeron-en-paraguay",
+      "type": "noticias",
+      "slug": "2026-01-16-más-de-7-600-empresas-por-acciones-simplificadas-se-constituyeron-en-paraguay",
+      "description": "Según datos de la Dirección General del Sistema Unificado de Apertura y Cierre de Empresas (SUACE), las EAS constituidas en 2025 movilizaron una inversión total de USD 363 millones. ",
+      "body": "Durante el año 2025, **un total de 7.618 Empresas por Acciones Simplificadas (EAS) fueron constituidas en Paraguay, lo que representa un incremento del 28% con respecto al año anterio**r, consolidando a esta figura jurídica como una de las principales herramientas para la formalización y dinamización del tejido empresarial.\r\n\r\nSegún datos de la **Dirección General del Sistema Unificado de Apertura y Cierre de Empresas (SUACE), las EAS constituidas en 2025 movilizaron una inversión total de USD 363 millones.** De ese monto, las inversiones de origen nacional alcanzaron los USD 317 millones, mientras que las inversiones extranjeras sumaron USD 45 millones, reflejando el interés tanto local como internacional por operar bajo este régimen empresarial.\r\n\r\nEn cuanto a los sectores económicos, el informe resalta que el 85% de las EAS constituidas corresponde a los rubros de comercio y servicios, seguido por los sectores industrial y agropecuario.\r\n\r\nDesde el SUACE destacan que las EAS continúan posicionándose como una alternativa ágil y eficiente para emprendedores e inversionistas, gracias a la simplificación de trámites, la reducción de los tiempos de constitución y la posibilidad de operar en un entorno formal.\r\n\r\n## **EAS desde su implementación**\r\n\r\nEn términos acumulados, desde febrero de 2021, fecha de implementación de las EAS, hasta diciembre de 2025, se han constituido 21.891 Empresas por Acciones Simplificadas en todo el país.\r\n\r\nDurante este período, el monto total de inversión asciende a USD 1.014 millones, evidenciando el impacto sostenido de este modelo societario en la creación de empresas y en la captación de capitales.\r\n\r\nLa evolución de estos indicadores reafirma el rol de las EAS como un instrumento clave para impulsar la formalización empresarial, fortalecer la actividad económica y fomentar la inversión en Paraguay.",
+      "tags_normalized": [
+        "negocios",
+        "empleo",
+        "economia",
+        "mercado-laboral",
+        "desarrollo",
+        "inversion"
+      ],
+      "kicker": "empleo",
+      "summary_short": "Según datos de la Dirección General del Sistema Unificado de Apertura y Cierre de Empresas (SUACE), las EAS constituidas en 2025 movilizaron una inversión total de USD 363 millones…"
+    },
+    {
+      "title": "Exportaciones de maquila superaron los USD 1.309 millones al cierre del 2025",
+      "date": "2026-01-15T19:38:00.000Z",
+      "summary": "Los envíos totales alcanzaron USD 1.309 millones, un nuevo récord para el sector, reportó el Viceministerio de Industria.",
+      "author": "Perspectivas",
+      "category": "empleo",
+      "tags": [
+        "comercio-exterior",
+        "empleo",
+        "economia",
+        "negocios",
+        "desarrollo"
+      ],
+      "thumbnail": "/assets/img/sumidenso-maquila-industria-trabajo-17.jpg",
+      "caption": "En materia de empleo, actualmente se registran 35.357 puestos de trabajo vinculados a las industrias maquiladoras, lo que representa un incremento interanual del 18%. Foto: IP Paraguay",
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": false,
+        "show_in_latest": true,
+        "is_section_featured": false
+      },
+      "id": "2026-01-15-exportaciones-de-maquila-superaron-los-usd-1-309-millones-al-cierre-del-2025",
+      "type": "noticias",
+      "slug": "2026-01-15-exportaciones-de-maquila-superaron-los-usd-1-309-millones-al-cierre-del-2025",
+      "description": "Los envíos totales alcanzaron USD 1.309 millones, un nuevo récord para el sector, reportó el Viceministerio de Industria.",
+      "body": "Con los datos del mes de diciembre, las exportaciones de maquila confirmaron su crecimiento sostenido durante el 2025. Los envíos totales alcanzaron USD 1.309 millones, un nuevo récord para el sector, reportó el Viceministerio de Industria.\r\n\r\nDel total exportado, USD 1.262 millones corresponden a bienes de consumo, lo que representa un incremento de USD 153 millones en comparación con el mismo periodo del año anterior. En tanto, las exportaciones de servicios intangibles alcanzaron USD 47 millones, reflejando la diversificación de la oferta exportable.\r\n\r\nDurante el año, fueron aprobados 22 nuevos programas de maquila, que representan aproximadamente USD 50 millones en inversiones.\r\n\r\n### **Productos enviados**\r\n\r\nEn cuanto a la composición de las exportaciones, el Viceministerio señala que en el 2025 el 83% de los envíos se concentró en los rubros de autopartes, confecciones, aluminio, productos alimenticios y plásticos, mientras que, en menor medida, también se exportaron productos químicos-farmacéuticos y alimentos para mascotas.\r\n\r\nRespecto a los destinos, el 82% de las manufacturas maquiladoras tuvo como destino al Mercosur, donde Brasil concentró el 64% de los envíos y Argentina el 16%. Asimismo, los productos bajo este régimen llegaron a Estados Unidos, Países Bajos, Bolivia, Chile, Uruguay, entre otros destinos.\r\n\r\n![Durante el año, fueron aprobados 22 nuevos programas de maquila, que representan aproximadamente USD 50 millones en inversiones.](/assets/img/exportación.jpg)\r\n\r\n### **Nuevos destinos**\r\n\r\nEn los últimos 12 meses, las empresas maquiladoras lograron acceder a seis nuevos mercados internacionales, con exportaciones a Rusia (productos cárnicos), Islas Caimán (químicos), Omán (productos alimenticios), Letonia (madera y manufacturas), Ucrania (autopartes) y Nepal (alimentos para mascotas).\r\n\r\nAdemás, al cierre de 2025 las exportaciones de las industrias maquiladoras representan el 70% de las exportaciones de manufacturas de origen industrial del país.\r\n\r\n### **Mano de obra empleada**\r\n\r\nEn materia de empleo, actualmente se registran 35.357 puestos de trabajo vinculados a las industrias maquiladoras, lo que representa un incremento interanual del 18%, equivalente a 5.401 nuevos empleos respecto a 2024.\r\n\r\nEl 45% de estos empleos es ocupado por mujeres, mientras que los principales rubros generadores de empleo son confecciones y textiles, autopartes, servicios intangibles, plásticos y químicos-farmacéuticos, señala el reporte.\r\n\r\nEl 91% de las empresas con programas de maquila aprobados se concentra en los departamentos de Alto Paraná, Central, Capital y Amambay, consolidando estos territorios como polos estratégicos para el desarrollo industrial del país.\r\n\r\n### **Balanza comercial positiva**\r\n\r\nCon importaciones por USD 675 millones bajo este régimen, la balanza comercial cerró con un 87% más de exportaciones.",
+      "tags_normalized": [
+        "comercio-exterior",
+        "empleo",
+        "economia",
+        "negocios",
+        "desarrollo"
+      ],
+      "kicker": "empleo",
+      "summary_short": "Los envíos totales alcanzaron USD 1.309 millones, un nuevo récord para el sector, reportó el Viceministerio de Industria."
+    },
+    {
+      "title": "La confianza del consumidor se mantuvo levemente sobre la zona neutral al cierre del 2025",
+      "date": "2026-01-15T17:07:00.000Z",
+      "summary": "En diciembre de 2025, el (ICC registró un nivel de 51,69, ubicándose por debajo del valor observado en el mes previo y del verificado en diciembre de 2024.\n\n",
+      "author": "Perspectivas",
+      "category": "macro",
+      "tags": [
+        "economia",
+        "empresa",
+        "negocios"
+      ],
+      "thumbnail": "/assets/img/mercado-libre-e1584221732666.jpg",
+      "featured": {
+        "is_featured": true,
+        "is_main_featured": false,
+        "show_in_latest": true,
+        "is_section_featured": false
+      },
+      "id": "2026-01-15-la-confianza-del-consumidor-se-mantuvo-levemente-sobre-la-zona-neutral-al-cierre-del-2025-1",
+      "type": "noticias",
+      "slug": "2026-01-15-la-confianza-del-consumidor-se-mantuvo-levemente-sobre-la-zona-neutral-al-cierre-del-2025-1",
+      "description": "En diciembre de 2025, el (ICC registró un nivel de 51,69, ubicándose por debajo del valor observado en el mes previo y del verificado en diciembre de 2024.\n\n",
+      "body": "En diciembre de 2025, el Índice de Confianza del Consumidor (ICC) registró un nivel de 51,69, ubicándose por debajo del valor observado en el mes previo y del verificado en diciembre de 2024.\r\n\r\nEl Índice de Situación Económica (ISE) registró un valor de 39,09, mayor en 0,71 puntos con respecto al mes anterior, pero menor en 0,79 puntos al dato registrado en diciembre de 2024. Por su parte, el Índice de Expectativas Económicas (IEE) alcanzó un resultado de 64,29, menor al índice del mes anterior en 2,42 puntos, e inferior en 3,80 puntos al valor de diciembre de 2024.\r\n\r\n## Predisposición para ahorrar\r\n\r\nEn cuanto a la predisposición a ahorrar, el porcentaje de encuestados que respondió de forma afirmativa a esta consulta fue de 29,50  %. Este resultado fue superior en 6,50 puntos porcentuales (pp) respecto al mes anterior, y en la misma magnitud respecto al dato de diciembre de 2024.\r\n\r\nPor otro lado, en la predisposición a adquirir bienes duraderos, se registraron incrementos mensuales en las categorías de electrodomésticos y autos. En contraste, se observó una reducción en la predisposición a adquirir casas y motos. En términos interanuales, todas las categorías de bienes presentaron reducciones, a excepción de electrodomésticos, que no registró variación.",
+      "tags_normalized": [
+        "economia",
+        "empresa",
+        "negocios"
+      ],
+      "kicker": "macro",
+      "summary_short": "En diciembre de 2025, el (ICC registró un nivel de 51,69, ubicándose por debajo del valor observado en el mes previo y del verificado en diciembre de 2024."
+    },
+    {
+      "title": "El Poder Ejecutivo declara de interés nacional el acercamiento de Paraguay a la OCDE",
+      "date": "2026-01-15T00:08:00.000Z",
+      "summary": "El Poder Ejecutivo declaró de interés nacional el proceso de acercamiento de la República del Paraguay a la Organización para la Cooperación y el Desarrollo Económicos (OCDE), con miras a la obtención de una membresía plena.\n\n",
+      "author": "Armando G Larrosa",
+      "category": "politica-economica",
+      "tags": [
+        "economia",
+        "finanzas",
+        "desarrollo"
+      ],
+      "thumbnail": "/assets/img/py.-imagen-de-pru-no-usar.jpg",
+      "featured": {
+        "is_featured": true,
+        "is_main_featured": false,
+        "show_in_latest": true,
+        "is_section_featured": false
+      },
+      "slug": "2026-01-15-el-poder-ejecutivo-declara-de-interés-nacional-el-acercamiento-de-paraguay-a-la-ocde-1",
+      "id": "2026-01-15-el-poder-ejecutivo-declara-de-interés-nacional-el-acercamiento-de-paraguay-a-la-ocde-1",
+      "type": "noticias",
+      "description": "El Poder Ejecutivo declaró de interés nacional el proceso de acercamiento de la República del Paraguay a la Organización para la Cooperación y el Desarrollo Económicos (OCDE), con miras a la obtención de una membresía plena.\n\n",
+      "body": "Mediante el Decreto N° 5221, **el Poder Ejecutivo declaró de interés nacional el proceso de acercamiento de la República del Paraguay a la Organización para la Cooperación y el Desarrollo Económicos (OCDE),** con miras a la obtención de una membresía plena.\r\n\r\nEste proceso de vinculación se inició en el año 2023 y se desarrolla en el marco del Programa País, aprobado por el Consejo de la OCDE. Dicho programa contempla la realización de una serie de estudios y evaluaciones orientados a analizar las políticas públicas y el marco normativo nacional, así como su grado de alineación con los estándares internacionales promovidos por la organización.\r\n\r\n**En este contexto, el decreto faculta al Ministerio de Economía y Finanzas (MEF), en coordinación con el Ministerio de Relaciones Exteriores (MRE), a llevar adelante las acciones de coordinación, gestión técnica y articulación interinstitucional necesarias para la implementación del Programa País OCDE.** Esto incluye la convocatoria a los Organismos y Entidades del Estado (OEE), así como a otros actores relevantes.\r\n\r\n![Dicho programa contempla la realización de una serie de estudios y evaluaciones orientados a analizar las políticas públicas y el marco normativo nacional, así como su grado de alineación con los estándares internacionales promovidos por la organización.](/assets/img/precios-de-commodities-en-baja-bm.jpg \"Economía\")\r\n\r\n## **Representantes**\r\n\r\nAsimismo, se establece que los OEE dependientes del Poder Ejecutivo que sean convocados en el marco del Programa País con la OCDE deberán designar, mediante resolución institucional, a sus representantes titulares y alternos para integrar los grupos de trabajo que se conformen.\r\n\r\n**El decreto también instruye a todas las instituciones y ministerios del Poder Ejecutivo** a arbitrar los medios necesarios para colaborar con el MEF y el MRE en los trabajos que se desarrollen en el marco del proceso de acercamiento a la OCDE, con miras a una futura membresía plena.\r\n\r\nLa adhesión a la OCDE permitirá posicionar internacionalmente a Paraguay como un país confiable, con políticas públicas alineadas a los más altos estándares de gobernanza y desarrollo. Este avance complementa el reciente logro del Grado de Inversión y constituye un sello de calidad institucional que reafirma el compromiso del país con las mejores prácticas internacionales.",
+      "tags_normalized": [
+        "economia",
+        "finanzas",
+        "desarrollo"
+      ],
+      "kicker": "politica-economica",
+      "summary_short": "El Poder Ejecutivo declaró de interés nacional el proceso de acercamiento de la República del Paraguay a la Organización para la Cooperación y el Desarrollo Económicos (OCDE), con…"
+    },
+    {
+      "title": "El Poder Ejecutivo declara de interés nacional el acercamiento de Paraguay a la OCDE",
+      "date": "2026-01-15T00:08:00.000Z",
+      "summary": "El Poder Ejecutivo declaró de interés nacional el proceso de acercamiento de la República del Paraguay a la Organización para la Cooperación y el Desarrollo Económicos (OCDE), con miras a la obtención de una membresía plena.\n\n",
+      "author": "Armando G Larrosa",
+      "category": "politica-economica",
+      "tags": [
+        "economia",
+        "finanzas",
+        "desarrollo"
+      ],
+      "thumbnail": "/assets/img/py.-imagen-de-pru-no-usar.jpg",
+      "featured": {
+        "is_featured": true,
+        "is_main_featured": false,
+        "show_in_latest": true,
+        "is_section_featured": false
+      },
+      "slug": "2026-01-15-el-poder-ejecutivo-declara-de-interés-nacional-el-acercamiento-de-paraguay-a-la-ocde",
+      "id": "2026-01-15-el-poder-ejecutivo-declara-de-interés-nacional-el-acercamiento-de-paraguay-a-la-ocde",
+      "type": "noticias",
+      "description": "El Poder Ejecutivo declaró de interés nacional el proceso de acercamiento de la República del Paraguay a la Organización para la Cooperación y el Desarrollo Económicos (OCDE), con miras a la obtención de una membresía plena.\n\n",
+      "body": "Mediante el Decreto N° 5221, **el Poder Ejecutivo declaró de interés nacional el proceso de acercamiento de la República del Paraguay a la Organización para la Cooperación y el Desarrollo Económicos (OCDE),** con miras a la obtención de una membresía plena.\r\n\r\nEste proceso de vinculación se inició en el año 2023 y se desarrolla en el marco del Programa País, aprobado por el Consejo de la OCDE. Dicho programa contempla la realización de una serie de estudios y evaluaciones orientados a analizar las políticas públicas y el marco normativo nacional, así como su grado de alineación con los estándares internacionales promovidos por la organización.\r\n\r\n**En este contexto, el decreto faculta al Ministerio de Economía y Finanzas (MEF), en coordinación con el Ministerio de Relaciones Exteriores (MRE), a llevar adelante las acciones de coordinación, gestión técnica y articulación interinstitucional necesarias para la implementación del Programa País OCDE.** Esto incluye la convocatoria a los Organismos y Entidades del Estado (OEE), así como a otros actores relevantes.\r\n\r\n![Dicho programa contempla la realización de una serie de estudios y evaluaciones orientados a analizar las políticas públicas y el marco normativo nacional, así como su grado de alineación con los estándares internacionales promovidos por la organización.](/assets/img/precios-de-commodities-en-baja-bm.jpg \"Economía\")\r\n\r\n## **Representantes**\r\n\r\nAsimismo, se establece que los OEE dependientes del Poder Ejecutivo que sean convocados en el marco del Programa País con la OCDE deberán designar, mediante resolución institucional, a sus representantes titulares y alternos para integrar los grupos de trabajo que se conformen.\r\n\r\n**El decreto también instruye a todas las instituciones y ministerios del Poder Ejecutivo** a arbitrar los medios necesarios para colaborar con el MEF y el MRE en los trabajos que se desarrollen en el marco del proceso de acercamiento a la OCDE, con miras a una futura membresía plena.\r\n\r\nLa adhesión a la OCDE permitirá posicionar internacionalmente a Paraguay como un país confiable, con políticas públicas alineadas a los más altos estándares de gobernanza y desarrollo. Este avance complementa el reciente logro del Grado de Inversión y constituye un sello de calidad institucional que reafirma el compromiso del país con las mejores prácticas internacionales.",
+      "tags_normalized": [
+        "economia",
+        "finanzas",
+        "desarrollo"
+      ],
+      "kicker": "politica-economica",
+      "summary_short": "El Poder Ejecutivo declaró de interés nacional el proceso de acercamiento de la República del Paraguay a la Organización para la Cooperación y el Desarrollo Económicos (OCDE), con…"
+    },
+    {
+      "title": "Créditos para la vivienda abarca cerca de la mitad de la cartera de la AFD​",
+      "date": "2026-01-14T16:14:00.000Z",
+      "summary": "La AFD desembolsó G 205 mil millones para créditos en el mes de noviembre. De esta manera, el acumulado sumó G 2,4 billones, 48,5% mayor.​\n\n",
+      "author": "Perspectivas",
+      "category": "politica-economica",
+      "tags": [
+        "economia",
+        "inversion",
+        "desarrollo"
+      ],
+      "thumbnail": "/assets/img/couple-holding-small-house-medium-shot.jpg",
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": false,
+        "show_in_latest": true,
+        "is_section_featured": false
+      },
+      "id": "2026-01-14-créditos-para-la-vivienda-abarca-cerca-de-la-mitad-de-la-cartera-de-la-afd​",
+      "type": "noticias",
+      "slug": "2026-01-14-créditos-para-la-vivienda-abarca-cerca-de-la-mitad-de-la-cartera-de-la-afd​",
+      "description": "La AFD desembolsó G 205 mil millones para créditos en el mes de noviembre. De esta manera, el acumulado sumó G 2,4 billones, 48,5% mayor.​\n\n",
+      "body": "La Agencia Financiera de Desarrollo (AFD) desembolsó PYG 205 mil millones (USD 24 millones) para créditos en el mes de noviembre. De esta manera el acumulado a dicho mes sumó PYG 2,4 billones (USD 321 millones), siendo 48,5% mayor interanualmente., según Mentu.\r\n\r\nLos mayores desembolsos a noviembre se dieron en créditos para la vivienda, con el 37,2%, equivalente a PYG 911 mil millones (USD 121 millones), así como un 31,6% para comercio y servicios, sectores que en conjunto representan 68,9% del total. ​\r\n\r\nCon estos desembolsos, la cartera vigente de la AFD ascendió a PYG 9,6 billones (USD 1,4 mil millones), con un incremento interanual de 11,5%. El principal sector de esta cartera es el de la vivienda, con 48,8% del total, beneficiando a 20.811 personas. ​\r\n\r\nA dicho sector le siguen el comercial (13,4%; 16.665 beneficiarios), el agrícola (12,7%; 3.694 beneficiarios) y el industrial (11,4%; 416 beneficiarios). El 86,3% de la cartera vigente de la AFD se concentra en estos cuatro sectores, que suman 41.586 beneficiarios, es decir, 98,7% del total.​",
+      "tags_normalized": [
+        "economia",
+        "inversion",
+        "desarrollo"
+      ],
+      "kicker": "politica-economica",
+      "summary_short": "La AFD desembolsó G 205 mil millones para créditos en el mes de noviembre. De esta manera, el acumulado sumó G 2,4 billones, 48,5% mayor.​"
+    },
+    {
+      "title": "Exportaciones repuntaron casi 6% durante el 2025",
+      "date": "2026-01-14T13:15:00.000Z",
+      "summary": "Durante el año 2025, las exportaciones totales, alcanzaron un valor de USD 16.720,3 millones, 5,8% por encima de los USD 15.806,1 millones observados a diciembre del año anterior. ",
+      "category": "macro",
       "tags": [
         "comercio-exterior",
         "economia",
         "banco-central",
         "commodities"
       ],
+      "thumbnail": "/assets/img/exportación.jpg",
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": false,
+        "show_in_latest": true,
+        "is_section_featured": false
+      },
+      "id": "2026-01-14-exportaciones-repuntaron-casi-6-durante-el-2025",
+      "type": "noticias",
+      "slug": "2026-01-14-exportaciones-repuntaron-casi-6-durante-el-2025",
+      "description": "Durante el año 2025, las exportaciones totales, alcanzaron un valor de USD 16.720,3 millones, 5,8% por encima de los USD 15.806,1 millones observados a diciembre del año anterior. ",
+      "body": "Durante el año 2025, las exportaciones totales, alcanzaron un valor de USD 16.720,3 millones, 5,8% por encima de los USD 15.806,1 millones observados a diciembre del año anterior. Las exportaciones registradas representaron el 66,3% del total, alcanzando USD 11.082,1 millones, superior en 1,5% al valor acumulado a diciembre del 2024. Las reexportaciones, por su parte, con el 27,4% del total, registraron un valor de USD 4.584,7 millones, con un aumento de 17,2%. Las otras exportaciones, con el 6,3% de participación, registraron un aumento del 7,7%, situándose en un nivel de USD 1.053,5 millones. El incremento observado en las exportaciones registradas se encuentra explicada principalmente por mayores ventas de carne, maíz y aceite de soja. Los envíos realizados bajo el régimen de maquila alcanzaron los USD 1.236,7 millones, superior en 10,0% a lo registrado en el mismo periodo del año 2024.\r\n\r\n\r\n\r\n## **Importaciones**\r\n\r\nDurante el año 2025, las importaciones totales, alcanzaron USD 18.111,1 millones, 10,6% mayor a los USD 16.379,4 millones registrados a diciembre de 2024. Las importaciones registradas representaron el 97,9% del total, alcanzando un valor de USD 17.721,9 millones, un 11,2% superior con respecto al valor del mismo periodo del 2024, mientras que las otras importaciones representaron el 2,1% restante, por un valor de USD 389,1 millones y con una reducción del 12,9% con respecto al valor acumulado en el mismo mes del año anterior. En volúmenes, se observó un incremento de 10,5%.",
       "tags_normalized": [
         "comercio-exterior",
         "economia",
         "banco-central",
         "commodities"
       ],
-      "summary": "Durante el año 2025, las exportaciones totales, alcanzaron un valor de USD 16.720,3 millones, 5,8% por encima de los USD 15.806,1 millones observados a diciembre del año anterior. "
+      "kicker": "macro",
+      "summary_short": "Durante el año 2025, las exportaciones totales, alcanzaron un valor de USD 16.720,3 millones, 5,8% por encima de los USD 15.806,1 millones observados a diciembre del año anterior."
     },
     {
-      "id": "macro",
-      "type": "noticias",
-      "slug": "macro",
-      "category": "macro",
       "title": "BCP mantiene 'anclada' la tasa de interés",
-      "description": "El Banco Central volvió a mantener la tasa de Política a la baja, por meses consecutivos",
-      "thumbnail": "/assets/img/knmg6a6szzcshjyavygmnkhpbi.jpg",
-      "body": "El Banco Central decidió mantener la tasa...",
       "date": "2026-01-14T00:32:00.000Z",
+      "summary": "El Banco Central volvió a mantener la tasa de Política a la baja, por meses consecutivos",
+      "category": "macro",
+      "tags": [
+        "economia"
+      ],
+      "thumbnail": "/assets/img/knmg6a6szzcshjyavygmnkhpbi.jpg",
       "featured": {
         "show_in_latest": true,
         "is_featured": true,
-        "is_main_featured": false
+        "is_main_featured": false,
+        "is_section_featured": false
       },
-      "tags": [
-        "economia"
-      ],
+      "id": "macro",
+      "type": "noticias",
+      "slug": "macro",
+      "description": "El Banco Central volvió a mantener la tasa de Política a la baja, por meses consecutivos",
+      "body": "El Banco Central decidió mantener la tasa...",
       "tags_normalized": [
         "economia"
       ],
-      "summary": "El Banco Central volvió a mantener la tasa de Política a la baja, por meses consecutivos"
+      "kicker": "macro",
+      "summary_short": "El Banco Central volvió a mantener la tasa de Política a la baja, por meses consecutivos"
     },
     {
+      "title": "BCP: Actividad económica marcó once meses consecutivos de expansión en noviembre",
+      "date": "2026-01-13T23:36:00.000Z",
+      "summary": "En base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cierre del mes de noviembre del 2025.\n",
+      "category": "macro",
+      "tags": [
+        "economia"
+      ],
+      "thumbnail": "/assets/img/female-working-environment-projects.jpg",
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": false,
+        "show_in_latest": true,
+        "is_section_featured": false
+      },
+      "slug": "2026-01-13-bcp-actividad-económica-marcó-once-meses-consecutivos-de-expansión-en-noviembre",
       "id": "2026-01-13-bcp-actividad-económica-marcó-once-meses-consecutivos-de-expansión-en-noviembre",
       "type": "noticias",
-      "slug": "2026-01-13-bcp-actividad-económica-marcó-once-meses-consecutivos-de-expansión-en-noviembre",
-      "category": "macro",
-      "title": "BCP: Actividad económica marcó once meses consecutivos de expansión en noviembre",
       "description": "En base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cierre del mes de noviembre del 2025.\n",
-      "thumbnail": "/assets/img/female-working-environment-projects.jpg",
       "body": "En noviembre, la actividad económica continúa con buen dinamismo, marcando once meses consecutivos de expansión interanual.\r\n\r\nEn base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cierre del mes de noviembre del 2025.\r\nEn el crecimiento interanual incidieron favorablemente los servicios y el sector primario.\r\n\r\nSector Primario\r\n\r\nEl sector primario registró un incremento interanual de 9,6%, acumulando con este resultado un aumento de 5,4% al cierre del mes de noviembre del 2025.\r\nLa agricultura, conforme a los nuevos datos del cierre de la campaña agrícola 2024/2025 y estimaciones 2025/2026, proveídas por el Ministerio de Agricultura y Ganadería (MAG), registró un crecimiento explicado por los mayores niveles de producción de maíz, trigo, arroz y algodón. Sin embargo, el menor nivel de producción de soja atenuó el resultado positivo.",
-      "date": "2026-01-13T23:36:00.000Z",
-      "featured": {
-        "is_featured": false,
-        "is_main_featured": false,
-        "show_in_latest": true
-      },
-      "tags": [
-        "economia"
-      ],
       "tags_normalized": [
         "economia"
       ],
-      "summary": "En base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cierre del mes de noviembre del 2025.\n"
+      "kicker": "macro",
+      "summary_short": "En base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cier…"
     },
     {
-      "id": "2026-01-13-actividad-económica-marcó-once-meses-consecutivos-de-expansión-en-noviembre",
-      "type": "noticias",
-      "slug": "",
       "category": "macro",
       "title": "Actividad económica marcó once meses consecutivos de expansión en noviembre",
-      "description": "En base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cierre del mes de noviembre del 2025.\n",
-      "thumbnail": "/assets/img/top-view-office-desk-with-growth-chart-coffee-cup.jpg",
-      "body": "En noviembre, la actividad económica continúa con buen dinamismo, marcando once meses consecutivos de\r\nexpansión interanual.\r\n\r\nEn base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cierre del mes de noviembre del 2025.\r\nEn el crecimiento interanual incidieron favorablemente los servicios y el sector primario.\r\n\r\nSector Primario\r\n\r\nEl sector primario registró un incremento interanual de 9,6%, acumulando con este resultado un aumento de 5,4% al cierre del mes de noviembre del 2025.\r\nLa agricultura, conforme a los nuevos datos del cierre de la campaña agrícola 2024/2025 y estimaciones 2025/2026, proveídas por el Ministerio de Agricultura y Ganadería (MAG), registró un crecimiento explicado por los mayores niveles de producción de maíz, trigo, arroz y algodón. Sin embargo, el menor nivel de producción de soja atenuó el resultado positivo.",
       "date": "2026-01-13T21:26:00.000Z",
-      "featured": {
-        "is_featured": false,
-        "is_main_featured": false,
-        "show_in_latest": true
-      },
+      "summary": "En base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cierre del mes de noviembre del 2025.\n",
       "tags": [
         "economia"
       ],
+      "thumbnail": "/assets/img/top-view-office-desk-with-growth-chart-coffee-cup.jpg",
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": false,
+        "show_in_latest": true,
+        "is_section_featured": false
+      },
+      "slug": "2026-01-13-actividad-económica-marcó-once-meses-consecutivos-de-expansión-en-noviembre",
+      "id": "2026-01-13-actividad-económica-marcó-once-meses-consecutivos-de-expansión-en-noviembre",
+      "type": "noticias",
+      "description": "En base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cierre del mes de noviembre del 2025.\n",
+      "body": "En noviembre, la actividad económica continúa con buen dinamismo, marcando once meses consecutivos de\r\nexpansión interanual.\r\n\r\nEn base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cierre del mes de noviembre del 2025.\r\nEn el crecimiento interanual incidieron favorablemente los servicios y el sector primario.\r\n\r\nSector Primario\r\n\r\nEl sector primario registró un incremento interanual de 9,6%, acumulando con este resultado un aumento de 5,4% al cierre del mes de noviembre del 2025.\r\nLa agricultura, conforme a los nuevos datos del cierre de la campaña agrícola 2024/2025 y estimaciones 2025/2026, proveídas por el Ministerio de Agricultura y Ganadería (MAG), registró un crecimiento explicado por los mayores niveles de producción de maíz, trigo, arroz y algodón. Sin embargo, el menor nivel de producción de soja atenuó el resultado positivo.",
       "tags_normalized": [
         "economia"
       ],
-      "summary": "En base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cierre del mes de noviembre del 2025.\n"
+      "kicker": "macro",
+      "summary_short": "En base a informaciones preliminares, el IMAEP registró un incremento de 4,0% con respecto al mismo mes del año anterior. Con este resultado, acumuló un crecimiento de 5,8% al cier…"
     },
     {
+      "featured": {
+        "is_featured": true,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
+      "category": "educacion-financiera",
+      "tags": [
+        "aguinaldo"
+      ],
+      "title": "¿Qué hacer con el aguinaldo?",
+      "date": "2025-11-20T02:57:34.108Z",
+      "summary": "El aguinaldo es un pago extra de salario que reciben los trabajadores de forma anual o semestral como reconocimiento a su labor. ",
       "id": "README",
       "type": "noticias",
       "slug": "README",
-      "category": "educacion-financiera",
-      "title": "¿Qué hacer con el aguinaldo?",
       "description": "El aguinaldo es un pago extra de salario que reciben los trabajadores de forma anual o semestral como reconocimiento a su labor. ",
       "thumbnail": "/assets/img/default.jpg",
       "body": "![sadadadaasd](/assets/img/que-es-aguinaldo.jpg \"el ahui\")\r\n\r\nEl aguinaldo es un pago extra de salario que reciben los trabajadores de forma anual o semestral como reconocimiento a su labor. Su monto y forma de pago varían según el país, pero generalmente se calcula sumando los ingresos del año o semestre y dividiéndolos entre 12 o dos cuotas semestrales, respectivamente. Su origen está en la tradición de dar un obsequio en las fiestas navideñas, y su pago es obligatorio para los empleadores y está regulado por ley en muchos lugares. \r\n\r\nCaracterísticas principales:\r\n\r\nPago adicional: Es un ingreso extra al salario mensual que se otorga como recompensa por el esfuerzo del año.\r\n\r\nObligatorio: Es un derecho laboral que los empleadores están obligados por ley a pagar.\r\n\r\nCálculo: Se calcula de diferentes maneras, como el 50% del mejor salario semestral percibido (en países como Argentina) o sumando todos los ingresos del año y dividiendo el total entre 12 (en otros países).",
-      "date": "2025-11-20T02:57:34.108Z",
-      "featured": true,
-      "tags": [
-        "aguinaldo"
-      ],
       "tags_normalized": [
         "aguinaldo"
       ],
-      "summary": "El aguinaldo es un pago extra de salario que reciben los trabajadores de forma anual o semestral como reconocimiento a su labor. "
+      "kicker": "educacion-financiera",
+      "summary_short": "El aguinaldo es un pago extra de salario que reciben los trabajadores de forma anual o semestral como reconocimiento a su labor."
     },
     {
+      "featured": {
+        "is_featured": true,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
+      "category": "macro",
+      "title": "\"Modernización bursátil: Presentarán ante emisores la nueva estructura y los procesos de registro\"",
+      "date": "2025-11-19T15:55:52.535Z",
+      "summary": "El encuentro se llevará a cabo este jueves 20 de noviembre",
+      "tags": [
+        "inversion"
+      ],
+      "thumbnail": "/assets/img/py.-imagen-de-pru-no-usar.jpg",
       "id": "2025-11-19-modernización-bursátil-presentarán-ante-emisores-la-nueva-estructura-y-los-procesos-de-registro",
       "type": "noticias",
       "slug": "2025-11-19-modernización-bursátil-presentarán-ante-emisores-la-nueva-estructura-y-los-procesos-de-registro",
-      "category": "macro",
-      "title": "\"Modernización bursátil: Presentarán ante emisores la nueva estructura y los procesos de registro\"",
       "description": "El encuentro se llevará a cabo este jueves 20 de noviembre",
-      "thumbnail": "/assets/img/py.-imagen-de-pru-no-usar.jpg",
       "body": "![Objetivo es presentar a las empresas emisoras las novedades](/assets/img/nasdaq.avif \"Nasdaq\")\r\n\r\n“Modernización bursátil: Nueva estructura y procesos para emisores” se denomina la charla que se encuentran organizando la Bolsa de Valores de Asunción (BVA), la Caja de Valores del Paraguay (CAVAPY) y la Asociación de Casas de Bolsa del Paraguay (Asobolsa), para este jueves 20 de noviembre.\r\n\r\nEl objetivo es presentar a las empresas emisoras las novedades que se están implementando en el mercado de valores, en el marco de la transformación tecnológica, regulatoria y de infraestructura por la que atraviesa el sector.\r\n\r\nEntre los temas que se abordarán en la oportunidad, se destaca el próximo lanzamiento del Registro Único del Mercado de Valores, que integrará procesos ante la Superintendencia de Valores (SIV), la BVA y CAVAPY, y se aplicará tanto a registro de emisores como de instrumentos de negociación.\r\n\r\nAdemás, se presentarán las oportunidades de conexión con los mercados globales que se están generando con la contratación de los sistemas Nasdaq -desde la BVAy Montran -desde CAVAPY-; y la nueva regulación que se implementará a partir de la Ley del Mercado de Valores recientemente promulgada.\r\n\r\nEl encuentro arrancará a las 08:00, en el Hotel Dazzler de Asunción, con la presencia de autoridades y directivos de las instituciones organizadoras, así como de representantes de empresas emisoras y casas de bolsa que operan en el mercado bursátil local.",
-      "date": "2025-11-19T15:55:52.535Z",
-      "featured": true,
-      "tags": [
-        "inversion"
-      ],
       "tags_normalized": [
         "inversion"
       ],
-      "summary": "El encuentro se llevará a cabo este jueves 20 de noviembre"
+      "kicker": "macro",
+      "summary_short": "El encuentro se llevará a cabo este jueves 20 de noviembre"
     },
     {
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
+      "category": "negocios",
+      "tags": [
+        "pago"
+      ],
+      "title": "MEF paga hoy más G. 227.000 millones a proveedores y acreedores del Estado",
+      "date": "2025-11-19T00:54:51.371Z",
+      "summary": " Procesará hoy martes 18 de noviembre ₲ 227.489 millones para pago a proveedores y acreedores del Estado. ",
       "id": "2025-11-19-mef-paga-hoy-más-g-227-000-millones-a-proveedores-y-acreedores-del-estado",
       "type": "noticias",
       "slug": "2025-11-19-mef-paga-hoy-más-g-227-000-millones-a-proveedores-y-acreedores-del-estado",
-      "category": "negocios",
-      "title": "MEF paga hoy más G. 227.000 millones a proveedores y acreedores del Estado",
       "description": " Procesará hoy martes 18 de noviembre ₲ 227.489 millones para pago a proveedores y acreedores del Estado. ",
       "thumbnail": "/assets/img/default.jpg",
       "body": "![ procesará hoy martes 18 de noviembre ₲ 227.489 millones para pago a proveedores y acreedores del Estado. ](/assets/img/2024-08-16-billetes.jpg \"Pago a proveedores\")\r\n\r\nEl Ministerio de Economía y Finanzas (MEF), a través de la Dirección General del Tesoro Público (DGTP), dependiente de la Gerencia de Gestión Financiera del Estado, procesará hoy martes 18 de noviembre G. 227.489 millones para pago a proveedores y acreedores del Estado.\r\n\r\nSerán procesadas las Solicitudes de Transferencias de Recursos (STR) que ingresaron a la DGTP el jueves 13, viernes 14 y lunes 17 de noviembre de 2025, correspondientes a compromisos financiados con Fuente 20 “Recursos del Crédito Público” y 30 “Recursos Institucionales”, principalmente.\r\n\r\nEn ese sentido, se procesará en Fuente 10 (en concepto de: Caja Chica, Gastos Reservados) la suma de ₲ 242 millones; en Fuente 20 (Pago a Proveedores y Acreedores del Estado) ₲ 132.799; y en Fuente 30 (en concepto de Caja Chica, Pago a Proveedores y Acreedores del Estado) unos ₲ 94.448 millones.\r\n\r\n\r\n\r\nDe esta forma, cabe resaltar que la Dirección General del Tesoro Público realiza el proceso de transferencias de manera sostenida, conforme a la fecha presentación de las STR ingresadas por las instituciones públicas.\r\n\r\n\r\n\r\nEl calendario detallado de pagos está disponible en el sitio web del Ministerio de Economía y Finanzas (https://www.mef.gov.py), o accediendo directamente al siguiente enlace: https://www.mef.gov.py/consulta-ciudadana/calendario-de-pagos/pago-a-proveedores",
-      "date": "2025-11-19T00:54:51.371Z",
-      "featured": false,
-      "tags": [
-        "pago"
-      ],
       "tags_normalized": [
         "pago"
       ],
-      "summary": " Procesará hoy martes 18 de noviembre ₲ 227.489 millones para pago a proveedores y acreedores del Estado. "
+      "kicker": "negocios",
+      "summary_short": "Procesará hoy martes 18 de noviembre ₲ 227.489 millones para pago a proveedores y acreedores del Estado."
     },
     {
+      "featured": {
+        "is_featured": true,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
+      "category": "politica-economica",
+      "tags": [
+        "seguro"
+      ],
+      "title": "Superintendencia de Valores inicia consulta pública de proyectos de reglamentación",
+      "date": "2025-11-18T16:51:08.840Z",
+      "summary": "\"Superintendencia de Valores inicia consulta pública de proyectos de reglamentación\"",
       "id": "2025-11-18-superintendencia-de-valores-inicia-consulta-pública-de-proyectos-de-reglamentación",
       "type": "noticias",
       "slug": "2025-11-18-superintendencia-de-valores-inicia-consulta-pública-de-proyectos-de-reglamentación",
-      "category": "politica-economica",
-      "title": "Superintendencia de Valores inicia consulta pública de proyectos de reglamentación",
       "description": "\"Superintendencia de Valores inicia consulta pública de proyectos de reglamentación\"",
       "thumbnail": "/assets/img/default.jpg",
       "body": "![](/assets/img/knmg6a6szzcshjyavygmnkhpbi.jpg)\r\n\r\nLa Superintendencia de Valores informa que tras la promulgación de la Ley N.º 7572/2025 “Mercado de Valores y Productos”, se inicia el proceso de consulta pública de los proyectos de reglamentación del nuevo marco regulatorio del mercado de capitales. Este paso proactivo refleja el compromiso institucional de asegurar una implementación ordenada, técnica y oportuna de la nueva ley.\r\n\r\n\r\n\r\n\r\n\r\nEl objetivo de los proyectos normativos es ordenar y actualizar el marco regulatorio aplicable al mercado, alinearlo con estándares internacionales y fortalecer la protección del inversionista, la transparencia y la competitividad. La etapa de socialización es abierta a todos los participantes del mercado e interesados en general, quienes podrán remitir sus aportes y comentarios hasta el 31 de diciembre de 2025 a través del siguiente formulario.\r\n\r\n\r\n\r\nEl Banco Central del Paraguay y la Superintendencia de Valores reafirman su compromiso con un mercado de valores y productos más seguro, moderno y previsible, y destacan que la colaboración activa del sector es fundamental para consolidar la transformación regulatoria que fortalecerá el desarrollo del mercado de capitales de Paraguay.",
-      "date": "2025-11-18T16:51:08.840Z",
-      "featured": true,
-      "tags": [
-        "seguro"
-      ],
       "tags_normalized": [
         "seguro"
       ],
-      "summary": "\"Superintendencia de Valores inicia consulta pública de proyectos de reglamentación\""
+      "kicker": "politica-economica",
+      "summary_short": "\"Superintendencia de Valores inicia consulta pública de proyectos de reglamentación\""
     },
     {
+      "featured": {
+        "is_featured": true,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
+      "title": "Banco Mundial prevé caída de precios de commodities en 2026",
+      "date": "2025-11-17T00:00:00.000Z",
+      "category": "macro",
+      "subcategory": "Commodities",
+      "summary": "Enfrentarían en el 2026 su cuarto año consecutivo de descenso de precios",
+      "image": "/assets/img/precios-de-commodities-en-baja-bm.jpg",
       "id": "2025-11-17-banco-mundial-prevé-caída-de-precios-de-commodities-en-2026",
       "type": "noticias",
       "slug": "2025-11-17-banco-mundial-prevé-caída-de-precios-de-commodities-en-2026",
-      "category": "macro",
-      "title": "Banco Mundial prevé caída de precios de commodities en 2026",
       "description": "Enfrentarían en el 2026 su cuarto año consecutivo de descenso de precios",
       "thumbnail": "/assets/img/default.jpg",
       "body": "![](/assets/img/precios-de-commodities-en-baja-bm.jpg)\r\n\r\n\r\nLos mercados globales de commodities enfrentarían en el 2026 su cuarto año consecutivo de descenso de precios, según el informe Commodity Markets Outlook del Banco Mundial. El organismo proyecta caídas de 7% de los precios tanto en 2025 como para el próximo año, en un contexto de crecimiento mundial moderado y un superávit energético en aumento.​\r\n\r\nLa baja de los precios energéticos continúa aportando alivio a la inflación global, mientras que el retroceso del arroz y el trigo mejora la accesibilidad de alimentos en países en desarrollo. No obstante, los fertilizantes registrarían un aumento de 21% en 2025, lo que podría presionar los márgenes agrícolas.​\r\n\r\nEntre los metales preciosos, el oro se mantiene como refugio en un contexto de incertidumbre, con un incremento estimado de 42% de sus precios en 2025. El informe advierte que, pese a la moderación reciente, el panorama continúa expuesto a riesgos derivados de tensiones geopolíticas, posibles sanciones adicionales, fenómenos climáticos como La Niña y el aumento de la demanda eléctrica asociada a la expansión de la inteligencia artificial.",
-      "date": "2025-11-17T00:00:00.000Z",
-      "featured": true,
       "tags": [],
       "tags_normalized": [],
-      "subcategory": "Commodities",
-      "summary": "Enfrentarían en el 2026 su cuarto año consecutivo de descenso de precios",
-      "image": "/assets/img/precios-de-commodities-en-baja-bm.jpg"
+      "kicker": "Commodities",
+      "summary_short": "Enfrentarían en el 2026 su cuarto año consecutivo de descenso de precios"
     },
     {
+      "category": "macro",
+      "featured": {
+        "is_featured": true,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
+      "title": "Paraguay destacó su política fiscal responsable en seminario internacional",
+      "date": "2025-11-16T21:24:00.000Z",
+      "summary": "Se debatió sobre los desafíos y tendencias de la gestión presupuestaria, así como para promover el intercambio técnico y político orientado a fortalecer la sostenibilidad fiscal.",
       "id": "2025-11-15-paraguay-destacó-su-política-fiscal-responsable-en-seminario-internacional",
       "type": "noticias",
       "slug": "2025-11-15-paraguay-destacó-su-política-fiscal-responsable-en-seminario-internacional",
-      "category": "macro",
-      "title": "Paraguay destacó su política fiscal responsable en seminario internacional",
       "description": "Se debatió sobre los desafíos y tendencias de la gestión presupuestaria, así como para promover el intercambio técnico y político orientado a fortalecer la sostenibilidad fiscal.",
       "thumbnail": "/assets/img/default.jpg",
       "body": "![Del evento, en representación del MEF participaron la gerente de Gestión Financiera del Estado, Teodora Recalde de Spinzi, y el director general de Presupuesto, Jorge Paredes.](/assets/img/exportación.jpg)\r\n\r\nEl Ministerio de Economía y Finanzas (MEF) representó a Paraguay en el 52° Seminario Internacional de Presupuesto Público, organizado por la Asociación Internacional de Presupuesto Público (ASIP) en República Dominicana. El encuentro reunió a autoridades fiscales y especialistas de la región para debatir sobre los desafíos y tendencias de la gestión presupuestaria, así como para promover el intercambio técnico y político orientado a fortalecer la sostenibilidad fiscal, optimizar la eficiencia del gasto y consolidar la estabilidad macroeconómica en América Latina.\r\n\r\nDel evento, en representación del MEF participaron la gerente de Gestión Financiera del Estado, Teodora Recalde de Spinzi, y el director general de Presupuesto, Jorge Paredes.\r\n\r\nEn este contexto, el director general de Presupuesto del MEF, Jorge Paredes, expuso sobre las políticas instrumentadas por el país para atenuar los efectos presupuestarios derivados de la inestabilidad mundial, destacando la prudencia fiscal y las reformas institucionales que fortalecen la gestión pública.\r\n\r\nDurante su intervención, el director subrayó que Paraguay mantiene un crecimiento económico sólido y sostenido, con una proyección del PIB real de 5,3% para 2025, respaldada por la estabilidad macroeconómica y una política fiscal responsable.\r\n\r\nAsimismo, señaló que el país avanza de manera ordenada hacia la convergencia con la regla fiscal en el 2026, tras reducir el déficit desde -6,1% del PIB en el 2020 a -1,9% en el 2025, en cumplimiento del plan de consolidación fiscal del MEF.\r\n\r\nEn materia de gasto público, destacó que Paraguay sostiene una gestión orientada a prioridades estratégicas, con incrementos dirigidos a salud, educación, desarrollo social y seguridad, fortaleciendo un modelo de crecimiento con enfoque social y responsabilidad fiscal. Al cierre de su exposición, remarcó que el país apunta a mantener la estabilidad y avanzar en el desarrollo social con responsabilidad fiscal y eficiencia en la gestión pública.",
-      "date": "2025-11-16T21:24:00.000Z",
-      "featured": true,
       "tags": [],
       "tags_normalized": [],
-      "summary": "Se debatió sobre los desafíos y tendencias de la gestión presupuestaria, así como para promover el intercambio técnico y político orientado a fortalecer la sostenibilidad fiscal."
+      "kicker": "macro",
+      "summary_short": "Se debatió sobre los desafíos y tendencias de la gestión presupuestaria, así como para promover el intercambio técnico y político orientado a fortalecer la sostenibilidad fiscal."
     },
     {
+      "category": "economia",
+      "title": "Confianza del consumidor se reduce en octubre",
+      "date": "2025-11-14T17:45:00.000Z",
+      "summary": "En octubre de 2025, el Índice de Confianza del Consumidor se ubicó en 48,32 puntos. Por su parte, el Índice de Expectativas Económicas y el Índice de Situación Económica se ubicaron en 61,75 y 34,88 puntos respectivamente.\n",
       "id": "2025-11-14-confianza-del-consumidor-se-reduce-en-octubre",
       "type": "noticias",
       "slug": "2025-11-14-confianza-del-consumidor-se-reduce-en-octubre",
-      "category": "economia",
-      "title": "Confianza del consumidor se reduce en octubre",
       "description": "En octubre de 2025, el Índice de Confianza del Consumidor se ubicó en 48,32 puntos. Por su parte, el Índice de Expectativas Económicas y el Índice de Situación Económica se ubicaron en 61,75 y 34,88 puntos respectivamente.\n",
       "thumbnail": "/assets/img/default.jpg",
       "body": "![](/assets/img/mercado-libre-e1584221732666.jpg)\r\n\r\n\r\n\r\n\r\nEn octubre de 2025, el Índice de Confianza del Consumidor (ICC) registró un nivel de 48,32, ubicándose por debajo del valor observado en el mes previo (49,86) y del nivel registrado en octubre de 2024 (54,46).\r\n\r\nEl Índice de Situación Económica (ISE) registró un valor de 34,88, menor en 1,12 puntos respecto al mes anterior y en 5,83 puntos al dato registrado en octubre de 2024. Por su parte, el Índice de Expectativas Económicas (IEE) alcanzó un resultado de 61,75, menor que el índice del mes anterior en 1,96 puntos y al valor de octubre de 2024 en 6,46 puntos.\r\n\r\nEn cuanto a la predisposición a ahorrar, el porcentaje de encuestados que respondió de forma afirmativa a esta consulta fue de 18,25%. Este resultado fue inferior en 1,25 puntos porcentuales (pp) al del mes anterior y en 4,50 pp al valor registrado en octubre de 2024.\r\n\r\nPor otro lado, la predisposición a adquirir bienes durables registró incrementos mensuales en las categorías de electrodomésticos, casas y autos. En contraste, se observó una reducción en la predisposición a adquirir motos. En términos interanuales, todas las categorías de bienes presentaron reducciones.",
-      "date": "2025-11-14T17:45:00.000Z",
-      "featured": false,
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
       "tags": [],
       "tags_normalized": [],
-      "summary": "En octubre de 2025, el Índice de Confianza del Consumidor se ubicó en 48,32 puntos. Por su parte, el Índice de Expectativas Económicas y el Índice de Situación Económica se ubicaron en 61,75 y 34,88 puntos respectivamente.\n"
+      "kicker": "economia",
+      "summary_short": "En octubre de 2025, el Índice de Confianza del Consumidor se ubicó en 48,32 puntos. Por su parte, el Índice de Expectativas Económicas y el Índice de Situación Económica se ubicaro…"
     },
     {
+      "category": "economia",
+      "title": "Comercio exterior movió US$ 14.182,1 millones en 10 meses",
+      "date": "2025-11-14T00:12:00.000Z",
+      "summary": "Las exportaciones totales, al mes de octubre de 2025, alcanzaron un valor de US$ 14.182,1 millones, 3,3% por encima de los US$ 13.273,9 millones observados a octubre del año anterior. ",
       "id": "2025-11-14-comercio-exterior-movió-usd-14-182-1-millones-en-10-meses",
       "type": "noticias",
       "slug": "2025-11-14-comercio-exterior-movió-usd-14-182-1-millones-en-10-meses",
-      "category": "economia",
-      "title": "Comercio exterior movió US$ 14.182,1 millones en 10 meses",
       "description": "Las exportaciones totales, al mes de octubre de 2025, alcanzaron un valor de US$ 14.182,1 millones, 3,3% por encima de los US$ 13.273,9 millones observados a octubre del año anterior. ",
       "thumbnail": "/assets/img/default.jpg",
       "body": "![lucas-van-oort-fbzovyf-96w-unsplash.jpg](/assets/img/lucas-van-oort-fbzovyf-96w-unsplash.jpg \"lucas-van-oort-fbzovyf-96w-unsplash.jpg\")\r\n\r\nLas exportaciones totales, al mes de octubre de 2025, alcanzaron un valor de US$ 14.182,1 millones, 3,3% por encima de los US$ 13.273,9 millones observados a octubre del año anterior. Las exportaciones registradas representaron el 67,1% del total, alcanzando US$ 9.513,9 millones, inferior en 0,8% al valor acumulado a octubre del 2024.\r\n\r\nLas reexportaciones, por su parte, con el 26,4% del total, registraron un valor de US$ 3.746,0 millones, con un aumento de 15,3%. Las otras exportaciones, con el 6,5% de participación, registraron un aumento del 4,1%, situándose en un nivel de US$ 922,3 millones. \r\n\r\nLa reducción observada en las exportaciones registradas se encuentra explicada principalmente por menores ventas de granos de soja, arroz parbolizado y harina de soja. Los envíos realizados bajo el régimen de maquila alcanzaron los USD 1.098,9 millones, superior en 10,9% a lo registrado en el mismo periodo del año 2024.",
-      "date": "2025-11-14T00:12:00.000Z",
-      "featured": false,
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
       "tags": [],
       "tags_normalized": [],
-      "summary": "Las exportaciones totales, al mes de octubre de 2025, alcanzaron un valor de US$ 14.182,1 millones, 3,3% por encima de los US$ 13.273,9 millones observados a octubre del año anterior. "
+      "kicker": "economia",
+      "summary_short": "Las exportaciones totales, al mes de octubre de 2025, alcanzaron un valor de US$ 14.182,1 millones, 3,3% por encima de los US$ 13.273,9 millones observados a octubre del año anteri…"
     },
     {
+      "category": "negocios",
+      "title": "CADIEM celebra 22 años de trayectoria, consolidándose como actor clave",
+      "date": "2025-11-13T23:54:00.000Z",
+      "summary": "Con la obtención de la primera nota en grado de inversión para el Paraguay, y a la\nespera de una segunda, desde la empresa se augura un horizonte de proyectos\ncada vez más grandes que resulten atractivos ante los inversionistas a nivel\ninternacional",
       "id": "2025-11-13-cadiem-celebra-22-años-de-trayectoria-consolidándose-como-actor-clave-en-el-mercado",
       "type": "noticias",
       "slug": "2025-11-13-cadiem-celebra-22-años-de-trayectoria-consolidándose-como-actor-clave-en-el-mercado",
-      "category": "negocios",
-      "title": "CADIEM celebra 22 años de trayectoria, consolidándose como actor clave",
       "description": "Con la obtención de la primera nota en grado de inversión para el Paraguay, y a la\nespera de una segunda, desde la empresa se augura un horizonte de proyectos\ncada vez más grandes que resulten atractivos ante los inversionistas a nivel\ninternacional",
       "thumbnail": "/assets/img/default.jpg",
       "body": "![Cadien 123](/assets/img/dsc_7982.jpg \"Cadien\")\r\n\r\nCADIEM Casa de Bolsa celebra 22 años de trayectoria institucional, en un contexto de sostenido crecimiento del mercado de valores, tanto en el segmento bursátil como en el de fondos mutuos y de inversión. En este contexto, Gloria Ayala Person, socia fundadora y directora de la compañía, recordó los inicios del emprendimiento que ya tiene más de dos décadas operando.\r\n\r\n“Recuerdo con emoción los comienzos de CADIEM. Desde el primer día, nuestro impulso fue un sueño claro: contribuir al desarrollo del Paraguay ofreciendo productos financieros hechos por y para las personas. Aquello era casi una ´quijotada´ en un mercado que apenas iniciaba, pero teníamos ilusión y convicción”, expresó la\r\nejecutiva en ocasión de un aniversario más de la empresa.\r\n\r\nSiendo una de las firmas pioneras en el sector, Ayala Person considera que poner al cliente en el centro ha sido uno de los mayores aciertos del grupo a lo largo de estos años. “Este compromiso lo comparto con el Directorio y con todo el equipo, porque comulgamos la visión de un Paraguay donde la inversión sea un camino al bienestar colectivo”, comentó sobre este tema. \r\n\r\nCon respecto al futuro, aseguró ver un horizonte “muy prometedor para el mercado de valores paraguayo”, ya que la reciente obtención del grado de inversión ha sido un hito histórico que proyecta al país como un destino más atractivo para el ahorro y las inversiones extranjeras. Esto genera, a su criterio, una gran oportunidad de atraer capital y financiar proyectos locales. \r\n\r\n## **Proyectos a mayor escala**\r\n\r\nPor su parte, Elías Gelay, presidente de CADIEM Casa de Bolsa, resaltó que este aniversario llega en un momento inmejorable para el mercado de valores paraguayo. A la espera de la segunda calificación en grado de inversión, señaló que los distintos actores del mercado se están preparando para recibir nuevas inversiones y promover proyectos de mayor escala, capaces de atraer el interés de inversionistas globales.\r\n\r\n“Hoy el mercado genera más de USD 7.000 millones en transacciones, con proyectos importantes que estamos financiando. Son hitos relevantes para CADIEM, pero principalmente para el mercado de capitales, porque estamos buscando desarrollar proyectos que sean más grandes y que sean interesantes para los inversores que van a venir del exterior”, puntualizó Gelay.\r\n\r\nExpresó su satisfacción por los logros alcanzados, pero aseguró que “lo mejor está por venir”, ya que para los próximos años se abre la posibilidad de establecer alianzas con agentes extranjeros, quienes comienzan a mirar a Paraguay con nuevos ojos, impulsados por la estabilidad alcanzada y el surgimiento de proyectos de creciente envergadura.",
-      "date": "2025-11-13T23:54:00.000Z",
-      "featured": false,
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
       "tags": [],
       "tags_normalized": [],
-      "summary": "Con la obtención de la primera nota en grado de inversión para el Paraguay, y a la\nespera de una segunda, desde la empresa se augura un horizonte de proyectos\ncada vez más grandes que resulten atractivos ante los inversionistas a nivel\ninternacional"
+      "kicker": "negocios",
+      "summary_short": "Con la obtención de la primera nota en grado de inversión para el Paraguay, y a la espera de una segunda, desde la empresa se augura un horizonte de proyectos cada vez más grandes…"
     },
     {
+      "category": "macro",
+      "title": "CADIEM celebra 22 años de trayectoria, consolidándose como actor clave",
+      "date": "2025-11-13T23:54:00.000Z",
+      "summary": "Con la obtención de la primera nota en grado de inversión para el Paraguay, y a la\nespera de una segunda, desde la empresa se augura un horizonte de proyectos\ncada vez más grandes que resulten atractivos ante los inversionistas a nivel\ninternacional",
       "id": "2025-11-13-cadiem-celebra-22-años-de-trayectoria-consolidándose-como-actor-clave",
       "type": "noticias",
       "slug": "2025-11-13-cadiem-celebra-22-años-de-trayectoria-consolidándose-como-actor-clave",
-      "category": "macro",
-      "title": "CADIEM celebra 22 años de trayectoria, consolidándose como actor clave",
       "description": "Con la obtención de la primera nota en grado de inversión para el Paraguay, y a la\nespera de una segunda, desde la empresa se augura un horizonte de proyectos\ncada vez más grandes que resulten atractivos ante los inversionistas a nivel\ninternacional",
       "thumbnail": "/assets/img/default.jpg",
       "body": "![Cadien 123](/assets/img/dsc_7982.jpg \"Cadien\")\r\n\r\nCADIEM Casa de Bolsa celebra 22 años de trayectoria institucional, en un contexto de sostenido crecimiento del mercado de valores, tanto en el segmento bursátil como en el de fondos mutuos y de inversión. En este contexto, Gloria Ayala Person, socia fundadora y directora de la compañía, recordó los inicios del emprendimiento que ya tiene más de dos décadas operando.\r\n\r\n“Recuerdo con emoción los comienzos de CADIEM. Desde el primer día, nuestro impulso fue un sueño claro: contribuir al desarrollo del Paraguay ofreciendo productos financieros hechos por y para las personas. Aquello era casi una ´quijotada´ en un mercado que apenas iniciaba, pero teníamos ilusión y convicción”, expresó la\r\nejecutiva en ocasión de un aniversario más de la empresa.\r\n\r\nSiendo una de las firmas pioneras en el sector, Ayala Person considera que poner al cliente en el centro ha sido uno de los mayores aciertos del grupo a lo largo de estos años. “Este compromiso lo comparto con el Directorio y con todo el equipo, porque comulgamos la visión de un Paraguay donde la inversión sea un camino al bienestar colectivo”, comentó sobre este tema. \r\n\r\nCon respecto al futuro, aseguró ver un horizonte “muy prometedor para el mercado de valores paraguayo”, ya que la reciente obtención del grado de inversión ha sido un hito histórico que proyecta al país como un destino más atractivo para el ahorro y las inversiones extranjeras. Esto genera, a su criterio, una gran oportunidad de atraer capital y financiar proyectos locales. \r\n\r\n## **Proyectos a mayor escala**\r\n\r\nPor su parte, Elías Gelay, presidente de CADIEM Casa de Bolsa, resaltó que este aniversario llega en un momento inmejorable para el mercado de valores paraguayo. A la espera de la segunda calificación en grado de inversión, señaló que los distintos actores del mercado se están preparando para recibir nuevas inversiones y promover proyectos de mayor escala, capaces de atraer el interés de inversionistas globales.\r\n\r\n“Hoy el mercado genera más de USD 7.000 millones en transacciones, con proyectos importantes que estamos financiando. Son hitos relevantes para CADIEM, pero principalmente para el mercado de capitales, porque estamos buscando desarrollar proyectos que sean más grandes y que sean interesantes para los inversores que van a venir del exterior”, puntualizó Gelay.\r\n\r\nExpresó su satisfacción por los logros alcanzados, pero aseguró que “lo mejor está por venir”, ya que para los próximos años se abre la posibilidad de establecer alianzas con agentes extranjeros, quienes comienzan a mirar a Paraguay con nuevos ojos, impulsados por la estabilidad alcanzada y el surgimiento de proyectos de creciente envergadura.",
-      "date": "2025-11-13T23:54:00.000Z",
-      "featured": false,
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
       "tags": [],
       "tags_normalized": [],
-      "summary": "Con la obtención de la primera nota en grado de inversión para el Paraguay, y a la\nespera de una segunda, desde la empresa se augura un horizonte de proyectos\ncada vez más grandes que resulten atractivos ante los inversionistas a nivel\ninternacional"
+      "kicker": "macro",
+      "summary_short": "Con la obtención de la primera nota en grado de inversión para el Paraguay, y a la espera de una segunda, desde la empresa se augura un horizonte de proyectos cada vez más grandes…"
     }
   ],
   "analisis": [
     {
-      "id": "2026-01-13-aportes-a-la-caja-fiscal-solo-alcanzan-para-financiar-5años-de-jubilación-en-promedio",
-      "type": "analisis",
-      "slug": "",
-      "category": "inversion",
       "title": "Aportes a la Caja Fiscal solo alcanzan para financiar 5años de jubilación en promedio",
-      "description": "Los aportes de un trabajador a la Caja Fiscal solo alcanzan para financiar cinco años de jubilación en promedio\n",
-      "thumbnail": "/assets/img/mef-villa-serrati_4_0.jpg",
-      "body": "En las condiciones actuales del Sistema de Jubilaciones y Pensiones del sector público, conocido como Caja Fiscal, el dinero acumulado por un trabajador durante su vida activa alcanza únicamente para financiar, en promedio, cinco años de su jubilación. A partir de ese momento, el pago del beneficio pasa a depender del sistema solidario. Así lo explicó la gerente de Desarrollo Económico del Ministerio de Economía y Finanzas (MEF), Liz Coronel, en una entrevista emitido por Telefuturo.",
       "date": "2026-01-14T13:18:00.000Z",
-      "featured": {
-        "is_featured": true,
-        "is_main_featured": false
-      },
+      "summary": "Los aportes de un trabajador a la Caja Fiscal solo alcanzan para financiar cinco años de jubilación en promedio\n",
+      "category": "inversion",
       "tags": [
         "analisis-economico",
         "inversion"
       ],
+      "thumbnail": "/assets/img/mef-villa-serrati_4_0.jpg",
+      "featured": {
+        "is_featured": true,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
+      "slug": "2026-01-13-aportes-a-la-caja-fiscal-solo-alcanzan-para-financiar-5años-de-jubilación-en-promedio",
+      "id": "2026-01-13-aportes-a-la-caja-fiscal-solo-alcanzan-para-financiar-5años-de-jubilación-en-promedio",
+      "type": "analisis",
+      "description": "Los aportes de un trabajador a la Caja Fiscal solo alcanzan para financiar cinco años de jubilación en promedio\n",
+      "body": "En las condiciones actuales del Sistema de Jubilaciones y Pensiones del sector público, conocido como Caja Fiscal, el dinero acumulado por un trabajador durante su vida activa alcanza únicamente para financiar, en promedio, cinco años de su jubilación. A partir de ese momento, el pago del beneficio pasa a depender del sistema solidario. Así lo explicó la gerente de Desarrollo Económico del Ministerio de Economía y Finanzas (MEF), Liz Coronel, en una entrevista emitido por Telefuturo.",
       "tags_normalized": [
         "analisis-economico",
         "inversion"
       ],
-      "summary": "Los aportes de un trabajador a la Caja Fiscal solo alcanzan para financiar cinco años de jubilación en promedio\n"
+      "kicker": "inversion",
+      "summary_short": "Los aportes de un trabajador a la Caja Fiscal solo alcanzan para financiar cinco años de jubilación en promedio"
     },
     {
+      "author": "Perspectivas",
+      "title": "Ley del Mercado de Valores fortalece protección al inversionista ",
+      "date": "2025-11-21T01:33:03.864Z",
+      "thumbnail": "/assets/img/2024-08-16-billetes.jpg",
+      "summary": "Ley del Mercado de Valores y Productos fortalece protección al inversionista ",
       "id": "2025-11-21-ley-del-mercado-de-valores-fortalece-protección-al-inversionista",
       "type": "analisis",
       "slug": "2025-11-21-ley-del-mercado-de-valores-fortalece-protección-al-inversionista",
       "category": "",
-      "title": "Ley del Mercado de Valores fortalece protección al inversionista ",
       "description": "Ley del Mercado de Valores y Productos fortalece protección al inversionista ",
-      "thumbnail": "/assets/img/2024-08-16-billetes.jpg",
       "body": "El superintendente de Valores, Rodrigo Ruiz, participó como panelista del conversatorio “Nuevo Régimen Jurídico del Mercado de Valores” organizado por FERRERE Abogados, junto a representantes de la Bolsa de Valores de Asunción (BVA), la Caja de Valores del Paraguay (CAVAPY) y especialistas del estudio anfitrión.\r\n\r\n\r\n\r\nDurante el encuentro que reunió a referentes del sector financiero, jurídico y del mercado de capitales se analizaron los principales alcances de la Ley N.º 7572/2025 “Mercado de Valores y Productos”, destacando su importancia para modernizar y unificar el marco regulatorio, fortalecer la protección al inversionista y consolidar un enfoque de supervisión basado en riesgos. \r\n\r\n\r\n\r\nEn su exposición, Ruiz destacó que la normativa pone fin a la fragmentación normativa que regulaba el mercado y establece por primera vez de forma explícita el triple objetivo de proteger al inversionista, promover un mercado equitativo, eficiente y transparente, y reducir el riesgo sistémico.\r\n\r\n\r\n\r\nEl superintendente anticipó que durante el 2026 se completará la primera generación de reglamentos habilitantes y se avanzará en innovación (fondos privados, crowdfunding, tokenización y DLT, emisiones extranjeras) en una segunda generación. En este tiempo se fortalecerá la supervisión basada en riesgos para abordar riesgos de liquidez y la resiliencia operativa de las infraestructuras, entre otros.\r\n\r\n\r\n\r\nAsimismo, Ruiz destacó los desafíos que plantean los productos innovadores, como crowdfunding, tokenización y activos emitidos en tecnologías DLT, y enfatizó que el criterio rector será la correcta delimitación del perímetro regulatorio: cuando hay captación de recursos del público, expectativa de rendimiento y asimetría de información, el instrumento debe quedar bajo supervisión. \r\n\r\n\r\n\r\nFinalmente, resaltó que la ley representa un paso decisivo para construir un mercado más transparente, previsible y seguro, alineado con estándares internacionales.",
-      "date": "2025-11-21T01:33:03.864Z",
-      "featured": false,
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
       "tags": [],
       "tags_normalized": [],
-      "author": "Perspectivas",
-      "summary": "Ley del Mercado de Valores y Productos fortalece protección al inversionista "
+      "kicker": "",
+      "summary_short": "Ley del Mercado de Valores y Productos fortalece protección al inversionista"
     },
     {
+      "author": "Perspectivas",
+      "title": "Modernización del mercado de valores",
+      "date": "2025-11-20T15:23:03.846Z",
+      "thumbnail": "/assets/img/nasdaq.avif",
+      "summary": "El encuentro se llevará a cabo este jueves 20 de noviembre, desde las 08:00, en el Hotel Dazzler (Av. Aviadores del Chaco y Vasconcellos) ",
       "id": "2025-11-20-modernización-del-mercado-de-valores",
       "type": "analisis",
       "slug": "2025-11-20-modernización-del-mercado-de-valores",
       "category": "",
-      "title": "Modernización del mercado de valores",
       "description": "El encuentro se llevará a cabo este jueves 20 de noviembre, desde las 08:00, en el Hotel Dazzler (Av. Aviadores del Chaco y Vasconcellos) ",
-      "thumbnail": "/assets/img/nasdaq.avif",
       "body": "![](/assets/img/2024-08-16-billetes.jpg)\r\n\r\n\r\n\r\nEn una charla organizada por la Bolsa de Valores de Asunción, la Caja de Valores del Paraguay y la Asociación de Casas de Bolsa, se brindarán detalles sobre las novedades que está trayendo el proceso de modernización del mercado de valores, entre ellas, los ajustes que se implementarán en la operativa con las empresas emisoras de títulos.\r\n\r\n\r\n\r\n\t•\tEl encuentro se llevará a cabo este jueves 20 de noviembre, desde las 08:00, en el Hotel Dazzler (Av. Aviadores del Chaco y Vasconcellos) \r\n\r\n\r\n\r\n(Asunción, 19 de noviembre de 2025).- “Modernización bursátil: Nueva estructura y procesos para emisores” se denomina la charla que se encuentran organizando la Bolsa de Valores de Asunción (BVA), la Caja de Valores del Paraguay (CAVAPY) y la Asociación de Casas de Bolsa del Paraguay (Asobolsa), para este jueves 20 de noviembre.\r\n\r\n\r\n\r\nEl objetivo es presentar a las empresas emisoras las novedades que se están implementando en el mercado de valores, en el marco de la transformación tecnológica, regulatoria y de infraestructura por la que atraviesa el sector.\r\n\r\n\r\n\r\nEntre los temas que se abordarán en la oportunidad, se destaca el próximo lanzamiento del Registro Único del Mercado de Valores, que integrará procesos ante la Superintendencia de Valores (SIV), la BVA y CAVAPY, y se aplicará tanto a registro de emisores como de instrumentos de negociación. \r\n\r\n\r\n\r\nAdemás, se presentarán las oportunidades de conexión con los mercados globales que se están generando con la contratación de los sistemas Nasdaq -desde la BVA- y Montran -desde CAVAPY-; y la nueva regulación que se implementará a partir de la Ley del Mercado de Valores recientemente promulgada.\r\n\r\n\r\n\r\nEl encuentro arrancará a las 08:00, en el Hotel Dazzler de Asunción, con la presencia de directivos de las instituciones organizadoras, así como de representantes de empresas emisoras y casas de bolsa que operan en el mercado bursátil local.",
-      "date": "2025-11-20T15:23:03.846Z",
-      "featured": false,
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
       "tags": [],
       "tags_normalized": [],
-      "author": "Perspectivas",
-      "summary": "El encuentro se llevará a cabo este jueves 20 de noviembre, desde las 08:00, en el Hotel Dazzler (Av. Aviadores del Chaco y Vasconcellos) "
+      "kicker": "",
+      "summary_short": "El encuentro se llevará a cabo este jueves 20 de noviembre, desde las 08:00, en el Hotel Dazzler (Av. Aviadores del Chaco y Vasconcellos)"
     }
   ],
   "programa": [
     {
+      "title": "Perspectivas: Capítulo 13/12/25",
+      "date": "2025-12-13T13:07:00.000Z",
+      "summary": "Todo el análisis de la economía local e internacional",
+      "tags": [
+        "economia-local"
+      ],
+      "thumbnail": "/assets/img/captura-de-pantalla-2026-01-13-181157.png",
+      "embed_url": "https://www.youtube.com/embed/TAAcjJXFJbQ",
+      "featured": {
+        "is_featured": true,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
       "id": "2026-01-13-perspectivas-capítulo-13-12-25",
       "type": "programa",
       "slug": "2026-01-13-perspectivas-capítulo-13-12-25",
       "category": "",
-      "title": "Perspectivas: Capítulo 13/12/25",
       "description": "Todo el análisis de la economía local e internacional",
-      "thumbnail": "/assets/img/captura-de-pantalla-2026-01-13-181157.png",
       "body": "",
-      "date": "2025-12-13T13:07:00.000Z",
-      "featured": {
-        "is_featured": true
-      },
-      "tags": [
-        "economia-local"
-      ],
       "tags_normalized": [
         "economia-local"
       ],
-      "summary": "Todo el análisis de la economía local e internacional",
-      "embed_url": "https://www.youtube.com/embed/TAAcjJXFJbQ"
+      "kicker": "",
+      "summary_short": "Todo el análisis de la economía local e internacional"
     },
     {
+      "title": "PERSPECTIVAS 08/11/25",
+      "date": "2025-11-09T00:57:51.355Z",
+      "embed_url": "https://www.youtube.com/embed/IZ_1l3Q656Q",
       "id": "2025-11-21-perspectivas-08-11-25",
       "type": "programa",
       "slug": "2025-11-21-perspectivas-08-11-25",
       "category": "",
-      "title": "PERSPECTIVAS 08/11/25",
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "Escuchá nuestra edición y enterate de los temas principales en el ámbito económico del país.",
-      "date": "2025-11-09T00:57:51.355Z",
-      "featured": false,
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
       "tags": [],
       "tags_normalized": [],
-      "embed_url": "https://www.youtube.com/embed/IZ_1l3Q656Q"
+      "kicker": "",
+      "summary_short": ""
     },
     {
+      "title": "PERSPECTIVAS - 21/06/2025",
+      "date": "2025-06-22T00:39:10.699Z",
+      "embed_url": "https://www.youtube.com/embed/Jb7U95VQq8k",
       "id": "2025-11-21-perspectivas-21-06-2025",
       "type": "programa",
       "slug": "2025-11-21-perspectivas-21-06-2025",
       "category": "",
-      "title": "PERSPECTIVAS - 21/06/2025",
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "Escuchá nuestra edición y enterate de los temas principales en el ámbito económico del país.",
-      "date": "2025-06-22T00:39:10.699Z",
-      "featured": false,
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
       "tags": [],
       "tags_normalized": [],
-      "embed_url": "https://www.youtube.com/embed/Jb7U95VQq8k"
+      "kicker": "",
+      "summary_short": ""
     },
     {
+      "title": "PERSPECTIVAS - 24/05/25",
+      "date": "2025-05-25T00:53:37.496Z",
+      "embed_url": "https://www.youtube.com/embed/LRr3RZ8Jo4Q",
       "id": "2025-11-21-perspectivas-24-05-25",
       "type": "programa",
       "slug": "2025-11-21-perspectivas-24-05-25",
       "category": "",
-      "title": "PERSPECTIVAS - 24/05/25",
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "Escuchá nuestra edición y enterate de los temas principales en el ámbito económico del país.",
-      "date": "2025-05-25T00:53:37.496Z",
-      "featured": false,
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
       "tags": [],
       "tags_normalized": [],
-      "embed_url": "https://www.youtube.com/embed/LRr3RZ8Jo4Q"
+      "kicker": "",
+      "summary_short": ""
     },
     {
+      "title": "PERSPECTIVAS - 17/05/25",
+      "date": "2025-05-18T00:51:06.240Z",
+      "embed_url": "https://www.youtube.com/embed/aKKcU3S7TIg",
       "id": "2025-11-21-perspectivas-17-05-25",
       "type": "programa",
       "slug": "2025-11-21-perspectivas-17-05-25",
       "category": "",
-      "title": "PERSPECTIVAS - 17/05/25",
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "Escuchá nuestra edición y enterate de los temas principales en el ámbito económico del país.",
-      "date": "2025-05-18T00:51:06.240Z",
-      "featured": false,
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
       "tags": [],
       "tags_normalized": [],
-      "embed_url": "https://www.youtube.com/embed/aKKcU3S7TIg"
+      "kicker": "",
+      "summary_short": ""
     },
     {
+      "title": "PERSPECTIVAS - 03/05/25",
+      "date": "2025-05-04T00:49:26.304Z",
+      "summary": "Una mirada mas allá de la economía",
+      "tags": [
+        "economia-local"
+      ],
+      "thumbnail": "/assets/img/2024-08-16-billetes.jpg",
+      "embed_url": "https://www.youtube.com/embed/6TO6xE6IiBE",
+      "featured": {
+        "is_featured": true,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
       "id": "2025-11-21-perspectivas-03-05-25",
       "type": "programa",
       "slug": "2025-11-21-perspectivas-03-05-25",
       "category": "",
-      "title": "PERSPECTIVAS - 03/05/25",
       "description": "Una mirada mas allá de la economía",
-      "thumbnail": "/assets/img/2024-08-16-billetes.jpg",
       "body": "Escuchá nuestra edición y enterate de los temas principales en el ámbito económico del país.",
-      "date": "2025-05-04T00:49:26.304Z",
-      "featured": {
-        "is_featured": true
-      },
-      "tags": [
-        "economia-local"
-      ],
       "tags_normalized": [
         "economia-local"
       ],
-      "summary": "Una mirada mas allá de la economía",
-      "embed_url": "https://www.youtube.com/embed/6TO6xE6IiBE"
+      "kicker": "",
+      "summary_short": "Una mirada mas allá de la economía"
     },
     {
+      "title": "PERSPECTIVAS - 19/04/25",
+      "date": "2025-04-20T00:33:46.704Z",
+      "embed_url": "https://www.youtube.com/embed/yf5WjqOtsUU",
       "id": "2025-11-21-perspectivas-19-04-25",
       "type": "programa",
       "slug": "2025-11-21-perspectivas-19-04-25",
       "category": "",
-      "title": "PERSPECTIVAS - 19/04/25",
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "Escuchá nuestra edición y enterate de los temas principales en el ámbito económico del país.",
-      "date": "2025-04-20T00:33:46.704Z",
-      "featured": false,
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
       "tags": [],
       "tags_normalized": [],
-      "embed_url": "https://www.youtube.com/embed/yf5WjqOtsUU"
+      "kicker": "",
+      "summary_short": ""
     }
   ],
   "podcast": [
     {
+      "title": "Proyecciones económicas - una mirada local e internacional",
+      "date": "2025-11-20T15:57:35.783Z",
+      "thumbnail": [
+        "/assets/img/knmg6a6szzcshjyavygmnkhpbi.jpg"
+      ],
+      "description": "Entrevista al titular del BCP",
+      "embed_url": "https://www.youtube.com/watch?v=6TO6xE6IiBE",
       "id": "2025-11-20-proyecciones-económicas-una-mirada-local-e-internacional",
       "type": "podcast",
       "slug": "2025-11-20-proyecciones-económicas-una-mirada-local-e-internacional",
       "category": "",
-      "title": "Proyecciones económicas - una mirada local e internacional",
-      "description": "Entrevista al titular del BCP",
-      "thumbnail": [
-        "/assets/img/knmg6a6szzcshjyavygmnkhpbi.jpg"
-      ],
       "body": "En esta entrega entrevistamos al presidente del Banco Central del Paraguay (BCP), Carlos Carvallos.",
-      "date": "2025-11-20T15:57:35.783Z",
-      "featured": false,
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
       "tags": [],
       "tags_normalized": [],
-      "embed_url": "https://www.youtube.com/watch?v=6TO6xE6IiBE"
+      "kicker": "",
+      "summary_short": "Entrevista al titular del BCP"
     }
   ],
   "sponsors": [
     {
-      "id": "perspectivacompany",
-      "type": "sponsors",
-      "slug": "perspectivacompany",
-      "category": "",
       "title": "PerspectivasCompany",
-      "description": "",
-      "thumbnail": "/assets/img/default.jpg",
-      "body": "",
-      "date": "2026-01-16T22:20:02.774Z",
-      "featured": false,
-      "tags": [],
-      "tags_normalized": [],
       "tier": "Gold",
       "url": "perspectivaspy.vercel.app",
       "logo": "/assets/img/perspectivas-logo.jpeg",
       "sector": "Media",
       "active": true,
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
       "headline": "Innovación que impulsa la economía",
       "excerpt": "Perspectiva Company apoya el desarrollo del periodismo económico independiente.",
       "priority": 2,
       "campaign_start": "2025-11-22T19:06:10.808Z",
-      "campaign_end": "2025-12-05T19:06:31.989Z"
-    },
-    {
-      "id": "cadiem-casa-de-bolsa",
+      "campaign_end": "2025-12-05T19:06:31.989Z",
+      "id": "perspectivacompany",
       "type": "sponsors",
-      "slug": "cadiem-casa-de-bolsa",
+      "slug": "perspectivacompany",
       "category": "",
-      "title": "Cadiem Casa de Bolsa",
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-16T22:20:02.773Z",
-      "featured": true,
+      "date": "2026-01-17T05:59:55.459Z",
       "tags": [],
       "tags_normalized": [],
+      "kicker": "",
+      "summary_short": ""
+    },
+    {
       "excerpt": "Casa de Bolsa y Administradora de Fondos con más de 20 años de experiencia en el mercado de valores.",
       "tier": "Silver",
       "priority": 1,
       "active": true,
       "sector": "Bursátil",
+      "title": "Cadiem Casa de Bolsa",
       "headline": "Donde tu dinero trabaja para vos",
       "logo": "/assets/img/cadiem-casa-de-bolsa.png",
       "campaign_end": "2025-12-31T18:36:07.001Z",
       "url": "https://www.cadiem.com.py/",
+      "featured": {
+        "is_featured": true,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
       "visible": true,
-      "campaign_start": "2025-11-22T11:49:59.367Z"
-    },
-    {
-      "id": "banco-itaú-paraguay",
+      "campaign_start": "2025-11-22T11:49:59.367Z",
+      "id": "cadiem-casa-de-bolsa",
       "type": "sponsors",
-      "slug": "banco-itaú-paraguay",
+      "slug": "cadiem-casa-de-bolsa",
       "category": "",
-      "title": "Banco Itaú Paraguay",
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-16T22:20:02.772Z",
-      "featured": false,
+      "date": "2026-01-17T05:59:55.458Z",
       "tags": [],
       "tags_normalized": [],
+      "kicker": "",
+      "summary_short": ""
+    },
+    {
       "excerpt": "Es una entidad financiera de capital extranjero, filial del banco brasileño Itaú Unibanco, que ofrece servicios bancarios a personas y empresas en el país. ",
       "tier": "Silver",
       "priority": 6,
       "active": true,
       "sector": "Banca",
+      "title": "Banco Itaú Paraguay",
       "headline": "Para lo importante, Itaú",
       "logo": "/assets/img/banco-itau.png",
       "campaign_end": "2025-11-29T19:07:44.073Z",
       "url": "https://www.itau.com.py/",
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
       "visible": false,
-      "campaign_start": "2025-11-22T19:07:33.649Z"
-    },
-    {
-      "id": "banco-atlas",
+      "campaign_start": "2025-11-22T19:07:33.649Z",
+      "id": "banco-itaú-paraguay",
       "type": "sponsors",
-      "slug": "banco-atlas",
+      "slug": "banco-itaú-paraguay",
       "category": "",
-      "title": "Banco Atlas",
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-16T22:20:02.770Z",
-      "featured": false,
+      "date": "2026-01-17T05:59:55.457Z",
       "tags": [],
       "tags_normalized": [],
+      "kicker": "",
+      "summary_short": ""
+    },
+    {
       "excerpt": "Es una entidad bancaria que opera tanto en el segmento corporativo como en el de personas, ofreciendo servicios de consumo, banca privada y de negocios. ",
       "tier": "Silver",
       "priority": 1,
       "active": true,
       "sector": "Banca",
+      "title": "Banco Atlas",
       "headline": "Lo hacemos simple Lo hacemos digital",
       "logo": "/assets/img/banco-atlas.png",
       "campaign_end": "2025-11-28T19:07:09.066Z",
       "url": "https://www.bancoatlas.com.py/web",
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
       "visible": false,
-      "campaign_start": "2025-11-22T19:07:00.073Z"
-    },
-    {
-      "id": "bancard",
+      "campaign_start": "2025-11-22T19:07:00.073Z",
+      "id": "banco-atlas",
       "type": "sponsors",
-      "slug": "bancard",
+      "slug": "banco-atlas",
       "category": "",
-      "title": "Bancard",
       "description": "",
       "thumbnail": "/assets/img/default.jpg",
       "body": "",
-      "date": "2026-01-16T22:20:02.768Z",
-      "featured": false,
+      "date": "2026-01-17T05:59:55.455Z",
       "tags": [],
       "tags_normalized": [],
+      "kicker": "",
+      "summary_short": ""
+    },
+    {
       "excerpt": "Más de 80.000 comercios y 39 años de experiencia nos avalan como el socio ideal para tu negocio",
       "tier": "Silver",
       "priority": 3,
       "active": true,
       "sector": "Procesadora de tarjetas",
+      "title": "Bancard",
       "headline": "Tu vida más simple",
       "logo": "/assets/img/bancard.png",
       "campaign_end": "2025-11-30T18:35:33.826Z",
       "url": "https://www.bancard.com.py/",
+      "featured": {
+        "is_featured": false,
+        "is_main_featured": false,
+        "is_section_featured": false,
+        "show_in_latest": true
+      },
       "visible": false,
-      "campaign_start": "2025-11-22T18:35:00.021Z"
+      "campaign_start": "2025-11-22T18:35:00.021Z",
+      "id": "bancard",
+      "type": "sponsors",
+      "slug": "bancard",
+      "category": "",
+      "description": "",
+      "thumbnail": "/assets/img/default.jpg",
+      "body": "",
+      "date": "2026-01-17T05:59:55.452Z",
+      "tags": [],
+      "tags_normalized": [],
+      "kicker": "",
+      "summary_short": ""
     }
   ]
 }

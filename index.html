@@ -142,11 +142,43 @@
     <section id="noticias" class="wrap section">
       <div class="section-header">
         <h2>Noticias Locales</h2>
+        <p class="sub">Cobertura macro, política económica y negocios en Paraguay.</p>
       </div>
 
-      <div id="category-filters" class="category-filters"></div>
-      <div id="news-grid" class="cards-grid"></div>
-      <button id="news-view-more" class="view-more-btn" type="button" hidden>Ver más</button>
+      <div class="noticias-locales-v2">
+        <div class="nlv2-hero-stack">
+          <article id="nlv2-hero-main" class="nlv2-hero-main" aria-live="polite">
+            <p class="nlv2-placeholder">Seleccionaremos automáticamente la nota destacada de la sección.</p>
+          </article>
+          <div class="nlv2-hero-secondary" id="nlv2-hero-secondary">
+            <article class="nlv2-secondary-card">
+              <p class="nlv2-placeholder">Espacio para notas kicker</p>
+            </article>
+            <article class="nlv2-secondary-card">
+              <p class="nlv2-placeholder">Espacio para notas kicker</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="nlv2-grid-layout">
+          <div class="nlv2-grid-column">
+            <div id="category-filters" class="category-filters"></div>
+            <div id="news-grid" class="cards-grid nlv2-cards-grid"></div>
+            <button id="news-view-more" class="view-more-btn" type="button" hidden>Ver más</button>
+          </div>
+          <aside class="nlv2-context-column" aria-labelledby="nlv2-context-title">
+            <div class="nlv2-context-panel">
+              <div class="nlv2-context-header">
+                <p class="nlv2-context-eyebrow">Contexto</p>
+                <h3 id="nlv2-context-title">Notas en seguimiento</h3>
+              </div>
+              <div id="nlv2-context-feed" class="nlv2-context-feed">
+                <p class="nlv2-placeholder">Aquí mostraremos mini tarjetas con datos y enlaces.</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
     </section>
 
     <!-- MÁS LEÍDAS -->

@@ -229,6 +229,7 @@ async function loadArticle() {
     // Resolver Categoría a mostrar (Lógica normal si NO es programa)
     const categoryKey = article.category?.toLowerCase();
     const categoryLabel = CATEGORY_LABELS[categoryKey] || TYPE_LABELS[article.type] || "Actualidad";
+    const kickerLabel = (article.kicker && article.kicker.trim()) || categoryLabel;
 
     // Sub-navegación (Etiquetas en header oscuro)
     const subNav = document.getElementById("sub-navigation");
@@ -239,8 +240,8 @@ async function loadArticle() {
       // 1. Agregar Categoría (si existe)
       if (article.category) {
         const catKey = article.category.toLowerCase();
-        const catLabel = CATEGORY_LABELS[catKey] || article.category;
-        subItems.push(`<a href="/categoria.html?cat=${encodeURIComponent(article.category)}" class="sub-nav-link" style="font-weight:800; color: #fff;">${catLabel.toUpperCase()}</a>`);
+        const catLabel = kickerLabel || CATEGORY_LABELS[catKey] || article.category;
+        subItems.push(`<a href="/categoria.html?cat=${encodeURIComponent(article.category)}" class="sub-nav-link" style="font-weight:800; color: #fff;">${(catLabel || "").toUpperCase()}</a>`);
 
         // Separador sutil
         if (article.tags && article.tags.length > 0) {
@@ -385,7 +386,7 @@ async function loadArticle() {
     // 1b. Inyectar subtítulo (si existe elemento y contenido)
     const subtitleEl = document.getElementById("article-subtitle");
     if (subtitleEl) {
-      subtitleEl.textContent = article.description || "";
+      subtitleEl.textContent = article.description || article.summary_short || article.summary || "";
     }
     
     // 2. Inyectar foto

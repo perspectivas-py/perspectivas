@@ -99,24 +99,67 @@ function renderSecondary(n) {
     .join("");
 }
 
-function renderNoticiasLocales(n) {
-  const container = document.getElementById("news-grid");
-  if (!container || !n?.length) return;
+function selectSectionHeroArticles(items = []) {
+  const pool = Array.isArray(items) ? [...items] : [];
+  if (!pool.length) return { main: null, secondary: [] };
 
-  // Renderizamos las primeras 12. 
-  // OJO: Esto duplica la Hero y las secundarias. 
-  // Idealmente deberíamos hacer .slice(4, 16) para no repetir, pero lo dejo como pediste.
-  container.innerHTML = n.slice(0, 12)
-    .map(a => `
-      <a href="/noticia.html?id=${encodeURIComponent(a.slug || a.id)}" class="card">
-        <div class="card-img-container">
-          <img src="${a.thumbnail}" alt="${a.title}">
+  const hero = pool.find(article => article?.featured?.is_section_featured) || pool[0];
+  const filtered = pool.filter(article => (article.slug || article.id) !== (hero?.slug || hero?.id));
+  const secondary = filtered.slice(0, 2);
+  return { main: hero, secondary };
+}
+
+function renderNoticiasLocales(items) {
+  if (!Array.isArray(items) || !items.length) return;
+
+  const heroMain = document.getElementById("nlv2-hero-main");
+  const heroSecondary = document.getElementById("nlv2-hero-secondary");
+  const gridContainer = document.getElementById("news-grid");
+  const contextFeed = document.getElementById("nlv2-context-feed");
+
+  const { main, secondary } = selectSectionHeroArticles(items);
+
+  if (heroMain && main) {
+    heroMain.style.backgroundImage = `url(${main.thumbnail})`;
+    heroMain.innerHTML = `
+      <div class="nlv2-hero-kicker">${(main.kicker || main.category || "Actualidad").toUpperCase()}</div>
+      <h3>${main.title}</h3>
+      <p>${main.summary_short || main.description || ""}</p>
+      <div class="nlv2-meta-row">
+        <span>${formatDate(main.date)}</span>
+        <a class="btn-link" href="/noticia.html?id=${encodeURIComponent(main.slug || main.id)}">Leer más →</a>
+      </div>`;
+  }
+
+  if (heroSecondary && secondary.length) {
+    heroSecondary.innerHTML = secondary.map(article => `
+      <article class="nlv2-secondary-card">
+        <div class="nlv2-meta-row">
+          <span>${(article.kicker || article.category || "Actualidad").toUpperCase()}</span>
+          <span>·</span>
+          <span>${formatDate(article.date)}</span>
         </div>
-        <h3>${a.title}</h3>
-        <div class="card-meta">${formatDate(a.date)}</div>
-      </a>
-    `)
-    .join("");
+        <h4>${article.title}</h4>
+        <p>${article.summary_short || article.description || ""}</p>
+        <a class="btn-link" href="/noticia.html?id=${encodeURIComponent(article.slug || article.id)}">Ver nota</a>
+      </article>`).join("");
+  }
+
+  if (gridContainer) {
+    const idsOmitidos = [main, ...secondary].filter(Boolean).map(article => article.slug || article.id);
+    const gridItems = items.filter(article => !idsOmitidos.includes(article.slug || article.id)).slice(0, 12);
+    gridContainer.innerHTML = gridItems.map(cardHTML).join("");
+  }
+
+  if (contextFeed) {
+    const contextItems = items.slice(0, 4);
+    contextFeed.innerHTML = contextItems.map(article => `
+      <div class="nlv2-context-item">
+        <h4>${article.title}</h4>
+        <p>${article.summary_short || article.summary || article.description || ""}</p>
+        <a class="btn-link" href="/noticia.html?id=${encodeURIComponent(article.slug || article.id)}">Seguir historia</a>
+      </div>`).join("");
+  }
 }
 
 function renderAnalisis(items) {
