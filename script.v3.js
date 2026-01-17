@@ -13,9 +13,63 @@ const MARKET_QUOTES = [
   { label: "Carne (USDA)", value: "USD 4,85/kg", change: "+0,1%" }
 ];
 
+const MARKET_FX_TICKER_SPEC = [
+  { code: "USD", label: "USD / Gs", mode: "sell" },
+  { code: "ARS", label: "Peso Argentino", units: 1000, decimals: 2 },
+  { code: "BRL", label: "Real Brasileño", units: 1, decimals: 0 },
+  { code: "EUR", label: "Euro", units: 1, decimals: 0 }
+];
+
+const MARKET_COMMODITY_SOURCES = [
+  {
+    id: "wti",
+    label: "Petróleo WTI",
+    symbol: "cl.f",
+    formatter: quote => {
+      const close = Number(quote.close);
+      if (!Number.isFinite(close)) return null;
+      return formatUsdTicker(close, 2);
+    }
+  },
+  {
+    id: "soy",
+    label: "Soja CME",
+    symbol: "zs.f",
+    formatter: quote => {
+      const close = Number(quote.close);
+      if (!Number.isFinite(close)) return null;
+      const usdPerBushel = close / 100; // contratos en centavos por bushel
+      return formatUsdTicker(usdPerBushel, 2, "/bu");
+    }
+  },
+  {
+    id: "beef",
+    label: "Carne (USDA)",
+    symbol: "le.f",
+    formatter: quote => {
+      const close = Number(quote.close);
+      if (!Number.isFinite(close)) return null;
+      const usdPerPound = close / 100; // contratos en centavos por libra
+      const usdPerKg = usdPerPound * 2.20462;
+      return formatUsdTicker(usdPerKg, 2, "/kg");
+    }
+  }
+];
+const MARKET_TICKER_REFRESH_INTERVAL = 5 * 60 * 1000;
+
 const FX_SPREAD = 0.006; // 0.6% spread estimado
 const FLAG_CDN_BASE = "https://flagcdn.com";
 const FX_REFERENCE_FALLBACK = "exchangerate.host · Indicativo";
+const DOLLAR_PY_API_URL = "https://dolar.melizeche.com/api/1.0/";
+const DOLLAR_PY_EXCLUDED_KEYS = ["bcp", "set"];
+const AWESOME_API_BASE = "https://economia.awesomeapi.com.br/last";
+const AWESOME_PAIR_MAP = {
+  BRL: { key: "BRLPYG", pair: "BRL-PYG", inverted: false },
+  EUR: { key: "EURPYG", pair: "EUR-PYG", inverted: false },
+  ARS: { key: "PYGARS", pair: "PYG-ARS", inverted: true }
+};
+const AWESOME_PAIRS = [...new Set(Object.values(AWESOME_PAIR_MAP).map(def => def.pair))];
+const AWESOME_REFERENCE = "AwesomeAPI FX · Mercado regional";
 
 const FX_CONFIG = [
   {
@@ -390,6 +444,285 @@ const FX_FALLBACK_QUOTES = (() => {
   if (retailFallback) base.push(retailFallback);
   return base;
 })();
+
+let latestFxQuotes = FX_FALLBACK_QUOTES;
+let marketTickerItems = [...MARKET_QUOTES];
+let marketTickerRefreshHandle = null;
+
+async function fetchAwesomeSnapshot() {
+  if (!AWESOME_PAIRS.length) return null;
+  try {
+    const url = `${AWESOME_API_BASE}/${AWESOME_PAIRS.join(",")}`;
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  } catch (error) {
+    console.warn("⚠️ No pudimos consultar AwesomeAPI", error);
+    return null;
+  }
+}
+
+function buildAwesomeFxQuote(cfg, data, options = {}) {
+  if (!cfg || !data) return null;
+  const { inverted = false } = options;
+  const rawBid = Number(data.bid);
+  const rawAsk = Number(data.ask);
+  let buyRate = Number.isFinite(rawBid) ? rawBid : null;
+  let sellRate = Number.isFinite(rawAsk) ? rawAsk : null;
+
+  if (inverted) {
+    buyRate = Number.isFinite(rawAsk) && rawAsk !== 0 ? 1 / rawAsk : null;
+    sellRate = Number.isFinite(rawBid) && rawBid !== 0 ? 1 / rawBid : null;
+  }
+
+  if (!Number.isFinite(buyRate) || !Number.isFinite(sellRate)) return null;
+
+  const units = cfg.units || 1;
+  const midValue = ((buyRate + sellRate) / 2) * units;
+  const pctChange = Number(data.pctChange);
+  const variationPct = Number.isFinite(pctChange)
+    ? (inverted ? -pctChange : pctChange)
+    : null;
+
+  const timestampStr = data?.create_date
+    || (data?.timestamp ? buildIsoFromSeconds(data.timestamp) : "");
+
+  return {
+    currency: cfg.currency,
+    code: cfg.code,
+    amount: cfg.amount,
+    flagCode: cfg.flagCode,
+    buy: formatGuarani(buyRate * units),
+    sell: formatGuarani(sellRate * units),
+    variation: Number.isFinite(variationPct)
+      ? formatVariation(variationPct)
+      : cfg.fallback?.variation || "0,0%",
+    reference: cfg.reference || AWESOME_REFERENCE,
+    lastUpdate: formatTimestampLabel(timestampStr) || cfg.fallback?.lastUpdate || "",
+    midValue
+  };
+}
+
+function buildIsoFromSeconds(seconds) {
+  const value = Number(seconds);
+  if (!Number.isFinite(value)) return "";
+  const date = new Date(value * 1000);
+  if (Number.isNaN(date.getTime())) return "";
+  return date.toISOString().replace("T", " ").slice(0, 19);
+}
+
+async function fetchDollarPySnapshot() {
+  try {
+    const url = `${DOLLAR_PY_API_URL}?t=${Date.now()}`;
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  } catch (error) {
+    console.warn("⚠️ No pudimos consultar dolarpy", error);
+    return null;
+  }
+}
+
+function buildDollarPyWholesaleQuote(cfg, snapshot) {
+  if (!cfg || !snapshot?.dolarpy) return null;
+  const bcpEntry = snapshot.dolarpy.bcp || snapshot.dolarpy.set;
+  if (!bcpEntry) return null;
+
+  const buyValue = Number(bcpEntry?.compra);
+  const sellValue = Number(bcpEntry?.venta ?? bcpEntry?.compra);
+  if (!Number.isFinite(buyValue) || !Number.isFinite(sellValue)) return null;
+
+  const midValue = (buyValue + sellValue) / 2;
+  const referential = Number(snapshot?.dolarpy?.bcp?.referencial_diario);
+  const variationPct = Number.isFinite(referential) && referential > 0
+    ? ((midValue - referential) / referential) * 100
+    : 0;
+
+  return {
+    currency: cfg.currency,
+    code: cfg.code,
+    amount: cfg.amount,
+    flagCode: cfg.flagCode,
+    buy: formatGuarani(buyValue),
+    sell: formatGuarani(sellValue),
+    variation: formatVariation(variationPct),
+    reference: cfg.reference || "Banco Central del Paraguay",
+    lastUpdate: formatTimestampLabel(snapshot?.updated) || cfg.fallback?.lastUpdate || "",
+    midValue
+  };
+}
+
+function buildDollarPyRetailQuote(snapshot, spec, usdQuote) {
+  if (!spec || !snapshot?.dolarpy) return null;
+  const entries = Object.entries(snapshot.dolarpy)
+    .filter(([key, val]) => {
+      const normalizedKey = key?.toLowerCase?.() || key;
+      if (DOLLAR_PY_EXCLUDED_KEYS.includes(normalizedKey)) return false;
+      const buy = Number(val?.compra);
+      const sell = Number(val?.venta);
+      return Number.isFinite(buy) && Number.isFinite(sell);
+    });
+
+  if (!entries.length) return null;
+
+  const totals = entries.reduce((acc, [, val]) => {
+    acc.buy += Number(val.compra);
+    acc.sell += Number(val.venta);
+    return acc;
+  }, { buy: 0, sell: 0 });
+
+  const avgBuy = totals.buy / entries.length;
+  const avgSell = totals.sell / entries.length;
+  if (!Number.isFinite(avgBuy) || !Number.isFinite(avgSell)) return null;
+
+  const midValue = (avgBuy + avgSell) / 2;
+
+  return {
+    currency: spec.currency,
+    code: spec.code,
+    amount: spec.amount,
+    flagCode: spec.flagCode || "us",
+    buy: formatGuarani(avgBuy),
+    sell: formatGuarani(avgSell),
+    variation: usdQuote?.variation || formatVariation(0),
+    reference: spec.reference || usdQuote?.reference || FX_REFERENCE_FALLBACK,
+    lastUpdate: formatTimestampLabel(snapshot?.updated) || usdQuote?.lastUpdate || spec.fallback?.lastUpdate || "",
+    midValue
+  };
+}
+
+function buildFallbackQuote(cfg) {
+  return {
+    currency: cfg.currency,
+    code: cfg.code,
+    amount: cfg.amount,
+    flagCode: cfg.flagCode,
+    buy: cfg.fallback.buy,
+    sell: cfg.fallback.sell,
+    variation: cfg.fallback.variation,
+    reference: cfg.reference || FX_REFERENCE_FALLBACK,
+    lastUpdate: cfg.fallback.lastUpdate,
+    midValue: computeFallbackMid(cfg.fallback.buy, cfg.fallback.sell)
+  };
+}
+
+async function fetchGenericFxQuote(cfg, previousDate) {
+  if (!cfg) return null;
+  if (cfg.code === "PYG") return buildFallbackQuote(cfg);
+
+  const units = cfg.units || 1;
+  const latestUrl = `https://api.exchangerate.host/latest?base=${cfg.code}&symbols=PYG`;
+  const prevUrl = `https://api.exchangerate.host/${previousDate}?base=${cfg.code}&symbols=PYG`;
+
+  try {
+    const [latestRes, prevRes] = await Promise.all([
+      fetch(latestUrl),
+      fetch(prevUrl)
+    ]);
+
+    if (!latestRes.ok) throw new Error(`HTTP ${latestRes.status}`);
+    const latestData = await latestRes.json();
+    const prevData = prevRes.ok ? await prevRes.json() : null;
+
+    const latestRate = latestData?.rates?.PYG;
+    if (!latestRate) throw new Error("Sin rate PYG");
+    const prevRate = prevData?.rates?.PYG || null;
+
+    const midValue = latestRate * units;
+    const prevValue = prevRate ? prevRate * units : null;
+    const spread = cfg.spread ?? FX_SPREAD;
+    const halfSpread = spread / 2;
+    const buyValue = midValue * (1 - halfSpread);
+    const sellValue = midValue * (1 + halfSpread);
+    const variationPct = prevValue ? ((midValue - prevValue) / prevValue) * 100 : 0;
+
+    return {
+      currency: cfg.currency,
+      code: cfg.code,
+      amount: cfg.amount,
+      flagCode: cfg.flagCode,
+      buy: formatGuarani(buyValue),
+      sell: formatGuarani(sellValue),
+      variation: formatVariation(variationPct),
+      reference: cfg.reference || FX_REFERENCE_FALLBACK,
+      lastUpdate: formatUpdateLabel(latestData?.date),
+      midValue
+    };
+  } catch (error) {
+    console.warn(`⚠️ Falló la cotización de ${cfg.code}`, error);
+    return buildFallbackQuote(cfg);
+  }
+}
+
+async function fetchCommoditySnapshot() {
+  if (!MARKET_COMMODITY_SOURCES.length) return null;
+  const symbolsParam = MARKET_COMMODITY_SOURCES.map(src => src.symbol).join("+");
+  const url = `https://stooq.com/q/l/?s=${symbolsParam}&f=sd2t2ohlcv&h&e=json`;
+  try {
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const payload = await res.json();
+    const entries = Array.isArray(payload?.symbols) ? payload.symbols : [];
+    return entries.reduce((acc, entry) => {
+      const key = (entry?.symbol || "").toLowerCase();
+      if (key) acc[key] = entry;
+      return acc;
+    }, {});
+  } catch (error) {
+    console.warn("⚠️ No pudimos consultar Stooq", error);
+    return null;
+  }
+}
+
+function buildMarketFxItems() {
+  if (!Array.isArray(latestFxQuotes)) return [];
+  return MARKET_FX_TICKER_SPEC.map(spec => {
+    const quote = latestFxQuotes.find(q => q.code === spec.code);
+    if (!quote) return null;
+    if (spec.mode === "sell") {
+      return {
+        label: spec.label,
+        value: quote.sell,
+        change: quote.variation || "0,0%"
+      };
+    }
+
+    const units = spec.units || 1;
+    const baseValue = Number(quote.midValue) / units;
+    if (!Number.isFinite(baseValue)) return null;
+
+    return {
+      label: spec.label,
+      value: formatGuaraniCompact(baseValue, spec.decimals ?? 0),
+      change: quote.variation || "0,0%"
+    };
+  }).filter(Boolean);
+}
+
+function buildCommodityTickerItems(snapshot) {
+  if (!snapshot) return [];
+  return MARKET_COMMODITY_SOURCES.map(source => {
+    const quote = snapshot[source.symbol.toLowerCase()];
+    if (!quote) return null;
+    const open = Number(quote.open);
+    const close = Number(quote.close);
+    const formattedValue = source.formatter?.({ ...quote, open, close });
+    if (!formattedValue) return null;
+    const changePct = computePercentChange(close, open);
+    return {
+      label: source.label,
+      value: formattedValue,
+      change: formatVariation(changePct)
+    };
+  }).filter(Boolean);
+}
+
+function computePercentChange(current, reference) {
+  if (!Number.isFinite(current) || !Number.isFinite(reference) || reference === 0) {
+    return 0;
+  }
+  return ((current - reference) / reference) * 100;
+}
 
 const flagIconUrl = (code = "") => {
   const normalized = (code || "").toLowerCase();
@@ -906,6 +1239,12 @@ async function initHome() {
   initSearchToggle();
   initMenuToggle();
   await loadFxQuotes();
+  await loadMarketQuotes();
+  if (!marketTickerRefreshHandle && MARKET_TICKER_REFRESH_INTERVAL > 0) {
+    marketTickerRefreshHandle = setInterval(() => {
+      loadMarketQuotes();
+    }, MARKET_TICKER_REFRESH_INTERVAL);
+  }
 
   try {
     // 1. CACHE BUSTING: Agregamos timestamp para obligar a Vercel/Navegador a bajar la versión nueva
@@ -1382,90 +1721,64 @@ function renderTopReads(noticias) {
 async function loadFxQuotes() {
   try {
     const quotes = await fetchFxQuotes();
+    latestFxQuotes = quotes;
     renderQuotes(quotes);
   } catch (error) {
     console.warn("⚠️ No pudimos traer cotizaciones en vivo, usamos fallback.", error);
+    latestFxQuotes = FX_FALLBACK_QUOTES;
     renderQuotes(FX_FALLBACK_QUOTES);
   }
 }
 
+async function loadMarketQuotes() {
+  try {
+    const commoditySnapshot = await fetchCommoditySnapshot();
+    const fxItems = buildMarketFxItems();
+    const commodityItems = buildCommodityTickerItems(commoditySnapshot);
+    const merged = [...fxItems, ...commodityItems].filter(Boolean);
+    if (!merged.length) throw new Error("Sin datos para mercado hoy");
+    marketTickerItems = merged;
+  } catch (error) {
+    console.warn("⚠️ No pudimos actualizar Mercado Hoy, usamos fallback.", error);
+    marketTickerItems = [...MARKET_QUOTES];
+  } finally {
+    renderMarketTicker("ticker-track-top");
+    renderMarketTicker("ticker-track-bottom");
+  }
+}
+
 async function fetchFxQuotes() {
+  const [dollarPySnapshot, awesomeSnapshot] = await Promise.all([
+    fetchDollarPySnapshot(),
+    fetchAwesomeSnapshot()
+  ]);
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
   const previousDate = yesterday.toISOString().split("T")[0];
 
   const requests = FX_CONFIG.map(async (cfg) => {
     if (cfg.code === "PYG") {
-      return {
-        currency: cfg.currency,
-        code: cfg.code,
-        amount: cfg.amount,
-        flagCode: cfg.flagCode,
-        buy: cfg.fallback.buy,
-        sell: cfg.fallback.sell,
-        variation: cfg.fallback.variation,
-        reference: cfg.reference,
-        lastUpdate: cfg.fallback.lastUpdate
-      };
+      return buildFallbackQuote(cfg);
     }
 
-    const units = cfg.units || 1;
-    const latestUrl = `https://api.exchangerate.host/latest?base=${cfg.code}&symbols=PYG`;
-    const prevUrl = `https://api.exchangerate.host/${previousDate}?base=${cfg.code}&symbols=PYG`;
-
-    try {
-      const [latestRes, prevRes] = await Promise.all([
-        fetch(latestUrl),
-        fetch(prevUrl)
-      ]);
-
-      if (!latestRes.ok) throw new Error(`HTTP ${latestRes.status}`);
-      const latestData = await latestRes.json();
-      const prevData = prevRes.ok ? await prevRes.json() : null;
-
-      const latestRate = latestData?.rates?.PYG;
-      if (!latestRate) throw new Error("Sin rate PYG");
-      const prevRate = prevData?.rates?.PYG || null;
-
-      const midValue = latestRate * units;
-      const prevValue = prevRate ? prevRate * units : null;
-      const spread = cfg.spread ?? FX_SPREAD;
-      const halfSpread = spread / 2;
-      const buyValue = midValue * (1 - halfSpread);
-      const sellValue = midValue * (1 + halfSpread);
-      const variationPct = prevValue ? ((midValue - prevValue) / prevValue) * 100 : 0;
-
-      return {
-        currency: cfg.currency,
-        code: cfg.code,
-        amount: cfg.amount,
-        flagCode: cfg.flagCode,
-        buy: formatGuarani(buyValue),
-        sell: formatGuarani(sellValue),
-        variation: formatVariation(variationPct),
-        reference: cfg.reference || FX_REFERENCE_FALLBACK,
-        lastUpdate: formatUpdateLabel(latestData?.date),
-        midValue
-      };
-    } catch (error) {
-      console.warn(`⚠️ Falló la cotización de ${cfg.code}`, error);
-      return {
-        currency: cfg.currency,
-        code: cfg.code,
-        amount: cfg.amount,
-        flagCode: cfg.flagCode,
-        buy: cfg.fallback.buy,
-        sell: cfg.fallback.sell,
-        variation: cfg.fallback.variation,
-        reference: cfg.reference || FX_REFERENCE_FALLBACK,
-        lastUpdate: cfg.fallback.lastUpdate,
-        midValue: computeFallbackMid(cfg.fallback.buy, cfg.fallback.sell)
-      };
+    if (cfg.code === "USD") {
+      const wholesale = buildDollarPyWholesaleQuote(cfg, dollarPySnapshot);
+      if (wholesale) return wholesale;
     }
+
+    const awesomeDef = AWESOME_PAIR_MAP[cfg.code];
+    if (awesomeDef) {
+      const awesomeQuote = buildAwesomeFxQuote(cfg, awesomeSnapshot?.[awesomeDef.key], { inverted: awesomeDef.inverted });
+      if (awesomeQuote) return awesomeQuote;
+    }
+
+    return fetchGenericFxQuote(cfg, previousDate);
   });
 
   const quotes = await Promise.all(requests);
-  const retailQuote = buildRetailQuoteFromUsd(quotes, FX_RETAIL_SPEC);
+  const usdQuote = quotes.find(q => q?.code === "USD");
+  const retailQuote = buildDollarPyRetailQuote(dollarPySnapshot, FX_RETAIL_SPEC, usdQuote)
+    || buildRetailQuoteFromUsd(quotes, FX_RETAIL_SPEC);
   if (retailQuote) quotes.push(retailQuote);
   return quotes;
 }
@@ -1479,6 +1792,24 @@ function formatGuarani(value) {
   }).format(value);
 }
 
+function formatGuaraniCompact(value, decimals = 0) {
+  if (!Number.isFinite(value)) return "Gs. —";
+  const formatted = value.toLocaleString("es-PY", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals
+  });
+  return `Gs. ${formatted}`;
+}
+
+function formatUsdTicker(value, decimals = 2, suffix = "") {
+  if (!Number.isFinite(value)) return "USD —";
+  const formatted = value.toLocaleString("es-PY", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals
+  });
+  return `USD ${formatted}${suffix}`;
+}
+
 function formatVariation(value) {
   if (!Number.isFinite(value)) return "0,0%";
   const sign = value > 0 ? "+" : "";
@@ -1490,6 +1821,16 @@ function formatUpdateLabel(dateStr) {
   const baseDate = dateStr ? new Date(`${dateStr}T12:00:00Z`) : now;
   const dateLabel = baseDate.toLocaleDateString("es-PY", { day: "2-digit", month: "short" });
   const timeLabel = now.toLocaleTimeString("es-PY", { hour: "2-digit", minute: "2-digit", hour12: false });
+  return `${dateLabel} · ${timeLabel}`;
+}
+
+function formatTimestampLabel(timestamp) {
+  if (!timestamp) return "";
+  const normalized = timestamp.replace(" ", "T");
+  const date = new Date(normalized);
+  if (Number.isNaN(date.getTime())) return "";
+  const dateLabel = date.toLocaleDateString("es-PY", { day: "2-digit", month: "short" });
+  const timeLabel = date.toLocaleTimeString("es-PY", { hour: "2-digit", minute: "2-digit", hour12: false });
   return `${dateLabel} · ${timeLabel}`;
 }
 
@@ -1611,9 +1952,11 @@ function renderQuotes(quotes = FX_FALLBACK_QUOTES) {
 
 function renderMarketTicker(trackId) {
   const track = document.getElementById(trackId);
-  if (!track || !MARKET_QUOTES.length) return;
+  if (!track) return;
+  const source = marketTickerItems.length ? marketTickerItems : MARKET_QUOTES;
+  if (!source.length) return;
 
-  const itemsHtml = MARKET_QUOTES.map(item => {
+  const itemsHtml = source.map(item => {
     const change = item.change || "";
     const trimmed = change.trim();
     const trend = trimmed.startsWith("-") ? "down" : trimmed.startsWith("+") ? "up" : "";
