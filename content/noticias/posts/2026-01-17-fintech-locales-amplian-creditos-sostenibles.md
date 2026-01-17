@@ -1,9 +1,9 @@
 ---
 title: Fintech locales amplían créditos sostenibles para mipymes
-date: 2026-01-17T11:25:00.000-03:00
+date: 2026-01-17T10:43:00.000-03:00
 summary: Tres plataformas anunciaron líneas especiales con tasa fija y monitoreo
   ambiental para cadenas agroindustriales y comercios urbanos.
-category: negocios
+category: educacion-financiera
 tags:
   - economia
 thumbnail: /assets/img/default.jpg
