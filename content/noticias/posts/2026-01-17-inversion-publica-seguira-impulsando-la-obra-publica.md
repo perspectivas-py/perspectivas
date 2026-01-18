@@ -1,15 +1,18 @@
 ---
 title: Inversión pública seguirá impulsando la obra pública en 2026
-slug: 2026-01-17-inversion-publica-seguira-impulsando-la-obra-publica
 date: 2026-01-17T09:10:00.000-03:00
-summary: "El MEF adelantó que el plan de inversión para el primer semestre prioriza corredores logísticos y obras de agua potable, con énfasis en alianzas público-privadas."
+summary: El MEF adelantó que el plan de inversión para el primer semestre
+  prioriza corredores logísticos y obras de agua potable, con énfasis en
+  alianzas público-privadas.
+author: Perspectivas
 category: politica-economica
 tags:
   - obra-publica
   - inversion
   - economia
   - politica-fiscal
-thumbnail: /assets/img/uploads/seminario-fiscal.jpg
+thumbnail: /assets/img/investor-broker-discussing-trading-strategy-holding-papers-with-financial-charts-pens-cropped-shot-broker-job-investment-concept.jpg
+caption: "Foto: freepik"
 featured:
   is_featured: true
   is_main_featured: false
@@ -19,6 +22,7 @@ featured:
     - El presupuesto prevé USD 620 millones sólo para infraestructura vial.
     - Se activan nuevos contratos bajo la Ley de Alianzas Público Privadas.
     - El Tesoro confirma que el financiamiento ya está asegurado.
+slug: 2026-01-17-inversion-publica-seguira-impulsando-la-obra-publica
 ---
 El Ministerio de Economía y Finanzas (MEF) confirmó que el plan de inversión pública para el primer semestre del 2026 priorizará **corredores logísticos, obras de saneamiento y sistemas de agua potable** en ocho departamentos. El portafolio representa un desembolso cercano a USD 1.050 millones e incluye la puesta en marcha de proyectos bajo esquemas de alianzas público-privadas (APP).
 
