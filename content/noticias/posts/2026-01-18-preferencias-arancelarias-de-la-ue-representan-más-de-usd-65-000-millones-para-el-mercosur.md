@@ -6,7 +6,7 @@ summary: Las condiciones de la parte comercial del acuerdo entre los bloques
   comerciales representan para el primero preferencias arancelarias por USD
   65.700 millones.
 author: Perspectivas
-author_image: /assets/img/authors/logo-completo-perspectivas.svg
+author_image: ""
 category: mercados-inversion
 tags:
   - economia
