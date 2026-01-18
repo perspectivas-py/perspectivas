@@ -28,6 +28,27 @@
         "Las transferencias del Tesoro quedan visibles por municipio y departamento.",
         "Gobiernos locales deben subir informes completos para habilitar nuevos desembolsos."
       ],
+      "context_timeline": [
+        {
+          "status": "Antes",
+          "date": "2024",
+          "title": "El MEF digitalizó las rendiciones",
+          "detail": "Se lanzó un piloto del portal para monitorear informes municipales y transferencias."
+        },
+        {
+          "status": "Ahora",
+          "date": "Enero 2026",
+          "title": "Panel único con datos del Tesoro",
+          "detail": "La plataforma integra pagos 24/7 y evidencia qué municipios cargaron informes completos."
+        },
+        {
+          "status": "Lo que sigue",
+          "date": "1er semestre 2026",
+          "title": "Gobiernos locales deben sostener la carga",
+          "detail": "La habilitación de nuevos desembolsos dependerá de subir toda la documentación a tiempo.",
+          "outlook": "El MEF auditará cruces con Contraloría y publicará alertas cuando haya atrasos."
+        }
+      ],
       "tags_normalized": [
         "economia",
         "finanzas"

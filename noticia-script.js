@@ -114,6 +114,72 @@ function renderKeyPoints(article) {
   panel.hidden = false;
 }
 
+// Renderiza el bloque de contexto rápido con una mini línea de tiempo
+function renderContextTimeline(article) {
+  const panel = document.getElementById("article-context-panel");
+  const list = document.getElementById("article-context-timeline");
+  if (!panel || !list) return;
+
+  const candidateSources = [
+    article.context_timeline,
+    article.contextTimeline,
+    article.timeline,
+    article.context
+  ];
+
+  const steps = candidateSources.find(Array.isArray) || [];
+  const normalizedSteps = steps
+    .map(step => {
+      if (!step) return null;
+      if (typeof step === "string") {
+        return { title: step, detail: "" };
+      }
+      if (typeof step === "object") {
+        return {
+          title: step.title || step.label || step.heading || "",
+          detail: step.detail || step.description || step.text || "",
+          date: step.date || step.when || "",
+          status: step.status || step.type || step.stage || "",
+          outlook: step.outlook || step.next || step.expectation || ""
+        };
+      }
+      return null;
+    })
+    .filter(step => step && (step.title || step.detail))
+    .slice(0, 4);
+
+  if (!normalizedSteps.length) {
+    panel.hidden = true;
+    list.innerHTML = "";
+    return;
+  }
+
+  list.innerHTML = normalizedSteps.map((step, index) => {
+    const descriptionParts = [step.detail, step.outlook].filter(Boolean);
+    const statusVariant = step.status
+      ? step.status.toString().trim().toLowerCase().replace(/\s+/g, "-")
+      : "";
+    return `
+      <li class="context-step">
+        <div class="context-step-icon" aria-hidden="true">
+          <span class="context-step-dot" data-variant="${statusVariant}"></span>
+          ${index < normalizedSteps.length - 1 ? '<span class="context-step-line"></span>' : ""}
+        </div>
+        <div class="context-step-body">
+          <div class="context-step-meta">
+            ${step.date ? `<span class="context-step-date">${step.date}</span>` : ""}
+            ${step.status ? `<span class="context-step-status">${step.status}</span>` : ""}
+          </div>
+          <h4>${step.title}</h4>
+          ${descriptionParts.length ? `<p>${descriptionParts.join(" ")}</p>` : ""}
+        </div>
+      </li>
+    `;
+  }).join("");
+
+  panel.hidden = false;
+}
+
 // Carga y renderiza la noticia principal
 async function loadArticle() {
   console.log("🚀 Iniciando loadArticle...");
@@ -454,6 +520,7 @@ async function loadArticle() {
     }
 
     renderKeyPoints(article);
+    renderContextTimeline(article);
 
     console.log("✅ Artículo renderizado correctamente");
 
