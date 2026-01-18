@@ -20,10 +20,7 @@ logo_url: https://placehold.co/180x50?text=Perspectivas
 media_folder: "assets/img"
 public_folder: "/assets/img"
 
-# 🖼️ Librería de medios (repositorio)
-media_library:
-  name: file
-  allow_multiple: true
+# 🖼️ Librería de medios: usar la integrada del backend de GitHub (valor por defecto)
 
 collections:
 
