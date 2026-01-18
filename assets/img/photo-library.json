@@ -1,0 +1,1402 @@
+[
+  {
+    "id": "photo-001",
+    "title": "Grafico financiero ascendente 1",
+    "description": "Line chart sobre crecimiento de indicadores macro. Serie 1.",
+    "topics": [
+      "economia",
+      "mercados"
+    ],
+    "url": "https://picsum.photos/seed/finanzas-001/1600/900",
+    "thumb_url": "https://picsum.photos/seed/finanzas-001/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-002",
+    "title": "Equipo en reunion de estrategia 1",
+    "description": "Personas colaborando en sala moderna con laptops. Serie 1.",
+    "topics": [
+      "empresas",
+      "management"
+    ],
+    "url": "https://picsum.photos/seed/reunion-002/1600/900",
+    "thumb_url": "https://picsum.photos/seed/reunion-002/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-003",
+    "title": "Vista aerea de ciudad nocturna 1",
+    "description": "Panorama urbano con iluminacion y rascacielos. Serie 1.",
+    "topics": [
+      "infraestructura",
+      "ciudad"
+    ],
+    "url": "https://picsum.photos/seed/ciudad-003/1600/900",
+    "thumb_url": "https://picsum.photos/seed/ciudad-003/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-004",
+    "title": "Ingeniera revisando tablero electrico 1",
+    "description": "Trabajo industrial y energia renovable. Serie 1.",
+    "topics": [
+      "energia",
+      "industria"
+    ],
+    "url": "https://picsum.photos/seed/energia-004/1600/900",
+    "thumb_url": "https://picsum.photos/seed/energia-004/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-005",
+    "title": "Agricultor inspeccionando cultivo 1",
+    "description": "Campo verde con inspeccion de cosechas. Serie 1.",
+    "topics": [
+      "agro",
+      "sostenibilidad"
+    ],
+    "url": "https://picsum.photos/seed/agro-005/1600/900",
+    "thumb_url": "https://picsum.photos/seed/agro-005/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-006",
+    "title": "Persona analizando datos en tablet 1",
+    "description": "Analitica digital y tecnologia financiera. Serie 1.",
+    "topics": [
+      "tecnologia",
+      "fintech"
+    ],
+    "url": "https://picsum.photos/seed/datos-006/1600/900",
+    "thumb_url": "https://picsum.photos/seed/datos-006/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-007",
+    "title": "Puente moderno sobre rio 1",
+    "description": "Obras de infraestructura y logistica. Serie 1.",
+    "topics": [
+      "infraestructura",
+      "logistica"
+    ],
+    "url": "https://picsum.photos/seed/puente-007/1600/900",
+    "thumb_url": "https://picsum.photos/seed/puente-007/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-008",
+    "title": "Centro de datos iluminado 1",
+    "description": "Pasillos con racks de servidores. Serie 1.",
+    "topics": [
+      "tecnologia",
+      "innovacion"
+    ],
+    "url": "https://picsum.photos/seed/datacenter-008/1600/900",
+    "thumb_url": "https://picsum.photos/seed/datacenter-008/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-009",
+    "title": "Fabricacion en linea automatizada 1",
+    "description": "Brazos roboticos y manufactura. Serie 1.",
+    "topics": [
+      "industria",
+      "automatizacion"
+    ],
+    "url": "https://picsum.photos/seed/industria-009/1600/900",
+    "thumb_url": "https://picsum.photos/seed/industria-009/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-010",
+    "title": "Persona firmando contrato 1",
+    "description": "Cierre de acuerdos comerciales. Serie 1.",
+    "topics": [
+      "negocios",
+      "legal"
+    ],
+    "url": "https://picsum.photos/seed/contrato-010/1600/900",
+    "thumb_url": "https://picsum.photos/seed/contrato-010/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-011",
+    "title": "Grafico financiero ascendente 2",
+    "description": "Line chart sobre crecimiento de indicadores macro. Serie 2.",
+    "topics": [
+      "economia",
+      "mercados"
+    ],
+    "url": "https://picsum.photos/seed/finanzas-011/1600/900",
+    "thumb_url": "https://picsum.photos/seed/finanzas-011/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-012",
+    "title": "Equipo en reunion de estrategia 2",
+    "description": "Personas colaborando en sala moderna con laptops. Serie 2.",
+    "topics": [
+      "empresas",
+      "management"
+    ],
+    "url": "https://picsum.photos/seed/reunion-012/1600/900",
+    "thumb_url": "https://picsum.photos/seed/reunion-012/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-013",
+    "title": "Vista aerea de ciudad nocturna 2",
+    "description": "Panorama urbano con iluminacion y rascacielos. Serie 2.",
+    "topics": [
+      "infraestructura",
+      "ciudad"
+    ],
+    "url": "https://picsum.photos/seed/ciudad-013/1600/900",
+    "thumb_url": "https://picsum.photos/seed/ciudad-013/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-014",
+    "title": "Ingeniera revisando tablero electrico 2",
+    "description": "Trabajo industrial y energia renovable. Serie 2.",
+    "topics": [
+      "energia",
+      "industria"
+    ],
+    "url": "https://picsum.photos/seed/energia-014/1600/900",
+    "thumb_url": "https://picsum.photos/seed/energia-014/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-015",
+    "title": "Agricultor inspeccionando cultivo 2",
+    "description": "Campo verde con inspeccion de cosechas. Serie 2.",
+    "topics": [
+      "agro",
+      "sostenibilidad"
+    ],
+    "url": "https://picsum.photos/seed/agro-015/1600/900",
+    "thumb_url": "https://picsum.photos/seed/agro-015/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-016",
+    "title": "Persona analizando datos en tablet 2",
+    "description": "Analitica digital y tecnologia financiera. Serie 2.",
+    "topics": [
+      "tecnologia",
+      "fintech"
+    ],
+    "url": "https://picsum.photos/seed/datos-016/1600/900",
+    "thumb_url": "https://picsum.photos/seed/datos-016/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-017",
+    "title": "Puente moderno sobre rio 2",
+    "description": "Obras de infraestructura y logistica. Serie 2.",
+    "topics": [
+      "infraestructura",
+      "logistica"
+    ],
+    "url": "https://picsum.photos/seed/puente-017/1600/900",
+    "thumb_url": "https://picsum.photos/seed/puente-017/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-018",
+    "title": "Centro de datos iluminado 2",
+    "description": "Pasillos con racks de servidores. Serie 2.",
+    "topics": [
+      "tecnologia",
+      "innovacion"
+    ],
+    "url": "https://picsum.photos/seed/datacenter-018/1600/900",
+    "thumb_url": "https://picsum.photos/seed/datacenter-018/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-019",
+    "title": "Fabricacion en linea automatizada 2",
+    "description": "Brazos roboticos y manufactura. Serie 2.",
+    "topics": [
+      "industria",
+      "automatizacion"
+    ],
+    "url": "https://picsum.photos/seed/industria-019/1600/900",
+    "thumb_url": "https://picsum.photos/seed/industria-019/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-020",
+    "title": "Persona firmando contrato 2",
+    "description": "Cierre de acuerdos comerciales. Serie 2.",
+    "topics": [
+      "negocios",
+      "legal"
+    ],
+    "url": "https://picsum.photos/seed/contrato-020/1600/900",
+    "thumb_url": "https://picsum.photos/seed/contrato-020/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-021",
+    "title": "Grafico financiero ascendente 3",
+    "description": "Line chart sobre crecimiento de indicadores macro. Serie 3.",
+    "topics": [
+      "economia",
+      "mercados"
+    ],
+    "url": "https://picsum.photos/seed/finanzas-021/1600/900",
+    "thumb_url": "https://picsum.photos/seed/finanzas-021/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-022",
+    "title": "Equipo en reunion de estrategia 3",
+    "description": "Personas colaborando en sala moderna con laptops. Serie 3.",
+    "topics": [
+      "empresas",
+      "management"
+    ],
+    "url": "https://picsum.photos/seed/reunion-022/1600/900",
+    "thumb_url": "https://picsum.photos/seed/reunion-022/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-023",
+    "title": "Vista aerea de ciudad nocturna 3",
+    "description": "Panorama urbano con iluminacion y rascacielos. Serie 3.",
+    "topics": [
+      "infraestructura",
+      "ciudad"
+    ],
+    "url": "https://picsum.photos/seed/ciudad-023/1600/900",
+    "thumb_url": "https://picsum.photos/seed/ciudad-023/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-024",
+    "title": "Ingeniera revisando tablero electrico 3",
+    "description": "Trabajo industrial y energia renovable. Serie 3.",
+    "topics": [
+      "energia",
+      "industria"
+    ],
+    "url": "https://picsum.photos/seed/energia-024/1600/900",
+    "thumb_url": "https://picsum.photos/seed/energia-024/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-025",
+    "title": "Agricultor inspeccionando cultivo 3",
+    "description": "Campo verde con inspeccion de cosechas. Serie 3.",
+    "topics": [
+      "agro",
+      "sostenibilidad"
+    ],
+    "url": "https://picsum.photos/seed/agro-025/1600/900",
+    "thumb_url": "https://picsum.photos/seed/agro-025/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-026",
+    "title": "Persona analizando datos en tablet 3",
+    "description": "Analitica digital y tecnologia financiera. Serie 3.",
+    "topics": [
+      "tecnologia",
+      "fintech"
+    ],
+    "url": "https://picsum.photos/seed/datos-026/1600/900",
+    "thumb_url": "https://picsum.photos/seed/datos-026/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-027",
+    "title": "Puente moderno sobre rio 3",
+    "description": "Obras de infraestructura y logistica. Serie 3.",
+    "topics": [
+      "infraestructura",
+      "logistica"
+    ],
+    "url": "https://picsum.photos/seed/puente-027/1600/900",
+    "thumb_url": "https://picsum.photos/seed/puente-027/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-028",
+    "title": "Centro de datos iluminado 3",
+    "description": "Pasillos con racks de servidores. Serie 3.",
+    "topics": [
+      "tecnologia",
+      "innovacion"
+    ],
+    "url": "https://picsum.photos/seed/datacenter-028/1600/900",
+    "thumb_url": "https://picsum.photos/seed/datacenter-028/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-029",
+    "title": "Fabricacion en linea automatizada 3",
+    "description": "Brazos roboticos y manufactura. Serie 3.",
+    "topics": [
+      "industria",
+      "automatizacion"
+    ],
+    "url": "https://picsum.photos/seed/industria-029/1600/900",
+    "thumb_url": "https://picsum.photos/seed/industria-029/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-030",
+    "title": "Persona firmando contrato 3",
+    "description": "Cierre de acuerdos comerciales. Serie 3.",
+    "topics": [
+      "negocios",
+      "legal"
+    ],
+    "url": "https://picsum.photos/seed/contrato-030/1600/900",
+    "thumb_url": "https://picsum.photos/seed/contrato-030/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-031",
+    "title": "Grafico financiero ascendente 4",
+    "description": "Line chart sobre crecimiento de indicadores macro. Serie 4.",
+    "topics": [
+      "economia",
+      "mercados"
+    ],
+    "url": "https://picsum.photos/seed/finanzas-031/1600/900",
+    "thumb_url": "https://picsum.photos/seed/finanzas-031/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-032",
+    "title": "Equipo en reunion de estrategia 4",
+    "description": "Personas colaborando en sala moderna con laptops. Serie 4.",
+    "topics": [
+      "empresas",
+      "management"
+    ],
+    "url": "https://picsum.photos/seed/reunion-032/1600/900",
+    "thumb_url": "https://picsum.photos/seed/reunion-032/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-033",
+    "title": "Vista aerea de ciudad nocturna 4",
+    "description": "Panorama urbano con iluminacion y rascacielos. Serie 4.",
+    "topics": [
+      "infraestructura",
+      "ciudad"
+    ],
+    "url": "https://picsum.photos/seed/ciudad-033/1600/900",
+    "thumb_url": "https://picsum.photos/seed/ciudad-033/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-034",
+    "title": "Ingeniera revisando tablero electrico 4",
+    "description": "Trabajo industrial y energia renovable. Serie 4.",
+    "topics": [
+      "energia",
+      "industria"
+    ],
+    "url": "https://picsum.photos/seed/energia-034/1600/900",
+    "thumb_url": "https://picsum.photos/seed/energia-034/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-035",
+    "title": "Agricultor inspeccionando cultivo 4",
+    "description": "Campo verde con inspeccion de cosechas. Serie 4.",
+    "topics": [
+      "agro",
+      "sostenibilidad"
+    ],
+    "url": "https://picsum.photos/seed/agro-035/1600/900",
+    "thumb_url": "https://picsum.photos/seed/agro-035/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-036",
+    "title": "Persona analizando datos en tablet 4",
+    "description": "Analitica digital y tecnologia financiera. Serie 4.",
+    "topics": [
+      "tecnologia",
+      "fintech"
+    ],
+    "url": "https://picsum.photos/seed/datos-036/1600/900",
+    "thumb_url": "https://picsum.photos/seed/datos-036/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-037",
+    "title": "Puente moderno sobre rio 4",
+    "description": "Obras de infraestructura y logistica. Serie 4.",
+    "topics": [
+      "infraestructura",
+      "logistica"
+    ],
+    "url": "https://picsum.photos/seed/puente-037/1600/900",
+    "thumb_url": "https://picsum.photos/seed/puente-037/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-038",
+    "title": "Centro de datos iluminado 4",
+    "description": "Pasillos con racks de servidores. Serie 4.",
+    "topics": [
+      "tecnologia",
+      "innovacion"
+    ],
+    "url": "https://picsum.photos/seed/datacenter-038/1600/900",
+    "thumb_url": "https://picsum.photos/seed/datacenter-038/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-039",
+    "title": "Fabricacion en linea automatizada 4",
+    "description": "Brazos roboticos y manufactura. Serie 4.",
+    "topics": [
+      "industria",
+      "automatizacion"
+    ],
+    "url": "https://picsum.photos/seed/industria-039/1600/900",
+    "thumb_url": "https://picsum.photos/seed/industria-039/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-040",
+    "title": "Persona firmando contrato 4",
+    "description": "Cierre de acuerdos comerciales. Serie 4.",
+    "topics": [
+      "negocios",
+      "legal"
+    ],
+    "url": "https://picsum.photos/seed/contrato-040/1600/900",
+    "thumb_url": "https://picsum.photos/seed/contrato-040/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-041",
+    "title": "Grafico financiero ascendente 5",
+    "description": "Line chart sobre crecimiento de indicadores macro. Serie 5.",
+    "topics": [
+      "economia",
+      "mercados"
+    ],
+    "url": "https://picsum.photos/seed/finanzas-041/1600/900",
+    "thumb_url": "https://picsum.photos/seed/finanzas-041/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-042",
+    "title": "Equipo en reunion de estrategia 5",
+    "description": "Personas colaborando en sala moderna con laptops. Serie 5.",
+    "topics": [
+      "empresas",
+      "management"
+    ],
+    "url": "https://picsum.photos/seed/reunion-042/1600/900",
+    "thumb_url": "https://picsum.photos/seed/reunion-042/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-043",
+    "title": "Vista aerea de ciudad nocturna 5",
+    "description": "Panorama urbano con iluminacion y rascacielos. Serie 5.",
+    "topics": [
+      "infraestructura",
+      "ciudad"
+    ],
+    "url": "https://picsum.photos/seed/ciudad-043/1600/900",
+    "thumb_url": "https://picsum.photos/seed/ciudad-043/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-044",
+    "title": "Ingeniera revisando tablero electrico 5",
+    "description": "Trabajo industrial y energia renovable. Serie 5.",
+    "topics": [
+      "energia",
+      "industria"
+    ],
+    "url": "https://picsum.photos/seed/energia-044/1600/900",
+    "thumb_url": "https://picsum.photos/seed/energia-044/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-045",
+    "title": "Agricultor inspeccionando cultivo 5",
+    "description": "Campo verde con inspeccion de cosechas. Serie 5.",
+    "topics": [
+      "agro",
+      "sostenibilidad"
+    ],
+    "url": "https://picsum.photos/seed/agro-045/1600/900",
+    "thumb_url": "https://picsum.photos/seed/agro-045/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-046",
+    "title": "Persona analizando datos en tablet 5",
+    "description": "Analitica digital y tecnologia financiera. Serie 5.",
+    "topics": [
+      "tecnologia",
+      "fintech"
+    ],
+    "url": "https://picsum.photos/seed/datos-046/1600/900",
+    "thumb_url": "https://picsum.photos/seed/datos-046/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-047",
+    "title": "Puente moderno sobre rio 5",
+    "description": "Obras de infraestructura y logistica. Serie 5.",
+    "topics": [
+      "infraestructura",
+      "logistica"
+    ],
+    "url": "https://picsum.photos/seed/puente-047/1600/900",
+    "thumb_url": "https://picsum.photos/seed/puente-047/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-048",
+    "title": "Centro de datos iluminado 5",
+    "description": "Pasillos con racks de servidores. Serie 5.",
+    "topics": [
+      "tecnologia",
+      "innovacion"
+    ],
+    "url": "https://picsum.photos/seed/datacenter-048/1600/900",
+    "thumb_url": "https://picsum.photos/seed/datacenter-048/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-049",
+    "title": "Fabricacion en linea automatizada 5",
+    "description": "Brazos roboticos y manufactura. Serie 5.",
+    "topics": [
+      "industria",
+      "automatizacion"
+    ],
+    "url": "https://picsum.photos/seed/industria-049/1600/900",
+    "thumb_url": "https://picsum.photos/seed/industria-049/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-050",
+    "title": "Persona firmando contrato 5",
+    "description": "Cierre de acuerdos comerciales. Serie 5.",
+    "topics": [
+      "negocios",
+      "legal"
+    ],
+    "url": "https://picsum.photos/seed/contrato-050/1600/900",
+    "thumb_url": "https://picsum.photos/seed/contrato-050/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-051",
+    "title": "Grafico financiero ascendente 6",
+    "description": "Line chart sobre crecimiento de indicadores macro. Serie 6.",
+    "topics": [
+      "economia",
+      "mercados"
+    ],
+    "url": "https://picsum.photos/seed/finanzas-051/1600/900",
+    "thumb_url": "https://picsum.photos/seed/finanzas-051/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-052",
+    "title": "Equipo en reunion de estrategia 6",
+    "description": "Personas colaborando en sala moderna con laptops. Serie 6.",
+    "topics": [
+      "empresas",
+      "management"
+    ],
+    "url": "https://picsum.photos/seed/reunion-052/1600/900",
+    "thumb_url": "https://picsum.photos/seed/reunion-052/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-053",
+    "title": "Vista aerea de ciudad nocturna 6",
+    "description": "Panorama urbano con iluminacion y rascacielos. Serie 6.",
+    "topics": [
+      "infraestructura",
+      "ciudad"
+    ],
+    "url": "https://picsum.photos/seed/ciudad-053/1600/900",
+    "thumb_url": "https://picsum.photos/seed/ciudad-053/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-054",
+    "title": "Ingeniera revisando tablero electrico 6",
+    "description": "Trabajo industrial y energia renovable. Serie 6.",
+    "topics": [
+      "energia",
+      "industria"
+    ],
+    "url": "https://picsum.photos/seed/energia-054/1600/900",
+    "thumb_url": "https://picsum.photos/seed/energia-054/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-055",
+    "title": "Agricultor inspeccionando cultivo 6",
+    "description": "Campo verde con inspeccion de cosechas. Serie 6.",
+    "topics": [
+      "agro",
+      "sostenibilidad"
+    ],
+    "url": "https://picsum.photos/seed/agro-055/1600/900",
+    "thumb_url": "https://picsum.photos/seed/agro-055/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-056",
+    "title": "Persona analizando datos en tablet 6",
+    "description": "Analitica digital y tecnologia financiera. Serie 6.",
+    "topics": [
+      "tecnologia",
+      "fintech"
+    ],
+    "url": "https://picsum.photos/seed/datos-056/1600/900",
+    "thumb_url": "https://picsum.photos/seed/datos-056/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-057",
+    "title": "Puente moderno sobre rio 6",
+    "description": "Obras de infraestructura y logistica. Serie 6.",
+    "topics": [
+      "infraestructura",
+      "logistica"
+    ],
+    "url": "https://picsum.photos/seed/puente-057/1600/900",
+    "thumb_url": "https://picsum.photos/seed/puente-057/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-058",
+    "title": "Centro de datos iluminado 6",
+    "description": "Pasillos con racks de servidores. Serie 6.",
+    "topics": [
+      "tecnologia",
+      "innovacion"
+    ],
+    "url": "https://picsum.photos/seed/datacenter-058/1600/900",
+    "thumb_url": "https://picsum.photos/seed/datacenter-058/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-059",
+    "title": "Fabricacion en linea automatizada 6",
+    "description": "Brazos roboticos y manufactura. Serie 6.",
+    "topics": [
+      "industria",
+      "automatizacion"
+    ],
+    "url": "https://picsum.photos/seed/industria-059/1600/900",
+    "thumb_url": "https://picsum.photos/seed/industria-059/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-060",
+    "title": "Persona firmando contrato 6",
+    "description": "Cierre de acuerdos comerciales. Serie 6.",
+    "topics": [
+      "negocios",
+      "legal"
+    ],
+    "url": "https://picsum.photos/seed/contrato-060/1600/900",
+    "thumb_url": "https://picsum.photos/seed/contrato-060/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-061",
+    "title": "Grafico financiero ascendente 7",
+    "description": "Line chart sobre crecimiento de indicadores macro. Serie 7.",
+    "topics": [
+      "economia",
+      "mercados"
+    ],
+    "url": "https://picsum.photos/seed/finanzas-061/1600/900",
+    "thumb_url": "https://picsum.photos/seed/finanzas-061/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-062",
+    "title": "Equipo en reunion de estrategia 7",
+    "description": "Personas colaborando en sala moderna con laptops. Serie 7.",
+    "topics": [
+      "empresas",
+      "management"
+    ],
+    "url": "https://picsum.photos/seed/reunion-062/1600/900",
+    "thumb_url": "https://picsum.photos/seed/reunion-062/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-063",
+    "title": "Vista aerea de ciudad nocturna 7",
+    "description": "Panorama urbano con iluminacion y rascacielos. Serie 7.",
+    "topics": [
+      "infraestructura",
+      "ciudad"
+    ],
+    "url": "https://picsum.photos/seed/ciudad-063/1600/900",
+    "thumb_url": "https://picsum.photos/seed/ciudad-063/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-064",
+    "title": "Ingeniera revisando tablero electrico 7",
+    "description": "Trabajo industrial y energia renovable. Serie 7.",
+    "topics": [
+      "energia",
+      "industria"
+    ],
+    "url": "https://picsum.photos/seed/energia-064/1600/900",
+    "thumb_url": "https://picsum.photos/seed/energia-064/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-065",
+    "title": "Agricultor inspeccionando cultivo 7",
+    "description": "Campo verde con inspeccion de cosechas. Serie 7.",
+    "topics": [
+      "agro",
+      "sostenibilidad"
+    ],
+    "url": "https://picsum.photos/seed/agro-065/1600/900",
+    "thumb_url": "https://picsum.photos/seed/agro-065/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-066",
+    "title": "Persona analizando datos en tablet 7",
+    "description": "Analitica digital y tecnologia financiera. Serie 7.",
+    "topics": [
+      "tecnologia",
+      "fintech"
+    ],
+    "url": "https://picsum.photos/seed/datos-066/1600/900",
+    "thumb_url": "https://picsum.photos/seed/datos-066/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-067",
+    "title": "Puente moderno sobre rio 7",
+    "description": "Obras de infraestructura y logistica. Serie 7.",
+    "topics": [
+      "infraestructura",
+      "logistica"
+    ],
+    "url": "https://picsum.photos/seed/puente-067/1600/900",
+    "thumb_url": "https://picsum.photos/seed/puente-067/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-068",
+    "title": "Centro de datos iluminado 7",
+    "description": "Pasillos con racks de servidores. Serie 7.",
+    "topics": [
+      "tecnologia",
+      "innovacion"
+    ],
+    "url": "https://picsum.photos/seed/datacenter-068/1600/900",
+    "thumb_url": "https://picsum.photos/seed/datacenter-068/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-069",
+    "title": "Fabricacion en linea automatizada 7",
+    "description": "Brazos roboticos y manufactura. Serie 7.",
+    "topics": [
+      "industria",
+      "automatizacion"
+    ],
+    "url": "https://picsum.photos/seed/industria-069/1600/900",
+    "thumb_url": "https://picsum.photos/seed/industria-069/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-070",
+    "title": "Persona firmando contrato 7",
+    "description": "Cierre de acuerdos comerciales. Serie 7.",
+    "topics": [
+      "negocios",
+      "legal"
+    ],
+    "url": "https://picsum.photos/seed/contrato-070/1600/900",
+    "thumb_url": "https://picsum.photos/seed/contrato-070/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-071",
+    "title": "Grafico financiero ascendente 8",
+    "description": "Line chart sobre crecimiento de indicadores macro. Serie 8.",
+    "topics": [
+      "economia",
+      "mercados"
+    ],
+    "url": "https://picsum.photos/seed/finanzas-071/1600/900",
+    "thumb_url": "https://picsum.photos/seed/finanzas-071/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-072",
+    "title": "Equipo en reunion de estrategia 8",
+    "description": "Personas colaborando en sala moderna con laptops. Serie 8.",
+    "topics": [
+      "empresas",
+      "management"
+    ],
+    "url": "https://picsum.photos/seed/reunion-072/1600/900",
+    "thumb_url": "https://picsum.photos/seed/reunion-072/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-073",
+    "title": "Vista aerea de ciudad nocturna 8",
+    "description": "Panorama urbano con iluminacion y rascacielos. Serie 8.",
+    "topics": [
+      "infraestructura",
+      "ciudad"
+    ],
+    "url": "https://picsum.photos/seed/ciudad-073/1600/900",
+    "thumb_url": "https://picsum.photos/seed/ciudad-073/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-074",
+    "title": "Ingeniera revisando tablero electrico 8",
+    "description": "Trabajo industrial y energia renovable. Serie 8.",
+    "topics": [
+      "energia",
+      "industria"
+    ],
+    "url": "https://picsum.photos/seed/energia-074/1600/900",
+    "thumb_url": "https://picsum.photos/seed/energia-074/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-075",
+    "title": "Agricultor inspeccionando cultivo 8",
+    "description": "Campo verde con inspeccion de cosechas. Serie 8.",
+    "topics": [
+      "agro",
+      "sostenibilidad"
+    ],
+    "url": "https://picsum.photos/seed/agro-075/1600/900",
+    "thumb_url": "https://picsum.photos/seed/agro-075/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-076",
+    "title": "Persona analizando datos en tablet 8",
+    "description": "Analitica digital y tecnologia financiera. Serie 8.",
+    "topics": [
+      "tecnologia",
+      "fintech"
+    ],
+    "url": "https://picsum.photos/seed/datos-076/1600/900",
+    "thumb_url": "https://picsum.photos/seed/datos-076/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-077",
+    "title": "Puente moderno sobre rio 8",
+    "description": "Obras de infraestructura y logistica. Serie 8.",
+    "topics": [
+      "infraestructura",
+      "logistica"
+    ],
+    "url": "https://picsum.photos/seed/puente-077/1600/900",
+    "thumb_url": "https://picsum.photos/seed/puente-077/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-078",
+    "title": "Centro de datos iluminado 8",
+    "description": "Pasillos con racks de servidores. Serie 8.",
+    "topics": [
+      "tecnologia",
+      "innovacion"
+    ],
+    "url": "https://picsum.photos/seed/datacenter-078/1600/900",
+    "thumb_url": "https://picsum.photos/seed/datacenter-078/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-079",
+    "title": "Fabricacion en linea automatizada 8",
+    "description": "Brazos roboticos y manufactura. Serie 8.",
+    "topics": [
+      "industria",
+      "automatizacion"
+    ],
+    "url": "https://picsum.photos/seed/industria-079/1600/900",
+    "thumb_url": "https://picsum.photos/seed/industria-079/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-080",
+    "title": "Persona firmando contrato 8",
+    "description": "Cierre de acuerdos comerciales. Serie 8.",
+    "topics": [
+      "negocios",
+      "legal"
+    ],
+    "url": "https://picsum.photos/seed/contrato-080/1600/900",
+    "thumb_url": "https://picsum.photos/seed/contrato-080/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-081",
+    "title": "Grafico financiero ascendente 9",
+    "description": "Line chart sobre crecimiento de indicadores macro. Serie 9.",
+    "topics": [
+      "economia",
+      "mercados"
+    ],
+    "url": "https://picsum.photos/seed/finanzas-081/1600/900",
+    "thumb_url": "https://picsum.photos/seed/finanzas-081/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-082",
+    "title": "Equipo en reunion de estrategia 9",
+    "description": "Personas colaborando en sala moderna con laptops. Serie 9.",
+    "topics": [
+      "empresas",
+      "management"
+    ],
+    "url": "https://picsum.photos/seed/reunion-082/1600/900",
+    "thumb_url": "https://picsum.photos/seed/reunion-082/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-083",
+    "title": "Vista aerea de ciudad nocturna 9",
+    "description": "Panorama urbano con iluminacion y rascacielos. Serie 9.",
+    "topics": [
+      "infraestructura",
+      "ciudad"
+    ],
+    "url": "https://picsum.photos/seed/ciudad-083/1600/900",
+    "thumb_url": "https://picsum.photos/seed/ciudad-083/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-084",
+    "title": "Ingeniera revisando tablero electrico 9",
+    "description": "Trabajo industrial y energia renovable. Serie 9.",
+    "topics": [
+      "energia",
+      "industria"
+    ],
+    "url": "https://picsum.photos/seed/energia-084/1600/900",
+    "thumb_url": "https://picsum.photos/seed/energia-084/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-085",
+    "title": "Agricultor inspeccionando cultivo 9",
+    "description": "Campo verde con inspeccion de cosechas. Serie 9.",
+    "topics": [
+      "agro",
+      "sostenibilidad"
+    ],
+    "url": "https://picsum.photos/seed/agro-085/1600/900",
+    "thumb_url": "https://picsum.photos/seed/agro-085/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-086",
+    "title": "Persona analizando datos en tablet 9",
+    "description": "Analitica digital y tecnologia financiera. Serie 9.",
+    "topics": [
+      "tecnologia",
+      "fintech"
+    ],
+    "url": "https://picsum.photos/seed/datos-086/1600/900",
+    "thumb_url": "https://picsum.photos/seed/datos-086/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-087",
+    "title": "Puente moderno sobre rio 9",
+    "description": "Obras de infraestructura y logistica. Serie 9.",
+    "topics": [
+      "infraestructura",
+      "logistica"
+    ],
+    "url": "https://picsum.photos/seed/puente-087/1600/900",
+    "thumb_url": "https://picsum.photos/seed/puente-087/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-088",
+    "title": "Centro de datos iluminado 9",
+    "description": "Pasillos con racks de servidores. Serie 9.",
+    "topics": [
+      "tecnologia",
+      "innovacion"
+    ],
+    "url": "https://picsum.photos/seed/datacenter-088/1600/900",
+    "thumb_url": "https://picsum.photos/seed/datacenter-088/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-089",
+    "title": "Fabricacion en linea automatizada 9",
+    "description": "Brazos roboticos y manufactura. Serie 9.",
+    "topics": [
+      "industria",
+      "automatizacion"
+    ],
+    "url": "https://picsum.photos/seed/industria-089/1600/900",
+    "thumb_url": "https://picsum.photos/seed/industria-089/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-090",
+    "title": "Persona firmando contrato 9",
+    "description": "Cierre de acuerdos comerciales. Serie 9.",
+    "topics": [
+      "negocios",
+      "legal"
+    ],
+    "url": "https://picsum.photos/seed/contrato-090/1600/900",
+    "thumb_url": "https://picsum.photos/seed/contrato-090/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-091",
+    "title": "Grafico financiero ascendente 10",
+    "description": "Line chart sobre crecimiento de indicadores macro. Serie 10.",
+    "topics": [
+      "economia",
+      "mercados"
+    ],
+    "url": "https://picsum.photos/seed/finanzas-091/1600/900",
+    "thumb_url": "https://picsum.photos/seed/finanzas-091/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-092",
+    "title": "Equipo en reunion de estrategia 10",
+    "description": "Personas colaborando en sala moderna con laptops. Serie 10.",
+    "topics": [
+      "empresas",
+      "management"
+    ],
+    "url": "https://picsum.photos/seed/reunion-092/1600/900",
+    "thumb_url": "https://picsum.photos/seed/reunion-092/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-093",
+    "title": "Vista aerea de ciudad nocturna 10",
+    "description": "Panorama urbano con iluminacion y rascacielos. Serie 10.",
+    "topics": [
+      "infraestructura",
+      "ciudad"
+    ],
+    "url": "https://picsum.photos/seed/ciudad-093/1600/900",
+    "thumb_url": "https://picsum.photos/seed/ciudad-093/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-094",
+    "title": "Ingeniera revisando tablero electrico 10",
+    "description": "Trabajo industrial y energia renovable. Serie 10.",
+    "topics": [
+      "energia",
+      "industria"
+    ],
+    "url": "https://picsum.photos/seed/energia-094/1600/900",
+    "thumb_url": "https://picsum.photos/seed/energia-094/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-095",
+    "title": "Agricultor inspeccionando cultivo 10",
+    "description": "Campo verde con inspeccion de cosechas. Serie 10.",
+    "topics": [
+      "agro",
+      "sostenibilidad"
+    ],
+    "url": "https://picsum.photos/seed/agro-095/1600/900",
+    "thumb_url": "https://picsum.photos/seed/agro-095/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-096",
+    "title": "Persona analizando datos en tablet 10",
+    "description": "Analitica digital y tecnologia financiera. Serie 10.",
+    "topics": [
+      "tecnologia",
+      "fintech"
+    ],
+    "url": "https://picsum.photos/seed/datos-096/1600/900",
+    "thumb_url": "https://picsum.photos/seed/datos-096/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-097",
+    "title": "Puente moderno sobre rio 10",
+    "description": "Obras de infraestructura y logistica. Serie 10.",
+    "topics": [
+      "infraestructura",
+      "logistica"
+    ],
+    "url": "https://picsum.photos/seed/puente-097/1600/900",
+    "thumb_url": "https://picsum.photos/seed/puente-097/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-098",
+    "title": "Centro de datos iluminado 10",
+    "description": "Pasillos con racks de servidores. Serie 10.",
+    "topics": [
+      "tecnologia",
+      "innovacion"
+    ],
+    "url": "https://picsum.photos/seed/datacenter-098/1600/900",
+    "thumb_url": "https://picsum.photos/seed/datacenter-098/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-099",
+    "title": "Fabricacion en linea automatizada 10",
+    "description": "Brazos roboticos y manufactura. Serie 10.",
+    "topics": [
+      "industria",
+      "automatizacion"
+    ],
+    "url": "https://picsum.photos/seed/industria-099/1600/900",
+    "thumb_url": "https://picsum.photos/seed/industria-099/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  },
+  {
+    "id": "photo-100",
+    "title": "Persona firmando contrato 10",
+    "description": "Cierre de acuerdos comerciales. Serie 10.",
+    "topics": [
+      "negocios",
+      "legal"
+    ],
+    "url": "https://picsum.photos/seed/contrato-100/1600/900",
+    "thumb_url": "https://picsum.photos/seed/contrato-100/800/600",
+    "source": "https://picsum.photos",
+    "license": "Unsplash / Lorem Picsum (uso libre, sin atribucion obligatoria)",
+    "credit": "Imagen generada via picsum.photos con semilla controlada"
+  }
+]
