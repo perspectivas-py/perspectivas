@@ -114,6 +114,34 @@ collections:
               hint: "Escribe una oración corta (80 caracteres aprox.)."
           - { label: "¿Mostrar en últimas noticias?", name: "show_in_latest", widget: "boolean", default: true, hint: "Aparecerá en la lista general de noticias" }
 
+      - label: "⚡ Claves del día"
+        name: "key_points"
+        widget: "list"
+        required: false
+        max: 4
+        label_singular: "Clave"
+        summary: "{{fields.key_point}}"
+        hint: "2 a 4 bullets breves que se mostrarán debajo del cuerpo del artículo."
+        field:
+          label: "Clave"
+          name: "key_point"
+          widget: "string"
+          hint: "Ejemplo: 'Nuevo impuesto digital recauda USD 45M'."
+
+      - label: "🕒 Contexto rápido"
+        name: "context_timeline"
+        widget: "list"
+        required: false
+        max: 4
+        label_singular: "Hito"
+        hint: "Historia en 3 pasos (Antes, Ahora, Lo que sigue)."
+        fields:
+          - { label: "Estado", name: "status", widget: "string", required: true, hint: "Ej: Antes, Ahora, Lo que sigue" }
+          - { label: "Fecha o periodo", name: "date", widget: "string", required: false, hint: "Ej: Enero 2026" }
+          - { label: "Título corto", name: "title", widget: "string", required: true }
+          - { label: "Detalle", name: "detail", widget: "text", required: true }
+          - { label: "Perspectiva / Outlook", name: "outlook", widget: "text", required: false, hint: "Opcional para agregar una mirada a futuro." }
+
       - { label: "📝 Contenido", name: "body", widget: "markdown", required: true, hint: "Contenido completo de la noticia (Markdown)" }
       
       - { label: "🔗 Slug personalizado", name: "slug", widget: "string", required: false, hint: "Opcional. URL personalizada de la nota" }
