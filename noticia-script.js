@@ -10,6 +10,15 @@ const TYPE_LABELS = {
   "podcast": "Podcast"
 };
 
+function normalizeSlug(value = "") {
+  return value
+    .toString()
+    .trim()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
 // Lee el id (slug) desde ?id=xxx
 function getArticleIdFromUrl() {
   const params = new URLSearchParams(window.location.search);
@@ -70,6 +79,41 @@ function renderRelated(allNews, currentArticle) {
   `).join("");
 }
 
+// Renderiza el bloque de "Claves del día" con hasta 4 bullets accionables
+function renderKeyPoints(article) {
+  const panel = document.getElementById("article-key-points");
+  const list = document.getElementById("article-key-points-list");
+  if (!panel || !list) return;
+
+  const candidateSources = [
+    article.key_points,
+    article.keyPoints,
+    article.takeaways,
+    article.featured?.highlights
+  ];
+
+  const points = candidateSources.find(Array.isArray) || [];
+  const normalizedPoints = points
+    .map(point => typeof point === "string" ? point.trim() : point)
+    .filter(Boolean)
+    .slice(0, 4);
+
+  if (!normalizedPoints.length) {
+    panel.hidden = true;
+    list.innerHTML = "";
+    return;
+  }
+
+  list.innerHTML = normalizedPoints.map((point, index) => `
+    <li class="key-point-item">
+      <span class="key-point-index">${String(index + 1).padStart(2, "0")}</span>
+      <p>${point}</p>
+    </li>
+  `).join("");
+
+  panel.hidden = false;
+}
+
 // Carga y renderiza la noticia principal
 async function loadArticle() {
   console.log("🚀 Iniciando loadArticle...");
@@ -115,9 +159,11 @@ async function loadArticle() {
 
     // Buscamos por slug o por id
     console.log(`🔍 Buscando artículo: "${articleId}"`);
-    const article = allNews.find(
-      a => (a.slug === articleId) || (a.id === articleId)
-    );
+    const normalizedTarget = normalizeSlug(articleId);
+    const article = allNews.find(a => {
+      const identifiers = [a.slug, a.id].filter(Boolean);
+      return identifiers.some(idValue => idValue === articleId || normalizeSlug(idValue) === normalizedTarget);
+    });
 
     if (!article) {
       console.error(`❌ Artículo no encontrado: "${articleId}"`);
@@ -406,6 +452,8 @@ async function loadArticle() {
     if (bodyContainer) {
       bodyContainer.innerHTML = `<section class="article-body">${htmlBody}</section>`;
     }
+
+    renderKeyPoints(article);
 
     console.log("✅ Artículo renderizado correctamente");
 
