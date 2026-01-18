@@ -21,7 +21,7 @@ export default (req, res) => {
         auth_endpoint: "api/auth"
       },
       // 🔥 PUBLICACIÓN INMEDIATA: Los cambios se publican directamente en main (sin workflow)
-      publish_mode: "editorial_workflow",
+      publish_mode: "simple",
       
       // 🚀 Hook para regenerar content.json después de cada publicación en Vercel
       deploy_url: "https://api.vercel.com/v1/integrations/deploy/prj_0GzabF6iVutw8vbfiNZDN7mWx5Sl/teg36of8ls",
@@ -31,9 +31,6 @@ export default (req, res) => {
       logo_url: "https://placehold.co/180x50?text=Perspectivas",
       media_folder: "assets/img",
       public_folder: "/assets/img",
-      media_library: {
-        name: "github"
-      },
       collections: [
         {
           name: "noticias",
@@ -101,7 +98,55 @@ export default (req, res) => {
               fields: [
                 { label: "¿Destacado en portada?", name: "is_featured", widget: "boolean", default: false, hint: "Aparecerá en la sección principal de la home" },
                 { label: "¿PORTADA PRINCIPAL (HERO)?", name: "is_main_featured", widget: "boolean", default: false, hint: "⚠️ CRÍTICO: Solo UNA noticia puede tener esto ACTIVADO. Si la activas aquí, debes DESACTIVARLA en todas las demás." },
+                {
+                  label: "🟦 Claves del día (Hero)",
+                  name: "highlights",
+                  widget: "list",
+                  required: false,
+                  max: 3,
+                  label_singular: "Dato clave",
+                  summary: "{{fields.highlight}}",
+                  hint: "Solo completa si marcas Portada Principal. Máximo 3 puntos breves para el hero.",
+                  field: {
+                    label: "Dato clave",
+                    name: "highlight",
+                    widget: "string",
+                    hint: "Ej: 'Reforma recauda USD 180M en 2026'."
+                  }
+                },
                 { label: "¿Mostrar en últimas noticias?", name: "show_in_latest", widget: "boolean", default: true, hint: "Aparecerá en la lista general de noticias" }
+              ]
+            },
+            {
+              label: "⚡ Claves del día",
+              name: "key_points",
+              widget: "list",
+              required: false,
+              max: 4,
+              label_singular: "Clave",
+              summary: "{{fields.key_point}}",
+              hint: "2 a 4 bullets que verán los lectores debajo del cuerpo del artículo.",
+              field: {
+                label: "Clave",
+                name: "key_point",
+                widget: "string",
+                hint: "Ej: 'Nuevo impuesto digital recauda USD 45M'."
+              }
+            },
+            {
+              label: "🕒 Contexto rápido",
+              name: "context_timeline",
+              widget: "list",
+              required: false,
+              max: 4,
+              label_singular: "Hito",
+              hint: "Historia en 3 pasos (Antes, Ahora, Lo que sigue).",
+              fields: [
+                { label: "Estado", name: "status", widget: "string", required: true, hint: "Ej: Antes, Ahora, Lo que sigue" },
+                { label: "Fecha o periodo", name: "date", widget: "string", required: false, hint: "Ej: Enero 2026" },
+                { label: "Título corto", name: "title", widget: "string", required: true },
+                { label: "Detalle", name: "detail", widget: "text", required: true },
+                { label: "Perspectiva / Outlook", name: "outlook", widget: "text", required: false, hint: "Opcional para agregar mirada futura" }
               ]
             },
             { label: "📝 Contenido", name: "body", widget: "markdown", required: true, hint: "Contenido completo de la noticia (Markdown)" },
