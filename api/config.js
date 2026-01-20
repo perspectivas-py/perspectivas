@@ -1,63 +1,35 @@
 // /api/config.js - Servir configuración de Decap CMS
 
+import fs from 'fs';
+import path from 'path';
+import YAML from 'yaml';
+
 export default (req, res) => {
   try {
+    const configPath = path.join(process.cwd(), 'editor', 'config.yml');
+    const content = fs.readFileSync(configPath, 'utf8');
+    const config = YAML.parse(content);
+
     // Detectar el dominio actual dinámicamente
     const protocol = req.headers['x-forwarded-proto'] || 'http';
     const host = req.headers['x-forwarded-host'] || req.headers.host || 'localhost:3000';
     const baseUrl = `${protocol}://${host}`;
 
-    console.log('📋 [CONFIG] Sirviendo configuración');
-    console.log('  - Protocol:', protocol);
-    console.log('  - Host:', host);
-    console.log('  - Base URL:', baseUrl);
+    config.backend.base_url = baseUrl;
+    config.site_url = baseUrl;
+    config.display_url = baseUrl;
 
-    const config = {
-      backend: {
-        name: "github",
-        repo: "perspectivas-py/perspectivas",
-        branch: "main",
-        base_url: baseUrl,
-        auth_endpoint: "api/auth"
-      },
-      // 🔥 PUBLICACIÓN INMEDIATA: Los cambios se publican directamente en main (sin workflow)
-      publish_mode: "simple",
-      
-      // 🚀 Hook para regenerar content.json después de cada publicación en Vercel
-      deploy_url: "https://api.vercel.com/v1/integrations/deploy/prj_0GzabF6iVutw8vbfiNZDN7mWx5Sl/teg36of8ls",
-
-      site_url: baseUrl,
-      display_url: baseUrl,
-      logo_url: "https://placehold.co/180x50?text=Perspectivas",
-      media_folder: "assets/img",
-      public_folder: "/assets/img",
-      media_library: {
-        name: "github",
-        repo: "perspectivas-py/perspectivas",
-        branch: "main"
-      },
-      collections: [
-        {
-          name: "noticias",
-          label: "📰 Noticias",
-          folder: "content/noticias/posts",
-          create: true,
-          slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
-          extension: "md",
-          format: "frontmatter",
-          sortable_fields: ["date"],
-          sort: "-date",
-          fields: [
-            { label: "📝 Título", name: "title", widget: "string", required: true },
-            { label: "📅 Fecha de publicación", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", required: true },
-            { label: "⏰ Programar publicación", name: "publish_date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", hint: "Dejar en blanco si se publica inmediatamente", required: false },
-            { label: "📄 Resumen/Descripción", name: "summary", widget: "text", required: true, hint: "Texto corto que aparecerá en las listas" },
-            { label: "✍️ Autor", name: "author", widget: "string", required: false, default: "Perspectivas", hint: "Nombre del autor o redactor de la noticia" },
-            { label: "👤 Foto del Autor", name: "author_image", widget: "image", required: false, media_folder: "assets/img/authors", public_folder: "/assets/img/authors", hint: "Foto de perfil del autor (se guardará en carpeta especial 'authors')" },
-            { 
-              label: "📑 Categoría Principal", 
-              name: "category", 
-              widget: "select", 
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.statusCode = 200;
+    res.end(JSON.stringify(config));
+  } catch (error) {
+    console.error('❌ [CONFIG] Error:', error.message);
+    res.statusCode = 500;
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify({ error: 'Failed to load config', message: error.message }));
+  }
+};
               required: true, 
               options: [
                 { label: "Macroeconomía", value: "macro" },
