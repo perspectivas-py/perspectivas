@@ -6,6 +6,17 @@
   <title>Gestor de Contenidos | Perspectivas</title>
 </head>
 <body>
+  <!-- Registrar media library de GitHub para Decap CMS -->
+  <script src="https://unpkg.com/decap-cms-media-library-github@1.4.0/dist/decap-cms-media-library-github.js"></script>
+  <script>
+    (function waitAndRegister() {
+      if (window.CMS && window.GitHubMediaLibrary) {
+        window.CMS.registerMediaLibrary(window.GitHubMediaLibrary);
+      } else {
+        setTimeout(waitAndRegister, 50);
+      }
+    })();
+  </script>
 
   <!-- contenedor requerido por Decap CMS -->
   <div id="cms"></div>
