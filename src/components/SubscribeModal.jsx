@@ -1,4 +1,12 @@
 import React, { useState } from "react";
+import analytics from "../utils/analytics";
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+  return null;
+}
 
 const SubscribeModal = ({ open, onClose }) => {
   const [email, setEmail] = useState("");
@@ -9,16 +17,17 @@ const SubscribeModal = ({ open, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    window.dispatchEvent(new CustomEvent("analytics", { detail: { event: "subscribe_start" } }));
+    const variant = getCookie("ab_cta_variant") || "A";
+    analytics.track("subscribe_start", { source: "header_cta", variant });
     try {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, source: "header_cta", variant: "A", alerts }),
+        body: JSON.stringify({ email, source: "header_cta", variant, alerts }),
       });
       if (res.ok) {
         setSuccess(true);
-        window.dispatchEvent(new CustomEvent("analytics", { detail: { event: "subscribe_complete" } }));
+        analytics.track("subscribe_complete", { source: "header_cta", plan: alerts ? "alertas" : "solo_email" });
       }
     } finally {
       setLoading(false);
