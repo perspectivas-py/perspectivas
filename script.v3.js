@@ -2003,7 +2003,7 @@ async function loadMarketQuotes() {
     const commoditySnapshot = await fetchCommoditySnapshot();
     const fxItems = buildMarketFxItems();
     const commodityItems = buildCommodityTickerItems(commoditySnapshot);
-    const merged = [...fxItems, ...commodityItems].filter(Boolean);
+    let merged = [...fxItems, ...commodityItems].filter(Boolean);
     if (!merged.length) throw new Error("Sin datos para mercado hoy");
     marketTickerItems = merged;
   } catch (error) {
@@ -2049,39 +2049,6 @@ async function fetchFxQuotes() {
     || buildRetailQuoteFromUsd(quotes, FX_RETAIL_SPEC);
   if (retailQuote) quotes.push(retailQuote);
   return quotes;
-}
-
-function formatGuarani(value) {
-  if (!Number.isFinite(value)) return "—";
-  return new Intl.NumberFormat("es-PY", {
-    style: "currency",
-    currency: "PYG",
-    maximumFractionDigits: 0
-  }).format(value);
-}
-
-function formatGuaraniCompact(value, decimals = 0) {
-  if (!Number.isFinite(value)) return "Gs. —";
-  const formatted = value.toLocaleString("es-PY", {
-    minimumFractionDigits: decimals,
-    maximumFractionDigits: decimals
-  });
-  return `Gs. ${formatted}`;
-}
-
-function formatUsdTicker(value, decimals = 2, suffix = "") {
-  if (!Number.isFinite(value)) return "USD —";
-  const formatted = value.toLocaleString("es-PY", {
-    minimumFractionDigits: decimals,
-    maximumFractionDigits: decimals
-  });
-  return `USD ${formatted}${suffix}`;
-}
-
-function formatVariation(value) {
-  if (!Number.isFinite(value)) return "0,0%";
-  const sign = value > 0 ? "+" : "";
-  return `${sign}${value.toFixed(2).replace(".", ",")}%`;
 }
 
 function formatUpdateLabel(dateStr) {
