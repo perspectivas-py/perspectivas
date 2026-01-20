@@ -17,24 +17,15 @@
     }, false);
   </script>
 
-  <!-- Inicialización manual de Decap CMS y media library de GitHub -->
+  <!-- Configuración de CMS -->
   <script>
-    window.CMS_MANUAL_INIT = true;
+    window.CMS_CONFIGURATION = {
+      config: '/api/config'
+    };
   </script>
 
-  <!-- Inicialización manual de Decap CMS y media library de GitHub -->
+  <!-- Librería de Decap CMS -->
   <script src="https://unpkg.com/decap-cms@3.9.0/dist/decap-cms.js"></script>
-  <script src="https://unpkg.com/decap-cms-media-library-github@1.4.0/dist/decap-cms-media-library-github.js"></script>
-  <script>
-    (function initCMS() {
-      if (window.CMS && window.GitHubMediaLibrary) {
-        window.CMS.registerMediaLibrary(window.GitHubMediaLibrary);
-        window.CMS.init({ config: '/api/config' });
-      } else {
-        setTimeout(initCMS, 50);
-      }
-    })();
-  </script>
 
 </body>
 </html>
