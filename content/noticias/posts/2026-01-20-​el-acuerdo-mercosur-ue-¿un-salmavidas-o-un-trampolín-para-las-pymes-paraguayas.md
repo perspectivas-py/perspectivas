@@ -1,5 +1,5 @@
 ---
-title: '​El Acuerdo Mercosur-UE: ¿Un "Salmavidas" o un "Trampolín" para las
+title: '​El Acuerdo Mercosur-UE: ¿Un "Salvavidas" o un "Trampolín" para las
   PYMES Paraguayas?'
 date: 2026-01-20T00:48:00.000-03:00
 summary: A menudo se piensa que estos acuerdos están hechos a medida para los
