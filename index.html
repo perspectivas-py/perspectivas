@@ -205,17 +205,37 @@
             </div>
             <button id="news-view-more" class="view-more-btn" type="button" hidden>Ver más</button>
           </div>
-          <aside class="nlv2-context-column" aria-labelledby="nlv2-context-title">
-            <div class="nlv2-context-panel">
-              <div class="nlv2-context-header">
-                <p class="nlv2-context-eyebrow">Contexto</p>
-                <h3 id="nlv2-context-title">Notas en seguimiento</h3>
-              </div>
-              <div id="nlv2-context-feed" class="nlv2-context-feed">
-                <p class="nlv2-placeholder">Aquí mostraremos mini tarjetas con datos y enlaces.</p>
-              </div>
+          <section class="nlv2-context-panel-inside">
+            <div class="nlv2-context-header">
+              <h3 id="nlv2-context-title">Notas en seguimiento</h3>
             </div>
-          </aside>
+            <div id="nlv2-context-feed" class="nlv2-context-feed">
+              <p class="nlv2-placeholder">Aquí mostraremos mini tarjetas con datos y enlaces.</p>
+            </div>
+          </section>
+            <script>
+              // Panel flotante Contexto
+              const fabBtn = document.getElementById('context-fab');
+              const fabPanel = document.getElementById('nlv2-context-fab-panel');
+              if (fabBtn && fabPanel) {
+                fabBtn.addEventListener('click', () => {
+                  const isOpen = !fabPanel.hasAttribute('hidden');
+                  if (isOpen) {
+                    fabPanel.setAttribute('hidden', '');
+                    fabBtn.classList.remove('open');
+                  } else {
+                    fabPanel.removeAttribute('hidden');
+                    fabBtn.classList.add('open');
+                  }
+                });
+                document.addEventListener('click', (e) => {
+                  if (!fabPanel.contains(e.target) && !fabBtn.contains(e.target)) {
+                    fabPanel.setAttribute('hidden', '');
+                    fabBtn.classList.remove('open');
+                  }
+                });
+              }
+            </script>
         </div>
       </div>
     </section>
