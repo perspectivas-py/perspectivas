@@ -27,5 +27,19 @@
   <!-- Librería de Decap CMS -->
   <script src="https://unpkg.com/decap-cms@3.9.0/dist/decap-cms.js"></script>
 
+  <!-- Registrar media library de GitHub para Decap CMS -->
+  <script src="https://unpkg.com/decap-cms-media-library-github@1.4.0/dist/decap-cms-media-library-github.js"></script>
+  <script>
+    if (window.CMS && window.GitHubMediaLibrary) {
+      window.CMS.registerMediaLibrary(window.GitHubMediaLibrary);
+    } else {
+      document.addEventListener('DOMContentLoaded', function() {
+        if (window.CMS && window.GitHubMediaLibrary) {
+          window.CMS.registerMediaLibrary(window.GitHubMediaLibrary);
+        }
+      });
+    }
+  </script>
+
 </body>
 </html>
