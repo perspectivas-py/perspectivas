@@ -29,7 +29,7 @@
     (function initCMS() {
       if (window.CMS && window.GitHubMediaLibrary) {
         window.CMS.registerMediaLibrary(window.GitHubMediaLibrary);
-        window.CMS.init({ config: '/editor/config.yml' });
+        window.CMS.init({ config: '/api/config' });
       } else {
         setTimeout(initCMS, 50);
       }
