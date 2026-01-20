@@ -17,26 +17,22 @@
     }, false);
   </script>
 
-  <!-- Configuración de CMS -->
+  <!-- Configuración de CMS: usar config.yml estático -->
   <script>
     window.CMS_CONFIGURATION = {
-      config: '/api/config'
+      config: '/editor/config.yml'
     };
   </script>
 
   <!-- Inicialización manual de Decap CMS y media library de GitHub -->
-  <script>
-    window.CMS_MANUAL_INIT = true;
-  </script>
   <script src="https://unpkg.com/decap-cms@3.9.0/dist/decap-cms.js"></script>
   <script src="https://unpkg.com/decap-cms-media-library-github@1.4.0/dist/decap-cms-media-library-github.js"></script>
   <script>
-    (function initCMS() {
+    (function waitAndRegister() {
       if (window.CMS && window.GitHubMediaLibrary) {
         window.CMS.registerMediaLibrary(window.GitHubMediaLibrary);
-        window.CMS.init();
       } else {
-        setTimeout(initCMS, 50);
+        setTimeout(waitAndRegister, 50);
       }
     })();
   </script>
