@@ -597,15 +597,14 @@ ul {
 
 /* CINTA DE COTIZACIONES */
 .market-ticker {
-  background: linear-gradient(90deg, #003f91, #005bb5);
-  color: #f8fafc;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  background: #f5f6fa;
+  color: #222;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
   overflow: hidden;
-  transition: max-height 0.4s ease, opacity 0.4s ease, margin 0.4s ease, padding 0.4s ease, border-width 0.4s ease;
-  max-height: 80px;
+  max-height: 56px;
   opacity: 1;
-  padding: 0.5rem 1rem;
+  padding: 0.22rem 0.7rem;
   will-change: max-height, opacity, margin-bottom, padding;
 }
 
@@ -657,37 +656,60 @@ ul {
   display: flex;
   gap: 2.5rem;
   width: max-content;
-  animation: ticker-scroll 32s linear infinite;
+  animation: ticker-scroll 48s linear infinite;
+  cursor: pointer;
+}
+
+/* Pausar animación al hacer hover o click */
+.ticker-track:hover, .ticker-track:active, .ticker-track:focus {
+  animation-play-state: paused !important;
 }
 
 .ticker-item {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 0.35rem;
-  font-size: 0.9rem;
-  letter-spacing: 0.04em;
+  background: transparent;
+  border-radius: 0;
+  border: none;
+  margin-right: 0.7rem;
+  padding: 0.06rem 0.45rem 0.06rem 0.35rem;
+  font-size: 0.93rem;
+  font-family: 'Lato', Arial, sans-serif;
+  font-weight: 700;
+  color: #222;
+  gap: 0.4rem;
+  min-width: 90px;
+  box-shadow: none;
+  letter-spacing: 0.01em;
 }
 
 .ticker-label-mini {
-  font-size: 0.75rem;
+  color: #888;
+  font-size: 0.78em;
+  font-weight: 700;
   text-transform: uppercase;
-  opacity: 0.8;
+  margin-right: 0.18em;
+  letter-spacing: 0.04em;
 }
 
 .ticker-value {
   font-weight: 700;
+  color: #222;
+  font-size: 0.93em;
 }
 
 .ticker-change {
-  font-weight: 600;
+  font-weight: 700;
+  margin-left: 0.12em;
+  font-size: 0.92em;
 }
 
 .ticker-change.up {
-  color: #7ae49d;
+  color: #1db954;
 }
 
 .ticker-change.down {
-  color: #f8a5a5;
+  color: #e53935;
 }
 
 @keyframes ticker-scroll {
@@ -702,7 +724,7 @@ ul {
 
 @media (prefers-reduced-motion: reduce) {
   .ticker-track {
-    animation-duration: 120s;
+    animation-duration: 128s;
   }
 }
 
@@ -805,11 +827,19 @@ ul {
 }
 
 .nlv2-hero-kicker {
-  font-size: 0.85rem;
+  font-size: 0.92rem;
+  font-family: 'Merriweather', serif;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-weight: 600;
-  display: inline-flex;
+  letter-spacing: 0.13em;
+  color: #003f91;
+  background: linear-gradient(90deg, #fff 60%, #eaf2fb 100%);
+  border: 1.5px solid #005bb5;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,63,145,0.07);
+  padding: 0.18em 1.1em 0.18em 1.1em;
+  margin-right: 1.2em;
+  white-space: nowrap;
   align-items: center;
   gap: 0.5rem;
 }
@@ -968,19 +998,23 @@ ul {
 }
 
 .nlv2-context-item h4 {
-  font-size: 1rem;
-  margin: 0;
-}
-
-.nlv2-context-item p {
-  font-size: 0.88rem;
-  color: rgba(15, 23, 42, 0.75);
-  margin: 0;
-}
-
-.nlv2-placeholder {
-  margin: 0;
-  font-size: 0.95rem;
+  font-size: 1.08rem;
+  font-family: 'Merriweather', 'Georgia', serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #003f91;
+  background: linear-gradient(90deg, #fff 70%, #eaf2fb 100%);
+  border: 2.5px solid #005bb5;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px 0 rgba(0,63,145,0.10);
+  padding: 0.32em 1.6em 0.32em 1.6em;
+  margin-right: 1.6em;
+  margin-left: 0.2em;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  min-height: 2.2em;
   color: rgba(15, 23, 42, 0.6);
 }
 
@@ -1262,6 +1296,7 @@ ul {
 
 /* Featured Card - Miniportada */
 .featured-card {
+    animation: ticker-scroll 64s linear infinite;
   display: flex;
   gap: 1.5rem;
   text-decoration: none;
