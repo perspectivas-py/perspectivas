@@ -75,80 +75,72 @@
   box-shadow: 0 4px 16px rgba(15,17,39,0.08);
   border: 1px solid #f0f0f0;
   padding: 1.5em 1.2em 1.2em 1.2em;
+  padding: 1.5em 1.2em 1.2em 1.2em;
   display: flex;
-  /* MiniPortada compacta */
-  .nlv2-hero-main {
-    background: linear-gradient(135deg, rgba(8, 24, 46, 0.92), rgba(9, 62, 104, 0.82));
-    border-radius: 18px;
-    padding: 1.1rem 1.2rem 1.2rem 1.2rem;
-    min-height: 140px;
-    max-width: 540px;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    margin-left: auto;
-    margin-right: auto;
-    box-shadow: 0 8px 32px rgba(11,61,102,0.10);
-  }
-  .nlv2-hero-main h3 {
-    font-size: 1.18rem;
-    font-family: var(--font-headline);
-    font-weight: 800;
-    margin: 0 0 0.45em 0;
-    line-height: 1.18;
-    max-height: calc(1.18em * 3.5);
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3.5;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-  }
-  .nlv2-hero-main p {
-    font-size: 0.99rem;
-    margin: 0 0 0.7em 0;
-    color: #e3e3e3;
-    line-height: 1.22;
-    max-height: calc(1.22em * 3.5);
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3.5;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-  }
-  .nlv2-hero-main .nlv2-meta-row {
-    display: flex;
-    align-items: center;
-    gap: 1.1em;
-    margin-top: 0.2em;
-    font-size: 0.93rem;
-    color: #c7c7c7;
-  }
-  .nlv2-hero-main .btn-link {
-    font-size: 0.97rem;
-    font-weight: 700;
-    color: #fff;
-    background: rgba(11,61,102,0.22);
-    border-radius: 999px;
-    padding: 0.38em 1.2em;
-    border: 1.5px solid rgba(255,255,255,0.18);
-    text-decoration: none;
-    margin-left: 0.5em;
-    transition: background 0.2s, color 0.2s;
-  }
-  .nlv2-hero-main .btn-link:hover {
-    background: #fff;
-    color: #0b3d66;
-  }
-  font-weight: 600;
-  font-size: 0.97rem;
-  text-decoration: underline;
-  transition: color 0.2s;
+}
+
+.nlv2-context-eyebrow {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #64748b;
+  margin: 0 0 0.25rem 0;
+  font-weight: 700;
+}
+
+.nlv2-context-panel-inside h3 {
+  font-family: 'Merriweather', serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  border: none;
+  padding: 0;
+  background: none;
+  text-align: left;
+  line-height: 1.2;
+  color: #0f172a;
+  text-decoration: none;
+}
+
+.nlv2-context-panel-inside .nlv2-context-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.nlv2-context-panel-inside .nlv2-context-item {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 1rem;
+}
+
+.nlv2-context-panel-inside .nlv2-context-item:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.nlv2-context-panel-inside .nlv2-context-item h4 {
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  color: #334155 !important;
+  margin-bottom: 0.25rem !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  line-height: 1.4 !important;
+  text-decoration: none !important;
+  display: block !important;
+  white-space: normal !important;
+  max-height: none !important;
+}
+
+.nlv2-context-panel-inside .nlv2-context-item p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #64748b;
+  margin: 0 0 0.5rem 0;
 }
 .nlv2-context-panel-inside .btn-link:hover {
   color: #b91c1c;
@@ -1186,6 +1178,10 @@ ul {
   border: 1px solid rgba(15, 23, 42, 0.06);
   padding-bottom: 0.5rem;
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+.nlv2-cards-grid .card .card-img-container {
+  aspect-ratio: 1 / 1;
 }
 
 .nlv2-cards-grid .card h3 {
