@@ -425,7 +425,7 @@ async function loadArticle() {
     sidebarHtml += `
       <div class="author-section-compact">
         <div class="author-profile">
-          <img src="${authorImg}" class="author-avatar" alt="${authorName}">
+          ${article.author_image ? `<img src="${article.author_image}" class="author-avatar" alt="${authorName}">` : ""}
           <div class="author-details">
             <span class="author-name">${authorName}</span>
             <span class="author-role">${authorRole}</span>

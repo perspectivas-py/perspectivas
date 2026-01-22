@@ -4732,6 +4732,20 @@ ul {
   font-weight: 400;
 }
 
+/* Drop Cap (Capitular) al estilo grandes portales */
+.article-body-text p:first-of-type::first-letter {
+  float: left;
+  font-size: 4rem;
+  line-height: 0.85;
+  font-weight: 800;
+  margin-top: 0.15rem;
+  margin-right: 0.6rem;
+  color: #000;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: var(--font-headline);
+  text-transform: uppercase;
+}
+
 .article-body-text h2,
 .article-body-text h3 {
   font-family: var(--font-headline);
