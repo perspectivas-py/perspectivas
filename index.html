@@ -55,14 +55,17 @@
           <span id="weather-symbol" class="weather-symbol" aria-hidden="true">
             <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true">
               <circle cx="12" cy="12" r="6"></circle>
-              <path d="M20 12h3M1 12h3M12 1v3M12 21v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke-linecap="round"></path>
+              <path
+                d="M20 12h3M1 12h3M12 1v3M12 21v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"
+                stroke-linecap="round"></path>
             </svg>
           </span>
           <span id="weather-temp" class="weather-temp">--°C</span>
         </div>
         <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">
           <!-- Icono de Sol (en modo claro) -->
-          <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none"
+            stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -74,7 +77,8 @@
             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
           </svg>
           <!-- Icono de Luna (en modo oscuro) -->
-          <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none"
+            stroke="currentColor" stroke-width="2">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </button>
@@ -165,18 +169,22 @@
             <div class="nlv2-filter-bar">
               <div class="nlv2-search-row">
                 <label class="nlv2-search-control" aria-label="Buscar en noticias locales">
-                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                    aria-hidden="true">
                     <circle cx="11" cy="11" r="8"></circle>
                     <path d="m21 21-4.35-4.35"></path>
                   </svg>
-                  <input type="search" id="nlv2-filter-search" placeholder="Buscar por título o palabra clave" autocomplete="off">
+                  <input type="search" id="nlv2-filter-search" placeholder="Buscar por título o palabra clave"
+                    autocomplete="off">
                 </label>
               </div>
               <div class="nlv2-tags-row">
-                <div id="category-filters" class="category-filters" role="toolbar" aria-label="Filtrar por categoría"></div>
+                <div id="category-filters" class="category-filters" role="toolbar" aria-label="Filtrar por categoría">
+                </div>
                 <div class="nlv2-filter-actions">
                   <div class="nlv2-sort-control" role="radiogroup" aria-label="Ordenar resultados">
-                    <button type="button" class="sort-pill active" data-sort="recent" aria-pressed="true">Recientes</button>
+                    <button type="button" class="sort-pill active" data-sort="recent"
+                      aria-pressed="true">Recientes</button>
                     <button type="button" class="sort-pill" data-sort="oldest" aria-pressed="false">Históricas</button>
                   </div>
                   <div class="nlv2-filter-status">
@@ -188,19 +196,24 @@
             </div>
 
             <div class="nlv2-scroll-wrapper">
-              <button class="nlv2-scroll-btn" type="button" data-scroll="prev" aria-label="Desplazar hacia la izquierda" disabled>
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <button class="nlv2-scroll-btn" type="button" data-scroll="prev" aria-label="Desplazar hacia la izquierda"
+                disabled>
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                  aria-hidden="true">
                   <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
               </button>
               <div id="news-grid" class="cards-grid nlv2-cards-grid" aria-live="polite"></div>
-              <button class="nlv2-scroll-btn" type="button" data-scroll="next" aria-label="Desplazar hacia la derecha" disabled>
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <button class="nlv2-scroll-btn" type="button" data-scroll="next" aria-label="Desplazar hacia la derecha"
+                disabled>
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                  aria-hidden="true">
                   <polyline points="9 6 15 12 9 18"></polyline>
                 </svg>
               </button>
             </div>
-            <div class="nlv2-scroll-indicator" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="nlv2-scroll-indicator" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+              aria-valuenow="0">
               <span></span>
             </div>
             <button id="news-view-more" class="view-more-btn" type="button" hidden>Ver más</button>
@@ -214,29 +227,29 @@
               <p class="nlv2-placeholder">Aquí mostraremos mini tarjetas con datos y enlaces.</p>
             </div>
           </section>
-            <script>
-              // Panel flotante Contexto
-              const fabBtn = document.getElementById('context-fab');
-              const fabPanel = document.getElementById('nlv2-context-fab-panel');
-              if (fabBtn && fabPanel) {
-                fabBtn.addEventListener('click', () => {
-                  const isOpen = !fabPanel.hasAttribute('hidden');
-                  if (isOpen) {
-                    fabPanel.setAttribute('hidden', '');
-                    fabBtn.classList.remove('open');
-                  } else {
-                    fabPanel.removeAttribute('hidden');
-                    fabBtn.classList.add('open');
-                  }
-                });
-                document.addEventListener('click', (e) => {
-                  if (!fabPanel.contains(e.target) && !fabBtn.contains(e.target)) {
-                    fabPanel.setAttribute('hidden', '');
-                    fabBtn.classList.remove('open');
-                  }
-                });
-              }
-            </script>
+          <script>
+            // Panel flotante Contexto
+            const fabBtn = document.getElementById('context-fab');
+            const fabPanel = document.getElementById('nlv2-context-fab-panel');
+            if (fabBtn && fabPanel) {
+              fabBtn.addEventListener('click', () => {
+                const isOpen = !fabPanel.hasAttribute('hidden');
+                if (isOpen) {
+                  fabPanel.setAttribute('hidden', '');
+                  fabBtn.classList.remove('open');
+                } else {
+                  fabPanel.removeAttribute('hidden');
+                  fabBtn.classList.add('open');
+                }
+              });
+              document.addEventListener('click', (e) => {
+                if (!fabPanel.contains(e.target) && !fabBtn.contains(e.target)) {
+                  fabPanel.setAttribute('hidden', '');
+                  fabBtn.classList.remove('open');
+                }
+              });
+            }
+          </script>
         </div>
       </div>
     </section>
@@ -265,14 +278,18 @@
           <h2>PROGRAMA PERSPECTIVAS <span class="header-arrow">›</span></h2>
           <div class="program-nav-controls">
             <button id="program-prev" class="program-nav-btn" aria-label="Anterior">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
             </button>
             <button id="program-next" class="program-nav-btn" aria-label="Siguiente">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
             </button>
           </div>
         </div>
-        
+
         <div class="program-carousel-container">
           <div id="program-grid" class="program-carousel"></div>
         </div>
@@ -421,12 +438,14 @@
       <div class="wrap">
         <a href="index.html" class="footer-logo" aria-label="Perspectivas">
           <span class="footer-logo-mark" aria-hidden="true">
-            <svg width="300" height="80" viewBox="0 0 420 100" preserveAspectRatio="xMinYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow: visible;">
+            <svg width="300" height="80" viewBox="0 0 420 100" preserveAspectRatio="xMinYMid meet" fill="none"
+              xmlns="http://www.w3.org/2000/svg" style="overflow: visible;">
               <rect x="0" y="15" width="12" height="70" rx="2" fill="#1e40af"></rect>
               <rect x="18" y="58" width="10" height="12" rx="2" fill="#3b82f6"></rect>
               <rect x="34" y="42" width="10" height="28" rx="2" fill="#0ea5e9"></rect>
               <rect x="50" y="24" width="10" height="46" rx="2" fill="#0284c7"></rect>
-              <text x="75" y="72" fill="#0f172a" style="font: 900 52px 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: -2px;">PERSPECTIVAS</text>
+              <text x="75" y="72" fill="#0f172a"
+                style="font: 900 52px 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: -2px;">PERSPECTIVAS</text>
             </svg>
           </span>
         </a>
@@ -493,11 +512,15 @@
         <div class="footer-column">
           <h4>Entidades Económicas</h4>
           <ul class="footer-list">
-            <li><a href="page.html?slug=entidad-bcp">Banco Central del Paraguay</a></li>
-            <li><a href="page.html?slug=ministerio-economia">Ministerio de Economía</a></li>
-            <li><a href="page.html?slug=bolsa-valores">Bolsa de Valores</a></li>
-            <li><a href="page.html?slug=fmi-banco-mundial">FMI & Banco Mundial</a></li>
-            <li><a href="page.html?slug=camara-anunciantes">Cámara de Anunciantes</a></li>
+            <li><a href="https://www.bcp.gov.py/" target="_blank" rel="noopener noreferrer">Banco Central del
+                Paraguay</a></li>
+            <li><a href="https://www.mef.gov.py/" target="_blank" rel="noopener noreferrer">Ministerio de Economía</a>
+            </li>
+            <li><a href="https://www.bolsadevalores.com.py/" target="_blank" rel="noopener noreferrer">Bolsa de
+                Valores</a></li>
+            <li><a href="https://www.bancomundial.org/es/country/paraguay" target="_blank"
+                rel="noopener noreferrer">Banco Mundial / FMI</a></li>
+            <li><a href="https://cap.com.py/" target="_blank" rel="noopener noreferrer">Cámara de Anunciantes</a></li>
           </ul>
         </div>
         <div class="footer-column">
