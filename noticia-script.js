@@ -264,28 +264,28 @@ async function loadArticle() {
     // DETECCIÓN DE MODO CINE (TIPO PROGRAMA / VIDEO)
     // ----------------------------------------------------
     if (article.type === "programa" || article.type === "video") {
-        console.log("🎬 Activando MODO CINE / VIDEO");
-        document.body.classList.add("cinema-mode");
-        
-        // Reemplazar main completo para layout personalizado
-        const mainWrapper = document.querySelector('.article-main-wrapper');
-        if (mainWrapper) {
-            
-            // Buscar video relacionado (Sidebar)
-            const relatedVideos = allNews
-               .filter(a => a.type === "programa" && (a.slug || a.id) !== articleId)
-               .slice(0, 5); // Tomar 5 videos
+      console.log("🎬 Activando MODO CINE / VIDEO");
+      document.body.classList.add("cinema-mode");
 
-            // Obtener URL de embed (limpia)
-            let embedSrc = article.embed_url || "";
-            if(embedSrc.includes("watch?v=")) {
-                embedSrc = embedSrc.replace("watch?v=", "embed/");
-            }
-            
-            // Construir HTML del sidebar lateral
-            const sidebarHtml = relatedVideos.map(vid => {
-                 let thumb = vid.thumbnail || '/assets/img/default_news.jpg';
-                 return `
+      // Reemplazar main completo para layout personalizado
+      const mainWrapper = document.querySelector('.article-main-wrapper');
+      if (mainWrapper) {
+
+        // Buscar video relacionado (Sidebar)
+        const relatedVideos = allNews
+          .filter(a => a.type === "programa" && (a.slug || a.id) !== articleId)
+          .slice(0, 5); // Tomar 5 videos
+
+        // Obtener URL de embed (limpia)
+        let embedSrc = article.embed_url || "";
+        if (embedSrc.includes("watch?v=")) {
+          embedSrc = embedSrc.replace("watch?v=", "embed/");
+        }
+
+        // Construir HTML del sidebar lateral
+        const sidebarHtml = relatedVideos.map(vid => {
+          let thumb = vid.thumbnail || '/assets/img/default_news.jpg';
+          return `
                  <a href="/noticia.html?type=programa&id=${encodeURIComponent(vid.slug || vid.id)}" class="sidebar-video-card">
                     <div class="sidebar-video-thumb">
                         <img src="${thumb}" alt="${vid.title}">
@@ -295,16 +295,16 @@ async function loadArticle() {
                         <span class="sidebar-video-time">${formatDate(vid.date)}</span>
                     </div>
                  </a>`;
-            }).join("");
+        }).join("");
 
-            mainWrapper.innerHTML = `
+        mainWrapper.innerHTML = `
             <div class="cinema-layout-container">
                 <!-- COLUMNA PRINCIPAL -->
                 <div class="cinema-main-column">
                     
                     <!-- VIDEO PLAYER -->
                     <div class="cinema-video-wrapper">
-                         ${ embedSrc ? `<iframe src="${embedSrc}" allowfullscreen allow="autoplay; encrypted-media"></iframe>` : '<p style="color:#fff; padding:2rem; text-align:center;">Video no disponible.</p>' }
+                         ${embedSrc ? `<iframe src="${embedSrc}" allowfullscreen allow="autoplay; encrypted-media"></iframe>` : '<p style="color:#fff; padding:2rem; text-align:center;">Video no disponible.</p>'}
                     </div>
                     
                     <!-- HEADER INFO -->
@@ -333,9 +333,9 @@ async function loadArticle() {
                 </aside>
             </div>
             `;
-            // Detenemos aquí, ya no ejecutamos el renderizado estándar de noticia
-            return; 
-        }
+        // Detenemos aquí, ya no ejecutamos el renderizado estándar de noticia
+        return;
+      }
     }
 
     // Resolver Categoría a mostrar (Lógica normal si NO es programa)
@@ -386,85 +386,58 @@ async function loadArticle() {
       thumbnail: article.thumbnail,
       caption: article.caption
     });
-    
+
     // COLUMNA IZQUIERDA (STICKY): METADATA NUEVA - DISEÑO MODERNO
-    
+
     // Preparar datos para el sidebar
     const pageUrl = encodeURIComponent(window.location.href);
     const pageTitle = encodeURIComponent(article.title);
-    
+
     // Fecha completa
     const fullDateOptions = { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' };
     let fullDateStr = "";
     if (article.date) {
-        // Ajustamos la zona horaria si es necesario, o lo dejamos por defecto
-        fullDateStr = new Date(article.date).toLocaleDateString('es-PY', fullDateOptions) + " GMT"; 
+      // Ajustamos la zona horaria si es necesario, o lo dejamos por defecto
+      fullDateStr = new Date(article.date).toLocaleDateString('es-PY', fullDateOptions) + " GMT";
     }
 
     // Datos de autor (Mock / Lógica simple)
     const authorName = article.author || "Redacción Perspectivas";
     const authorRole = authorName.includes("Perspectivas") ? "Equipo Editorial" : "Colaborador Especial";
-    
+
     // Lógica inteligente para imagen de autor
     let authorImg = "assets/img/perspectivas-logo.jpeg"; // Default
-    
+
     if (article.author_image) {
-        // 1. Si el artículo tiene foto de autor explícita (cargada via CMS)
-        authorImg = article.author_image;
+      // 1. Si el artículo tiene foto de autor explícita (cargada via CMS)
+      authorImg = article.author_image;
     } else if (authorName.includes("Perspectivas")) {
-        // 2. Si es de la casa
-        authorImg = "assets/img/perspectivas-logo.jpeg";
+      // 2. Si es de la casa
+      authorImg = "assets/img/perspectivas-logo.jpeg";
     } else {
-        // 3. Fallback: Avatar generado con iniciales
-        authorImg = `https://ui-avatars.com/api/?name=${encodeURIComponent(authorName)}&background=f0f0f0&color=333&size=128`;
+      // 3. Fallback: Avatar generado con iniciales
+      authorImg = `https://ui-avatars.com/api/?name=${encodeURIComponent(authorName)}&background=f0f0f0&color=333&size=128`;
     }
 
     let sidebarHtml = `<div class="article-meta-sidebar-new">`;
-    
-    // 1. Autor
+
+    // 1. Autor y Fecha (Agrupados para elegancia)
     sidebarHtml += `
-      <div class="author-profile">
-        <img src="${authorImg}" class="author-avatar" alt="${authorName}">
-        <div class="author-details">
-          <span class="author-name">${authorName}</span>
-          <span class="author-role">${authorRole}</span>
+      <div class="author-section-compact">
+        <div class="author-profile">
+          <img src="${authorImg}" class="author-avatar" alt="${authorName}">
+          <div class="author-details">
+            <span class="author-name">${authorName}</span>
+            <span class="author-role">${authorRole}</span>
+          </div>
+        </div>
+        <div class="sidebar-date-section">
+          <span class="article-date-full">${fullDateStr}</span>
         </div>
       </div>`;
-    
-    // 2. Fecha
-    sidebarHtml += `
-      <div class="sidebar-date-section">
-        <span class="article-date-full">${fullDateStr}</span>
-      </div>`;
-    
-    // 3. Temas (Tags)
-    if (article.tags && article.tags.length > 0) {
-      sidebarHtml += `
-        <div class="sidebar-topics-section">
-          <span class="sidebar-label">Temas relacionados</span>
-          <div class="topics-list-text">
-            ${article.tags.map(t => `<a href="categoria.html?tag=${encodeURIComponent(t)}" class="topic-link">${t}</a>`).join(", ")}
-          </div>
-        </div>`;
-    }
-    
-    // 4. Acciones (Lectura, Bookmark) - SIN GIFT
-    sidebarHtml += `
-      <div class="sidebar-actions-section">
-         <div style="font-size: 0.85rem; margin-bottom: 0.75rem; color: #555; display:flex; align-items:center; gap:0.5rem">
-            <i class="far fa-clock"></i> ${lectura}
-         </div>
-         <div class="action-row">
-            <button class="action-icon-btn" aria-label="Guardar" title="Guardar para leer después">
-              <i class="far fa-bookmark"></i>
-            </button>
-            <button class="action-icon-btn" aria-label="Comentarios" title="Ver comentarios">
-              <i class="far fa-comment"></i> <span style="font-size: 0.8em">3</span>
-            </button>
-         </div>
-      </div>`;
 
-    // 5. Redes Sociales (Circulares)
+    // 3. Temas (Tags)
+    // 2. Redes Sociales (Circulares e Inmediatas)
     sidebarHtml += `
       <div class="sidebar-social-row">
         <a href="https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}" target="_blank" class="social-circle-btn" aria-label="X">
@@ -480,14 +453,41 @@ async function loadArticle() {
             <i class="far fa-envelope"></i>
         </a>
       </div>`;
-    
+
+    // 3. Temas (Tags)
+    if (article.tags && article.tags.length > 0) {
+      sidebarHtml += `
+        <div class="sidebar-topics-section">
+          <span class="sidebar-label">Temas</span>
+          <div class="topics-list-text">
+            ${article.tags.map(t => `<a href="categoria.html?tag=${encodeURIComponent(t)}" class="topic-link">${t}</a>`).join(", ")}
+          </div>
+        </div>`;
+    }
+
+    // 4. Acciones (Lectura, Bookmark)
+    sidebarHtml += `
+      <div class="sidebar-actions-section">
+         <div class="reading-time-info">
+            <i class="far fa-clock"></i> ${lectura}
+         </div>
+         <div class="action-row">
+            <button class="action-icon-btn" aria-label="Guardar" title="Guardar para leer después">
+              <i class="far fa-bookmark"></i>
+            </button>
+            <button class="action-icon-btn" aria-label="Comentarios" title="Ver comentarios">
+              <i class="far fa-comment"></i> <span style="font-size: 0.8em">3</span>
+            </button>
+         </div>
+      </div>`;
+
     sidebarHtml += `</div>`; // Cierre sidebar
-    
+
     const sidebarLeftContainer = document.getElementById("sidebar-left-content");
     if (sidebarLeftContainer) {
       sidebarLeftContainer.innerHTML = sidebarHtml;
     }
-    
+
     // COLUMNA CENTRAL: TÍTULO + FOTO + CONTENIDO
     // 1. Inyectar título
     const titleEl = document.getElementById("article-title-main");
@@ -500,7 +500,7 @@ async function loadArticle() {
     if (subtitleEl) {
       subtitleEl.textContent = article.description || article.summary_short || article.summary || "";
     }
-    
+
     // 2. Inyectar foto
     const heroFigure = document.getElementById("article-hero-figure");
     if (heroFigure) {
@@ -512,7 +512,7 @@ async function loadArticle() {
         heroFigure.innerHTML = `<p style="padding: 20px;">Imagen no disponible</p>`;
       }
     }
-    
+
     // 3. Inyectar contenido del artículo
     const bodyContainer = document.getElementById("article-body-content");
     if (bodyContainer) {
