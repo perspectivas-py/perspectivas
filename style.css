@@ -4580,9 +4580,9 @@ ul {
 /* Grid Layout */
 .article-layout-grid {
   display: grid;
-  grid-template-columns: 145px 1fr 260px;
-  /* Reduced by another 5-10% (approx 145px) */
-  column-gap: 3.5rem;
+  grid-template-columns: 110px 1fr 260px;
+  /* Left column reduced to 110px to widen center content */
+  column-gap: 2.5rem;
   row-gap: 1rem;
   align-items: start;
 }
@@ -4619,7 +4619,7 @@ ul {
 }
 
 .meta-label {
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   /* text-transform: uppercase; Removed uppercase to match style */
   letter-spacing: normal;
   color: #64748b;
@@ -4628,7 +4628,7 @@ ul {
 }
 
 .author-name {
-  font-size: 0.95rem;
+  font-size: 0.75rem;
   font-weight: 700;
   color: var(--color-accent);
   /* Author name in accent color often looks good or bold black */
@@ -4636,7 +4636,7 @@ ul {
 }
 
 .article-date {
-  font-size: 0.85rem;
+  font-size: 0.7rem;
   color: var(--text-secondary);
 }
 
@@ -4648,7 +4648,7 @@ ul {
 
 .tag-badge-small {
   color: var(--color-accent);
-  font-size: 0.85rem;
+  font-size: 0.7rem;
   font-weight: 600;
   text-decoration: none;
   display: block;
@@ -4696,7 +4696,12 @@ ul {
 
 .article-hero-wide img {
   width: 100%;
-  height: auto;
+  aspect-ratio: 8 / 5;
+  /* Fixed aspect ratio similar to Telegraph (1.6 ratio) */
+  object-fit: cover;
+  /* Ensures images fill the space without distortion */
+  object-position: center;
+  /* Centers the image within the frame */
   border-radius: 4px;
   display: block;
 }
@@ -4850,7 +4855,7 @@ ul {
 
 @media (max-width: 1024px) {
   .article-layout-grid {
-    grid-template-columns: 145px 1fr;
+    grid-template-columns: 110px 1fr;
     gap: 2rem;
   }
 
