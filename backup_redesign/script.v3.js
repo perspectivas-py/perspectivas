@@ -896,12 +896,12 @@ const programaController = createSectionController({
     // Helper para obtener miniatura de YouTube si no hay thumbnail explícito
     let thumb = item.thumbnail;
     if ((!thumb || thumb.includes("default_news")) && item.embed_url && item.embed_url.includes("youtube")) {
-      try {
-        // asume formato embed/VIDEO_ID
-        const parts = item.embed_url.split('/');
-        const vid = parts.pop() || parts.pop();
-        thumb = `https://img.youtube.com/vi/${vid}/hqdefault.jpg`;
-      } catch (e) { }
+         try {
+             // asume formato embed/VIDEO_ID
+             const parts = item.embed_url.split('/');
+             const vid = parts.pop() || parts.pop(); 
+             thumb = `https://img.youtube.com/vi/${vid}/hqdefault.jpg`;
+         } catch(e) {}
     }
     thumb = thumb || '/assets/img/default_news.jpg';
 
@@ -1186,58 +1186,74 @@ function initMenuToggle() {
 }
 
 function initHeaderScrollState() {
+  console.log("🔧 initHeaderScrollState iniciado");
   const header = document.querySelector(".site-header");
-  if (!header) return;
-
-  if (header.dataset.scrollBound === "true") return;
+  if (!header) {
+    console.log("❌ Header no encontrado");
+    return;
+  }
+  console.log("✓ Header encontrado:", header);
+  
+  if (header.dataset.scrollBound === "true") {
+    console.log("⚠️ Scroll listener ya está bound");
+    return;
+  }
   header.dataset.scrollBound = "true";
+  console.log("📌 Scroll listener marcado como bound");
 
+  // Detectar la sección de Noticias Locales (solo existe en home)
   const noticiasSection = document.getElementById("noticias");
-  const SCROLL_THRESHOLD = 80;
-
+  let noticiasTop = noticiasSection ? noticiasSection.offsetTop : null;
+  const SCROLL_THRESHOLD = 50;
+  
   let lastScrollState = null;
   let scrollThrottleId = null;
 
   const handleScroll = () => {
     if (scrollThrottleId) return;
-
+    
     scrollThrottleId = requestAnimationFrame(() => {
       const currentScroll = window.scrollY;
-      const noticiasTop = noticiasSection ? noticiasSection.offsetTop : 1000;
-
-      // En home se comprime al llegar a noticias, en otras páginas con un threshold fijo
-      const threshold = noticiasSection ? (noticiasTop - 100) : SCROLL_THRESHOLD;
-      const isScrolled = currentScroll > threshold;
-
+      let isScrolled;
+      if (noticiasTop !== null) {
+        // Home: activar scroll comprimido cuando llegamos a Noticias Locales
+        isScrolled = currentScroll >= (noticiasTop - 50);
+      } else {
+        // Otras páginas: usar umbral genérico
+        isScrolled = currentScroll > SCROLL_THRESHOLD;
+      }
+      
+      // Solo actualizar si el estado cambió
       if (lastScrollState !== isScrolled) {
         lastScrollState = isScrolled;
+        console.log("🔄 Scroll state cambió:", isScrolled ? "scrolled" : "top", "scrollY:", currentScroll, "noticiasTop:", noticiasTop);
         header.classList.toggle("scrolled", isScrolled);
-
+        
+        // Controlar el market-ticker top
         const topTicker = document.querySelector('.market-ticker[data-variant="top"]');
         if (topTicker) {
           topTicker.classList.toggle("hidden", isScrolled);
         }
       }
-
+      
       scrollThrottleId = null;
     });
   };
 
+  // Agregar el listener de scroll
+  console.log("🎧 Agregando listener de scroll");
   window.addEventListener("scroll", handleScroll, { passive: true });
-  handleScroll(); // Check state on load
-}
+  console.log("✓ Listener de scroll agregado");
 
-function initHeaderDate() {
-  const dateEl = document.getElementById("header-date");
-  if (!dateEl) return;
-
-  const options = { weekday: 'long', day: 'numeric', month: 'long' };
-  const today = new Date();
-  let dateString = today.toLocaleDateString('es-ES', options);
-
-  // Capitalizar primera letra
-  dateString = dateString.charAt(0).toUpperCase() + dateString.slice(1);
-  dateEl.textContent = dateString;
+  let resizeRaf = null;
+  window.addEventListener("resize", () => {
+    if (resizeRaf) cancelAnimationFrame(resizeRaf);
+    resizeRaf = window.requestAnimationFrame(() => {
+      if (noticiasSection) {
+        noticiasTop = noticiasSection.offsetTop;
+      }
+    });
+  });
 }
 
 async function initHome() {
@@ -1670,15 +1686,15 @@ function initPodcastSection(items) {
 function renderSponsors(items) {
   const container = document.getElementById("sponsorsGrid");
   if (!container || !items?.length) return;
-
+  
   // Filtrar solo los visibles (visible !== false para dar soporte a los que no tienen el campo)
   const visibleItems = items.filter(s => s.visible !== false);
-
+  
   if (visibleItems.length === 0) {
-    container.parentElement.style.display = 'none'; // Ocultar sección si no hay nada
-    return;
+      container.parentElement.style.display = 'none'; // Ocultar sección si no hay nada
+      return;
   } else {
-    container.parentElement.style.display = 'block';
+      container.parentElement.style.display = 'block';
   }
 
   container.innerHTML = visibleItems.map(s => `
@@ -1895,15 +1911,14 @@ function closeCategoryDrawer() {
 }
 
 function initCategoryDrawer() {
-  const toggle = document.querySelector(".menu-pill-toggle");
+  const toggle = document.getElementById("category-drawer-toggle");
   const drawer = document.getElementById("category-drawer");
   const closeBtn = document.getElementById("category-drawer-close");
   if (!toggle || !drawer) return;
   if (toggle.dataset.bound === "true") return;
   toggle.dataset.bound = "true";
 
-  toggle.addEventListener("click", (e) => {
-    e.stopPropagation();
+  toggle.addEventListener("click", () => {
     const isOpen = drawer.classList.contains("open");
     setCategoryDrawerState(!isOpen);
   });
@@ -2248,9 +2263,9 @@ async function renderNoticia() {
 // Ejecutar cuando el DOM esté listo
 function initRouter() {
   console.log("✓ initRouter ejecutado");
-  initHeaderDate();
   initWeatherWidget();
   initHeaderScrollState();
+  console.log("✓ initHeaderScrollState ejecutado");
   initCategoryDrawer();
   const isHome = document.getElementById("hero") !== null;
   const isNoticia = document.getElementById("contenido-noticia") !== null;
