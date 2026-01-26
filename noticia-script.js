@@ -425,7 +425,7 @@ async function loadArticle() {
     sidebarHtml += `
       <div class="author-section-compact">
         <div class="author-profile">
-          ${article.author_image ? `<img src="${article.author_image}" class="author-avatar" alt="${authorName}">` : ""}
+          <img src="${authorImg}" class="author-avatar" alt="${authorName}">
           <div class="author-details">
             <span class="author-name">${authorName}</span>
             <span class="author-role">${authorRole}</span>
@@ -513,10 +513,28 @@ async function loadArticle() {
       }
     }
 
-    // 3. Inyectar contenido del artículo
+    // 3. Inyectar contenido del artículo con recomendación interna
     const bodyContainer = document.getElementById("article-body-content");
     if (bodyContainer) {
-      bodyContainer.innerHTML = `<section class="article-body">${htmlBody}</section>`;
+      const paragraphs = htmlBody.split('</p>');
+      if (paragraphs.length > 4) {
+        // Seleccionamos un artículo aleatorio diferente al actual
+        const recommended = allNews.filter(a => (a.slug || a.id) !== articleId).sort(() => Math.random() - 0.5)[0];
+
+        if (recommended) {
+          const recommendedHtml = `
+            <div class="inline-recommendation">
+              <span class="recommendation-label">Recomendado</span>
+              <a href="/noticia.html?id=${encodeURIComponent(recommended.slug || recommended.id)}">
+                ${recommended.title}
+              </a>
+            </div>`;
+
+          // Insertar después del 3er párrafo
+          paragraphs.splice(3, 0, recommendedHtml);
+        }
+      }
+      bodyContainer.innerHTML = `<section class="article-body">${paragraphs.join('</p>')}</section>`;
     }
 
     renderKeyPoints(article);
@@ -538,10 +556,24 @@ async function loadArticle() {
   }
 }
 
+// Barra de progreso de lectura
+function initReadingProgress() {
+  const bar = document.getElementById("reading-progress-bar");
+  if (!bar) return;
+
+  window.addEventListener("scroll", () => {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    bar.style.width = scrolled + "%";
+  }, { passive: true });
+}
+
 // Ejecutar cuando el DOM esté listo
 function initNoticia() {
   console.log("🎬 Inicializando noticia-script.js");
   loadArticle();
+  initReadingProgress();
 }
 
 if (document.readyState === "loading") {

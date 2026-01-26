@@ -2,6 +2,7 @@
 console.log("🚀 Perspectivas PRO v3 cargado");
 
 const CONTENT_URL = "content.json";
+let searchDataCache = null;
 
 const MARKET_QUOTES = [
   { label: "USD / Gs", value: "7.320", change: "+0,4%" },
@@ -1089,63 +1090,157 @@ function initWeatherWidget() {
 }
 
 // Toggle del buscador en el drawer
+// Toggle del buscador en el drawer -> AHORA OVERLAY
+// Toggle del buscador premium overlay
 function initSearchToggle() {
   const searchToggleHeader = document.getElementById("search-toggle-header");
-  const searchToggleDrawer = document.getElementById("search-toggle");
-  const searchInput = document.getElementById("search-input");
-  const drawer = document.getElementById("category-drawer");
+  const overlay = document.getElementById("search-overlay");
+  const overlayClose = document.getElementById("search-overlay-close");
+  const overlayInput = document.getElementById("search-overlay-input");
+  const overlayResults = document.getElementById("search-overlay-results");
 
-  if (!searchInput) return;
+  if (!overlay || !searchToggleHeader) return;
 
-  // Click en el icono de búsqueda del header
-  if (searchToggleHeader && searchToggleHeader.dataset.bound !== "true") {
+  // Cache busting y carga de datos unificada
+  async function getSearchData() {
+    if (searchDataCache) return searchDataCache;
+    try {
+      // Intentar usar CONTENT_URL definido arriba
+      const res = await fetch(`${CONTENT_URL}?t=${Date.now()}`);
+      if (!res.ok) throw new Error("Fetch failed");
+      const data = await res.json();
+
+      // Aplanar todas las colecciones para búsqueda global
+      searchDataCache = [
+        ...(data.noticias || []),
+        ...(data.analisis || []),
+        ...(data.programa || []),
+        ...(data.podcast || [])
+      ].map(item => ({
+        ...item,
+        // Pre-normalizar campos para búsqueda rápida
+        _searchSource: `${item.title} ${item.description || item.summary || ""} ${item.category || ""}`.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      }));
+
+      return searchDataCache;
+    } catch (e) {
+      console.warn("⚠️ No se pudieron cargar datos para el buscador", e);
+      return [];
+    }
+  }
+
+  function renderSearchResults(results, query) {
+    if (!overlayResults) return;
+
+    if (results.length === 0) {
+      overlayResults.innerHTML = `
+        <div class="search-no-results">
+          <p>No encontramos resultados para "<strong>${escapeHtml(query)}</strong>"</p>
+          <small>Intenta con palabras más generales.</small>
+        </div>`;
+      return;
+    }
+
+    overlayResults.innerHTML = results.map(item => {
+      const title = escapeHtml(item.title);
+      const thumb = item.thumbnail || "/assets/img/default_news.jpg";
+      const cat = resolveCategoryLabel(item.category || item.type || "Actualidad");
+      const date = formatDate(item.date);
+      const url = `/noticia.html?id=${encodeURIComponent(item.slug || item.id)}`;
+
+      return `
+        <a href="${url}" class="search-result-item">
+          <img src="${thumb}" class="search-result-img" alt="${title}" loading="lazy">
+          <div class="search-result-info">
+            <h4>${title}</h4>
+            <div class="search-result-meta">
+              <span class="search-result-category">${cat}</span>
+              <span class="search-result-date">${date}</span>
+            </div>
+          </div>
+        </a>
+      `;
+    }).join("");
+  }
+
+  // Función para abrir/cerrar
+  function toggleOverlay(show) {
+    const isOpen = show ?? !overlay.classList.contains("open");
+    overlay.classList.toggle("open", isOpen);
+    overlay.setAttribute("aria-hidden", String(!isOpen));
+    document.body.style.overflow = isOpen ? "hidden" : "";
+
+    if (isOpen) {
+      if (overlayInput) {
+        setTimeout(() => overlayInput.focus(), 150);
+      }
+      // Pre-cargar datos al abrir
+      getSearchData();
+    } else {
+      // Limpiar al cerrar
+      if (overlayInput) overlayInput.value = "";
+      if (overlayResults) overlayResults.innerHTML = "";
+    }
+  }
+
+  // Click en lupa header
+  if (searchToggleHeader.dataset.bound !== "true") {
     searchToggleHeader.dataset.bound = "true";
     searchToggleHeader.addEventListener("click", (e) => {
       e.preventDefault();
-      // Abrir drawer si está cerrado
-      if (!drawer.classList.contains("open")) {
-        drawer.classList.add("open");
-        document.getElementById("category-drawer-toggle").setAttribute("aria-expanded", "true");
-        drawer.setAttribute("aria-hidden", "false");
-      }
-      // Mostrar campo de búsqueda
-      searchInput.classList.remove("hidden");
-      setTimeout(() => searchInput.focus(), 100);
+      toggleOverlay(true);
     });
   }
 
-  // Click en el icono de búsqueda dentro del drawer
-  if (searchToggleDrawer && searchToggleDrawer.dataset.bound !== "true") {
-    searchToggleDrawer.dataset.bound = "true";
-    searchToggleDrawer.addEventListener("click", (e) => {
-      e.preventDefault();
-      searchInput.classList.toggle("hidden");
-      if (!searchInput.classList.contains("hidden")) {
-        searchInput.focus();
-      }
-    });
+  // Click en cerrar overlay
+  if (overlayClose && overlayClose.dataset.bound !== "true") {
+    overlayClose.dataset.bound = "true";
+    overlayClose.addEventListener("click", () => toggleOverlay(false));
   }
 
-  // Filtrar noticias mientras se escribe
-  searchInput.addEventListener("input", (e) => {
-    const query = e.target.value.toLowerCase().trim();
-    filterNewsBySearch(query);
-  });
-
-  // Cerrar buscador al presionar Escape
-  searchInput.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      searchInput.classList.add("hidden");
-      searchInput.value = "";
-      filterNewsBySearch("");
+  // Cerrar con ESC
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && overlay.classList.contains("open")) {
+      toggleOverlay(false);
     }
   });
-}
 
-function filterNewsBySearch(query) {
-  // Aquí puedes implementar la lógica de filtrado de noticias
-  // Por ahora solo limpiamos o aplicamos el filtro
-  console.log("Buscando:", query);
+  // Listener de búsqueda real mientras se escribe
+  if (overlayInput && overlayInput.dataset.bound !== "true") {
+    overlayInput.dataset.bound = "true";
+
+    let debounceTimer;
+    overlayInput.addEventListener("input", (e) => {
+      const query = e.target.value.trim();
+
+      clearTimeout(debounceTimer);
+      if (!query) {
+        if (overlayResults) overlayResults.innerHTML = "";
+        return;
+      }
+
+      debounceTimer = setTimeout(async () => {
+        const data = await getSearchData();
+        const normalizedQuery = query.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+        const matched = data.filter(item => item._searchSource.includes(normalizedQuery))
+          .sort((a, b) => new Date(b.date) - new Date(a.date))
+          .slice(0, 8); // Top 8 resultados
+
+        renderSearchResults(matched, query);
+      }, 250);
+    });
+
+    // También manejar Enter para ir al primer resultado si existe
+    overlayInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        const firstResult = overlayResults.querySelector(".search-result-item");
+        if (firstResult) {
+          firstResult.click();
+        }
+      }
+    });
+  }
 }
 
 function initMenuToggle() {
@@ -1264,7 +1359,18 @@ async function initHome() {
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
 
     const data = await res.json();
-    console.log("📦 Datos frescos recibidos:", data); // Mirá la consola para confirmar fecha
+    console.log("📦 Datos frescos recibidos:", data);
+
+    // Pre-poblar caché de búsqueda
+    searchDataCache = [
+      ...(data.noticias || []),
+      ...(data.analisis || []),
+      ...(data.programa || []),
+      ...(data.podcast || [])
+    ].map(item => ({
+      ...item,
+      _searchSource: `${item.title} ${item.description || item.summary || ""} ${item.category || ""}`.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    }));
 
     // 2. RENDERIZADO MODULAR
     const heroArticle = renderHero(data.noticias);
@@ -2203,47 +2309,7 @@ function formatDate(dateString) {
     day: "2-digit", month: "short", year: "numeric"
   });
 }
-// --- RENDER DE NOTICIA INDIVIDUAL ---
-async function renderNoticia() {
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
-  if (!id) return; // no estamos en página de noticia
-
-  const container = document.getElementById("contenido-noticia");
-  if (!container) return;
-
-  try {
-    const res = await fetch(`${CONTENT_URL}?t=${new Date().getTime()}`);
-    const data = await res.json();
-    const item = data.noticias.find(n => n.slug === id || n.id === id);
-
-    if (!item) {
-      container.innerHTML = `<p style="padding:40px;text-align:center;color:red;">
-        ❌ Noticia no encontrada
-      </p>`;
-      return;
-    }
-
-    container.innerHTML = `
-      <h1 class="article-title">${item.title}</h1>
-      <div class="article-meta">
-        <span>${item.category || ""}</span> — 
-        <span>${formatDate(item.date)}</span>
-      </div>
-
-      <img class="article-img" src="${item.thumbnail}" alt="${item.title}"/>
-
-      <div class="article-body">
-        ${marked.parse(item.body || "")}
-      </div>
-    `;
-  } catch (e) {
-    container.innerHTML = `<p style="padding:40px;text-align:center;color:red;">
-      ⚠️ Error cargando la noticia. Intentá más tarde.
-    </p>`;
-    console.error("Error renderNoticia()", e);
-  }
-}
+// function renderNoticia() es manejada por noticia-script.js (Module PRO)
 
 // Ejecutar cuando el DOM esté listo
 function initRouter() {
