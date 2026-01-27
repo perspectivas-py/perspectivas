@@ -7,7 +7,7 @@ active: true
 sector: Bursátil
 title: Cadiem Casa de Bolsa
 headline: Donde tu dinero trabaja para vos
-logo: /assets/img/cadiem-casa-de-bolsa.png
+logo: /assets/img/1002070270.jpg
 campaign_end: 2025-12-31T18:36:07.001Z
 url: https://www.cadiem.com.py/
 featured: true
