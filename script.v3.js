@@ -1335,6 +1335,52 @@ function initHeaderDate() {
   dateEl.textContent = dateString;
 }
 
+// Cargar artículos destacados en los mega menús de Análisis y Noticias
+async function initMegaMenuFeatured() {
+  const megaAnalisis = document.getElementById("mega-featured-analisis");
+  const megaNoticias = document.getElementById("mega-featured-noticias");
+
+  // Si no hay mega menús en esta página, salir
+  if (!megaAnalisis && !megaNoticias) return;
+
+  try {
+    const res = await fetch(`${CONTENT_URL}?t=${Date.now()}`);
+    if (!res.ok) return;
+
+    const data = await res.json();
+
+    // Función para construir un mini card para mega menú
+    const buildMegaCard = (item) => {
+      const thumb = item.thumbnail || "/assets/img/default.jpg";
+      const id = item.slug || item.id;
+      const title = item.title || "Sin título";
+      return `
+        <a href="/noticia.html?id=${encodeURIComponent(id)}" class="mega-featured-card">
+          <img src="${thumb}" alt="${title}" loading="lazy">
+          <span class="mega-featured-title">${title}</span>
+        </a>
+      `;
+    };
+
+    // Poblar Análisis (2 más recientes)
+    if (megaAnalisis && data.analisis?.length) {
+      const featured = data.analisis.slice(0, 2);
+      megaAnalisis.innerHTML = featured.map(buildMegaCard).join("");
+    }
+
+    // Poblar Noticias (3 más recientes)
+    if (megaNoticias && data.noticias?.length) {
+      const featured = data.noticias.slice(0, 3);
+      megaNoticias.innerHTML = featured.map(buildMegaCard).join("");
+    }
+
+    console.log("✅ Mega menús cargados");
+  } catch (e) {
+    console.warn("No se pudieron cargar los mega menús:", e);
+  }
+}
+
+
 async function initHome() {
   console.log("🔄 Iniciando carga de datos...");
 
@@ -2033,7 +2079,49 @@ function initCategoryDrawer() {
       }
     });
   }
+
+  // Inicializar buscador interno del drawer
+  initDrawerSearch();
 }
+
+// Lógica para el buscador expandible del drawer (Menú Hamburguesa)
+function initDrawerSearch() {
+  const searchBox = document.getElementById("drawer-search-box");
+  const searchToggle = document.getElementById("drawer-search-toggle");
+  const searchClose = document.getElementById("drawer-search-close");
+  const searchInput = document.getElementById("drawer-search-input");
+
+  if (!searchBox || !searchToggle || !searchClose || !searchInput) return;
+
+  // Abrir buscador
+  searchToggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    searchBox.classList.add("expanded");
+    setTimeout(() => searchInput.focus(), 100);
+  });
+
+  // Cerrar buscador
+  searchClose.addEventListener("click", (e) => {
+    e.stopPropagation();
+    searchBox.classList.remove("expanded");
+    searchInput.value = "";
+  });
+
+  // Ejecutar búsqueda al presionar Enter
+  searchInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      const query = searchInput.value.trim();
+      if (query) {
+        // Redirigir a la página de categorías con el tag buscado
+        window.location.href = `/categoria.html?tag=${encodeURIComponent(query)}`;
+      }
+    }
+  });
+
+  // Evitar que el click en el input cierre el drawer
+  searchInput.addEventListener("click", (e) => e.stopPropagation());
+}
+
 
 // Renderizar top 5 de más leídas en grid
 function renderTopReads(noticias) {
@@ -2318,6 +2406,7 @@ function initRouter() {
   initWeatherWidget();
   initHeaderScrollState();
   initCategoryDrawer();
+  initMegaMenuFeatured(); // Cargar mega menús en todas las páginas
   const isHome = document.getElementById("hero") !== null;
   const isNoticia = document.getElementById("contenido-noticia") !== null;
 

@@ -17,7 +17,7 @@ caption: Para la PYME local, este acuerdo no significa competir por volumen,
   trazable y con historia.
 featured:
   is_featured: true
-  is_main_featured: true
+  is_main_featured: false
   show_in_latest: true
 key_points:
   - "Para la PYME local, este acuerdo no significa competir por volumen, sino

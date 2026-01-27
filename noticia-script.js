@@ -405,36 +405,42 @@ async function loadArticle() {
     const authorName = article.author || "Redacción Perspectivas";
     const authorRole = authorName.includes("Perspectivas") ? "Equipo Editorial" : "Colaborador Especial";
 
-    // Lógica inteligente para imagen de autor
-    let authorImg = "assets/img/perspectivas-logo.jpeg"; // Default
-
-    if (article.author_image) {
-      // 1. Si el artículo tiene foto de autor explícita (cargada via CMS)
-      authorImg = article.author_image;
-    } else if (authorName.includes("Perspectivas")) {
-      // 2. Si es de la casa
-      authorImg = "assets/img/perspectivas-logo.jpeg";
-    } else {
-      // 3. Fallback: Avatar generado con iniciales
-      authorImg = `https://ui-avatars.com/api/?name=${encodeURIComponent(authorName)}&background=f0f0f0&color=333&size=128`;
-    }
+    // La foto del autor solo se muestra si está cargada desde Decap CMS (campo author_image)
+    const hasAuthorPhoto = !!article.author_image;
+    const authorImg = article.author_image || null;
 
     let sidebarHtml = `<div class="article-meta-sidebar-new">`;
 
     // 1. Autor y Fecha (Agrupados para elegancia)
-    sidebarHtml += `
-      <div class="author-section-compact">
-        <div class="author-profile">
-          <img src="${authorImg}" class="author-avatar" alt="${authorName}">
-          <div class="author-details">
+    // Si hay foto de autor cargada desde CMS, mostrar con foto; si no, solo nombre
+    if (hasAuthorPhoto) {
+      // Layout CON foto de autor
+      sidebarHtml += `
+        <div class="author-section-compact">
+          <div class="author-profile">
+            <img src="${authorImg}" class="author-avatar" alt="${authorName}">
+            <div class="author-details">
+              <span class="author-name">${authorName}</span>
+              <span class="author-role">${authorRole}</span>
+            </div>
+          </div>
+          <div class="sidebar-date-section">
+            <span class="article-date-full">${fullDateStr}</span>
+          </div>
+        </div>`;
+    } else {
+      // Layout SIN foto de autor (solo nombre y rol)
+      sidebarHtml += `
+        <div class="author-section-compact author-section-no-photo">
+          <div class="author-details-inline">
             <span class="author-name">${authorName}</span>
             <span class="author-role">${authorRole}</span>
           </div>
-        </div>
-        <div class="sidebar-date-section">
-          <span class="article-date-full">${fullDateStr}</span>
-        </div>
-      </div>`;
+          <div class="sidebar-date-section">
+            <span class="article-date-full">${fullDateStr}</span>
+          </div>
+        </div>`;
+    }
 
     // 3. Temas (Tags)
     // 2. Redes Sociales (Circulares e Inmediatas)

@@ -13,7 +13,7 @@ thumbnail: "/assets/img/uploads/2024-08-16-billetes.jpg"
 caption: "Las nuevas medidas fiscales buscan ampliar la base de contribuyentes y mejorar la recaudación de impuestos en Paraguay."
 featured:
   is_featured: true
-  is_main_featured: true
+  is_main_featured: false
   show_in_latest: true
   is_section_featured: true
   highlights:

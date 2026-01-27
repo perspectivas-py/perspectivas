@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Lato:wght@400;700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/style.css?v=4.7">
 </head>
 
 <body>
@@ -128,12 +128,18 @@
         <button id="category-drawer-close" class="drawer-close-v2">×</button>
       </div>
       <div class="drawer-content-v2">
-        <div class="drawer-search-box">
-          <input type="text" id="search-input" placeholder="Buscar noticias...">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8"></circle>
-            <path d="m21 21-4.35-4.35"></path>
-          </svg>
+        <div class="drawer-search-box" id="drawer-search-box">
+          <button type="button" class="drawer-search-toggle" id="drawer-search-toggle" aria-label="Abrir búsqueda">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </button>
+          <div class="drawer-search-expanded" id="drawer-search-expanded">
+            <input type="text" id="drawer-search-input" placeholder="Buscar noticias...">
+            <button type="button" class="drawer-search-close" id="drawer-search-close"
+              aria-label="Cerrar búsqueda">×</button>
+          </div>
         </div>
         <div class="drawer-nav-v2">
           <h4>Secciones</h4>
@@ -282,7 +288,7 @@
   </footer>
 
   <script src="https://unpkg.com/marked@^4.0.0/marked.min.js"></script>
-  <script src="script.v3.js?v=4.0"></script>
+  <script src="/script.v3.js?v=4.7"></script>
 </body>
 
 </html>

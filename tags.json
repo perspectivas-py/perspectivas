@@ -1,7 +1,264 @@
 {
+  "inversion": {
+    "label": "inversion",
+    "items": [
+      {
+        "id": "2026-01-26-grupo-cartes-invierte-120-millones-planta-celulosa-alto-parana",
+        "title": "Grupo Cartes invierte USD 120 millones en planta de celulosa en Alto Paraná",
+        "thumbnail": "/assets/img/uploads/sumidenso-maquila-industria-trabajo-17.jpg",
+        "date": "2026-01-26T15:30:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-17-inversion-publica-seguira-impulsando-la-obra-publica",
+        "title": "Inversión pública seguirá impulsando la obra pública en 2026",
+        "thumbnail": "/assets/img/investor-broker-discussing-trading-strategy-holding-papers-with-financial-charts-pens-cropped-shot-broker-job-investment-concept.jpg",
+        "date": "2026-01-17T12:10:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-16-más-de-7-600-empresas-por-acciones-simplificadas-se-constituyeron-en-paraguay",
+        "title": "Más de 7.600 Empresas por Acciones Simplificadas se constituyeron en Paraguay",
+        "thumbnail": "/assets/img/uploads/empresas-bajo-regimen-de-eas.jpg",
+        "date": "2026-01-16T22:02:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-17-más-de-7-600-empresas-por-acciones-simplificadas-se-constituyeron-en-paraguay",
+        "title": "Más de 7.600 Empresas por Acciones Simplificadas se constituyeron en Paraguay",
+        "thumbnail": "/assets/img/uploads/empresas-bajo-regimen-de-eas.jpg",
+        "date": "2026-01-16T22:02:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-14-créditos-para-la-vivienda-abarca-cerca-de-la-mitad-de-la-cartera-de-la-afd​",
+        "title": "Créditos para la vivienda abarca cerca de la mitad de la cartera de la AFD​",
+        "thumbnail": "/assets/img/uploads/couple-holding-small-house-medium-shot.jpg",
+        "date": "2026-01-14T16:14:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-13-aportes-a-la-caja-fiscal-solo-alcanzan-para-financiar-5años-de-jubilación-en-promedio",
+        "title": "Aportes a la Caja Fiscal solo alcanzan para financiar 5años de jubilación en promedio",
+        "thumbnail": "/assets/img/uploads/mef-villa-serrati_4_0.jpg",
+        "date": "2026-01-14T13:18:00.000Z",
+        "type": "analisis"
+      },
+      {
+        "id": "2025-11-19-modernización-bursátil-presentarán-ante-emisores-la-nueva-estructura-y-los-procesos-de-registro",
+        "title": "\"Modernización bursátil: Presentarán ante emisores la nueva estructura y los procesos de registro\"",
+        "thumbnail": "/assets/img/uploads/py.-imagen-de-pru-no-usar.jpg",
+        "date": "2025-11-19T15:55:52.535Z",
+        "type": "noticias"
+      }
+    ]
+  },
+  "industria": {
+    "label": "industria",
+    "items": [
+      {
+        "id": "2026-01-26-grupo-cartes-invierte-120-millones-planta-celulosa-alto-parana",
+        "title": "Grupo Cartes invierte USD 120 millones en planta de celulosa en Alto Paraná",
+        "thumbnail": "/assets/img/uploads/sumidenso-maquila-industria-trabajo-17.jpg",
+        "date": "2026-01-26T15:30:00.000Z",
+        "type": "noticias"
+      }
+    ]
+  },
+  "celulosa": {
+    "label": "celulosa",
+    "items": [
+      {
+        "id": "2026-01-26-grupo-cartes-invierte-120-millones-planta-celulosa-alto-parana",
+        "title": "Grupo Cartes invierte USD 120 millones en planta de celulosa en Alto Paraná",
+        "thumbnail": "/assets/img/uploads/sumidenso-maquila-industria-trabajo-17.jpg",
+        "date": "2026-01-26T15:30:00.000Z",
+        "type": "noticias"
+      }
+    ]
+  },
+  "forestal": {
+    "label": "forestal",
+    "items": [
+      {
+        "id": "2026-01-26-grupo-cartes-invierte-120-millones-planta-celulosa-alto-parana",
+        "title": "Grupo Cartes invierte USD 120 millones en planta de celulosa en Alto Paraná",
+        "thumbnail": "/assets/img/uploads/sumidenso-maquila-industria-trabajo-17.jpg",
+        "date": "2026-01-26T15:30:00.000Z",
+        "type": "noticias"
+      }
+    ]
+  },
+  "fintech": {
+    "label": "fintech",
+    "items": [
+      {
+        "id": "2026-01-26-fintech-paraguaya-tigo-money-alcanza-2-millones-usuarios-activos",
+        "title": "Fintech paraguaya Tigo Money alcanza 2 millones de usuarios activos",
+        "thumbnail": "/assets/img/uploads/female-working-environment-projects.jpg",
+        "date": "2026-01-26T14:00:00.000Z",
+        "type": "noticias"
+      }
+    ]
+  },
+  "inclusion-financiera": {
+    "label": "inclusion-financiera",
+    "items": [
+      {
+        "id": "2026-01-26-fintech-paraguaya-tigo-money-alcanza-2-millones-usuarios-activos",
+        "title": "Fintech paraguaya Tigo Money alcanza 2 millones de usuarios activos",
+        "thumbnail": "/assets/img/uploads/female-working-environment-projects.jpg",
+        "date": "2026-01-26T14:00:00.000Z",
+        "type": "noticias"
+      }
+    ]
+  },
+  "tecnologia": {
+    "label": "tecnologia",
+    "items": [
+      {
+        "id": "2026-01-26-fintech-paraguaya-tigo-money-alcanza-2-millones-usuarios-activos",
+        "title": "Fintech paraguaya Tigo Money alcanza 2 millones de usuarios activos",
+        "thumbnail": "/assets/img/uploads/female-working-environment-projects.jpg",
+        "date": "2026-01-26T14:00:00.000Z",
+        "type": "noticias"
+      }
+    ]
+  },
+  "pagos-digitales": {
+    "label": "pagos-digitales",
+    "items": [
+      {
+        "id": "2026-01-26-fintech-paraguaya-tigo-money-alcanza-2-millones-usuarios-activos",
+        "title": "Fintech paraguaya Tigo Money alcanza 2 millones de usuarios activos",
+        "thumbnail": "/assets/img/uploads/female-working-environment-projects.jpg",
+        "date": "2026-01-26T14:00:00.000Z",
+        "type": "noticias"
+      }
+    ]
+  },
+  "soja": {
+    "label": "soja",
+    "items": [
+      {
+        "id": "2026-01-26-precio-soja-alcanza-maximo-6-meses-chicago-clima-adverso",
+        "title": "Precio de la soja alcanza máximo de 6 meses en Chicago impulsado por clima adverso",
+        "thumbnail": "/assets/img/uploads/precios-de-commodities-en-baja-bm.jpg",
+        "date": "2026-01-26T13:15:00.000Z",
+        "type": "noticias"
+      }
+    ]
+  },
+  "commodities": {
+    "label": "commodities",
+    "items": [
+      {
+        "id": "2026-01-26-precio-soja-alcanza-maximo-6-meses-chicago-clima-adverso",
+        "title": "Precio de la soja alcanza máximo de 6 meses en Chicago impulsado por clima adverso",
+        "thumbnail": "/assets/img/uploads/precios-de-commodities-en-baja-bm.jpg",
+        "date": "2026-01-26T13:15:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-14-exportaciones-repuntaron-casi-6-durante-el-2025",
+        "title": "Exportaciones repuntaron casi 6% durante el 2025",
+        "thumbnail": "/assets/img/uploads/exportación.jpg",
+        "date": "2026-01-14T13:15:00.000Z",
+        "type": "noticias"
+      }
+    ]
+  },
+  "precios": {
+    "label": "precios",
+    "items": [
+      {
+        "id": "2026-01-26-precio-soja-alcanza-maximo-6-meses-chicago-clima-adverso",
+        "title": "Precio de la soja alcanza máximo de 6 meses en Chicago impulsado por clima adverso",
+        "thumbnail": "/assets/img/uploads/precios-de-commodities-en-baja-bm.jpg",
+        "date": "2026-01-26T13:15:00.000Z",
+        "type": "noticias"
+      }
+    ]
+  },
+  "clima": {
+    "label": "clima",
+    "items": [
+      {
+        "id": "2026-01-26-precio-soja-alcanza-maximo-6-meses-chicago-clima-adverso",
+        "title": "Precio de la soja alcanza máximo de 6 meses en Chicago impulsado por clima adverso",
+        "thumbnail": "/assets/img/uploads/precios-de-commodities-en-baja-bm.jpg",
+        "date": "2026-01-26T13:15:00.000Z",
+        "type": "noticias"
+      }
+    ]
+  },
+  "banco-central": {
+    "label": "banco-central",
+    "items": [
+      {
+        "id": "2026-01-26-banco-central-mantiene-tasa-interes-575-proyecta-inflacion-38-2026",
+        "title": "Banco Central mantiene tasa de interés en 5,75% y proyecta inflación de 3,8% para 2026",
+        "thumbnail": "/assets/img/uploads/mef-villa-serrati_4_0.jpg",
+        "date": "2026-01-26T12:00:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-14-exportaciones-repuntaron-casi-6-durante-el-2025",
+        "title": "Exportaciones repuntaron casi 6% durante el 2025",
+        "thumbnail": "/assets/img/uploads/exportación.jpg",
+        "date": "2026-01-14T13:15:00.000Z",
+        "type": "noticias"
+      }
+    ]
+  },
+  "politica-monetaria": {
+    "label": "politica-monetaria",
+    "items": [
+      {
+        "id": "2026-01-26-banco-central-mantiene-tasa-interes-575-proyecta-inflacion-38-2026",
+        "title": "Banco Central mantiene tasa de interés en 5,75% y proyecta inflación de 3,8% para 2026",
+        "thumbnail": "/assets/img/uploads/mef-villa-serrati_4_0.jpg",
+        "date": "2026-01-26T12:00:00.000Z",
+        "type": "noticias"
+      }
+    ]
+  },
+  "inflacion": {
+    "label": "inflacion",
+    "items": [
+      {
+        "id": "2026-01-26-banco-central-mantiene-tasa-interes-575-proyecta-inflacion-38-2026",
+        "title": "Banco Central mantiene tasa de interés en 5,75% y proyecta inflación de 3,8% para 2026",
+        "thumbnail": "/assets/img/uploads/mef-villa-serrati_4_0.jpg",
+        "date": "2026-01-26T12:00:00.000Z",
+        "type": "noticias"
+      }
+    ]
+  },
   "economia": {
     "label": "economia",
     "items": [
+      {
+        "id": "2026-01-26-banco-central-mantiene-tasa-interes-575-proyecta-inflacion-38-2026",
+        "title": "Banco Central mantiene tasa de interés en 5,75% y proyecta inflación de 3,8% para 2026",
+        "thumbnail": "/assets/img/uploads/mef-villa-serrati_4_0.jpg",
+        "date": "2026-01-26T12:00:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-18-preferencias-arancelarias-de-la-ue-representan-más-de-usd-65-000-millones-para-el-mercosur",
+        "title": "Preferencias arancelarias de la UE representan más de USD 65.000 millones para el Mercosur",
+        "thumbnail": "/assets/img/acuerdo-mercosur-union-europea-firma-ue.jpeg",
+        "date": "2026-01-18T19:40:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-17-reforma-fiscal-2026-nuevas-tasas-impositivas",
+        "title": "Reforma fiscal 2026: nuevas tasas impositivas buscan fortalecer ingresos del Estado",
+        "thumbnail": "/assets/img/uploads/2024-08-16-billetes.jpg",
+        "date": "2026-01-17T18:45:00.000Z",
+        "type": "noticias"
+      },
       {
         "id": "2026-01-17-recuerdan-disponibilidad-del-servicio-en-línea-de-consultas-para-municipios-y-gobernaciones",
         "title": "Recuerdan disponibilidad del servicio en línea de consultas para Municipios y Gobernaciones",
@@ -33,7 +290,7 @@
       {
         "id": "2026-01-17-inversion-publica-seguira-impulsando-la-obra-publica",
         "title": "Inversión pública seguirá impulsando la obra pública en 2026",
-        "thumbnail": "/assets/img/uploads/seminario-fiscal.jpg",
+        "thumbnail": "/assets/img/investor-broker-discussing-trading-strategy-holding-papers-with-financial-charts-pens-cropped-shot-broker-job-investment-concept.jpg",
         "date": "2026-01-17T12:10:00.000Z",
         "type": "noticias"
       },
@@ -130,35 +387,38 @@
       }
     ]
   },
-  "finanzas": {
-    "label": "finanzas",
+  "ganaderia": {
+    "label": "ganadería",
     "items": [
       {
-        "id": "2026-01-17-recuerdan-disponibilidad-del-servicio-en-línea-de-consultas-para-municipios-y-gobernaciones",
-        "title": "Recuerdan disponibilidad del servicio en línea de consultas para Municipios y Gobernaciones",
-        "thumbnail": "/assets/img/top-view-office-desk-with-growth-chart-coffee-cup.jpg",
-        "date": "2026-01-17T17:28:00.000Z",
+        "id": "2026-01-26-exportaciones-carne-bovina-crecen-18-primer-trimestre",
+        "title": "Exportaciones de carne bovina paraguaya crecen 18% en el primer trimestre",
+        "thumbnail": "/assets/img/uploads/exportación.jpg",
+        "date": "2026-01-26T11:30:00.000Z",
         "type": "noticias"
-      },
+      }
+    ]
+  },
+  "exportaciones": {
+    "label": "exportaciones",
+    "items": [
       {
-        "id": "2026-01-16-economía-y-finanzas-expone-alcances-de-la-reforma-de-la-caja-fiscal",
-        "title": " Economía y Finanzas expone alcances de la reforma de la Caja Fiscal ",
-        "thumbnail": "/assets/img/uploads/mef-villa-serrati_4_0.jpg",
-        "date": "2026-01-16T23:34:00.000Z",
+        "id": "2026-01-26-exportaciones-carne-bovina-crecen-18-primer-trimestre",
+        "title": "Exportaciones de carne bovina paraguaya crecen 18% en el primer trimestre",
+        "thumbnail": "/assets/img/uploads/exportación.jpg",
+        "date": "2026-01-26T11:30:00.000Z",
         "type": "noticias"
-      },
+      }
+    ]
+  },
+  "carne": {
+    "label": "carne",
+    "items": [
       {
-        "id": "2026-01-15-el-poder-ejecutivo-declara-de-interés-nacional-el-acercamiento-de-paraguay-a-la-ocde-1",
-        "title": "El Poder Ejecutivo declara de interés nacional el acercamiento de Paraguay a la OCDE",
-        "thumbnail": "/assets/img/uploads/py.-imagen-de-pru-no-usar.jpg",
-        "date": "2026-01-15T00:08:00.000Z",
-        "type": "noticias"
-      },
-      {
-        "id": "2026-01-15-el-poder-ejecutivo-declara-de-interés-nacional-el-acercamiento-de-paraguay-a-la-ocde",
-        "title": "El Poder Ejecutivo declara de interés nacional el acercamiento de Paraguay a la OCDE",
-        "thumbnail": "/assets/img/uploads/py.-imagen-de-pru-no-usar.jpg",
-        "date": "2026-01-15T00:08:00.000Z",
+        "id": "2026-01-26-exportaciones-carne-bovina-crecen-18-primer-trimestre",
+        "title": "Exportaciones de carne bovina paraguaya crecen 18% en el primer trimestre",
+        "thumbnail": "/assets/img/uploads/exportación.jpg",
+        "date": "2026-01-26T11:30:00.000Z",
         "type": "noticias"
       }
     ]
@@ -166,6 +426,27 @@
   "comercio-exterior": {
     "label": "comercio-exterior",
     "items": [
+      {
+        "id": "2026-01-26-exportaciones-carne-bovina-crecen-18-primer-trimestre",
+        "title": "Exportaciones de carne bovina paraguaya crecen 18% en el primer trimestre",
+        "thumbnail": "/assets/img/uploads/exportación.jpg",
+        "date": "2026-01-26T11:30:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-20-​el-acuerdo-mercosur-ue-¿un-salmavidas-o-un-trampolín-para-las-pymes-paraguayas",
+        "title": "​El Acuerdo Mercosur-UE: ¿Un \"Salvavidas\" o un \"Trampolín\" para las PYMES Paraguayas?",
+        "thumbnail": "/assets/img/1002045483.webp",
+        "date": "2026-01-20T03:48:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-18-preferencias-arancelarias-de-la-ue-representan-más-de-usd-65-000-millones-para-el-mercosur",
+        "title": "Preferencias arancelarias de la UE representan más de USD 65.000 millones para el Mercosur",
+        "thumbnail": "/assets/img/acuerdo-mercosur-union-europea-firma-ue.jpeg",
+        "date": "2026-01-18T19:40:00.000Z",
+        "type": "noticias"
+      },
       {
         "id": "2026-01-17-exportaciones-de-maquila-superaron-los-usd-1-309-millones-al-cierre-del-2025",
         "title": "Exportaciones de maquila superaron los USD 1.309 millones al cierre del 2025",
@@ -203,42 +484,16 @@
       }
     ]
   },
-  "empleo": {
-    "label": "empleo",
-    "items": [
-      {
-        "id": "2026-01-17-exportaciones-de-maquila-superaron-los-usd-1-309-millones-al-cierre-del-2025",
-        "title": "Exportaciones de maquila superaron los USD 1.309 millones al cierre del 2025",
-        "thumbnail": "/assets/img/uploads/sumidenso-maquila-industria-trabajo-17.jpg",
-        "date": "2026-01-17T13:45:00.000Z",
-        "type": "noticias"
-      },
-      {
-        "id": "2026-01-16-más-de-7-600-empresas-por-acciones-simplificadas-se-constituyeron-en-paraguay",
-        "title": "Más de 7.600 Empresas por Acciones Simplificadas se constituyeron en Paraguay",
-        "thumbnail": "/assets/img/uploads/empresas-bajo-regimen-de-eas.jpg",
-        "date": "2026-01-16T22:02:00.000Z",
-        "type": "noticias"
-      },
-      {
-        "id": "2026-01-17-más-de-7-600-empresas-por-acciones-simplificadas-se-constituyeron-en-paraguay",
-        "title": "Más de 7.600 Empresas por Acciones Simplificadas se constituyeron en Paraguay",
-        "thumbnail": "/assets/img/uploads/empresas-bajo-regimen-de-eas.jpg",
-        "date": "2026-01-16T22:02:00.000Z",
-        "type": "noticias"
-      },
-      {
-        "id": "2026-01-15-exportaciones-de-maquila-superaron-los-usd-1-309-millones-al-cierre-del-2025",
-        "title": "Exportaciones de maquila superaron los USD 1.309 millones al cierre del 2025",
-        "thumbnail": "/assets/img/uploads/sumidenso-maquila-industria-trabajo-17.jpg",
-        "date": "2026-01-15T19:38:00.000Z",
-        "type": "noticias"
-      }
-    ]
-  },
   "negocios": {
     "label": "negocios",
     "items": [
+      {
+        "id": "2026-01-18-preferencias-arancelarias-de-la-ue-representan-más-de-usd-65-000-millones-para-el-mercosur",
+        "title": "Preferencias arancelarias de la UE representan más de USD 65.000 millones para el Mercosur",
+        "thumbnail": "/assets/img/acuerdo-mercosur-union-europea-firma-ue.jpeg",
+        "date": "2026-01-18T19:40:00.000Z",
+        "type": "noticias"
+      },
       {
         "id": "2026-01-17-exportaciones-de-maquila-superaron-los-usd-1-309-millones-al-cierre-del-2025",
         "title": "Exportaciones de maquila superaron los USD 1.309 millones al cierre del 2025",
@@ -272,6 +527,122 @@
         "title": "La confianza del consumidor se mantuvo levemente sobre la zona neutral al cierre del 2025",
         "thumbnail": "/assets/img/uploads/mercado-libre-e1584221732666.jpg",
         "date": "2026-01-15T17:07:00.000Z",
+        "type": "noticias"
+      }
+    ]
+  },
+  "politica-fiscal": {
+    "label": "politica-fiscal",
+    "items": [
+      {
+        "id": "2026-01-17-reforma-fiscal-2026-nuevas-tasas-impositivas",
+        "title": "Reforma fiscal 2026: nuevas tasas impositivas buscan fortalecer ingresos del Estado",
+        "thumbnail": "/assets/img/uploads/2024-08-16-billetes.jpg",
+        "date": "2026-01-17T18:45:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-17-inversion-publica-seguira-impulsando-la-obra-publica",
+        "title": "Inversión pública seguirá impulsando la obra pública en 2026",
+        "thumbnail": "/assets/img/investor-broker-discussing-trading-strategy-holding-papers-with-financial-charts-pens-cropped-shot-broker-job-investment-concept.jpg",
+        "date": "2026-01-17T12:10:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-16-economía-y-finanzas-expone-alcances-de-la-reforma-de-la-caja-fiscal",
+        "title": " Economía y Finanzas expone alcances de la reforma de la Caja Fiscal ",
+        "thumbnail": "/assets/img/uploads/mef-villa-serrati_4_0.jpg",
+        "date": "2026-01-16T23:34:00.000Z",
+        "type": "noticias"
+      }
+    ]
+  },
+  "impuestos": {
+    "label": "impuestos",
+    "items": [
+      {
+        "id": "2026-01-17-reforma-fiscal-2026-nuevas-tasas-impositivas",
+        "title": "Reforma fiscal 2026: nuevas tasas impositivas buscan fortalecer ingresos del Estado",
+        "thumbnail": "/assets/img/uploads/2024-08-16-billetes.jpg",
+        "date": "2026-01-17T18:45:00.000Z",
+        "type": "noticias"
+      }
+    ]
+  },
+  "reforma": {
+    "label": "reforma",
+    "items": [
+      {
+        "id": "2026-01-17-reforma-fiscal-2026-nuevas-tasas-impositivas",
+        "title": "Reforma fiscal 2026: nuevas tasas impositivas buscan fortalecer ingresos del Estado",
+        "thumbnail": "/assets/img/uploads/2024-08-16-billetes.jpg",
+        "date": "2026-01-17T18:45:00.000Z",
+        "type": "noticias"
+      }
+    ]
+  },
+  "finanzas": {
+    "label": "finanzas",
+    "items": [
+      {
+        "id": "2026-01-17-recuerdan-disponibilidad-del-servicio-en-línea-de-consultas-para-municipios-y-gobernaciones",
+        "title": "Recuerdan disponibilidad del servicio en línea de consultas para Municipios y Gobernaciones",
+        "thumbnail": "/assets/img/top-view-office-desk-with-growth-chart-coffee-cup.jpg",
+        "date": "2026-01-17T17:28:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-16-economía-y-finanzas-expone-alcances-de-la-reforma-de-la-caja-fiscal",
+        "title": " Economía y Finanzas expone alcances de la reforma de la Caja Fiscal ",
+        "thumbnail": "/assets/img/uploads/mef-villa-serrati_4_0.jpg",
+        "date": "2026-01-16T23:34:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-15-el-poder-ejecutivo-declara-de-interés-nacional-el-acercamiento-de-paraguay-a-la-ocde-1",
+        "title": "El Poder Ejecutivo declara de interés nacional el acercamiento de Paraguay a la OCDE",
+        "thumbnail": "/assets/img/uploads/py.-imagen-de-pru-no-usar.jpg",
+        "date": "2026-01-15T00:08:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-15-el-poder-ejecutivo-declara-de-interés-nacional-el-acercamiento-de-paraguay-a-la-ocde",
+        "title": "El Poder Ejecutivo declara de interés nacional el acercamiento de Paraguay a la OCDE",
+        "thumbnail": "/assets/img/uploads/py.-imagen-de-pru-no-usar.jpg",
+        "date": "2026-01-15T00:08:00.000Z",
+        "type": "noticias"
+      }
+    ]
+  },
+  "empleo": {
+    "label": "empleo",
+    "items": [
+      {
+        "id": "2026-01-17-exportaciones-de-maquila-superaron-los-usd-1-309-millones-al-cierre-del-2025",
+        "title": "Exportaciones de maquila superaron los USD 1.309 millones al cierre del 2025",
+        "thumbnail": "/assets/img/uploads/sumidenso-maquila-industria-trabajo-17.jpg",
+        "date": "2026-01-17T13:45:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-16-más-de-7-600-empresas-por-acciones-simplificadas-se-constituyeron-en-paraguay",
+        "title": "Más de 7.600 Empresas por Acciones Simplificadas se constituyeron en Paraguay",
+        "thumbnail": "/assets/img/uploads/empresas-bajo-regimen-de-eas.jpg",
+        "date": "2026-01-16T22:02:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-17-más-de-7-600-empresas-por-acciones-simplificadas-se-constituyeron-en-paraguay",
+        "title": "Más de 7.600 Empresas por Acciones Simplificadas se constituyeron en Paraguay",
+        "thumbnail": "/assets/img/uploads/empresas-bajo-regimen-de-eas.jpg",
+        "date": "2026-01-16T22:02:00.000Z",
+        "type": "noticias"
+      },
+      {
+        "id": "2026-01-15-exportaciones-de-maquila-superaron-los-usd-1-309-millones-al-cierre-del-2025",
+        "title": "Exportaciones de maquila superaron los USD 1.309 millones al cierre del 2025",
+        "thumbnail": "/assets/img/uploads/sumidenso-maquila-industria-trabajo-17.jpg",
+        "date": "2026-01-15T19:38:00.000Z",
         "type": "noticias"
       }
     ]
@@ -343,74 +714,8 @@
       {
         "id": "2026-01-17-inversion-publica-seguira-impulsando-la-obra-publica",
         "title": "Inversión pública seguirá impulsando la obra pública en 2026",
-        "thumbnail": "/assets/img/uploads/seminario-fiscal.jpg",
+        "thumbnail": "/assets/img/investor-broker-discussing-trading-strategy-holding-papers-with-financial-charts-pens-cropped-shot-broker-job-investment-concept.jpg",
         "date": "2026-01-17T12:10:00.000Z",
-        "type": "noticias"
-      }
-    ]
-  },
-  "inversion": {
-    "label": "inversion",
-    "items": [
-      {
-        "id": "2026-01-17-inversion-publica-seguira-impulsando-la-obra-publica",
-        "title": "Inversión pública seguirá impulsando la obra pública en 2026",
-        "thumbnail": "/assets/img/uploads/seminario-fiscal.jpg",
-        "date": "2026-01-17T12:10:00.000Z",
-        "type": "noticias"
-      },
-      {
-        "id": "2026-01-16-más-de-7-600-empresas-por-acciones-simplificadas-se-constituyeron-en-paraguay",
-        "title": "Más de 7.600 Empresas por Acciones Simplificadas se constituyeron en Paraguay",
-        "thumbnail": "/assets/img/uploads/empresas-bajo-regimen-de-eas.jpg",
-        "date": "2026-01-16T22:02:00.000Z",
-        "type": "noticias"
-      },
-      {
-        "id": "2026-01-17-más-de-7-600-empresas-por-acciones-simplificadas-se-constituyeron-en-paraguay",
-        "title": "Más de 7.600 Empresas por Acciones Simplificadas se constituyeron en Paraguay",
-        "thumbnail": "/assets/img/uploads/empresas-bajo-regimen-de-eas.jpg",
-        "date": "2026-01-16T22:02:00.000Z",
-        "type": "noticias"
-      },
-      {
-        "id": "2026-01-14-créditos-para-la-vivienda-abarca-cerca-de-la-mitad-de-la-cartera-de-la-afd​",
-        "title": "Créditos para la vivienda abarca cerca de la mitad de la cartera de la AFD​",
-        "thumbnail": "/assets/img/uploads/couple-holding-small-house-medium-shot.jpg",
-        "date": "2026-01-14T16:14:00.000Z",
-        "type": "noticias"
-      },
-      {
-        "id": "2026-01-13-aportes-a-la-caja-fiscal-solo-alcanzan-para-financiar-5años-de-jubilación-en-promedio",
-        "title": "Aportes a la Caja Fiscal solo alcanzan para financiar 5años de jubilación en promedio",
-        "thumbnail": "/assets/img/uploads/mef-villa-serrati_4_0.jpg",
-        "date": "2026-01-14T13:18:00.000Z",
-        "type": "analisis"
-      },
-      {
-        "id": "2025-11-19-modernización-bursátil-presentarán-ante-emisores-la-nueva-estructura-y-los-procesos-de-registro",
-        "title": "\"Modernización bursátil: Presentarán ante emisores la nueva estructura y los procesos de registro\"",
-        "thumbnail": "/assets/img/uploads/py.-imagen-de-pru-no-usar.jpg",
-        "date": "2025-11-19T15:55:52.535Z",
-        "type": "noticias"
-      }
-    ]
-  },
-  "politica-fiscal": {
-    "label": "politica-fiscal",
-    "items": [
-      {
-        "id": "2026-01-17-inversion-publica-seguira-impulsando-la-obra-publica",
-        "title": "Inversión pública seguirá impulsando la obra pública en 2026",
-        "thumbnail": "/assets/img/uploads/seminario-fiscal.jpg",
-        "date": "2026-01-17T12:10:00.000Z",
-        "type": "noticias"
-      },
-      {
-        "id": "2026-01-16-economía-y-finanzas-expone-alcances-de-la-reforma-de-la-caja-fiscal",
-        "title": " Economía y Finanzas expone alcances de la reforma de la Caja Fiscal ",
-        "thumbnail": "/assets/img/uploads/mef-villa-serrati_4_0.jpg",
-        "date": "2026-01-16T23:34:00.000Z",
         "type": "noticias"
       }
     ]
@@ -442,30 +747,6 @@
         "title": "La confianza del consumidor se mantuvo levemente sobre la zona neutral al cierre del 2025",
         "thumbnail": "/assets/img/uploads/mercado-libre-e1584221732666.jpg",
         "date": "2026-01-15T17:07:00.000Z",
-        "type": "noticias"
-      }
-    ]
-  },
-  "banco-central": {
-    "label": "banco-central",
-    "items": [
-      {
-        "id": "2026-01-14-exportaciones-repuntaron-casi-6-durante-el-2025",
-        "title": "Exportaciones repuntaron casi 6% durante el 2025",
-        "thumbnail": "/assets/img/uploads/exportación.jpg",
-        "date": "2026-01-14T13:15:00.000Z",
-        "type": "noticias"
-      }
-    ]
-  },
-  "commodities": {
-    "label": "commodities",
-    "items": [
-      {
-        "id": "2026-01-14-exportaciones-repuntaron-casi-6-durante-el-2025",
-        "title": "Exportaciones repuntaron casi 6% durante el 2025",
-        "thumbnail": "/assets/img/uploads/exportación.jpg",
-        "date": "2026-01-14T13:15:00.000Z",
         "type": "noticias"
       }
     ]
@@ -506,9 +787,114 @@
       }
     ]
   },
+  "brasil": {
+    "label": "brasil",
+    "items": [
+      {
+        "id": "2026-01-26-brasil-argentina-evaluan-moneda-comun-comercio-bilateral",
+        "title": "Brasil y Argentina evalúan moneda común para comercio bilateral",
+        "thumbnail": "/assets/img/uploads/2024-08-16-billetes.jpg",
+        "date": "2026-01-26T18:30:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "argentina": {
+    "label": "argentina",
+    "items": [
+      {
+        "id": "2026-01-26-brasil-argentina-evaluan-moneda-comun-comercio-bilateral",
+        "title": "Brasil y Argentina evalúan moneda común para comercio bilateral",
+        "thumbnail": "/assets/img/uploads/2024-08-16-billetes.jpg",
+        "date": "2026-01-26T18:30:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "moneda": {
+    "label": "moneda",
+    "items": [
+      {
+        "id": "2026-01-26-brasil-argentina-evaluan-moneda-comun-comercio-bilateral",
+        "title": "Brasil y Argentina evalúan moneda común para comercio bilateral",
+        "thumbnail": "/assets/img/uploads/2024-08-16-billetes.jpg",
+        "date": "2026-01-26T18:30:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "integracion": {
+    "label": "integracion",
+    "items": [
+      {
+        "id": "2026-01-26-brasil-argentina-evaluan-moneda-comun-comercio-bilateral",
+        "title": "Brasil y Argentina evalúan moneda común para comercio bilateral",
+        "thumbnail": "/assets/img/uploads/2024-08-16-billetes.jpg",
+        "date": "2026-01-26T18:30:00.000Z",
+        "type": "analisis"
+      },
+      {
+        "id": "2026-01-26-mercosur-ue-avanzan-armonizacion-normas-fitosanitarias",
+        "title": "Mercosur y Unión Europea avanzan en armonización de normas fitosanitarias",
+        "thumbnail": "/assets/img/acuerdo-mercosur-union-europea-firma-ue.jpeg",
+        "date": "2026-01-26T17:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "mercosur": {
+    "label": "mercosur",
+    "items": [
+      {
+        "id": "2026-01-26-brasil-argentina-evaluan-moneda-comun-comercio-bilateral",
+        "title": "Brasil y Argentina evalúan moneda común para comercio bilateral",
+        "thumbnail": "/assets/img/uploads/2024-08-16-billetes.jpg",
+        "date": "2026-01-26T18:30:00.000Z",
+        "type": "analisis"
+      },
+      {
+        "id": "2026-01-26-mercosur-ue-avanzan-armonizacion-normas-fitosanitarias",
+        "title": "Mercosur y Unión Europea avanzan en armonización de normas fitosanitarias",
+        "thumbnail": "/assets/img/acuerdo-mercosur-union-europea-firma-ue.jpeg",
+        "date": "2026-01-26T17:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "union-europea": {
+    "label": "union-europea",
+    "items": [
+      {
+        "id": "2026-01-26-mercosur-ue-avanzan-armonizacion-normas-fitosanitarias",
+        "title": "Mercosur y Unión Europea avanzan en armonización de normas fitosanitarias",
+        "thumbnail": "/assets/img/acuerdo-mercosur-union-europea-firma-ue.jpeg",
+        "date": "2026-01-26T17:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "comercio": {
+    "label": "comercio",
+    "items": [
+      {
+        "id": "2026-01-26-mercosur-ue-avanzan-armonizacion-normas-fitosanitarias",
+        "title": "Mercosur y Unión Europea avanzan en armonización de normas fitosanitarias",
+        "thumbnail": "/assets/img/acuerdo-mercosur-union-europea-firma-ue.jpeg",
+        "date": "2026-01-26T17:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
   "analisis-economico": {
     "label": "analisis-economico",
     "items": [
+      {
+        "id": "2026-01-20-mercosur-ue-¿el-salto-de-calidad-que-paraguay-esperaba",
+        "title": "Mercosur-UE: ¿El Salto de Calidad que Paraguay Esperaba?",
+        "thumbnail": "/assets/img/1002045483.webp",
+        "date": "2026-01-20T03:30:00.000Z",
+        "type": "analisis"
+      },
       {
         "id": "2026-01-13-aportes-a-la-caja-fiscal-solo-alcanzan-para-financiar-5años-de-jubilación-en-promedio",
         "title": "Aportes a la Caja Fiscal solo alcanzan para financiar 5años de jubilación en promedio",

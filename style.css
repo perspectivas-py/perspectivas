@@ -5192,6 +5192,33 @@ ul {
   gap: 0.5rem;
 }
 
+/* Author section WITHOUT photo (when no author_image from CMS) */
+.author-section-no-photo {
+  padding-top: 0.25rem;
+}
+
+.author-details-inline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.author-details-inline .author-name {
+  font-family: 'Merriweather', serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.author-details-inline .author-role {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
 /* Topics Section */
 .sidebar-topics-section {
   border-top: 1px solid var(--border-color);
@@ -6464,6 +6491,50 @@ body.cinema-mode .site-footer-new {
   gap: 1.5rem;
 }
 
+/* Tarjetas de destacados cargadas por JS */
+.mega-featured-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.mega-featured-card:hover {
+  transform: translateY(-2px);
+}
+
+.mega-featured-card img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: 4px;
+  background: var(--bg-secondary);
+  transition: box-shadow 0.2s ease;
+}
+
+.mega-featured-card:hover img {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.mega-featured-title {
+  font-family: 'Merriweather', serif;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: var(--text-primary);
+  font-weight: 600;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.2s;
+}
+
+.mega-featured-card:hover .mega-featured-title {
+  color: var(--accent-blue);
+}
+
 .mega-card {
   display: flex;
   flex-direction: column;
@@ -6534,4 +6605,106 @@ body.cinema-mode .site-footer-new {
   width: 0%;
   transition: width 0.1s ease;
   box-shadow: 0 0 10px rgba(37, 99, 235, 0.4);
+}
+
+/* =========================================
+   DRAWER SEARCH - EXPANDABLE
+   ========================================= */
+.drawer-search-box {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.drawer-search-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-secondary);
+}
+
+.drawer-search-toggle:hover {
+  background: var(--color-accent);
+  color: white;
+  border-color: var(--color-accent);
+}
+
+.drawer-search-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Expanded search state */
+.drawer-search-expanded {
+  display: none;
+  flex: 1;
+  align-items: center;
+  gap: 0.5rem;
+  animation: slideIn 0.2s ease;
+}
+
+.drawer-search-box.expanded .drawer-search-toggle {
+  display: none;
+}
+
+.drawer-search-box.expanded .drawer-search-expanded {
+  display: flex;
+}
+
+.drawer-search-expanded input {
+  flex: 1;
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: border-color 0.2s;
+}
+
+.drawer-search-expanded input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.drawer-search-expanded input::placeholder {
+  color: var(--text-secondary);
+}
+
+.drawer-search-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.drawer-search-close:hover {
+  color: var(--text-primary);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Categoría | Perspectivas</title>
   <link rel="icon" type="image/svg+xml" href="/assets/img/icono-perspectivas.svg">
-  <link rel="stylesheet" href="/style.css?v=4.5">
+  <link rel="stylesheet" href="/style.css?v=4.7">
 </head>
 
 <body>
@@ -146,12 +146,18 @@
         <button id="category-drawer-close" class="drawer-close-v2">×</button>
       </div>
       <div class="drawer-content-v2">
-        <div class="drawer-search-box">
-          <input type="text" id="search-input" placeholder="Buscar noticias...">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8"></circle>
-            <path d="m21 21-4.35-4.35"></path>
-          </svg>
+        <div class="drawer-search-box" id="drawer-search-box">
+          <button type="button" class="drawer-search-toggle" id="drawer-search-toggle" aria-label="Abrir búsqueda">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </button>
+          <div class="drawer-search-expanded" id="drawer-search-expanded">
+            <input type="text" id="drawer-search-input" placeholder="Buscar noticias...">
+            <button type="button" class="drawer-search-close" id="drawer-search-close"
+              aria-label="Cerrar búsqueda">×</button>
+          </div>
         </div>
         <div class="drawer-nav-v2">
           <h4>Secciones</h4>
@@ -193,11 +199,11 @@
   </main>
 
   <footer class="site-footer">
-    <div class="wrap">Perspectivas © 2025</div>
+    <div class="wrap">Perspectivas © 2026</div>
   </footer>
 
-  <script src="/script.v3.js?v=4.5"></script>
-  <script src="/categoria-script.js"></script>
+  <script src="/script.v3.js?v=4.7"></script>
+  <script src="/categoria-script.js?v=4.2"></script>
 </body>
 
 </html>

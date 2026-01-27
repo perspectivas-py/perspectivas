@@ -17,7 +17,7 @@ caption: "El Ministerio de Economía y Finanzas expone alcances de la reforma de
   MEF"
 featured:
   is_featured: false
-  is_main_featured: true
+  is_main_featured: false
   show_in_latest: true
   highlights:
     - Se presentó un diagnóstico detallado sobre la sostenibilidad financiera

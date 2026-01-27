@@ -46,14 +46,34 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Update DOM
         document.title = `${title} — Perspectivas`;
-        document.getElementById('page-title').textContent = title;
+        const titleEl = document.getElementById('page-title');
+        const contentEl = document.getElementById('page-content');
+        const loadingEl = document.getElementById('page-loading');
+
+        if (loadingEl) loadingEl.style.display = 'none';
+        if (titleEl) {
+            titleEl.textContent = title;
+            titleEl.style.display = 'block';
+        }
 
         // Convert Markdown to HTML
-        document.getElementById('page-content').innerHTML = marked.parse(markdownBody);
+        if (contentEl) {
+            contentEl.innerHTML = marked.parse(markdownBody);
+        }
 
     } catch (error) {
         console.error(error);
-        document.getElementById('page-title').textContent = 'Error 404';
-        document.getElementById('page-content').innerHTML = '<p>La página que buscas no existe o ha sido movida.</p><a href="index.html">Volver al inicio</a>';
+        const titleEl = document.getElementById('page-title');
+        const contentEl = document.getElementById('page-content');
+        const loadingEl = document.getElementById('page-loading');
+
+        if (loadingEl) loadingEl.style.display = 'none';
+        if (titleEl) {
+            titleEl.textContent = 'Error 404';
+            titleEl.style.display = 'block';
+        }
+        if (contentEl) {
+            contentEl.innerHTML = '<p>La página que buscas no existe o ha sido movida.</p><a href="index.html" class="cta-subscribe-v2" style="display:inline-block; margin-top:2rem;">Volver al inicio</a>';
+        }
     }
 });
