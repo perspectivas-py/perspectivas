@@ -1348,33 +1348,107 @@ async function initMegaMenuFeatured() {
     if (!res.ok) return;
 
     const data = await res.json();
+    const noticiasData = data.noticias || [];
+    const analisisData = data.analisis || [];
 
     // Función para construir un mini card para mega menú
     const buildMegaCard = (item) => {
       const thumb = item.thumbnail || "/assets/img/default.jpg";
       const id = item.slug || item.id;
       const title = item.title || "Sin título";
+      const categoryLabel = (item.category || "").toUpperCase();
+
       return `
-        <a href="/noticia.html?id=${encodeURIComponent(id)}" class="mega-featured-card">
-          <img src="${thumb}" alt="${title}" loading="lazy">
-          <span class="mega-featured-title">${title}</span>
+        <a href="/noticia.html?id=${encodeURIComponent(id)}" class="mega-featured-card fade-in">
+          <div class="mega-card-thumb">
+             <img src="${thumb}" alt="${title}" loading="lazy">
+          </div>
+          <div class="mega-card-content">
+             <span class="mega-card-cat">${categoryLabel}</span>
+             <span class="mega-featured-title">${title}</span>
+          </div>
         </a>
       `;
     };
 
-    // Poblar Análisis (2 más recientes)
-    if (megaAnalisis && data.analisis?.length) {
-      const featured = data.analisis.slice(0, 2);
-      megaAnalisis.innerHTML = featured.map(buildMegaCard).join("");
+    const updateMegaContainer = (container, items) => {
+      if (!container) return;
+      if (!items || !items.length) {
+        container.innerHTML = `<p class="mega-empty">No hay contenido reciente.</p>`;
+        return;
+      }
+      container.innerHTML = items.map(buildMegaCard).join("");
+    };
+
+    // 1. Carga Inicial (Default: Más recientes)
+    if (megaAnalisis) updateMegaContainer(megaAnalisis, analisisData.slice(0, 2));
+    if (megaNoticias) updateMegaContainer(megaNoticias, noticiasData.slice(0, 3));
+
+    // 2. Agregar Event Listeners para Hover (Dinámico)
+
+    // > Lógica para Análisis
+    if (megaAnalisis) {
+      const container = megaAnalisis.closest('.mega-menu-inner');
+      const links = container.querySelectorAll('.mega-menu-list a');
+
+      links.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+          const href = link.getAttribute('href') || "";
+          let filtered = [];
+
+          if (href.includes('analisis.html')) {
+            // "Opinión Editorial" - busco tags específicos o uso default
+            filtered = analisisData.filter(n => n.category === 'opinion' || n.category === 'editorial');
+          } else if (href.includes('cat=')) {
+            const cat = href.split('cat=')[1];
+            filtered = analisisData.filter(n => (n.category || "").includes(cat));
+          }
+
+          // Fallback a recientes si no hay matches
+          if (!filtered.length) filtered = analisisData;
+
+          updateMegaContainer(megaAnalisis, filtered.slice(0, 2));
+        });
+      });
+
+      // Restaurar al salir del menú completo (opcional, o dejar la última selección)
+      // container.addEventListener('mouseleave', () => updateMegaContainer(megaAnalisis, analisisData.slice(0, 2))); 
     }
 
-    // Poblar Noticias (3 más recientes)
-    if (megaNoticias && data.noticias?.length) {
-      const featured = data.noticias.slice(0, 3);
-      megaNoticias.innerHTML = featured.map(buildMegaCard).join("");
+    // > Lógica para Noticias
+    if (megaNoticias) {
+      const container = megaNoticias.closest('.mega-menu-inner');
+      const links = container.querySelectorAll('.mega-menu-list a');
+
+      links.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+          const href = link.getAttribute('href') || "";
+          let filtered = [];
+
+          if (href.includes('cat=')) {
+            // Better parsing
+            const urlParts = href.split('?');
+            if (urlParts.length > 1) {
+              const urlParams = new URLSearchParams(urlParts[1]);
+              const catParam = urlParams.get('cat');
+              if (catParam) {
+                filtered = noticiasData.filter(n => (n.category || "").includes(catParam));
+              }
+            }
+          }
+
+          if (!filtered.length) {
+            // Try heuristic based on text content if URL param fails? No, simpler to stick to 'cat' param.
+            // Fallback to recent
+            filtered = noticiasData;
+          }
+
+          updateMegaContainer(megaNoticias, filtered.slice(0, 3));
+        });
+      });
     }
 
-    console.log("✅ Mega menús cargados");
+    console.log("✅ Mega menús dinámicos activados");
   } catch (e) {
     console.warn("No se pudieron cargar los mega menús:", e);
   }
