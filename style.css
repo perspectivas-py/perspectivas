@@ -6475,17 +6475,55 @@ body.cinema-mode .site-footer-new {
 .mega-menu-list a {
   display: block;
   padding: 0.5rem 0.8rem;
+  padding-left: 1rem;
   color: var(--text-primary);
   font-weight: 600;
   font-size: 0.95rem;
   border-radius: 4px;
-  transition: all 0.2s;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+/* Indicador visual: línea vertical izquierda */
+.mega-menu-list a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  background: linear-gradient(180deg, #3b82f6 0%, #1e40af 100%);
+  border-radius: 0 2px 2px 0;
+  transition: height 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Indicador visual: punto decorativo derecho */
+.mega-menu-list a::after {
+  content: '';
+  position: absolute;
+  right: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+  width: 6px;
+  height: 6px;
+  background: #3b82f6;
+  border-radius: 50%;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .mega-menu-list a:hover {
   background: var(--bg-secondary);
   color: var(--accent-blue);
-  transform: translateX(5px);
+  padding-left: 1.2rem;
+}
+
+.mega-menu-list a:hover::before {
+  height: 100%;
+}
+
+.mega-menu-list a:hover::after {
+  transform: translateY(-50%) scale(1);
 }
 
 /* Columna de Destacados (Derecha) */
@@ -6501,8 +6539,6 @@ body.cinema-mode .site-footer-new {
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  group: hover;
-  /* For nested hover effects */
 }
 
 .mega-card-thumb {
