@@ -191,12 +191,20 @@ const CATEGORY_LABELS = {
 };
 
 const CATEGORY_ACCENT_PRESETS = [
-  { keys: ["macro", "economia"], primary: "#38bdf8", secondary: "#2563eb" },
-  { keys: ["politica", "fiscal"], primary: "#f97316", secondary: "#c2410c" },
-  { keys: ["negocios", "empresas"], primary: "#14b8a6", secondary: "#0f766e" },
-  { keys: ["mercado", "mercados-inversion", "inversion"], primary: "#c084fc", secondary: "#7c3aed" },
-  { keys: ["programa", "podcast"], primary: "#fbbf24", secondary: "#f59e0b" },
-  { keys: ["finanzas-personales", "educacion-financiera"], primary: "#22d3ee", secondary: "#0ea5e9" }
+  // Análisis
+  { keys: ["macro", "economia", "macroeconomia"], primary: "#3b82f6", secondary: "#1e40af", name: "Azul" },
+  { keys: ["politica", "politica-economica"], primary: "#f97316", secondary: "#c2410c", name: "Naranja" },
+  { keys: ["regional", "analisis-regional"], primary: "#8b5cf6", secondary: "#6d28d9", name: "Violeta" },
+
+  // Noticias
+  { keys: ["agro", "commodities", "agricultura"], primary: "#10b981", secondary: "#059669", name: "Verde" },
+  { keys: ["mercados", "mercados-inversion", "inversion", "mercados-financieros"], primary: "#a855f7", secondary: "#7c3aed", name: "Púrpura" },
+  { keys: ["negocios", "empresas"], primary: "#14b8a6", secondary: "#0f766e", name: "Turquesa" },
+  { keys: ["locales", "actualidad", "noticias-locales"], primary: "#ef4444", secondary: "#b91c1c", name: "Rojo" },
+
+  // Otros
+  { keys: ["finanzas-personales", "educacion-financiera"], primary: "#22d3ee", secondary: "#0ea5e9", name: "Cyan" },
+  { keys: ["programa", "podcast"], primary: "#fbbf24", secondary: "#f59e0b", name: "Amarillo" }
 ];
 
 const DEFAULT_ACCENT = { primary: "#38bdf8", secondary: "#2563eb" };
@@ -1356,7 +1364,8 @@ async function initMegaMenuFeatured() {
       const thumb = item.thumbnail || "/assets/img/default.jpg";
       const id = item.slug || item.id;
       const title = item.title || "Sin título";
-      const categoryLabel = (item.category || "").toUpperCase();
+      const category = item.category || "";
+      const categoryLabel = category.toUpperCase();
 
       return `
         <a href="/noticia.html?id=${encodeURIComponent(id)}" class="mega-featured-card fade-in">
@@ -1364,7 +1373,7 @@ async function initMegaMenuFeatured() {
              <img src="${thumb}" alt="${title}" loading="lazy">
           </div>
           <div class="mega-card-content">
-             <span class="mega-card-cat">${categoryLabel}</span>
+             <span class="mega-card-cat" data-category="${category}">${categoryLabel}</span>
              <span class="mega-featured-title">${title}</span>
           </div>
         </a>

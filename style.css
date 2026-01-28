@@ -220,6 +220,30 @@ ul {
   --glass-border: rgba(0, 0, 0, 0.08);
   --accent-blue: #1e40af;
   --accent-red: #b91c1c;
+
+  /* Category Colors - Análisis */
+  --cat-macro-primary: #3b82f6;
+  --cat-macro-secondary: #1e40af;
+  --cat-politica-primary: #f97316;
+  --cat-politica-secondary: #c2410c;
+  --cat-regional-primary: #8b5cf6;
+  --cat-regional-secondary: #6d28d9;
+
+  /* Category Colors - Noticias */
+  --cat-agro-primary: #10b981;
+  --cat-agro-secondary: #059669;
+  --cat-mercados-primary: #a855f7;
+  --cat-mercados-secondary: #7c3aed;
+  --cat-empresas-primary: #14b8a6;
+  --cat-empresas-secondary: #0f766e;
+  --cat-locales-primary: #ef4444;
+  --cat-locales-secondary: #b91c1c;
+
+  /* Category Colors - Otros */
+  --cat-finanzas-primary: #22d3ee;
+  --cat-finanzas-secondary: #0ea5e9;
+  --cat-programa-primary: #fbbf24;
+  --cat-programa-secondary: #f59e0b;
 }
 
 [data-theme="dark"] {
@@ -6572,9 +6596,64 @@ body.cinema-mode .site-footer-new {
   text-transform: uppercase;
   font-weight: 800;
   letter-spacing: 0.05em;
-  color: #b91c1c;
-  /* Accent Red directly or var */
+  color: var(--cat-locales-primary);
   transition: color 0.2s;
+  padding: 0.25rem 0.5rem;
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: 3px;
+  display: inline-block;
+}
+
+/* Category-specific badge colors */
+.mega-card-cat[data-category*="macro"],
+.mega-card-cat[data-category*="economia"] {
+  color: var(--cat-macro-primary);
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.mega-card-cat[data-category*="politica"] {
+  color: var(--cat-politica-primary);
+  background: rgba(249, 115, 22, 0.1);
+}
+
+.mega-card-cat[data-category*="regional"] {
+  color: var(--cat-regional-primary);
+  background: rgba(139, 92, 246, 0.1);
+}
+
+.mega-card-cat[data-category*="agro"],
+.mega-card-cat[data-category*="agricultura"] {
+  color: var(--cat-agro-primary);
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.mega-card-cat[data-category*="mercado"],
+.mega-card-cat[data-category*="inversion"] {
+  color: var(--cat-mercados-primary);
+  background: rgba(168, 85, 247, 0.1);
+}
+
+.mega-card-cat[data-category*="empresa"],
+.mega-card-cat[data-category*="negocio"] {
+  color: var(--cat-empresas-primary);
+  background: rgba(20, 184, 166, 0.1);
+}
+
+.mega-card-cat[data-category*="local"],
+.mega-card-cat[data-category*="actualidad"] {
+  color: var(--cat-locales-primary);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.mega-card-cat[data-category*="finanzas"] {
+  color: var(--cat-finanzas-primary);
+  background: rgba(34, 211, 238, 0.1);
+}
+
+.mega-card-cat[data-category*="programa"],
+.mega-card-cat[data-category*="podcast"] {
+  color: var(--cat-programa-primary);
+  background: rgba(251, 191, 36, 0.1);
 }
 
 .mega-featured-title {
