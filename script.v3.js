@@ -1662,7 +1662,7 @@ async function initHome() {
     renderSecondary(remainingNoticias);
 
     // Renderizar tapas digitales verticales (datos de muestra)
-    renderDigitalCoversHorizontal();
+    renderDigitalCoversVertical();
 
     initNoticiasLocales(remainingNoticias);
     renderCategoryFilters(remainingNoticias);
@@ -2667,7 +2667,7 @@ function initRouter() {
 }
 
 // ========================================
-// TAPA DIGITAL - HORIZONTAL SCROLL
+// TAPA DIGITAL - SIDEBAR VERTICAL
 // ========================================
 
 // Datos de muestra para tapas digitales (NO artículos reales)
@@ -2695,7 +2695,7 @@ const DIGITAL_COVERS_SAMPLE = [
   }
 ];
 
-function buildDigitalCoverHorizontalCard(cover) {
+function buildDigitalCoverVerticalCard(cover) {
   if (!cover) return '';
 
   const title = escapeHtml(cover.title || 'Sin título');
@@ -2703,7 +2703,7 @@ function buildDigitalCoverHorizontalCard(cover) {
   const edition = escapeHtml(cover.edition || '');
 
   return `
-    <article class="digital-cover-card-horizontal" data-cover-id="${cover.id}">
+    <article class="digital-cover-card-vertical" data-cover-id="${cover.id}">
       <div class="digital-cover-image-wrapper">
         <img src="${image}" alt="Tapa ${edition}" class="digital-cover-image" loading="lazy" />
       </div>
@@ -2714,16 +2714,16 @@ function buildDigitalCoverHorizontalCard(cover) {
   `;
 }
 
-function renderDigitalCoversHorizontal() {
-  const container = document.getElementById('digital-covers-horizontal');
+function renderDigitalCoversVertical() {
+  const container = document.getElementById('digital-covers-vertical');
   if (!container) return;
 
   container.innerHTML = DIGITAL_COVERS_SAMPLE
-    .map(buildDigitalCoverHorizontalCard)
+    .map(buildDigitalCoverVerticalCard)
     .join('');
 
   // Agregar event listeners para modal
-  container.querySelectorAll('.digital-cover-card-horizontal').forEach(card => {
+  container.querySelectorAll('.digital-cover-card-vertical').forEach(card => {
     card.addEventListener('click', (e) => {
       e.preventDefault();
       const coverId = card.dataset.coverId;
@@ -2734,31 +2734,31 @@ function renderDigitalCoversHorizontal() {
     });
   });
 
-  // Inicializar controles de navegación
-  initDigitalCoversNavigation();
+  // Inicializar controles de navegación vertical
+  initDigitalCoversVerticalNavigation();
 }
 
-function initDigitalCoversNavigation() {
-  const track = document.querySelector('.digital-covers-track');
+function initDigitalCoversVerticalNavigation() {
+  const track = document.querySelector('.digital-covers-vertical-track');
   const prevBtn = document.querySelector('.dc-prev');
   const nextBtn = document.querySelector('.dc-next');
 
   if (!track || !prevBtn || !nextBtn) return;
 
-  // Scroll al hacer click en botones
+  // Scroll vertical al hacer click en botones
   prevBtn.addEventListener('click', () => {
-    track.scrollBy({ left: -320, behavior: 'smooth' });
+    track.scrollBy({ top: -250, behavior: 'smooth' });
   });
 
   nextBtn.addEventListener('click', () => {
-    track.scrollBy({ left: 320, behavior: 'smooth' });
+    track.scrollBy({ top: 250, behavior: 'smooth' });
   });
 
   // Actualizar estado de botones según posición de scroll
   function updateButtons() {
-    const { scrollLeft, scrollWidth, clientWidth } = track;
-    prevBtn.disabled = scrollLeft <= 0;
-    nextBtn.disabled = scrollLeft + clientWidth >= scrollWidth - 1;
+    const { scrollTop, scrollHeight, clientHeight } = track;
+    prevBtn.disabled = scrollTop <= 0;
+    nextBtn.disabled = scrollTop + clientHeight >= scrollHeight - 1;
   }
 
   track.addEventListener('scroll', updateButtons);

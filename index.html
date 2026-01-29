@@ -232,145 +232,149 @@
       </div>
 
       <div class="noticias-locales-v2">
-        <!-- NUEVA SECCIÓN: Tapa Digital Horizontal -->
-        <div class="digital-covers-horizontal-section">
-          <div class="digital-covers-header">
-            <h3>Tapa Digital</h3>
-            <div class="digital-covers-nav">
-              <button class="dc-nav-btn dc-prev" aria-label="Anterior" type="button">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-              </button>
-              <button class="dc-nav-btn dc-next" aria-label="Siguiente" type="button">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="9 6 15 12 9 18"></polyline>
-                </svg>
-              </button>
-            </div>
+        <!-- CONTENIDO PRINCIPAL (Izquierda) -->
+        <div class="nlv2-main-content">
+          <!-- HERO REORGANIZADO: Main + Miniportada -->
+          <div class="nlv2-hero-layout">
+            <!-- Hero Principal (Izquierda) -->
+            <article id="nlv2-hero-main" class="nlv2-hero-main" aria-live="polite">
+              <p class="nlv2-placeholder">Seleccionaremos automáticamente la nota destacada de la sección.</p>
+            </article>
+
+            <!-- Miniportada (Derecha) -->
+            <aside class="nlv2-miniportada">
+              <h3 class="miniportada-title">Destacadas</h3>
+              <div id="nlv2-hero-secondary" class="nlv2-hero-secondary">
+                <article class="nlv2-secondary-card">
+                  <p class="nlv2-placeholder">Espacio para notas kicker</p>
+                </article>
+                <article class="nlv2-secondary-card">
+                  <p class="nlv2-placeholder">Espacio para notas kicker</p>
+                </article>
+              </div>
+            </aside>
           </div>
-          <div class="digital-covers-scroll-container">
-            <div id="digital-covers-horizontal" class="digital-covers-track">
-              <!-- JavaScript inyectará las tapas aquí -->
-            </div>
-          </div>
-        </div>
 
-        <!-- HERO REORGANIZADO: Main + Miniportada -->
-        <div class="nlv2-hero-layout">
-          <!-- Hero Principal (Izquierda) -->
-          <article id="nlv2-hero-main" class="nlv2-hero-main" aria-live="polite">
-            <p class="nlv2-placeholder">Seleccionaremos automáticamente la nota destacada de la sección.</p>
-          </article>
-          
-          <!-- Miniportada (Derecha) -->
-          <aside class="nlv2-miniportada">
-            <h3 class="miniportada-title">Destacadas</h3>
-            <div id="nlv2-hero-secondary" class="nlv2-hero-secondary">
-              <article class="nlv2-secondary-card">
-                <p class="nlv2-placeholder">Espacio para notas kicker</p>
-              </article>
-              <article class="nlv2-secondary-card">
-                <p class="nlv2-placeholder">Espacio para notas kicker</p>
-              </article>
-            </div>
-          </aside>
-        </div>
+          <!-- CONTENIDO PRINCIPAL DE NOTICIAS -->
+          <div class="noticias-content-wrapper">
 
-        <!-- CONTENIDO PRINCIPAL DE NOTICIAS -->
-        <div class="noticias-content-wrapper">
+            <div class="nlv2-grid-layout">
+              <div class="nlv2-grid-column">
+                <div class="nlv2-filter-bar">
+                  <div class="nlv2-search-row">
+                    <label class="nlv2-search-control" aria-label="Buscar en noticias locales">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                        aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                      </svg>
+                      <input type="search" id="nlv2-filter-search" placeholder="Buscar por título o palabra clave"
+                        autocomplete="off">
+                    </label>
+                  </div>
+                  <div class="nlv2-tags-row">
+                    <div id="category-filters" class="category-filters" role="toolbar"
+                      aria-label="Filtrar por categoría">
+                    </div>
+                    <div class="nlv2-filter-actions">
+                      <div class="nlv2-sort-control" role="radiogroup" aria-label="Ordenar resultados">
+                        <button type="button" class="sort-pill active" data-sort="recent"
+                          aria-pressed="true">Recientes</button>
+                        <button type="button" class="sort-pill" data-sort="oldest"
+                          aria-pressed="false">Históricas</button>
+                      </div>
+                      <div class="nlv2-filter-status">
+                        <span id="nlv2-filter-count">0 resultados</span>
+                        <button id="nlv2-filter-reset" class="nlv2-reset-btn" type="button" hidden>Limpiar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-          <div class="nlv2-grid-layout">
-            <div class="nlv2-grid-column">
-              <div class="nlv2-filter-bar">
-                <div class="nlv2-search-row">
-                  <label class="nlv2-search-control" aria-label="Buscar en noticias locales">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"
+                <div class="nlv2-scroll-wrapper">
+                  <button class="nlv2-scroll-btn" type="button" data-scroll="prev"
+                    aria-label="Desplazar hacia la izquierda" disabled>
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
                       aria-hidden="true">
-                      <circle cx="11" cy="11" r="8"></circle>
-                      <path d="m21 21-4.35-4.35"></path>
+                      <polyline points="15 18 9 12 15 6"></polyline>
                     </svg>
-                    <input type="search" id="nlv2-filter-search" placeholder="Buscar por título o palabra clave"
-                      autocomplete="off">
-                  </label>
+                  </button>
+                  <div id="news-grid" class="cards-grid nlv2-cards-grid" aria-live="polite"></div>
+                  <button class="nlv2-scroll-btn" type="button" data-scroll="next"
+                    aria-label="Desplazar hacia la derecha" disabled>
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                      aria-hidden="true">
+                      <polyline points="9 6 15 12 9 18"></polyline>
+                    </svg>
+                  </button>
                 </div>
-                <div class="nlv2-tags-row">
-                  <div id="category-filters" class="category-filters" role="toolbar" aria-label="Filtrar por categoría">
-                  </div>
-                  <div class="nlv2-filter-actions">
-                    <div class="nlv2-sort-control" role="radiogroup" aria-label="Ordenar resultados">
-                      <button type="button" class="sort-pill active" data-sort="recent"
-                        aria-pressed="true">Recientes</button>
-                      <button type="button" class="sort-pill" data-sort="oldest"
-                        aria-pressed="false">Históricas</button>
-                    </div>
-                    <div class="nlv2-filter-status">
-                      <span id="nlv2-filter-count">0 resultados</span>
-                      <button id="nlv2-filter-reset" class="nlv2-reset-btn" type="button" hidden>Limpiar</button>
-                    </div>
-                  </div>
+                <div class="nlv2-scroll-indicator" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                  aria-valuenow="0">
+                  <span></span>
                 </div>
+                <button id="news-view-more" class="view-more-btn" type="button" hidden>Ver más</button>
               </div>
-
-              <div class="nlv2-scroll-wrapper">
-                <button class="nlv2-scroll-btn" type="button" data-scroll="prev"
-                  aria-label="Desplazar hacia la izquierda" disabled>
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
-                    aria-hidden="true">
-                    <polyline points="15 18 9 12 15 6"></polyline>
-                  </svg>
-                </button>
-                <div id="news-grid" class="cards-grid nlv2-cards-grid" aria-live="polite"></div>
-                <button class="nlv2-scroll-btn" type="button" data-scroll="next" aria-label="Desplazar hacia la derecha"
-                  disabled>
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
-                    aria-hidden="true">
-                    <polyline points="9 6 15 12 9 18"></polyline>
-                  </svg>
-                </button>
-              </div>
-              <div class="nlv2-scroll-indicator" role="progressbar" aria-valuemin="0" aria-valuemax="100"
-                aria-valuenow="0">
-                <span></span>
-              </div>
-              <button id="news-view-more" class="view-more-btn" type="button" hidden>Ver más</button>
+              <section class="nlv2-context-panel-inside">
+                <div class="nlv2-context-header">
+                  <p class="nlv2-context-eyebrow">Contexto</p>
+                  <h3 id="nlv2-context-title">Notas en seguimiento</h3>
+                </div>
+                <div id="nlv2-context-feed" class="nlv2-context-feed">
+                  <p class="nlv2-placeholder">Aquí mostraremos mini tarjetas con datos y enlaces.</p>
+                </div>
+              </section>
+              <script>
+                // Panel flotante Contexto
+                const fabBtn = document.getElementById('context-fab');
+                const fabPanel = document.getElementById('nlv2-context-fab-panel');
+                if (fabBtn && fabPanel) {
+                  fabBtn.addEventListener('click', () => {
+                    const isOpen = !fabPanel.hasAttribute('hidden');
+                    if (isOpen) {
+                      fabPanel.setAttribute('hidden', '');
+                      fabBtn.classList.remove('open');
+                    } else {
+                      fabPanel.removeAttribute('hidden');
+                      fabBtn.classList.add('open');
+                    }
+                  });
+                  document.addEventListener('click', (e) => {
+                    if (!fabPanel.contains(e.target) && !fabBtn.contains(e.target)) {
+                      fabPanel.setAttribute('hidden', '');
+                      fabBtn.classList.remove('open');
+                    }
+                  });
+                }
+              </script>
             </div>
-            <section class="nlv2-context-panel-inside">
-              <div class="nlv2-context-header">
-                <p class="nlv2-context-eyebrow">Contexto</p>
-                <h3 id="nlv2-context-title">Notas en seguimiento</h3>
-              </div>
-              <div id="nlv2-context-feed" class="nlv2-context-feed">
-                <p class="nlv2-placeholder">Aquí mostraremos mini tarjetas con datos y enlaces.</p>
-              </div>
-            </section>
-            <script>
-              // Panel flotante Contexto
-              const fabBtn = document.getElementById('context-fab');
-              const fabPanel = document.getElementById('nlv2-context-fab-panel');
-              if (fabBtn && fabPanel) {
-                fabBtn.addEventListener('click', () => {
-                  const isOpen = !fabPanel.hasAttribute('hidden');
-                  if (isOpen) {
-                    fabPanel.setAttribute('hidden', '');
-                    fabBtn.classList.remove('open');
-                  } else {
-                    fabPanel.removeAttribute('hidden');
-                    fabBtn.classList.add('open');
-                  }
-                });
-                document.addEventListener('click', (e) => {
-                  if (!fabPanel.contains(e.target) && !fabBtn.contains(e.target)) {
-                    fabPanel.setAttribute('hidden', '');
-                    fabBtn.classList.remove('open');
-                  }
-                });
-              }
-            </script>
+          </div>
+        </div> <!-- fin noticias-content-wrapper -->
+      </div> <!-- fin nlv2-main-content -->
+
+      <!-- SIDEBAR DERECHO: Tapa Digital -->
+      <aside class="digital-covers-sidebar-right">
+        <div class="digital-covers-header">
+          <h3>Tapa Digital</h3>
+          <div class="digital-covers-nav">
+            <button class="dc-nav-btn dc-prev" aria-label="Anterior" type="button">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="18 15 12 9 6 15"></polyline>
+              </svg>
+            </button>
+            <button class="dc-nav-btn dc-next" aria-label="Siguiente" type="button">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
           </div>
         </div>
-      </div> <!-- fin noticias-content-wrapper -->
-      </div>
+        <div class="digital-covers-vertical-container">
+          <div id="digital-covers-vertical" class="digital-covers-vertical-track">
+            <!-- JavaScript inyectará las tapas aquí -->
+          </div>
+        </div>
+      </aside>
+      </div> <!-- fin noticias-locales-v2 -->
     </section>
 
     <!-- MÁS LEÍDAS -->
