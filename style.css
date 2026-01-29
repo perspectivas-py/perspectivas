@@ -1439,7 +1439,8 @@ ul {
   display: grid;
   grid-template-columns: 2fr 1.2fr;
   gap: 1.5rem;
-  margin: 1.5rem 0 0;
+  margin: 1.5rem auto 0;
+  max-width: var(--container);
   align-items: stretch;
 }
 
@@ -5756,7 +5757,8 @@ body.cinema-mode .site-footer-new {
   display: grid;
   grid-template-columns: minmax(0, 2.3fr) minmax(0, 0.95fr);
   gap: 1.2rem;
-  margin: 1.5rem 0 0;
+  margin: 1.5rem auto 0;
+  max-width: var(--container);
   align-items: stretch;
   justify-content: center;
 }
