@@ -1660,6 +1660,10 @@ async function initHome() {
     const remainingNoticias = data.noticias.filter(n => (n.slug || n.id) !== (heroArticle.slug || heroArticle.id));
 
     renderSecondary(remainingNoticias);
+
+    // Renderizar portadas digitales con scroll horizontal
+    renderDigitalCovers(data.noticias || []);
+
     initNoticiasLocales(remainingNoticias);
     renderCategoryFilters(remainingNoticias);
     renderTopReads(remainingNoticias);
@@ -2661,6 +2665,79 @@ function initRouter() {
   if (isHome) initHome();
   // if (isNoticia) renderNoticia(); // Deshabilitado para evitar conflicto con noticia-script.js
 }
+
+// ========================================
+// TAPA DIGITAL - HORIZONTAL SCROLL
+// ========================================
+
+function buildDigitalCoverCard(article) {
+  if (!article) return '';
+
+  const title = escapeHtml(article.title || 'Sin título');
+  const href = `/noticia.html?id=${encodeURIComponent(article.slug || article.id)}`;
+  const image = escapeHtml(article.thumbnail || article.image || HERO_IMAGE_FALLBACK);
+  const date = formatDate(article.date || new Date().toISOString());
+
+  return `
+    <a href="${href}" class="digital-cover-card">
+      <img src="${image}" alt="${title}" class="digital-cover-image" loading="lazy" />
+      <div class="digital-cover-content">
+        <div class="digital-cover-date">${date}</div>
+        <h3 class="digital-cover-title">${title}</h3>
+        <div class="digital-cover-cta">Ver portada completa</div>
+      </div>
+    </a>
+  `;
+}
+
+function renderDigitalCovers(articles) {
+  const container = document.getElementById('digital-covers-grid');
+  if (!container) return;
+
+  // Filtrar artículos destacados o con imagen de portada
+  const covers = articles
+    .filter(a => a.thumbnail || a.image)
+    .slice(0, 10); // Mostrar hasta 10 portadas
+
+  if (!covers.length) {
+    container.innerHTML = '<p class="empty-copy">No hay portadas disponibles.</p>';
+    return;
+  }
+
+  container.innerHTML = covers.map(buildDigitalCoverCard).join('');
+  initScrollControls();
+}
+
+function initScrollControls() {
+  const container = document.querySelector('.digital-covers-grid');
+  const leftBtn = document.querySelector('.scroll-btn-left');
+  const rightBtn = document.querySelector('.scroll-btn-right');
+
+  if (!container || !leftBtn || !rightBtn) return;
+
+  const scrollAmount = 340; // Ancho de tarjeta + gap
+
+  leftBtn.addEventListener('click', () => {
+    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+  });
+
+  rightBtn.addEventListener('click', () => {
+    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  });
+
+  // Actualizar estado de botones según posición
+  function updateButtonStates() {
+    const isAtStart = container.scrollLeft <= 0;
+    const isAtEnd = container.scrollLeft >= container.scrollWidth - container.clientWidth - 10;
+
+    leftBtn.disabled = isAtStart;
+    rightBtn.disabled = isAtEnd;
+  }
+
+  container.addEventListener('scroll', updateButtonStates);
+  updateButtonStates();
+}
+
 
 if (document.readyState === 'loading') {
   console.log("📋 readyState='loading', esperando DOMContentLoaded");
