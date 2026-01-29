@@ -1661,8 +1661,8 @@ async function initHome() {
 
     renderSecondary(remainingNoticias);
 
-    // Renderizar portadas digitales con scroll horizontal
-    renderDigitalCovers(data.noticias || []);
+    // Renderizar tapas digitales verticales (datos de muestra)
+    renderDigitalCoversVertical();
 
     initNoticiasLocales(remainingNoticias);
     renderCategoryFilters(remainingNoticias);
@@ -2667,75 +2667,105 @@ function initRouter() {
 }
 
 // ========================================
-// TAPA DIGITAL - HORIZONTAL SCROLL
+// TAPA DIGITAL - SIDEBAR VERTICAL
 // ========================================
 
-function buildDigitalCoverCard(article) {
-  if (!article) return '';
+// Datos de muestra para tapas digitales (NO artículos reales)
+const DIGITAL_COVERS_SAMPLE = [
+  {
+    id: 'tapa-2026-01-27',
+    date: '2026-01-27',
+    title: 'Economía Verde en el Chaco',
+    image: 'assets/tapa_perspectivas_01_1769691542717.png',
+    edition: 'Lunes, 27 de Enero de 2026'
+  },
+  {
+    id: 'tapa-2026-01-28',
+    date: '2026-01-28',
+    title: 'Estrategias de Ahorro',
+    image: 'assets/tapa_perspectivas_02_1769691601592.png',
+    edition: 'Martes, 28 de Enero de 2026'
+  },
+  {
+    id: 'tapa-2026-01-29',
+    date: '2026-01-29',
+    title: 'Nueva Ley Bancaria',
+    image: 'assets/tapa_perspectivas_03_1769691626948.png',
+    edition: 'Miércoles, 29 de Enero de 2026'
+  }
+];
 
-  const title = escapeHtml(article.title || 'Sin título');
-  const href = `/noticia.html?id=${encodeURIComponent(article.slug || article.id)}`;
-  const image = escapeHtml(article.thumbnail || article.image || HERO_IMAGE_FALLBACK);
-  const date = formatDate(article.date || new Date().toISOString());
+function buildDigitalCoverVerticalCard(cover) {
+  if (!cover) return '';
+
+  const title = escapeHtml(cover.title || 'Sin título');
+  const image = escapeHtml(cover.image || HERO_IMAGE_FALLBACK);
+  const edition = escapeHtml(cover.edition || '');
 
   return `
-    <a href="${href}" class="digital-cover-card">
-      <img src="${image}" alt="${title}" class="digital-cover-image" loading="lazy" />
-      <div class="digital-cover-content">
-        <div class="digital-cover-date">${date}</div>
-        <h3 class="digital-cover-title">${title}</h3>
-        <div class="digital-cover-cta">Ver portada completa</div>
+    <div class="digital-cover-vertical-card" data-cover-id="${cover.id}">
+      <img src="${image}" alt="Tapa ${edition}" class="digital-cover-vertical-image" loading="lazy" />
+      <div class="digital-cover-vertical-info">
+        <div class="digital-cover-vertical-date">${edition}</div>
+        <div class="digital-cover-vertical-label">Ver edición completa →</div>
       </div>
-    </a>
+    </div>
   `;
 }
 
-function renderDigitalCovers(articles) {
-  const container = document.getElementById('digital-covers-grid');
+function renderDigitalCoversVertical() {
+  const container = document.getElementById('digital-covers-vertical');
   if (!container) return;
 
-  // Filtrar artículos destacados o con imagen de portada
-  const covers = articles
-    .filter(a => a.thumbnail || a.image)
-    .slice(0, 10); // Mostrar hasta 10 portadas
+  container.innerHTML = DIGITAL_COVERS_SAMPLE
+    .map(buildDigitalCoverVerticalCard)
+    .join('');
 
-  if (!covers.length) {
-    container.innerHTML = '<p class="empty-copy">No hay portadas disponibles.</p>';
-    return;
-  }
-
-  container.innerHTML = covers.map(buildDigitalCoverCard).join('');
-  initScrollControls();
+  // Agregar event listeners para modal
+  container.querySelectorAll('.digital-cover-vertical-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      const coverId = card.dataset.coverId;
+      const cover = DIGITAL_COVERS_SAMPLE.find(c => c.id === coverId);
+      if (cover) {
+        openCoverModal(cover);
+      }
+    });
+  });
 }
 
-function initScrollControls() {
-  const container = document.querySelector('.digital-covers-grid');
-  const leftBtn = document.querySelector('.scroll-btn-left');
-  const rightBtn = document.querySelector('.scroll-btn-right');
+function openCoverModal(cover) {
+  // Crear modal para mostrar la tapa ampliada
+  const modal = document.createElement('div');
+  modal.className = 'cover-modal';
+  modal.innerHTML = `
+    <div class="cover-modal-overlay"></div>
+    <div class="cover-modal-content">
+      <button class="cover-modal-close" aria-label="Cerrar">×</button>
+      <img src="${escapeHtml(cover.image)}" alt="Tapa ${escapeHtml(cover.edition)}" />
+      <p class="cover-modal-caption">${escapeHtml(cover.edition)}</p>
+    </div>
+  `;
 
-  if (!container || !leftBtn || !rightBtn) return;
+  document.body.appendChild(modal);
 
-  const scrollAmount = 340; // Ancho de tarjeta + gap
+  // Event listeners para cerrar
+  const closeBtn = modal.querySelector('.cover-modal-close');
+  const overlay = modal.querySelector('.cover-modal-overlay');
 
-  leftBtn.addEventListener('click', () => {
-    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-  });
+  const closeModal = () => modal.remove();
 
-  rightBtn.addEventListener('click', () => {
-    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-  });
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', closeModal);
 
-  // Actualizar estado de botones según posición
-  function updateButtonStates() {
-    const isAtStart = container.scrollLeft <= 0;
-    const isAtEnd = container.scrollLeft >= container.scrollWidth - container.clientWidth - 10;
-
-    leftBtn.disabled = isAtStart;
-    rightBtn.disabled = isAtEnd;
-  }
-
-  container.addEventListener('scroll', updateButtonStates);
-  updateButtonStates();
+  // Cerrar con tecla ESC
+  const handleEscape = (e) => {
+    if (e.key === 'Escape') {
+      closeModal();
+      document.removeEventListener('keydown', handleEscape);
+    }
+  };
+  document.addEventListener('keydown', handleEscape);
 }
 
 
