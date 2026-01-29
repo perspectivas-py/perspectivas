@@ -7092,3 +7092,190 @@ body.cinema-mode .site-footer-new {
     transform: translateX(0);
   }
 }
+
+/* ========================================
+   EDITORIAL TYPOGRAPHY ENHANCEMENTS
+   ======================================== */
+
+/* Hero Title - Maximum Impact */
+.hero-title {
+  font-weight: 900 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.05 !important;
+}
+
+.hero .hero-title {
+  font-weight: 900 !important;
+  letter-spacing: -0.025em !important;
+}
+
+/* Section Headers - Strong Hierarchy */
+.section-header h2 {
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.secondary-news-title {
+  font-weight: 800 !important;
+  letter-spacing: -0.015em !important;
+}
+
+/* Card Titles - Editorial Weight */
+.card h3 {
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.25 !important;
+}
+
+.secondary-card h3 {
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.featured-card h3 {
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* NLV2 Cards Grid */
+.nlv2-cards-grid .card h3 {
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* About Section */
+.about-copy h2 {
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* Article Headers */
+.article-header h1 {
+  font-weight: 900 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.1 !important;
+}
+
+/* Mega Menu Cards */
+.mega-card h4 {
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* Program Section */
+.program-section-header h2 {
+  font-weight: 900 !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* ========================================
+   BREADCRUMB NAVIGATION
+   ======================================== */
+
+.breadcrumb-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.75rem 0;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.breadcrumb-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb-nav a:hover {
+  color: var(--accent-blue);
+}
+
+.breadcrumb-nav .breadcrumb-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.breadcrumb-nav .breadcrumb-icon svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
+
+.breadcrumb-separator {
+  color: #cbd5e1;
+  font-size: 0.9rem;
+  user-select: none;
+}
+
+.breadcrumb-current {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+/* Breadcrumb Category Colors */
+.breadcrumb-nav a[data-category="agro"]:hover {
+  color: var(--cat-agro-primary);
+}
+
+.breadcrumb-nav a[data-category="mercados"]:hover {
+  color: var(--cat-mercados-primary);
+}
+
+.breadcrumb-nav a[data-category="macro"]:hover {
+  color: var(--cat-macro-primary);
+}
+
+.breadcrumb-nav a[data-category="empresas"]:hover {
+  color: var(--cat-empresas-primary);
+}
+
+.breadcrumb-nav a[data-category="locales"]:hover {
+  color: var(--cat-locales-primary);
+}
+
+.breadcrumb-nav a[data-category="politica"]:hover {
+  color: var(--cat-politica-primary);
+}
+
+.breadcrumb-nav a[data-category="regional"]:hover {
+  color: var(--cat-regional-primary);
+}
+
+.breadcrumb-nav a[data-category="finanzas"]:hover {
+  color: var(--cat-finanzas-primary);
+}
+
+/* Responsive Breadcrumbs */
+@media (max-width: 640px) {
+  .breadcrumb-nav {
+    font-size: 0.8rem;
+    gap: 0.35rem;
+  }
+
+  .breadcrumb-nav .breadcrumb-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Hide middle items on very small screens, keep first and last */
+  .breadcrumb-nav .breadcrumb-item:not(:first-child):not(:last-child):not(:nth-last-child(2)) {
+    display: none;
+  }
+
+  .breadcrumb-nav .breadcrumb-item:nth-last-child(3) .breadcrumb-separator::before {
+    content: '...';
+    margin: 0 0.25rem;
+  }
+}

@@ -419,6 +419,91 @@ function buildHeroMarkup(article) {
   `;
 }
 
+// ========================================
+// BREADCRUMB NAVIGATION BUILDER
+// ========================================
+
+const CATEGORY_ICONS = {
+  agro: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M12 2c-3 0-5 2-5 5s2 5 5 5M12 2c3 0 5 2 5 5s-2 5-5 5M12 12c-3 0-5 2-5 5s2 5 5 5M12 12c3 0 5 2 5 5s-2 5-5 5"/></svg>`,
+  mercados: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+  macro: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>`,
+  empresas: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`,
+  locales: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
+  politica: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
+  regional: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+  finanzas: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+  programa: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>`,
+  analisis: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`,
+  home: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`
+};
+
+function getCategoryIcon(category) {
+  const normalized = normalizeCategoryKey(category);
+  for (const [key, icon] of Object.entries(CATEGORY_ICONS)) {
+    if (normalized.includes(key)) return icon;
+  }
+  return CATEGORY_ICONS.analisis; // default
+}
+
+function buildBreadcrumbs(article) {
+  if (!article) return '';
+
+  const category = article.category || 'actualidad';
+  const normalizedCat = normalizeCategoryKey(category);
+  const categoryLabel = resolveCategoryLabel(category);
+  const categoryIcon = getCategoryIcon(category);
+
+  // Determine parent section (Análisis or Noticias)
+  const isAnalisis = ['macro', 'politica', 'regional', 'economia', 'analisis'].some(key => normalizedCat.includes(key));
+  const parentSection = isAnalisis ? 'Análisis' : 'Noticias';
+  const parentHref = isAnalisis ? '#analisis' : '#noticias';
+
+  const items = [
+    {
+      label: 'Inicio',
+      href: 'index.html',
+      icon: CATEGORY_ICONS.home,
+      category: 'home'
+    },
+    {
+      label: parentSection,
+      href: parentHref,
+      icon: isAnalisis ? CATEGORY_ICONS.analisis : CATEGORY_ICONS.locales,
+      category: normalizedCat
+    },
+    {
+      label: categoryLabel,
+      href: `categoria.html?cat=${encodeURIComponent(category)}`,
+      icon: categoryIcon,
+      category: normalizedCat
+    }
+  ];
+
+  const breadcrumbItems = items.map((item, index) => {
+    const isLast = index === items.length - 1;
+    const iconHtml = `<span class="breadcrumb-icon">${item.icon}</span>`;
+    const separator = isLast ? '' : '<span class="breadcrumb-separator">›</span>';
+
+    return `
+      <span class="breadcrumb-item">
+        <a href="${item.href}" data-category="${item.category}">
+          ${iconHtml}
+          ${escapeHtml(item.label)}
+        </a>
+        ${separator}
+      </span>
+    `;
+  }).join('');
+
+  return `
+    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+      ${breadcrumbItems}
+      <span class="breadcrumb-current">${escapeHtml(truncateCopy(article.title || 'Artículo', 50))}</span>
+    </nav>
+  `;
+}
+
+
 const FX_RETAIL_SPEC = {
   currency: "Dólar minorista (casas de cambio)",
   code: "USD MIN",
