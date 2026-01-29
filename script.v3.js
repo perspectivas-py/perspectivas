@@ -1661,8 +1661,8 @@ async function initHome() {
 
     renderSecondary(remainingNoticias);
 
-    // Renderizar tapas digitales verticales (datos de muestra)
-    renderDigitalCoversVertical();
+    // Renderizar tapas digitales en sidebar (datos de muestra)
+    renderDigitalCoversSidebar();
 
     initNoticiasLocales(remainingNoticias);
     renderCategoryFilters(remainingNoticias);
@@ -1679,16 +1679,29 @@ async function initHome() {
   }
 }
 // --- GENERADOR UNIVERSAL DE TARJETAS ---
-// Esta función se usa cuando se renderizan listas dinámicas
-function cardHTML(item) {
+function buildNoticiaCard(item, variant = 'standard') {
+  if (!item) return '';
+  const kicker = (item.kicker || item.category || "Noticia").toUpperCase();
+  const summary = truncateCopy(item.summary || item.description || "", 120);
+  const href = `/noticia.html?id=${encodeURIComponent(item.slug || item.id)}`;
+
   return `
-    <div class="card">
-      <div class="card-img-container">
-        <img src="${item.thumbnail}" alt="${item.title}">
-      </div>
-      <h3>${item.title}</h3>
-      <div class="card-meta">${formatDate(item.date)}</div>
-    </div>
+    <article class="card ${variant === 'large' ? 'card-large' : ''}" data-category="${item.category}">
+      <a href="${href}" class="card-link-wrapper">
+        <div class="card-img-container">
+          <img src="${item.thumbnail || HERO_IMAGE_FALLBACK}" alt="${escapeHtml(item.title)}" loading="lazy">
+        </div>
+        <div class="card-body">
+          ${variant === 'large' ? `<span class="card-kicker">${escapeHtml(kicker)}</span>` : ''}
+          <h3 class="card-title">${escapeHtml(item.title)}</h3>
+          ${variant === 'large' ? `<p class="card-excerpt">${escapeHtml(summary)}</p>` : ''}
+          ${variant === 'large' ? `
+          <div class="card-meta">
+            <time>${formatDate(item.date)}</time>
+          </div>` : ''}
+        </div>
+      </a>
+    </article>
   `;
 }
 
@@ -1882,7 +1895,6 @@ function updateNoticiasViewMore() {
 
 function renderNoticiasLocales() {
   const heroMain = document.getElementById("nlv2-hero-main");
-  const heroSecondary = document.getElementById("nlv2-hero-secondary");
   const gridContainer = document.getElementById("news-grid");
   const contextFeed = document.getElementById("nlv2-context-feed");
 
@@ -1890,82 +1902,67 @@ function renderNoticiasLocales() {
 
   const source = noticiasLocalesState.source || [];
   if (!source.length) {
-    if (heroMain) heroMain.innerHTML = `<p class="nlv2-placeholder">Aún no hay notas destacadas para esta sección.</p>`;
-    if (heroSecondary) heroSecondary.innerHTML = `<article class="nlv2-secondary-card"><p class="nlv2-placeholder">Agregá más publicaciones para ver recomendaciones.</p></article>`;
+    if (heroMain) heroMain.innerHTML = `<p class="nlv2-placeholder">No hay noticias locales disponibles.</p>`;
     gridContainer.innerHTML = `<p class="empty-copy">No encontramos noticias en esta categoría.</p>`;
-    if (contextFeed) contextFeed.innerHTML = `<p class="nlv2-placeholder">Sin historias relacionadas por ahora.</p>`;
+    if (contextFeed) contextFeed.innerHTML = `<p class="nlv2-placeholder">Sin historias relacionadas.</p>`;
     updateNoticiasViewMore();
     return;
   }
 
+  // 1. Seleccionar destacados
   const { main, secondary, remainder } = selectSectionHeroArticles(source);
+  const featured = main;
 
-  if (heroMain && main) {
-    const kickerLabel = (main.kicker || main.category || "Actualidad").toUpperCase();
-    const summary = truncateCopy(main.summary_short || main.summary || main.description || "", 220);
-    heroMain.style.backgroundImage = `url(${main.thumbnail || HERO_IMAGE_FALLBACK})`;
+  // En el grid mostramos el resto. En el nuevo diseño no hay "secondary" aparte,
+  // así que unimos secondary y remainder para el grid.
+  const gridSource = [...secondary, ...remainder];
+  const gridItems = gridSource.slice(0, noticiasLocalesState.visible);
+
+  // 2. Renderizar Artículo Destacado (65% Column)
+  if (heroMain && featured) {
+    const kicker = (featured.kicker || featured.category || "Destacado").toUpperCase();
+    const summary = truncateCopy(featured.summary || featured.description || "", 260);
+
     heroMain.innerHTML = `
-      <div class="nlv2-hero-kicker">${escapeHtml(kickerLabel)}</div>
-      <h3>${escapeHtml(main.title || "Noticia principal")}</h3>
-      ${summary ? `<p>${escapeHtml(summary)}</p>` : ""}
-      <div class="nlv2-meta-row">
-        <span>${escapeHtml(formatDate(main.date))}</span>
-        <a class="btn-link" href="/noticia.html?id=${encodeURIComponent(main.slug || main.id)}">Leer informe →</a>
-      </div>`;
-  } else if (heroMain) {
-    heroMain.innerHTML = `<p class="nlv2-placeholder">Seleccionaremos automáticamente la nota destacada de la sección.</p>`;
-  }
-
-  if (heroSecondary) {
-    if (secondary.length) {
-      heroSecondary.innerHTML = secondary.map(article => {
-        const kickerLabel = (article.kicker || article.category || "Noticias").toUpperCase();
-        const summary = truncateCopy(article.summary_short || article.summary || article.description || "", 160);
-        return `
-          <article class="nlv2-secondary-card">
-            <div class="nlv2-meta-row">
-              <span>${escapeHtml(kickerLabel)}</span>
-              <span>·</span>
-              <span>${escapeHtml(formatDate(article.date))}</span>
-            </div>
-            <h4>${escapeHtml(article.title || "")}</h4>
-            ${summary ? `<p>${escapeHtml(summary)}</p>` : ""}
-            <a class="btn-link" href="/noticia.html?id=${encodeURIComponent(article.slug || article.id)}">Ver nota</a>
-          </article>`;
-      }).join("");
-    } else {
-      heroSecondary.innerHTML = `<article class="nlv2-secondary-card"><p class="nlv2-placeholder">Espacio para notas kicker.</p></article>`;
-    }
-  }
-
-  const gridLimit = Math.min(noticiasLocalesState.visible, remainder.length);
-  const gridItems = remainder.slice(0, gridLimit);
-
-  if (gridItems.length) {
-    gridContainer.innerHTML = gridItems.map(item => `
-      <a href="/noticia.html?id=${encodeURIComponent(item.slug || item.id)}" class="card">
-        <div class="card-img-container">
-          <img src="${item.thumbnail || HERO_IMAGE_FALLBACK}" alt="${escapeHtml(item.title || "Noticia")}" loading="lazy">
+      <div class="card-image-wrapper">
+        <img src="${featured.thumbnail || HERO_IMAGE_FALLBACK}" alt="${escapeHtml(featured.title)}" loading="lazy" />
+      </div>
+      <div class="card-content">
+        <span class="card-kicker">${escapeHtml(kicker)}</span>
+        <h2 class="card-title">${escapeHtml(featured.title)}</h2>
+        <p class="card-excerpt">${escapeHtml(summary)}</p>
+        <div class="card-meta">
+          <time>${formatDate(featured.date)}</time>
+          <a href="/noticia.html?id=${encodeURIComponent(featured.slug || featured.id)}" class="btn-read-more">Ver reporte completo</a>
         </div>
-        <h3>${escapeHtml(item.title || "Noticia")}</h3>
-        <div class="card-meta">${escapeHtml(formatDate(item.date))}</div>
-      </a>
-    `).join("");
-  } else {
-    gridContainer.innerHTML = `<p class="empty-copy">No hay más noticias en la categoría seleccionada.</p>`;
+      </div>
+    `;
   }
 
+  // 3. Renderizar Grid de Noticias (Abajo)
+  gridContainer.innerHTML = gridItems
+    .map((noticia, idx) => buildNoticiaCard(noticia, 'standard'))
+    .join('');
+
+  // 4. Renderizar Context Feed (Sidebar)
   if (contextFeed) {
-    const contextItems = remainder.slice(0, 4);
-    contextFeed.innerHTML = contextItems.length
-      ? contextItems.map(item => `
-          <div class="nlv2-context-item">
-            <h4>${escapeHtml(item.title || "Noticia")}</h4>
-            <p>${escapeHtml(truncateCopy(item.summary_short || item.summary || item.description || "", 150))}</p>
-            <a class="btn-link" href="/noticia.html?id=${encodeURIComponent(item.slug || item.id)}">Seguir historia</a>
+    // Usar una muestra de noticias para el contexto
+    const contextItems = source.slice(1, 4); // Ignoramos el principal para el contexto
+    if (contextItems.length) {
+      contextFeed.innerHTML = contextItems.map(item => `
+        <article class="context-mini-card">
+          <div class="context-mini-dot"></div>
+          <div class="context-mini-body">
+            <h4 class="context-mini-title">
+              <a href="/noticia.html?id=${encodeURIComponent(item.slug || item.id)}">${escapeHtml(item.title)}</a>
+            </h4>
+            <time class="context-mini-date">${formatDate(item.date)}</time>
           </div>
-        `).join("")
-      : `<p class="nlv2-placeholder">Agregá más historias para ver notas en seguimiento.</p>`;
+        </article>
+      `).join('');
+    } else {
+      contextFeed.innerHTML = `<p class="nlv2-placeholder">Sin historias por el momento.</p>`;
+    }
   }
 
   refreshNoticiasScroller();
@@ -2667,7 +2664,7 @@ function initRouter() {
 }
 
 // ========================================
-// TAPA DIGITAL - SIDEBAR VERTICAL
+// TAPA DIGITAL - SIDEBAR WIDGET (Horizontal)
 // ========================================
 
 // Datos de muestra para tapas digitales (NO artículos reales)
@@ -2695,15 +2692,14 @@ const DIGITAL_COVERS_SAMPLE = [
   }
 ];
 
-function buildDigitalCoverVerticalCard(cover) {
+function buildDigitalCoverHorizontalCard(cover) {
   if (!cover) return '';
 
-  const title = escapeHtml(cover.title || 'Sin título');
   const image = escapeHtml(cover.image || HERO_IMAGE_FALLBACK);
   const edition = escapeHtml(cover.edition || '');
 
   return `
-    <article class="digital-cover-card-vertical" data-cover-id="${cover.id}">
+    <article class="digital-cover-card-horizontal" data-cover-id="${cover.id}">
       <div class="digital-cover-image-wrapper">
         <img src="${image}" alt="Tapa ${edition}" class="digital-cover-image" loading="lazy" />
       </div>
@@ -2714,16 +2710,16 @@ function buildDigitalCoverVerticalCard(cover) {
   `;
 }
 
-function renderDigitalCoversVertical() {
-  const container = document.getElementById('digital-covers-vertical');
+function renderDigitalCoversSidebar() {
+  const container = document.getElementById('digital-covers-horizontal');
   if (!container) return;
 
   container.innerHTML = DIGITAL_COVERS_SAMPLE
-    .map(buildDigitalCoverVerticalCard)
+    .map(buildDigitalCoverHorizontalCard)
     .join('');
 
   // Agregar event listeners para modal
-  container.querySelectorAll('.digital-cover-card-vertical').forEach(card => {
+  container.querySelectorAll('.digital-cover-card-horizontal').forEach(card => {
     card.addEventListener('click', (e) => {
       e.preventDefault();
       const coverId = card.dataset.coverId;
@@ -2734,39 +2730,82 @@ function renderDigitalCoversVertical() {
     });
   });
 
-  // Inicializar controles de navegación vertical
-  initDigitalCoversVerticalNavigation();
+  // Inicializar controles de navegación horizontal
+  initDigitalCoversSidebarNavigation();
 }
 
-function initDigitalCoversVerticalNavigation() {
-  const track = document.querySelector('.digital-covers-vertical-track');
-  const prevBtn = document.querySelector('.dc-prev');
-  const nextBtn = document.querySelector('.dc-next');
+function initDigitalCoversSidebarNavigation() {
+  const track = document.querySelector('.digital-covers-track');
+  const prevBtn = document.querySelector('.digital-covers-nav .dc-prev');
+  const nextBtn = document.querySelector('.digital-covers-nav .dc-next');
+  const widget = document.querySelector('.digital-covers-sidebar-widget');
 
-  if (!track || !prevBtn || !nextBtn) return;
+  if (!track || !prevBtn || !nextBtn || !widget) return;
 
-  // Scroll vertical al hacer click en botones
+  const cards = Array.from(track.querySelectorAll('.digital-cover-card-horizontal'));
+  let currentIndex = 0;
+
+  // Create pagination dots
+  const paginationContainer = document.createElement('div');
+  paginationContainer.className = 'digital-covers-pagination';
+
+  cards.forEach((_, index) => {
+    const dot = document.createElement('button');
+    dot.className = 'dc-pagination-dot';
+    dot.setAttribute('aria-label', `Ver tapa ${index + 1}`);
+    if (index === 0) dot.classList.add('active');
+
+    dot.addEventListener('click', () => {
+      currentIndex = index;
+      scrollToIndex(currentIndex);
+    });
+
+    paginationContainer.appendChild(dot);
+  });
+
+  widget.appendChild(paginationContainer);
+
+  function scrollToIndex(index) {
+    const cardWidth = track.clientWidth;
+    track.scrollTo({ left: cardWidth * index, behavior: 'smooth' });
+  }
+
+  function updateActiveState() {
+    const cardWidth = track.clientWidth;
+    const scrollPosition = track.scrollLeft;
+    currentIndex = Math.round(scrollPosition / cardWidth);
+
+    // Update pagination dots
+    const dots = paginationContainer.querySelectorAll('.dc-pagination-dot');
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentIndex);
+    });
+
+    // Update navigation buttons
+    prevBtn.disabled = currentIndex <= 0;
+    nextBtn.disabled = currentIndex >= cards.length - 1;
+  }
+
   prevBtn.addEventListener('click', () => {
-    track.scrollBy({ top: -250, behavior: 'smooth' });
+    if (currentIndex > 0) {
+      currentIndex--;
+      scrollToIndex(currentIndex);
+    }
   });
 
   nextBtn.addEventListener('click', () => {
-    track.scrollBy({ top: 250, behavior: 'smooth' });
+    if (currentIndex < cards.length - 1) {
+      currentIndex++;
+      scrollToIndex(currentIndex);
+    }
   });
 
-  // Actualizar estado de botones según posición de scroll
-  function updateButtons() {
-    const { scrollTop, scrollHeight, clientHeight } = track;
-    prevBtn.disabled = scrollTop <= 0;
-    nextBtn.disabled = scrollTop + clientHeight >= scrollHeight - 1;
-  }
-
-  track.addEventListener('scroll', updateButtons);
-  updateButtons(); // Estado inicial
+  track.addEventListener('scroll', updateActiveState);
+  updateActiveState();
 }
 
+
 function openCoverModal(cover) {
-  // Crear modal para mostrar la tapa ampliada
   const modal = document.createElement('div');
   modal.className = 'cover-modal';
   modal.innerHTML = `
@@ -2780,7 +2819,6 @@ function openCoverModal(cover) {
 
   document.body.appendChild(modal);
 
-  // Event listeners para cerrar
   const closeBtn = modal.querySelector('.cover-modal-close');
   const overlay = modal.querySelector('.cover-modal-overlay');
 
@@ -2789,7 +2827,6 @@ function openCoverModal(cover) {
   closeBtn.addEventListener('click', closeModal);
   overlay.addEventListener('click', closeModal);
 
-  // Cerrar con tecla ESC
   const handleEscape = (e) => {
     if (e.key === 'Escape') {
       closeModal();
