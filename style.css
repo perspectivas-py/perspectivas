@@ -7283,98 +7283,244 @@ body.cinema-mode .site-footer-new {
 }
 
 /* ========================================
-   TAPA DIGITAL - SIDEBAR VERTICAL
+   TAPA DIGITAL - HORIZONTAL SCROLL
    ======================================== */
 
-/* Grid de 2 columnas para Noticias Locales */
+/* Contenedor principal de la sección */
 .noticias-locales-v2 {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 2rem;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 }
 
-/* Sidebar de Tapas Digitales */
-.digital-covers-sidebar {
-  position: sticky;
-  top: 80px;
-  max-height: calc(100vh - 100px);
-  overflow-y: auto;
+/* Sección de Tapas Digitales Horizontal */
+.digital-covers-horizontal-section {
+  margin: 0;
+  padding: 2rem;
+  background: var(--bg-secondary);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .digital-covers-horizontal-section {
+  background: rgba(30, 41, 59, 0.4);
+  border-color: rgba(71, 85, 105, 0.3);
+}
+
+/* Header con título y controles */
+.digital-covers-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.digital-covers-header h3 {
+  font-family: var(--font-headline);
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+/* Botones de navegación */
+.digital-covers-nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dc-nav-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.dc-nav-btn:hover:not(:disabled) {
+  background: var(--color-accent);
+  color: white;
+  border-color: var(--color-accent);
+  transform: scale(1.1);
+}
+
+.dc-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.dc-nav-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Contenedor de scroll */
+.digital-covers-scroll-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.digital-covers-track {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 0.5rem;
 }
 
-.digital-covers-sidebar::-webkit-scrollbar {
+.digital-covers-track::-webkit-scrollbar {
   display: none;
 }
 
-.sidebar-title {
+/* Tarjetas de tapa horizontal */
+.digital-cover-card-horizontal {
+  flex: 0 0 280px;
+  scroll-snap-align: start;
+  background: var(--bg-primary);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: block;
+}
+
+[data-theme="dark"] .digital-cover-card-horizontal {
+  background: rgba(30, 41, 59, 0.6);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.digital-cover-card-horizontal:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .digital-cover-card-horizontal:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+.digital-cover-image-wrapper {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+[data-theme="dark"] .digital-cover-image-wrapper {
+  background: #1e293b;
+}
+
+.digital-cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.digital-cover-info {
+  padding: 1rem;
+  text-align: center;
+  background: var(--bg-secondary);
+}
+
+.digital-cover-date {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* ========================================
+   HERO LAYOUT - MAIN + MINIPORTADA
+   ======================================== */
+
+/* Layout de 2 columnas: Hero + Miniportada */
+.nlv2-hero-layout {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* Hero principal */
+.nlv2-hero-main {
+  background: linear-gradient(135deg, rgba(8, 24, 46, 0.92), rgba(9, 62, 104, 0.82));
+  border-radius: 16px;
+  padding: clamp(1.5rem, 2vw, 2.5rem);
+  min-height: 500px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Miniportada */
+.nlv2-miniportada {
+  background: var(--bg-secondary);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+}
+
+[data-theme="dark"] .nlv2-miniportada {
+  background: rgba(30, 41, 59, 0.4);
+  border-color: rgba(71, 85, 105, 0.3);
+}
+
+.miniportada-title {
   font-family: var(--font-headline);
   font-size: 1.3rem;
   font-weight: 800;
+  margin: 0 0 1.25rem 0;
   letter-spacing: -0.01em;
-  margin-bottom: 1rem;
   color: var(--text-primary);
   border-bottom: 3px solid var(--color-accent);
   padding-bottom: 0.5rem;
 }
 
-/* Contenedor Vertical de Tapas */
-.digital-covers-vertical {
+.nlv2-hero-secondary {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
+  flex: 1;
 }
 
-/* Tarjeta de Tapa Vertical */
-.digital-cover-vertical-card {
+.nlv2-secondary-card {
+  padding: 1rem;
   background: var(--bg-primary);
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
   cursor: pointer;
-  display: block;
 }
 
-[data-theme="dark"] .digital-cover-vertical-card {
-  background: rgba(30, 41, 59, 0.6);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+[data-theme="dark"] .nlv2-secondary-card {
+  background: rgba(15, 23, 42, 0.6);
 }
 
-.digital-cover-vertical-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-}
-
-[data-theme="dark"] .digital-cover-vertical-card:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-}
-
-.digital-cover-vertical-image {
-  width: 100%;
-  aspect-ratio: 3/4;
-  object-fit: cover;
-  display: block;
-}
-
-.digital-cover-vertical-info {
-  padding: 0.75rem;
-  background: var(--bg-secondary);
-}
-
-.digital-cover-vertical-date {
-  font-size: 0.7rem;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 600;
-}
-
-.digital-cover-vertical-label {
-  font-size: 0.75rem;
-  color: var(--color-accent);
-  font-weight: 600;
-  margin-top: 0.25rem;
+.nlv2-secondary-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: var(--color-accent);
 }
 
 /* Wrapper para contenido de noticias */
@@ -7393,6 +7539,16 @@ body.cinema-mode .site-footer-new {
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .cover-modal-overlay {
@@ -7401,7 +7557,8 @@ body.cinema-mode .site-footer-new {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.9);
+  cursor: pointer;
 }
 
 .cover-modal-content {
@@ -7409,9 +7566,10 @@ body.cinema-mode .site-footer-new {
   max-width: 90%;
   max-height: 90%;
   background: white;
-  border-radius: 8px;
-  padding: 1rem;
+  border-radius: 16px;
+  padding: 1.5rem;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  z-index: 1;
 }
 
 [data-theme="dark"] .cover-modal-content {
@@ -7423,6 +7581,7 @@ body.cinema-mode .site-footer-new {
   max-height: 80vh;
   display: block;
   margin: 0 auto;
+  border-radius: 8px;
 }
 
 .cover-modal-close {
@@ -7441,6 +7600,7 @@ body.cinema-mode .site-footer-new {
   align-items: center;
   justify-content: center;
   transition: transform 0.2s ease;
+  z-index: 2;
 }
 
 .cover-modal-close:hover {
@@ -7449,52 +7609,77 @@ body.cinema-mode .site-footer-new {
 
 .cover-modal-caption {
   text-align: center;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
   font-size: 0.9rem;
   color: var(--text-secondary);
+  font-weight: 600;
 }
 
-/* Responsive */
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
 @media (max-width: 1024px) {
-  .noticias-locales-v2 {
+  /* Hero layout cambia a columna única */
+  .nlv2-hero-layout {
     grid-template-columns: 1fr;
   }
 
-  .digital-covers-sidebar {
-    position: static;
-    max-height: none;
-    margin-bottom: 2rem;
+  .nlv2-hero-main {
+    min-height: 400px;
   }
 
-  .digital-covers-vertical {
-    flex-direction: row;
-    overflow-x: auto;
-    gap: 1rem;
-    padding-bottom: 1rem;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
+  /* Tapas más pequeñas en tablet */
+  .digital-cover-card-horizontal {
+    flex: 0 0 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Sección de tapas más compacta */
+  .digital-covers-horizontal-section {
+    padding: 1.5rem;
   }
 
-  .digital-covers-vertical::-webkit-scrollbar {
+  .digital-covers-header h3 {
+    font-size: 1.25rem;
+  }
+
+  /* Ocultar flechas en móvil (solo gestos táctiles) */
+  .digital-covers-nav {
     display: none;
   }
 
-  .digital-cover-vertical-card {
-    flex: 0 0 200px;
-    scroll-snap-align: start;
+  /* Tapas aún más pequeñas en móvil */
+  .digital-cover-card-horizontal {
+    flex: 0 0 180px;
+  }
+
+  /* Hero más compacto */
+  .nlv2-hero-main {
+    min-height: 300px;
+  }
+
+  /* Miniportada más compacta */
+  .nlv2-miniportada {
+    padding: 1rem;
+  }
+
+  .miniportada-title {
+    font-size: 1.1rem;
   }
 }
 
 @media (max-width: 480px) {
-  .digital-cover-vertical-card {
-    flex: 0 0 180px;
+  .digital-cover-card-horizontal {
+    flex: 0 0 160px;
   }
 
-  .digital-cover-vertical-info {
-    padding: 0.5rem;
+  .digital-cover-info {
+    padding: 0.75rem;
   }
 
-  .sidebar-title {
-    font-size: 1.1rem;
+  .digital-cover-date {
+    font-size: 0.75rem;
   }
 }

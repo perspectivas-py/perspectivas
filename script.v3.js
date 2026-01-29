@@ -1662,7 +1662,7 @@ async function initHome() {
     renderSecondary(remainingNoticias);
 
     // Renderizar tapas digitales verticales (datos de muestra)
-    renderDigitalCoversVertical();
+    renderDigitalCoversHorizontal();
 
     initNoticiasLocales(remainingNoticias);
     renderCategoryFilters(remainingNoticias);
@@ -2667,7 +2667,7 @@ function initRouter() {
 }
 
 // ========================================
-// TAPA DIGITAL - SIDEBAR VERTICAL
+// TAPA DIGITAL - HORIZONTAL SCROLL
 // ========================================
 
 // Datos de muestra para tapas digitales (NO artículos reales)
@@ -2695,7 +2695,7 @@ const DIGITAL_COVERS_SAMPLE = [
   }
 ];
 
-function buildDigitalCoverVerticalCard(cover) {
+function buildDigitalCoverHorizontalCard(cover) {
   if (!cover) return '';
 
   const title = escapeHtml(cover.title || 'Sin título');
@@ -2703,26 +2703,27 @@ function buildDigitalCoverVerticalCard(cover) {
   const edition = escapeHtml(cover.edition || '');
 
   return `
-    <div class="digital-cover-vertical-card" data-cover-id="${cover.id}">
-      <img src="${image}" alt="Tapa ${edition}" class="digital-cover-vertical-image" loading="lazy" />
-      <div class="digital-cover-vertical-info">
-        <div class="digital-cover-vertical-date">${edition}</div>
-        <div class="digital-cover-vertical-label">Ver edición completa →</div>
+    <article class="digital-cover-card-horizontal" data-cover-id="${cover.id}">
+      <div class="digital-cover-image-wrapper">
+        <img src="${image}" alt="Tapa ${edition}" class="digital-cover-image" loading="lazy" />
       </div>
-    </div>
+      <div class="digital-cover-info">
+        <time class="digital-cover-date">${edition}</time>
+      </div>
+    </article>
   `;
 }
 
-function renderDigitalCoversVertical() {
-  const container = document.getElementById('digital-covers-vertical');
+function renderDigitalCoversHorizontal() {
+  const container = document.getElementById('digital-covers-horizontal');
   if (!container) return;
 
   container.innerHTML = DIGITAL_COVERS_SAMPLE
-    .map(buildDigitalCoverVerticalCard)
+    .map(buildDigitalCoverHorizontalCard)
     .join('');
 
   // Agregar event listeners para modal
-  container.querySelectorAll('.digital-cover-vertical-card').forEach(card => {
+  container.querySelectorAll('.digital-cover-card-horizontal').forEach(card => {
     card.addEventListener('click', (e) => {
       e.preventDefault();
       const coverId = card.dataset.coverId;
@@ -2732,6 +2733,36 @@ function renderDigitalCoversVertical() {
       }
     });
   });
+
+  // Inicializar controles de navegación
+  initDigitalCoversNavigation();
+}
+
+function initDigitalCoversNavigation() {
+  const track = document.querySelector('.digital-covers-track');
+  const prevBtn = document.querySelector('.dc-prev');
+  const nextBtn = document.querySelector('.dc-next');
+
+  if (!track || !prevBtn || !nextBtn) return;
+
+  // Scroll al hacer click en botones
+  prevBtn.addEventListener('click', () => {
+    track.scrollBy({ left: -320, behavior: 'smooth' });
+  });
+
+  nextBtn.addEventListener('click', () => {
+    track.scrollBy({ left: 320, behavior: 'smooth' });
+  });
+
+  // Actualizar estado de botones según posición de scroll
+  function updateButtons() {
+    const { scrollLeft, scrollWidth, clientWidth } = track;
+    prevBtn.disabled = scrollLeft <= 0;
+    nextBtn.disabled = scrollLeft + clientWidth >= scrollWidth - 1;
+  }
+
+  track.addEventListener('scroll', updateButtons);
+  updateButtons(); // Estado inicial
 }
 
 function openCoverModal(cover) {

@@ -232,21 +232,41 @@
       </div>
 
       <div class="noticias-locales-v2">
-        <!-- SIDEBAR IZQUIERDO: Tapas Digitales -->
-        <aside class="digital-covers-sidebar">
-          <h3 class="sidebar-title">Tapa Digital</h3>
-          <div id="digital-covers-vertical" class="digital-covers-vertical">
-            <!-- JavaScript inyectará las tapas aquí -->
+        <!-- NUEVA SECCIÓN: Tapa Digital Horizontal -->
+        <div class="digital-covers-horizontal-section">
+          <div class="digital-covers-header">
+            <h3>Tapa Digital</h3>
+            <div class="digital-covers-nav">
+              <button class="dc-nav-btn dc-prev" aria-label="Anterior" type="button">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <button class="dc-nav-btn dc-next" aria-label="Siguiente" type="button">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 6 15 12 9 18"></polyline>
+                </svg>
+              </button>
+            </div>
           </div>
-        </aside>
+          <div class="digital-covers-scroll-container">
+            <div id="digital-covers-horizontal" class="digital-covers-track">
+              <!-- JavaScript inyectará las tapas aquí -->
+            </div>
+          </div>
+        </div>
 
-        <!-- CONTENIDO PRINCIPAL DE NOTICIAS -->
-        <div class="noticias-content-wrapper">
-          <div class="nlv2-hero-stack">
-            <article id="nlv2-hero-main" class="nlv2-hero-main" aria-live="polite">
-              <p class="nlv2-placeholder">Seleccionaremos automáticamente la nota destacada de la sección.</p>
-            </article>
-            <div class="nlv2-hero-secondary" id="nlv2-hero-secondary">
+        <!-- HERO REORGANIZADO: Main + Miniportada -->
+        <div class="nlv2-hero-layout">
+          <!-- Hero Principal (Izquierda) -->
+          <article id="nlv2-hero-main" class="nlv2-hero-main" aria-live="polite">
+            <p class="nlv2-placeholder">Seleccionaremos automáticamente la nota destacada de la sección.</p>
+          </article>
+          
+          <!-- Miniportada (Derecha) -->
+          <aside class="nlv2-miniportada">
+            <h3 class="miniportada-title">Destacadas</h3>
+            <div id="nlv2-hero-secondary" class="nlv2-hero-secondary">
               <article class="nlv2-secondary-card">
                 <p class="nlv2-placeholder">Espacio para notas kicker</p>
               </article>
@@ -254,7 +274,11 @@
                 <p class="nlv2-placeholder">Espacio para notas kicker</p>
               </article>
             </div>
-          </div>
+          </aside>
+        </div>
+
+        <!-- CONTENIDO PRINCIPAL DE NOTICIAS -->
+        <div class="noticias-content-wrapper">
 
           <div class="nlv2-grid-layout">
             <div class="nlv2-grid-column">
