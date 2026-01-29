@@ -1343,6 +1343,65 @@ function initHeaderDate() {
   dateEl.textContent = dateString;
 }
 
+// ========================================
+// SKELETON LOADER BUILDERS
+// ========================================
+
+// Skeleton para mega menu cards
+const buildSkeletonCard = () => `
+  <div class="skeleton-mega-card">
+    <div class="skeleton-mega-thumb skeleton"></div>
+    <div class="skeleton-mega-content">
+      <div class="skeleton-mega-cat skeleton"></div>
+      <div class="skeleton-mega-title skeleton"></div>
+      <div class="skeleton-mega-title skeleton"></div>
+    </div>
+  </div>
+`;
+
+// Skeleton para hero section
+const buildHeroSkeleton = () => `
+  <div class="skeleton-hero">
+    <div class="skeleton-hero-media skeleton"></div>
+    <div class="skeleton-hero-content">
+      <div class="skeleton-hero-badge skeleton"></div>
+      <div class="skeleton-hero-title skeleton"></div>
+      <div class="skeleton-hero-title-line skeleton"></div>
+      <div class="skeleton-hero-lede skeleton"></div>
+      <div class="skeleton-hero-lede skeleton"></div>
+      <div class="skeleton-hero-cta skeleton"></div>
+    </div>
+  </div>
+`;
+
+// Skeleton para secondary cards
+const buildSecondaryCardSkeleton = () => `
+  <div class="skeleton-secondary-card">
+    <div class="skeleton-secondary-media skeleton"></div>
+    <div class="skeleton-secondary-body">
+      <div class="skeleton-secondary-badge skeleton"></div>
+      <div class="skeleton-secondary-title skeleton"></div>
+      <div class="skeleton-secondary-title skeleton"></div>
+      <div class="skeleton-secondary-summary skeleton"></div>
+      <div class="skeleton-secondary-summary skeleton"></div>
+      <div class="skeleton-secondary-summary skeleton"></div>
+      <div class="skeleton-secondary-meta skeleton"></div>
+    </div>
+  </div>
+`;
+
+// Skeleton para card grids
+const buildCardSkeleton = () => `
+  <div class="skeleton-card">
+    <div class="skeleton-card-img skeleton"></div>
+    <div class="skeleton-card-content">
+      <div class="skeleton-card-title skeleton"></div>
+      <div class="skeleton-card-title skeleton"></div>
+      <div class="skeleton-card-meta skeleton"></div>
+    </div>
+  </div>
+`;
+
 // Cargar artículos destacados en los mega menús de Análisis y Noticias
 async function initMegaMenuFeatured() {
   const megaAnalisis = document.getElementById("mega-featured-analisis");
@@ -1350,6 +1409,14 @@ async function initMegaMenuFeatured() {
 
   // Si no hay mega menús en esta página, salir
   if (!megaAnalisis && !megaNoticias) return;
+
+  // Mostrar skeletons mientras carga
+  if (megaAnalisis) {
+    megaAnalisis.innerHTML = Array(2).fill(buildSkeletonCard()).join('');
+  }
+  if (megaNoticias) {
+    megaNoticias.innerHTML = Array(3).fill(buildSkeletonCard()).join('');
+  }
 
   try {
     const res = await fetch(`${CONTENT_URL}?t=${Date.now()}`);
@@ -1613,7 +1680,14 @@ async function renderHeroFromFile() {
 
 function renderHero(n) {
   const container = document.getElementById("hero");
-  if (!container || !n?.length) return null;
+  if (!container) return null;
+
+  // Mostrar skeleton mientras no hay datos
+  if (!n?.length) {
+    container.className = 'hero';
+    container.innerHTML = buildHeroSkeleton();
+    return null;
+  }
 
   // 🎯 Buscar la noticia marcada como is_main_featured
   let heroArticle = n.find(noticia => {
@@ -1641,7 +1715,13 @@ function renderHero(n) {
 
 function renderSecondary(n) {
   const container = document.getElementById("secondary-news");
-  if (!container || !n?.length) return;
+  if (!container) return;
+
+  // Mostrar skeleton mientras no hay datos
+  if (!n?.length) {
+    container.innerHTML = Array(2).fill(buildSecondaryCardSkeleton()).join('');
+    return;
+  }
 
   // Tomamos los primeros 3 de la lista recibida (ya viene sin la Hero)
   const cardsHtml = n.slice(0, 2)

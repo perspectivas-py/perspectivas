@@ -922,5 +922,19 @@
         "type": "programa"
       }
     ]
+  },
+  "entrevistas": {
+    "label": "entrevistas",
+    "items": [
+      {
+        "id": "2025-11-20-proyecciones-económicas-una-mirada-local-e-internacional",
+        "title": "Baja de tasa de política monetaria,  22 meses después. ",
+        "thumbnail": [
+          "/assets/img/knmg6a6szzcshjyavygmnkhpbi.jpg"
+        ],
+        "date": "2026-01-27T00:26:00.000Z",
+        "type": "podcast"
+      }
+    ]
   }
 }

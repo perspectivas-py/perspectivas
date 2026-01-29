@@ -6692,6 +6692,233 @@ body.cinema-mode .site-footer-new {
   }
 }
 
+/* ========================================
+   SKELETON LOADERS
+   ======================================== */
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg,
+      #f1f5f9 0%,
+      #e2e8f0 50%,
+      #f1f5f9 100%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+  border-radius: 6px;
+}
+
+[data-theme="dark"] .skeleton {
+  background: linear-gradient(90deg,
+      #1e293b 0%,
+      #334155 50%,
+      #1e293b 100%);
+}
+
+/* Skeleton para Mega Menu Cards */
+.skeleton-mega-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  opacity: 0.7;
+}
+
+.skeleton-mega-thumb {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 6px;
+}
+
+.skeleton-mega-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.skeleton-mega-cat {
+  width: 80px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.skeleton-mega-title {
+  width: 100%;
+  height: 13px;
+  border-radius: 3px;
+}
+
+.skeleton-mega-title:nth-child(3) {
+  width: 70%;
+}
+
+/* Skeleton para Hero Section */
+.skeleton-hero {
+  position: relative;
+  width: 100%;
+  min-height: 500px;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.skeleton-hero-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.skeleton-hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 2.5rem 2.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.skeleton-hero-badge {
+  width: 120px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+.skeleton-hero-title {
+  width: 70%;
+  height: 36px;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.skeleton-hero-title-line {
+  width: 50%;
+  height: 36px;
+  border-radius: 4px;
+}
+
+.skeleton-hero-lede {
+  width: 60%;
+  height: 14px;
+  border-radius: 3px;
+  margin-bottom: 0.3rem;
+}
+
+.skeleton-hero-lede:last-of-type {
+  width: 45%;
+}
+
+.skeleton-hero-cta {
+  width: 150px;
+  height: 40px;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+}
+
+/* Skeleton para Secondary Cards */
+.skeleton-secondary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  opacity: 0.7;
+}
+
+.skeleton-secondary-media {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 8px;
+}
+
+.skeleton-secondary-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.skeleton-secondary-badge {
+  width: 100px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+.skeleton-secondary-title {
+  width: 100%;
+  height: 18px;
+  border-radius: 3px;
+}
+
+.skeleton-secondary-title:nth-child(3) {
+  width: 85%;
+}
+
+.skeleton-secondary-summary {
+  width: 100%;
+  height: 12px;
+  border-radius: 3px;
+  margin-top: 0.2rem;
+}
+
+.skeleton-secondary-summary:nth-child(5) {
+  width: 90%;
+}
+
+.skeleton-secondary-summary:nth-child(6) {
+  width: 75%;
+}
+
+.skeleton-secondary-meta {
+  width: 120px;
+  height: 10px;
+  border-radius: 3px;
+  margin-top: 0.3rem;
+}
+
+/* Skeleton para Card Grids (Noticias Locales, etc.) */
+.skeleton-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  opacity: 0.7;
+}
+
+.skeleton-card-img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 6px;
+}
+
+.skeleton-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.skeleton-card-title {
+  width: 100%;
+  height: 16px;
+  border-radius: 3px;
+}
+
+.skeleton-card-title:nth-child(2) {
+  width: 80%;
+}
+
+.skeleton-card-meta {
+  width: 90px;
+  height: 10px;
+  border-radius: 3px;
+  margin-top: 0.2rem;
+}
+
 .mega-card {
   display: flex;
   flex-direction: column;
