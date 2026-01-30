@@ -10,6 +10,16 @@ const TYPE_LABELS = {
   "podcast": "Podcast"
 };
 
+// Categorías principales para el submenú
+const MAIN_CATEGORIES = [
+  { key: 'agro', label: 'Agro', color: '#10b981' },
+  { key: 'empresas', label: 'Negocios', color: '#14b8a6' },
+  { key: 'macro', label: 'Macro', color: '#3b82f6' },
+  { key: 'mercados-inversion', label: 'Mercados', color: '#a855f7' },
+  { key: 'politica-economica', label: 'Política Económica', color: '#f97316' },
+  { key: 'locales', label: 'Locales', color: '#ef4444' }
+];
+
 function normalizeSlug(value = "") {
   return value
     .toString()
@@ -44,6 +54,45 @@ function estimateReadingTime(text) {
   const words = text.trim().split(/\s+/).length;
   const minutes = Math.max(1, Math.round(words / 200));
   return `${minutes} min de lectura`;
+}
+
+// Renderiza el submenú de categorías
+function renderCategorySubmenu(currentCategory) {
+  const container = document.getElementById('category-tags-container');
+  const submenu = document.getElementById('category-submenu');
+
+  if (!container || !submenu) return;
+
+  const normalizedCurrent = normalizeSlug(currentCategory || '');
+
+  // Reordenar categorías: la activa primero, luego las demás
+  const orderedCategories = [...MAIN_CATEGORIES];
+  const activeIndex = orderedCategories.findIndex(cat =>
+    normalizedCurrent === cat.key || normalizedCurrent.includes(cat.key)
+  );
+
+  if (activeIndex > 0) {
+    // Mover la categoría activa al inicio
+    const activeCategory = orderedCategories.splice(activeIndex, 1)[0];
+    orderedCategories.unshift(activeCategory);
+  }
+
+  container.innerHTML = orderedCategories.map(cat => {
+    const isActive = normalizedCurrent === cat.key || normalizedCurrent.includes(cat.key);
+    const activeClass = isActive ? 'active' : '';
+    const styleAttr = isActive ? `style="--tag-color: ${cat.color};"` : '';
+
+    return `
+      <a href="/categoria.html?cat=${encodeURIComponent(cat.key)}" 
+         class="category-tag ${activeClass}" 
+         ${styleAttr}>
+        ${cat.label}
+      </a>
+    `;
+  }).join('');
+
+  // Mostrar el submenú
+  submenu.style.display = 'block';
 }
 
 // Renderiza la sección de relacionadas
@@ -545,6 +594,9 @@ async function loadArticle() {
 
     renderKeyPoints(article);
     renderContextTimeline(article);
+
+    // Renderizar submenú de categorías
+    renderCategorySubmenu(article.category);
 
     console.log("✅ Artículo renderizado correctamente");
 

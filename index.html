@@ -301,16 +301,7 @@
               </div>
             </div>
 
-            <!-- Panel Contexto (Integrado debajo de Tapas) -->
-            <section class="nlv2-context-sidebar-widget">
-              <div class="nlv2-context-header">
-                <p class="nlv2-context-eyebrow">En Contexto</p>
-                <h3 id="nlv2-context-title">Notas en seguimiento</h3>
-              </div>
-              <div id="nlv2-context-feed" class="nlv2-context-feed">
-                <p class="nlv2-placeholder">Cargando datos de contexto...</p>
-              </div>
-            </section>
+
           </aside>
         </div>
 
@@ -424,14 +415,34 @@
       </div>
     </section>
 
-    <!-- ANÁLISIS -->
-    <section id="analisis" class="wrap section">
+    <!-- ANÁLISIS (Rediseñado - Magazine Premium) -->
+    <section id="analisis" class="wrap section analisis-magazine-layout">
       <div class="section-header">
         <h2>Análisis & Opinión</h2>
+        <p class="sub">Perspectivas profundas sobre economía y política</p>
       </div>
-      <div id="analisis-featured" class="featured-card"></div>
-      <div id="analisis-grid" class="cards-grid"></div>
-      <button id="analisis-view-more" class="view-more-btn" type="button" hidden>Ver más</button>
+
+      <!-- Filtro de subcategorías -->
+      <div class="analisis-filter-bar">
+        <div id="analisis-category-filters" class="category-pills">
+          <!-- JavaScript inyectará pills: Todos | Opinión | Macro | Política | etc. -->
+        </div>
+      </div>
+
+      <!-- Featured + Grid Layout -->
+      <div class="analisis-content-layout">
+        <!-- Featured (Horizontal Split) -->
+        <article id="analisis-featured" class="analisis-featured-horizontal">
+          <!-- JS inyectará: imagen grande izquierda + texto derecha -->
+        </article>
+
+        <!-- Grid 2 columnas -->
+        <div id="analisis-grid" class="analisis-cards-grid-2col">
+          <!-- JS inyectará tarjetas horizontales compactas -->
+        </div>
+      </div>
+
+      <button id="analisis-view-more" class="view-more-btn" type="button" hidden>Ver más análisis</button>
     </section>
 
     <!-- NEWSLETTER -->

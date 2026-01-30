@@ -1,6 +1,16 @@
 // script.v3.js — MOTOR PRO DEFINITIVO (Corregido)
 console.log("🚀 Perspectivas PRO v3 cargado");
 
+// Categorías principales para Análisis
+const ANALYSIS_CATEGORIES = [
+  { key: 'opinion-editorial', label: 'Opinión Editorial', color: '#7c3aed' },
+  { key: 'macro', label: 'Macroeconomía', color: '#3b82f6' },
+  { key: 'politica', label: 'Política Económica', color: '#f97316' },
+  { key: 'regional', label: 'Análisis Regional', color: '#06b6d4' },
+  { key: 'internacional', label: 'Internacional', color: '#10b981' },
+  { key: 'columnistas', label: 'Columnistas', color: '#ec4899' }
+];
+
 const CONTENT_URL = "content.json";
 let searchDataCache = null;
 
@@ -915,8 +925,50 @@ function createSectionController({ gridId, buttonId, limit = SECTION_LIMIT, incr
 }
 
 const analisisController = (() => {
-  const state = { source: [], visible: 6 };
+  const state = {
+    source: [],
+    filtered: [],
+    visible: 7, // 1 featured + 6 in grid (2 cols * 3 rows)
+    currentCategory: 'all'
+  };
   let button = null;
+  let filterContainer = null;
+
+  function renderFilters() {
+    if (!filterContainer) return;
+
+    const categories = [{ key: 'all', label: 'Todos' }, ...ANALYSIS_CATEGORIES];
+
+    filterContainer.innerHTML = categories.map(cat => `
+      <button class="category-pill ${state.currentCategory === cat.key ? 'active' : ''}" 
+              data-category="${cat.key}" 
+              type="button">
+        ${cat.label}
+      </button>
+    `).join('');
+
+    // Bind events
+    filterContainer.querySelectorAll('.category-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cat = btn.dataset.category;
+        setCategory(cat);
+      });
+    });
+  }
+
+  function setCategory(category) {
+    state.currentCategory = category;
+    if (category === 'all') {
+      state.filtered = state.source;
+    } else {
+      state.filtered = state.source.filter(item =>
+        item.category === category || (item.tags && item.tags.includes(category))
+      );
+    }
+    state.visible = 7;
+    renderFilters();
+    render();
+  }
 
   function render() {
     const featured = document.getElementById("analisis-featured");
@@ -924,53 +976,68 @@ const analisisController = (() => {
 
     if (!featured || !grid) return;
 
-    if (!state.source.length) {
+    if (!state.filtered.length) {
       featured.innerHTML = "";
-      grid.innerHTML = `<p class="empty-copy">No encontramos análisis disponibles.</p>`;
+      grid.innerHTML = `<p class="empty-copy">No encontramos análisis en esta categoría.</p>`;
       if (button) button.hidden = true;
       return;
     }
 
-    // Primera nota como miniportada
-    const firstItem = state.source[0];
+    // Featured (Horizontal Split)
+    const firstItem = state.filtered[0];
+    const catData = ANALYSIS_CATEGORIES.find(c => c.key === firstItem.category) || { label: 'Análisis', color: 'var(--brand-primary)' };
+
     featured.innerHTML = `
-      <a href="/noticia.html?id=${encodeURIComponent(firstItem.slug || firstItem.id)}" class="featured-card">
-        <div class="featured-card-img">
-          <img src="${firstItem.thumbnail}" alt="${firstItem.title}"/>
-        </div>
-        <div class="featured-card-content">
+      <a href="/noticia.html?id=${encodeURIComponent(firstItem.slug || firstItem.id)}" class="analisis-featured-horizontal">
+        <img src="${firstItem.thumbnail}" alt="${firstItem.title}" loading="lazy"/>
+        <div class="content">
+          <span class="eyebrow" style="color: ${catData.color}">${catData.label}</span>
           <h3>${firstItem.title}</h3>
-          <small>${formatDate(firstItem.date)}</small>
+          <p class="summary">${firstItem.description || firstItem.summary || ''}</p>
+          <div class="meta">
+            <span>Por: ${firstItem.author || 'Redacción'}</span>
+            <span>${formatDate(firstItem.date)}</span>
+          </div>
         </div>
       </a>
     `;
 
-    // Resto en grid (a partir del índice 1)
-    const remaining = state.source.slice(1, state.visible);
+    // Grid 2 Columnas (tarjetas horizontales compactas)
+    const remaining = state.filtered.slice(1, state.visible);
     grid.innerHTML = remaining
-      .map(item => `
-        <a href="/noticia.html?id=${encodeURIComponent(item.slug || item.id)}" class="card">
-          <img src="${item.thumbnail}" alt="${item.title}">
-          <h3>${item.title}</h3>
-          <div class="card-meta">${formatDate(item.date)}</div>
-        </a>
-      `)
+      .map(item => {
+        const itemCat = ANALYSIS_CATEGORIES.find(c => c.key === item.category) || { label: 'Análisis', color: 'var(--brand-primary)' };
+        return `
+          <a href="/noticia.html?id=${encodeURIComponent(item.slug || item.id)}" class="analisis-card-horizontal">
+            <img src="${item.thumbnail}" alt="${item.title}" loading="lazy">
+            <div class="content">
+              <span class="eyebrow" style="color: ${itemCat.color}">${itemCat.label}</span>
+              <h4>${item.title}</h4>
+              <div class="meta">${formatDate(item.date)} · ${item.author || 'Redacción'}</div>
+            </div>
+          </a>
+        `;
+      })
       .join("");
 
-    // Botón "Ver más" si hay más de lo visible
+    // Botón "Ver más"
     if (button) {
-      button.hidden = state.source.length <= state.visible;
+      button.hidden = state.filtered.length <= state.visible;
     }
   }
 
   function setSource(items) {
     state.source = Array.isArray(items) ? items : [];
-    state.visible = 6; // Mostrar la primera (featured) + 5 en grid = 6 total
+    state.filtered = state.source;
+    state.visible = 7;
+    renderFilters();
     render();
   }
 
   function init() {
     button = document.getElementById("analisis-view-more");
+    filterContainer = document.getElementById("analisis-category-filters");
+
     if (button && !button.dataset.bound) {
       button.addEventListener("click", () => {
         state.visible += 6;
@@ -2495,6 +2562,19 @@ function formatTimestampLabel(timestamp) {
   const dateLabel = date.toLocaleDateString("es-PY", { day: "2-digit", month: "short" });
   const timeLabel = date.toLocaleTimeString("es-PY", { hour: "2-digit", minute: "2-digit", hour12: false });
   return `${dateLabel} · ${timeLabel}`;
+}
+
+function formatGuaraniCompact(value) {
+  const num = typeof value === "string" ? parseGuaraniValue(value) : value;
+  if (!Number.isFinite(num)) return "—";
+
+  if (num >= 1000000) {
+    return (num / 1000000).toLocaleString("es-PY", { maximumFractionDigits: 1 }) + "M";
+  }
+  if (num >= 1000) {
+    return (num / 1000).toLocaleString("es-PY", { maximumFractionDigits: 1 }) + "K";
+  }
+  return num.toLocaleString("es-PY");
 }
 
 function parseGuaraniValue(value) {
