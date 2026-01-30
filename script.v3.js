@@ -2681,6 +2681,22 @@ function formatGuaraniCompact(value) {
   return num.toLocaleString("es-PY");
 }
 
+function formatGuarani(value) {
+  const num = typeof value === "string" ? parseGuaraniValue(value) : value;
+  if (!Number.isFinite(num)) return "—";
+
+  // Si es un valor entero grande (como Gs. 7.500)
+  if (num >= 100 || num <= -100) {
+    return "₲ " + Math.round(num).toLocaleString("es-PY");
+  }
+  
+  // Si es un valor decimal (como una tasa o variación)
+  return "₲ " + num.toLocaleString("es-PY", {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2
+  });
+}
+
 function parseGuaraniValue(value) {
   if (typeof value !== "string") return Number(value) || NaN;
   const normalized = value

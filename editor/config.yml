@@ -20,9 +20,6 @@ logo_url: https://placehold.co/180x50?text=Perspectivas
 media_folder: "assets/img/uploads"
 public_folder: "/assets/img/uploads"
 
-media_library:
-  name: github
-
 
 collections:
 

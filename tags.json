@@ -843,6 +843,37 @@
       }
     ]
   },
+  "proyecciones": {
+    "label": "proyecciones",
+    "items": [
+      {
+        "id": "2026-01-30-¿qué-pasa-con-el-dólar-en-este-2026",
+        "title": "¿Qué pasa con el dólar en este 2026?",
+        "thumbnail": "/assets/img/billie-dollar-money-background.jpg",
+        "date": "2026-01-30T11:39:00.000Z",
+        "type": "analisis"
+      },
+      {
+        "id": "2026-01-28-inflacion-proyecciones-primer-trimestre",
+        "title": "Proyecciones de Inflación para el Primer Trimestre: Factores Clave a Monitorear",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-28T00:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "tendencias": {
+    "label": "tendencias",
+    "items": [
+      {
+        "id": "2026-01-30-¿qué-pasa-con-el-dólar-en-este-2026",
+        "title": "¿Qué pasa con el dólar en este 2026?",
+        "thumbnail": "/assets/img/billie-dollar-money-background.jpg",
+        "date": "2026-01-30T11:39:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
   "diversificacion": {
     "label": "diversificación",
     "items": [
@@ -1111,18 +1142,6 @@
       {
         "id": "2026-01-28-commodities-mercados-internacionales",
         "title": "Commodities en 2026: Navegando la Volatilidad en Mercados Internacionales",
-        "thumbnail": "/assets/img/default.jpg",
-        "date": "2026-01-28T00:00:00.000Z",
-        "type": "analisis"
-      }
-    ]
-  },
-  "proyecciones": {
-    "label": "proyecciones",
-    "items": [
-      {
-        "id": "2026-01-28-inflacion-proyecciones-primer-trimestre",
-        "title": "Proyecciones de Inflación para el Primer Trimestre: Factores Clave a Monitorear",
         "thumbnail": "/assets/img/default.jpg",
         "date": "2026-01-28T00:00:00.000Z",
         "type": "analisis"
