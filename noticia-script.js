@@ -20,6 +20,15 @@ const MAIN_CATEGORIES = [
   { key: 'locales', label: 'Locales', color: '#ef4444' }
 ];
 
+const ANALYSIS_CATEGORIES = [
+  { key: 'opinion-editorial', label: 'Opinión Editorial', color: '#7c3aed' },
+  { key: 'macro', label: 'Macroeconomía', color: '#3b82f6' },
+  { key: 'politica', label: 'Política Económica', color: '#f97316' },
+  { key: 'regional', label: 'Regional', color: '#06b6d4' },
+  { key: 'internacional', label: 'Internacional', color: '#10b981' },
+  { key: 'columnistas', label: 'Columnistas', color: '#ec4899' }
+];
+
 function normalizeSlug(value = "") {
   return value
     .toString()
@@ -57,7 +66,7 @@ function estimateReadingTime(text) {
 }
 
 // Renderiza el submenú de categorías
-function renderCategorySubmenu(currentCategory) {
+function renderCategorySubmenu(currentCategory, articleType = 'noticias') {
   const container = document.getElementById('category-tags-container');
   const submenu = document.getElementById('category-submenu');
 
@@ -65,8 +74,11 @@ function renderCategorySubmenu(currentCategory) {
 
   const normalizedCurrent = normalizeSlug(currentCategory || '');
 
+  // Elegir colección de categorías según el tipo de artículo
+  const categoriesToUse = articleType === 'analisis' ? ANALYSIS_CATEGORIES : MAIN_CATEGORIES;
+
   // Reordenar categorías: la activa primero, luego las demás
-  const orderedCategories = [...MAIN_CATEGORIES];
+  const orderedCategories = [...categoriesToUse];
   const activeIndex = orderedCategories.findIndex(cat =>
     normalizedCurrent === cat.key || normalizedCurrent.includes(cat.key)
   );
@@ -596,7 +608,7 @@ async function loadArticle() {
     renderContextTimeline(article);
 
     // Renderizar submenú de categorías
-    renderCategorySubmenu(article.category);
+    renderCategorySubmenu(article.category, article.type);
 
     console.log("✅ Artículo renderizado correctamente");
 

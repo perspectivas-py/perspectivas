@@ -117,6 +117,13 @@
     "label": "tecnologia",
     "items": [
       {
+        "id": "2026-01-30-futuro-trabajo-economia-digital",
+        "title": "El Futuro del Trabajo en la Era de la Economía Digital",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-30T00:00:00.000Z",
+        "type": "analisis"
+      },
+      {
         "id": "2026-01-26-fintech-paraguaya-tigo-money-alcanza-2-millones-usuarios-activos",
         "title": "Fintech paraguaya Tigo Money alcanza 2 millones de usuarios activos",
         "thumbnail": "/assets/img/uploads/female-working-environment-projects.jpg",
@@ -141,6 +148,13 @@
     "label": "soja",
     "items": [
       {
+        "id": "2026-01-28-commodities-mercados-internacionales",
+        "title": "Commodities en 2026: Navegando la Volatilidad en Mercados Internacionales",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-28T00:00:00.000Z",
+        "type": "analisis"
+      },
+      {
         "id": "2026-01-26-precio-soja-alcanza-maximo-6-meses-chicago-clima-adverso",
         "title": "Precio de la soja alcanza máximo de 6 meses en Chicago impulsado por clima adverso",
         "thumbnail": "/assets/img/uploads/precios-de-commodities-en-baja-bm.jpg",
@@ -152,6 +166,13 @@
   "commodities": {
     "label": "commodities",
     "items": [
+      {
+        "id": "2026-01-28-commodities-mercados-internacionales",
+        "title": "Commodities en 2026: Navegando la Volatilidad en Mercados Internacionales",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-28T00:00:00.000Z",
+        "type": "analisis"
+      },
       {
         "id": "2026-01-26-precio-soja-alcanza-maximo-6-meses-chicago-clima-adverso",
         "title": "Precio de la soja alcanza máximo de 6 meses en Chicago impulsado por clima adverso",
@@ -171,6 +192,13 @@
   "precios": {
     "label": "precios",
     "items": [
+      {
+        "id": "2026-01-28-inflacion-proyecciones-primer-trimestre",
+        "title": "Proyecciones de Inflación para el Primer Trimestre: Factores Clave a Monitorear",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-28T00:00:00.000Z",
+        "type": "analisis"
+      },
       {
         "id": "2026-01-26-precio-soja-alcanza-maximo-6-meses-chicago-clima-adverso",
         "title": "Precio de la soja alcanza máximo de 6 meses en Chicago impulsado por clima adverso",
@@ -226,6 +254,20 @@
   "inflacion": {
     "label": "inflacion",
     "items": [
+      {
+        "id": "2026-01-29-bcp-tasas-interes-2026",
+        "title": "BCP mantiene tasa de política monetaria en 5.75% ante expectativas de inflación controlada",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-29T00:00:00.000Z",
+        "type": "analisis"
+      },
+      {
+        "id": "2026-01-28-inflacion-proyecciones-primer-trimestre",
+        "title": "Proyecciones de Inflación para el Primer Trimestre: Factores Clave a Monitorear",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-28T00:00:00.000Z",
+        "type": "analisis"
+      },
       {
         "id": "2026-01-26-banco-central-mantiene-tasa-interes-575-proyecta-inflacion-38-2026",
         "title": "Banco Central mantiene tasa de interés en 5,75% y proyecta inflación de 3,8% para 2026",
@@ -561,6 +603,13 @@
     "label": "impuestos",
     "items": [
       {
+        "id": "2026-01-27-reforma-tributaria-propuestas",
+        "title": "Reforma Tributaria 2026: Propuestas y Resistencias en el Debate Fiscal",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-27T00:00:00.000Z",
+        "type": "analisis"
+      },
+      {
         "id": "2026-01-17-reforma-fiscal-2026-nuevas-tasas-impositivas",
         "title": "Reforma fiscal 2026: nuevas tasas impositivas buscan fortalecer ingresos del Estado",
         "thumbnail": "/assets/img/uploads/2024-08-16-billetes.jpg",
@@ -617,6 +666,13 @@
   "empleo": {
     "label": "empleo",
     "items": [
+      {
+        "id": "2026-01-30-futuro-trabajo-economia-digital",
+        "title": "El Futuro del Trabajo en la Era de la Economía Digital",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-30T00:00:00.000Z",
+        "type": "analisis"
+      },
       {
         "id": "2026-01-17-exportaciones-de-maquila-superaron-los-usd-1-309-millones-al-cierre-del-2025",
         "title": "Exportaciones de maquila superaron los USD 1.309 millones al cierre del 2025",
@@ -787,6 +843,328 @@
       }
     ]
   },
+  "diversificacion": {
+    "label": "diversificación",
+    "items": [
+      {
+        "id": "2026-01-30-diversificacion-economica-paraguay",
+        "title": "La Diversificación Económica: Un Imperativo para el Paraguay del Siglo XXI",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-30T00:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "desarrollo economico": {
+    "label": "desarrollo económico",
+    "items": [
+      {
+        "id": "2026-01-30-diversificacion-economica-paraguay",
+        "title": "La Diversificación Económica: Un Imperativo para el Paraguay del Siglo XXI",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-30T00:00:00.000Z",
+        "type": "analisis"
+      },
+      {
+        "id": "2026-01-27-sostenibilidad-crecimiento-economico",
+        "title": "Sostenibilidad y Crecimiento Económico: ¿Un Dilema Falso?",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-27T00:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "politica publica": {
+    "label": "política pública",
+    "items": [
+      {
+        "id": "2026-01-30-diversificacion-economica-paraguay",
+        "title": "La Diversificación Económica: Un Imperativo para el Paraguay del Siglo XXI",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-30T00:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "futuro del trabajo": {
+    "label": "futuro del trabajo",
+    "items": [
+      {
+        "id": "2026-01-30-futuro-trabajo-economia-digital",
+        "title": "El Futuro del Trabajo en la Era de la Economía Digital",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-30T00:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "economia digital": {
+    "label": "economía digital",
+    "items": [
+      {
+        "id": "2026-01-30-futuro-trabajo-economia-digital",
+        "title": "El Futuro del Trabajo en la Era de la Economía Digital",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-30T00:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "bcp": {
+    "label": "BCP",
+    "items": [
+      {
+        "id": "2026-01-29-bcp-tasas-interes-2026",
+        "title": "BCP mantiene tasa de política monetaria en 5.75% ante expectativas de inflación controlada",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-29T00:00:00.000Z",
+        "type": "analisis"
+      },
+      {
+        "id": "2026-01-28-inflacion-proyecciones-primer-trimestre",
+        "title": "Proyecciones de Inflación para el Primer Trimestre: Factores Clave a Monitorear",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-28T00:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "politica monetaria": {
+    "label": "política monetaria",
+    "items": [
+      {
+        "id": "2026-01-29-bcp-tasas-interes-2026",
+        "title": "BCP mantiene tasa de política monetaria en 5.75% ante expectativas de inflación controlada",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-29T00:00:00.000Z",
+        "type": "analisis"
+      },
+      {
+        "id": "2026-01-25-fed-politica-monetaria-impacto",
+        "title": "Política Monetaria de la Fed y su Impacto en Economías Emergentes",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-25T00:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "tasas de interes": {
+    "label": "tasas de interés",
+    "items": [
+      {
+        "id": "2026-01-29-bcp-tasas-interes-2026",
+        "title": "BCP mantiene tasa de política monetaria en 5.75% ante expectativas de inflación controlada",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-29T00:00:00.000Z",
+        "type": "analisis"
+      },
+      {
+        "id": "2026-01-25-fed-politica-monetaria-impacto",
+        "title": "Política Monetaria de la Fed y su Impacto en Economías Emergentes",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-25T00:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "mercosur": {
+    "label": "Mercosur",
+    "items": [
+      {
+        "id": "2026-01-29-mercosur-ue-acuerdo-comercial",
+        "title": "Acuerdo Mercosur-UE: Oportunidades y Desafíos para la Integración Regional",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-29T00:00:00.000Z",
+        "type": "analisis"
+      },
+      {
+        "id": "2026-01-26-brasil-argentina-evaluan-moneda-comun-comercio-bilateral",
+        "title": "Brasil y Argentina evalúan moneda común para comercio bilateral",
+        "thumbnail": "/assets/img/uploads/2024-08-16-billetes.jpg",
+        "date": "2026-01-26T18:30:00.000Z",
+        "type": "analisis"
+      },
+      {
+        "id": "2026-01-26-mercosur-ue-avanzan-armonizacion-normas-fitosanitarias",
+        "title": "Mercosur y Unión Europea avanzan en armonización de normas fitosanitarias",
+        "thumbnail": "/assets/img/acuerdo-mercosur-union-europea-firma-ue.jpeg",
+        "date": "2026-01-26T17:00:00.000Z",
+        "type": "analisis"
+      },
+      {
+        "id": "2026-01-26-integracion-regional-desafios",
+        "title": "Integración Regional: Desafíos y Oportunidades para el Desarrollo del Mercosur",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-26T00:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "union europea": {
+    "label": "Unión Europea",
+    "items": [
+      {
+        "id": "2026-01-29-mercosur-ue-acuerdo-comercial",
+        "title": "Acuerdo Mercosur-UE: Oportunidades y Desafíos para la Integración Regional",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-29T00:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "comercio internacional": {
+    "label": "comercio internacional",
+    "items": [
+      {
+        "id": "2026-01-29-mercosur-ue-acuerdo-comercial",
+        "title": "Acuerdo Mercosur-UE: Oportunidades y Desafíos para la Integración Regional",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-29T00:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "integracion": {
+    "label": "integración",
+    "items": [
+      {
+        "id": "2026-01-29-mercosur-ue-acuerdo-comercial",
+        "title": "Acuerdo Mercosur-UE: Oportunidades y Desafíos para la Integración Regional",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-29T00:00:00.000Z",
+        "type": "analisis"
+      },
+      {
+        "id": "2026-01-26-brasil-argentina-evaluan-moneda-comun-comercio-bilateral",
+        "title": "Brasil y Argentina evalúan moneda común para comercio bilateral",
+        "thumbnail": "/assets/img/uploads/2024-08-16-billetes.jpg",
+        "date": "2026-01-26T18:30:00.000Z",
+        "type": "analisis"
+      },
+      {
+        "id": "2026-01-26-mercosur-ue-avanzan-armonizacion-normas-fitosanitarias",
+        "title": "Mercosur y Unión Europea avanzan en armonización de normas fitosanitarias",
+        "thumbnail": "/assets/img/acuerdo-mercosur-union-europea-firma-ue.jpeg",
+        "date": "2026-01-26T17:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "presupuesto": {
+    "label": "presupuesto",
+    "items": [
+      {
+        "id": "2026-01-29-presupuesto-general-nacion-2026",
+        "title": "Presupuesto General de la Nación 2026: Análisis de Prioridades y Desafíos Fiscales",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-29T00:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "politica fiscal": {
+    "label": "política fiscal",
+    "items": [
+      {
+        "id": "2026-01-29-presupuesto-general-nacion-2026",
+        "title": "Presupuesto General de la Nación 2026: Análisis de Prioridades y Desafíos Fiscales",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-29T00:00:00.000Z",
+        "type": "analisis"
+      },
+      {
+        "id": "2026-01-27-reforma-tributaria-propuestas",
+        "title": "Reforma Tributaria 2026: Propuestas y Resistencias en el Debate Fiscal",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-27T00:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "gasto publico": {
+    "label": "gasto público",
+    "items": [
+      {
+        "id": "2026-01-29-presupuesto-general-nacion-2026",
+        "title": "Presupuesto General de la Nación 2026: Análisis de Prioridades y Desafíos Fiscales",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-29T00:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "mercados internacionales": {
+    "label": "mercados internacionales",
+    "items": [
+      {
+        "id": "2026-01-28-commodities-mercados-internacionales",
+        "title": "Commodities en 2026: Navegando la Volatilidad en Mercados Internacionales",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-28T00:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "petroleo": {
+    "label": "petróleo",
+    "items": [
+      {
+        "id": "2026-01-28-commodities-mercados-internacionales",
+        "title": "Commodities en 2026: Navegando la Volatilidad en Mercados Internacionales",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-28T00:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "proyecciones": {
+    "label": "proyecciones",
+    "items": [
+      {
+        "id": "2026-01-28-inflacion-proyecciones-primer-trimestre",
+        "title": "Proyecciones de Inflación para el Primer Trimestre: Factores Clave a Monitorear",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-28T00:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "reforma tributaria": {
+    "label": "reforma tributaria",
+    "items": [
+      {
+        "id": "2026-01-27-reforma-tributaria-propuestas",
+        "title": "Reforma Tributaria 2026: Propuestas y Resistencias en el Debate Fiscal",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-27T00:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "sostenibilidad": {
+    "label": "sostenibilidad",
+    "items": [
+      {
+        "id": "2026-01-27-sostenibilidad-crecimiento-economico",
+        "title": "Sostenibilidad y Crecimiento Económico: ¿Un Dilema Falso?",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-27T00:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "medio ambiente": {
+    "label": "medio ambiente",
+    "items": [
+      {
+        "id": "2026-01-27-sostenibilidad-crecimiento-economico",
+        "title": "Sostenibilidad y Crecimiento Económico: ¿Un Dilema Falso?",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-27T00:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
   "brasil": {
     "label": "brasil",
     "items": [
@@ -823,44 +1201,6 @@
       }
     ]
   },
-  "integracion": {
-    "label": "integracion",
-    "items": [
-      {
-        "id": "2026-01-26-brasil-argentina-evaluan-moneda-comun-comercio-bilateral",
-        "title": "Brasil y Argentina evalúan moneda común para comercio bilateral",
-        "thumbnail": "/assets/img/uploads/2024-08-16-billetes.jpg",
-        "date": "2026-01-26T18:30:00.000Z",
-        "type": "analisis"
-      },
-      {
-        "id": "2026-01-26-mercosur-ue-avanzan-armonizacion-normas-fitosanitarias",
-        "title": "Mercosur y Unión Europea avanzan en armonización de normas fitosanitarias",
-        "thumbnail": "/assets/img/acuerdo-mercosur-union-europea-firma-ue.jpeg",
-        "date": "2026-01-26T17:00:00.000Z",
-        "type": "analisis"
-      }
-    ]
-  },
-  "mercosur": {
-    "label": "mercosur",
-    "items": [
-      {
-        "id": "2026-01-26-brasil-argentina-evaluan-moneda-comun-comercio-bilateral",
-        "title": "Brasil y Argentina evalúan moneda común para comercio bilateral",
-        "thumbnail": "/assets/img/uploads/2024-08-16-billetes.jpg",
-        "date": "2026-01-26T18:30:00.000Z",
-        "type": "analisis"
-      },
-      {
-        "id": "2026-01-26-mercosur-ue-avanzan-armonizacion-normas-fitosanitarias",
-        "title": "Mercosur y Unión Europea avanzan en armonización de normas fitosanitarias",
-        "thumbnail": "/assets/img/acuerdo-mercosur-union-europea-firma-ue.jpeg",
-        "date": "2026-01-26T17:00:00.000Z",
-        "type": "analisis"
-      }
-    ]
-  },
   "union-europea": {
     "label": "union-europea",
     "items": [
@@ -881,6 +1221,49 @@
         "title": "Mercosur y Unión Europea avanzan en armonización de normas fitosanitarias",
         "thumbnail": "/assets/img/acuerdo-mercosur-union-europea-firma-ue.jpeg",
         "date": "2026-01-26T17:00:00.000Z",
+        "type": "analisis"
+      },
+      {
+        "id": "2026-01-26-integracion-regional-desafios",
+        "title": "Integración Regional: Desafíos y Oportunidades para el Desarrollo del Mercosur",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-26T00:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "integracion regional": {
+    "label": "integración regional",
+    "items": [
+      {
+        "id": "2026-01-26-integracion-regional-desafios",
+        "title": "Integración Regional: Desafíos y Oportunidades para el Desarrollo del Mercosur",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-26T00:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "fed": {
+    "label": "Fed",
+    "items": [
+      {
+        "id": "2026-01-25-fed-politica-monetaria-impacto",
+        "title": "Política Monetaria de la Fed y su Impacto en Economías Emergentes",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-25T00:00:00.000Z",
+        "type": "analisis"
+      }
+    ]
+  },
+  "economias emergentes": {
+    "label": "economías emergentes",
+    "items": [
+      {
+        "id": "2026-01-25-fed-politica-monetaria-impacto",
+        "title": "Política Monetaria de la Fed y su Impacto en Economías Emergentes",
+        "thumbnail": "/assets/img/default.jpg",
+        "date": "2026-01-25T00:00:00.000Z",
         "type": "analisis"
       }
     ]

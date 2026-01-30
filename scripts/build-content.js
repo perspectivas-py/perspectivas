@@ -10,7 +10,7 @@ import matter from "gray-matter";
 // Rutas de colecciones
 const COLLECTIONS = {
   noticias: "content/noticias/posts",
-  analisis: "content/analisis/posts",
+  analisis: "content/analisis/_posts",
   programa: "content/programa/posts",
   podcast: "content/podcast/posts",
   sponsors: "content/sponsors",
@@ -69,11 +69,11 @@ function loadCollection(folder, type) {
       const raw = fs.readFileSync(path.join(collectionPath, file), "utf8");
       const { data, content } = matter(raw);
       const slug = file.replace(/\.mdx?$/, "");
-      
+
       // Normalización de tags en tiempo de construcción
       const rawTags = data.tags || [];
       const tags = Array.isArray(rawTags) ? rawTags : [rawTags];
-      
+
       const normalizedFeatured = normalizeFeatured(data.featured);
 
       return {
@@ -94,7 +94,7 @@ function loadCollection(folder, type) {
         summary_short: deriveSummaryShort(data)
       };
     })
-    .sort((a, b) => new Date(b.date) - new Date(a.date)); 
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 
 async function main() {
@@ -102,43 +102,46 @@ async function main() {
 
   const data = {
     noticias: loadCollection(COLLECTIONS.noticias, "noticias"),
-    analisis: loadCollection(COLLECTIONS.analisis, "analisis"),
+    analisis: [
+      ...loadCollection("content/analisis/posts", "analisis"),
+      ...loadCollection("content/analisis/_posts", "analisis")
+    ].sort((a, b) => new Date(b.date) - new Date(a.date)),
     programa: loadCollection(COLLECTIONS.programa, "programa"),
     podcast: loadCollection(COLLECTIONS.podcast, "podcast"),
     sponsors: loadCollection(COLLECTIONS.sponsors, "sponsors"),
   };
-  
+
   // GENERAR ÍNDICE DE TAGS (BD de Etiquetas)
   console.log("🗂️ Generando índice de etiquetas (tags.json)...");
   const tagsIndex = {};
-  
+
   [...data.noticias, ...data.analisis, ...data.programa, ...data.podcast].forEach(item => {
-      if(item.tags && Array.isArray(item.tags)) {
-          item.tags.forEach(tag => {
-              const key = normalizeTag(tag);
-              if(!tagsIndex[key]) {
-                  tagsIndex[key] = {
-                      label: tag, // Guardamos la primera versión "bonita" que encontremos
-                      items: []
-                  };
-              }
-              // Guardamos solo lo necesario para listar (ahorro de espacio)
-              tagsIndex[key].items.push({
-                  id: item.slug || item.id,
-                  title: item.title,
-                  thumbnail: item.thumbnail,
-                  date: item.date,
-                  type: item.type
-              });
-          });
-      }
+    if (item.tags && Array.isArray(item.tags)) {
+      item.tags.forEach(tag => {
+        const key = normalizeTag(tag);
+        if (!tagsIndex[key]) {
+          tagsIndex[key] = {
+            label: tag, // Guardamos la primera versión "bonita" que encontremos
+            items: []
+          };
+        }
+        // Guardamos solo lo necesario para listar (ahorro de espacio)
+        tagsIndex[key].items.push({
+          id: item.slug || item.id,
+          title: item.title,
+          thumbnail: item.thumbnail,
+          date: item.date,
+          type: item.type
+        });
+      });
+    }
   });
-  
+
   // Ordenar items dentro de cada tag por fecha
   Object.keys(tagsIndex).forEach(key => {
-      tagsIndex[key].items.sort((a, b) => new Date(b.date) - new Date(a.date));
+    tagsIndex[key].items.sort((a, b) => new Date(b.date) - new Date(a.date));
   });
-  
+
   // Guardar tags.json (Nuestra "Base de Datos" de etiquetas)
   fs.writeFileSync(path.join(process.cwd(), "tags.json"), JSON.stringify(tagsIndex, null, 2));
   fs.writeFileSync(path.join(process.cwd(), "public/tags.json"), JSON.stringify(tagsIndex, null, 2)); // Copia en public

@@ -15,17 +15,17 @@ function parseFrontmatter(md) {
     let currentKey = null;
     let currentIndent = -1;
     let nestedObj = null;
-    
+
     m[1].split("\n").forEach(line => {
       if (!line.trim()) return;
-      
+
       const indent = line.search(/\S/);
       const lineContent = line.trim();
       const [key, ...v] = lineContent.split(":");
-      
+
       if (key && v.length > 0) {
         const value = v.join(":").trim().replace(/^["']|["']$/g, "");
-        
+
         if (!value || value === '{}') {
           currentKey = key.trim();
           nestedObj = {};
@@ -49,7 +49,7 @@ async function loadCollectionFromGitHub(folder, type) {
   try {
     const url = `https://api.github.com/repos/${REPO}/contents/${folder}?ref=${BRANCH}`;
     const res = await fetch(url);
-    
+
     if (!res.ok) {
       console.error(`Error cargando ${folder}:`, res.status);
       return [];
@@ -73,7 +73,7 @@ async function loadCollectionFromGitHub(folder, type) {
               is_main_featured: false,
               show_in_latest: true
             };
-            
+
             if (typeof frontmatter.featured === 'object' && frontmatter.featured !== null) {
               featuredObj = {
                 is_featured: frontmatter.featured.is_featured === "true" || frontmatter.featured.is_featured === true,
@@ -81,7 +81,7 @@ async function loadCollectionFromGitHub(folder, type) {
                 show_in_latest: frontmatter.featured.show_in_latest !== "false" && frontmatter.featured.show_in_latest !== false
               };
             }
-            
+
             return {
               id: frontmatter.id || slug,
               type,
@@ -115,13 +115,17 @@ export default async function handler(req, res) {
   try {
     console.log("🔄 Generando content.json dinámicamente desde GitHub...");
 
-    const [noticias, analisis, programa, podcast, sponsors] = await Promise.all([
+    const [noticias, analisisPosts, analisisUnderscorePosts, programa, podcast, sponsors] = await Promise.all([
       loadCollectionFromGitHub("content/noticias/posts", "noticias"),
       loadCollectionFromGitHub("content/analisis/posts", "analisis"),
+      loadCollectionFromGitHub("content/analisis/_posts", "analisis"),
       loadCollectionFromGitHub("content/programa/posts", "programa"),
       loadCollectionFromGitHub("content/podcast/posts", "podcast"),
       loadCollectionFromGitHub("content/sponsors", "sponsors"),
     ]);
+
+    const analisis = [...analisisPosts, ...analisisUnderscorePosts]
+      .sort((a, b) => new Date(b.date) - new Date(a.date));
 
     const data = {
       noticias,
@@ -136,16 +140,16 @@ export default async function handler(req, res) {
     res.setHeader("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
 
     console.log(`✅ Generado: ${data.noticias.length} noticias, ${data.analisis.length} análisis`);
-    
+
     res.statusCode = 200;
     res.end(JSON.stringify(data));
   } catch (error) {
     console.error("❌ Error generando content.json:", error);
     res.statusCode = 500;
     res.setHeader("Content-Type", "application/json");
-    res.end(JSON.stringify({ 
+    res.end(JSON.stringify({
       error: "Error generando contenido",
-      message: error.message 
+      message: error.message
     }));
   }
 }
