@@ -1,13 +1,5 @@
 {
-  // Categorías principales para Análisis (Sincronizadas con script.v3.js)
-  const ANALYSIS_CATEGORIES = [
-    { key: 'opinion-editorial', label: 'Opinión Editorial', color: '#7c3aed' },
-    { key: 'macro', label: 'Macroeconomía', color: '#3b82f6' },
-    { key: 'politica', label: 'Política Económica', color: '#f97316' },
-    { key: 'regional', label: 'Regional', color: '#06b6d4' },
-    { key: 'internacional', label: 'Internacional', color: '#10b981' },
-    { key: 'columnistas', label: 'Columnistas', color: '#ec4899' }
-  ];
+  // ANALYSIS_CATEGORIES is now loaded from src/constants.js
 
   // Función de normalización de slugs
   function normalizeSlug(str) {
@@ -98,21 +90,21 @@
       });
   });
 
-  function crearTarjetaAnalisis(md, filename) { 
-    const { frontmatter: f } = parseFrontmatter(md); 
+  function crearTarjetaAnalisis(md, filename) {
+    const { frontmatter: f } = parseFrontmatter(md);
     return `<article class="card">${f.image ? `<img src="${f.image}" alt="">` : ""}<div class="card-content"><h3><a href="noticia.html?type=analisis&id=${filename}">${f.title || "Sin título"}</a></h3><p class="meta" style="color: var(--color-text-secondary); font-size: 0.9em;">Por: ${f.author || "Anónimo"}</p></div></article>`;
   }
 
-  function parseFrontmatter(md) { 
-    const match = /^---\s*([\s\S]*?)\s*---/.exec(md), data = { frontmatter: {}, content: md }; 
-    if (match) { 
-      data.content = md.replace(match[0], "").trim(), 
-      match[1].split("\n").forEach(line => { 
-        const [key, ...valueParts] = line.split(":"); 
-        key && valueParts.length > 0 && (data.frontmatter[key.trim()] = valueParts.join(":").trim().replace(/"/g, "")); 
-      }); 
-    } 
-    const imageMatch = data.content.match(/!\[.*\]\((.*)\)/); 
-    return imageMatch && (data.frontmatter.image = imageMatch[1]), data; 
+  function parseFrontmatter(md) {
+    const match = /^---\s*([\s\S]*?)\s*---/.exec(md), data = { frontmatter: {}, content: md };
+    if (match) {
+      data.content = md.replace(match[0], "").trim(),
+        match[1].split("\n").forEach(line => {
+          const [key, ...valueParts] = line.split(":");
+          key && valueParts.length > 0 && (data.frontmatter[key.trim()] = valueParts.join(":").trim().replace(/"/g, ""));
+        });
+    }
+    const imageMatch = data.content.match(/!\[.*\]\((.*)\)/);
+    return imageMatch && (data.frontmatter.image = imageMatch[1]), data;
   }
 }

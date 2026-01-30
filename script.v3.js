@@ -1,15 +1,7 @@
 // script.v3.js — MOTOR PRO DEFINITIVO (Corregido)
 console.log("🚀 Perspectivas PRO v3 cargado");
 
-// Categorías principales para Análisis
-const ANALYSIS_CATEGORIES = [
-  { key: 'opinion-editorial', label: 'Opinión Editorial', color: '#7c3aed' },
-  { key: 'macro', label: 'Macroeconomía', color: '#3b82f6' },
-  { key: 'politica', label: 'Política Económica', color: '#f97316' },
-  { key: 'regional', label: 'Análisis Regional', color: '#06b6d4' },
-  { key: 'internacional', label: 'Internacional', color: '#10b981' },
-  { key: 'columnistas', label: 'Columnistas', color: '#ec4899' }
-];
+// ANALYSIS_CATEGORIES is now loaded from src/constants.js
 
 const CONTENT_URL = "content.json";
 let searchDataCache = null;
@@ -2689,7 +2681,7 @@ function formatGuarani(value) {
   if (num >= 100 || num <= -100) {
     return "₲ " + Math.round(num).toLocaleString("es-PY");
   }
-  
+
   // Si es un valor decimal (como una tasa o variación)
   return "₲ " + num.toLocaleString("es-PY", {
     minimumFractionDigits: 0,

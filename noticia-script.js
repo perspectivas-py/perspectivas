@@ -25,14 +25,7 @@ const MAIN_CATEGORIES = [
   { key: 'locales', label: 'Locales', color: '#ef4444' }
 ];
 
-const ANALYSIS_CATEGORIES = [
-  { key: 'opinion-editorial', label: 'Opinión Editorial', color: '#7c3aed' },
-  { key: 'macro', label: 'Macroeconomía', color: '#3b82f6' },
-  { key: 'politica', label: 'Política Económica', color: '#f97316' },
-  { key: 'regional', label: 'Regional', color: '#06b6d4' },
-  { key: 'internacional', label: 'Internacional', color: '#10b981' },
-  { key: 'columnistas', label: 'Columnistas', color: '#ec4899' }
-];
+// ANALYSIS_CATEGORIES is now loaded from src/constants.js
 
 function normalizeSlug(value = "") {
   return value
@@ -134,7 +127,7 @@ function renderRelated(allNews, currentArticle) {
     <article class="related-card">
       <a href="/noticia.html?id=${encodeURIComponent(a.slug || a.id)}">
         <div class="related-card-img">
-          <img src="${a.thumbnail}" alt="${a.title}">
+          <img src="${a.thumbnail || '/images/default.jpg'}" alt="${a.title}" onerror="this.src='/images/default.jpg'">
         </div>
         <div class="related-card-content">
           <h4>${a.title}</h4>
@@ -576,12 +569,15 @@ async function loadArticle() {
     // 2. Inyectar foto
     const heroFigure = document.getElementById("article-hero-figure");
     if (heroFigure) {
-      if (article.thumbnail) {
+      if (article.thumbnail || article.image) {
+        const imgSrc = article.thumbnail || article.image || "/images/default.jpg";
         heroFigure.innerHTML = `
-          <img src="${article.thumbnail}" alt="${article.title}">
+          <img src="${imgSrc}" alt="${article.title}" onerror="this.src='/images/default.jpg'">
           ${article.caption ? `<figcaption>${article.caption}</figcaption>` : ""}`;
       } else {
-        heroFigure.innerHTML = `<p style="padding: 20px;">Imagen no disponible</p>`;
+        heroFigure.innerHTML = `
+          <img src="/images/default.jpg" alt="${article.title}">
+          <p style="padding: 20px;">Imagen no disponible</p>`;
       }
     }
 
