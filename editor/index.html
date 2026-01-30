@@ -1,10 +1,12 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gestor de Contenidos | Perspectivas</title>
 </head>
+
 <body>
 
   <!-- contenedor requerido por Decap CMS -->
@@ -12,7 +14,7 @@
 
   <!-- Script de depuración -->
   <script>
-    window.addEventListener("message", function(event) {
+    window.addEventListener("message", function (event) {
       console.log("📩 MENSAJE RECIBIDO DESDE POPUP:", event.data);
     }, false);
   </script>
@@ -20,7 +22,7 @@
   <!-- Configuración de CMS -->
   <script>
     window.CMS_CONFIGURATION = {
-      config: '/api/config'
+      config: '/api/config?v=' + Date.now()
     };
   </script>
 
@@ -28,4 +30,5 @@
   <script src="https://unpkg.com/decap-cms@3.9.0/dist/decap-cms.js"></script>
 
 </body>
+
 </html>
