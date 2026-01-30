@@ -10,6 +10,11 @@ const TYPE_LABELS = {
   "podcast": "Podcast"
 };
 
+// Seguridad: Asegurar que CATEGORY_LABELS exista (definido en script.v3.js)
+if (typeof window.CATEGORY_LABELS === "undefined") {
+  window.CATEGORY_LABELS = {};
+}
+
 // Categorías principales para el submenú
 const MAIN_CATEGORIES = [
   { key: 'agro', label: 'Agro', color: '#10b981' },
