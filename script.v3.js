@@ -929,10 +929,16 @@ const analisisController = (() => {
     source: [],
     filtered: [],
     visible: 7, // 1 featured + 6 in grid (2 cols * 3 rows)
-    currentCategory: 'all'
+    currentCategory: 'all',
+    searchQuery: '',
+    sortOrder: 'recent'
   };
   let button = null;
   let filterContainer = null;
+  let searchInput = null;
+  let sortButtons = [];
+  let countLabel = null;
+  let resetBtn = null;
 
   function renderFilters() {
     if (!filterContainer) return;
@@ -940,15 +946,16 @@ const analisisController = (() => {
     const categories = [{ key: 'all', label: 'Todos' }, ...ANALYSIS_CATEGORIES];
 
     filterContainer.innerHTML = categories.map(cat => `
-      <button class="category-pill ${state.currentCategory === cat.key ? 'active' : ''}" 
+      <button class="filter-btn ${state.currentCategory === cat.key ? 'active' : ''}" 
               data-category="${cat.key}" 
-              type="button">
+              type="button"
+              aria-pressed="${state.currentCategory === cat.key}">
         ${cat.label}
       </button>
     `).join('');
 
     // Bind events
-    filterContainer.querySelectorAll('.category-pill').forEach(btn => {
+    filterContainer.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const cat = btn.dataset.category;
         setCategory(cat);
@@ -958,16 +965,78 @@ const analisisController = (() => {
 
   function setCategory(category) {
     state.currentCategory = category;
-    if (category === 'all') {
-      state.filtered = state.source;
-    } else {
-      state.filtered = state.source.filter(item =>
-        item.category === category || (item.tags && item.tags.includes(category))
+    applyFilters();
+  }
+
+  function applyFilters() {
+    let filtered = [...state.source];
+
+    // Filter by category
+    if (state.currentCategory && state.currentCategory !== 'all') {
+      filtered = filtered.filter(item =>
+        item.category === state.currentCategory || (item.tags && item.tags.includes(state.currentCategory))
       );
     }
+
+    // Filter by search query
+    if (state.searchQuery) {
+      const query = state.searchQuery.toLowerCase();
+      filtered = filtered.filter(item => {
+        const haystack = [
+          item.title,
+          item.description,
+          item.summary,
+          item.author,
+          resolveCategoryLabel(item.category)
+        ].map(v => (v || '').toString().toLowerCase()).join(' ');
+        return haystack.includes(query);
+      });
+    }
+
+    // Sort
+    if (state.sortOrder === 'oldest') {
+      filtered.sort((a, b) => new Date(a.date || 0) - new Date(b.date || 0));
+    } else {
+      filtered.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+    }
+
+    state.filtered = filtered;
     state.visible = 7;
     renderFilters();
+    updateFilterMeta();
+    updateSortButtons();
     render();
+  }
+
+  function updateFilterMeta() {
+    if (countLabel) {
+      const total = state.filtered.length;
+      const base = state.source.length;
+      const hasActive = state.currentCategory !== 'all' || state.searchQuery || state.sortOrder !== 'recent';
+      const label = hasActive && base !== total
+        ? `${total} de ${base} resultados`
+        : `${total} resultados`;
+      countLabel.textContent = label;
+    }
+    if (resetBtn) {
+      resetBtn.hidden = !(state.currentCategory !== 'all' || state.searchQuery || state.sortOrder !== 'recent');
+    }
+  }
+
+  function updateSortButtons() {
+    sortButtons.forEach(btn => {
+      const isActive = (btn.dataset.sort || 'recent') === state.sortOrder;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', String(isActive));
+    });
+  }
+
+  function resetFilters() {
+    state.currentCategory = 'all';
+    state.searchQuery = '';
+    state.sortOrder = 'recent';
+    if (searchInput) searchInput.value = '';
+    applyFilters();
   }
 
   function render() {
@@ -983,19 +1052,21 @@ const analisisController = (() => {
       return;
     }
 
-    // Featured (Horizontal Split)
+    // Featured Miniportada (Imagen Vertical Grande)
     const firstItem = state.filtered[0];
     const catData = ANALYSIS_CATEGORIES.find(c => c.key === firstItem.category) || { label: 'Análisis', color: 'var(--brand-primary)' };
 
     featured.innerHTML = `
-      <a href="/noticia.html?id=${encodeURIComponent(firstItem.slug || firstItem.id)}" class="analisis-featured-horizontal">
-        <img src="${firstItem.thumbnail}" alt="${firstItem.title}" loading="lazy"/>
-        <div class="content">
-          <span class="eyebrow" style="color: ${catData.color}">${catData.label}</span>
-          <h3>${firstItem.title}</h3>
-          <p class="summary">${firstItem.description || firstItem.summary || ''}</p>
-          <div class="meta">
-            <span>Por: ${firstItem.author || 'Redacción'}</span>
+      <a href="/noticia.html?id=${encodeURIComponent(firstItem.slug || firstItem.id)}" class="analisis-miniportada-featured">
+        <div class="featured-image-wrapper">
+          <img src="${firstItem.thumbnail}" alt="${firstItem.title}" loading="lazy"/>
+        </div>
+        <div class="featured-content">
+          <span class="featured-eyebrow" style="color: ${catData.color}">${catData.label}</span>
+          <h3 class="featured-title">${firstItem.title}</h3>
+          <p class="featured-summary">${firstItem.description || firstItem.summary || ''}</p>
+          <div class="featured-meta">
+            <span>${firstItem.author || 'Redacción'}</span>
             <span>${formatDate(firstItem.date)}</span>
           </div>
         </div>
@@ -1031,12 +1102,16 @@ const analisisController = (() => {
     state.filtered = state.source;
     state.visible = 7;
     renderFilters();
+    updateFilterMeta();
     render();
   }
 
   function init() {
     button = document.getElementById("analisis-view-more");
     filterContainer = document.getElementById("analisis-category-filters");
+    searchInput = document.getElementById("analisis-filter-search");
+    countLabel = document.getElementById("analisis-filter-count");
+    resetBtn = document.getElementById("analisis-filter-reset");
 
     if (button && !button.dataset.bound) {
       button.addEventListener("click", () => {
@@ -1045,6 +1120,35 @@ const analisisController = (() => {
       });
       button.dataset.bound = "true";
     }
+
+    if (searchInput && !searchInput.dataset.bound) {
+      const handleSearch = () => {
+        state.searchQuery = (searchInput.value || '').toLowerCase().trim();
+        applyFilters();
+      };
+      searchInput.addEventListener('input', handleSearch);
+      searchInput.addEventListener('search', handleSearch);
+      searchInput.dataset.bound = "true";
+    }
+
+    if (resetBtn && !resetBtn.dataset.bound) {
+      resetBtn.addEventListener('click', resetFilters);
+      resetBtn.dataset.bound = "true";
+    }
+
+    // Sort buttons
+    const sortBtns = document.querySelectorAll('.analisis-sort-control .sort-pill');
+    sortButtons = Array.from(sortBtns);
+    sortButtons.forEach(btn => {
+      if (btn.dataset.bound === "true") return;
+      btn.addEventListener('click', () => {
+        const targetSort = btn.dataset.sort || 'recent';
+        if (state.sortOrder === targetSort) return;
+        state.sortOrder = targetSort;
+        applyFilters();
+      });
+      btn.dataset.bound = "true";
+    });
   }
 
   return { init, setSource };
