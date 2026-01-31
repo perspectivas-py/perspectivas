@@ -653,38 +653,53 @@ function buildDollarPyWholesaleQuote(cfg, snapshot) {
 
 function buildDollarPyRetailQuote(snapshot, spec, usdQuote) {
   if (!spec || !snapshot?.dolarpy) return null;
-  const entries = Object.entries(snapshot.dolarpy)
-    .filter(([key, val]) => {
-      const normalizedKey = key?.toLowerCase?.() || key;
-      if (DOLLAR_PY_EXCLUDED_KEYS.includes(normalizedKey)) return false;
-      const buy = Number(val?.compra);
-      const sell = Number(val?.venta);
-      return Number.isFinite(buy) && Number.isFinite(sell);
-    });
 
-  if (!entries.length) return null;
+  // 1. Priorizar Cambios Chaco si está disponible
+  const chaco = snapshot.dolarpy.cambioschaco;
+  const hasChaco = chaco && Number.isFinite(Number(chaco.compra)) && Number.isFinite(Number(chaco.venta));
 
-  const totals = entries.reduce((acc, [, val]) => {
-    acc.buy += Number(val.compra);
-    acc.sell += Number(val.venta);
-    return acc;
-  }, { buy: 0, sell: 0 });
+  let finalBuy, finalSell, finalReference;
 
-  const avgBuy = totals.buy / entries.length;
-  const avgSell = totals.sell / entries.length;
-  if (!Number.isFinite(avgBuy) || !Number.isFinite(avgSell)) return null;
+  if (hasChaco) {
+    finalBuy = Number(chaco.compra);
+    finalSell = Number(chaco.venta);
+    finalReference = "Cambios Chaco (Minorista)";
+  } else {
+    // 2. Fallback al promedio de casas de cambio
+    const entries = Object.entries(snapshot.dolarpy)
+      .filter(([key, val]) => {
+        const normalizedKey = key?.toLowerCase?.() || key;
+        if (DOLLAR_PY_EXCLUDED_KEYS.includes(normalizedKey)) return false;
+        const buy = Number(val?.compra);
+        const sell = Number(val?.venta);
+        return Number.isFinite(buy) && Number.isFinite(sell);
+      });
 
-  const midValue = (avgBuy + avgSell) / 2;
+    if (!entries.length) return null;
+
+    const totals = entries.reduce((acc, [, val]) => {
+      acc.buy += Number(val.compra);
+      acc.sell += Number(val.venta);
+      return acc;
+    }, { buy: 0, sell: 0 });
+
+    finalBuy = totals.buy / entries.length;
+    finalSell = totals.sell / entries.length;
+    finalReference = spec.reference || "Promedio Casas de Cambio";
+  }
+
+  if (!Number.isFinite(finalBuy) || !Number.isFinite(finalSell)) return null;
+  const midValue = (finalBuy + finalSell) / 2;
 
   return {
     currency: spec.currency,
     code: spec.code,
     amount: spec.amount,
     flagCode: spec.flagCode || "us",
-    buy: formatGuarani(avgBuy),
-    sell: formatGuarani(avgSell),
+    buy: formatGuarani(finalBuy),
+    sell: formatGuarani(finalSell),
     variation: usdQuote?.variation || formatVariation(0),
-    reference: spec.reference || usdQuote?.reference || FX_REFERENCE_FALLBACK,
+    reference: finalReference,
     lastUpdate: formatTimestampLabel(snapshot?.updated) || usdQuote?.lastUpdate || spec.fallback?.lastUpdate || "",
     midValue
   };
