@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Datos y Visualizaciones Económicas de Paraguay - Perspectivas.">
+    <title>Datos & Visualizaciones — Perspectivas</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;700&family=Montserrat:wght@600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="icon" type="image/svg+xml" href="assets/img/icono-perspectivas.svg">
+    <link rel="stylesheet" href="style.css?v=4.6">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <header class="site-header">
+        <!-- Nivel 1: Barra de Utilidad -->
+        <div class="header-utility-bar">
+            <div class="wrap header-utility-inner">
+                <div class="utility-left">
+                    <span id="header-date" class="header-date">-- de --, 2026</span>
+                </div>
+                <div class="utility-right">
+                    <div id="weather-widget" class="weather-widget-v2" aria-label="Clima de Asunción">
+                        <span id="weather-temp" class="weather-temp">--°C</span>
+                        <span id="weather-symbol" class="weather-symbol-v2"></span>
+                    </div>
+                    <button id="theme-toggle" class="theme-toggle-v2" aria-label="Cambiar tema">
+                        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nivel 2: Barra de Marca -->
+        <div class="header-main-bar">
+            <div class="wrap header-main-inner">
+                <div class="header-main-left">
+                    <button id="category-drawer-toggle" class="menu-pill-toggle" aria-label="Abrir menú">
+                        <div class="hamburger-icon">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <span class="menu-label">MENÚ</span>
+                    </button>
+                    <button id="search-toggle-header" class="search-icon-btn" aria-label="Buscar">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="header-main-center">
+                    <a class="brand-v2" href="index.html">
+                        <span class="brand-text">Perspectivas</span>
+                    </a>
+                </div>
+
+                <div class="header-main-right">
+                    <a href="#newsletter" class="cta-subscribe-v2">SUSCRÍBETE</a>
+                    <button class="user-access-btn" aria-label="Acceso usuario">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nivel 3: Navegación Principal -->
+        <nav class="header-nav-bar">
+            <div class="wrap">
+                <ul class="nav-list-v2">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li class="has-submenu">
+                        <a href="analisis.html">Análisis <svg class="chevron-down" viewBox="0 0 24 24" width="14"
+                                height="14" fill="none" stroke="currentColor" stroke-width="3">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg></a>
+                        <div class="mega-menu-panel">
+                            <div class="mega-menu-inner">
+                                <div class="mega-menu-links">
+                                    <h4>Secciones</h4>
+                                    <ul class="mega-menu-list">
+                                        <li><a href="analisis.html">Opinión Editorial</a></li>
+                                        <li><a href="categoria.html?cat=macro">Macroeconomía</a></li>
+                                        <li><a href="categoria.html?cat=politica">Política Económica</a></li>
+                                        <li><a href="categoria.html?cat=regional">Análisis Regional</a></li>
+                                    </ul>
+                                </div>
+                                <div id="mega-featured-analisis" class="mega-menu-featured">
+                                    <p class="loading-text">Cargando destacados...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="datos.html" class="active">Datos & Visualizaciones</a></li>
+                    <li class="has-submenu">
+                        <a href="index.html#noticias">Noticias <svg class="chevron-down" viewBox="0 0 24 24" width="14"
+                                height="14" fill="none" stroke="currentColor" stroke-width="3">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg></a>
+                        <div class="mega-menu-panel">
+                            <div class="mega-menu-inner">
+                                <div class="mega-menu-links">
+                                    <h4>Cobertura</h4>
+                                    <ul class="mega-menu-list">
+                                        <li><a href="categoria.html?cat=locales">Noticias Locales</a></li>
+                                        <li><a href="categoria.html?cat=empresas">Empresas & Negocios</a></li>
+                                        <li><a href="categoria.html?cat=mercados">Mercados Financieros</a></li>
+                                        <li><a href="categoria.html?cat=agro">Agro & Commodities</a></li>
+                                    </ul>
+                                </div>
+                                <div id="mega-featured-noticias" class="mega-menu-featured">
+                                    <p class="loading-text">Cargando noticias...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="index.html#newsletter">Suscríbete</a></li>
+                    <li><a href="index.html#about">Contacto</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Drawer / Menú Lateral para Móvil -->
+        <div id="category-drawer" class="category-drawer-v2" aria-hidden="true">
+            <div class="drawer-header-v2">
+                <a class="brand-mini" href="index.html">Perspectivas</a>
+                <button id="category-drawer-close" class="drawer-close-v2">×</button>
+            </div>
+            <div class="drawer-content-v2">
+                <div class="drawer-search-box" id="drawer-search-box">
+                    <button type="button" class="drawer-search-toggle" id="drawer-search-toggle"
+                        aria-label="Abrir búsqueda">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+                    <div class="drawer-search-expanded" id="drawer-search-expanded">
+                        <input type="text" id="drawer-search-input" placeholder="Buscar noticias...">
+                        <button type="button" class="drawer-search-close" id="drawer-search-close"
+                            aria-label="Cerrar búsqueda">×</button>
+                    </div>
+                </div>
+                <div class="drawer-nav-v2">
+                    <h4>Secciones</h4>
+                    <ul id="category-drawer-filters"></ul>
+                </div>
+                <div class="drawer-footer-v2">
+                    <a href="#newsletter" class="cta-subscribe-full">SUSCRÍBETE AHORA</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel de Clima (Modal) -->
+        <div id="weather-panel" class="weather-panel-v2" aria-hidden="true">
+            <div class="weather-panel-inner-v2">
+                <div class="weather-panel-header-v2">
+                    <h3>Pronóstico Asunción</h3>
+                    <button id="weather-panel-close">×</button>
+                </div>
+                <div id="weather-panel-content"></div>
+            </div>
+        </div>
+
+        <!-- Search Overlay -->
+        <div id="search-overlay" class="search-overlay" aria-hidden="true">
+            <button id="search-overlay-close" class="search-overlay-close" aria-label="Cerrar búsqueda">×</button>
+            <div class="search-overlay-content">
+                <input type="text" id="search-overlay-input" class="search-overlay-input"
+                    placeholder="Escribe para buscar..." autocomplete="off">
+                <div id="search-overlay-results" class="search-results-container"></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="wrap section">
+            <div class="dashboard-header">
+                <h1 class="dashboard-title">Dashboard Económico</h1>
+                <p class="dashboard-subtitle">Indicadores en tiempo real y análisis de tendencias para el mercado
+                    paraguayo.</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- Tarjeta Principal: Gráfico de Tendencia -->
+                <div class="dashboard-card chart-card">
+                    <div class="card-header">
+                        <h3>Evolución USD / PYG</h3>
+                        <div class="card-actions">
+                            <button class="btn-time active" data-range="1M">30D</button>
+                            <button class="btn-time" data-range="6M">6M</button>
+                            <button class="btn-time" data-range="1Y">1Y</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="mainChart"></canvas>
+                    </div>
+                    <div class="card-footer">
+                        <span class="price-now">Gs. <span id="usd-price-now">7.320</span></span>
+                        <span class="price-change positive">+0,17% hoy</span>
+                    </div>
+                </div>
+
+                <!-- Sidebar Dashboard: Widgets Rápidos -->
+                <div class="dashboard-sidebar">
+                    <div class="dashboard-card mini-card">
+                        <span class="mini-label">Inflación (IPC)</span>
+                        <span class="mini-value">3,8%</span>
+                        <span class="mini-meta">Meta: 4.0%</span>
+                        <div class="mini-sparkline"><canvas id="spark-inflation"></canvas></div>
+                    </div>
+                    <div class="dashboard-card mini-card">
+                        <span class="mini-label">PIB (Proyectado)</span>
+                        <span class="mini-value">+4,2%</span>
+                        <span class="mini-meta">BPC (2025)</span>
+                        <div class="mini-sparkline"><canvas id="spark-pib"></canvas></div>
+                    </div>
+                    <div class="dashboard-card mini-card">
+                        <span class="mini-label">TPM (Tasa BCP)</span>
+                        <span class="mini-value">6,00%</span>
+                        <span class="mini-meta">Sin cambios</span>
+                    </div>
+                </div>
+
+                <!-- Fila Inferior: Otros Mercados -->
+                <div class="dashboard-card">
+                    <h4>Real Brasileño</h4>
+                    <div class="market-row">
+                        <span class="market-price">Gs. 1.435</span>
+                        <span class="market-trend negative">-0,1%</span>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <h4>Euro</h4>
+                    <div class="market-row">
+                        <span class="market-price">Gs. 8.010</span>
+                        <span class="market-trend positive">+0,3%</span>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <h4>Soja (CME)</h4>
+                    <div class="market-row">
+                        <span class="market-price">USD 378,5</span>
+                        <span class="market-trend positive">+1,2%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer-new">
+        <div class="footer-top-bar">
+            <div class="wrap">
+                <a href="index.html" class="footer-logo">
+                    <span class="brand-text">Perspectivas</span>
+                </a>
+                <div class="footer-socials">
+                    <a href="#" class="footer-social-link">FB</a>
+                    <a href="#" class="footer-social-link">X</a>
+                    <a href="#" class="footer-social-link">IG</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-main-content">
+            <div class="wrap footer-grid">
+                <div class="footer-col">
+                    <h4>Secciones</h4>
+                    <ul>
+                        <li><a href="analisis.html">Análisis</a></li>
+                        <li><a href="index.html#noticias">Noticias</a></li>
+                        <li><a href="datos.html">Datos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <p>prensa.perspectivas@gmail.com</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="wrap">
+                <p>&copy; 2026 Perspectivas. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts Shared -->
+    <script src="src/constants.js"></script>
+    <script src="script.v3.js"></script>
+    <!-- Script específico -->
+    <script src="datos-script.js"></script>
+</body>
+
+</html>
