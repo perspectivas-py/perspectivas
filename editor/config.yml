@@ -347,3 +347,21 @@ collections:
       - { label: "🔗 Slug (URL)", name: "slug", widget: "string", required: true, hint: "Ej: sobre-nosotros, historia, contacto" }
       - { label: "📝 Contenido", name: "body", widget: "markdown", required: true }
 
+  # ============================================================
+  # TAPAS DIGITALES
+  # ============================================================
+  - name: "digital_covers"
+    label: "🖼️ Tapas Digitales"
+    folder: "content/tapas"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - {label: "🆔 ID", name: "id", widget: "hidden", default: "{{slug}}"}
+      - {label: "🖼️ Imagen de Portada", name: "image", widget: "image", required: true, hint: "La imagen de la tapa digital (3:4 aspect ratio recomendado)"}
+      - {label: "📅 Edición (Fecha)", name: "edition", widget: "string", required: true, hint: "Ej: Miércoles, 29 de Enero de 2026"}
+      - {label: "📅 Fecha de Publicación", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", required: true}
+      - {label: "✅ Activa", name: "active", widget: "boolean", default: true, hint: "Mostrar u ocultar esta tapa"}
+      - {label: "🔢 Orden", name: "order", widget: "number", default: 0, hint: "Orden de aparición (menor = primero)"}
+

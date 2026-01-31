@@ -14,6 +14,7 @@ const COLLECTIONS = {
   programa: "content/programa/posts",
   podcast: "content/podcast/posts",
   sponsors: "content/sponsors",
+  tapas: "content/tapas",
 };
 
 // Función de normalización consistente
@@ -109,6 +110,7 @@ async function main() {
     programa: loadCollection(COLLECTIONS.programa, "programa"),
     podcast: loadCollection(COLLECTIONS.podcast, "podcast"),
     sponsors: loadCollection(COLLECTIONS.sponsors, "sponsors"),
+    tapas: loadCollection(COLLECTIONS.tapas, "tapa"),
   };
 
   // GENERAR ÍNDICE DE TAGS (BD de Etiquetas)
@@ -159,7 +161,7 @@ async function main() {
   fs.writeFileSync(publicPath, JSON.stringify(data, null, 2));
   console.log("✨ content.json también disponible en /public/content.json");
 
-  console.log(`📊 Estadísticas: ${data.noticias.length} noticias, ${data.analisis.length} análisis`);
+  console.log(`📊 Estadísticas: ${data.noticias.length} noticias, ${data.analisis.length} análisis, ${data.tapas.length} tapas`);
 
   console.log("🏁 Finalizado con éxito!");
 }

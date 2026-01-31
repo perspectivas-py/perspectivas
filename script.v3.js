@@ -1796,8 +1796,8 @@ async function initHome() {
 
     renderSecondary(remainingNoticias);
 
-    // Renderizar tapas digitales en sidebar (datos de muestra)
-    renderDigitalCoversSidebar();
+    // Renderizar tapas digitales en sidebar (desde content.json si existen)
+    renderDigitalCoversSidebar(data.tapas);
 
     initNoticiasLocales(remainingNoticias);
     renderCategoryFilters(remainingNoticias);
@@ -2924,11 +2924,22 @@ function buildDigitalCoverHorizontalCard(cover) {
   `;
 }
 
-function renderDigitalCoversSidebar() {
+function renderDigitalCoversSidebar(cmsCovers = []) {
   const container = document.getElementById('digital-covers-horizontal');
   if (!container) return;
 
-  container.innerHTML = DIGITAL_COVERS_SAMPLE
+  // Priorizar CMS, fallback a sample si está vacío
+  const activeCovers = (cmsCovers && cmsCovers.length > 0)
+    ? cmsCovers.filter(c => c.active !== false).sort((a, b) => (a.order || 0) - (b.order || 0))
+    : DIGITAL_COVERS_SAMPLE;
+
+  if (!activeCovers.length) {
+    const parent = container.closest('.digital-covers-sidebar-widget');
+    if (parent) parent.style.display = 'none';
+    return;
+  }
+
+  container.innerHTML = activeCovers
     .map(buildDigitalCoverHorizontalCard)
     .join('');
 
@@ -2937,7 +2948,7 @@ function renderDigitalCoversSidebar() {
     card.addEventListener('click', (e) => {
       e.preventDefault();
       const coverId = card.dataset.coverId;
-      const cover = DIGITAL_COVERS_SAMPLE.find(c => c.id === coverId);
+      const cover = activeCovers.find(c => (c.slug || c.id) === coverId);
       if (cover) {
         openCoverModal(cover);
       }
