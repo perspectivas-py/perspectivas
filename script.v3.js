@@ -17,7 +17,7 @@ const MARKET_QUOTES = [
 ];
 
 const MARKET_FX_TICKER_SPEC = [
-  { code: "USD", label: "USD / Gs", mode: "sell" },
+  { code: "USD MIN", label: "Dólar Minorista", mode: "sell" },
   { code: "ARS", label: "Peso Argentino", units: 1000, decimals: 2 },
   { code: "BRL", label: "Real Brasileño", units: 1, decimals: 0 },
   { code: "EUR", label: "Euro", units: 1, decimals: 0 }
