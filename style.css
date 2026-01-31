@@ -8347,17 +8347,16 @@ body.cinema-mode .site-footer-new {
 .related-horizontal-section {
   margin: 4rem 0;
   padding: 0 1rem;
-  border-top: 1px solid var(--border-color);
+  border-top: 2px solid var(--text-primary);
+  /* More highlighted line */
   clear: both;
 }
 
 .related-horizontal-header {
-  margin-top: -0.75rem;
-  /* Intersection with top border */
+  margin-top: 1rem;
+  /* Move below the line */
   margin-bottom: 2rem;
-  background: var(--bg-primary);
-  display: inline-block;
-  padding-right: 1.5rem;
+  display: block;
 }
 
 .related-horizontal-title {
