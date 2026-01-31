@@ -5204,10 +5204,10 @@ ul {
 .article-meta-sidebar-new {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
   font-family: var(--font-body);
   color: var(--text-primary);
-  border-top: 3px solid var(--color-accent);
+  border-top: 1px solid var(--border-color); /* More subtle border */
   padding-top: 1rem;
 }
 
@@ -5219,12 +5219,12 @@ ul {
 }
 
 .author-avatar {
-  width: 40px;
-  /* Smaller avatar */
-  height: 40px;
+  width: 32px; /* Smaller avatar */
+  height: 32px;
   border-radius: 50%;
   object-fit: cover;
   border: 1px solid var(--border-color);
+  filter: grayscale(100%); /* Sophisticated look */
 }
 
 .author-details {
@@ -5234,27 +5234,27 @@ ul {
 }
 
 .author-name {
-  font-family: var(--font-headline);
-  font-weight: 800;
-  font-size: 0.9rem;
+  font-family: 'Merriweather', serif; /* Serif for author names */
+  font-weight: 700;
+  font-size: 0.85rem; /* Smaller */
   color: var(--text-primary);
   line-height: 1.2;
 }
 
 .author-role {
-  font-size: 0.7rem;
+  font-size: 0.65rem; /* Super small and elegant */
   color: var(--text-secondary);
-  font-weight: 600;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.05em;
 }
 
 /* Date Section */
 .sidebar-date-section {
-  font-size: 0.7rem;
-  color: var(--text-secondary);
+  font-size: 0.65rem; /* Smaller date */
+  color: #64748b;
   line-height: 1.4;
-  margin-top: 0.25rem;
+  margin-top: 0.1rem;
 }
 
 .author-section-compact {
@@ -5276,18 +5276,18 @@ ul {
 
 .author-details-inline .author-name {
   font-family: 'Merriweather', serif;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   font-weight: 700;
   color: var(--text-primary);
 }
 
 .author-details-inline .author-role {
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
   font-weight: 500;
   color: var(--text-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.05em;
 }
 
 /* Topics Section */
@@ -5299,15 +5299,15 @@ ul {
 .sidebar-label {
   display: block;
   font-weight: 700;
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   color: var(--text-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   margin-bottom: 0.35rem;
 }
 
 .topics-list-text {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   line-height: 1.4;
   color: var(--color-accent);
 }
@@ -5335,11 +5335,11 @@ ul {
 }
 
 .reading-time-info {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: #64748b;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
 }
 
 .action-row {
@@ -5356,7 +5356,7 @@ ul {
   display: flex;
   align-items: center;
   gap: 0.3rem;
-  font-size: 1rem;
+  font-size: 0.85rem; /* Smaller icons */
   padding: 0;
   transition: color 0.2s;
 }
@@ -5394,15 +5394,15 @@ ul {
 }
 
 .social-circle-btn {
-  width: 32px;
-  height: 32px;
+  width: 28px; /* Smaller circles */
+  height: 28px;
   border-radius: 50%;
   background-color: var(--bg-secondary);
   color: var(--text-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.85rem;
+  font-size: 0.75rem; /* Smaller icons */
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid var(--border-color);
 }
