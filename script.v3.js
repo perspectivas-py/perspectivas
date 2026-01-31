@@ -1808,18 +1808,19 @@ async function initHome() {
   renderMarketTicker("ticker-track-bottom");
   initSearchToggle();
   initMenuToggle();
-  await loadFxQuotes();
-  await loadMarketQuotes();
+  loadFxQuotes();
+  loadMarketQuotes();
   if (!marketTickerRefreshHandle && MARKET_TICKER_REFRESH_INTERVAL > 0) {
     marketTickerRefreshHandle = setInterval(async () => {
-      await loadFxQuotes();
-      await loadMarketQuotes();
+      loadFxQuotes();
+      loadMarketQuotes();
     }, MARKET_TICKER_REFRESH_INTERVAL);
   }
 
   try {
-    // 1. CACHE BUSTING: Agregamos timestamp para obligar a Vercel/Navegador a bajar la versión nueva
-    const uniqueUrl = `${CONTENT_URL}?t=${new Date().getTime()}`;
+    // 1. CACHE BUSTING: Usamos un buster de 5 minutos para permitir caché del navegador
+    const vBuster = Math.floor(Date.now() / 300000);
+    const uniqueUrl = `${CONTENT_URL}?v=${vBuster}`;
 
     const res = await fetch(uniqueUrl);
 

@@ -311,9 +311,10 @@ async function loadArticle() {
   }
 
   try {
-    // Cache busting sencillo para navegador
+    // Cache busting de 5 minutos para permitir caché del navegador
     console.log("📥 Cargando content.json...");
-    const res = await fetch(`${ARTICLE_CONTENT_URL}?t=${Date.now()}`);
+    const vBuster = Math.floor(Date.now() / 300000);
+    const res = await fetch(`${ARTICLE_CONTENT_URL}?v=${vBuster}`);
 
     if (!res.ok) {
       throw new Error(`No se pudo cargar content.json (HTTP ${res.status})`);
