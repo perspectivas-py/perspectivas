@@ -35,6 +35,16 @@ const MARKET_COMMODITY_SOURCES = [
     }
   },
   {
+    id: "brent",
+    label: "Petróleo Brent",
+    symbol: "cb.f",
+    formatter: quote => {
+      const close = Number(quote.close);
+      if (!Number.isFinite(close)) return null;
+      return formatUsdTicker(close, 2);
+    }
+  },
+  {
     id: "soy",
     label: "Soja CME",
     symbol: "zs.f",
