@@ -1173,29 +1173,68 @@ const programaController = createSectionController({
   emptyMessage: `<p class="empty-copy">Aún no cargamos episodios del programa.</p>`
 });
 
-const podcastController = createSectionController({
-  gridId: "podcast-grid",
-  buttonId: "podcast-view-more",
-  renderItem: (item, idx, meta) => {
-    const total = meta && typeof meta.total === "number" ? meta.total : 0;
-    const episodeNumber = total ? String(total - idx).padStart(2, "0") : String(idx + 1).padStart(2, "0");
+// Podcast Controller - Premium Layout
+const podcastController = (() => {
+  const state = {
+    source: [],
+    visible: 6 // 1 featured + 5 in list
+  };
+  let button = null;
+
+  function formatDate(dateStr) {
+    if (!dateStr) return "";
+    try {
+      const d = new Date(dateStr);
+      return d.toLocaleDateString("es-PY", { day: "numeric", month: "short", year: "numeric" });
+    } catch {
+      return dateStr;
+    }
+  }
+
+  function renderFeatured(item, total) {
+    const featuredContainer = document.getElementById("podcast-featured");
+    if (!featuredContainer) return;
+
+    if (!item) {
+      featuredContainer.innerHTML = `<p class="podcast-loading">No hay episodios disponibles.</p>`;
+      return;
+    }
+
+    const episodeNumber = String(total).padStart(2, "0");
     const dateLabel = formatDate(item.date);
-    return `
-      <article class="podcast-card">
-        <div class="podcast-cover">
-          <img src="${item.thumbnail}" alt="${item.title}" loading="lazy">
-          <span class="podcast-badge">EP ${episodeNumber}</span>
-          <button class="podcast-play" type="button" aria-label="Reproducir episodio ${episodeNumber}">
-            <span>▶</span>
+    const description = item.description || item.summary || "";
+
+    featuredContainer.innerHTML = `
+      <div class="podcast-featured-inner">
+        <div class="podcast-featured-cover">
+          <img src="${item.thumbnail || '/assets/img/default_news.jpg'}" alt="${item.title}" loading="lazy">
+          <span class="podcast-featured-episode-badge">EP ${episodeNumber}</span>
+          <button class="podcast-featured-play" type="button" aria-label="Reproducir episodio">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
           </button>
+          ${item.duration ? `<span class="podcast-featured-duration">${item.duration}</span>` : ''}
         </div>
-        <div class="podcast-body">
-          <p class="podcast-meta">${dateLabel || "Nuevo"}</p>
-          <h3>${item.title}</h3>
-          <p class="podcast-tagline">Serie Perspectivas Podcast</p>
-          <div class="podcast-actions">
-            <a class="podcast-listen" href="/noticia.html?id=${encodeURIComponent(item.slug || item.id)}">Escuchar ahora</a>
-            <button class="podcast-share" type="button" aria-label="Compartir episodio ${episodeNumber}">
+        <div class="podcast-featured-body">
+          <div class="podcast-featured-meta">
+            <span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              ${dateLabel}
+            </span>
+            <span>Perspectivas Podcast</span>
+          </div>
+          <h3 class="podcast-featured-title">${item.title}</h3>
+          ${description ? `<p class="podcast-featured-description">${description}</p>` : ''}
+          <div class="podcast-featured-actions">
+            <a href="/noticia.html?id=${encodeURIComponent(item.slug || item.id)}" class="podcast-listen-btn">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              Escuchar ahora
+            </a>
+            <button class="podcast-share-btn" type="button" aria-label="Compartir episodio">
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6">
                 <circle cx="18" cy="5" r="3" />
                 <circle cx="6" cy="12" r="3" />
@@ -1206,11 +1245,85 @@ const podcastController = createSectionController({
             </button>
           </div>
         </div>
-      </article>
+      </div>
     `;
-  },
-  emptyMessage: `<p class="empty-copy">No hay episodios del podcast para mostrar.</p>`
-});
+  }
+
+  function renderEpisodesList(items, total) {
+    const listContainer = document.getElementById("podcast-episodes-scroll");
+    if (!listContainer) return;
+
+    if (!items.length) {
+      listContainer.innerHTML = `<p class="podcast-loading">No hay más episodios disponibles.</p>`;
+      return;
+    }
+
+    listContainer.innerHTML = items.map((item, idx) => {
+      const episodeNumber = String(total - idx - 1).padStart(2, "0");
+      const dateLabel = formatDate(item.date);
+
+      return `
+        <a href="/noticia.html?id=${encodeURIComponent(item.slug || item.id)}" class="podcast-episode-item">
+          <div class="podcast-episode-thumb">
+            <img src="${item.thumbnail || '/assets/img/default_news.jpg'}" alt="${item.title}" loading="lazy">
+            <div class="podcast-episode-play-mini">
+              <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+          </div>
+          <div class="podcast-episode-info">
+            <span class="podcast-episode-number">EP ${episodeNumber}</span>
+            <h4 class="podcast-episode-title">${item.title}</h4>
+            <span class="podcast-episode-meta">${dateLabel}</span>
+          </div>
+        </a>
+      `;
+    }).join("");
+  }
+
+  function updateButton() {
+    if (!button) return;
+    button.hidden = state.source.length <= state.visible;
+  }
+
+  function render() {
+    if (!state.source.length) {
+      renderFeatured(null, 0);
+      renderEpisodesList([], 0);
+      updateButton();
+      return;
+    }
+
+    const total = state.source.length;
+    const featured = state.source[0];
+    const remaining = state.source.slice(1, state.visible);
+
+    renderFeatured(featured, total);
+    renderEpisodesList(remaining, total);
+    updateButton();
+  }
+
+  function setSource(items) {
+    state.source = Array.isArray(items) ? items : [];
+    state.visible = Math.min(6, state.source.length);
+    render();
+  }
+
+  function handleViewMore() {
+    state.visible = Math.min(state.source.length, state.visible + 5);
+    render();
+  }
+
+  function init(items) {
+    button = document.getElementById("podcast-view-more");
+    if (button && !button.dataset.bound) {
+      button.addEventListener("click", handleViewMore);
+      button.dataset.bound = "true";
+    }
+    setSource(items);
+  }
+
+  return { init, setSource, render };
+})();
 
 function initWeatherWidget() {
   const widget = document.getElementById("weather-widget");

@@ -509,14 +509,70 @@
       </div>
     </section>
 
-    <!-- PODCAST -->
-    <section id="podcast" class="wrap section">
-      <div class="section-header">
-        <h2>Podcast Exclusivo</h2>
-        <p class="sub">Conversaciones a fondo con los protagonistas de la economía.</p>
+    <!-- PODCAST - Diseño Premium Infobae -->
+    <section id="podcast" class="podcast-section-premium">
+      <div class="wrap">
+        <div class="podcast-section-header">
+          <div class="podcast-header-left">
+            <span class="podcast-eyebrow">Contenido Exclusivo</span>
+            <h2>Perspectivas Podcast</h2>
+            <p class="podcast-tagline-header">Conversaciones a fondo con los protagonistas de la economía paraguaya.</p>
+          </div>
+          <div class="podcast-header-right">
+            <a href="/categoria.html?cat=podcast" class="podcast-see-all">
+              Ver todos los episodios
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="podcast-premium-layout">
+          <!-- Episodio Destacado (Lado Izquierdo) -->
+          <article id="podcast-featured" class="podcast-featured-card" aria-live="polite">
+            <p class="podcast-loading">Cargando episodio destacado...</p>
+          </article>
+
+          <!-- Lista de Episodios Recientes (Lado Derecho) -->
+          <aside class="podcast-episodes-list">
+            <div class="podcast-list-header">
+              <h3>Episodios Recientes</h3>
+              <div class="podcast-platforms">
+                <a href="#" class="platform-icon" aria-label="Escuchar en Spotify" title="Spotify">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path
+                      d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" />
+                  </svg>
+                </a>
+                <a href="#" class="platform-icon" aria-label="Escuchar en Apple Podcasts" title="Apple Podcasts">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path
+                      d="M5.34 0A5.328 5.328 0 0 0 0 5.34v13.32A5.328 5.328 0 0 0 5.34 24h13.32A5.328 5.328 0 0 0 24 18.66V5.34A5.328 5.328 0 0 0 18.66 0H5.34zm6.525 2.568c4.988 0 9.041 4.054 9.041 9.041 0 4.988-4.053 9.042-9.041 9.042-4.988 0-9.042-4.054-9.042-9.042s4.054-9.041 9.042-9.041zm-.006 3.182a5.54 5.54 0 0 0-5.541 5.542c0 .917.225 1.79.636 2.556a5.535 5.535 0 0 0 2.081 2.139l.19-.545a5.055 5.055 0 0 1-1.734-1.846c-.407-.69-.64-1.49-.64-2.304a5.097 5.097 0 0 1 5.008-5.141 5.097 5.097 0 0 1 5.141 5.006v.135a5.1 5.1 0 0 1-.641 2.169 5.031 5.031 0 0 1-1.733 1.844l.19.546a5.536 5.536 0 0 0 2.08-2.138c.412-.766.637-1.64.637-2.556a5.54 5.54 0 0 0-5.674-5.407zm-.065 3.269a2.277 2.277 0 0 0-2.25 2.277 2.277 2.277 0 0 0 .756 1.696v.001l-.391 1.122.462-.019.103.623.046.292.015.067.011.048.021.101.132.657.205.999.074.36.093.45.12.578.013.053.012.037.01.024.01.019.01.014.01.009.01.006.01.003H12h.082l.01-.003.01-.006.01-.009.01-.014.01-.019.01-.024.012-.037.013-.053.12-.578.093-.45.074-.36.205-.999.132-.657.021-.101.011-.048.015-.067.046-.292.103-.623.462.019-.391-1.122v-.001a2.277 2.277 0 0 0 .756-1.696 2.277 2.277 0 0 0-2.397-2.277z" />
+                  </svg>
+                </a>
+                <a href="#" class="platform-icon" aria-label="Escuchar en YouTube" title="YouTube">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path
+                      d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14c-1.88-.5-9.38-.5-9.38-.5s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.87.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.54 15.57V8.43L15.82 12l-6.28 3.57z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div id="podcast-episodes-scroll" class="podcast-episodes-scroll">
+              <!-- JS inyectará los episodios aquí -->
+            </div>
+          </aside>
+        </div>
+
+        <button id="podcast-view-more" class="podcast-view-more-btn" type="button" hidden>
+          <span>Explorar más episodios</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m6 9 6 6 6-6"></path>
+          </svg>
+        </button>
       </div>
-      <div id="podcast-grid" class="cards-grid podcast-grid"></div>
-      <button id="podcast-view-more" class="view-more-btn" type="button" hidden>Ver más</button>
     </section>
 
     <!-- PATROCINADORES -->
