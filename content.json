@@ -2474,5 +2474,73 @@
       "summary_short": ""
     }
   ],
-  "tapas": []
+  "tapas": [],
+  "videos_destacados": [
+    {
+      "id": "video-mercosur-ue",
+      "title": "¿Qué significa el acuerdo Mercosur-UE para Paraguay?",
+      "date": "2026-01-28T15:00:00.000Z",
+      "summary": "Analizamos los beneficios y desafíos del histórico acuerdo comercial",
+      "platform": "youtube",
+      "video_url": "https://www.youtube.com/shorts/example1",
+      "duration": "01:26",
+      "thumbnail": "/assets/img/uploads/mef-villa-serrati_4_0.jpg",
+      "type": "videos_destacados"
+    },
+    {
+      "id": "video-inflacion-enero",
+      "title": "La inflación en enero: claves para entenderla",
+      "date": "2026-01-27T12:00:00.000Z",
+      "summary": "Datos clave sobre el comportamiento de los precios",
+      "platform": "tiktok",
+      "video_url": "https://www.tiktok.com/@perspectivas/video/example",
+      "duration": "00:58",
+      "thumbnail": "/assets/img/uploads/2024-08-16-billetes.jpg",
+      "type": "videos_destacados"
+    },
+    {
+      "id": "video-exportaciones-maquila",
+      "title": "Récord de exportaciones de maquila en 2025",
+      "date": "2026-01-26T18:30:00.000Z",
+      "summary": "Las cifras que posicionan a Paraguay como polo industrial",
+      "platform": "youtube",
+      "video_url": "https://www.youtube.com/shorts/example3",
+      "duration": "02:15",
+      "thumbnail": "/assets/img/uploads/sumidenso-maquila-industria-trabajo-17.jpg",
+      "type": "videos_destacados"
+    },
+    {
+      "id": "video-tasa-bcp",
+      "title": "BCP mantiene tasa: ¿qué implica?",
+      "date": "2026-01-25T10:00:00.000Z",
+      "summary": "La decisión del Banco Central explicada en 60 segundos",
+      "platform": "reels",
+      "video_url": "https://www.instagram.com/reel/example",
+      "duration": "00:54",
+      "thumbnail": "/assets/img/uploads/knmg6a6szzcshjyavygmnkhpbi.jpg",
+      "type": "videos_destacados"
+    },
+    {
+      "id": "video-soja-precios",
+      "title": "Soja: máximo de 6 meses en Chicago",
+      "date": "2026-01-24T14:00:00.000Z",
+      "summary": "Análisis del mercado de commodities para productores",
+      "platform": "youtube",
+      "video_url": "https://www.youtube.com/shorts/example5",
+      "duration": "01:48",
+      "thumbnail": "/assets/img/uploads/precios-de-commodities-en-baja-bm.jpg",
+      "type": "videos_destacados"
+    },
+    {
+      "id": "video-fintech-tigo",
+      "title": "Tigo Money: 2 millones de usuarios",
+      "date": "2026-01-23T16:30:00.000Z",
+      "summary": "El éxito de la fintech paraguaya en números",
+      "platform": "tiktok",
+      "video_url": "https://www.tiktok.com/@perspectivas/video/example6",
+      "duration": "01:12",
+      "thumbnail": "/assets/img/uploads/female-working-environment-projects.jpg",
+      "type": "videos_destacados"
+    }
+  ]
 }

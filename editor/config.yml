@@ -247,6 +247,45 @@ collections:
           - { label: "¿Mostrar como destacado?", name: "is_featured", widget: "boolean", default: false }
 
   # ============================================================
+  # VIDEOS DESTACADOS (Shorts/TikTok/Reels)
+  # ============================================================
+  - name: "videos_destacados"
+    label: "🎬 Videos Destacados"
+    folder: "content/videos_destacados/posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: "md"
+    sortable_fields: ["date"]
+    sort: "-date"
+    fields:
+      - { label: "📝 Título del video", name: "title", widget: "string", required: true }
+      - { label: "📅 Fecha de publicación", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", required: true }
+      - { label: "⏰ Programar publicación", name: "publish_date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ss.SSSZ", required: false }
+      - { label: "📄 Descripción breve", name: "summary", widget: "text", required: false, hint: "Opcional - Texto corto debajo del título" }
+      
+      - label: "📺 Plataforma"
+        name: "platform"
+        widget: "select"
+        required: true
+        options:
+          - { label: "YouTube", value: "youtube" }
+          - { label: "TikTok", value: "tiktok" }
+          - { label: "Instagram Reels", value: "reels" }
+
+      - { label: "🔗 URL del Video", name: "video_url", widget: "string", required: true, hint: "URL completa del video (YouTube, TikTok, etc.)" }
+      - { label: "⏱️ Duración", name: "duration", widget: "string", required: true, hint: "Formato: MM:SS (ej: 01:48)" }
+      
+      - label: "🖼️ Miniatura vertical (9:16)"
+        name: "thumbnail"
+        widget: "image"
+        required: true
+        hint: "Imagen vertical formato 9:16 (como TikTok/Reels)"
+
+      - label: "⭐ ¿Destacado?"
+        name: "featured"
+        widget: "object"
+        fields:
+          - { label: "¿Mostrar como destacado?", name: "is_featured", widget: "boolean", default: false }
   # PODCAST
   # ============================================================
   - name: "podcast"

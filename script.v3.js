@@ -1138,6 +1138,81 @@ const analisisController = (() => {
   return { init, setSource };
 })();
 
+// Videos Destacados Controller - Carrusel estilo Infobae
+const videosDestacadosController = (() => {
+  let carousel = null;
+  let prevBtn = null;
+  let nextBtn = null;
+  let items = [];
+
+  function renderCard(item) {
+    const platform = item.platform || 'youtube';
+    const platformLabel = {
+      youtube: 'YouTube',
+      tiktok: 'TikTok',
+      reels: 'Reels'
+    }[platform] || platform;
+
+    return `
+      <a href="${item.video_url || '#'}" target="_blank" rel="noopener" class="video-card-vertical">
+        <div class="video-card-thumbnail">
+          <img src="${item.thumbnail || '/assets/img/default_news.jpg'}" alt="${item.title}" loading="lazy">
+          <div class="video-card-overlay"></div>
+          <span class="video-card-platform ${platform}">${platformLabel}</span>
+          <div class="video-card-play">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          </div>
+          <span class="video-card-duration">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            ${item.duration || '00:00'}
+          </span>
+        </div>
+        <h4 class="video-card-title">${item.title}</h4>
+      </a>
+    `;
+  }
+
+  function render() {
+    if (!carousel) return;
+
+    if (!items.length) {
+      carousel.innerHTML = `<p class="videos-empty">No hay videos destacados disponibles.</p>`;
+      return;
+    }
+
+    carousel.innerHTML = items.map(renderCard).join('');
+  }
+
+  function scrollCarousel(direction) {
+    if (!carousel) return;
+    const cardWidth = carousel.querySelector('.video-card-vertical')?.offsetWidth || 180;
+    const scrollAmount = cardWidth * 2 + 16; // 2 cards + gap
+    carousel.scrollBy({
+      left: direction === 'next' ? scrollAmount : -scrollAmount,
+      behavior: 'smooth'
+    });
+  }
+
+  function init(data) {
+    carousel = document.getElementById('videos-carousel');
+    prevBtn = document.getElementById('videos-prev');
+    nextBtn = document.getElementById('videos-next');
+
+    items = Array.isArray(data) ? data : [];
+
+    if (prevBtn) prevBtn.addEventListener('click', () => scrollCarousel('prev'));
+    if (nextBtn) nextBtn.addEventListener('click', () => scrollCarousel('next'));
+
+    render();
+  }
+
+  return { init };
+})();
+
+function initVideosDestacadosSection(data) {
+  videosDestacadosController.init(data);
+}
+
 const programaController = createSectionController({
   gridId: "program-grid",
   buttonId: "program-view-more",
@@ -2004,6 +2079,7 @@ async function initHome() {
     renderTopReads(remainingNoticias);
     initAnalisisSection(data.analisis);
     initProgramaSection(data.programa);
+    initVideosDestacadosSection(data.videos_destacados || []);
     initPodcastSection(data.podcast);
     renderSponsors(data.sponsors);
 
