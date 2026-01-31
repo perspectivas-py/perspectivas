@@ -69,9 +69,12 @@ const AWESOME_API_BASE = "https://economia.awesomeapi.com.br/last";
 const AWESOME_PAIR_MAP = {
   BRL: { key: "BRLPYG", pair: "BRL-PYG", inverted: false },
   EUR: { key: "EURPYG", pair: "EUR-PYG", inverted: false },
-  ARS: { key: "PYGARS", pair: "PYG-ARS", inverted: true }
+  ARS: { key: "PYGARS", pair: "PYG-ARS", inverted: true },
+  USD: { key: "USDPYG", pair: "USD-PYG", inverted: false },
+  USDCLP: { key: "USDCLP", pair: "USD-CLP", inverted: false },
+  USDUYU: { key: "USDUYU", pair: "USD-UYU", inverted: false }
 };
-const AWESOME_PAIRS = [...new Set(Object.values(AWESOME_PAIR_MAP).map(def => def.pair))];
+const AWESOME_PAIRS = ["BRL-PYG", "EUR-PYG", "PYG-ARS", "USD-PYG", "USD-CLP", "USD-UYU"];
 const AWESOME_REFERENCE = "AwesomeAPI FX · Mercado regional";
 
 const FX_CONFIG = [
@@ -702,53 +705,6 @@ function buildFallbackQuote(cfg) {
   };
 }
 
-async function fetchGenericFxQuote(cfg, previousDate) {
-  if (!cfg) return null;
-  if (cfg.code === "PYG") return buildFallbackQuote(cfg);
-
-  const units = cfg.units || 1;
-  const latestUrl = `https://api.exchangerate.host/latest?base=${cfg.code}&symbols=PYG`;
-  const prevUrl = `https://api.exchangerate.host/${previousDate}?base=${cfg.code}&symbols=PYG`;
-
-  try {
-    const [latestRes, prevRes] = await Promise.all([
-      fetch(latestUrl),
-      fetch(prevUrl)
-    ]);
-
-    if (!latestRes.ok) throw new Error(`HTTP ${latestRes.status}`);
-    const latestData = await latestRes.json();
-    const prevData = prevRes.ok ? await prevRes.json() : null;
-
-    const latestRate = latestData?.rates?.PYG;
-    if (!latestRate) throw new Error("Sin rate PYG");
-    const prevRate = prevData?.rates?.PYG || null;
-
-    const midValue = latestRate * units;
-    const prevValue = prevRate ? prevRate * units : null;
-    const spread = cfg.spread ?? FX_SPREAD;
-    const halfSpread = spread / 2;
-    const buyValue = midValue * (1 - halfSpread);
-    const sellValue = midValue * (1 + halfSpread);
-    const variationPct = prevValue ? ((midValue - prevValue) / prevValue) * 100 : 0;
-
-    return {
-      currency: cfg.currency,
-      code: cfg.code,
-      amount: cfg.amount,
-      flagCode: cfg.flagCode,
-      buy: formatGuarani(buyValue),
-      sell: formatGuarani(sellValue),
-      variation: formatVariation(variationPct),
-      reference: cfg.reference || FX_REFERENCE_FALLBACK,
-      lastUpdate: formatUpdateLabel(latestData?.date),
-      midValue
-    };
-  } catch (error) {
-    console.warn(`⚠️ Falló la cotización de ${cfg.code}`, error);
-    return buildFallbackQuote(cfg);
-  }
-}
 
 async function fetchCommoditySnapshot() {
   if (!MARKET_COMMODITY_SOURCES.length) return null;
@@ -1789,8 +1745,9 @@ async function initHome() {
   await loadFxQuotes();
   await loadMarketQuotes();
   if (!marketTickerRefreshHandle && MARKET_TICKER_REFRESH_INTERVAL > 0) {
-    marketTickerRefreshHandle = setInterval(() => {
-      loadMarketQuotes();
+    marketTickerRefreshHandle = setInterval(async () => {
+      await loadFxQuotes();
+      await loadMarketQuotes();
     }, MARKET_TICKER_REFRESH_INTERVAL);
   }
 
@@ -2611,35 +2568,85 @@ async function fetchFxQuotes() {
     fetchDollarPySnapshot(),
     fetchAwesomeSnapshot()
   ]);
-  const yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
-  const previousDate = yesterday.toISOString().split("T")[0];
 
-  const requests = FX_CONFIG.map(async (cfg) => {
+  // fallback results array
+  const results = [];
+
+  const usdAwesome = awesomeSnapshot?.USDPYG;
+  const usdPygRate = usdAwesome ? (Number(usdAwesome.bid) + Number(usdAwesome.ask)) / 2 : 7400;
+
+  for (const cfg of FX_CONFIG) {
+    // 1. PYG is constant
     if (cfg.code === "PYG") {
-      return buildFallbackQuote(cfg);
+      results.push(buildFallbackQuote(cfg));
+      continue;
     }
 
+    // 2. USD (Wholesale) preferred from DolarPy
     if (cfg.code === "USD") {
       const wholesale = buildDollarPyWholesaleQuote(cfg, dollarPySnapshot);
-      if (wholesale) return wholesale;
+      if (wholesale) {
+        results.push(wholesale);
+        continue;
+      }
+      // awesome fallback
+      const wholesaleAwesome = buildAwesomeFxQuote(cfg, usdAwesome);
+      if (wholesaleAwesome) {
+        results.push(wholesaleAwesome);
+        continue;
+      }
     }
 
+    // 3. Direct AwesomeAPI pairs (BRL, EUR, ARS)
     const awesomeDef = AWESOME_PAIR_MAP[cfg.code];
-    if (awesomeDef) {
-      const awesomeQuote = buildAwesomeFxQuote(cfg, awesomeSnapshot?.[awesomeDef.key], { inverted: awesomeDef.inverted });
-      if (awesomeQuote) return awesomeQuote;
+    if (awesomeDef && !cfg.code.includes("CLP") && !cfg.code.includes("UYU")) {
+      const q = buildAwesomeFxQuote(cfg, awesomeSnapshot?.[awesomeDef.key], { inverted: awesomeDef.inverted });
+      if (q) {
+        results.push(q);
+        continue;
+      }
     }
 
-    return fetchGenericFxQuote(cfg, previousDate);
-  });
+    // 4. Triangulated pairs (CLP, UYU)
+    if (cfg.code === "CLP" || cfg.code === "UYU") {
+      const triKey = cfg.code === "CLP" ? "USDCLP" : "USDUYU";
+      const triData = awesomeSnapshot?.[triKey];
+      if (triData && usdPygRate) {
+        const usdToForeign = (Number(triData.bid) + Number(triData.ask)) / 2;
+        const rate = (usdPygRate / usdToForeign); // Gs per 1 unit of foreign
 
-  const quotes = await Promise.all(requests);
-  const usdQuote = quotes.find(q => q?.code === "USD");
+        const midValue = rate * cfg.units;
+        const spread = 0.02; // 2% spread for regional cash
+        const buy = midValue * (1 - (spread / 2));
+        const sell = midValue * (1 + (spread / 2));
+
+        results.push({
+          currency: cfg.currency,
+          code: cfg.code,
+          amount: cfg.amount,
+          flagCode: cfg.flagCode,
+          buy: formatGuarani(buy),
+          sell: formatGuarani(sell),
+          variation: triData.pctChange ? formatVariation(Number(triData.pctChange)) : "0,0%",
+          reference: "AwesomeAPI (triangulado)",
+          lastUpdate: formatTimestampLabel(triData.create_date) || "",
+          midValue
+        });
+        continue;
+      }
+    }
+
+    // Fallback if everything else fails
+    results.push(buildFallbackQuote(cfg));
+  }
+
+  // Add Retail (Calculated or Average from DolarPy)
+  const usdQuote = results.find(q => q.code === "USD");
   const retailQuote = buildDollarPyRetailQuote(dollarPySnapshot, FX_RETAIL_SPEC, usdQuote)
-    || buildRetailQuoteFromUsd(quotes, FX_RETAIL_SPEC);
-  if (retailQuote) quotes.push(retailQuote);
-  return quotes;
+    || buildRetailQuoteFromUsd(results, FX_RETAIL_SPEC);
+  if (retailQuote) results.push(retailQuote);
+
+  return results;
 }
 
 function formatUpdateLabel(dateStr) {
