@@ -140,10 +140,19 @@ function renderRelated(allNews, currentArticle) {
 
 // Renderiza la sección horizontal estilo Telegraph (6 artículos)
 function renderHorizontalRelated(allNews, currentArticle) {
+  console.log("🔍 Iniciando renderHorizontalRelated...");
   const container = document.getElementById("related-horizontal-grid");
-  if (!container || !allNews?.length) return;
+  if (!container) {
+    console.error("❌ No se encontró el contenedor #related-horizontal-grid");
+    return;
+  }
+  if (!allNews?.length) {
+    console.warn("⚠️ allNews está vacío o no es un array");
+    return;
+  }
 
   const currentId = currentArticle.slug || currentArticle.id;
+  console.log("📍 ID artículo actual:", currentId);
 
   // Filtrar el actual y priorizar misma categoría/tipo, luego random
   const related = allNews
@@ -157,7 +166,10 @@ function renderHorizontalRelated(allNews, currentArticle) {
     })
     .slice(0, 6);
 
+  console.log(`📊 Artículos relacionados encontrados: ${related.length}`);
+
   if (!related.length) {
+    console.warn("⚠️ No se encontraron artículos relacionados para el grid horizontal");
     const section = container.closest(".related-horizontal-section");
     if (section) section.style.display = "none";
     return;
@@ -166,13 +178,14 @@ function renderHorizontalRelated(allNews, currentArticle) {
   container.innerHTML = related.map(a => `
     <a href="/noticia.html?id=${encodeURIComponent(a.slug || a.id)}" class="related-h-card">
       <div class="related-h-img-wrapper">
-        <img src="${a.thumbnail || '/assets/img/default.jpg'}" alt="${a.title}" loading="lazy" onerror="this.src='/assets/img/default.jpg'">
+        <img src="${a.thumbnail || '/images/default.jpg'}" alt="${a.title}" loading="lazy" onerror="this.src='/images/default.jpg'">
       </div>
       <div class="related-h-content">
         <h4>${a.title}</h4>
       </div>
     </a>
   `).join("");
+  console.log("✅ Grid horizontal renderizado");
 }
 
 // Renderiza el bloque de "Claves del día" con hasta 4 bullets accionables
