@@ -2758,6 +2758,25 @@ function parseGuaraniValue(value) {
   return Number(normalized);
 }
 
+function formatVariation(pct) {
+  if (!Number.isFinite(pct)) return "0,0%";
+  const sign = pct > 0 ? "+" : "";
+  // Formato: +1,2% (estilo paraguayo con coma decimal)
+  return `${sign}${pct.toLocaleString("es-PY", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`;
+}
+
+function formatIndexTicker(val, decimals = 2) {
+  const num = Number(val);
+  if (!Number.isFinite(num)) return "—";
+  return num.toLocaleString("en-US", { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+}
+
+function formatUsdTicker(val, decimals = 2, suffix = "") {
+  const num = Number(val);
+  if (!Number.isFinite(num)) return "—";
+  return "USD " + num.toLocaleString("en-US", { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) + suffix;
+}
+
 function computeFallbackMid(buy, sell) {
   const buyNum = parseGuaraniValue(buy);
   const sellNum = parseGuaraniValue(sell);
