@@ -20,6 +20,9 @@ async function initDashboard() {
 
     // 3. Inicializar Sparklines (Pequeños gráficos laterales)
     initSparklines();
+
+    // 4. Renderizar Índices Bursátiles Globales
+    renderStockIndices();
 }
 
 function updateDashboardNumbers() {
@@ -144,4 +147,37 @@ function initSparklines() {
             }
         });
     });
+}
+
+function renderStockIndices() {
+    const container = document.getElementById("stocks-indices-grid");
+    if (!container) return;
+
+    if (typeof marketTickerItems === 'undefined' || !marketTickerItems.length) {
+        setTimeout(renderStockIndices, 1000);
+        return;
+    }
+
+    const indicesLabels = ["S&P 500", "Dow Jones", "Nasdaq", "Ibovespa", "Merval"];
+    const indicesData = marketTickerItems.filter(item => indicesLabels.includes(item.label));
+
+    if (!indicesData.length) {
+        container.innerHTML = `<p class="muted">Datos bursátiles no disponibles.</p>`;
+        return;
+    }
+
+    container.innerHTML = indicesData.map(item => {
+        const change = item.change || "";
+        const trend = change.includes("-") ? "negative" : "positive";
+
+        return `
+            <div class="stock-item">
+                <div class="stock-info">
+                    <span class="stock-label">${item.label}</span>
+                    <span class="stock-value">${item.value}</span>
+                </div>
+                <div class="stock-trend ${trend}">${change}</div>
+            </div>
+        `;
+    }).join("");
 }

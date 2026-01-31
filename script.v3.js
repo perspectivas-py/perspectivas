@@ -58,6 +58,14 @@ const MARKET_COMMODITY_SOURCES = [
     }
   }
 ];
+const MARKET_INDEX_SOURCES = [
+  { id: "sp500", label: "S&P 500", symbol: "^spx", formatter: q => formatIndexTicker(q.close) },
+  { id: "dow", label: "Dow Jones", symbol: "^dji", formatter: q => formatIndexTicker(q.close) },
+  { id: "nasdaq", label: "Nasdaq", symbol: "^ndq", formatter: q => formatIndexTicker(q.close) },
+  { id: "ibov", label: "Ibovespa", symbol: "^bvsp", formatter: q => formatIndexTicker(q.close, 0) },
+  { id: "merval", label: "Merval", symbol: "^merv", formatter: q => formatIndexTicker(q.close, 0) }
+];
+
 const MARKET_TICKER_REFRESH_INTERVAL = 5 * 60 * 1000;
 
 const FX_SPREAD = 0.006; // 0.6% spread estimado
@@ -722,8 +730,9 @@ function buildFallbackQuote(cfg) {
 
 
 async function fetchCommoditySnapshot() {
-  if (!MARKET_COMMODITY_SOURCES.length) return null;
-  const symbolsParam = MARKET_COMMODITY_SOURCES.map(src => src.symbol).join("+");
+  const allSources = [...MARKET_COMMODITY_SOURCES, ...MARKET_INDEX_SOURCES];
+  if (!allSources.length) return null;
+  const symbolsParam = allSources.map(src => src.symbol).join("+");
   const url = `https://stooq.com/q/l/?s=${symbolsParam}&f=sd2t2ohlcv&h&e=json`;
   try {
     const res = await fetch(url, { cache: "no-store" });
@@ -769,6 +778,24 @@ function buildMarketFxItems() {
 function buildCommodityTickerItems(snapshot) {
   if (!snapshot) return [];
   return MARKET_COMMODITY_SOURCES.map(source => {
+    const quote = snapshot[source.symbol.toLowerCase()];
+    if (!quote) return null;
+    const open = Number(quote.open);
+    const close = Number(quote.close);
+    const formattedValue = source.formatter?.({ ...quote, open, close });
+    if (!formattedValue) return null;
+    const changePct = computePercentChange(close, open);
+    return {
+      label: source.label,
+      value: formattedValue,
+      change: formatVariation(changePct)
+    };
+  }).filter(Boolean);
+}
+
+function buildStockTickerItems(snapshot) {
+  if (!snapshot) return [];
+  return MARKET_INDEX_SOURCES.map(source => {
     const quote = snapshot[source.symbol.toLowerCase()];
     if (!quote) return null;
     const open = Number(quote.open);
@@ -2566,7 +2593,8 @@ async function loadMarketQuotes() {
     const commoditySnapshot = await fetchCommoditySnapshot();
     const fxItems = buildMarketFxItems();
     const commodityItems = buildCommodityTickerItems(commoditySnapshot);
-    let merged = [...fxItems, ...commodityItems].filter(Boolean);
+    const indexItems = buildStockTickerItems(commoditySnapshot);
+    let merged = [...fxItems, ...commodityItems, ...indexItems].filter(Boolean);
     if (!merged.length) throw new Error("Sin datos para mercado hoy");
     marketTickerItems = merged;
   } catch (error) {
