@@ -84,7 +84,7 @@ const FX_CONFIG = [
     amount: "1 USD",
     units: 1,
     flagCode: "us",
-    reference: "Banco Central del Paraguay",
+    reference: "Dólar Referencial (BCP)",
     fallback: {
       buy: "₲ 7.300",
       sell: "₲ 7.360",
@@ -2644,7 +2644,7 @@ async function fetchFxQuotes() {
   const usdQuote = results.find(q => q.code === "USD");
   const retailQuote = buildDollarPyRetailQuote(dollarPySnapshot, FX_RETAIL_SPEC, usdQuote)
     || buildRetailQuoteFromUsd(results, FX_RETAIL_SPEC);
-  if (retailQuote) results.push(retailQuote);
+  if (retailQuote) results.unshift(retailQuote);
 
   return results;
 }
