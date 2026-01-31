@@ -69,11 +69,11 @@ const MARKET_COMMODITY_SOURCES = [
   }
 ];
 const MARKET_INDEX_SOURCES = [
-  { id: "sp500", label: "S&P 500", symbol: "^spx", formatter: q => formatIndexTicker(q.close) },
-  { id: "dow", label: "Dow Jones", symbol: "^dji", formatter: q => formatIndexTicker(q.close) },
-  { id: "nasdaq", label: "Nasdaq", symbol: "^ndq", formatter: q => formatIndexTicker(q.close) },
-  { id: "ibov", label: "Ibovespa", symbol: "^bvsp", formatter: q => formatIndexTicker(q.close, 0) },
-  { id: "merval", label: "Merval", symbol: "^merv", formatter: q => formatIndexTicker(q.close, 0) }
+  { id: "sp500", label: "S&P 500", symbol: "^spx", fallback: "5,800.00", formatter: q => formatIndexTicker(q.close) },
+  { id: "dow", label: "Dow Jones", symbol: "^dji", fallback: "42,000.00", formatter: q => formatIndexTicker(q.close) },
+  { id: "nasdaq", label: "Nasdaq", symbol: "^ndq", fallback: "18,500.00", formatter: q => formatIndexTicker(q.close) },
+  { id: "ibov", label: "Ibovespa", symbol: "^bvsp", fallback: "125,000", formatter: q => formatIndexTicker(q.close, 0) },
+  { id: "merval", label: "Merval", symbol: "^merv", fallback: "1,800,000", formatter: q => formatIndexTicker(q.close, 0) }
 ];
 
 const MARKET_TICKER_REFRESH_INTERVAL = 5 * 60 * 1000;
@@ -743,19 +743,25 @@ async function fetchCommoditySnapshot() {
   const allSources = [...MARKET_COMMODITY_SOURCES, ...MARKET_INDEX_SOURCES];
   if (!allSources.length) return null;
   const symbolsParam = allSources.map(src => src.symbol).join("+");
-  const url = `https://stooq.com/q/l/?s=${symbolsParam}&f=sd2t2ohlcv&h&e=json`;
+  const stooqUrl = `https://stooq.com/q/l/?s=${symbolsParam}&f=sd2t2ohlcv&h&e=json`;
+
+  // Usar proxy AllOrigins para evitar CORS
+  const url = `https://api.allorigins.win/get?url=${encodeURIComponent(stooqUrl)}`;
+
   try {
     const res = await fetch(url, { cache: "no-store" });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const payload = await res.json();
-    const entries = Array.isArray(payload?.symbols) ? payload.symbols : [];
-    return entries.reduce((acc, entry) => {
-      const key = (entry?.symbol || "").toLowerCase();
-      if (key) acc[key] = entry;
-      return acc;
-    }, {});
-  } catch (error) {
-    console.warn("⚠️ No pudimos consultar Stooq", error);
+    if (!res.ok) throw new Error("Stooq Proxy Error");
+    const wrappedData = await res.json();
+    const data = JSON.parse(wrappedData.contents);
+
+    if (!data?.symbols) return null;
+    const map = {};
+    data.symbols.forEach(s => {
+      if (s.symbol) map[s.symbol.toLowerCase()] = s;
+    });
+    return map;
+  } catch (err) {
+    console.warn("⚠️ Falló carga de Stooq via Proxy:", err);
     return null;
   }
 }
@@ -804,19 +810,27 @@ function buildCommodityTickerItems(snapshot) {
 }
 
 function buildStockTickerItems(snapshot) {
-  if (!snapshot) return [];
   return MARKET_INDEX_SOURCES.map(source => {
-    const quote = snapshot[source.symbol.toLowerCase()];
-    if (!quote) return null;
-    const open = Number(quote.open);
-    const close = Number(quote.close);
-    const formattedValue = source.formatter?.({ ...quote, open, close });
-    if (!formattedValue) return null;
-    const changePct = computePercentChange(close, open);
+    const quote = snapshot ? snapshot[source.symbol.toLowerCase()] : null;
+
+    // Si hay datos en el snapshot, construimos el item real
+    if (quote && quote.close) {
+      const open = Number(quote.open);
+      const close = Number(quote.close);
+      const formattedValue = source.formatter?.({ ...quote, open, close });
+      const changePct = computePercentChange(close, open);
+      return {
+        label: source.label,
+        value: formattedValue,
+        change: formatVariation(changePct)
+      };
+    }
+
+    // Si no hay datos, usamos el fallback
     return {
       label: source.label,
-      value: formattedValue,
-      change: formatVariation(changePct)
+      value: source.fallback || "—",
+      change: "0,0%"
     };
   }).filter(Boolean);
 }
