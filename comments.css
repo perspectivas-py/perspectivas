@@ -1,0 +1,268 @@
+/* comments.css - Estilos Premium para el Sistema de Comentarios */
+
+.article-comments-section {
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.comments-title {
+    font-family: 'Merriweather', serif;
+    font-size: 1.5rem;
+    color: #1e293b;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#comments-count {
+    color: #64748b;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+/* Auth Section */
+.auth-section {
+    text-align: center;
+    padding: 2rem;
+    background: #f8fafc;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.auth-section p {
+    color: #475569;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.auth-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-auth {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    color: #1e293b;
+}
+
+.btn-auth img {
+    width: 18px;
+    height: 18px;
+}
+
+.btn-auth:hover {
+    background: #f1f5f9;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Comment Form */
+.comment-form-section {
+    margin-bottom: 3rem;
+}
+
+.user-profile-mini {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.user-profile-mini img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#current-user-name {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.btn-logout {
+    font-size: 0.8rem;
+    color: #ef4444;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+.btn-logout:hover {
+    opacity: 1;
+}
+
+#comment-input {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    resize: vertical;
+    transition: border-color 0.2s ease;
+    margin-bottom: 1rem;
+}
+
+#comment-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+.btn-submit-comment {
+    background: #1e40af;
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn-submit-comment:hover {
+    background: #1d4ed8;
+}
+
+/* Comments List */
+.comment-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.comment-avatar img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.comment-content {
+    flex: 1;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.comment-author {
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.comment-date {
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+.comment-body {
+    color: #334155;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+/* No comments state */
+.no-comments {
+    text-align: center;
+    color: #64748b;
+    padding: 2rem;
+    font-style: italic;
+}
+
+.loading-comments {
+    text-align: center;
+    padding: 2rem;
+    color: #64748b;
+}
+
+/* DARK MODE SUPPORT */
+[data-theme="dark"] .article-comments-section {
+    background: #1e293b;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .comments-title {
+    color: #f8fafc;
+    border-bottom-color: #334155;
+}
+
+[data-theme="dark"] .auth-section {
+    background: #1e293b;
+    border: 1px solid #334155;
+}
+
+[data-theme="dark"] .auth-section p {
+    color: #cbd5e1;
+}
+
+[data-theme="dark"] .btn-auth {
+    background: #334155;
+    border-color: #475569;
+    color: #f8fafc;
+}
+
+[data-theme="dark"] .btn-auth:hover {
+    background: #475569;
+}
+
+[data-theme="dark"] #current-user-name {
+    color: #f8fafc;
+}
+
+[data-theme="dark"] #comment-input {
+    background: #0f172a;
+    border-color: #334155;
+    color: #f8fafc;
+}
+
+[data-theme="dark"] .comment-item {
+    border-bottom-color: #334155;
+}
+
+[data-theme="dark"] .comment-author {
+    color: #f8fafc;
+}
+
+[data-theme="dark"] .comment-body {
+    color: #cbd5e1;
+}
+
+[data-theme="dark"] .no-comments,
+[data-theme="dark"] .loading-comments,
+[data-theme="dark"] #comments-count {
+    color: #94a3b8;
+}
+
+@media (max-width: 640px) {
+    .article-comments-section {
+        margin: 2rem 1rem;
+        padding: 1.5rem;
+    }
+}
