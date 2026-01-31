@@ -127,7 +127,7 @@ function renderRelated(allNews, currentArticle) {
     <article class="related-card">
       <a href="/noticia.html?id=${encodeURIComponent(a.slug || a.id)}">
         <div class="related-card-img">
-          <img src="${a.thumbnail || '/images/default.jpg'}" alt="${a.title}" onerror="this.src='/images/default.jpg'">
+          <img src="${a.thumbnail || '/assets/img/default.jpg'}" alt="${a.title}" onerror="this.src='/assets/img/default.jpg'">
         </div>
         <div class="related-card-content">
           <h4>${a.title}</h4>
@@ -135,6 +135,43 @@ function renderRelated(allNews, currentArticle) {
         </div>
       </a>
     </article>
+  `).join("");
+}
+
+// Renderiza la sección horizontal estilo Telegraph (6 artículos)
+function renderHorizontalRelated(allNews, currentArticle) {
+  const container = document.getElementById("related-horizontal-grid");
+  if (!container || !allNews?.length) return;
+
+  const currentId = currentArticle.slug || currentArticle.id;
+
+  // Filtrar el actual y priorizar misma categoría/tipo, luego random
+  const related = allNews
+    .filter(a => (a.slug || a.id) !== currentId)
+    .sort((a, b) => {
+      // Priorizar misma categoría
+      if (a.category === currentArticle.category && b.category !== currentArticle.category) return -1;
+      if (b.category === currentArticle.category && a.category !== currentArticle.category) return 1;
+      // Luego por fecha
+      return new Date(b.date) - new Date(a.date);
+    })
+    .slice(0, 6);
+
+  if (!related.length) {
+    const section = container.closest(".related-horizontal-section");
+    if (section) section.style.display = "none";
+    return;
+  }
+
+  container.innerHTML = related.map(a => `
+    <a href="/noticia.html?id=${encodeURIComponent(a.slug || a.id)}" class="related-h-card">
+      <div class="related-h-img-wrapper">
+        <img src="${a.thumbnail || '/assets/img/default.jpg'}" alt="${a.title}" loading="lazy" onerror="this.src='/assets/img/default.jpg'">
+      </div>
+      <div class="related-h-content">
+        <h4>${a.title}</h4>
+      </div>
+    </a>
   `).join("");
 }
 
@@ -613,8 +650,9 @@ async function loadArticle() {
 
     console.log("✅ Artículo renderizado correctamente");
 
-    // Renderizamos noticias relacionadas
+    // Renderizamos noticias relacionadas (Sidebar y Horizontal)
     renderRelated(allNews, article);
+    renderHorizontalRelated(allNews, article);
 
   } catch (err) {
     console.error("❌ Error al cargar la noticia:", err);
