@@ -2271,7 +2271,7 @@ function renderSponsors(items) {
   container.innerHTML = visibleItems.map(s => `
       <div class="sponsor-item">
         <a href="${s.url}" target="_blank" rel="noopener noreferrer">
-            <img src="${s.logo}" alt="Sponsor">
+            <img src="${s.logo}" alt="Sponsor" loading="lazy">
         </a>
       </div>
     `).join("");
@@ -3108,7 +3108,7 @@ function openCoverModal(cover) {
     <div class="cover-modal-overlay"></div>
     <div class="cover-modal-content">
       <button class="cover-modal-close" aria-label="Cerrar">×</button>
-      <img src="${escapeHtml(cover.image)}" alt="Tapa ${escapeHtml(cover.edition)}" />
+      <img src="${escapeHtml(cover.image)}" alt="Tapa ${escapeHtml(cover.edition)}" loading="lazy" />
       <p class="cover-modal-caption">${escapeHtml(cover.edition)}</p>
     </div>
   `;

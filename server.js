@@ -122,6 +122,8 @@ const server = http.createServer((req, res) => {
 
     // Determinar content-type
     const ext = path.extname(filePath).toLowerCase();
+    const isAsset = ['.js', '.css', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico', '.avif', '.webp'].includes(ext);
+
     const contentType = {
       '.html': 'text/html',
       '.js': 'application/javascript',
@@ -137,9 +139,14 @@ const server = http.createServer((req, res) => {
       '.webp': 'image/webp'
     }[ext] || 'application/octet-stream';
 
+    // Headers de caché: Assets estáticos por 1 hora, el resto no-cache
+    const cacheHeader = isAsset
+      ? 'public, max-age=3600'
+      : 'no-cache, must-revalidate';
+
     res.writeHead(200, {
       'Content-Type': contentType,
-      'Cache-Control': 'no-cache, must-revalidate',
+      'Cache-Control': cacheHeader,
       'Access-Control-Allow-Origin': '*'
     });
     res.end(content);

@@ -127,7 +127,7 @@ function renderRelated(allNews, currentArticle) {
     <article class="related-card">
       <a href="/noticia.html?id=${encodeURIComponent(a.slug || a.id)}">
         <div class="related-card-img">
-          <img src="${a.thumbnail || '/assets/img/default.jpg'}" alt="${a.title}" onerror="this.src='/assets/img/default.jpg'">
+          <img src="${a.thumbnail || '/assets/img/default.jpg'}" alt="${a.title}" loading="lazy" onerror="this.src='/assets/img/default.jpg'">
         </div>
         <div class="related-card-content">
           <h4>${a.title}</h4>
@@ -397,7 +397,7 @@ async function loadArticle() {
           return `
                  <a href="/noticia.html?type=programa&id=${encodeURIComponent(vid.slug || vid.id)}" class="sidebar-video-card">
                     <div class="sidebar-video-thumb">
-                        <img src="${thumb}" alt="${vid.title}">
+                        <img src="${thumb}" alt="${vid.title}" loading="lazy">
                     </div>
                     <div class="sidebar-video-info">
                         <h4>${vid.title}</h4>
@@ -527,7 +527,7 @@ async function loadArticle() {
       sidebarHtml += `
         <div class="author-section-compact">
           <div class="author-profile">
-            <img src="${authorImg}" class="author-avatar" alt="${authorName}">
+            <img src="${authorImg}" class="author-avatar" alt="${authorName}" loading="lazy">
             <div class="author-details">
               <span class="author-name">${authorName}</span>
               <span class="author-role">${authorRole}</span>
