@@ -51,16 +51,16 @@
         <li><a href="#cotizaciones">Cotizaciones</a></li>
       </ul>
       <div class="nav-search-wrapper">
-        <div id="weather-widget" class="weather-widget" aria-label="Clima de Asunción">
-          <span id="weather-symbol" class="weather-symbol" aria-hidden="true">
-            <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true">
-              <circle cx="12" cy="12" r="6"></circle>
-              <path
-                d="M20 12h3M1 12h3M12 1v3M12 21v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"
-                stroke-linecap="round"></path>
-            </svg>
-          </span>
-          <span id="weather-temp" class="weather-temp">--°C</span>
+        <div id="weather-widget" class="weather-widget-v3" aria-label="Clima de Asunción">
+          <div class="weather-brief">
+            <span id="weather-symbol" class="weather-symbol-v3"></span>
+            <span id="weather-temp" class="weather-temp-v3">--°C</span>
+          </div>
+          <div class="weather-ticker">
+            <div id="weather-ticker-track" class="weather-ticker-track">
+              <!-- Conteudo dinâmico via JS -->
+            </div>
+          </div>
         </div>
         <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">
           <!-- Icono de Sol (en modo claro) -->
@@ -514,3 +514,10 @@
 
     // Cargar tema al inicio
     loadTheme();
+  </script>
+  <script src="/src/constants.js"></script>
+  <script src="/auth.js"></script>
+  <script src="/script.v3.js?v=4.7"></script>
+</body>
+
+</html>

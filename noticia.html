@@ -23,6 +23,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="preload" href="content.json" as="fetch" crossorigin="anonymous">
   <script src="src/constants.js" defer></script>
+  <script src="auth.js" defer></script>
   <script src="script.v3.js?v=4.7" defer></script>
   <script src="noticia-script.js?v=4.5" defer></script>
   <script src="comments-script.js" defer></script>
@@ -44,9 +45,16 @@
           <span id="header-date" class="header-date">-- de --, 2026</span>
         </div>
         <div class="utility-right">
-          <div id="weather-widget" class="weather-widget-v2" aria-label="Clima de Asunción">
-            <span id="weather-temp" class="weather-temp">--°C</span>
-            <span id="weather-symbol" class="weather-symbol-v2"></span>
+          <div id="weather-widget" class="weather-widget-v3" aria-label="Clima de Asunción">
+            <div class="weather-brief">
+              <span id="weather-symbol" class="weather-symbol-v3"></span>
+              <span id="weather-temp" class="weather-temp-v3">--°C</span>
+            </div>
+            <div class="weather-ticker">
+              <div id="weather-ticker-track" class="weather-ticker-track">
+                <!-- Conteudo dinâmico via JS -->
+              </div>
+            </div>
           </div>
           <button id="theme-toggle" class="theme-toggle-v2" aria-label="Cambiar tema">
             <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none"

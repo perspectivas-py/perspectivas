@@ -253,46 +253,16 @@ const WEATHER_CONDITIONS = [
 ];
 
 const WEATHER_ICON_SVGS = {
-  sun: `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
-    <circle cx="16" cy="16" r="6"></circle>
-    <path d="M16 4v3M16 25v3M4 16h3M25 16h3M6.8 6.8l2.1 2.1M23.1 23.1l2.1 2.1M6.8 25.2l2.1-2.1M23.1 8.9l2.1-2.1" stroke-linecap="round"></path>
-  </svg>`,
-  partly: `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
-    <circle cx="12" cy="12" r="5"></circle>
-    <path d="M26 22a5 5 0 0 0-5-5 6 6 0 0 0-11.7 1.5A4 4 0 0 0 9 27h12a5 5 0 0 0 5-5z" fill="none"></path>
-    <path d="M6 12h2M12 4v2M4 20h2" stroke-linecap="round"></path>
-  </svg>`,
-  cloud: `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
-    <path d="M8 24h14a5 5 0 0 0 0-10 7 7 0 0 0-13.5 1.8A4 4 0 0 0 8 24z"></path>
-  </svg>`,
-  drizzle: `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
-    <path d="M8 23h14a5 5 0 0 0 0-10 7 7 0 0 0-13.5 1.8A4 4 0 0 0 8 23z"></path>
-    <path d="M12 26l-1 3M18 26l-1 3M24 26l-1 3" stroke-linecap="round"></path>
-  </svg>`,
-  rain: `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
-    <path d="M8 22h14a5 5 0 0 0 0-10 7 7 0 0 0-13.5 1.8A4 4 0 0 0 8 22z"></path>
-    <path d="M12 24l-1.5 4M18 24l-1.5 4M24 24l-1.5 4" stroke-linecap="round"></path>
-  </svg>`,
-  showers: `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
-    <path d="M8 21h14a5 5 0 0 0 0-10 7 7 0 0 0-13.5 1.8A4 4 0 0 0 8 21z"></path>
-    <path d="M11 23l-2 5M17 23l-2 5M23 23l-2 5" stroke-linecap="round"></path>
-  </svg>`,
-  storm: `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
-    <path d="M8 21h14a5 5 0 0 0 0-10 7 7 0 0 0-13.5 1.8A4 4 0 0 0 8 21z"></path>
-    <path d="M15 22l-2 6 4-3-1 5 4-7" stroke-linecap="round" fill="none"></path>
-  </svg>`,
-  snow: `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
-    <path d="M8 22h14a5 5 0 0 0 0-10 7 7 0 0 0-13.5 1.8A4 4 0 0 0 8 22z"></path>
-    <path d="M12 25.5l-1.5 1.5M12 27l-1.5-1.5M18 25.5l-1.5 1.5M18 27l-1.5-1.5M24 25.5l-1.5 1.5M24 27l-1.5-1.5" stroke-linecap="round"></path>
-  </svg>`,
-  fog: `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
-    <path d="M8 20h14a5 5 0 0 0 0-10 7 7 0 0 0-13.5 1.8A4 4 0 0 0 8 20z"></path>
-    <path d="M6 24h20M8 27h16" stroke-linecap="round"></path>
-  </svg>`,
-  default: `<svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
-    <circle cx="16" cy="16" r="6"></circle>
-    <path d="M16 4v3M16 25v3M4 16h3M25 16h3" stroke-linecap="round"></path>
-  </svg>`
+  sun: `<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="weather-icon-v3"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`,
+  partly: `<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="weather-icon-v3"><path d="M12 2v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="M20 12h2"></path><path d="m19.07 4.93-1.41 1.41"></path><path d="M15.947 12.65a4 4 0 0 0-5.925-4.128"></path><path d="M13 22H7a5 5 0 1 1 4.9-6H13a5 5 0 0 1 0 10Z"></path></svg>`,
+  cloud: `<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="weather-icon-v3"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path></svg>`,
+  drizzle: `<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="weather-icon-v3"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path><path d="m8 22-1 3"></path><path d="m12 22-1 3"></path><path d="m16 22-1 3"></path></svg>`,
+  rain: `<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="weather-icon-v3"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M16 14v6"></path><path d="M8 14v6"></path><path d="M12 16v6"></path></svg>`,
+  showers: `<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="weather-icon-v3"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="m14 14-2 6"></path><path d="m8 14-2 6"></path><path d="m20 14-2 6"></path></svg>`,
+  storm: `<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="weather-icon-v3"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path><path d="m13 11-2 6h4l-2 6"></path></svg>`,
+  snow: `<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="weather-icon-v3"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path><path d="m8 22 2 2"></path><path d="m12 22 2 2"></path><path d="m16 22 2 2"></path></svg>`,
+  fog: `<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="weather-icon-v3"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path><path d="M5 22h14"></path></svg>`,
+  default: `<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="weather-icon-v3"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>`
 };
 
 function normalizeCategoryKey(category = "") {
@@ -1286,7 +1256,7 @@ function initWeatherWidget() {
 
   bindPanelEvents();
 
-  const setStatus = (text, condition) => {
+  const setStatus = (text, condition, extraData) => {
     const label = condition?.label || "Clima local";
     const symbol = condition?.symbol || "default";
     tempEl.textContent = text;
@@ -1296,7 +1266,20 @@ function initWeatherWidget() {
       symbolEl.dataset.symbol = symbol;
     }
     widget.setAttribute("title", `Clima en Asunción: ${label}${text !== "--°C" ? ` · ${text}` : ""}`);
-    widget.setAttribute("aria-label", `Clima en Asunción: ${label}${text !== "--°C" ? ` · ${text}` : ""}`);
+
+    // UI Ticker logic
+    const tickerTrack = document.getElementById("weather-ticker-track");
+    if (tickerTrack && extraData) {
+      const humidity = extraData.humidity ? ` · Humedad: ${extraData.humidity}%` : "";
+      const wind = extraData.wind ? ` · Viento: ${extraData.wind} km/h` : "";
+      const pressure = extraData.pressure ? ` · Presión: ${extraData.pressure} hPa` : "";
+      const conditionText = `Asunción: ${label}`;
+      const fullText = `${conditionText}${humidity}${wind}${pressure}`;
+
+      // Duplicamos el contenido para el efecto de scroll infinito si es necesario
+      // O simplemente ponemos el texto
+      tickerTrack.innerHTML = `<span>${fullText}</span><span>${fullText}</span>`;
+    }
   };
 
   const renderForecast = (daily) => {
@@ -1306,8 +1289,32 @@ function initWeatherWidget() {
       return;
     }
 
+    // Header del panel con datos actuales más detallados si los tenemos
+    let currentDetailHtml = "";
+    if (lastForecast && lastForecast.current) {
+      const cur = lastForecast.current;
+      const cond = resolveWeatherCondition(cur.weather_code);
+      currentDetailHtml = `
+        <div class="weather-current-detailed-card">
+          <div class="wcd-main">
+            <span class="wcd-symbol">${cond.icon}</span>
+            <span class="wcd-temp">${Math.round(cur.temperature_2m)}°C</span>
+          </div>
+          <div class="wcd-info">
+            <p class="wcd-label">${cond.label}</p>
+            <div class="wcd-metrics">
+              <span><strong>Humedad:</strong> ${cur.relative_humidity_2m}%</span>
+              <span><strong>Viento:</strong> ${cur.wind_speed_10m} km/h</span>
+              <span><strong>Presión:</strong> ${Math.round(cur.surface_pressure)} hPa</span>
+            </div>
+          </div>
+        </div>
+        <h4 class="forecast-title">Próximos días</h4>
+      `;
+    }
+
     const cards = daily.time.slice(0, WEATHER_FORECAST_DAYS).map((dateStr, idx) => {
-      const condition = resolveWeatherCondition(daily.weathercode?.[idx]);
+      const condition = resolveWeatherCondition(daily.weather_code?.[idx] ?? daily.weathercode?.[idx]);
       const max = daily.temperature_2m_max?.[idx];
       const min = daily.temperature_2m_min?.[idx];
       const maxLabel = typeof max === "number" ? `${Math.round(max)}°` : "--";
@@ -1316,13 +1323,18 @@ function initWeatherWidget() {
         <article class="weather-forecast-card">
           <strong>${formatForecastDay(dateStr)}</strong>
           <div class="weather-forecast-symbol" aria-hidden="true">${condition.icon}</div>
-          <p class="weather-forecast-temps">${maxLabel} / ${minLabel}</p>
+          <p class="weather-forecast-temps"><span>${maxLabel}</span> / <span class="min-t">${minLabel}</span></p>
           <small>${condition.label}</small>
         </article>
       `;
     }).join("");
 
-    panelContent.innerHTML = `<div class="weather-forecast-grid">${cards}</div>`;
+    panelContent.innerHTML = `
+      <div class="weather-detailed-panel">
+        ${currentDetailHtml}
+        <div class="weather-forecast-grid">${cards}</div>
+      </div>
+    `;
     panelContent.dataset.hydrated = "true";
   };
 
@@ -1330,18 +1342,23 @@ function initWeatherWidget() {
     const params = new URLSearchParams({
       latitude: WEATHER_COORDS.latitude,
       longitude: WEATHER_COORDS.longitude,
-      current_weather: "true",
-      daily: "weathercode,temperature_2m_max,temperature_2m_min",
+      current: "temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m,surface_pressure",
+      daily: "weather_code,temperature_2m_max,temperature_2m_min",
       timezone: "auto"
     });
     const response = await fetch(`${WEATHER_API_URL}?${params.toString()}`, { cache: "no-store" });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const payload = await response.json();
-    const current = payload?.current_weather;
-    if (!current) throw new Error("Sin datos de current_weather");
+    const current = payload?.current;
+    if (!current) throw new Error("Sin datos de current");
+
     return {
-      temperature: typeof current.temperature === "number" ? Math.round(current.temperature) : null,
-      code: typeof current.weathercode === "number" ? current.weathercode : null,
+      temperature: typeof current.temperature_2m === "number" ? Math.round(current.temperature_2m) : null,
+      code: typeof current.weather_code === "number" ? current.weather_code : null,
+      humidity: current.relative_humidity_2m,
+      wind: current.wind_speed_10m,
+      pressure: current.surface_pressure,
+      current: current, // Guardamos todo para el panel
       daily: payload?.daily || null
     };
   };
@@ -1351,10 +1368,21 @@ function initWeatherWidget() {
       const data = await fetchWeather();
       const condition = resolveWeatherCondition(data.code);
       const tempLabel = typeof data.temperature === "number" ? `${data.temperature}°C` : "--°C";
-      setStatus(tempLabel, condition);
+
+      const extraData = {
+        humidity: data.humidity,
+        wind: data.wind,
+        pressure: data.pressure
+      };
+
+      setStatus(tempLabel, condition, extraData);
+
       if (data.daily) {
-        lastForecast = data.daily;
-        renderForecast(lastForecast);
+        lastForecast = {
+          daily: data.daily,
+          current: data.current
+        };
+        renderForecast(data.daily);
       }
     } catch (error) {
       console.warn("⚠️ No se pudo actualizar el clima", error);
@@ -1604,12 +1632,19 @@ function initHeaderDate() {
   const dateEl = document.getElementById("header-date");
   if (!dateEl) return;
 
-  const options = { weekday: 'long', day: 'numeric', month: 'long' };
+  const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
   const today = new Date();
   let dateString = today.toLocaleDateString('es-ES', options);
 
-  // Capitalizar primera letra
-  dateString = dateString.charAt(0).toUpperCase() + dateString.slice(1);
+  // Formato: "Sábado, 31 de Enero de 2026"
+  // Capitalizar cada palabra importante para look editorial
+  dateString = dateString.split(' ').map(word => {
+    if (word.length > 2) {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    }
+    return word;
+  }).join(' ');
+
   dateEl.textContent = dateString;
 }
 
