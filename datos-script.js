@@ -27,6 +27,7 @@ async function initDashboard() {
 
 function updateDashboardNumbers() {
     // Intentar sincronizar con latestFxQuotes definido en script.v3.js
+    // Intentar sincronizar con latestFxQuotes definido en script.v3.js
     if (typeof latestFxQuotes !== 'undefined') {
         const usd = latestFxQuotes.find(q => q.code === "USD");
         const retail = latestFxQuotes.find(q => q.code === "USD MIN");
@@ -34,6 +35,29 @@ function updateDashboardNumbers() {
         const usdDisplay = document.getElementById("usd-price-now");
         if (usdDisplay && retail) {
             usdDisplay.textContent = retail.sell.replace("₲ ", "");
+        }
+
+        // --- LÓGICA SALARIO MÍNIMO ---
+        const minimumWagePYG = 2899048;
+        const minWageUsdDisplay = document.getElementById("minimum-wage-usd");
+
+        // Usamos la cotización de venta minorista o la genérica como fallback
+        // Prioridad: Retail Sell -> USD Sell -> Fallback
+        let rateToUse = 7300;
+        let rateSource = "Estimado";
+
+        if (retail) {
+            rateToUse = parseFloat(retail.sell.replace(/\./g, '').replace(',', '.').replace("₲ ", ""));
+            rateSource = "Dólar Cambio";
+        } else if (usd) {
+            rateToUse = parseFloat(usd.sell.replace(/\./g, '').replace(',', '.').replace("₲ ", ""));
+            rateSource = "Dólar Interbancario";
+        }
+
+        if (minWageUsdDisplay && rateToUse) {
+            const usdValue = (minimumWagePYG / rateToUse).toFixed(2);
+            // Formatear display: "USD 395.23 (Cambio: 7.350)"
+            minWageUsdDisplay.innerHTML = `USD ${usdValue} <span style="font-size:0.85em; opacity:0.8; display:block; font-weight:400;">(Tipo de cambio: Gs. ${rateToUse.toLocaleString('es-PY')})</span>`;
         }
     }
 }
