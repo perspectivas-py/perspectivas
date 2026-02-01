@@ -369,9 +369,11 @@ ul {
 
 .weather-ticker-track {
   display: inline-flex;
-  gap: 2rem;
-  animation: weather-ticker-scroll 25s linear infinite;
-  padding-left: 100%;
+  gap: 4rem;
+  /* Mayor espacio entre repeticiones */
+  animation: weather-ticker-scroll 60s linear infinite;
+  padding-left: 0;
+  /* Eliminado el padding-left para un inicio más limpio */
 }
 
 @keyframes weather-ticker-scroll {
@@ -386,6 +388,15 @@ ul {
 
 .weather-ticker-track span {
   flex-shrink: 0;
+}
+
+.weather-ticker-track .ticker-dot {
+  color: var(--brand-primary);
+  opacity: 0.6;
+  font-size: 1.2rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
 }
 
 /* Detailed Panel Modern Styling */
@@ -9813,6 +9824,7 @@ body.cinema-mode .site-footer-new {
     grid-template-columns: 1fr;
   }
 }
+
 /* ==========================================================================
    VIDEO PREVIEW MODAL (Infobae Style)
    ========================================================================== */
@@ -9893,7 +9905,8 @@ body.cinema-mode .site-footer-new {
 .video-preview-player {
   position: relative;
   width: 100%;
-  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  padding-top: 56.25%;
+  /* 16:9 Aspect Ratio */
   background: #111;
 }
 
@@ -9930,9 +9943,11 @@ body.cinema-mode .site-footer-new {
   .video-preview-container {
     width: 95%;
   }
+
   .video-preview-info {
     padding: 15px;
   }
+
   .video-preview-title {
     font-size: 1.2rem;
   }

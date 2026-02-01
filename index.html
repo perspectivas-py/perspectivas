@@ -1,4 +1,3 @@
-PU
 <!DOCTYPE html>
 <html lang="es">
 
@@ -19,7 +18,13 @@ PU
   <link rel="preload" href="content.json" as="fetch" crossorigin="anonymous">
   <script src="src/constants.js" defer></script>
   <script src="auth.js" defer></script>
-  <script src="script.v3.js?v=20250113-hero-fix" defer></script>
+  <script src="script-pro.js" defer></script>
+  <script>
+    // Inicialización manual si es necesario
+    if (document.readyState === 'complete' && typeof initRouter === 'function') {
+      initRouter();
+    }
+  </script>
 </head>
 
 <body>

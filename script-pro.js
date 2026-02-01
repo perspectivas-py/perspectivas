@@ -1579,7 +1579,8 @@ function initWeatherWidget() {
 
       // Duplicamos el contenido para el efecto de scroll infinito si es necesario
       // O simplemente ponemos el texto
-      tickerTrack.innerHTML = `<span>${fullText}</span><span>${fullText}</span>`;
+      const separator = " <span class=\"ticker-dot\">•</span> ";
+      tickerTrack.innerHTML = `<span>${fullText}</span>${separator}<span>${fullText}</span>${separator}`;
     }
   };
 
