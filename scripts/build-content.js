@@ -15,6 +15,7 @@ const COLLECTIONS = {
   podcast: "content/podcast/posts",
   sponsors: "content/sponsors",
   tapas: "content/tapas",
+  videos_destacados: "content/videos_destacados/posts",
 };
 
 // Función de normalización consistente
@@ -111,6 +112,7 @@ async function main() {
     podcast: loadCollection(COLLECTIONS.podcast, "podcast"),
     sponsors: loadCollection(COLLECTIONS.sponsors, "sponsors"),
     tapas: loadCollection(COLLECTIONS.tapas, "tapa"),
+    videos_destacados: loadCollection(COLLECTIONS.videos_destacados, "videos_destacados"),
   };
 
   // GENERAR ÍNDICE DE TAGS (BD de Etiquetas)

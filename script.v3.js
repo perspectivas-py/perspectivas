@@ -2552,8 +2552,7 @@ function renderSponsors(items) {
 function renderCategoryFilters(noticias) {
   noticiasFilterSource = Array.isArray(noticias) ? noticias : [];
   const containers = [
-    document.getElementById("category-filters"),
-    document.getElementById("category-drawer-filters")
+    document.getElementById("category-filters")
   ].filter(Boolean);
 
   if (!containers.length || !noticiasFilterSource.length) return;
@@ -2788,6 +2787,53 @@ function initCategoryDrawer() {
 
   // Inicializar buscador interno del drawer
   initDrawerSearch();
+  
+  // Renderizar secciones fijas de la Home
+  renderDrawerSections();
+}
+
+/**
+ * Renderiza los enlaces a las secciones principales de la Home en el menú hamburguesa.
+ */
+function renderDrawerSections() {
+  const container = document.getElementById("category-drawer-filters");
+  if (!container) return;
+
+  const sections = [
+    { label: "Noticias", link: "index.html#noticias", icon: "newspaper" },
+    { label: "Análisis & Opinión", link: "index.html#analisis", icon: "trending-up" },
+    { label: "Podcast", link: "index.html#podcast", icon: "mic" },
+    { label: "Programa TV", link: "index.html#programa", icon: "tv" },
+    { label: "Videos", link: "index.html#videos-destacados", icon: "play-circle" },
+    { label: "Datos & Visualizaciones", link: "datos.html", icon: "bar-chart-2" },
+    { label: "Cotizaciones", link: "index.html#cotizaciones", icon: "dollar-sign" }
+  ];
+
+  const icons = {
+    "newspaper": '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"></path><path d="M18 14h-8"></path><path d="M15 18h-5"></path><path d="M10 6h8v4h-8V6Z"></path></svg>',
+    "trending-up": '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>',
+    "mic": '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line><line x1="8" y1="22" x2="16" y2="22"></line></svg>',
+    "tv": '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>',
+    "play-circle": '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>',
+    "bar-chart-2": '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>',
+    "dollar-sign": '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>'
+  };
+
+  container.innerHTML = sections.map(sec => `
+    <li class="drawer-nav-item">
+      <a href="${sec.link}" class="drawer-nav-link">
+        <span class="drawer-nav-icon">${icons[sec.icon] || ''}</span>
+        <span class="drawer-nav-text">${sec.label}</span>
+      </a>
+    </li>
+  `).join("");
+
+  // Añadir eventos de cierre al hacer click en un link
+  container.querySelectorAll(".drawer-nav-link").forEach(link => {
+    link.addEventListener("click", () => {
+      closeCategoryDrawer();
+    });
+  });
 }
 
 // Lógica para el buscador expandible del drawer (Menú Hamburguesa)
