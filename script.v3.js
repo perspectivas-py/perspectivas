@@ -908,6 +908,50 @@ function createSectionController({ gridId, buttonId, limit = SECTION_LIMIT, incr
   return { init, setSource, render };
 }
 
+// Controller para la sección de Patrocinadores
+const sponsorsController = (() => {
+  const state = {
+    source: []
+  };
+
+  function renderCard(item) {
+    const tier = item.tier || 'Silver';
+    const logoUrl = item.logo || '/assets/img/default_news.jpg';
+
+    return `
+      <div class="sponsor-item tier-${tier}" title="${item.title}">
+        <a href="${item.url || '#'}" target="_blank" rel="noopener">
+          <img src="${logoUrl}" alt="${item.title}" loading="lazy">
+        </a>
+      </div>
+    `;
+  }
+
+  function render() {
+    const container = document.getElementById('sponsorsGrid');
+    if (!container) return;
+
+    if (!state.source.length) {
+      container.innerHTML = '<p class="empty-copy">Próximamente más aliados.</p>';
+      return;
+    }
+
+    // Filtrar solo activos y visibles, y ordenar por prioridad
+    const visibleSponsors = state.source
+      .filter(s => s.active !== false && s.visible !== false)
+      .sort((a, b) => (a.priority || 99) - (b.priority || 99));
+
+    container.innerHTML = visibleSponsors.map(renderCard).join('');
+  }
+
+  function init(data) {
+    state.source = Array.isArray(data) ? data : [];
+    render();
+  }
+
+  return { init };
+})();
+
 const analisisController = (() => {
   const state = {
     source: [],
@@ -2081,7 +2125,9 @@ async function initHome() {
     initProgramaSection(data.programa);
     initVideosDestacadosSection(data.videos_destacados || []);
     initPodcastSection(data.podcast);
-    renderSponsors(data.sponsors);
+    if (Array.isArray(data.sponsors)) {
+      sponsorsController.init(data.sponsors);
+    }
 
   } catch (e) {
     console.error("❌ Error crítico cargando contenido:", e);
