@@ -1896,7 +1896,17 @@ function initHeaderScrollState() {
   header.dataset.scrollBound = "true";
 
   const noticiasSection = document.getElementById("noticias");
-  const SCROLL_THRESHOLD = 80;
+
+  // Detectar si estamos en una página de contenido (Noticia o Análisis)
+  // Buscamos contenedores específicos de estas páginas
+  const isContentPage = document.getElementById("contenido-noticia") ||
+    document.getElementById("analisis-grid") ||
+    document.querySelector("main .article-container-pro") ||
+    window.location.pathname.includes("noticia.html") ||
+    window.location.pathname.includes("analisis.html");
+
+  // Threshold más bajo para páginas internas para que el efecto sea más inmediato
+  const SCROLL_THRESHOLD = isContentPage ? 50 : 80;
 
   let lastScrollState = null;
   let scrollThrottleId = null;
@@ -1906,20 +1916,34 @@ function initHeaderScrollState() {
 
     scrollThrottleId = requestAnimationFrame(() => {
       const currentScroll = window.scrollY;
-      const noticiasTop = noticiasSection ? noticiasSection.offsetTop : 1000;
+      let baseThreshold = SCROLL_THRESHOLD;
 
-      // En home se comprime al llegar a noticias, en otras páginas con un threshold fijo
-      const threshold = noticiasSection ? (noticiasTop - 100) : SCROLL_THRESHOLD;
-      const isScrolled = currentScroll > threshold;
+      // Lógica dinámica SOLO para la Home (si existe sección noticias y NO es página de contenido)
+      if (noticiasSection && !isContentPage) {
+        const noticiasTop = noticiasSection.offsetTop;
+        // El threshold base es un poco antes de llegar a la sección noticias, 
+        // pero respetando un mínimo (SCROLL_THRESHOLD)
+        baseThreshold = Math.max(SCROLL_THRESHOLD, noticiasTop - 100);
+      } else {
+        // En páginas internas, usamos el threshold fijo bajo (50px)
+        baseThreshold = SCROLL_THRESHOLD;
+      }
 
-      if (lastScrollState !== isScrolled) {
-        lastScrollState = isScrolled;
-        header.classList.toggle("scrolled", isScrolled);
+      // Hysteresis buffer to prevent flickering
+      const BUFFER = 20;
 
+      if (!lastScrollState && currentScroll > (baseThreshold + BUFFER)) {
+        // Switch to Scrolled State (Hide sections)
+        lastScrollState = true;
+        header.classList.add("scrolled");
         const topTicker = document.querySelector('.market-ticker[data-variant="top"]');
-        if (topTicker) {
-          topTicker.classList.toggle("hidden", isScrolled);
-        }
+        if (topTicker) topTicker.classList.add("hidden");
+      } else if (lastScrollState && currentScroll < (baseThreshold - BUFFER)) {
+        // Switch to Expanded State (Show sections)
+        lastScrollState = false;
+        header.classList.remove("scrolled");
+        const topTicker = document.querySelector('.market-ticker[data-variant="top"]');
+        if (topTicker) topTicker.classList.remove("hidden");
       }
 
       scrollThrottleId = null;
