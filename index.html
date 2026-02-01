@@ -813,43 +813,66 @@ PU
     </div>
   </footer>
 
-  <script src="https://unpkg.com/marked@^4.0.0/marked.min.js"></script>
+  <!-- MODAL DE VISTA PREVIA DE VIDEO (Estilo Infobae) -->
+  <div id="video-preview-modal" class="video-preview-modal" aria-hidden="true">
+    <div class="video-preview-overlay"></div>
+    <div class="video-preview-container">
+      <button id="video-preview-close" class="video-preview-close" aria-label="Cerrar vista previa">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="28" height="28">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="video-preview-content">
+        <div id="video-preview-player" class="video-preview-player">
+          <!-- Iframe inyectado por JS -->
+        </div>
+        <div class="video-preview-info">
+          <h3 id="video-preview-title" class="video-preview-title"></h3>
+          <p id="video-preview-desc" class="video-preview-desc"></p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <script>
-    // Dark Mode Toggle Script
-    const themeToggle = document.getElementById('theme-toggle');
-    const htmlElement = document.documentElement;
+</body>
+<script src="https://unpkg.com/marked@^4.0.0/marked.min.js"></script>
 
-    // Cargar tema guardado o detectar preferencia del sistema
-    function loadTheme() {
-      const savedTheme = localStorage.getItem('theme');
-      let theme = savedTheme;
+<script>
+  // Dark Mode Toggle Script
+  const themeToggle = document.getElementById('theme-toggle');
+  const htmlElement = document.documentElement;
 
-      if (!savedTheme) {
-        // Detectar preferencia del sistema
-        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      }
+  // Cargar tema guardado o detectar preferencia del sistema
+  function loadTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    let theme = savedTheme;
 
-      applyTheme(theme);
+    if (!savedTheme) {
+      // Detectar preferencia del sistema
+      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
 
-    function applyTheme(theme) {
-      htmlElement.setAttribute('data-theme', theme === 'dark' ? 'dark' : '');
-      localStorage.setItem('theme', theme);
-      updateThemeButton(theme);
-    }
+    applyTheme(theme);
+  }
 
-    function updateThemeButton(theme) {
-      themeToggle.title = theme === 'dark' ? 'Modo claro' : 'Modo oscuro';
-    }
+  function applyTheme(theme) {
+    htmlElement.setAttribute('data-theme', theme === 'dark' ? 'dark' : '');
+    localStorage.setItem('theme', theme);
+    updateThemeButton(theme);
+  }
 
-    // Toggle al hacer click
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = localStorage.getItem('theme') || 'light';
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      applyTheme(newTheme);
-    });
+  function updateThemeButton(theme) {
+    themeToggle.title = theme === 'dark' ? 'Modo claro' : 'Modo oscuro';
+  }
 
-    // Cargar tema al inicio
-    loadTheme();
-  </script>
+  // Toggle al hacer click
+  themeToggle.addEventListener('click', () => {
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    applyTheme(newTheme);
+  });
+
+  // Cargar tema al inicio
+  loadTheme();
+</script>

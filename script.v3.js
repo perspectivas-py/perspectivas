@@ -1188,6 +1188,48 @@ const videosDestacadosController = (() => {
   let prevBtn = null;
   let nextBtn = null;
   let items = [];
+  let modal = null;
+  let playerContainer = null;
+  let modalClose = null;
+  let modalTitle = null;
+  let modalDesc = null;
+
+  function getYouTubeId(url) {
+    if (!url) return null;
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+  }
+
+  function openVideoPreview(item) {
+    if (!modal || !playerContainer) return;
+
+    const videoId = getYouTubeId(item.video_url);
+    if (!videoId) {
+      // Fallback: abrir en pestaña nueva si no es YouTube (o manejar otros protocolos)
+      window.open(item.video_url, '_blank');
+      return;
+    }
+
+    const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+    playerContainer.innerHTML = `<iframe src="${embedUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+
+    if (modalTitle) modalTitle.textContent = item.title;
+    if (modalDesc) modalDesc.textContent = item.summary || item.description || '';
+
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden'; // Prevenir scroll de fondo
+  }
+
+  function closeVideoPreview() {
+    if (!modal || !playerContainer) return;
+
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    playerContainer.innerHTML = ''; // Detener video
+    document.body.style.overflow = '';
+  }
 
   function renderCard(item) {
     const platform = item.platform || 'youtube';
@@ -1198,7 +1240,7 @@ const videosDestacadosController = (() => {
     }[platform] || platform;
 
     return `
-      <a href="${item.video_url || '#'}" target="_blank" rel="noopener" class="video-card-vertical">
+      <div class="video-card-vertical" data-slug="${item.slug || ''}">
         <div class="video-card-thumbnail">
           <img src="${item.thumbnail || '/assets/img/default_news.jpg'}" alt="${item.title}" loading="lazy">
           <div class="video-card-overlay"></div>
@@ -1212,7 +1254,7 @@ const videosDestacadosController = (() => {
           </span>
         </div>
         <h4 class="video-card-title">${item.title}</h4>
-      </a>
+      </div>
     `;
   }
 
@@ -1244,8 +1286,35 @@ const videosDestacadosController = (() => {
 
     items = Array.isArray(data) ? data : [];
 
+    // Modal elements
+    modal = document.getElementById('video-preview-modal');
+    playerContainer = document.getElementById('video-preview-player');
+    modalClose = document.getElementById('video-preview-close');
+    modalTitle = document.getElementById('video-preview-title');
+    modalDesc = document.getElementById('video-preview-desc');
+
     if (prevBtn) prevBtn.addEventListener('click', () => scrollCarousel('prev'));
     if (nextBtn) nextBtn.addEventListener('click', () => scrollCarousel('next'));
+
+    if (modalClose) modalClose.addEventListener('click', closeVideoPreview);
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal || e.target.classList.contains('video-preview-overlay')) {
+          closeVideoPreview();
+        }
+      });
+    }
+
+    if (carousel) {
+      carousel.addEventListener('click', (e) => {
+        const card = e.target.closest('.video-card-vertical');
+        if (card) {
+          const slug = card.dataset.slug;
+          const item = items.find(v => v.slug === slug);
+          if (item) openVideoPreview(item);
+        }
+      });
+    }
 
     render();
   }
@@ -2787,7 +2856,7 @@ function initCategoryDrawer() {
 
   // Inicializar buscador interno del drawer
   initDrawerSearch();
-  
+
   // Renderizar secciones fijas de la Home
   renderDrawerSections();
 }
