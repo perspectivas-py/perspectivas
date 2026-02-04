@@ -3513,8 +3513,12 @@ function initDigitalCoversSidebarNavigation() {
 
 
 function openCoverModal(cover) {
+  // Prevenir scroll del body cuando el modal está abierto
+  document.body.style.overflow = 'hidden';
+  
   const modal = document.createElement('div');
   modal.className = 'cover-modal';
+  modal.style.opacity = '0';
   modal.innerHTML = `
     <div class="cover-modal-overlay"></div>
     <div class="cover-modal-content">
@@ -3526,13 +3530,38 @@ function openCoverModal(cover) {
 
   document.body.appendChild(modal);
 
+  // Forzar reflow para que la animación funcione
+  modal.offsetHeight;
+  
+  // Animar entrada
+  requestAnimationFrame(() => {
+    modal.style.transition = 'opacity 0.3s ease';
+    modal.style.opacity = '1';
+  });
+
   const closeBtn = modal.querySelector('.cover-modal-close');
   const overlay = modal.querySelector('.cover-modal-overlay');
+  const content = modal.querySelector('.cover-modal-content');
 
-  const closeModal = () => modal.remove();
+  const closeModal = () => {
+    modal.style.opacity = '0';
+    setTimeout(() => {
+      modal.remove();
+      document.body.style.overflow = '';
+    }, 300);
+  };
 
-  closeBtn.addEventListener('click', closeModal);
+  closeBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    closeModal();
+  });
+  
   overlay.addEventListener('click', closeModal);
+  
+  // Prevenir que el click en el contenido cierre el modal
+  content.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
 
   const handleEscape = (e) => {
     if (e.key === 'Escape') {
