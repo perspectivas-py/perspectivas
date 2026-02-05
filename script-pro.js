@@ -3421,24 +3421,63 @@ function renderDigitalCoversSidebar(cmsCovers = []) {
     return;
   }
 
+  // Renderizar las cards con índice como data attribute adicional
   container.innerHTML = activeCovers
-    .map(buildDigitalCoverHorizontalCard)
+    .map((cover, index) => buildDigitalCoverHorizontalCardWithIndex(cover, index))
     .join('');
 
-  // Agregar event listeners para modal
-  container.querySelectorAll('.digital-cover-card-horizontal').forEach(card => {
+  // Agregar event listeners para modal con mejor debugging
+  container.querySelectorAll('.digital-cover-card-horizontal').forEach((card, idx) => {
+    card.style.cursor = 'pointer'; // Asegurar cursor pointer
     card.addEventListener('click', (e) => {
       e.preventDefault();
+      e.stopPropagation();
+
+      // Obtener el índice del data attribute
+      const coverIndex = parseInt(card.dataset.coverIndex, 10);
       const coverId = card.dataset.coverId;
-      const cover = activeCovers.find(c => (c.slug || c.id) === coverId);
+
+      console.log('[Tapa Digital] Click detectado:', { coverIndex, coverId, totalCovers: activeCovers.length });
+
+      // Buscar por índice primero (más confiable), luego por ID
+      let cover = null;
+      if (!isNaN(coverIndex) && activeCovers[coverIndex]) {
+        cover = activeCovers[coverIndex];
+      } else {
+        cover = activeCovers.find(c => (c.slug || c.id) === coverId);
+      }
+
       if (cover) {
+        console.log('[Tapa Digital] Abriendo modal para:', cover.edition || cover.id);
         openCoverModal(cover);
+      } else {
+        console.error('[Tapa Digital] No se encontró la cover:', { coverId, coverIndex });
       }
     });
   });
 
   // Inicializar controles de navegación horizontal
   initDigitalCoversSidebarNavigation();
+}
+
+// Helper function para construir la card con índice
+function buildDigitalCoverHorizontalCardWithIndex(cover, index) {
+  if (!cover) return '';
+
+  const image = escapeHtml(cover.image || HERO_IMAGE_FALLBACK);
+  const edition = escapeHtml(cover.edition || '');
+  const coverId = escapeHtml(cover.slug || cover.id || `cover-${index}`);
+
+  return `
+    <article class="digital-cover-card-horizontal" data-cover-id="${coverId}" data-cover-index="${index}">
+      <div class="digital-cover-image-wrapper">
+        <img src="${image}" alt="Tapa ${edition}" class="digital-cover-image" loading="lazy" />
+      </div>
+      <div class="digital-cover-info">
+        <time class="digital-cover-date">${edition}</time>
+      </div>
+    </article>
+  `;
 }
 
 function initDigitalCoversSidebarNavigation() {
@@ -3515,7 +3554,7 @@ function initDigitalCoversSidebarNavigation() {
 function openCoverModal(cover) {
   // Prevenir scroll del body cuando el modal está abierto
   document.body.style.overflow = 'hidden';
-  
+
   const modal = document.createElement('div');
   modal.className = 'cover-modal';
   modal.style.opacity = '0';
@@ -3532,7 +3571,7 @@ function openCoverModal(cover) {
 
   // Forzar reflow para que la animación funcione
   modal.offsetHeight;
-  
+
   // Animar entrada
   requestAnimationFrame(() => {
     modal.style.transition = 'opacity 0.3s ease';
@@ -3555,9 +3594,9 @@ function openCoverModal(cover) {
     e.stopPropagation();
     closeModal();
   });
-  
+
   overlay.addEventListener('click', closeModal);
-  
+
   // Prevenir que el click en el contenido cierre el modal
   content.addEventListener('click', (e) => {
     e.stopPropagation();
